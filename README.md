@@ -69,6 +69,6 @@ Start-Process index.html
 
 - **Corporate Line:** +234 805 555 8197
 - **WhatsApp Concierge:** [+234 805 555 8197](https://wa.me/2348055558197)
-- **Official Email:** info@kelvincameoresort.com
+- **Official Email:** [kelvincameo73@gmail.com](mailto:kelvincameo73@gmail.com)
 - **Physical Address:** Kelvin Cameo Resort Hotel Complex, Suleja, Niger State (Abuja Corridor), Nigeria.
 - **Registration:** RC: 1613032 (Corporate Affairs Commission, Federal Republic of Nigeria).
