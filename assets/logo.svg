@@ -1,199 +1,49 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
   <defs>
-    <!-- Background Gradient (Deep Executive Navy / Obsidian) -->
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#07192f" />
-      <stop offset="50%" stop-color="#040d1a" />
-      <stop offset="100%" stop-color="#02070f" />
-    </linearGradient>
-
-    <!-- Metallic Gold Shield Border -->
-    <linearGradient id="goldBorder" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#fef08a" />
-      <stop offset="25%" stop-color="#d97706" />
-      <stop offset="50%" stop-color="#f59e0b" />
-      <stop offset="75%" stop-color="#78350f" />
-      <stop offset="100%" stop-color="#fef3c7" />
-    </linearGradient>
-
-    <!-- Inner Glow Radial -->
-    <radialGradient id="ambientGlow" cx="50%" cy="45%" r="65%">
-      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.18" />
-      <stop offset="60%" stop-color="#0f4c81" stop-opacity="0.08" />
-      <stop offset="100%" stop-color="#040d1a" stop-opacity="0" />
-    </radialGradient>
-
-    <!-- 3D Monogram Gold (K Upper Arm & C Facets) -->
-    <linearGradient id="monogramGold" x1="0%" y1="0%" x2="100%" y2="80%">
-      <stop offset="0%" stop-color="#fffbeb" />
-      <stop offset="18%" stop-color="#fcd34d" />
-      <stop offset="55%" stop-color="#f59e0b" />
-      <stop offset="85%" stop-color="#d97706" />
-      <stop offset="100%" stop-color="#92400e" />
-    </linearGradient>
-
-    <!-- Energy Flame (Amber / Orange Peak) -->
-    <linearGradient id="monogramOrange" x1="0%" y1="100%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#ea580c" />
-      <stop offset="40%" stop-color="#f25c05" />
-      <stop offset="100%" stop-color="#ff9248" />
-    </linearGradient>
-
-    <!-- Royal Sapphire Monogram (K Spine & Foundation) -->
-    <linearGradient id="monogramBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+    <!-- Sky Blue Vibrant Gradient -->
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#38bdf8" />
-      <stop offset="25%" stop-color="#1d4f8a" />
-      <stop offset="70%" stop-color="#0f2c4f" />
-      <stop offset="100%" stop-color="#081b33" />
+      <stop offset="50%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0369a1" />
     </linearGradient>
 
-    <!-- Agro Emerald Accent (Lower K Wing Weave) -->
-    <linearGradient id="monogramEmerald" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#34d399" />
-      <stop offset="50%" stop-color="#10b981" />
-      <stop offset="100%" stop-color="#047857" />
+    <!-- Warm Amber Gold Accent Gradient -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="40%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#ea580c" />
     </linearGradient>
 
-    <!-- High-Impact Drop Shadow -->
-    <filter id="emblemShadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.45" />
-      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.3" />
-    </filter>
-
-    <!-- Core Star Glow -->
-    <filter id="starGlow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="4" result="blur" />
-      <feMerge>
-        <feMergeNode in="blur" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
-    </filter>
+    <!-- Clean Crisp Inner Glow -->
+    <radialGradient id="softGlow" cx="30%" cy="20%" r="70%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0" />
+    </radialGradient>
   </defs>
 
-  <!-- ======================================================================
-       1. EMBLEM BASE (Crest Squircle with Beveled Dual Gold Border)
-       ====================================================================== -->
-  <g filter="url(#emblemShadow)">
-    <!-- Outer Shield Squircle -->
-    <rect x="25" y="25" width="450" height="450" rx="100" ry="100" fill="url(#bgGrad)" stroke="url(#goldBorder)" stroke-width="4.5" />
-    
-    <!-- Inner Fine Inset Ring -->
-    <rect x="36" y="36" width="428" height="428" rx="89" ry="89" fill="none" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1.5" />
+  <!-- Outer Rounded Emblem Shield -->
+  <rect x="20" y="20" width="360" height="360" rx="84" fill="url(#skyGrad)" stroke="#bae6fd" stroke-width="6" />
+  <rect x="20" y="20" width="360" height="360" rx="84" fill="url(#softGlow)" />
 
-    <!-- Ambient Center Flare -->
-    <rect x="25" y="25" width="450" height="450" rx="100" ry="100" fill="url(#ambientGlow)" />
+  <!-- Gold Orbital Ring -->
+  <circle cx="200" cy="200" r="145" fill="none" stroke="url(#goldGrad)" stroke-width="7" stroke-dasharray="16 8" opacity="0.85" />
+
+  <!-- Stylized Geometric "K" and "C" Vector Mark -->
+  <g transform="translate(4, 0)">
+    <!-- Letter K (Vertical Pillar & Energy Wing) -->
+    <path d="M125 105 H155 V295 H125 Z" fill="#ffffff" />
+    <!-- K Upper Arm (Gold Gradient Flame) -->
+    <path d="M155 195 L225 105 H265 L185 205 Z" fill="url(#goldGrad)" />
+    <!-- K Lower Arm (Sky Cyan Pillar) -->
+    <path d="M175 190 L260 295 H220 L155 215 Z" fill="#bae6fd" />
+
+    <!-- Letter C (Dynamic Crest Arc) -->
+    <path d="M260 140 C240 115 205 105 170 105 C115 105 80 150 80 200 C80 250 115 295 170 295 C205 295 240 285 260 260 L240 240 C225 258 200 265 170 265 C130 265 110 232 110 200 C110 168 130 135 170 135 C200 135 225 142 240 160 Z" fill="#ffffff" opacity="0.25" />
   </g>
 
-  <!-- ======================================================================
-       2. CONGLOMERATE QUADRANT GEOMETRY (Subtle Sector Rings)
-       ====================================================================== -->
-  <g opacity="0.18">
-    <!-- Concentric orbital guides representing 4 economic sectors -->
-    <circle cx="250" cy="245" r="165" fill="none" stroke="url(#goldBorder)" stroke-width="1" stroke-dasharray="6 8" />
-    <circle cx="250" cy="245" r="185" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="0.75" />
-  </g>
-
-  <!-- ======================================================================
-       3. THE INTERLOCKING "KC" MONOGRAM
-       ====================================================================== -->
-  <g filter="url(#emblemShadow)">
-    
-    <!-- --------------------------------------------------------------------
-         A. LETTER "K" - ARCHITECTURAL SPINE (Left Vertical Pillar)
-         -------------------------------------------------------------------- -->
-    <!-- Back Shading Facet -->
-    <path d="M 130 145 
-             L 165 115 
-             L 178 115 
-             L 178 375 
-             L 130 375 Z" fill="url(#monogramBlue)" />
-
-    <!-- Front Beveled Edge (Light specular ridge) -->
-    <path d="M 130 145 
-             L 152 125 
-             L 152 375 
-             L 130 375 Z" fill="#38bdf8" opacity="0.35" />
-
-    <!-- Left Pillar Base Trim -->
-    <polygon points="122,368 186,368 178,382 130,382" fill="url(#goldBorder)" />
-
-    <!-- --------------------------------------------------------------------
-         B. LETTER "K" - UPPER ASCENDING ARROW (Energy & Real Estate Axis)
-         -------------------------------------------------------------------- -->
-    <!-- Upper Diagonal Arm launching from spine to top right -->
-    <path d="M 178 245 
-             L 285 130 
-             L 338 130 
-             L 218 265 Z" fill="url(#monogramOrange)" />
-
-    <!-- Upper Arm Beveled Gold Highlight -->
-    <path d="M 285 130 
-             L 338 130 
-             L 315 152 
-             L 262 152 Z" fill="url(#monogramGold)" />
-
-    <!-- --------------------------------------------------------------------
-         C. LETTER "C" - MAJESTIC INTERLOCKING CRESCENT (Hospitality & Agro)
-         -------------------------------------------------------------------- -->
-    <!-- The outer sweeping arc of the C that wraps around the center -->
-    <path d="M 335 170 
-             C 310 135, 255 125, 205 160 
-             C 155 200, 155 285, 205 325 
-             C 255 365, 320 355, 355 315 
-             L 318 288 
-             C 292 318, 248 322, 218 298 
-             C 185 270, 185 218, 218 190 
-             C 248 165, 290 172, 312 196 Z" fill="url(#monogramGold)" />
-
-    <!-- Shading depth contour inside C -->
-    <path d="M 335 170 
-             C 310 135, 255 125, 205 160 
-             L 218 172 
-             C 260 142, 305 150, 325 178 Z" fill="#fffbeb" opacity="0.6" />
-
-    <!-- --------------------------------------------------------------------
-         D. LETTER "K" - LOWER DIAGONAL LEG (Agro Emerald & Gold Anchor)
-         -------------------------------------------------------------------- -->
-    <!-- Lower leg emerging from center node and anchoring to bottom-right -->
-    <path d="M 198 248 
-             L 305 365 
-             L 355 365 
-             L 238 238 Z" fill="url(#monogramEmerald)" />
-
-    <!-- Lower leg specular highlight -->
-    <polygon points="238,238 252,238 355,352 355,365" fill="url(#monogramGold)" opacity="0.5" />
-
-    <!-- --------------------------------------------------------------------
-         E. THE 4-PILLAR NEXUS STAR (Energy • Estate • Agro • Hospitality)
-         -------------------------------------------------------------------- -->
-    <g filter="url(#starGlow)">
-      <!-- Radiant Diamond Star at intersection (X: 242, Y: 245) -->
-      <path d="M 242 205 
-               Q 242 245, 202 245 
-               Q 242 245, 242 285 
-               Q 242 245, 282 245 
-               Q 242 245, 242 205 Z" fill="#ffffff" />
-      <!-- Star Center Core Spark -->
-      <circle cx="242" cy="245" r="4.5" fill="#fef08a" />
-    </g>
-  </g>
-
-  <!-- ======================================================================
-       4. CONGLOMERATE AUTHORITY RIBBON & RC BADGE
-       ====================================================================== -->
-  <!-- Bottom Ribbon Bar -->
-  <g>
-    <!-- Sleek Gold Plaque Base -->
-    <rect x="135" y="408" width="230" height="26" rx="13" ry="13" fill="rgba(15, 44, 79, 0.9)" stroke="url(#goldBorder)" stroke-width="1.5" />
-
-    <!-- Official CAC Incorporation Registration -->
-    <text x="250" y="425" font-family="'Outfit', 'Plus Jakarta Sans', sans-serif" font-weight="900" font-size="11.5" fill="#fef08a" text-anchor="middle" letter-spacing="2">
-      RC: 1613032
-    </text>
-  </g>
-
-  <!-- Top Crown Accent (Sleek Three-Point Apex Pip) -->
-  <circle cx="250" cy="58" r="3" fill="#f59e0b" />
-  <circle cx="236" cy="62" r="2" fill="rgba(245, 158, 11, 0.6)" />
-  <circle cx="264" cy="62" r="2" fill="rgba(245, 158, 11, 0.6)" />
+  <!-- Four Strategic Division Stars -->
+  <circle cx="200" cy="56" r="6" fill="#f59e0b" />
+  <circle cx="344" cy="200" r="6" fill="#f59e0b" />
+  <circle cx="200" cy="344" r="6" fill="#f59e0b" />
+  <circle cx="56" cy="200" r="6" fill="#f59e0b" />
 </svg>
