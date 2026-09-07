@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initModalActions();
   initGalleryFilter();
   initStatsCounter();
+  initExperiencePicker();
+  initConciergeEstimator();
+  initFaqAccordion();
 });
 
 /* --------------------------------------------------------------------------
@@ -54,11 +57,19 @@ function initMobileDrawer() {
     drawer.innerHTML = `
       <div>
         <div class="drawer-header">
-          <div style="display:flex; align-items:center; gap:0.6rem;">
-            <img src="assets/logo.svg" alt="Kelvin Cameo Logo" style="height:38px;">
+          <div style="display:flex; align-items:center; gap:0.65rem;">
+            <div class="brand-emblem-badge" style="width:38px; height:38px;" aria-label="Kelvin Cameo Logo">
+              <svg viewBox="0 0 100 100" width="26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="6" width="88" height="88" rx="22" fill="#0284c7"/>
+                <circle cx="50" cy="50" r="38" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.85"/>
+                <path d="M30 24 H39 V76 H30 Z" fill="#ffffff"/>
+                <path d="M39 48 L62 24 H74 L50 51 Z" fill="#f59e0b"/>
+                <path d="M46 47 L72 76 H60 L39 52 Z" fill="#bae6fd"/>
+              </svg>
+            </div>
             <div>
-              <strong style="font-family:var(--font-display); font-size:1.05rem; color:var(--navy-900);">KELVIN CAMEO</strong>
-              <div style="font-size:0.65rem; color:var(--orange-500); font-weight:700;">RC: 1613032</div>
+              <strong style="font-family:var(--font-display); font-size:1.05rem; color:var(--sky-900);">KELVIN CAMEO</strong>
+              <div style="font-size:0.65rem; color:var(--sky-600); font-weight:700;">RC: 1613032</div>
             </div>
           </div>
           <button id="closeDrawerBtn" class="modal-close-btn" style="position:static;" aria-label="Close Navigation">✕</button>
@@ -400,4 +411,260 @@ function initStatsCounter() {
 
   const statsSection = document.querySelector('.stats-section');
   if (statsSection) observer.observe(statsSection);
+}
+
+/* --------------------------------------------------------------------------
+   Dribbble Interactive Sector Switcher: "What Can We Do For You?"
+   -------------------------------------------------------------------------- */
+const experienceData = {
+  energy: {
+    badge: 'Division 01 • Energy & Filling Stations',
+    headline: 'Honest, 100% Calibrated Fuel. No Meter Games.',
+    realTalk: 'Ever driven away from a filling station feeling like your gauge barely moved? We despise pump tampering. At Kelvin Cameo stations, our digital dispensers are certified and strictly calibrated. 10 Litres is 10 Litres—every single time.',
+    perks: [
+      'Certified PMS (Petrol) & AGO (Automotive Diesel)',
+      'Digital accurate calibration with zero pump tampering',
+      'Clean cooking gas (LPG) refill skids on-site',
+      'Dedicated fleet fueling & corporate accounts'
+    ],
+    ctaText: 'Visit Energy Division →',
+    ctaLink: 'energy.html',
+    whatsappMsg: 'Hello Kelvin Cameo, I would like to inquire about your fuel stations and petroleum supply.',
+    img: 'https://images.unsplash.com/photo-1545459720-aac8509eb02c?auto=format&fit=crop&w=800&q=80',
+    priceLabel: 'Availability',
+    priceVal: '24/7 Retail Stations'
+  },
+  estate: {
+    badge: 'Division 02 • Real Estate & Properties',
+    headline: 'Genuine Land. Verified Titles. Zero "Omonile" Drama.',
+    realTalk: 'Buying land in Nigeria shouldn’t give you sleepless nights or high blood pressure. All our residential and commercial layouts come with clean, registered documentation (C of O / Gazettes). You buy with peace of mind, and build when you are ready.',
+    perks: [
+      '100% dry, accessible land along key Abuja development corridors',
+      'Gated, master-planned residential estates with perimeter fencing',
+      'Commercial highway plots for logistics and filling stations',
+      'Flexible, structured milestone payment plans'
+    ],
+    ctaText: 'View Available Land →',
+    ctaLink: 'real-estate.html',
+    whatsappMsg: 'Hello Kelvin Cameo, I am interested in inspecting your verified land and estate plots.',
+    img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+    priceLabel: 'Starting Investment',
+    priceVal: 'From ₦3.5M / Plot'
+  },
+  agro: {
+    badge: 'Division 03 • Commercial Agribusiness',
+    headline: 'Real Farm Produce Straight From Nigerian Soil.',
+    realTalk: 'No middlemen inflating costs. We run high-volume mechanized operations producing fresh table eggs daily from our 50,000-bird poultry facility, rearing disease-free beef cattle, and storing grains in 10,000 MT silos to feed families and industries.',
+    perks: [
+      'Freshly collected high-grade table eggs daily',
+      'Healthy, disease-screened beef cattle and goats',
+      '10,000 MT grain storage and post-harvest drying facilities',
+      'Direct farm-gate supply contracts for FMCGs & distributors'
+    ],
+    ctaText: 'Explore Farm Products →',
+    ctaLink: 'agriculture.html',
+    whatsappMsg: 'Hello Kelvin Cameo, I want to inquire about bulk farm produce and eggs supply.',
+    img: 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=80',
+    priceLabel: 'Farm Capacity',
+    priceVal: '50,000+ Birds Daily'
+  },
+  resort: {
+    badge: 'Division 04 • Luxury Resort Hotel',
+    headline: 'Where 24/7 Light is a Guarantee, Not a Wish.',
+    realTalk: 'Escape the heat, traffic, and noise. Kelvin Cameo Resort Hotel guarantees continuous 24/7 electricity backed by heavy-duty generators and solar. Sleep like royalty from ₦25,000/night, cool off in our pristine pool, or celebrate in our 1,000-seat grand banquet hall.',
+    perks: [
+      'Cozy rooms & executive suites from ₦25,000 to ₦180,000/night',
+      '1,000-seat fully air-conditioned Grand Banquet Hall',
+      'Sparkling outdoor swimming pool (₦3,000 day access)',
+      'High-speed Wi-Fi, fine dining & 24-hour guarded security'
+    ],
+    ctaText: 'Book a Room / Hall →',
+    ctaLink: 'hospitality.html',
+    whatsappMsg: 'Hello Kelvin Cameo, I would like to book a room or inquire about the 1,000-seat banquet hall.',
+    img: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80',
+    priceLabel: 'Rooms & Banquet Hall',
+    priceVal: 'Rooms from ₦25k · Hall ₦1.05M'
+  }
+};
+
+function initExperiencePicker() {
+  const tabPills = document.querySelectorAll('.exp-tab-pill');
+  if (!tabPills.length) return;
+
+  const eyebrow = document.getElementById('expBadge');
+  const headline = document.getElementById('expHeadline');
+  const realTalk = document.getElementById('expRealTalk');
+  const perksList = document.getElementById('expPerksList');
+  const ctaBtn = document.getElementById('expCtaBtn');
+  const whatsappBtn = document.getElementById('expWhatsappBtn');
+  const previewImg = document.getElementById('expPreviewImg');
+  const priceLabel = document.getElementById('expPriceLabel');
+  const priceVal = document.getElementById('expPriceVal');
+
+  tabPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      tabPills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+
+      const sector = pill.getAttribute('data-sector');
+      const data = experienceData[sector];
+      if (!data) return;
+
+      // Animate content swap
+      const panel = document.querySelector('.exp-showcase-panel');
+      if (panel) {
+        panel.style.opacity = '0.4';
+        panel.style.transform = 'scale(0.99)';
+      }
+
+      setTimeout(() => {
+        if (eyebrow) eyebrow.textContent = data.badge;
+        if (headline) headline.textContent = data.headline;
+        if (realTalk) realTalk.textContent = data.realTalk;
+        if (ctaBtn) {
+          ctaBtn.textContent = data.ctaText;
+          ctaBtn.href = data.ctaLink;
+        }
+        if (whatsappBtn) {
+          whatsappBtn.href = `https://wa.me/2348055558197?text=${encodeURIComponent(data.whatsappMsg)}`;
+        }
+        if (previewImg) previewImg.src = data.img;
+        if (priceLabel) priceLabel.textContent = data.priceLabel;
+        if (priceVal) priceVal.textContent = data.priceVal;
+
+        if (perksList) {
+          perksList.innerHTML = data.perks.map(perk => `
+            <div class="exp-perk-item">
+              <span class="exp-perk-check">✓</span>
+              <span>${perk}</span>
+            </div>
+          `).join('');
+        }
+
+        if (panel) {
+          panel.style.opacity = '1';
+          panel.style.transform = 'scale(1)';
+        }
+      }, 150);
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   Dribbble Instant Concierge Estimator
+   -------------------------------------------------------------------------- */
+const conciergeEstimates = {
+  room: {
+    title: 'Resort Room / Executive Suite',
+    price: 'From ₦25,000 / night',
+    details: [
+      '24/7 Guaranteed Power (Solar + Industrial Gen)',
+      'Freezing cold split air conditioning & hot shower',
+      'High-speed Wi-Fi & pristine swimming pool access',
+      'Secure, guarded premises with ample parking'
+    ],
+    whatsappMsg: 'Hello Kelvin Cameo, I would like to book a room at your Resort Hotel.'
+  },
+  wedding: {
+    title: '1,000-Seat Grand Banquet Hall',
+    price: '₦1,050,000 (Weekend) / ₦850,000 (Weekday)',
+    details: [
+      'Accommodates 1,000 banquet seated guests comfortably',
+      'Fully air-conditioned with dedicated heavy generator standby',
+      '2 Private VIP changing suites & green rooms included',
+      'Guarded parking for 150+ vehicles & protocol escort'
+    ],
+    whatsappMsg: 'Hello Kelvin Cameo, I would like to reserve the 1,000-Seat Grand Banquet Hall for an upcoming event.'
+  },
+  land: {
+    title: 'Verified Land / Estate Plot',
+    price: 'From ₦3,500,000 / Plot',
+    details: [
+      'Registered C of O / Gazette documentation with zero omonile',
+      'Immediate physical plot demarcation & allocation',
+      'Perimeter fencing, security gatehouse & layout road access',
+      'Flexible installment options available upon request'
+    ],
+    whatsappMsg: 'Hello Kelvin Cameo, I would like to schedule a site inspection for your estate plots.'
+  },
+  fuel: {
+    title: 'Petroleum Bulk Supply / Fleet Tankering',
+    price: 'Official NNPC/NMDPRA Bulk Depots Rate',
+    details: [
+      '100% Calibrated PMS & AGO (Diesel) wholesale delivery',
+      'Fleet fuel card integration & digital meter metering',
+      '24/7 dedicated commercial dispenser lanes at our stations',
+      'Standardized quality test certificate with every load'
+    ],
+    whatsappMsg: 'Hello Kelvin Cameo, I want to discuss corporate fuel supply for our fleet.'
+  },
+  farm: {
+    title: 'Wholesale Farm Produce & Table Eggs',
+    price: 'Direct Farm-Gate Bulk Rates',
+    details: [
+      'Fresh crates of jumbo table eggs collected daily',
+      'Healthy, vetted beef cattle & goats for events or butchery',
+      'Bulk grains (Maize, Sorghum, Soya) from 10,000 MT silos',
+      'Logistics delivery available across Niger State & Abuja FCT'
+    ],
+    whatsappMsg: 'Hello Kelvin Cameo, I would like to request your current wholesale farm price list.'
+  }
+};
+
+function initConciergeEstimator() {
+  const chipBtns = document.querySelectorAll('.concierge-chip-btn');
+  if (!chipBtns.length) return;
+
+  const resultTitle = document.getElementById('conciergeTitle');
+  const resultPrice = document.getElementById('conciergePrice');
+  const resultList = document.getElementById('conciergeList');
+  const resultWhatsapp = document.getElementById('conciergeWhatsapp');
+
+  chipBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      chipBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const option = btn.getAttribute('data-option');
+      const item = conciergeEstimates[option];
+      if (!item) return;
+
+      if (resultTitle) resultTitle.textContent = item.title;
+      if (resultPrice) resultPrice.textContent = item.price;
+      if (resultWhatsapp) {
+        resultWhatsapp.href = `https://wa.me/2348055558197?text=${encodeURIComponent(item.whatsappMsg)}`;
+      }
+
+      if (resultList) {
+        resultList.innerHTML = item.details.map(d => `
+          <li style="display:flex; align-items:flex-start; gap:0.6rem; font-size:0.875rem; color:#334155; margin-bottom:0.5rem;">
+            <span style="color:#0284c7; font-weight:800;">✓</span>
+            <span>${d}</span>
+          </li>
+        `).join('');
+      }
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   Human Conversational FAQ Accordion
+   -------------------------------------------------------------------------- */
+function initFaqAccordion() {
+  const faqCards = document.querySelectorAll('.faq-card');
+  if (!faqCards.length) return;
+
+  faqCards.forEach(card => {
+    const btn = card.querySelector('.faq-question-btn');
+    if (!btn) return;
+
+    btn.addEventListener('click', () => {
+      const isOpen = card.classList.contains('open');
+      // Close other cards for accordion effect
+      faqCards.forEach(c => c.classList.remove('open'));
+      if (!isOpen) {
+        card.classList.add('open');
+      }
+    });
+  });
 }

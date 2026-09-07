@@ -5,12 +5,25 @@
    ========================================================================== */
 
 :root {
-  /* Brand Core */
-  --navy-950: #040d1a;
-  --navy-900: #0a1f38;
-  --navy-800: #0f2c4f;
-  --navy-700: #163d6b;
-  --navy-600: #1d4f8a;
+  /* Brand Core - Sky Blue Modern Theme */
+  --sky-950: #082f49;
+  --sky-900: #0c4a6e;
+  --sky-800: #075985;
+  --sky-700: #0369a1;
+  --sky-600: #0284c7;
+  --sky-500: #0ea5e9;
+  --sky-400: #38bdf8;
+  --sky-300: #7dd3fc;
+  --sky-200: #bae6fd;
+  --sky-100: #e0f2fe;
+  --sky-50:  #f0f9ff;
+
+  /* Remap Dark Navy to modern Sky Blue & Deep Cobalt */
+  --navy-950: #082f49;
+  --navy-900: #0c4a6e;
+  --navy-800: #075985;
+  --navy-700: #0369a1;
+  --navy-600: #0284c7;
   
   --orange-600: #d44900;
   --orange-500: #f25c05;
@@ -19,27 +32,27 @@
   --orange-50: #fff7f0;
 
   /* Sector Accents */
-  --energy-orange: #ea580c;
+  --energy-orange: #f25c05;
   --energy-amber: #f59e0b;
-  --energy-glow: rgba(234, 88, 12, 0.35);
+  --energy-glow: rgba(242, 92, 5, 0.28);
 
-  --estate-gold: #c99a45;
-  --estate-champagne: #dfb25e;
-  --estate-glow: rgba(201, 154, 69, 0.3);
+  --estate-gold: #0284c7;
+  --estate-champagne: #38bdf8;
+  --estate-glow: rgba(2, 132, 199, 0.25);
 
   --agro-emerald: #059669;
   --agro-green: #10b981;
-  --agro-glow: rgba(16, 185, 129, 0.3);
+  --agro-glow: rgba(16, 185, 129, 0.25);
 
-  --resort-sapphire: #0f4c81;
+  --resort-sapphire: #0284c7;
   --resort-coral: #f25c05;
-  --resort-glow: rgba(242, 92, 5, 0.35);
+  --resort-glow: rgba(14, 165, 233, 0.3);
 
   /* Backgrounds & Neutrals */
-  --sand-50: #faf8f5;
-  --sand-100: #f4efe6;
-  --sand-200: #e9e2d5;
-  --sand-300: #d8cebc;
+  --sand-50: #f8fafc;
+  --sand-100: #f1f5f9;
+  --sand-200: #e2e8f0;
+  --sand-300: #cbd5e1;
 
   --slate-900: #0f172a;
   --slate-800: #1e293b;
@@ -50,21 +63,24 @@
   --slate-200: #e2e8f0;
   --slate-100: #f1f5f9;
 
-  --paystack-blue: #0071C2;
+  --paystack-blue: #0ea5e9;
   --whatsapp-green: #25D366;
 
   --white: #ffffff;
   --black: #000000;
 
-  /* Gradients System */
-  --gradient-brand: linear-gradient(135deg, #f25c05 0%, #ff7626 50%, #ffb703 100%);
+  /* Gradients System - Sky Blue & Dribbble Luxury */
+  --gradient-brand: linear-gradient(135deg, #0284c7 0%, #0ea5e9 50%, #38bdf8 100%);
   --gradient-energy: linear-gradient(135deg, #ea580c 0%, #f59e0b 50%, #ef4444 100%);
-  --gradient-estate: linear-gradient(135deg, #b8860b 0%, #dfb25e 50%, #f3e5ab 100%);
+  --gradient-estate: linear-gradient(135deg, #0284c7 0%, #38bdf8 50%, #bae6fd 100%);
   --gradient-agro: linear-gradient(135deg, #059669 0%, #10b981 50%, #84cc16 100%);
-  --gradient-resort: linear-gradient(135deg, #0a2540 0%, #0f4c81 50%, #f25c05 100%);
-  --gradient-dark-hero: radial-gradient(circle at 10% 20%, rgba(242, 92, 5, 0.2) 0%, transparent 45%),
-                        radial-gradient(circle at 90% 80%, rgba(15, 76, 129, 0.3) 0%, transparent 50%),
-                        linear-gradient(180deg, #040d1a 0%, #0a1f38 100%);
+  --gradient-resort: linear-gradient(135deg, #0284c7 0%, #0ea5e9 50%, #f25c05 100%);
+  --gradient-sky-hero: radial-gradient(circle at 15% 20%, rgba(56, 189, 248, 0.45) 0%, transparent 40%),
+                       radial-gradient(circle at 85% 75%, rgba(14, 165, 233, 0.35) 0%, transparent 45%),
+                       linear-gradient(145deg, #075985 0%, #0284c7 45%, #0ea5e9 100%);
+  --gradient-sky-mesh: radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.2) 0px, transparent 50%),
+                       radial-gradient(at 100% 100%, rgba(14, 165, 233, 0.15) 0px, transparent 50%),
+                       #f8fafc;
 
   /* Typography */
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -72,12 +88,12 @@
   --font-serif: 'Playfair Display', Georgia, serif;
 
   /* Elevations */
-  --shadow-sm: 0 2px 8px rgba(5, 19, 36, 0.05);
-  --shadow-md: 0 8px 24px rgba(5, 19, 36, 0.08);
-  --shadow-lg: 0 16px 40px rgba(5, 19, 36, 0.12);
-  --shadow-xl: 0 24px 60px rgba(5, 19, 36, 0.16);
+  --shadow-sm: 0 2px 8px rgba(2, 132, 199, 0.06);
+  --shadow-md: 0 8px 24px rgba(2, 132, 199, 0.1);
+  --shadow-lg: 0 16px 40px rgba(2, 132, 199, 0.15);
+  --shadow-xl: 0 24px 60px rgba(2, 132, 199, 0.2);
   --shadow-orange: 0 10px 25px rgba(242, 92, 5, 0.28);
-  --shadow-navy: 0 12px 35px rgba(10, 31, 56, 0.35);
+  --shadow-sky: 0 12px 35px rgba(14, 165, 233, 0.35);
 
   --radius-sm: 8px;
   --radius-md: 14px;
@@ -190,10 +206,10 @@ ul, ol {
    Top Utility Bar
    ========================================================================== */
 .top-utility-bar {
-  background-color: var(--navy-950);
-  color: var(--slate-400);
+  background: linear-gradient(90deg, #075985 0%, #0284c7 60%, #0ea5e9 100%);
+  color: #ffffff;
   font-size: 0.8125rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   padding: 0.5rem 0;
   position: relative;
   z-index: 60;
@@ -217,33 +233,36 @@ ul, ol {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  background: rgba(242, 92, 5, 0.15);
-  color: var(--orange-400);
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
   font-weight: 700;
   font-size: 0.75rem;
-  padding: 0.15rem 0.6rem;
+  padding: 0.18rem 0.65rem;
   border-radius: var(--radius-full);
   letter-spacing: 0.03em;
-  border: 1px solid rgba(242, 92, 5, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .utility-link {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  color: var(--slate-300);
+  color: #e0f2fe;
   font-size: 0.8125rem;
-  transition: color var(--transition-fast);
+  font-weight: 600;
+  transition: all var(--transition-fast);
 }
 
 .utility-link:hover {
-  color: var(--orange-400);
+  color: #ffffff;
+  transform: translateY(-1px);
 }
 
 .utility-link svg {
   width: 14px;
   height: 14px;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 /* ==========================================================================
@@ -276,10 +295,30 @@ ul, ol {
   align-items: center;
   gap: 0.85rem;
   text-decoration: none;
+  transition: transform var(--transition-fast);
+}
+
+.brand-emblem-badge {
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.35);
+  border: 1.5px solid #bae6fd;
+  flex-shrink: 0;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.brand-logo-wrap:hover .brand-emblem-badge {
+  transform: scale(1.05) rotate(-2deg);
+  box-shadow: 0 8px 22px rgba(14, 165, 233, 0.5);
 }
 
 .brand-logo-img {
-  height: 52px;
+  height: 48px;
   width: auto;
   border-radius: var(--radius-sm);
   object-fit: contain;
@@ -300,16 +339,16 @@ ul, ol {
 }
 
 .brand-title span {
-  color: var(--orange-500);
+  color: var(--sky-600);
 }
 
 .brand-subtitle {
-  font-size: 0.6875rem;
-  font-weight: 600;
+  font-size: 0.65rem;
+  font-weight: 700;
   color: var(--slate-500);
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-top: 2px;
+  letter-spacing: 0.1em;
+  margin-top: 3px;
 }
 
 .nav-menu {
@@ -658,33 +697,33 @@ ul, ol {
 }
 
 .page-hero.hero-energy {
-  background: radial-gradient(circle at 80% 20%, rgba(234, 88, 12, 0.35) 0%, transparent 50%),
-              radial-gradient(circle at 10% 80%, rgba(245, 158, 11, 0.2) 0%, transparent 45%),
-              linear-gradient(180deg, var(--navy-950) 0%, #0d1e33 100%);
+  background: radial-gradient(circle at 80% 20%, rgba(242, 92, 5, 0.4) 0%, transparent 50%),
+              radial-gradient(circle at 10% 80%, rgba(56, 189, 248, 0.35) 0%, transparent 45%),
+              linear-gradient(145deg, #0369a1 0%, #0284c7 45%, #0ea5e9 100%);
 }
 
 .page-hero.hero-estate {
-  background: radial-gradient(circle at 80% 20%, rgba(201, 154, 69, 0.3) 0%, transparent 50%),
-              radial-gradient(circle at 10% 80%, rgba(223, 178, 94, 0.2) 0%, transparent 45%),
-              linear-gradient(180deg, var(--navy-950) 0%, #0d1e33 100%);
+  background: radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.5) 0%, transparent 50%),
+              radial-gradient(circle at 10% 80%, rgba(14, 165, 233, 0.3) 0%, transparent 45%),
+              linear-gradient(145deg, #075985 0%, #0284c7 50%, #38bdf8 100%);
 }
 
 .page-hero.hero-agro {
-  background: radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.3) 0%, transparent 50%),
-              radial-gradient(circle at 10% 80%, rgba(132, 204, 22, 0.2) 0%, transparent 45%),
-              linear-gradient(180deg, var(--navy-950) 0%, #0a2418 100%);
+  background: radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.45) 0%, transparent 50%),
+              radial-gradient(circle at 10% 80%, rgba(56, 189, 248, 0.3) 0%, transparent 45%),
+              linear-gradient(145deg, #065f46 0%, #0284c7 55%, #10b981 100%);
 }
 
 .page-hero.hero-resort {
-  background: radial-gradient(circle at 80% 20%, rgba(242, 92, 5, 0.35) 0%, transparent 50%),
-              radial-gradient(circle at 10% 80%, rgba(15, 76, 129, 0.4) 0%, transparent 50%),
-              linear-gradient(180deg, var(--navy-950) 0%, #0a1f38 100%);
+  background: radial-gradient(circle at 80% 20%, rgba(242, 92, 5, 0.4) 0%, transparent 50%),
+              radial-gradient(circle at 10% 80%, rgba(56, 189, 248, 0.4) 0%, transparent 50%),
+              linear-gradient(145deg, #0369a1 0%, #0ea5e9 50%, #38bdf8 100%);
 }
 
 .page-hero.hero-about {
-  background: radial-gradient(circle at 80% 20%, rgba(242, 92, 5, 0.25) 0%, transparent 50%),
-              radial-gradient(circle at 10% 80%, rgba(15, 76, 129, 0.3) 0%, transparent 50%),
-              linear-gradient(180deg, var(--navy-950) 0%, var(--navy-900) 100%);
+  background: radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.45) 0%, transparent 50%),
+              radial-gradient(circle at 10% 80%, rgba(14, 165, 233, 0.35) 0%, transparent 50%),
+              linear-gradient(145deg, #075985 0%, #0284c7 50%, #0ea5e9 100%);
 }
 
 .page-hero-inner {
@@ -1273,12 +1312,12 @@ ul, ol {
   visibility: visible;
 }
 
-/* Footer (Shared) */
+/* Footer (Shared - Vibrant Sky Blue Conglomerate Theme) */
 .site-footer {
-  background-color: var(--navy-950);
-  color: var(--slate-400);
+  background: linear-gradient(180deg, #0c4a6e 0%, #075985 40%, #0369a1 100%);
+  color: #e0f2fe;
   padding: 5rem 0 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .footer-top-grid {
@@ -1286,12 +1325,12 @@ ul, ol {
   grid-template-columns: 1.5fr repeat(4, 1fr);
   gap: 3rem;
   padding-bottom: 4rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .footer-brand-block p {
   font-size: 0.875rem;
-  color: var(--slate-400);
+  color: #e0f2fe;
   line-height: 1.6;
   margin: 1.25rem 0 1.5rem;
 }
@@ -1314,12 +1353,14 @@ ul, ol {
 
 .footer-link {
   font-size: 0.875rem;
-  color: var(--slate-400);
+  color: #bae6fd;
+  transition: all var(--transition-fast);
 }
 
 .footer-link:hover {
-  color: var(--orange-400);
-  transform: translateX(3px);
+  color: #ffffff;
+  transform: translateX(4px);
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
 
 .footer-bottom-bar {
@@ -1328,7 +1369,7 @@ ul, ol {
   justify-content: space-between;
   padding-top: 2rem;
   font-size: 0.8125rem;
-  color: var(--slate-500);
+  color: #bae6fd;
   flex-wrap: wrap;
   gap: 1rem;
 }
@@ -2206,3 +2247,439 @@ ul, ol {
     width: 100%;
   }
 }
+
+/* ==========================================================================
+   DRIBBLE-GRADE INTERACTIVE EXPERIENCE: "WHAT CAN WE DO FOR YOU?"
+   ========================================================================== */
+.experience-picker-section {
+  padding: 4.5rem 0 5rem;
+  background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 50%, #f8fafc 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.picker-tabs-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin: 2.25rem 0 3rem;
+}
+
+.exp-tab-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1.6rem;
+  background: var(--white);
+  border: 1.5px solid var(--sky-200);
+  border-radius: var(--radius-full);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--sky-900);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.08);
+  transition: all var(--transition-fast);
+}
+
+.exp-tab-pill:hover {
+  border-color: var(--sky-500);
+  background: var(--sky-50);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(14, 165, 233, 0.18);
+}
+
+.exp-tab-pill.active {
+  background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
+  color: var(--white);
+  border-color: transparent;
+  box-shadow: 0 10px 25px rgba(14, 165, 233, 0.38);
+  transform: translateY(-2px);
+}
+
+.exp-tab-pill .pill-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.exp-showcase-panel {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  border: 1.5px solid var(--sky-100);
+  box-shadow: 0 20px 60px rgba(2, 132, 199, 0.12);
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  position: relative;
+  transition: all var(--transition-smooth);
+}
+
+.exp-showcase-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #0284c7 0%, #38bdf8 50%, #f59e0b 100%);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+.exp-badge-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.85rem;
+  background: #e0f2fe;
+  color: #0284c7;
+  border-radius: 9999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+.exp-headline {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.5vw, 2.25rem);
+  font-weight: 800;
+  color: #0c4a6e;
+  line-height: 1.25;
+  margin-bottom: 1.25rem;
+}
+
+.exp-real-talk {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #334155;
+  margin-bottom: 1.75rem;
+}
+
+.exp-perks-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2.25rem;
+}
+
+.exp-perk-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.exp-perk-check {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #e0f2fe;
+  color: #0284c7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+
+.exp-cta-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.exp-preview-card {
+  background: linear-gradient(145deg, #f0f9ff 0%, #e0f2fe 100%);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  border: 1px solid var(--sky-200);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.exp-preview-media {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  height: 220px;
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.15);
+}
+
+.exp-preview-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.exp-preview-card:hover .exp-preview-media img {
+  transform: scale(1.05);
+}
+
+.exp-price-badge-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--white);
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.exp-price-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--slate-500);
+  text-transform: uppercase;
+}
+
+.exp-price-val {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0284c7;
+}
+
+/* ==========================================================================
+   CONVERSATIONAL "REAL-TALK" GUARANTEE CARDS
+   ========================================================================== */
+.real-talk-section {
+  padding: 5rem 0;
+  background: var(--white);
+}
+
+.real-talk-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.75rem;
+  margin-top: 3.5rem;
+}
+
+.real-talk-card {
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 1.75rem;
+  transition: all var(--transition-smooth);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.real-talk-card:hover {
+  transform: translateY(-8px);
+  background: var(--white);
+  border-color: #38bdf8;
+  box-shadow: 0 16px 36px rgba(14, 165, 233, 0.15);
+}
+
+.real-talk-icon-wrap {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #7dd3fc;
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.15);
+}
+
+.real-talk-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0c4a6e;
+  line-height: 1.3;
+  margin-bottom: 0.85rem;
+}
+
+.real-talk-desc {
+  font-size: 0.925rem;
+  line-height: 1.65;
+  color: #475569;
+  flex-grow: 1;
+}
+
+.real-talk-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #0284c7;
+  background: #e0f2fe;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  margin-top: 1.25rem;
+  width: fit-content;
+}
+
+/* ==========================================================================
+   INTERACTIVE CONCIERGE ESTIMATOR WIDGET
+   ========================================================================== */
+.interactive-concierge-box {
+  background: linear-gradient(145deg, #0c4a6e 0%, #0369a1 100%);
+  border-radius: var(--radius-xl);
+  padding: 3.5rem;
+  color: var(--white);
+  box-shadow: 0 24px 60px rgba(2, 132, 199, 0.25);
+  margin-top: 4rem;
+}
+
+.concierge-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.concierge-chip-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.concierge-chip-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.4rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  color: var(--white);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: left;
+}
+
+.concierge-chip-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: #38bdf8;
+  transform: translateX(4px);
+}
+
+.concierge-chip-btn.active {
+  background: var(--white);
+  color: #0369a1;
+  border-color: var(--white);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.concierge-result-card {
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem;
+  color: #0f172a;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+}
+
+/* ==========================================================================
+   HUMAN CONVERSATIONAL FAQ ACCORDION
+   ========================================================================== */
+.faq-section {
+  padding: 5rem 0;
+  background: #f8fafc;
+}
+
+.faq-list-wrap {
+  max-width: 840px;
+  margin: 3rem auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.faq-card {
+  background: var(--white);
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  transition: all var(--transition-fast);
+}
+
+.faq-card:hover {
+  border-color: #7dd3fc;
+}
+
+.faq-question-btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.35rem 1.75rem;
+  background: none;
+  border: none;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #0c4a6e;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq-chevron {
+  width: 20px;
+  height: 20px;
+  color: #0284c7;
+  transition: transform var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.faq-card.open .faq-chevron {
+  transform: rotate(180deg);
+}
+
+.faq-answer-panel {
+  display: none;
+  padding: 0 1.75rem 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #475569;
+  border-top: 1px dashed #e2e8f0;
+  padding-top: 1.25rem;
+}
+
+.faq-card.open .faq-answer-panel {
+  display: block;
+}
+
+@media (max-width: 992px) {
+  .exp-showcase-panel {
+    grid-template-columns: 1fr;
+    padding: 2rem;
+  }
+  .real-talk-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .concierge-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .real-talk-grid {
+    grid-template-columns: 1fr;
+  }
+  .interactive-concierge-box {
+    padding: 2rem 1.25rem;
+  }
+}
+
