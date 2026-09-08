@@ -223,24 +223,24 @@ get_header();
           </div>
         </article>
 
-        <!-- 5. Love Night Suite (Main Hotel) -->
+        <!-- 5. Love Night Room (Main Hotel) -->
         <article class="suite-card" data-room-cat="main">
           <div class="suite-card-media">
             <span class="suite-branch-badge branch-main">Branch 01 • Main Hotel</span>
-            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80" alt="Love Night Suite at Kelvin Cameo Resort" loading="lazy">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/love-night-room.jpg' ); ?>" alt="Love Night Room at Kelvin Cameo Resort Hotel" loading="lazy">
           </div>
           <div class="suite-card-body">
             <div>
               <span class="suite-category-label">Romantic Getaway</span>
-              <h3 class="suite-name">Love Night Suite</h3>
+              <h3 class="suite-name">Love Night Room</h3>
               <p class="suite-desc">
-                Curated for couples, anniversaries, and honeymoon celebrations. Romantic mood fixtures, bespoke floral styling upon request, and deep soak spa bath.
+                Curated for couples, anniversaries, and romantic getaways. Authentic plush upholstered headboard, ambient mood lighting, bedside intercom, and ensuite luxury bath.
               </p>
               <div class="suite-amenities-row">
-                <span class="suite-amenity-tag">Romantic Decor</span>
-                <span class="suite-amenity-tag">Spa Bath</span>
-                <span class="suite-amenity-tag">King Canopy</span>
-                <span class="suite-amenity-tag">Complimentary Wine</span>
+                <span class="suite-amenity-tag">Designer Bed</span>
+                <span class="suite-amenity-tag">Intercom</span>
+                <span class="suite-amenity-tag">Air Conditioning</span>
+                <span class="suite-amenity-tag">Plush Linens</span>
               </div>
             </div>
             <div class="suite-footer">
@@ -256,24 +256,24 @@ get_header();
           </div>
         </article>
 
-        <!-- 6. Golden Nest Suite (Main Hotel) -->
+        <!-- 6. Golden Nest Room (Main Hotel) -->
         <article class="suite-card" data-room-cat="main">
           <div class="suite-card-media">
             <span class="suite-branch-badge branch-main">Branch 01 • Main Hotel</span>
-            <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=800&q=80" alt="Golden Nest Suite at Kelvin Cameo Resort" loading="lazy">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/golden-nest-room.jpg' ); ?>" alt="Golden Nest Room at Kelvin Cameo Resort Hotel" loading="lazy">
           </div>
           <div class="suite-card-body">
             <div>
-              <span class="suite-category-label">Signature Suite</span>
-              <h3 class="suite-name">Golden Nest Suite</h3>
+              <span class="suite-category-label">Signature Luxury</span>
+              <h3 class="suite-name">Golden Nest Room</h3>
               <p class="suite-desc">
-                Golden warm finishes, custom velvet headboards, and executive lounge seating. Ideal for senior executives and VIP guests seeking prestige and tranquility.
+                Warm amber finishes, custom velvet ribbed headboard, bedside ambient sconces, executive armchair, carpeted floor, and full split-unit air conditioning.
               </p>
               <div class="suite-amenities-row">
-                <span class="suite-amenity-tag">Lounge Area</span>
-                <span class="suite-amenity-tag">Super King Bed</span>
-                <span class="suite-amenity-tag">Coffee Machine</span>
-                <span class="suite-amenity-tag">55" 4K Smart TV</span>
+                <span class="suite-amenity-tag">Ambient Sconces</span>
+                <span class="suite-amenity-tag">Lounge Chair</span>
+                <span class="suite-amenity-tag">Split AC</span>
+                <span class="suite-amenity-tag">Intercom</span>
               </div>
             </div>
             <div class="suite-footer">
