@@ -673,17 +673,34 @@ ul, ol {
   display: none;
   flex-direction: column;
   gap: 5px;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
   justify-content: center;
   align-items: center;
+  background: rgba(2, 132, 199, 0.08);
+  border: 1px solid rgba(2, 132, 199, 0.15);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-toggle:hover {
+  background: rgba(2, 132, 199, 0.16);
+  border-color: var(--sky-500);
 }
 
 .mobile-toggle span {
-  width: 24px;
-  height: 2px;
+  width: 22px;
+  height: 2.5px;
   background-color: var(--navy-900);
   border-radius: 2px;
+  transition: all var(--transition-fast);
+}
+
+.hide-desktop {
+  display: none !important;
 }
 
 /* ==========================================================================
