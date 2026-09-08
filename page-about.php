@@ -153,13 +153,15 @@ get_header();
           </p>
         </article>
 
-        <!-- Leader 2: Energy & Operations -->
+        <!-- Leader 2: Alh. Kamorudeen Oladejo (Director, Kelvin Energy Services Ltd) -->
         <article class="board-card">
-          <div class="board-avatar">DO</div>
-          <h3 class="board-name">Director of Energy & Petroleum</h3>
-          <span class="board-title">Downstream & Retail Distribution</span>
+          <div style="width:115px; height:115px; border-radius:50%; margin:0 auto 1.25rem; overflow:hidden; border:4px solid var(--white); box-shadow:var(--shadow-md);">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/director-alh-kamorudeen-oladejo.jpg' ); ?>" alt="Alh. Kamorudeen Oladejo - Director, Kelvin Energy Services Ltd" style="width:100%; height:100%; object-fit:cover; object-position:top center;">
+          </div>
+          <h3 class="board-name">Alh. Kamorudeen Oladejo</h3>
+          <span class="board-title">Director, Kelvin Energy Services Ltd</span>
           <p class="board-bio">
-            Oversees Kelvin Cameo Energy retail network, supply chain depot logistics, NMDPRA compliance, LPG storage expansions, and solar microgrid integrations.
+            Steers downstream retail network expansions, fuel tanker haulage logistics, NMDPRA regulatory compliance, LPG plant operations, and wholesale commercial supply across Nigeria.
           </p>
         </article>
 
