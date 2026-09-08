@@ -38,7 +38,7 @@ get_header();
   <!-- Group Genesis & Heritage -->
   <section class="section-padding" style="background:var(--white);">
     <div class="container">
-      <div style="display:grid; grid-template-columns:1.1fr 1fr; gap:4rem; align-items:center;">
+      <div class="split-media-grid">
         <div>
           <span class="section-badge" style="background:rgba(242,92,5,0.15); color:var(--orange-600);">Our Corporate Identity</span>
           <h2 class="section-title" style="margin-top:0.5rem;">An Indigenous Conglomerate Built on Resilient Foundations</h2>
@@ -49,7 +49,7 @@ get_header();
             Over the years, our operations have systematically expanded into four pillar sectors critical to the everyday prosperity of Nigerians: powering transportation and commerce through our energy retail network, unlocking generational wealth through verified land and residential properties, securing local food chains through mechanized farming, and setting new benchmarks for leisure and grand events at Kelvin Cameo Resort Hotel.
           </p>
 
-          <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:1.5rem; margin-top:2rem;">
+          <div class="grid-2-stats" style="margin-top:2rem;">
             <div style="background:var(--sand-50); padding:1.5rem; border-radius:var(--radius-md); border-left:4px solid var(--orange-500);">
               <h4 style="font-family:var(--font-display); font-size:1.75rem; font-weight:800; color:var(--navy-900);">RC: 1613032</h4>
               <p style="font-size:0.85rem; color:var(--slate-600);">Corporate Affairs Commission verified legal standing.</p>
@@ -63,10 +63,10 @@ get_header();
 
         <div>
           <div style="position:relative;">
-            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80" alt="Corporate Architecture Skyline" style="width:100%; height:480px; object-fit:cover; border-radius:var(--radius-xl); box-shadow:var(--shadow-xl); border:1px solid var(--slate-200);">
-            <div style="position:absolute; bottom:-25px; right:-25px; background:var(--navy-950); color:var(--white); padding:2rem; border-radius:var(--radius-lg); box-shadow:var(--shadow-xl); max-width:280px; border:1px solid rgba(255,255,255,0.1);">
-              <span style="color:var(--orange-400); font-weight:800; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em;">Group Philosophy</span>
-              <p style="font-size:0.9rem; margin-top:0.5rem; line-height:1.5;">"Creating enduring prosperity through local enterprise and operational excellence."</p>
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/kelvin-energy-drivers-team.jpg' ); ?>" alt="Kelvin Energy Drivers and Logistics Team" style="width:100%; height:480px; object-fit:cover; border-radius:var(--radius-xl); box-shadow:var(--shadow-xl); border:1px solid var(--slate-200);">
+            <div style="position:absolute; bottom:-25px; right:-25px; background:var(--navy-950); color:var(--white); padding:1.75rem; border-radius:var(--radius-lg); box-shadow:var(--shadow-xl); max-width:280px; border:1px solid rgba(255,255,255,0.1);">
+              <span style="color:var(--orange-400); font-weight:800; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em;">Group Workforce</span>
+              <p style="font-size:0.85rem; margin-top:0.4rem; line-height:1.5;">Dedicated professional drivers, engineers, and hospitality personnel powering daily operations.</p>
             </div>
           </div>
         </div>
