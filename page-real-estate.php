@@ -178,7 +178,7 @@ get_header();
   <!-- Plot Inspection & Inquiry Form -->
   <section class="section-padding" id="inquire" style="background:var(--sand-50);">
     <div class="container">
-      <div class="overview-grid">
+      <div class="grid-2-responsive">
         <div>
           <span class="section-badge" style="background:rgba(201,154,69,0.15); color:var(--estate-gold);">Secure Allocation</span>
           <h2 class="section-title">Schedule a Site Inspection or Consultation</h2>
