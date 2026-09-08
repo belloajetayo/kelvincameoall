@@ -124,17 +124,17 @@ get_header();
       </div>
 
       <div class="estate-layouts-grid">
-        <!-- Layout 1 -->
+        <!-- Layout 1: Authentic Completed Residential Duplex Scheme -->
         <div class="estate-card">
           <div class="estate-img-wrap">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Cameo Royal Palms Estate">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/cameo-duplex-construction.jpg' ); ?>" alt="Kelvin Cameo Building and Construction - Luxury Duplex Compound" loading="lazy">
           </div>
           <div class="estate-body">
-            <span class="branch-pill" style="background:var(--estate-gold); color:var(--navy-950); margin-bottom:0.5rem;">Residential Gated Estate</span>
-            <h4>Cameo Royal Palms Luxury Estate</h4>
-            <p>Master-planned residential enclave with 500sqm & 1,000sqm residential plots, solar streetlights, paved interlock roads, and recreational club.</p>
+            <span class="branch-pill" style="background:var(--estate-gold); color:var(--navy-950); margin-bottom:0.5rem;">Completed Infrastructure & Plots</span>
+            <h4>Cameo Imperial Residential Enclave</h4>
+            <p>Authentic master-built contemporary duplex residences and serviced plots featuring perimeter fencing, gated security access, paved drainage, and solar power.</p>
             <div style="display:flex; justify-content:space-between; align-items:center; padding-top:1rem; border-top:1px solid var(--slate-100);">
-              <span style="font-weight:800; font-size:1.15rem; color:var(--navy-900);">Title: C of O</span>
+              <span style="font-weight:800; font-size:1.15rem; color:var(--navy-900);">Title: C of O / Gazette</span>
               <button class="btn btn-estate btn-sm" data-modal="inquiryModal">Request Layout</button>
             </div>
           </div>
