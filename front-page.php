@@ -215,7 +215,7 @@ get_header();
         <!-- 1. Energy & Filling Stations Card -->
         <article class="sector-mega-card card-energy">
           <div class="sector-card-media">
-            <img src="https://images.unsplash.com/photo-1545459720-aac8509eb02c?auto=format&fit=crop&w=1000&q=80" alt="Kelvin Cameo Energy Filling Station" loading="lazy">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/kelvin-filling-station-canopy.jpg' ); ?>" alt="Kelvin Cameo Energy Retail Filling Station" loading="lazy">
             <span class="sector-pill-badge badge-energy">Division 01 • Energy & Fuel</span>
           </div>
           <div class="sector-card-body">
@@ -246,7 +246,7 @@ get_header();
         <!-- 2. Real Estate & Infrastructure Card -->
         <article class="sector-mega-card card-estate">
           <div class="sector-card-media">
-            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1000&q=80" alt="Kelvin Cameo Real Estate Developments" loading="lazy">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/cameo-duplex-construction.jpg' ); ?>" alt="Kelvin Cameo Real Estate Duplex Developments" loading="lazy">
             <span class="sector-pill-badge badge-estate">Division 02 • Real Estate</span>
           </div>
           <div class="sector-card-body">
@@ -308,7 +308,7 @@ get_header();
         <!-- 4. Hospitality & Resort Hotel Card -->
         <article class="sector-mega-card card-resort">
           <div class="sector-card-media">
-            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80" alt="Kelvin Cameo Resort Hotel Suleja" loading="lazy">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/golden-nest-room.jpg' ); ?>" alt="Kelvin Cameo Resort Hotel Golden Nest Room" loading="lazy">
             <span class="sector-pill-badge badge-resort">Division 04 • Hospitality</span>
           </div>
           <div class="sector-card-body">
