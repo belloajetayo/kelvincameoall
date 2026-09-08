@@ -76,13 +76,13 @@ function initMobileDrawer() {
         </div>
 
         <nav class="drawer-links" aria-label="Mobile Menu">
-          <a href="index.html" class="drawer-link">Home (Conglomerate)</a>
-          <a href="energy.html" class="drawer-link">Energy & Filling Stations</a>
-          <a href="real-estate.html" class="drawer-link">Real Estate & Land</a>
-          <a href="agriculture.html" class="drawer-link">Commercial Agriculture</a>
-          <a href="hospitality.html" class="drawer-link" style="color:var(--orange-500);">Resort Hotel & Banquets</a>
-          <a href="about.html" class="drawer-link">About The Group</a>
-          <a href="contact.html" class="drawer-link">Contact & Inquiries</a>
+          <a href="/" class="drawer-link">Home (Conglomerate)</a>
+          <a href="/energy/" class="drawer-link">Energy & Filling Stations</a>
+          <a href="/real-estate/" class="drawer-link">Real Estate & Land</a>
+          <a href="/agriculture/" class="drawer-link">Commercial Agriculture</a>
+          <a href="/hospitality/" class="drawer-link" style="color:var(--orange-500);">Resort Hotel & Banquets</a>
+          <a href="/about/" class="drawer-link">About The Group</a>
+          <a href="/contact/" class="drawer-link">Contact & Inquiries</a>
         </nav>
       </div>
 
