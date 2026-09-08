@@ -387,7 +387,7 @@ get_header();
        ======================================================================== -->
   <section class="section-padding" style="background:var(--sand-50); border-top: 1px solid var(--sand-200);">
     <div class="container">
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+      <div class="split-media-grid">
         <div>
           <span class="section-badge" style="background: rgba(15,76,129,0.15); color: var(--resort-sapphire);">Institutional Integrity</span>
           <h2 class="section-title" style="margin-top: 0.5rem;">Engineered for Performance, Governed with Integrity</h2>
@@ -420,7 +420,7 @@ get_header();
           <a href="<?php echo kc_url('about'); ?>" class="btn btn-navy btn-lg">Read Our Corporate Profile</a>
         </div>
         <div>
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80" alt="Kelvin Cameo Corporate Architecture" style="width: 100%; height: 480px; object-fit: cover; border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); border: 1px solid var(--slate-200);" loading="lazy">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/kelvin-energy-drivers-team.jpg' ); ?>" alt="Kelvin Energy Drivers and Operations Team" style="width: 100%; height: 480px; object-fit: cover; border-radius: var(--radius-xl); box-shadow: var(--shadow-xl); border: 1px solid var(--slate-200);" loading="lazy">
         </div>
       </div>
     </div>
