@@ -169,8 +169,8 @@ get_header();
         </p>
       </div>
 
-      <div style="background:var(--sand-50); border:1px solid var(--sand-200); border-radius:var(--radius-xl); padding:3rem; box-shadow:var(--shadow-md);">
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center;">
+      <div style="background:var(--sand-50); border:1px solid var(--sand-200); border-radius:var(--radius-xl); padding:2.5rem; box-shadow:var(--shadow-md);">
+        <div class="grid-2-responsive">
           <div>
             <h3 style="font-family:var(--font-display); font-size:1.6rem; font-weight:800; color:var(--navy-900); margin-bottom:1rem;">
               Visiting Kelvin Cameo Resort Hotel
