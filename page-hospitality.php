@@ -437,7 +437,7 @@ get_header();
       </div>
 
       <div class="banquet-showcase-box">
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:3.5rem; align-items:center;">
+        <div class="grid-2-responsive">
           <div>
             <span class="rc-badge" style="background:rgba(242,92,5,0.2); color:var(--orange-400); margin-bottom:1rem; display:inline-flex;">
               Capacity: Up To 1,000 Guests (Banquet Style)
@@ -448,7 +448,7 @@ get_header();
             <p style="color:var(--slate-300); line-height:1.7; margin-bottom:1.75rem;">
               The Kelvin Cameo Grand Banquet Hall features expansive pillarless sightlines, soaring ceilings adorned with crystal chandeliers, commercial-grade central chilling air conditioning, and dual 250kVA standby soundproof generators.
             </p>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-bottom:2rem;">
+            <div class="grid-2-stats" style="margin-bottom:2rem;">
               <div>
                 <h5 style="color:var(--orange-400); font-size:1.1rem; font-weight:800;">1,000 Seats</h5>
                 <p style="font-size:0.85rem; color:var(--slate-400);">Banquet or theatre layout configuration</p>
