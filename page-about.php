@@ -85,7 +85,7 @@ get_header();
         </p>
       </div>
 
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:2.5rem; margin-bottom:3.5rem;">
+      <div class="grid-2-responsive" style="margin-bottom:3.5rem;">
         <!-- Vision Box -->
         <div style="background:var(--white); padding:3rem; border-radius:var(--radius-xl); border:1px solid var(--slate-200); box-shadow:var(--shadow-md);">
           <div style="width:52px; height:52px; border-radius:var(--radius-md); background:rgba(242,92,5,0.1); color:var(--orange-500); display:flex; align-items:center; justify-content:center; margin-bottom:1.5rem;">
@@ -110,7 +110,7 @@ get_header();
       </div>
 
       <!-- Core Values -->
-      <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:1.75rem;">
+      <div class="grid-4-responsive">
         <div style="background:var(--white); padding:2rem; border-radius:var(--radius-lg); border:1px solid var(--slate-200);">
           <h5 style="font-size:1.15rem; font-weight:800; color:var(--navy-900); margin-bottom:0.5rem;">Integrity & Truth</h5>
           <p style="font-size:0.875rem; color:var(--slate-600); line-height:1.6;">Transparent dealings in pump calibration, legal land documentation, and guest billing.</p>
