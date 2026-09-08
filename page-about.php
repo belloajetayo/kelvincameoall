@@ -298,7 +298,7 @@ get_header();
   <!-- Corporate Social Responsibility (Kelvin Cameo Foundation) -->
   <section id="foundation" class="section-padding" style="background:var(--navy-950); color:var(--white);">
     <div class="container">
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center;">
+      <div class="grid-2-responsive">
         <div>
           <span class="rc-badge" style="background:rgba(242,92,5,0.25); color:var(--orange-400); margin-bottom:1rem; display:inline-flex;">
             Kelvin Cameo Foundation (CSR)
