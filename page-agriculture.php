@@ -199,7 +199,7 @@ get_header();
   <!-- Contract Farming & Partnership Architecture -->
   <section class="section-padding" style="background:var(--sand-50); border-top:1px solid var(--sand-200);">
     <div class="container">
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:3.5rem; align-items:center;">
+      <div class="grid-2-responsive">
         <div>
           <span class="section-badge" style="background:rgba(16,185,129,0.15); color:var(--agro-emerald);">Sustainable Partnership</span>
           <h2 class="section-title" style="margin-top:0.5rem;">Empowering Rural Outgrowers, Feeding Modern Nigeria</h2>
