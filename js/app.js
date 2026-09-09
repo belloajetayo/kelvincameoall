@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initSubsidiaryTabs();
   initRoomTabs();
   initSuiteTrackSliders();
+  initCardMediaSliders();
+  initHeroMovingBackground();
+  initMovingGallery();
   initRoomBookingModal();
   initBookingWidget();
   initModalActions();
