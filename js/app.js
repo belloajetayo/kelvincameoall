@@ -1093,7 +1093,7 @@ function initSiteKitAnalytics() {
   });
 
   // Track Form Submissions & RFP buttons
-  document.querySelectorAll('form').forEach(form => {
+    document.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', () => {
       const formId = form.id || form.getAttribute('data-form-type') || 'inquiry-form';
       sendGaEvent('generate_lead', {
@@ -1101,6 +1101,223 @@ function initSiteKitAnalytics() {
         event_label: formId,
         form_name: formId
       });
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   Hero Moving Exterior Background Slideshow
+   -------------------------------------------------------------------------- */
+function initHeroMovingBackground() {
+  const sliders = document.querySelectorAll('.hero-moving-bg-slider');
+  if (!sliders.length) return;
+
+  sliders.forEach(slider => {
+    const slides = slider.querySelectorAll('.hero-bg-slide');
+    if (slides.length <= 1) return;
+
+    let current = 0;
+    setInterval(() => {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }, 5500);
+  });
+}
+
+/* --------------------------------------------------------------------------
+   Card Media Micro-Slider (Multiple Photos Support per Room)
+   -------------------------------------------------------------------------- */
+function initCardMediaSliders() {
+  const sliders = document.querySelectorAll('.card-media-slider');
+  if (!sliders.length) return;
+
+  sliders.forEach(slider => {
+    const slides = slider.querySelectorAll('.card-media-slides img');
+    const dots = slider.querySelectorAll('.card-media-dots .dot');
+    const prevBtn = slider.querySelector('.card-media-nav.prev');
+    const nextBtn = slider.querySelector('.card-media-nav.next');
+    if (slides.length <= 1) return;
+
+    let currentIndex = 0;
+
+    function showSlide(index) {
+      slides.forEach(img => img.classList.remove('active'));
+      dots.forEach(dot => dot.classList.remove('active'));
+
+      currentIndex = (index + slides.length) % slides.length;
+      slides[currentIndex].classList.add('active');
+      if (dots[currentIndex]) dots[currentIndex].classList.add('active');
+
+      const card = slider.closest('.suite-card');
+      if (card) {
+        const bookBtn = card.querySelector('.btn-book-room');
+        if (bookBtn) {
+          bookBtn.setAttribute('data-room-img', slides[currentIndex].src);
+        }
+      }
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        showSlide(currentIndex - 1);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        showSlide(currentIndex + 1);
+      });
+    }
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        showSlide(i);
+      });
+    });
+
+    let touchStartX = 0;
+    slider.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    slider.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].screenX;
+      const diff = touchEndX - touchStartX;
+      if (Math.abs(diff) > 40) {
+        if (diff < 0) {
+          showSlide(currentIndex + 1);
+        } else {
+          showSlide(currentIndex - 1);
+        }
+      }
+    }, { passive: true });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   Continuous Moving Resort Gallery & Lightbox
+   -------------------------------------------------------------------------- */
+function initMovingGallery() {
+  const viewport = document.getElementById('movingGalleryViewport');
+  const track = document.getElementById('movingGalleryTrack');
+  const toggleBtn = document.getElementById('galleryMotionToggle');
+  const prevBtn = document.getElementById('galleryPrevBtn');
+  const nextBtn = document.getElementById('galleryNextBtn');
+  const filterBtns = document.querySelectorAll('.gallery-filter-bar .tab-btn');
+
+  if (!viewport || !track) return;
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      const isPaused = viewport.classList.toggle('is-paused');
+      const dot = toggleBtn.querySelector('.motion-dot');
+      const label = document.getElementById('galleryMotionLabel');
+      if (isPaused) {
+        if (dot) dot.classList.add('paused');
+        if (label) label.textContent = 'Resume Motion';
+      } else {
+        if (dot) dot.classList.remove('paused');
+        if (label) label.textContent = 'Pause Motion';
+      }
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      viewport.classList.add('is-paused');
+      track.style.animation = 'none';
+      viewport.scrollBy({ left: -340, behavior: 'smooth' });
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      viewport.classList.add('is-paused');
+      track.style.animation = 'none';
+      viewport.scrollBy({ left: 340, behavior: 'smooth' });
+    });
+  }
+
+  if (filterBtns.length) {
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const cat = btn.getAttribute('data-gallery-filter');
+        const items = track.querySelectorAll('.moving-gallery-item');
+
+        items.forEach(item => {
+          const itemCat = item.getAttribute('data-category');
+          if (cat === 'all' || itemCat === cat) {
+            item.style.opacity = '1';
+            item.style.filter = 'none';
+          } else {
+            item.style.opacity = '0.25';
+            item.style.filter = 'grayscale(80%)';
+          }
+        });
+      });
+    });
+  }
+
+  let lightbox = document.getElementById('resortGalleryLightbox');
+  if (!lightbox) {
+    lightbox = document.createElement('div');
+    lightbox.id = 'resortGalleryLightbox';
+    lightbox.className = 'gallery-lightbox';
+    lightbox.innerHTML = `
+      <div class="gallery-lightbox-content">
+        <button type="button" class="gallery-lightbox-close" aria-label="Close image">✕</button>
+        <img src="" alt="Resort View" class="gallery-lightbox-img" id="lightboxImg">
+        <div class="gallery-lightbox-caption">
+          <span class="moving-gallery-badge" id="lightboxBadge">Resort View</span>
+          <h4 class="moving-gallery-title" id="lightboxTitle" style="font-size:1.35rem; margin:0.35rem 0 0.25rem;"></h4>
+          <p class="moving-gallery-desc" id="lightboxDesc"></p>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(lightbox);
+
+    const closeBtn = lightbox.querySelector('.gallery-lightbox-close');
+    closeBtn.addEventListener('click', () => {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxBadge = document.getElementById('lightboxBadge');
+  const lightboxTitle = document.getElementById('lightboxTitle');
+  const lightboxDesc = document.getElementById('lightboxDesc');
+
+  track.querySelectorAll('.moving-gallery-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const img = item.querySelector('img');
+      const badge = item.querySelector('.moving-gallery-badge');
+      const title = item.querySelector('.moving-gallery-title');
+      const desc = item.querySelector('.moving-gallery-desc');
+
+      if (lightboxImg && img) lightboxImg.src = img.src;
+      if (lightboxBadge && badge) lightboxBadge.textContent = badge.textContent;
+      if (lightboxTitle && title) lightboxTitle.textContent = title.textContent;
+      if (lightboxDesc && desc) lightboxDesc.textContent = desc.textContent;
+
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
     });
   });
 }
