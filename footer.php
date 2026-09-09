@@ -59,6 +59,7 @@
             <li><a href="<?php echo kc_url('hospitality'); ?>#rooms" class="footer-link">Luxury Apartments (From ₦160,000)</a></li>
             <li><a href="<?php echo kc_url('hospitality'); ?>#banquet" class="footer-link">Banquet Hall Packages</a></li>
             <li><a href="<?php echo kc_url('hospitality'); ?>#amenities" class="footer-link">Swimming Pool & Dining</a></li>
+            <li><a href="<?php echo kc_url('hospitality'); ?>#booking-platforms" class="footer-link">Global Booking Platforms</a></li>
           </ul>
         </div>
 
