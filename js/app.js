@@ -147,9 +147,10 @@ function initSubsidiaryTabs() {
 }
 
 /* --------------------------------------------------------------------------
-   Room & Accommodation Category Filter Tabs
+   Room & Accommodation Category Filter Tabs & Horizontal Slider
    -------------------------------------------------------------------------- */
 function initRoomTabs() {
+  const unifiedTrack = document.getElementById('roomsScrollTrack');
   const tabBtns = document.querySelectorAll('.room-tabs .tab-btn');
   const cards = document.querySelectorAll('.suite-card');
   const annexBar = document.querySelector('.branch-section-bar.annex-bar');
@@ -166,16 +167,13 @@ function initRoomTabs() {
 
       const filter = btn.getAttribute('data-room-filter');
 
-      // Manage branch header and track visibility
-      const showMain = (filter === 'all' || filter === 'main' || filter === 'main-room' || filter === 'main-suite');
-      const showAnnex = (filter === 'all' || filter === 'annex');
+      // If separate tracks exist
+      if (mainBar) mainBar.style.display = (filter === 'all' || filter === 'main') ? '' : 'none';
+      if (mainTrack) mainTrack.style.display = (filter === 'all' || filter === 'main') ? '' : 'none';
+      if (annexBar) annexBar.style.display = (filter === 'all' || filter === 'annex') ? '' : 'none';
+      if (annexTrack) annexTrack.style.display = (filter === 'all' || filter === 'annex') ? '' : 'none';
 
-      if (mainBar) mainBar.style.display = showMain ? '' : 'none';
-      if (mainTrack) mainTrack.style.display = showMain ? '' : 'none';
-
-      if (annexBar) annexBar.style.display = showAnnex ? '' : 'none';
-      if (annexTrack) annexTrack.style.display = showAnnex ? '' : 'none';
-
+      // Unified track card filtering
       cards.forEach(card => {
         const category = card.getAttribute('data-room-cat');
         let matches = false;
@@ -194,39 +192,129 @@ function initRoomTabs() {
           card.style.opacity = '0';
           setTimeout(() => {
             card.style.opacity = '1';
-          }, 50);
+          }, 40);
         } else {
           card.style.display = 'none';
         }
       });
+
+      if (unifiedTrack) {
+        unifiedTrack.scrollTo({ left: 0, behavior: 'smooth' });
+      }
     });
   });
 }
 
 /* --------------------------------------------------------------------------
-   Horizontal Suite Track Navigation (Arrows & Drag/Scroll)
+   Horizontal Suite Track Navigation (Arrows, Floating Buttons & Auto-Scroll)
    -------------------------------------------------------------------------- */
 function initSuiteTrackSliders() {
-  const navBtns = document.querySelectorAll('.slider-nav-btn');
-  if (!navBtns.length) return;
+  const unifiedTrack = document.getElementById('roomsScrollTrack');
+  const navBtns = document.querySelectorAll('.slider-nav-btn, .track-floating-btn');
+  const toggleBtn = document.getElementById('autoScrollToggle');
+  const statusDot = document.getElementById('autoScrollStatusDot');
 
+  // Generic Button handler (works for any target track)
   navBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetId = btn.getAttribute('data-target');
-      const track = document.getElementById(targetId);
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = btn.getAttribute('data-target') || (btn.id.includes('float') || btn.id.includes('roomCatalog') ? 'roomsScrollTrack' : null);
+      const track = targetId ? document.getElementById(targetId) : unifiedTrack;
       if (!track) return;
 
-      const firstCard = track.querySelector('.suite-card');
-      const cardWidth = firstCard ? firstCard.offsetWidth : 360;
+      const firstVisibleCard = track.querySelector('.suite-card:not([style*="display: none"])');
+      const cardWidth = firstVisibleCard ? firstVisibleCard.offsetWidth : 370;
       const scrollStep = cardWidth + 28; // card width + gap
 
-      if (btn.classList.contains('prev-btn')) {
-        track.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+      if (btn.classList.contains('prev-btn') || btn.classList.contains('prev') || btn.id.includes('Prev')) {
+        if (track.scrollLeft <= 15) {
+          track.scrollTo({ left: track.scrollWidth - track.clientWidth, behavior: 'smooth' });
+        } else {
+          track.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+        }
       } else {
-        track.scrollBy({ left: scrollStep, behavior: 'smooth' });
+        const maxScroll = track.scrollWidth - track.clientWidth - 15;
+        if (track.scrollLeft >= maxScroll) {
+          track.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          track.scrollBy({ left: scrollStep, behavior: 'smooth' });
+        }
       }
+
+      resetAutoScroll();
     });
   });
+
+  // Auto-scroll to the right
+  if (!unifiedTrack) return;
+
+  let isAutoScrolling = true;
+  let autoScrollTimer = null;
+
+  function advanceRight() {
+    const firstVisibleCard = unifiedTrack.querySelector('.suite-card:not([style*="display: none"])');
+    const cardWidth = firstVisibleCard ? firstVisibleCard.offsetWidth : 370;
+    const scrollStep = cardWidth + 28;
+    const maxScroll = unifiedTrack.scrollWidth - unifiedTrack.clientWidth - 15;
+
+    if (unifiedTrack.scrollLeft >= maxScroll) {
+      unifiedTrack.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      unifiedTrack.scrollBy({ left: scrollStep, behavior: 'smooth' });
+    }
+  }
+
+  function startAutoScroll() {
+    if (autoScrollTimer) clearInterval(autoScrollTimer);
+    autoScrollTimer = setInterval(() => {
+      if (isAutoScrolling) {
+        advanceRight();
+      }
+    }, 3800);
+  }
+
+  function resetAutoScroll() {
+    if (toggleBtn && toggleBtn.getAttribute('data-paused') === 'true') return;
+    if (autoScrollTimer) clearInterval(autoScrollTimer);
+    startAutoScroll();
+  }
+
+  // Pause on hover or touch
+  unifiedTrack.addEventListener('mouseenter', () => { isAutoScrolling = false; });
+  unifiedTrack.addEventListener('mouseleave', () => {
+    if (!toggleBtn || toggleBtn.getAttribute('data-paused') !== 'true') {
+      isAutoScrolling = true;
+      resetAutoScroll();
+    }
+  });
+
+  unifiedTrack.addEventListener('touchstart', () => { isAutoScrolling = false; }, { passive: true });
+  unifiedTrack.addEventListener('touchend', () => {
+    if (!toggleBtn || toggleBtn.getAttribute('data-paused') !== 'true') {
+      isAutoScrolling = true;
+      resetAutoScroll();
+    }
+  }, { passive: true });
+
+  // Toggle button control
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      const isPaused = toggleBtn.getAttribute('data-paused') === 'true';
+      if (isPaused) {
+        toggleBtn.setAttribute('data-paused', 'false');
+        isAutoScrolling = true;
+        toggleBtn.innerHTML = '<span id="autoScrollStatusDot" style="width:8px; height:8px; border-radius:50%; background:#10b981; display:inline-block; margin-right:5px;"></span> Auto-Scroll: ON';
+        startAutoScroll();
+      } else {
+        toggleBtn.setAttribute('data-paused', 'true');
+        isAutoScrolling = false;
+        if (autoScrollTimer) clearInterval(autoScrollTimer);
+        toggleBtn.innerHTML = '<span id="autoScrollStatusDot" style="width:8px; height:8px; border-radius:50%; background:#ef4444; display:inline-block; margin-right:5px;"></span> Auto-Scroll: Paused';
+      }
+    });
+  }
+
+  startAutoScroll();
 }
 
 /* --------------------------------------------------------------------------
