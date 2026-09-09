@@ -16,9 +16,11 @@ get_header();
     <!-- Moving Exterior Background Slideshow -->
     <div class="hero-moving-bg-slider" aria-hidden="true">
       <div class="hero-bg-slide active" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/exterior.jpg' ); ?>');"></div>
+      <div class="hero-bg-slide" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/kelvin-filling-station-tankers.jpg' ); ?>');"></div>
+      <div class="hero-bg-slide" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/annex.jpg' ); ?>');"></div>
+      <div class="hero-bg-slide" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/kelvin-filling-station-canopy-clean.jpg' ); ?>');"></div>
       <div class="hero-bg-slide" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/evening.jpg' ); ?>');"></div>
       <div class="hero-bg-slide" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/entrance.jpg' ); ?>');"></div>
-      <div class="hero-bg-slide" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/annex.jpg' ); ?>');"></div>
       <div class="hero-bg-overlay"></div>
     </div>
 
