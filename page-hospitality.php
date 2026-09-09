@@ -854,5 +854,250 @@ get_header();
     </div>
   </section>
 
+  <!-- A Look Around The Resort Gallery Section -->
+  <section id="gallery" class="section-padding" style="background:var(--sand-50); border-top:1px solid var(--sand-200);">
+    <div class="container">
+      <div class="section-head" style="text-align:center; max-width:760px; margin:0 auto 2.5rem;">
+        <span class="section-badge" style="background:rgba(242,92,5,0.15); color:var(--orange-600);">Visual Walkthrough</span>
+        <h2 class="section-title">A Look Around The Resort</h2>
+        <p class="section-subtitle">
+          Take a photographic tour through our sparkling pool, cozy cocktail bar, gourmet restaurant, 1,000-seat grand auditorium, billiards lounge, and manicured grounds.
+        </p>
+      </div>
+
+      <!-- Gallery Filter Tabs -->
+      <div class="filter-tabs-wrapper gallery-filter-bar" style="margin-bottom:2.5rem;">
+        <button type="button" class="tab-btn tab-resort active" data-gallery-filter="all">All Resort Views (11)</button>
+        <button type="button" class="tab-btn tab-resort" data-gallery-filter="pool">Swimming Pool</button>
+        <button type="button" class="tab-btn tab-resort" data-gallery-filter="bar">Bar & Lounge</button>
+        <button type="button" class="tab-btn tab-resort" data-gallery-filter="restaurant">Dining & Restaurant</button>
+        <button type="button" class="tab-btn tab-resort" data-gallery-filter="banquet">Grand Banquet Hall</button>
+        <button type="button" class="tab-btn tab-resort" data-gallery-filter="games">Billiards & Games</button>
+        <button type="button" class="tab-btn tab-resort" data-gallery-filter="grounds">Grounds & Exterior</button>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="resort-gallery-grid">
+        <!-- 1. Swimming Pool -->
+        <div class="gallery-card gallery-item" data-category="pool">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/swimming-pool.jpg' ); ?>" alt="Kelvin Cameo Resort Swimming Pool" loading="lazy">
+          <div class="gallery-overlay">
+            <span class="gallery-badge">Swimming Pool</span>
+            <h4 class="gallery-title">Pristine Outdoor Pool</h4>
+            <p class="gallery-caption">Crystal-clear resort pool with sun loungers, poolside refreshments, and certified lifeguards.</p>
+          </div>
+        </div>
+
+        <!-- 2. Bar Counter -->
+        <div class="gallery-card gallery-item" data-category="bar">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/bar-counter.jpg' ); ?>" alt="Cameo Cocktail Bar Counter" loading="lazy">
+          <div class="gallery-overlay">
+            <span class="gallery-badge">Bar & Mixology</span>
+            <h4 class="gallery-title">Cameo Cocktail Bar</h4>
+            <p class="gallery-caption">Full-service cocktail bar offering premium spirits, signature blends, and artisan cocktails.</p>
+          </div>
+        </div>
+
+        <!-- 3. VIP Bar Lounge -->
+        <div class="gallery-card gallery-item" data-category="bar">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/bar-lounge.jpg' ); ?>" alt="VIP Lounge at Kelvin Cameo Resort" loading="lazy">
+          <div class="gallery-overlay">
+            <span class="gallery-badge">VIP Lounge</span>
+            <h4 class="gallery-title">Executive Lounge Seating</h4>
+            <p class="gallery-caption">Plush mood-lit parlor crafted for discreet networking and evening social downtime.</p>
+          </div>
+        </div>
+
+        <!-- 4. Restaurant -->
+        <div class="gallery-card gallery-item" data-category="restaurant">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/restaurant.jpg' ); ?>" alt="Kelvin Cameo Fine Dining Restaurant" loading="lazy">
+          <div class="gallery-overlay">
+            <span class="gallery-badge">Gourmet Dining</span>
+            <h4 class="gallery-title">Cameo Restaurant</h4>
+            <p class="gallery-caption">Fresh Nigerian favorites (point-and-kill catfish, pepper soup) and continental specialties.</p>
+          </div>
+        </div>
+
+        <!-- 5. 1,000-Seat Grand Banquet Hall -->
+        <div class="gallery-card gallery-item" data-category="banquet">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/banquet-hall.jpg' ); ?>" alt="Kelvin Cameo 1,000-Seat Grand Banquet Hall" loading="lazy">
+          <div class="gallery-overlay">
+            <span class="gallery-badge">Event Auditorium</span>
+            <h4 class="gallery-title">1,000-Seat Grand Hall</h4>
+            <p class="gallery-caption">Soaring pillarless sightlines, crystal chandeliers, industrial AC, and VIP suites.</p>
+          </div>
+        </div>
+
+        <!-- 6. Billiards & Snooker Table -->
+        <div class="gallery-card gallery-item" data-category="games">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/lounge-pool-table.jpg' ); ?>" alt="Billiards and Pool Table Lounge" loading="lazy">
+          <div class="gallery-overlay">
+            <span class="gallery-badge">Games & Leisure</span>
+            <h4 class="gallery-title">Billiards & Snooker Lounge</h4>
+            <p class="gallery-caption">Tournament-quality pool tables, sports broadcasts, and cold beverages.</p>
+          </div>
+        </div>
+
+        <!-- 7. Games Recreation Hub -->
+        <div class="gallery-card gallery-item" data-category="games">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/lounge-view.jpg' ); ?>" alt="Games Recreation Hub" loading="lazy">
+          <div class="gallery-overlay">
+            <span class="gallery-badge">Recreation</span>
+            <h4 class="gallery-title">Clubhouse Recreation</h4>
+            <p class="gallery-caption">Comfortable lounge armchairs and board gaming corner for unwinding.</p>
+          </div>
+        </div>
+
+        <!-- 8. Exterior Architecture -->
+        <div class="gallery-card gallery-item" data-category="grounds">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/exterior.jpg' ); ?>" alt="Kelvin Cameo Resort Exterior Architecture" loading="lazy">
+          <div class="gallery-overlay">
+            <span class="gallery-badge">Architecture</span>
+            <h4 class="gallery-title">Resort Architectural Facade</h4>
+            <p class="gallery-caption">Grand architectural presence with perimeter security and manicured palm avenues.</p>
+          </div>
+        </div>
+
+        <!-- 9. Evening Atmosphere -->
+        <div class="gallery-card gallery-item" data-category="grounds">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/evening.jpg' ); ?>" alt="Evening Atmosphere at Kelvin Cameo Resort" loading="lazy">
+          <div class="gallery-overlay">
+            <span class="gallery-badge">Night Ambiance</span>
+            <h4 class="gallery-title">Enchanting Evening Ambiance</h4>
+            <p class="gallery-caption">Warm architectural lighting illuminating the courtyard as twilight settles over Suleja.</p>
+          </div>
+        </div>
+
+        <!-- 10. Grand Entrance -->
+        <div class="gallery-card gallery-item" data-category="grounds">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/entrance.jpg' ); ?>" alt="Kelvin Cameo Resort Entrance" loading="lazy">
+          <div class="gallery-overlay">
+            <span class="gallery-badge">Porte-Cochère</span>
+            <h4 class="gallery-title">Grand Entrance & Reception</h4>
+            <p class="gallery-caption">Welcoming 24-hour reception desk, luggage assistance, and valet arrival parking.</p>
+          </div>
+        </div>
+
+        <!-- 11. The Annex Branch -->
+        <div class="gallery-card gallery-item" data-category="grounds">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/annex.jpg' ); ?>" alt="The Annex Branch of Kelvin Cameo Resort" loading="lazy">
+          <div class="gallery-overlay">
+            <span class="gallery-badge">Branch 02</span>
+            <h4 class="gallery-title">The Annex Courtyard</h4>
+            <p class="gallery-caption">The quiet, secluded secondary branch offering private executive accommodations.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Room Booking Modal with Paystack Gateway -->
+  <div class="modal-backdrop" id="roomReservationModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card">
+      <button type="button" class="modal-close-btn" id="roomModalCloseBtn" aria-label="Close modal">&times;</button>
+      
+      <div class="modal-header" style="margin-bottom: 1.25rem;">
+        <span class="rc-badge" style="margin-bottom:0.4rem; display:inline-flex;">Direct Room Reservation</span>
+        <h3 style="font-family:var(--font-display); font-size: 1.45rem; font-weight: 800; color: var(--navy-900); margin:0;">Complete Your Stay Reservation</h3>
+        <p style="font-size: 0.85rem; color: var(--slate-600); margin:0.35rem 0 0;">Lock in your dates instantly. Details are dispatched directly to our reception desk.</p>
+      </div>
+
+      <!-- Dynamic Room Preview Banner -->
+      <div class="room-modal-preview">
+        <img id="modalRoomImg" src="" alt="Selected Room" class="room-modal-thumb">
+        <div class="room-modal-info">
+          <span id="modalRoomBranch" class="room-modal-branch branch-main">Branch 01 • Main Hotel</span>
+          <h4 id="modalRoomName" class="room-modal-title">Room Name</h4>
+          <div class="room-modal-price"><span id="modalRoomPrice">₦0</span> <span style="font-size:0.75rem; color:var(--slate-500); font-weight:normal;">/ night</span></div>
+        </div>
+      </div>
+
+      <form id="roomReservationForm">
+        <input type="hidden" id="bookingRoomName" name="room_name" value="">
+        <input type="hidden" id="bookingRoomBranch" name="room_branch" value="">
+        <input type="hidden" id="bookingRoomPrice" name="room_price" value="0">
+        <input type="hidden" id="bookingPaystackUrl" name="paystack_url" value="">
+        <input type="hidden" id="bookingNights" name="nights_count" value="1">
+        <input type="hidden" id="bookingTotalAmount" name="total_amount" value="">
+
+        <div class="form-group-row">
+          <div class="form-group">
+            <label for="bookingGuestName" style="font-size:0.8rem; font-weight:700; color:var(--slate-700); margin-bottom:0.25rem; display:block;">Full Name *</label>
+            <input type="text" id="bookingGuestName" name="guest_name" class="form-control" placeholder="e.g. Dr. Emeka Danladi" required>
+          </div>
+          <div class="form-group">
+            <label for="bookingGuestEmail" style="font-size:0.8rem; font-weight:700; color:var(--slate-700); margin-bottom:0.25rem; display:block;">Email Address *</label>
+            <input type="email" id="bookingGuestEmail" name="guest_email" class="form-control" placeholder="guest@domain.com" required>
+          </div>
+        </div>
+
+        <div class="form-group-row">
+          <div class="form-group">
+            <label for="bookingGuestPhone" style="font-size:0.8rem; font-weight:700; color:var(--slate-700); margin-bottom:0.25rem; display:block;">Phone / WhatsApp *</label>
+            <input type="tel" id="bookingGuestPhone" name="guest_phone" class="form-control" placeholder="0805 555 8197" required>
+          </div>
+          <div class="form-group">
+            <label for="bookingGuestCount" style="font-size:0.8rem; font-weight:700; color:var(--slate-700); margin-bottom:0.25rem; display:block;">Number of Guests</label>
+            <select id="bookingGuestCount" name="guest_count" class="form-control">
+              <option value="1">1 Guest</option>
+              <option value="2" selected>2 Guests</option>
+              <option value="3">3 Guests</option>
+              <option value="4">4+ Guests</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group-row">
+          <div class="form-group">
+            <label for="bookingCheckin" style="font-size:0.8rem; font-weight:700; color:var(--slate-700); margin-bottom:0.25rem; display:block;">Check-In Date *</label>
+            <input type="date" id="bookingCheckin" name="checkin_date" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="bookingCheckout" style="font-size:0.8rem; font-weight:700; color:var(--slate-700); margin-bottom:0.25rem; display:block;">Check-Out Date *</label>
+            <input type="date" id="bookingCheckout" name="checkout_date" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="bookingNotes" style="font-size:0.8rem; font-weight:700; color:var(--slate-700); margin-bottom:0.25rem; display:block;">Special Requests / Arrival Time (Optional)</label>
+          <textarea id="bookingNotes" name="special_requests" class="form-control" rows="2" placeholder="e.g. Late check-in around 8 PM, extra pillows, quiet floor..."></textarea>
+        </div>
+
+        <!-- Live Cost Breakdown -->
+        <div class="booking-calc-strip">
+          <div class="calc-breakdown">
+            <strong id="calcSummaryRate">₦25,000 × 1 Night</strong>
+            <span>Standard tariff per room</span>
+          </div>
+          <div class="calc-total">
+            <span id="calcTotalLabel">Estimated Total</span>
+            <div id="calcTotalDisplay" style="color:var(--orange-600);">₦25,000</div>
+          </div>
+        </div>
+
+        <!-- Trust Guarantee & Paystack Notice -->
+        <div class="paystack-trust-badge">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          <div>
+            <strong>Instant Front Desk Notification & Paystack Checkout:</strong>
+            Upon submission, our reception desk receives your reservation and you will proceed to Paystack’s 256-bit SSL secured payment gateway.
+          </div>
+        </div>
+
+        <div id="bookingFormError" style="display:none; background:#fee2e2; color:#b91c1c; padding:0.75rem; border-radius:var(--radius-md); font-size:0.85rem; margin-bottom:1rem;"></div>
+
+        <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+          <button type="submit" id="bookingSubmitBtn" class="btn btn-primary btn-lg" style="flex:1; justify-content:center;">
+            <span>Confirm & Proceed to Payment</span>
+          </button>
+          <a id="bookingWaFallback" href="https://wa.me/2348055558197" target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg" style="padding:0.75rem 1rem;" title="Book via WhatsApp Concierge">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.073.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+
 <?php
 get_footer();
+
