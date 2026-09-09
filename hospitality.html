@@ -1137,137 +1137,216 @@
     </div>
   </section>
 
-  <!-- A Look Around The Resort Gallery Section -->
-  <section id="gallery" class="section-padding" style="background:var(--sand-50); border-top:1px solid var(--sand-200);">
+    <!-- A Look Around The Resort (Continuous Moving Gallery) -->
+  <section id="gallery" class="section-padding moving-gallery-section" style="background:var(--sand-50); border-top:1px solid var(--sand-200);">
     <div class="container">
-      <div class="section-head" style="text-align:center; max-width:760px; margin:0 auto 2.5rem;">
+      <div class="section-head" style="text-align:center; max-width:780px; margin:0 auto 2rem;">
         <span class="section-badge" style="background:rgba(242,92,5,0.15); color:var(--orange-600);">Visual Walkthrough</span>
         <h2 class="section-title">A Look Around The Resort</h2>
         <p class="section-subtitle">
-          Take a photographic tour through our sparkling pool, cozy cocktail bar, gourmet restaurant, 1,000-seat grand auditorium, billiards lounge, and manicured grounds.
+          Take a gliding photographic tour through our sparkling pool, cozy cocktail bar, gourmet dining, 1,000-seat grand auditorium, billiards lounge, and manicured grounds.
         </p>
       </div>
 
-      <!-- Gallery Filter Tabs -->
-      <div class="filter-tabs-wrapper gallery-filter-bar" style="margin-bottom:2.5rem;">
-        <button type="button" class="tab-btn tab-resort active" data-gallery-filter="all">All Resort Views (11)</button>
-        <button type="button" class="tab-btn tab-resort" data-gallery-filter="pool">Swimming Pool</button>
-        <button type="button" class="tab-btn tab-resort" data-gallery-filter="bar">Bar & Lounge</button>
-        <button type="button" class="tab-btn tab-resort" data-gallery-filter="restaurant">Dining & Restaurant</button>
-        <button type="button" class="tab-btn tab-resort" data-gallery-filter="banquet">Grand Banquet Hall</button>
-        <button type="button" class="tab-btn tab-resort" data-gallery-filter="games">Billiards & Games</button>
-        <button type="button" class="tab-btn tab-resort" data-gallery-filter="grounds">Grounds & Exterior</button>
+      <!-- Moving Gallery Controls Bar -->
+      <div class="moving-gallery-controls-bar">
+        <div class="filter-tabs-wrapper gallery-filter-bar" style="margin:0;">
+          <button type="button" class="tab-btn tab-resort active" data-gallery-filter="all">All Resort Views (11)</button>
+          <button type="button" class="tab-btn tab-resort" data-gallery-filter="pool">Swimming Pool</button>
+          <button type="button" class="tab-btn tab-resort" data-gallery-filter="bar">Bar & Lounge</button>
+          <button type="button" class="tab-btn tab-resort" data-gallery-filter="restaurant">Dining</button>
+          <button type="button" class="tab-btn tab-resort" data-gallery-filter="banquet">Grand Banquet Hall</button>
+          <button type="button" class="tab-btn tab-resort" data-gallery-filter="games">Billiards</button>
+          <button type="button" class="tab-btn tab-resort" data-gallery-filter="grounds">Grounds & Facade</button>
+        </div>
+
+        <div class="gallery-motion-actions">
+          <button type="button" class="slider-nav-btn" id="galleryPrevBtn" aria-label="Scroll left">‹</button>
+          <button type="button" class="slider-nav-btn" id="galleryNextBtn" aria-label="Scroll right">›</button>
+          <button type="button" class="btn btn-outline-navy btn-sm" id="galleryMotionToggle">
+            <span class="motion-dot"></span> <span id="galleryMotionLabel">Pause Motion</span>
+          </button>
+        </div>
       </div>
+    </div>
 
-      <!-- Gallery Grid -->
-      <div class="resort-gallery-grid">
-        <!-- 1. Swimming Pool -->
-        <div class="gallery-card gallery-item" data-category="pool">
-          <img src="assets/photos/resort/swimming-pool.jpg" alt="Kelvin Cameo Resort Swimming Pool" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-badge">Swimming Pool</span>
-            <h4 class="gallery-title">Pristine Outdoor Pool</h4>
-            <p class="gallery-caption">Crystal-clear resort pool with sun loungers, poolside refreshments, and certified lifeguards.</p>
+    <!-- Continuous Horizontal Moving Viewport with Seamless Duplicate Loop -->
+    <div class="moving-gallery-viewport" id="movingGalleryViewport">
+      <div class="moving-gallery-track" id="movingGalleryTrack">
+        <div class="moving-gallery-item" data-category="pool">
+          <img src="assets/photos/resort/swimming-pool.jpg" alt="Pristine Outdoor Pool" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Swimming Pool</span>
+            <h4 class="moving-gallery-title">Pristine Outdoor Pool</h4>
+            <p class="moving-gallery-desc">Crystal-clear resort pool with sun loungers, poolside refreshments, and certified lifeguards.</p>
           </div>
         </div>
-
-        <!-- 2. Bar Counter -->
-        <div class="gallery-card gallery-item" data-category="bar">
-          <img src="assets/photos/resort/bar-counter.jpg" alt="Cameo Cocktail Bar Counter" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-badge">Bar & Mixology</span>
-            <h4 class="gallery-title">Cameo Cocktail Bar</h4>
-            <p class="gallery-caption">Full-service cocktail bar offering premium spirits, signature blends, and artisan cocktails.</p>
+        <div class="moving-gallery-item" data-category="bar">
+          <img src="assets/photos/resort/bar-counter.jpg" alt="Cameo Cocktail Bar" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Bar & Mixology</span>
+            <h4 class="moving-gallery-title">Cameo Cocktail Bar</h4>
+            <p class="moving-gallery-desc">Full-service cocktail bar offering premium spirits, signature blends, and artisan cocktails.</p>
           </div>
         </div>
-
-        <!-- 3. VIP Bar Lounge -->
-        <div class="gallery-card gallery-item" data-category="bar">
-          <img src="assets/photos/resort/bar-lounge.jpg" alt="VIP Lounge at Kelvin Cameo Resort" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-badge">VIP Lounge</span>
-            <h4 class="gallery-title">Executive Lounge Seating</h4>
-            <p class="gallery-caption">Plush mood-lit parlor crafted for discreet networking and evening social downtime.</p>
+        <div class="moving-gallery-item" data-category="bar">
+          <img src="assets/photos/resort/bar-lounge.jpg" alt="Executive Lounge Seating" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">VIP Lounge</span>
+            <h4 class="moving-gallery-title">Executive Lounge Seating</h4>
+            <p class="moving-gallery-desc">Plush mood-lit parlor crafted for discreet networking and evening social downtime.</p>
           </div>
         </div>
-
-        <!-- 4. Restaurant -->
-        <div class="gallery-card gallery-item" data-category="restaurant">
-          <img src="assets/photos/resort/restaurant.jpg" alt="Kelvin Cameo Fine Dining Restaurant" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-badge">Gourmet Dining</span>
-            <h4 class="gallery-title">Cameo Restaurant</h4>
-            <p class="gallery-caption">Fresh Nigerian favorites (point-and-kill catfish, pepper soup) and continental specialties.</p>
+        <div class="moving-gallery-item" data-category="restaurant">
+          <img src="assets/photos/resort/restaurant.jpg" alt="Cameo Restaurant" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Gourmet Dining</span>
+            <h4 class="moving-gallery-title">Cameo Restaurant</h4>
+            <p class="moving-gallery-desc">Fresh Nigerian favorites (point-and-kill catfish, pepper soup) and continental specialties.</p>
           </div>
         </div>
-
-        <!-- 5. 1,000-Seat Grand Banquet Hall -->
-        <div class="gallery-card gallery-item" data-category="banquet">
-          <img src="assets/photos/resort/banquet-hall.jpg" alt="Kelvin Cameo 1,000-Seat Grand Banquet Hall" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-badge">Event Auditorium</span>
-            <h4 class="gallery-title">1,000-Seat Grand Hall</h4>
-            <p class="gallery-caption">Soaring pillarless sightlines, crystal chandeliers, industrial AC, and VIP suites.</p>
+        <div class="moving-gallery-item" data-category="banquet">
+          <img src="assets/photos/resort/banquet-hall.jpg" alt="1,000-Seat Grand Hall" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Event Auditorium</span>
+            <h4 class="moving-gallery-title">1,000-Seat Grand Hall</h4>
+            <p class="moving-gallery-desc">Soaring pillarless sightlines, crystal chandeliers, industrial AC, and VIP suites.</p>
           </div>
         </div>
-
-        <!-- 6. Billiards & Snooker Table -->
-        <div class="gallery-card gallery-item" data-category="games">
-          <img src="assets/photos/resort/lounge-pool-table.jpg" alt="Billiards and Pool Table Lounge" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-badge">Games & Leisure</span>
-            <h4 class="gallery-title">Billiards & Snooker Lounge</h4>
-            <p class="gallery-caption">Tournament-quality pool tables, sports broadcasts, and cold beverages.</p>
+        <div class="moving-gallery-item" data-category="games">
+          <img src="assets/photos/resort/lounge-pool-table.jpg" alt="Billiards & Snooker Lounge" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Games & Leisure</span>
+            <h4 class="moving-gallery-title">Billiards & Snooker Lounge</h4>
+            <p class="moving-gallery-desc">Tournament-quality pool tables, sports broadcasts, and cold beverages.</p>
           </div>
         </div>
-
-        <!-- 7. Games Recreation Hub -->
-        <div class="gallery-card gallery-item" data-category="games">
-          <img src="assets/photos/resort/lounge-view.jpg" alt="Games Recreation Hub" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-badge">Recreation</span>
-            <h4 class="gallery-title">Clubhouse Recreation</h4>
-            <p class="gallery-caption">Comfortable lounge armchairs and board gaming corner for unwinding.</p>
+        <div class="moving-gallery-item" data-category="games">
+          <img src="assets/photos/resort/lounge-view.jpg" alt="Clubhouse Recreation" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Recreation</span>
+            <h4 class="moving-gallery-title">Clubhouse Recreation</h4>
+            <p class="moving-gallery-desc">Comfortable lounge armchairs and board gaming corner for unwinding.</p>
           </div>
         </div>
-
-        <!-- 8. Exterior Architecture -->
-        <div class="gallery-card gallery-item" data-category="grounds">
-          <img src="assets/photos/resort/exterior.jpg" alt="Kelvin Cameo Resort Exterior Architecture" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-badge">Architecture</span>
-            <h4 class="gallery-title">Resort Architectural Facade</h4>
-            <p class="gallery-caption">Grand architectural presence with perimeter security and manicured palm avenues.</p>
+        <div class="moving-gallery-item" data-category="grounds">
+          <img src="assets/photos/resort/exterior.jpg" alt="Resort Architectural Facade" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Architecture</span>
+            <h4 class="moving-gallery-title">Resort Architectural Facade</h4>
+            <p class="moving-gallery-desc">Grand architectural presence with perimeter security and manicured palm avenues.</p>
           </div>
         </div>
-
-        <!-- 9. Evening Atmosphere -->
-        <div class="gallery-card gallery-item" data-category="grounds">
-          <img src="assets/photos/resort/evening.jpg" alt="Evening Atmosphere at Kelvin Cameo Resort" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-badge">Night Ambiance</span>
-            <h4 class="gallery-title">Enchanting Evening Ambiance</h4>
-            <p class="gallery-caption">Warm architectural lighting illuminating the courtyard as twilight settles over Suleja.</p>
+        <div class="moving-gallery-item" data-category="grounds">
+          <img src="assets/photos/resort/evening.jpg" alt="Enchanting Evening Ambiance" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Night Ambiance</span>
+            <h4 class="moving-gallery-title">Enchanting Evening Ambiance</h4>
+            <p class="moving-gallery-desc">Warm architectural lighting illuminating the courtyard as twilight settles over Suleja.</p>
           </div>
         </div>
-
-        <!-- 10. Grand Entrance -->
-        <div class="gallery-card gallery-item" data-category="grounds">
-          <img src="assets/photos/resort/entrance.jpg" alt="Kelvin Cameo Resort Entrance" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-badge">Porte-Cochère</span>
-            <h4 class="gallery-title">Grand Entrance & Reception</h4>
-            <p class="gallery-caption">Welcoming 24-hour reception desk, luggage assistance, and valet arrival parking.</p>
+        <div class="moving-gallery-item" data-category="grounds">
+          <img src="assets/photos/resort/entrance.jpg" alt="Grand Entrance & Reception" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Porte-Cochère</span>
+            <h4 class="moving-gallery-title">Grand Entrance & Reception</h4>
+            <p class="moving-gallery-desc">Welcoming 24-hour reception desk, luggage assistance, and valet arrival parking.</p>
           </div>
         </div>
-
-        <!-- 11. The Annex Branch -->
-        <div class="gallery-card gallery-item" data-category="grounds">
-          <img src="assets/photos/resort/annex.jpg" alt="The Annex Branch of Kelvin Cameo Resort" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-badge">Branch 02</span>
-            <h4 class="gallery-title">The Annex Courtyard</h4>
-            <p class="gallery-caption">The quiet, secluded secondary branch offering private executive accommodations.</p>
+        <div class="moving-gallery-item" data-category="grounds">
+          <img src="assets/photos/resort/annex.jpg" alt="The Annex Courtyard" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Branch 02</span>
+            <h4 class="moving-gallery-title">The Annex Courtyard</h4>
+            <p class="moving-gallery-desc">The quiet, secluded secondary branch offering private executive accommodations.</p>
+          </div>
+        </div>
+        <div class="moving-gallery-item" data-category="pool">
+          <img src="assets/photos/resort/swimming-pool.jpg" alt="Pristine Outdoor Pool" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Swimming Pool</span>
+            <h4 class="moving-gallery-title">Pristine Outdoor Pool</h4>
+            <p class="moving-gallery-desc">Crystal-clear resort pool with sun loungers, poolside refreshments, and certified lifeguards.</p>
+          </div>
+        </div>
+        <div class="moving-gallery-item" data-category="bar">
+          <img src="assets/photos/resort/bar-counter.jpg" alt="Cameo Cocktail Bar" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Bar & Mixology</span>
+            <h4 class="moving-gallery-title">Cameo Cocktail Bar</h4>
+            <p class="moving-gallery-desc">Full-service cocktail bar offering premium spirits, signature blends, and artisan cocktails.</p>
+          </div>
+        </div>
+        <div class="moving-gallery-item" data-category="bar">
+          <img src="assets/photos/resort/bar-lounge.jpg" alt="Executive Lounge Seating" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">VIP Lounge</span>
+            <h4 class="moving-gallery-title">Executive Lounge Seating</h4>
+            <p class="moving-gallery-desc">Plush mood-lit parlor crafted for discreet networking and evening social downtime.</p>
+          </div>
+        </div>
+        <div class="moving-gallery-item" data-category="restaurant">
+          <img src="assets/photos/resort/restaurant.jpg" alt="Cameo Restaurant" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Gourmet Dining</span>
+            <h4 class="moving-gallery-title">Cameo Restaurant</h4>
+            <p class="moving-gallery-desc">Fresh Nigerian favorites (point-and-kill catfish, pepper soup) and continental specialties.</p>
+          </div>
+        </div>
+        <div class="moving-gallery-item" data-category="banquet">
+          <img src="assets/photos/resort/banquet-hall.jpg" alt="1,000-Seat Grand Hall" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Event Auditorium</span>
+            <h4 class="moving-gallery-title">1,000-Seat Grand Hall</h4>
+            <p class="moving-gallery-desc">Soaring pillarless sightlines, crystal chandeliers, industrial AC, and VIP suites.</p>
+          </div>
+        </div>
+        <div class="moving-gallery-item" data-category="games">
+          <img src="assets/photos/resort/lounge-pool-table.jpg" alt="Billiards & Snooker Lounge" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Games & Leisure</span>
+            <h4 class="moving-gallery-title">Billiards & Snooker Lounge</h4>
+            <p class="moving-gallery-desc">Tournament-quality pool tables, sports broadcasts, and cold beverages.</p>
+          </div>
+        </div>
+        <div class="moving-gallery-item" data-category="games">
+          <img src="assets/photos/resort/lounge-view.jpg" alt="Clubhouse Recreation" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Recreation</span>
+            <h4 class="moving-gallery-title">Clubhouse Recreation</h4>
+            <p class="moving-gallery-desc">Comfortable lounge armchairs and board gaming corner for unwinding.</p>
+          </div>
+        </div>
+        <div class="moving-gallery-item" data-category="grounds">
+          <img src="assets/photos/resort/exterior.jpg" alt="Resort Architectural Facade" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Architecture</span>
+            <h4 class="moving-gallery-title">Resort Architectural Facade</h4>
+            <p class="moving-gallery-desc">Grand architectural presence with perimeter security and manicured palm avenues.</p>
+          </div>
+        </div>
+        <div class="moving-gallery-item" data-category="grounds">
+          <img src="assets/photos/resort/evening.jpg" alt="Enchanting Evening Ambiance" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Night Ambiance</span>
+            <h4 class="moving-gallery-title">Enchanting Evening Ambiance</h4>
+            <p class="moving-gallery-desc">Warm architectural lighting illuminating the courtyard as twilight settles over Suleja.</p>
+          </div>
+        </div>
+        <div class="moving-gallery-item" data-category="grounds">
+          <img src="assets/photos/resort/entrance.jpg" alt="Grand Entrance & Reception" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Porte-Cochère</span>
+            <h4 class="moving-gallery-title">Grand Entrance & Reception</h4>
+            <p class="moving-gallery-desc">Welcoming 24-hour reception desk, luggage assistance, and valet arrival parking.</p>
+          </div>
+        </div>
+        <div class="moving-gallery-item" data-category="grounds">
+          <img src="assets/photos/resort/annex.jpg" alt="The Annex Courtyard" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Branch 02</span>
+            <h4 class="moving-gallery-title">The Annex Courtyard</h4>
+            <p class="moving-gallery-desc">The quiet, secluded secondary branch offering private executive accommodations.</p>
           </div>
         </div>
       </div>
