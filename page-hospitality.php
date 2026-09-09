@@ -689,146 +689,319 @@ get_header();
     </div>
   </section>
 
-  <!-- Conference & Retreat Partners -->
-  <section class="partners-section dark" id="corporate-clients" style="background: var(--navy-950); padding: 5.5rem 0;">
+  <!-- Online Travel Directories & Verified Booking Platforms -->
+  <section class="partners-section dark" id="booking-platforms" style="background: var(--navy-950); padding: 5.5rem 0;">
     <div class="container">
-      <div class="section-head" style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">
+      <div class="section-head" style="text-align: center; max-width: 820px; margin: 0 auto 3rem;">
         <span class="rc-badge" style="background: rgba(242,92,5,0.25); color: var(--orange-400); margin-bottom: 0.75rem; display: inline-flex;">
-          Trusted Conference & Retreat Hosts
+          Global Directories & Online Travel Agencies
         </span>
-        <h2 class="section-title" style="color: var(--white);">Premier Destination for Healthcare, Corporate & Institutional Summits</h2>
+        <h2 class="section-title" style="color: var(--white);">Listed Across the World's Leading Booking Platforms</h2>
         <p class="section-subtitle" style="color: var(--slate-300);">
-          Kelvin Cameo Resort Hotel is the venue of choice along the Abuja Capital Corridor for leading clinical research NGOs, multi-sector conglomerates, and corporate institutions conducting executive workshops, residential retreats, and grand summits.
+          Reserve your stay with absolute confidence. Kelvin Cameo Resort Hotel is verified, reviewed, and bookable across top global travel networks — or book directly on our website for guaranteed best rates, zero commission fees, and VIP front desk treatment.
         </p>
       </div>
 
-      <!-- Quick Logo Strip -->
-      <div class="partners-logo-row" style="margin-bottom: 3.5rem;">
-        <div class="partner-logo-item" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12);">
-          <div class="partner-logo-icon" style="background: var(--resort-sapphire); color: var(--white);">CC</div>
+      <!-- Quick Platform Logo Strip -->
+      <div class="partners-logo-row" style="margin-bottom: 3.5rem; flex-wrap: wrap; justify-content: center; gap: 1rem;">
+        <a href="https://www.booking.com/searchresults.html?ss=Kelvin+Cameo+Resort+Hotel+Suleja" target="_blank" rel="noopener noreferrer" class="partner-logo-item" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); text-decoration: none;">
+          <div class="partner-logo-icon" style="background: #003580; color: #ffffff; font-weight: 900;">B.</div>
           <div class="partner-logo-text">
-            <span class="partner-logo-name" style="color: var(--white);">CCCRN Nigeria</span>
-            <span class="partner-logo-sub" style="color: var(--orange-400);">Clinical Care & Research</span>
+            <span class="partner-logo-name" style="color: var(--white);">Booking.com</span>
+            <span class="partner-logo-sub" style="color: var(--orange-400);">Verified Listing</span>
           </div>
-        </div>
+        </a>
 
-        <div class="partner-logo-item" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12);">
-          <div class="partner-logo-icon" style="background: var(--estate-gold); color: var(--navy-950);">IMK</div>
+        <a href="https://www.agoda.com/search?text=Kelvin%20Cameo%20Resort%20Hotel%20Suleja" target="_blank" rel="noopener noreferrer" class="partner-logo-item" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); text-decoration: none;">
+          <div class="partner-logo-icon" style="background: #5392f9; color: #ffffff; font-weight: 900;">AG</div>
           <div class="partner-logo-text">
-            <span class="partner-logo-name" style="color: var(--white);">IMKash Group</span>
-            <span class="partner-logo-sub" style="color: var(--estate-gold);">Conglomerate Partner</span>
+            <span class="partner-logo-name" style="color: var(--white);">Agoda</span>
+            <span class="partner-logo-sub" style="color: #60a5fa;">Top Rated Suleja</span>
           </div>
-        </div>
+        </a>
 
-        <div class="partner-logo-item" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12);">
-          <div class="partner-logo-icon" style="background: var(--orange-500); color: var(--white);">FCT</div>
+        <a href="https://hotels.ng/hotel/1013444-kelvin-cameo-resort-hotel-niger" target="_blank" rel="noopener noreferrer" class="partner-logo-item" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); text-decoration: none;">
+          <div class="partner-logo-icon" style="background: #00a651; color: #ffffff; font-weight: 900;">H.</div>
           <div class="partner-logo-text">
-            <span class="partner-logo-name" style="color: var(--white);">Federal Health Missions</span>
-            <span class="partner-logo-sub" style="color: var(--slate-300);">Symposia & Training</span>
+            <span class="partner-logo-name" style="color: var(--white);">Hotels.ng</span>
+            <span class="partner-logo-sub" style="color: #34d399;">Nigeria's #1</span>
           </div>
-        </div>
+        </a>
 
-        <div class="partner-logo-item" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12);">
-          <div class="partner-logo-icon" style="background: var(--navy-700); color: var(--white);">CB</div>
+        <a href="https://www.tripadvisor.com/Search?q=Kelvin+Cameo+Resort+Hotel+Suleja" target="_blank" rel="noopener noreferrer" class="partner-logo-item" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); text-decoration: none;">
+          <div class="partner-logo-icon" style="background: #00af87; color: #ffffff; font-weight: 900;">TA</div>
           <div class="partner-logo-text">
-            <span class="partner-logo-name" style="color: var(--white);">Corporate Banking Desks</span>
-            <span class="partner-logo-sub" style="color: var(--slate-300);">Regional AGMs</span>
+            <span class="partner-logo-name" style="color: var(--white);">Tripadvisor</span>
+            <span class="partner-logo-sub" style="color: #2dd4bf;">Guest Reviews</span>
           </div>
-        </div>
+        </a>
+
+        <a href="https://www.expedia.com/Hotel-Search?destination=Kelvin+Cameo+Resort+Hotel+Suleja" target="_blank" rel="noopener noreferrer" class="partner-logo-item" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); text-decoration: none;">
+          <div class="partner-logo-icon" style="background: #ffcc00; color: #00355f; font-weight: 900;">EX</div>
+          <div class="partner-logo-text">
+            <span class="partner-logo-name" style="color: var(--white);">Expedia</span>
+            <span class="partner-logo-sub" style="color: var(--estate-gold);">Global Network</span>
+          </div>
+        </a>
+
+        <a href="https://www.google.com/travel/search?q=Kelvin%20Cameo%20Resort%20Hotel%20Suleja" target="_blank" rel="noopener noreferrer" class="partner-logo-item" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); text-decoration: none;">
+          <div class="partner-logo-icon" style="background: #4285f4; color: #ffffff; font-weight: 900;">G</div>
+          <div class="partner-logo-text">
+            <span class="partner-logo-name" style="color: var(--white);">Google Travel</span>
+            <span class="partner-logo-sub" style="color: #93c5fd;">Verified Business</span>
+          </div>
+        </a>
       </div>
 
-      <!-- Partner Cards -->
+      <!-- Platform Detailed Cards (3x2 Grid) -->
       <div class="partners-cards-grid">
+        <!-- 1. Booking.com -->
         <article class="partner-card dark-card">
           <div>
             <div class="partner-card-header">
               <div class="partner-card-brand">
-                <div class="partner-avatar" style="background: linear-gradient(135deg, #0f4c81, #163d6b); color: var(--white);">CC</div>
+                <div class="partner-avatar" style="background: linear-gradient(135deg, #003580, #00224f); color: var(--white); font-size: 1.3rem;">B.</div>
                 <div>
-                  <h3 class="partner-card-title">CCCRN Nigeria</h3>
-                  <span class="partner-card-sector" style="color: var(--orange-400);">Clinical Care & Research NGO</span>
+                  <h3 class="partner-card-title">Booking.com</h3>
+                  <span class="partner-card-sector" style="color: #60a5fa;">Global Hotel Network</span>
                 </div>
               </div>
-              <span class="rc-badge" style="font-size:0.65rem; background: rgba(242,92,5,0.2); color: var(--orange-400);">Key Client</span>
+              <span class="rc-badge" style="font-size:0.65rem; background: rgba(0,53,128,0.35); color: #93c5fd; border: 1px solid rgba(147,197,253,0.3);">Verified Listing</span>
             </div>
             <p class="partner-card-desc">
-              Centre for Clinical Care & Clinical Research Nigeria (CCCRN) consistently utilizes Kelvin Cameo Resort Hotel's 1,000-seat banquet auditorium and executive residential suites for multi-day clinical training seminars, regional healthcare retreats, and program review meetings.
+              Browse guest reviews, verified amenity checklists, flexible reservation terms, and instant booking confirmations on the world’s leading accommodation marketplace.
             </p>
           </div>
-          <div class="partner-card-tags">
-            <span class="partner-tag">Residential Stays</span>
-            <span class="partner-tag">1,000-Seat Hall</span>
-            <span class="partner-tag">Health Workshops</span>
-            <span class="partner-tag">Executive Catering</span>
+          <div>
+            <div class="partner-card-tags">
+              <span class="partner-tag">Instant Confirmation</span>
+              <span class="partner-tag">Guest Ratings</span>
+              <span class="partner-tag">Mobile Deals</span>
+              <span class="partner-tag">Flexible Terms</span>
+            </div>
+            <a href="https://www.booking.com/searchresults.html?ss=Kelvin+Cameo+Resort+Hotel+Suleja" target="_blank" rel="noopener noreferrer" class="platform-link">
+              <span>View on Booking.com</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
           </div>
         </article>
 
+        <!-- 2. Agoda -->
         <article class="partner-card dark-card">
           <div>
             <div class="partner-card-header">
               <div class="partner-card-brand">
-                <div class="partner-avatar" style="background: linear-gradient(135deg, #c99a45, #dfb25e); color: var(--navy-950);">IMK</div>
+                <div class="partner-avatar" style="background: linear-gradient(135deg, #5392f9, #2b6cb0); color: var(--white); font-size: 1.15rem;">AG</div>
                 <div>
-                  <h3 class="partner-card-title">IMKash Group</h3>
-                  <span class="partner-card-sector" style="color: var(--estate-gold);">Enterprise & Capital Partner</span>
+                  <h3 class="partner-card-title">Agoda</h3>
+                  <span class="partner-card-sector" style="color: #93c5fd;">Resort & Leisure Specialist</span>
                 </div>
               </div>
-              <span class="rc-badge" style="font-size:0.65rem; background: rgba(201,154,69,0.2); color: var(--estate-gold);">Strategic Partner</span>
+              <span class="rc-badge" style="font-size:0.65rem; background: rgba(83,146,249,0.3); color: #bfdbfe; border: 1px solid rgba(191,219,254,0.3);">Top Pick Suleja</span>
             </div>
             <p class="partner-card-desc">
-              Strategic enterprise alliance collaborating with Kelvin Cameo on executive retreats, investor roundtables, high-level business summits, and milestone corporate celebrations hosted within our VIP luxury apartments and banquet suites.
+              Discover exclusive Agoda VIP member discounts, mobile-app privileges, real-time suite availability, and guaranteed room allocations across our Main Hotel and Annex.
             </p>
           </div>
-          <div class="partner-card-tags">
-            <span class="partner-tag">Executive Boardrooms</span>
-            <span class="partner-tag">Corporate Summits</span>
-            <span class="partner-tag">VIP Apartments</span>
-            <span class="partner-tag">Investor Dinners</span>
+          <div>
+            <div class="partner-card-tags">
+              <span class="partner-tag">Member Discounts</span>
+              <span class="partner-tag">Instant Voucher</span>
+              <span class="partner-tag">Real-Time Rooms</span>
+              <span class="partner-tag">Secure Checkout</span>
+            </div>
+            <a href="https://www.agoda.com/search?text=Kelvin%20Cameo%20Resort%20Hotel%20Suleja" target="_blank" rel="noopener noreferrer" class="platform-link">
+              <span>View on Agoda</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
           </div>
         </article>
 
+        <!-- 3. Hotels.ng -->
         <article class="partner-card dark-card">
           <div>
             <div class="partner-card-header">
               <div class="partner-card-brand">
-                <div class="partner-avatar" style="background: linear-gradient(135deg, #10b981, #064e3b); color: var(--white);">PH</div>
+                <div class="partner-avatar" style="background: linear-gradient(135deg, #00a651, #065f46); color: var(--white); font-size: 1.3rem;">H.</div>
                 <div>
-                  <h3 class="partner-card-title">Public Health & NGOs</h3>
-                  <span class="partner-card-sector" style="color: var(--agro-emerald);">Developmental Summits</span>
+                  <h3 class="partner-card-title">Hotels.ng</h3>
+                  <span class="partner-card-sector" style="color: #34d399;">Nigeria's #1 Hotel Engine</span>
                 </div>
               </div>
-              <span class="rc-badge" style="font-size:0.65rem; background: rgba(16,185,129,0.2); color: var(--agro-emerald);">Institutional</span>
+              <span class="rc-badge" style="font-size:0.65rem; background: rgba(0,166,81,0.25); color: #6ee7b7; border: 1px solid rgba(110,231,183,0.3);">Verified Partner</span>
             </div>
             <p class="partner-card-desc">
-              National health intervention bodies and development partners frequent our quiet annex suites and spacious auditorium for intensive strategy sessions, technical workshops, and confidential stakeholder symposiums.
+              Book seamlessly in Nigerian Naira (₦) through Nigeria's premier hotel reservation platform, complete with 24/7 localized concierge assistance and verified traveler testimonials.
             </p>
           </div>
-          <div class="partner-card-tags">
-            <span class="partner-tag">Breakout Rooms</span>
-            <span class="partner-tag">Pillarless Auditorium</span>
-            <span class="partner-tag">Dual Power Generators</span>
-            <span class="partner-tag">200+ Cars Parking</span>
+          <div>
+            <div class="partner-card-tags">
+              <span class="partner-tag">Direct Naira (₦) Pay</span>
+              <span class="partner-tag">24/7 Local Support</span>
+              <span class="partner-tag">Pay at Hotel Option</span>
+              <span class="partner-tag">Top Capital Choice</span>
+            </div>
+            <a href="https://hotels.ng/hotel/1013444-kelvin-cameo-resort-hotel-niger" target="_blank" rel="noopener noreferrer" class="platform-link">
+              <span>View on Hotels.ng</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 4. Tripadvisor -->
+        <article class="partner-card dark-card">
+          <div>
+            <div class="partner-card-header">
+              <div class="partner-card-brand">
+                <div class="partner-avatar" style="background: linear-gradient(135deg, #00af87, #065f46); color: var(--white); font-size: 1.15rem;">TA</div>
+                <div>
+                  <h3 class="partner-card-title">Tripadvisor</h3>
+                  <span class="partner-card-sector" style="color: #2dd4bf;">Traveler Guidance & Reviews</span>
+                </div>
+              </div>
+              <span class="rc-badge" style="font-size:0.65rem; background: rgba(0,175,135,0.25); color: #5eead4; border: 1px solid rgba(94,234,212,0.3);">Guest Reviews</span>
+            </div>
+            <p class="partner-card-desc">
+              Read candid traveler experiences, view authentic guest photos, and verify traveler ratings for our outdoor pool, cocktail bar, restaurant dining, and guest suites.
+            </p>
+          </div>
+          <div>
+            <div class="partner-card-tags">
+              <span class="partner-tag">Unbiased Reviews</span>
+              <span class="partner-tag">Guest Photos</span>
+              <span class="partner-tag">Resort Rating</span>
+              <span class="partner-tag">Traveler Insights</span>
+            </div>
+            <a href="https://www.tripadvisor.com/Search?q=Kelvin+Cameo+Resort+Hotel+Suleja" target="_blank" rel="noopener noreferrer" class="platform-link">
+              <span>View on Tripadvisor</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 5. Expedia -->
+        <article class="partner-card dark-card">
+          <div>
+            <div class="partner-card-header">
+              <div class="partner-card-brand">
+                <div class="partner-avatar" style="background: linear-gradient(135deg, #ffcc00, #d97706); color: #00355f; font-size: 1.15rem;">EX</div>
+                <div>
+                  <h3 class="partner-card-title">Expedia</h3>
+                  <span class="partner-card-sector" style="color: var(--estate-gold);">Worldwide Travel Marketplace</span>
+                </div>
+              </div>
+              <span class="rc-badge" style="font-size:0.65rem; background: rgba(255,204,0,0.2); color: #fde047; border: 1px solid rgba(253,224,71,0.3);">Global Network</span>
+            </div>
+            <p class="partner-card-desc">
+              Preferred platform for international travelers, diaspora visitors, and corporate delegations booking flight-and-stay bundles and earning global loyalty points.
+            </p>
+          </div>
+          <div>
+            <div class="partner-card-tags">
+              <span class="partner-tag">Flight + Stay Bundles</span>
+              <span class="partner-tag">Expedia Rewards</span>
+              <span class="partner-tag">Corporate Portals</span>
+              <span class="partner-tag">Global Support</span>
+            </div>
+            <a href="https://www.expedia.com/Hotel-Search?destination=Kelvin+Cameo+Resort+Hotel+Suleja" target="_blank" rel="noopener noreferrer" class="platform-link">
+              <span>View on Expedia</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- 6. Google Travel & Hotels -->
+        <article class="partner-card dark-card">
+          <div>
+            <div class="partner-card-header">
+              <div class="partner-card-brand">
+                <div class="partner-avatar" style="background: linear-gradient(135deg, #4285f4, #1d4ed8); color: var(--white); font-size: 1.3rem;">G</div>
+                <div>
+                  <h3 class="partner-card-title">Google Hotels</h3>
+                  <span class="partner-card-sector" style="color: #93c5fd;">Maps & Verified Business</span>
+                </div>
+              </div>
+              <span class="rc-badge" style="font-size:0.65rem; background: rgba(66,133,244,0.3); color: #bfdbfe; border: 1px solid rgba(191,219,254,0.3);">Google Verified</span>
+            </div>
+            <p class="partner-card-desc">
+              Locate Kelvin Cameo Resort directly on Google Maps with real-time GPS navigation, street access directions, aggregated live pricing, and direct front desk calling.
+            </p>
+          </div>
+          <div>
+            <div class="partner-card-tags">
+              <span class="partner-tag">Turn-by-Turn GPS</span>
+              <span class="partner-tag">Google Maps Listing</span>
+              <span class="partner-tag">Direct Front Desk</span>
+              <span class="partner-tag">Live Rate Compare</span>
+            </div>
+            <a href="https://www.google.com/travel/search?q=Kelvin%20Cameo%20Resort%20Hotel%20Suleja" target="_blank" rel="noopener noreferrer" class="platform-link">
+              <span>View on Google Travel</span>
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            </a>
           </div>
         </article>
       </div>
 
-      <!-- Book A Corporate Retreat CTA -->
-      <div style="margin-top: 3.5rem; text-align: center; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-xl); padding: 2.5rem;">
-        <h4 style="font-family: var(--font-display); font-size: 1.5rem; color: var(--white); margin-bottom: 0.5rem;">
-          Planning a Corporate Retreat or Institutional Workshop?
-        </h4>
-        <p style="color: var(--slate-300); font-size: 0.95rem; max-width: 650px; margin: 0 auto 1.5rem;">
-          Take advantage of discounted institutional block-booking rates on suites and full banquet hall rental with synchronized 24/7 power, dedicated sound engineers, and tailored conference dining.
+      <!-- Direct Booking Advantage Banner -->
+      <div class="direct-booking-banner" style="margin-top: 3.5rem; background: linear-gradient(135deg, rgba(242,92,5,0.12), rgba(201,154,69,0.08)); border: 1px solid rgba(242,92,5,0.35); border-radius: var(--radius-xl); padding: 2.75rem 2rem; text-align: center; position: relative; overflow: hidden;">
+        <span class="rc-badge" style="background: var(--orange-500); color: var(--white); margin-bottom: 0.75rem; display: inline-flex; font-weight: 800;">
+          Direct Booking Guarantee
+        </span>
+        <h3 style="font-family: var(--font-display); font-size: 1.85rem; color: var(--white); margin-bottom: 0.75rem; font-weight: 800;">
+          Why Book Directly on KelvinCameo.com?
+        </h3>
+        <p style="color: var(--slate-300); font-size: 1rem; max-width: 720px; margin: 0 auto 2rem; line-height: 1.65;">
+          While you can find us on all major international travel sites, reserving directly with us guarantees you the lowest possible rate with zero booking fees, priority room selection, complimentary welcome refreshments, and 24/7 dedicated WhatsApp reception concierge.
         </p>
+
+        <!-- Direct Perks Row -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; max-width: 960px; margin: 0 auto 2.5rem; text-align: left;">
+          <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); padding: 1.25rem;">
+            <div style="font-size: 1.5rem; margin-bottom: 0.35rem;">💰</div>
+            <div style="font-weight: 700; color: var(--white); font-size: 0.95rem; margin-bottom: 0.2rem;">Guaranteed Best Rate</div>
+            <div style="font-size: 0.82rem; color: var(--slate-300);">Zero intermediary fees or third-party markups. Always our best price.</div>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); padding: 1.25rem;">
+            <div style="font-size: 1.5rem; margin-bottom: 0.35rem;">⚡</div>
+            <div style="font-weight: 700; color: var(--white); font-size: 0.95rem; margin-bottom: 0.2rem;">Instant Front Desk Lock-In</div>
+            <div style="font-size: 0.82rem; color: var(--slate-300);">Direct reservation entry in front desk ledger and instant email voucher.</div>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); padding: 1.25rem;">
+            <div style="font-size: 1.5rem; margin-bottom: 0.35rem;">🍹</div>
+            <div style="font-weight: 700; color: var(--white); font-size: 0.95rem; margin-bottom: 0.2rem;">Complimentary Welcome Drinks</div>
+            <div style="font-size: 0.82rem; color: var(--slate-300);">Chilled tropical refreshment upon arrival at our poolside lounge.</div>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); padding: 1.25rem;">
+            <div style="font-size: 1.5rem; margin-bottom: 0.35rem;">🕒</div>
+            <div style="font-weight: 700; color: var(--white); font-size: 0.95rem; margin-bottom: 0.2rem;">Flexible Check-In Priority</div>
+            <div style="font-size: 0.82rem; color: var(--slate-300);">Early check-in and late check-out priority subject to room availability.</div>
+          </div>
+        </div>
+
         <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-          <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20we%20are%20planning%20a%20corporate%20conference/retreat%20and%20need%20a%20formal%20proposal" target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
-            Request Corporate Retreat RFP via WhatsApp
+          <a href="#rooms" class="btn btn-primary btn-lg" style="gap: 0.5rem;">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            Book Directly & Save (Select Room Above)
           </a>
-          <a href="tel:+2348055558197" class="btn btn-outline-white btn-lg">
-            Call Event Director: +234 805 555 8197
+          <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20I%20am%20booking%20directly%20and%20need%20assistance%20with%20a%20reservation" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp btn-lg" style="gap: 0.5rem;">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.971.53 1.83.81 2.802.81 3.182 0 5.768-2.587 5.768-5.766 0-3.18-2.586-5.766-5.774-5.766zm8.47 5.766c0 4.686-3.814 8.498-8.47 8.498-1.464 0-2.85-.376-4.062-1.037l-4.509 1.182 1.205-4.402c-.754-1.272-1.157-2.73-1.157-4.241 0-4.686 3.813-8.499 8.47-8.499 4.656 0 8.47 3.813 8.47 8.499z"/></svg>
+            WhatsApp Front Desk: +234 805 555 8197
           </a>
         </div>
+
+        <!-- Corporate / Event note -->
+        <p style="margin-top: 1.75rem; font-size: 0.85rem; color: var(--slate-400); margin-bottom: 0;">
+          Planning a corporate conference, group residential retreat, or booking our 1,000-seat banquet hall?
+          <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20we%20are%20planning%20a%20corporate%20conference/retreat%20and%20need%20a%20formal%20proposal" target="_blank" rel="noopener noreferrer" style="color: var(--orange-400); font-weight: 700; text-decoration: underline; margin-left: 0.35rem;">
+            Request a Corporate Group Proposal
+          </a>
+        </p>
       </div>
+    </div>
+  </section>
     </div>
   </section>
 
