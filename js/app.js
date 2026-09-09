@@ -170,10 +170,15 @@ function initRoomTabs() {
 
       const filter = btn.getAttribute('data-room-filter');
 
-      // If separate tracks exist
+      const mainGrid = document.querySelector('.suites-grid[data-branch-grid="main"]');
+      const annexGrid = document.querySelector('.suites-grid[data-branch-grid="annex"]');
+
+      // If separate tracks/grids exist
       if (mainBar) mainBar.style.display = (filter === 'all' || filter === 'main') ? '' : 'none';
+      if (mainGrid) mainGrid.style.display = (filter === 'all' || filter === 'main') ? '' : 'none';
       if (mainTrack) mainTrack.style.display = (filter === 'all' || filter === 'main') ? '' : 'none';
       if (annexBar) annexBar.style.display = (filter === 'all' || filter === 'annex') ? '' : 'none';
+      if (annexGrid) annexGrid.style.display = (filter === 'all' || filter === 'annex') ? '' : 'none';
       if (annexTrack) annexTrack.style.display = (filter === 'all' || filter === 'annex') ? '' : 'none';
 
       // Unified track card filtering
