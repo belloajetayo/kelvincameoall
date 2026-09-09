@@ -22,6 +22,10 @@ get_header();
       <!-- Grand Entrance & Valet Arrival -->
       <div class="hero-bg-slide" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/entrance.jpg' ); ?>');"></div>
       <div class="hero-bg-overlay"></div>
+      <div class="hero-slider-badge" aria-live="polite">
+        <span class="hero-slider-dot"></span>
+        <span id="heroSlideName">Branch 01 • Main Hotel Exterior</span>
+      </div>
     </div>
 
     <div class="container" style="position: relative; z-index: 2;">
@@ -796,7 +800,7 @@ get_header();
             </div>
             <div>
               <a href="https://paystack.com/buy/banquet-hall--celebrations-vuwyfa" target="_blank" rel="noopener" class="btn btn-primary btn-lg" style="width:100%; margin-bottom:0.75rem;">Paystack Instant Booking (₦1,050,000)</a>
-              <button type="button" class="btn btn-outline-white btn-sm" style="width:100%;" data-modal="inquiryModal">Hold Event Date</button>
+              <button type="button" class="btn btn-outline-white btn-sm" style="width:100%;" data-modal="inquiryModal" data-service="banquet" data-suite-name="1,000-Seat Grand Banquet Hall (Celebrations Full Package)">Hold Event Date</button>
             </div>
           </div>
 
@@ -831,7 +835,7 @@ get_header();
             </div>
             <div>
               <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20I%20want%20to%20inquire%20about%20the%20A%20La%20Carte%20Banquet%20Package%20(850,000)" target="_blank" rel="noopener" class="btn btn-secondary btn-lg" style="width:100%; margin-bottom:0.75rem;">Inquire via WhatsApp</a>
-              <button type="button" class="btn btn-outline-white btn-sm" style="width:100%;" data-modal="inquiryModal">Hold Event Date</button>
+              <button type="button" class="btn btn-outline-white btn-sm" style="width:100%;" data-modal="inquiryModal" data-service="banquet" data-suite-name="1,000-Seat Grand Banquet Hall (À La Carte Package)">Hold Event Date</button>
             </div>
           </div>
         </div>
@@ -1470,6 +1474,41 @@ get_header();
       </form>
     </div>
   </div>
+
+
+  <!-- Schema.org Rich Snippet for Kelvin Cameo Resort Hotel -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["Hotel", "Resort"],
+    "name": "Kelvin Cameo Resort Hotel",
+    "alternateName": "Kelvin Cameo Hotel & Banquets",
+    "description": "Premier luxury resort hotel, Love Night & Golden Nest suites, serviced apartments, and 1,000-seat grand event hall along the Abuja-Kaduna highway corridor in Suleja, Niger State.",
+    "url": "https://kelvincameo.com/hospitality/",
+    "telephone": "+2348055558197",
+    "email": "concierge@kelvincameo.com",
+    "priceRange": "₦25,000 - ₦200,000",
+    "currenciesAccepted": "NGN",
+    "paymentAccepted": "Cash, Debit Card, Credit Card, Bank Transfer, Paystack",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Abuja-Kaduna Expressway Corridor",
+      "addressLocality": "Suleja",
+      "addressRegion": "Niger State",
+      "addressCountry": "NG"
+    },
+    "amenityFeature": [
+      { "@type": "LocationFeatureSpecification", "name": "Resort Swimming Pool", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "1,000-Seat Grand Banquet Auditorium", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Free High-Speed Fiber Wi-Fi", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "24/7 Dual 250kVA Standby Power", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Cameo Restaurant & Catfish Point & Kill", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Full Cocktail Bar & VIP Lounge", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "Billiards & Snooker Room", "value": true },
+      { "@type": "LocationFeatureSpecification", "name": "24-Hour Armed Perimeter Security", "value": true }
+    ]
+  }
+  </script>
 
 <?php
 get_footer();

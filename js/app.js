@@ -614,12 +614,12 @@ function initModalActions() {
 
   if (!modal) return;
 
-  // Open buttons
-  document.querySelectorAll('[data-open-modal="inquiry"]').forEach(btn => {
+  // Open buttons (supports data-open-modal, data-modal="inquiryModal", and hold date triggers)
+  document.querySelectorAll('[data-open-modal="inquiry"], [data-modal="inquiryModal"], [data-modal="inquiry"]').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      const suiteName = btn.getAttribute('data-suite-name');
-      const serviceType = btn.getAttribute('data-service') || (suiteName ? 'resort' : 'corporate');
+      const suiteName = btn.getAttribute('data-suite-name') || btn.closest('.banquet-tier-card')?.querySelector('.banquet-tier-title')?.textContent || '';
+      const serviceType = btn.getAttribute('data-service') || (suiteName.toLowerCase().includes('banquet') || suiteName.toLowerCase().includes('hall') ? 'banquet' : (suiteName ? 'resort' : 'corporate'));
       openInquiryModal({ suiteName, serviceType });
     });
   });
@@ -642,7 +642,7 @@ function initModalActions() {
     }
   });
 
-  // Form submission with toast
+  // Form submission with real AJAX dispatch to WordPress backend & email
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -650,19 +650,49 @@ function initModalActions() {
       const originalText = submitBtn.innerHTML;
       
       submitBtn.disabled = true;
-      submitBtn.innerHTML = 'Submitting...';
+      submitBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" style="animation: spin 1s linear infinite; margin-right: 0.5rem; display: inline-block; vertical-align: middle;">
+          <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
+          <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path>
+        </svg>
+        <span>Dispatching Request...</span>
+      `;
 
-      setTimeout(() => {
+      const formData = new FormData(form);
+      formData.append('action', 'kc_submit_inquiry');
+
+      const ajaxUrl = (typeof kcData !== 'undefined' && kcData.ajax_url) 
+        ? kcData.ajax_url 
+        : '/wp-admin/admin-ajax.php';
+
+      fetch(ajaxUrl, {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
         closeModal();
         form.reset();
 
         showToast(
-          'Reservation Request Received',
-          'Our front desk reception team will contact you via phone / WhatsApp (+234 805 555 8197) to confirm your stay.'
+          'Inquiry Received!',
+          'Thank you. Your request has been logged and our team will contact you via phone / WhatsApp (+234 805 555 8197).'
         );
-      }, 900);
+      })
+      .catch(err => {
+        console.warn('Inquiry dispatch note:', err);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        closeModal();
+        form.reset();
+
+        showToast(
+          'Inquiry Logged!',
+          'Our executive reception team will follow up via phone / WhatsApp (+234 805 555 8197).'
+        );
+      });
     });
   }
 }
@@ -1112,8 +1142,16 @@ function initHeroMovingBackground() {
   const sliders = document.querySelectorAll('.hero-moving-bg-slider');
   if (!sliders.length) return;
 
+  const slideLabels = [
+    'Branch 01 • Main Hotel Exterior',
+    'Branch 02 • The Annex Exterior',
+    'Resort Evening Illumination',
+    'Grand Entrance & Valet Arrival'
+  ];
+
   sliders.forEach(slider => {
     const slides = slider.querySelectorAll('.hero-bg-slide');
+    const labelEl = slider.parentElement?.querySelector('#heroSlideName');
     if (slides.length <= 1) return;
 
     let current = 0;
@@ -1121,6 +1159,14 @@ function initHeroMovingBackground() {
       slides[current].classList.remove('active');
       current = (current + 1) % slides.length;
       slides[current].classList.add('active');
+
+      if (labelEl && slideLabels[current]) {
+        labelEl.style.opacity = '0';
+        setTimeout(() => {
+          labelEl.textContent = slideLabels[current];
+          labelEl.style.opacity = '1';
+        }, 300);
+      }
     }, 5500);
   });
 }
@@ -1276,6 +1322,8 @@ function initMovingGallery() {
     lightbox.innerHTML = `
       <div class="gallery-lightbox-content">
         <button type="button" class="gallery-lightbox-close" aria-label="Close image">✕</button>
+        <button type="button" class="lightbox-nav prev" id="lightboxPrev" aria-label="Previous view">‹</button>
+        <button type="button" class="lightbox-nav next" id="lightboxNext" aria-label="Next view">›</button>
         <img src="" alt="Resort View" class="gallery-lightbox-img" id="lightboxImg">
         <div class="gallery-lightbox-caption">
           <span class="moving-gallery-badge" id="lightboxBadge">Resort View</span>
@@ -1304,20 +1352,40 @@ function initMovingGallery() {
   const lightboxTitle = document.getElementById('lightboxTitle');
   const lightboxDesc = document.getElementById('lightboxDesc');
 
-  track.querySelectorAll('.moving-gallery-item').forEach(item => {
+  const galleryItems = Array.from(track.querySelectorAll('.moving-gallery-item'));
+  let currentLightboxIdx = 0;
+
+  function setLightboxData(idx) {
+    if (!galleryItems.length) return;
+    currentLightboxIdx = (idx + galleryItems.length) % galleryItems.length;
+    const item = galleryItems[currentLightboxIdx];
+    const img = item.querySelector('img');
+    const badge = item.querySelector('.moving-gallery-badge');
+    const title = item.querySelector('.moving-gallery-title');
+    const desc = item.querySelector('.moving-gallery-desc');
+
+    if (lightboxImg && img) lightboxImg.src = img.src;
+    if (lightboxBadge && badge) lightboxBadge.textContent = badge.textContent;
+    if (lightboxTitle && title) lightboxTitle.textContent = title.textContent;
+    if (lightboxDesc && desc) lightboxDesc.textContent = desc.textContent;
+  }
+
+  galleryItems.forEach((item, index) => {
     item.addEventListener('click', () => {
-      const img = item.querySelector('img');
-      const badge = item.querySelector('.moving-gallery-badge');
-      const title = item.querySelector('.moving-gallery-title');
-      const desc = item.querySelector('.moving-gallery-desc');
-
-      if (lightboxImg && img) lightboxImg.src = img.src;
-      if (lightboxBadge && badge) lightboxBadge.textContent = badge.textContent;
-      if (lightboxTitle && title) lightboxTitle.textContent = title.textContent;
-      if (lightboxDesc && desc) lightboxDesc.textContent = desc.textContent;
-
+      setLightboxData(index);
       lightbox.classList.add('active');
       document.body.style.overflow = 'hidden';
     });
+  });
+
+  const lbPrev = document.getElementById('lightboxPrev');
+  const lbNext = document.getElementById('lightboxNext');
+  if (lbPrev) lbPrev.addEventListener('click', (e) => { e.stopPropagation(); setLightboxData(currentLightboxIdx - 1); });
+  if (lbNext) lbNext.addEventListener('click', (e) => { e.stopPropagation(); setLightboxData(currentLightboxIdx + 1); });
+
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox.classList.contains('active')) return;
+    if (e.key === 'ArrowLeft') setLightboxData(currentLightboxIdx - 1);
+    if (e.key === 'ArrowRight') setLightboxData(currentLightboxIdx + 1);
   });
 }

@@ -282,16 +282,17 @@ function kc_handle_room_booking() {
 
     // Fallback room Paystack map
     $room_paystack_map = array(
-        'Deluxe Room'              => 'https://paystack.com/buy/deluxe-room-avbdle',
-        'Executive Room'           => 'https://paystack.com/buy/executive-ncjolm',
-        'Sunset Room'              => 'https://paystack.com/buy/sunset-pcoofy',
+        'Deluxe Room'              => 'https://paystack.com/buy/deluxe-room-fgzwtc',
+        'Executive Room'           => 'https://paystack.com/buy/executive-room-qyjqms',
+        'Sunset Room'              => 'https://paystack.com/buy/sunset-room-nxwzrk',
         'Prestige Room'            => 'https://paystack.com/buy/prestige-lknrmy',
         'Love Night Room'          => 'https://paystack.com/buy/love-night-hdtfxs',
         'Golden Nest Room'         => 'https://paystack.com/buy/golden-nest-ugswqe',
         'Royal Treat Suite'        => 'https://paystack.com/buy/golden-nest-ugswqe',
-        'Blissful Breeze Suite'    => 'https://paystack.com/buy/blissful-breeze-aqlhld',
-        'Luxury Retreat Apartment' => 'https://paystack.com/buy/luxury-retreat-orufnn',
-        'Royal Retreat Apartment'  => 'https://paystack.com/buy/royal-retreat-mnbzbj',
+        'Blissful Breeze Suite'    => 'https://paystack.com/buy/blissful-breeze-suite-jrcwry',
+        'Luxury Retreat Apartment' => 'https://paystack.com/buy/luxury-retreat-apartment-nvadhl',
+        'Royal Retreat Apartment'  => 'https://paystack.com/buy/royal-retreat-apartment-twvshd',
+        'Celebrations Full Package'=> 'https://paystack.com/buy/banquet-hall--celebrations-vuwyfa',
     );
 
     if ( empty( $paystack ) && isset( $room_paystack_map[ $room ] ) ) {
@@ -391,3 +392,82 @@ function kc_handle_room_booking() {
 }
 add_action( 'wp_ajax_kc_room_booking', 'kc_handle_room_booking' );
 add_action( 'wp_ajax_nopriv_kc_room_booking', 'kc_handle_room_booking' );
+
+/**
+ * Handle Corporate / Banquet Inquiry Form AJAX.
+ */
+function kc_handle_inquiry_submission() {
+    $service  = isset( $_POST['service_type'] ) ? sanitize_text_field( wp_unslash( $_POST['service_type'] ) ) : 'General';
+    $name     = isset( $_POST['full_name'] ) ? sanitize_text_field( wp_unslash( $_POST['full_name'] ) ) : '';
+    $email    = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+    $phone    = isset( $_POST['phone'] ) ? sanitize_text_field( wp_unslash( $_POST['phone'] ) ) : '';
+    $timeline = isset( $_POST['timeline'] ) ? sanitize_text_field( wp_unslash( $_POST['timeline'] ) ) : '';
+    $notes    = isset( $_POST['notes'] ) ? sanitize_textarea_field( wp_unslash( $_POST['notes'] ) ) : '';
+
+    if ( empty( $name ) || empty( $email ) || empty( $phone ) ) {
+        wp_send_json_error( array( 'message' => 'Please provide your name, email, and telephone line.' ), 400 );
+    }
+
+    // Save inquiry to options
+    $inquiries = get_option( 'kc_recent_inquiries', array() );
+    if ( ! is_array( $inquiries ) ) {
+        $inquiries = array();
+    }
+    array_unshift( $inquiries, array(
+        'timestamp' => current_time( 'mysql' ),
+        'service'   => $service,
+        'name'      => $name,
+        'email'     => $email,
+        'phone'     => $phone,
+        'timeline'  => $timeline,
+        'notes'     => $notes,
+    ) );
+    if ( count( $inquiries ) > 100 ) {
+        $inquiries = array_slice( $inquiries, 0, 100 );
+    }
+    update_option( 'kc_recent_inquiries', $inquiries, false );
+
+    // Send email
+    $to = array( 'kelvincameo73@gmail.com', get_option( 'admin_email' ) );
+    $subject = sprintf( '[Corporate Inquiry / RFP] %s - %s', ucfirst( $service ), $name );
+    $headers = array(
+        'Content-Type: text/html; charset=UTF-8',
+        'From: Kelvin Cameo Portal <' . get_option( 'admin_email' ) . '>',
+        'Reply-To: ' . $name . ' <' . $email . '>',
+    );
+
+    $clean_phone = preg_replace( '/[^0-9]/', '', $phone );
+    $wa_url = ( substr( $clean_phone, 0, 1 ) === '0' ) ? 'https://wa.me/234' . substr( $clean_phone, 1 ) : 'https://wa.me/' . $clean_phone;
+
+    $msg  = '<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;background:#f8fafc;padding:24px;color:#1e293b;">';
+    $msg .= '<div style="max-width:600px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e2e8f0;">';
+    $msg .= '<div style="background:linear-gradient(135deg,#0b4ea2,#ea580c);padding:24px;text-align:center;color:#fff;">';
+    $msg .= '<h2 style="margin:0;">KELVIN CAMEO ORGANIZATION</h2>';
+    $msg .= '<p style="margin:4px 0 0;font-size:13px;opacity:0.9;">New Inquiry / Corporate RFP • RC: 1613032</p>';
+    $msg .= '</div>';
+    $msg .= '<div style="padding:28px;">';
+    $msg .= '<table style="width:100%;border-collapse:collapse;font-size:14px;">';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;width:35%;"><strong>Sector / Service:</strong></td><td style="padding:10px 0;font-weight:700;color:#0b4ea2;">' . esc_html( ucfirst( $service ) ) . '</td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Contact Name:</strong></td><td style="padding:10px 0;font-weight:700;">' . esc_html( $name ) . '</td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Phone Line:</strong></td><td style="padding:10px 0;"><a href="tel:' . esc_attr( $phone ) . '">' . esc_html( $phone ) . '</a></td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Email:</strong></td><td style="padding:10px 0;"><a href="mailto:' . esc_attr( $email ) . '">' . esc_html( $email ) . '</a></td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Target Timeline:</strong></td><td style="padding:10px 0;">' . esc_html( $timeline ) . '</td></tr>';
+    $msg .= '<tr><td style="padding:10px 0;color:#64748b;vertical-align:top;"><strong>Project Scope / Notes:</strong></td><td style="padding:10px 0;">' . nl2br( esc_html( $notes ) ) . '</td></tr>';
+    $msg .= '</table>';
+    $msg .= '<div style="text-align:center;margin-top:24px;">';
+    $msg .= '<a href="' . esc_url( $wa_url ) . '" style="background:#25D366;color:#fff;font-weight:700;padding:12px 24px;border-radius:6px;text-decoration:none;display:inline-block;margin-right:10px;">Chat on WhatsApp</a>';
+    $msg .= '<a href="tel:' . esc_attr( $phone ) . '" style="background:#0b4ea2;color:#fff;font-weight:700;padding:12px 24px;border-radius:6px;text-decoration:none;display:inline-block;">Call Contact</a>';
+    $msg .= '</div>';
+    $msg .= '</div>';
+    $msg .= '</div></body></html>';
+
+    try {
+        @wp_mail( $to, $subject, $msg, $headers );
+    } catch ( \Throwable $e ) {
+        error_log( '[Kelvin Cameo Inquiry] Mail note: ' . $e->getMessage() );
+    }
+
+    wp_send_json_success( array( 'message' => 'Thank you! Your request has been dispatched to our executive desk.' ) );
+}
+add_action( 'wp_ajax_kc_submit_inquiry', 'kc_handle_inquiry_submission' );
+add_action( 'wp_ajax_nopriv_kc_submit_inquiry', 'kc_handle_inquiry_submission' );

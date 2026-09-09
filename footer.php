@@ -120,7 +120,7 @@
       <form id="reservationRfpForm">
         <div class="form-group">
           <label for="modalServiceType">Operating Division / Sector *</label>
-          <select id="modalServiceType" class="form-control" required>
+          <select id="modalServiceType" name="service_type" class="form-control" required>
             <option value="energy">Kelvin Cameo Energy (Fuel Supply / Station Franchising)</option>
             <option value="realestate">Kelvin Cameo Real Estate (Plot Acquisition / Land Banking)</option>
             <option value="agriculture">Kelvin Cameo Agriculture (Bulk Commodity Purchase / Farm Produce)</option>
@@ -133,28 +133,28 @@
         <div class="form-group-row">
           <div class="form-group">
             <label for="modalName">Full Name / Corporate Title *</label>
-            <input type="text" id="modalName" class="form-control" placeholder="e.g. Alh. Sanusi Danladi" required>
+            <input type="text" id="modalName" name="full_name" class="form-control" placeholder="e.g. Alh. Sanusi Danladi" required>
           </div>
           <div class="form-group">
             <label for="modalEmail">Official / Personal Email *</label>
-            <input type="email" id="modalEmail" class="form-control" placeholder="name@domain.com" required>
+            <input type="email" id="modalEmail" name="email" class="form-control" placeholder="name@domain.com" required>
           </div>
         </div>
 
         <div class="form-group-row">
           <div class="form-group">
             <label for="modalPhone">Phone / WhatsApp Line *</label>
-            <input type="tel" id="modalPhone" class="form-control" placeholder="+234 ..." required>
+            <input type="tel" id="modalPhone" name="phone" class="form-control" placeholder="+234 ..." required>
           </div>
           <div class="form-group">
             <label for="modalDates">Target Timeline / Scope</label>
-            <input type="text" id="modalDates" class="form-control" placeholder="e.g. Immediate / Next Quarter">
+            <input type="text" id="modalDates" name="timeline" class="form-control" placeholder="e.g. Immediate / Next Quarter">
           </div>
         </div>
 
         <div class="form-group">
           <label for="modalNotes">Project Scope / Specific Requirements</label>
-          <textarea id="modalNotes" class="form-control" rows="3" placeholder="Provide details regarding your request, desired volume, location, or stay dates..."></textarea>
+          <textarea id="modalNotes" name="notes" class="form-control" rows="3" placeholder="Provide details regarding your request, desired volume, location, or stay dates..."></textarea>
         </div>
 
         <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">
