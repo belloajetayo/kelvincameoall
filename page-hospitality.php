@@ -96,25 +96,260 @@ get_header();
       <!-- Filter Tabs -->
       <div class="filter-tabs-wrapper room-tabs">
         <button type="button" class="tab-btn tab-resort active" data-room-filter="all">All Accommodations (10)</button>
-        <button type="button" class="tab-btn tab-resort" data-room-filter="annex">Branch 02: The Annex (4)</button>
-        <button type="button" class="tab-btn tab-resort" data-room-filter="main-room">Branch 01: Main Rooms (2)</button>
-        <button type="button" class="tab-btn tab-resort" data-room-filter="main-suite">Branch 01: Suites & Apartments (4)</button>
+        <button type="button" class="tab-btn tab-resort" data-room-filter="main">Branch 01: Main Hotel (5)</button>
+        <button type="button" class="tab-btn tab-resort" data-room-filter="annex">Branch 02: The Annex (5)</button>
       </div>
 
-      <!-- Branch 02 Section Indicator -->
+      <!-- Branch 01 Section Indicator (Main Hotel First) -->
+      <div class="branch-section-bar main-bar">
+        <div class="branch-bar-title-group">
+          <span class="branch-pill main">Branch 01</span>
+          <div>
+            <h3 class="branch-bar-heading">Main Hotel — Luxury Rooms, Boutique Suites & Serviced Residences</h3>
+            <p class="branch-bar-sub">Direct access to the swimming pool, gourmet restaurant, cocktail bar, and the 1,000-seat grand banquet auditorium.</p>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+          <span class="slider-hint-pill">⟵ Scroll to select ⟶</span>
+          <div class="slider-controls">
+            <button type="button" class="slider-nav-btn prev-btn" data-target="mainHotelTrack" aria-label="Previous room">‹</button>
+            <button type="button" class="slider-nav-btn next-btn" data-target="mainHotelTrack" aria-label="Next room">›</button>
+          </div>
+          <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20I%20want%20to%20inquire%20about%20staying%20at%20Branch%2001%20Main%20Hotel" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Inquire Main Hotel</a>
+        </div>
+      </div>
+
+      <!-- Main Hotel Horizontal Scroll Track -->
+      <div class="suites-scroll-track" id="mainHotelTrack">
+
+        <!-- 1. Love Night Room (Main Hotel) -->
+        <article class="suite-card" data-room-cat="main">
+          <div class="suite-card-media">
+            <span class="suite-branch-badge branch-main">Branch 01 • Main Hotel</span>
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/single-room.jpg' ); ?>" alt="Love Night Room at Kelvin Cameo Resort Hotel" loading="lazy">
+          </div>
+          <div class="suite-card-body">
+            <div>
+              <span class="suite-category-label">Romantic Getaway Room</span>
+              <h3 class="suite-name">Love Night Room</h3>
+              <p class="suite-desc">
+                Curated for couples, anniversaries, and romantic getaways. Authentic plush upholstered headboard, ambient mood lighting, bedside intercom, and ensuite luxury bath.
+              </p>
+              <div class="suite-amenities-row">
+                <span class="suite-amenity-tag">Designer Bed</span>
+                <span class="suite-amenity-tag">Intercom</span>
+                <span class="suite-amenity-tag">Air Conditioning</span>
+                <span class="suite-amenity-tag">Plush Linens</span>
+              </div>
+            </div>
+            <div class="suite-footer">
+              <div class="suite-price-block">
+                <span class="suite-price-currency">Tariff Per Night</span>
+                <div class="suite-price-amount">₦50,000<span>/night</span></div>
+              </div>
+              <div class="suite-action-btns">
+                <button type="button" class="btn btn-primary btn-sm btn-book-room" 
+                  data-room-name="Love Night Room"
+                  data-room-price="50000"
+                  data-room-branch="Branch 01 • Main Hotel"
+                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/single-room.jpg' ); ?>"
+                  data-paystack-url="https://paystack.com/buy/love-night-hdtfxs">
+                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  Book Now
+                </button>
+                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Love%20Night%20Room%20(50k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. Golden Nest Room (Main Hotel) -->
+        <article class="suite-card" data-room-cat="main">
+          <div class="suite-card-media">
+            <span class="suite-branch-badge branch-main">Branch 01 • Main Hotel</span>
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-purple.jpg' ); ?>" alt="Golden Nest Room at Kelvin Cameo Resort Hotel" loading="lazy">
+          </div>
+          <div class="suite-card-body">
+            <div>
+              <span class="suite-category-label">Signature Luxury Room</span>
+              <h3 class="suite-name">Golden Nest Room</h3>
+              <p class="suite-desc">
+                Warm amber finishes, custom velvet ribbed headboard, bedside ambient sconces, executive armchair, carpeted floor, and full split-unit air conditioning.
+              </p>
+              <div class="suite-amenities-row">
+                <span class="suite-amenity-tag">Ambient Sconces</span>
+                <span class="suite-amenity-tag">Lounge Chair</span>
+                <span class="suite-amenity-tag">Split AC</span>
+                <span class="suite-amenity-tag">Intercom</span>
+              </div>
+            </div>
+            <div class="suite-footer">
+              <div class="suite-price-block">
+                <span class="suite-price-currency">Tariff Per Night</span>
+                <div class="suite-price-amount">₦60,000<span>/night</span></div>
+              </div>
+              <div class="suite-action-btns">
+                <button type="button" class="btn btn-primary btn-sm btn-book-room" 
+                  data-room-name="Golden Nest Room"
+                  data-room-price="60000"
+                  data-room-branch="Branch 01 • Main Hotel"
+                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-purple.jpg' ); ?>"
+                  data-paystack-url="https://paystack.com/buy/golden-nest-ugswqe">
+                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  Book Now
+                </button>
+                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Golden%20Nest%20Room%20(60k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. Blissful Breeze Suite (Main Hotel) -->
+        <article class="suite-card" data-room-cat="main">
+          <div class="suite-card-media">
+            <span class="suite-branch-badge branch-main">Branch 01 • Main Hotel</span>
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-hall.jpg' ); ?>" alt="Blissful Breeze Suite at Kelvin Cameo Resort" loading="lazy">
+          </div>
+          <div class="suite-card-body">
+            <div>
+              <span class="suite-category-label">Terrace Penthouse Suite</span>
+              <h3 class="suite-name">Blissful Breeze Suite</h3>
+              <p class="suite-desc">
+                Positioned on the highest floor with an expansive private terrace overlooking the resort courtyard and pool. Pure aeration, natural light, and unmatched serenity.
+              </p>
+              <div class="suite-amenities-row">
+                <span class="suite-amenity-tag">Private Balcony</span>
+                <span class="suite-amenity-tag">Poolside View</span>
+                <span class="suite-amenity-tag">Jacuzzi Bath</span>
+                <span class="suite-amenity-tag">Espresso Bar</span>
+              </div>
+            </div>
+            <div class="suite-footer">
+              <div class="suite-price-block">
+                <span class="suite-price-currency">Tariff Per Night</span>
+                <div class="suite-price-amount">₦75,000<span>/night</span></div>
+              </div>
+              <div class="suite-action-btns">
+                <button type="button" class="btn btn-primary btn-sm btn-book-room" 
+                  data-room-name="Blissful Breeze Suite"
+                  data-room-price="75000"
+                  data-room-branch="Branch 01 • Main Hotel"
+                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-hall.jpg' ); ?>"
+                  data-paystack-url="https://paystack.com/buy/blissful-breeze-aqlhld">
+                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  Book Now
+                </button>
+                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Blissful%20Breeze%20Suite%20(75k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4. Luxury Retreat Apartment (Main Hotel) -->
+        <article class="suite-card" data-room-cat="main">
+          <div class="suite-card-media">
+            <span class="suite-branch-badge branch-main">Branch 01 • Serviced Apartment</span>
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/dining-2.jpg' ); ?>" alt="Luxury Retreat Apartment at Kelvin Cameo Resort" loading="lazy">
+          </div>
+          <div class="suite-card-body">
+            <div>
+              <span class="suite-category-label">Multi-Room Serviced Residence</span>
+              <h3 class="suite-name">Luxury Retreat Apartment</h3>
+              <p class="suite-desc">
+                Fully serviced apartment featuring a sprawling private living parlor, dining room, fully equipped kitchenette, master bedroom ensuite, and private entrance.
+              </p>
+              <div class="suite-amenities-row">
+                <span class="suite-amenity-tag">Private Living Room</span>
+                <span class="suite-amenity-tag">Fitted Kitchenette</span>
+                <span class="suite-amenity-tag">Dining Area</span>
+                <span class="suite-amenity-tag">Extended Stays</span>
+              </div>
+            </div>
+            <div class="suite-footer">
+              <div class="suite-price-block">
+                <span class="suite-price-currency">Tariff Per Night</span>
+                <div class="suite-price-amount">₦160,000<span>/night</span></div>
+              </div>
+              <div class="suite-action-btns">
+                <button type="button" class="btn btn-primary btn-sm btn-book-room" 
+                  data-room-name="Luxury Retreat Apartment"
+                  data-room-price="160000"
+                  data-room-branch="Branch 01 • Main Hotel"
+                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/dining-2.jpg' ); ?>"
+                  data-paystack-url="https://paystack.com/buy/luxury-retreat-orufnn">
+                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  Book Now
+                </button>
+                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Luxury%20Retreat%20Apartment%20(160k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5. Royal Retreat Apartment (Main Hotel) -->
+        <article class="suite-card" data-room-cat="main">
+          <div class="suite-card-media">
+            <span class="suite-branch-badge branch-main">Branch 01 • Presidential Suite</span>
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-lounge.jpg' ); ?>" alt="Royal Retreat Apartment at Kelvin Cameo Resort" loading="lazy">
+          </div>
+          <div class="suite-card-body">
+            <div>
+              <span class="suite-category-label">Presidential Penthouse Residence</span>
+              <h3 class="suite-name">Royal Retreat Apartment</h3>
+              <p class="suite-desc">
+                The pinnacle of hospitality excellence. A palatial 2-bedroom executive apartment with formal dining, security quarters interlink, jacuzzi, and dedicated chef services.
+              </p>
+              <div class="suite-amenities-row">
+                <span class="suite-amenity-tag">Dual Ensuite Bedrooms</span>
+                <span class="suite-amenity-tag">Full Kitchen</span>
+                <span class="suite-amenity-tag">Executive Dining</span>
+                <span class="suite-amenity-tag">Private Concierge</span>
+              </div>
+            </div>
+            <div class="suite-footer">
+              <div class="suite-price-block">
+                <span class="suite-price-currency">Tariff Per Night</span>
+                <div class="suite-price-amount">₦180,000<span>/night</span></div>
+              </div>
+              <div class="suite-action-btns">
+                <button type="button" class="btn btn-primary btn-sm btn-book-room" 
+                  data-room-name="Royal Retreat Apartment"
+                  data-room-price="180000"
+                  data-room-branch="Branch 01 • Main Hotel"
+                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-lounge.jpg' ); ?>"
+                  data-paystack-url="https://paystack.com/buy/royal-retreat-mnbzbj">
+                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  Book Now
+                </button>
+                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Royal%20Retreat%20Apartment%20(180k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Branch 02 Section Indicator (The Annex Second) -->
       <div class="branch-section-bar annex-bar">
         <div class="branch-bar-title-group">
           <span class="branch-pill annex">Branch 02</span>
           <div>
-            <h3 class="branch-bar-heading">The Annex Branch — Executive & Deluxe Rooms</h3>
+            <h3 class="branch-bar-heading">The Annex Branch — Executive, Deluxe Rooms & Royal Treat Suite</h3>
             <p class="branch-bar-sub">Affordable business comfort, quiet residential privacy, and modern executive amenities from ₦25,000/night.</p>
           </div>
         </div>
-        <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20I%20want%20to%20inquire%20about%20staying%20at%20The%20Annex%20Branch" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Inquire The Annex</a>
+        <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+          <span class="slider-hint-pill">⟵ Scroll to select ⟶</span>
+          <div class="slider-controls">
+            <button type="button" class="slider-nav-btn prev-btn" data-target="annexTrack" aria-label="Previous room">‹</button>
+            <button type="button" class="slider-nav-btn next-btn" data-target="annexTrack" aria-label="Next room">›</button>
+          </div>
+          <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20I%20want%20to%20inquire%20about%20staying%20at%20The%20Annex%20Branch" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Inquire The Annex</a>
+        </div>
       </div>
 
-      <!-- Annex Suites Grid -->
-      <div class="suites-grid">
+      <!-- The Annex Horizontal Scroll Track -->
+      <div class="suites-scroll-track" id="annexTrack">
 
         <!-- 1. Deluxe Room (Annex) -->
         <article class="suite-card" data-room-cat="annex">
@@ -280,117 +515,18 @@ get_header();
           </div>
         </article>
 
-      </div>
-
-      <!-- Branch 01 Section Indicator -->
-      <div class="branch-section-bar main-bar">
-        <div class="branch-bar-title-group">
-          <span class="branch-pill main">Branch 01</span>
-          <div>
-            <h3 class="branch-bar-heading">Main Hotel — Luxury Rooms, Boutique Suites & Serviced Residences</h3>
-            <p class="branch-bar-sub">Direct access to the swimming pool, gourmet restaurant, cocktail bar, and the 1,000-seat grand banquet auditorium.</p>
-          </div>
-        </div>
-        <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20I%20want%20to%20inquire%20about%20staying%20at%20Branch%2001%20Main%20Hotel" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Inquire Main Hotel</a>
-      </div>
-
-      <!-- Main Hotel Grid -->
-      <div class="suites-grid">
-
-        <!-- 5. Love Night Room (Main Hotel) -->
-        <article class="suite-card" data-room-cat="main-room">
+        <!-- 5. Royal Treat Suite (Annex Suite) -->
+        <article class="suite-card" data-room-cat="annex">
           <div class="suite-card-media">
-            <span class="suite-branch-badge branch-main">Branch 01 • Main Hotel</span>
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/single-room.jpg' ); ?>" alt="Love Night Room at Kelvin Cameo Resort Hotel" loading="lazy">
+            <span class="suite-branch-badge branch-annex">Branch 02 • The Annex</span>
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/suite-lounge.jpg' ); ?>" alt="Royal Treat Suite at Kelvin Cameo Resort Annex" loading="lazy">
           </div>
           <div class="suite-card-body">
             <div>
-              <span class="suite-category-label">Romantic Getaway Room</span>
-              <h3 class="suite-name">Love Night Room</h3>
-              <p class="suite-desc">
-                Curated for couples, anniversaries, and romantic getaways. Authentic plush upholstered headboard, ambient mood lighting, bedside intercom, and ensuite luxury bath.
-              </p>
-              <div class="suite-amenities-row">
-                <span class="suite-amenity-tag">Designer Bed</span>
-                <span class="suite-amenity-tag">Intercom</span>
-                <span class="suite-amenity-tag">Air Conditioning</span>
-                <span class="suite-amenity-tag">Plush Linens</span>
-              </div>
-            </div>
-            <div class="suite-footer">
-              <div class="suite-price-block">
-                <span class="suite-price-currency">Tariff Per Night</span>
-                <div class="suite-price-amount">₦50,000<span>/night</span></div>
-              </div>
-              <div class="suite-action-btns">
-                <button type="button" class="btn btn-primary btn-sm btn-book-room" 
-                  data-room-name="Love Night Room"
-                  data-room-price="50000"
-                  data-room-branch="Branch 01 • Main Hotel"
-                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/single-room.jpg' ); ?>"
-                  data-paystack-url="https://paystack.com/buy/love-night-hdtfxs">
-                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                  Book Now
-                </button>
-                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Love%20Night%20Room%20(50k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- 6. Golden Nest Room (Main Hotel) -->
-        <article class="suite-card" data-room-cat="main-room">
-          <div class="suite-card-media">
-            <span class="suite-branch-badge branch-main">Branch 01 • Main Hotel</span>
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-purple.jpg' ); ?>" alt="Golden Nest Room at Kelvin Cameo Resort Hotel" loading="lazy">
-          </div>
-          <div class="suite-card-body">
-            <div>
-              <span class="suite-category-label">Signature Luxury Room</span>
-              <h3 class="suite-name">Golden Nest Room</h3>
-              <p class="suite-desc">
-                Warm amber finishes, custom velvet ribbed headboard, bedside ambient sconces, executive armchair, carpeted floor, and full split-unit air conditioning.
-              </p>
-              <div class="suite-amenities-row">
-                <span class="suite-amenity-tag">Ambient Sconces</span>
-                <span class="suite-amenity-tag">Lounge Chair</span>
-                <span class="suite-amenity-tag">Split AC</span>
-                <span class="suite-amenity-tag">Intercom</span>
-              </div>
-            </div>
-            <div class="suite-footer">
-              <div class="suite-price-block">
-                <span class="suite-price-currency">Tariff Per Night</span>
-                <div class="suite-price-amount">₦60,000<span>/night</span></div>
-              </div>
-              <div class="suite-action-btns">
-                <button type="button" class="btn btn-primary btn-sm btn-book-room" 
-                  data-room-name="Golden Nest Room"
-                  data-room-price="60000"
-                  data-room-branch="Branch 01 • Main Hotel"
-                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-purple.jpg' ); ?>"
-                  data-paystack-url="https://paystack.com/buy/golden-nest-ugswqe">
-                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                  Book Now
-                </button>
-                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Golden%20Nest%20Room%20(60k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- 7. Royal Treat Suite (Main Hotel) -->
-        <article class="suite-card" data-room-cat="main-suite">
-          <div class="suite-card-media">
-            <span class="suite-branch-badge branch-main">Branch 01 • Main Hotel</span>
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/suite-lounge.jpg' ); ?>" alt="Royal Treat Suite at Kelvin Cameo Resort" loading="lazy">
-          </div>
-          <div class="suite-card-body">
-            <div>
-              <span class="suite-category-label">Regal Experience Suite</span>
+              <span class="suite-category-label">Regal Annex Suite</span>
               <h3 class="suite-name">Royal Treat Suite</h3>
               <p class="suite-desc">
-                Indulge in royal comfort featuring an expansive master bedroom, gold-accented fixtures, separate guest powder room, and personalized 24-hour butler service.
+                The premier crown jewel suite at The Annex branch. Indulge in regal comfort featuring an expansive master bedroom, gold-accented fixtures, separate guest powder room, and personalized 24-hour butler service.
               </p>
               <div class="suite-amenities-row">
                 <span class="suite-amenity-tag">Regal Finish</span>
@@ -408,136 +544,13 @@ get_header();
                 <button type="button" class="btn btn-primary btn-sm btn-book-room" 
                   data-room-name="Royal Treat Suite"
                   data-room-price="60000"
-                  data-room-branch="Branch 01 • Main Hotel"
+                  data-room-branch="Branch 02 • The Annex"
                   data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/suite-lounge.jpg' ); ?>"
                   data-paystack-url="https://paystack.com/buy/golden-nest-ugswqe">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
                 </button>
-                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Royal%20Treat%20Suite%20(60k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- 8. Blissful Breeze Suite (Main Hotel) -->
-        <article class="suite-card" data-room-cat="main-suite">
-          <div class="suite-card-media">
-            <span class="suite-branch-badge branch-main">Branch 01 • Main Hotel</span>
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-hall.jpg' ); ?>" alt="Blissful Breeze Suite at Kelvin Cameo Resort" loading="lazy">
-          </div>
-          <div class="suite-card-body">
-            <div>
-              <span class="suite-category-label">Terrace Penthouse Suite</span>
-              <h3 class="suite-name">Blissful Breeze Suite</h3>
-              <p class="suite-desc">
-                Positioned on the highest floor with an expansive private terrace overlooking the resort courtyard and pool. Pure aeration, natural light, and unmatched serenity.
-              </p>
-              <div class="suite-amenities-row">
-                <span class="suite-amenity-tag">Private Balcony</span>
-                <span class="suite-amenity-tag">Poolside View</span>
-                <span class="suite-amenity-tag">Jacuzzi Bath</span>
-                <span class="suite-amenity-tag">Espresso Bar</span>
-              </div>
-            </div>
-            <div class="suite-footer">
-              <div class="suite-price-block">
-                <span class="suite-price-currency">Tariff Per Night</span>
-                <div class="suite-price-amount">₦75,000<span>/night</span></div>
-              </div>
-              <div class="suite-action-btns">
-                <button type="button" class="btn btn-primary btn-sm btn-book-room" 
-                  data-room-name="Blissful Breeze Suite"
-                  data-room-price="75000"
-                  data-room-branch="Branch 01 • Main Hotel"
-                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-hall.jpg' ); ?>"
-                  data-paystack-url="https://paystack.com/buy/blissful-breeze-aqlhld">
-                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                  Book Now
-                </button>
-                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Blissful%20Breeze%20Suite%20(75k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- 9. Luxury Retreat Apartment (Main Hotel) -->
-        <article class="suite-card" data-room-cat="main-suite">
-          <div class="suite-card-media">
-            <span class="suite-branch-badge branch-main">Branch 01 • Serviced Apartment</span>
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/dining-2.jpg' ); ?>" alt="Luxury Retreat Apartment at Kelvin Cameo Resort" loading="lazy">
-          </div>
-          <div class="suite-card-body">
-            <div>
-              <span class="suite-category-label">Multi-Room Serviced Residence</span>
-              <h3 class="suite-name">Luxury Retreat Apartment</h3>
-              <p class="suite-desc">
-                Fully serviced apartment featuring a sprawling private living parlor, dining room, fully equipped kitchenette, master bedroom ensuite, and private entrance.
-              </p>
-              <div class="suite-amenities-row">
-                <span class="suite-amenity-tag">Private Living Room</span>
-                <span class="suite-amenity-tag">Fitted Kitchenette</span>
-                <span class="suite-amenity-tag">Dining Area</span>
-                <span class="suite-amenity-tag">Extended Stays</span>
-              </div>
-            </div>
-            <div class="suite-footer">
-              <div class="suite-price-block">
-                <span class="suite-price-currency">Tariff Per Night</span>
-                <div class="suite-price-amount">₦160,000<span>/night</span></div>
-              </div>
-              <div class="suite-action-btns">
-                <button type="button" class="btn btn-primary btn-sm btn-book-room" 
-                  data-room-name="Luxury Retreat Apartment"
-                  data-room-price="160000"
-                  data-room-branch="Branch 01 • Main Hotel"
-                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/dining-2.jpg' ); ?>"
-                  data-paystack-url="https://paystack.com/buy/luxury-retreat-orufnn">
-                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                  Book Now
-                </button>
-                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Luxury%20Retreat%20Apartment%20(160k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- 10. Royal Retreat Apartment (Main Hotel) -->
-        <article class="suite-card" data-room-cat="main-suite">
-          <div class="suite-card-media">
-            <span class="suite-branch-badge branch-main">Branch 01 • Presidential Suite</span>
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-lounge.jpg' ); ?>" alt="Royal Retreat Apartment at Kelvin Cameo Resort" loading="lazy">
-          </div>
-          <div class="suite-card-body">
-            <div>
-              <span class="suite-category-label">Presidential Penthouse Residence</span>
-              <h3 class="suite-name">Royal Retreat Apartment</h3>
-              <p class="suite-desc">
-                The pinnacle of hospitality excellence. A palatial 2-bedroom executive apartment with formal dining, security quarters interlink, jacuzzi, and dedicated chef services.
-              </p>
-              <div class="suite-amenities-row">
-                <span class="suite-amenity-tag">Dual Ensuite Bedrooms</span>
-                <span class="suite-amenity-tag">Full Kitchen</span>
-                <span class="suite-amenity-tag">Executive Dining</span>
-                <span class="suite-amenity-tag">Private Concierge</span>
-              </div>
-            </div>
-            <div class="suite-footer">
-              <div class="suite-price-block">
-                <span class="suite-price-currency">Tariff Per Night</span>
-                <div class="suite-price-amount">₦180,000<span>/night</span></div>
-              </div>
-              <div class="suite-action-btns">
-                <button type="button" class="btn btn-primary btn-sm btn-book-room" 
-                  data-room-name="Royal Retreat Apartment"
-                  data-room-price="180000"
-                  data-room-branch="Branch 01 • Main Hotel"
-                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-lounge.jpg' ); ?>"
-                  data-paystack-url="https://paystack.com/buy/royal-retreat-mnbzbj">
-                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                  Book Now
-                </button>
-                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Royal%20Retreat%20Apartment%20(180k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
+                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Royal%20Treat%20Suite%20Annex%20(60k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
               </div>
             </div>
           </div>
