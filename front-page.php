@@ -30,7 +30,7 @@ get_header();
         </p>
 
         <div style="display:flex; gap:1.15rem; flex-wrap:wrap; margin-bottom: 2.5rem;">
-          <a href="#interactive-picker" class="btn btn-primary btn-lg" style="background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%); color: #082f49; font-weight: 800; box-shadow: 0 10px 25px rgba(2, 132, 199, 0.35);">
+          <a href="#interactive-picker" class="btn btn-primary btn-lg" style="background: linear-gradient(135deg, #ea580c 0%, #f97316 100%); color: #ffffff; font-weight: 800; box-shadow: 0 10px 25px rgba(234, 88, 12, 0.35);">
             Pick What You Need Today ↓
           </a>
           <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%2C%20I%20would%20like%20to%20speak%20with%20your%20team." target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
