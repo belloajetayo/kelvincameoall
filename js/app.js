@@ -151,6 +151,8 @@ function initSubsidiaryTabs() {
 function initRoomTabs() {
   const tabBtns = document.querySelectorAll('.room-tabs .tab-btn');
   const cards = document.querySelectorAll('.suite-card');
+  const annexBar = document.querySelector('.branch-section-bar.annex-bar');
+  const mainBar = document.querySelector('.branch-section-bar.main-bar');
 
   if (!tabBtns.length || !cards.length) return;
 
@@ -160,6 +162,14 @@ function initRoomTabs() {
       btn.classList.add('active');
 
       const filter = btn.getAttribute('data-room-filter');
+
+      // Manage branch header visibility
+      if (annexBar) {
+        annexBar.style.display = (filter === 'all' || filter === 'annex') ? '' : 'none';
+      }
+      if (mainBar) {
+        mainBar.style.display = (filter === 'all' || filter === 'main-room' || filter === 'main-suite') ? '' : 'none';
+      }
 
       cards.forEach(card => {
         const category = card.getAttribute('data-room-cat');
@@ -173,6 +183,238 @@ function initRoomTabs() {
           card.style.display = 'none';
         }
       });
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   Room Booking Modal with Instant Front Desk Dispatch & Paystack Flow
+   -------------------------------------------------------------------------- */
+function initRoomBookingModal() {
+  const modal = document.getElementById('roomReservationModal');
+  const closeBtn = document.getElementById('roomModalCloseBtn');
+  const form = document.getElementById('roomReservationForm');
+  const bookBtns = document.querySelectorAll('.btn-book-room');
+
+  if (!modal || !form) return;
+
+  const roomImg = document.getElementById('modalRoomImg');
+  const roomNameEl = document.getElementById('modalRoomName');
+  const roomBranchEl = document.getElementById('modalRoomBranch');
+  const roomPriceEl = document.getElementById('modalRoomPrice');
+
+  const inputRoomName = document.getElementById('bookingRoomName');
+  const inputRoomBranch = document.getElementById('bookingRoomBranch');
+  const inputRoomPrice = document.getElementById('bookingRoomPrice');
+  const inputPaystackUrl = document.getElementById('bookingPaystackUrl');
+  const inputNights = document.getElementById('bookingNights');
+  const inputTotalAmount = document.getElementById('bookingTotalAmount');
+
+  const checkinInput = document.getElementById('bookingCheckin');
+  const checkoutInput = document.getElementById('bookingCheckout');
+  const guestCountSelect = document.getElementById('bookingGuestCount');
+  const calcRateSummary = document.getElementById('calcSummaryRate');
+  const calcTotalDisplay = document.getElementById('calcTotalDisplay');
+  const waFallbackBtn = document.getElementById('bookingWaFallback');
+  const submitBtn = document.getElementById('bookingSubmitBtn');
+  const errorBox = document.getElementById('bookingFormError');
+
+  function getISODate(date) {
+    return date.toISOString().split('T')[0];
+  }
+
+  function setDefaultDates() {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    const checkinMin = getISODate(today);
+    const checkoutMin = getISODate(tomorrow);
+
+    if (checkinInput) {
+      checkinInput.min = checkinMin;
+      if (!checkinInput.value) checkinInput.value = checkinMin;
+    }
+    if (checkoutInput) {
+      checkoutInput.min = checkoutMin;
+      if (!checkoutInput.value) checkoutInput.value = checkoutMin;
+    }
+  }
+
+  function updateCostCalculation() {
+    const price = parseInt(inputRoomPrice.value, 10) || 0;
+    const checkinVal = checkinInput ? checkinInput.value : '';
+    const checkoutVal = checkoutInput ? checkoutInput.value : '';
+
+    let nights = 1;
+    if (checkinVal && checkoutVal) {
+      const d1 = new Date(checkinVal);
+      const d2 = new Date(checkoutVal);
+      const diffTime = d2 - d1;
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      nights = diffDays > 0 ? diffDays : 1;
+    }
+
+    const total = price * nights;
+    const formattedPrice = '₦' + price.toLocaleString();
+    const formattedTotal = '₦' + total.toLocaleString();
+
+    if (inputNights) inputNights.value = nights;
+    if (inputTotalAmount) inputTotalAmount.value = formattedTotal;
+
+    if (calcRateSummary) {
+      calcRateSummary.textContent = `${formattedPrice} × ${nights} Night${nights > 1 ? 's' : ''}`;
+    }
+    if (calcTotalDisplay) {
+      calcTotalDisplay.textContent = formattedTotal;
+    }
+
+    if (waFallbackBtn) {
+      const room = inputRoomName ? inputRoomName.value : 'Resort Room';
+      const branch = inputRoomBranch ? inputRoomBranch.value : 'Kelvin Cameo';
+      const waText = encodeURIComponent(
+        `Hello Kelvin Cameo Resort, I would like to book the ${room} (${branch}) from ${checkinVal} to ${checkoutVal} (${nights} night${nights > 1 ? 's' : ''}) for ${formattedTotal}. Please confirm availability.`
+      );
+      waFallbackBtn.href = `https://wa.me/2348055558197?text=${waText}`;
+    }
+  }
+
+  if (checkinInput) {
+    checkinInput.addEventListener('change', () => {
+      const d1 = new Date(checkinInput.value);
+      const nextDay = new Date(d1);
+      nextDay.setDate(nextDay.getDate() + 1);
+      const nextDayStr = getISODate(nextDay);
+      if (checkoutInput) {
+        checkoutInput.min = nextDayStr;
+        if (checkoutInput.value <= checkinInput.value) {
+          checkoutInput.value = nextDayStr;
+        }
+      }
+      updateCostCalculation();
+    });
+  }
+
+  if (checkoutInput) {
+    checkoutInput.addEventListener('change', updateCostCalculation);
+  }
+
+  function openModal(btn) {
+    const roomName = btn.getAttribute('data-room-name') || 'Resort Room';
+    const roomPrice = btn.getAttribute('data-room-price') || '25000';
+    const roomBranch = btn.getAttribute('data-room-branch') || 'Branch 01 • Main Hotel';
+    const roomImgSrc = btn.getAttribute('data-room-img') || '';
+    const paystackUrl = btn.getAttribute('data-paystack-url') || '';
+
+    if (roomNameEl) roomNameEl.textContent = roomName;
+    if (roomBranchEl) {
+      roomBranchEl.textContent = roomBranch;
+      roomBranchEl.className = 'room-modal-branch ' + (roomBranch.includes('02') || roomBranch.includes('Annex') ? 'branch-annex' : 'branch-main');
+    }
+    if (roomPriceEl) roomPriceEl.textContent = '₦' + parseInt(roomPrice, 10).toLocaleString();
+    if (roomImg && roomImgSrc) {
+      roomImg.src = roomImgSrc;
+      roomImg.alt = roomName;
+    }
+
+    if (inputRoomName) inputRoomName.value = roomName;
+    if (inputRoomBranch) inputRoomBranch.value = roomBranch;
+    if (inputRoomPrice) inputRoomPrice.value = roomPrice;
+    if (inputPaystackUrl) inputPaystackUrl.value = paystackUrl;
+
+    setDefaultDates();
+    updateCostCalculation();
+
+    if (errorBox) errorBox.style.display = 'none';
+
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  bookBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal(btn);
+    });
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+  }
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
+  // Handle Form Submit
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (errorBox) errorBox.style.display = 'none';
+
+    const originalText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" style="animation: spin 1s linear infinite; margin-right: 0.5rem; display: inline-block; vertical-align: middle;">
+        <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
+        <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path>
+      </svg>
+      <span>Connecting to Paystack...</span>
+    `;
+
+    const formData = new FormData(form);
+    formData.append('action', 'kc_room_booking');
+    if (typeof kcData !== 'undefined' && kcData.nonce) {
+      formData.append('nonce', kcData.nonce);
+    }
+
+    const ajaxUrl = (typeof kcData !== 'undefined' && kcData.ajax_url) 
+      ? kcData.ajax_url 
+      : '/wp-admin/admin-ajax.php';
+
+    fetch(ajaxUrl, {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        showToast(
+          'Reservation Logged!',
+          'Opening secure Paystack gateway to finalize booking.'
+        );
+        const redirectUrl = data.data.paystack_url || (inputPaystackUrl ? inputPaystackUrl.value : '');
+        setTimeout(() => {
+          window.location.href = redirectUrl;
+        }, 1000);
+      } else {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        if (errorBox) {
+          errorBox.textContent = data.data?.message || 'Unable to record booking. Please try again or chat via WhatsApp.';
+          errorBox.style.display = 'block';
+        }
+      }
+    })
+    .catch(err => {
+      console.warn('Booking dispatch error:', err);
+      // Fallback redirect so customer can proceed even if offline or ajax glitch
+      const fallbackUrl = (inputPaystackUrl && inputPaystackUrl.value) 
+        ? inputPaystackUrl.value 
+        : 'https://paystack.com/buy/deluxe-room-avbdle';
+      window.location.href = fallbackUrl;
     });
   });
 }
