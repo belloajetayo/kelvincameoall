@@ -578,7 +578,7 @@ get_header();
             <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20I%20want%20to%20book%20the%201000-Seat%20Banquet%20Hall%20for%20an%20event" class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener">Chat With Events Coordinator</a>
           </div>
           <div>
-            <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1000&q=80" alt="Kelvin Cameo Grand Banquet Hall Interior" style="width:100%; height:440px; object-fit:cover; border-radius:var(--radius-lg); box-shadow:0 20px 40px rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.15);">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/banquet-hall.jpg' ); ?>" alt="Kelvin Cameo Grand Banquet Hall Interior" style="width:100%; height:440px; object-fit:cover; border-radius:var(--radius-lg); box-shadow:0 20px 40px rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.15);" loading="lazy">
           </div>
         </div>
 
