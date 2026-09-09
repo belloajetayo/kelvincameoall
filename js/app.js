@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileDrawer();
   initSubsidiaryTabs();
   initRoomTabs();
+  initSuiteTrackSliders();
   initRoomBookingModal();
   initBookingWidget();
   initModalActions();
