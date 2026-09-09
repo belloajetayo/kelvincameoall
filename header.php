@@ -10,7 +10,8 @@
 <head>
   <meta charset="<?php bloginfo( 'charset' ); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/svg+xml" href="<?php echo esc_url( get_template_directory_uri() . '/assets/logo.svg' ); ?>">
+  <link rel="icon" type="image/png" href="<?php echo esc_url( get_template_directory_uri() . '/assets/favicon.png' ); ?>">
+  <link rel="apple-touch-icon" href="<?php echo esc_url( get_template_directory_uri() . '/assets/logo-emblem.png' ); ?>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <?php wp_head(); ?>
@@ -57,19 +58,12 @@
   <header class="site-header">
     <div class="container container-wide">
       <nav class="navbar" aria-label="Main Navigation">
-        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="brand-logo-wrap">
+        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="brand-logo-wrap" title="Kelvin Cameo (RC: 1613032)">
           <div class="brand-emblem-badge" aria-label="Kelvin Cameo Brand Emblem">
-            <svg viewBox="0 0 100 100" width="32" height="32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="6" y="6" width="88" height="88" rx="22" fill="#0284c7"/>
-              <circle cx="50" cy="50" r="38" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.85"/>
-              <path d="M30 24 H39 V76 H30 Z" fill="#ffffff"/>
-              <path d="M39 48 L62 24 H74 L50 51 Z" fill="#f59e0b"/>
-              <path d="M46 47 L72 76 H60 L39 52 Z" fill="#bae6fd"/>
-              <path d="M72 35 C66 26 56 24 48 24 C34 24 25 36 25 50 C25 64 34 76 48 76 C57 76 66 73 72 65" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" opacity="0.35"/>
-            </svg>
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/logo-emblem.png' ); ?>" alt="Kelvin Cameo Monogram" class="brand-emblem-img" width="46" height="46" />
           </div>
           <div class="brand-text-block">
-            <span class="brand-title">KELVIN <span>CAMEO</span></span>
+            <span class="brand-title">KELVIN <span style="color:var(--orange-500);">CAMEO</span></span>
             <span class="brand-subtitle">RC: 1613032 • NIGERIAN MULTI-INDUSTRY</span>
           </div>
         </a>
