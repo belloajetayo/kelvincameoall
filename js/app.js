@@ -154,6 +154,8 @@ function initRoomTabs() {
   const cards = document.querySelectorAll('.suite-card');
   const annexBar = document.querySelector('.branch-section-bar.annex-bar');
   const mainBar = document.querySelector('.branch-section-bar.main-bar');
+  const mainTrack = document.getElementById('mainHotelTrack');
+  const annexTrack = document.getElementById('annexTrack');
 
   if (!tabBtns.length || !cards.length) return;
 
@@ -164,17 +166,30 @@ function initRoomTabs() {
 
       const filter = btn.getAttribute('data-room-filter');
 
-      // Manage branch header visibility
-      if (annexBar) {
-        annexBar.style.display = (filter === 'all' || filter === 'annex') ? '' : 'none';
-      }
-      if (mainBar) {
-        mainBar.style.display = (filter === 'all' || filter === 'main-room' || filter === 'main-suite') ? '' : 'none';
-      }
+      // Manage branch header and track visibility
+      const showMain = (filter === 'all' || filter === 'main' || filter === 'main-room' || filter === 'main-suite');
+      const showAnnex = (filter === 'all' || filter === 'annex');
+
+      if (mainBar) mainBar.style.display = showMain ? '' : 'none';
+      if (mainTrack) mainTrack.style.display = showMain ? '' : 'none';
+
+      if (annexBar) annexBar.style.display = showAnnex ? '' : 'none';
+      if (annexTrack) annexTrack.style.display = showAnnex ? '' : 'none';
 
       cards.forEach(card => {
         const category = card.getAttribute('data-room-cat');
-        if (filter === 'all' || category === filter) {
+        let matches = false;
+        if (filter === 'all') {
+          matches = true;
+        } else if (filter === 'main' && (category === 'main' || category === 'main-room' || category === 'main-suite')) {
+          matches = true;
+        } else if (filter === 'annex' && category === 'annex') {
+          matches = true;
+        } else if (category === filter) {
+          matches = true;
+        }
+
+        if (matches) {
           card.style.display = '';
           card.style.opacity = '0';
           setTimeout(() => {
@@ -184,6 +199,32 @@ function initRoomTabs() {
           card.style.display = 'none';
         }
       });
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   Horizontal Suite Track Navigation (Arrows & Drag/Scroll)
+   -------------------------------------------------------------------------- */
+function initSuiteTrackSliders() {
+  const navBtns = document.querySelectorAll('.slider-nav-btn');
+  if (!navBtns.length) return;
+
+  navBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-target');
+      const track = document.getElementById(targetId);
+      if (!track) return;
+
+      const firstCard = track.querySelector('.suite-card');
+      const cardWidth = firstCard ? firstCard.offsetWidth : 360;
+      const scrollStep = cardWidth + 28; // card width + gap
+
+      if (btn.classList.contains('prev-btn')) {
+        track.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+      } else {
+        track.scrollBy({ left: scrollStep, behavior: 'smooth' });
+      }
     });
   });
 }
