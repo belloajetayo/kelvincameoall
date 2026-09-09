@@ -321,29 +321,8 @@ get_header();
           </div>
         </article>
 
-      </div>
 
-      <!-- Branch 02 Section Indicator (The Annex Second) -->
-      <div class="branch-section-bar annex-bar">
-        <div class="branch-bar-title-group">
-          <span class="branch-pill annex">Branch 02</span>
-          <div>
-            <h3 class="branch-bar-heading">The Annex Branch — Executive, Deluxe Rooms & Royal Treat Suite</h3>
-            <p class="branch-bar-sub">Affordable business comfort, quiet residential privacy, and modern executive amenities from ₦25,000/night.</p>
-          </div>
-        </div>
-        <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
-          <span class="slider-hint-pill">⟵ Scroll to select ⟶</span>
-          <div class="slider-controls">
-            <button type="button" class="slider-nav-btn prev-btn" data-target="annexTrack" aria-label="Previous room">‹</button>
-            <button type="button" class="slider-nav-btn next-btn" data-target="annexTrack" aria-label="Next room">›</button>
-          </div>
-          <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20I%20want%20to%20inquire%20about%20staying%20at%20The%20Annex%20Branch" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Inquire The Annex</a>
-        </div>
-      </div>
 
-      <!-- The Annex Horizontal Scroll Track -->
-      <div class="suites-scroll-track" id="annexTrack">
 
         <!-- 1. Deluxe Room (Annex) -->
         <article class="suite-card" data-room-cat="annex">
