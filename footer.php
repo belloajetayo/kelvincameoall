@@ -11,19 +11,13 @@
     <div class="container container-wide">
       <div class="footer-top-grid">
         <div class="footer-brand-col">
-          <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1.25rem;">
-            <div class="brand-emblem-badge" style="width:40px; height:40px;" aria-label="Kelvin Cameo Logo">
-              <svg viewBox="0 0 100 100" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="6" y="6" width="88" height="88" rx="22" fill="#0284c7"/>
-                <circle cx="50" cy="50" r="38" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.85"/>
-                <path d="M30 24 H39 V76 H30 Z" fill="#ffffff"/>
-                <path d="M39 48 L62 24 H74 L50 51 Z" fill="#f59e0b"/>
-                <path d="M46 47 L72 76 H60 L39 52 Z" fill="#bae6fd"/>
-              </svg>
+          <div style="display:flex; align-items:center; gap:0.85rem; margin-bottom:1.25rem;">
+            <div class="brand-emblem-badge" style="width:48px; height:48px; border-radius:13px; background:#ffffff; box-shadow:0 4px 14px rgba(0,0,0,0.25);" aria-label="Kelvin Cameo Logo">
+              <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/logo-emblem.png' ); ?>" alt="Kelvin Cameo Monogram" style="width:100%; height:100%; object-fit:cover; border-radius:11px;" />
             </div>
             <div>
-              <h4 style="font-family:var(--font-display); font-size:1.15rem; font-weight:800; color:var(--white); margin:0;">KELVIN CAMEO</h4>
-              <span style="font-size:0.7rem; color:#bae6fd; font-weight:700;">RC: 1613032 • CONGLOMERATE</span>
+              <h4 style="font-family:var(--font-display); font-size:1.15rem; font-weight:800; color:var(--white); margin:0;">KELVIN <span style="color:var(--orange-400);">CAMEO</span></h4>
+              <span style="font-size:0.7rem; color:#bad7fc; font-weight:700; letter-spacing:0.04em;">RC: 1613032 • CONGLOMERATE</span>
             </div>
           </div>
           <p class="footer-bio">
