@@ -3633,3 +3633,378 @@ ul, ol {
   }
 }
 
+/* ==========================================================================
+   Hero Moving Exterior Background Slideshow
+   ========================================================================== */
+.hero-moving-bg-slider {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hero-bg-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1);
+  transition: opacity 1.8s ease-in-out;
+  will-change: transform, opacity;
+}
+.hero-bg-slide.active {
+  opacity: 1;
+  animation: heroKenBurns 14s infinite alternate ease-in-out;
+}
+@keyframes heroKenBurns {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.08) translate(-1.5%, -1%); }
+}
+.hero-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(4, 20, 43, 0.88) 0%, rgba(7, 34, 71, 0.80) 45%, rgba(11, 78, 162, 0.72) 100%),
+              radial-gradient(circle at 80% 20%, rgba(234, 88, 12, 0.35) 0%, transparent 50%);
+  z-index: 1;
+}
+
+/* ==========================================================================
+   5-Point Luxury Resort Guarantee Bar
+   ========================================================================== */
+.resort-guarantee-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0 2.5rem;
+}
+.guarantee-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background: var(--white);
+  padding: 0.9rem 1.15rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--slate-200);
+  box-shadow: 0 4px 12px rgba(4, 20, 43, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.guarantee-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(4, 20, 43, 0.08);
+}
+.guarantee-pill .pill-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--sand-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.guarantee-pill strong {
+  display: block;
+  font-size: 0.88rem;
+  color: var(--navy-900);
+  font-weight: 700;
+  line-height: 1.25;
+}
+.guarantee-pill span {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--slate-500);
+  line-height: 1.2;
+}
+
+/* ==========================================================================
+   Card Media Micro-Slider (Multiple Photos Support)
+   ========================================================================== */
+.card-media-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.card-media-slides {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.card-media-slides img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out, transform 0.5s ease;
+  pointer-events: none;
+}
+.card-media-slides img.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.suite-card:hover .card-media-slides img.active {
+  transform: scale(1.05);
+}
+.card-media-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(4, 20, 43, 0.7);
+  color: #ffffff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  cursor: pointer;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 0.2s ease, background 0.2s ease;
+}
+.card-media-nav:hover {
+  background: var(--orange-500);
+}
+.card-media-nav.prev {
+  left: 8px;
+}
+.card-media-nav.next {
+  right: 8px;
+}
+.suite-card:hover .card-media-nav {
+  opacity: 1;
+}
+@media (hover: none) {
+  .card-media-nav {
+    opacity: 0.85;
+  }
+}
+.card-media-dots {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  z-index: 4;
+}
+.card-media-dots .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transition: background 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.card-media-dots .dot.active {
+  background: var(--orange-500);
+  transform: scale(1.3);
+}
+.card-media-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(4, 20, 43, 0.75);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  z-index: 3;
+  pointer-events: none;
+  letter-spacing: 0.02em;
+}
+
+/* ==========================================================================
+   Continuous Moving Resort Gallery
+   ========================================================================== */
+.moving-gallery-section {
+  position: relative;
+  overflow: hidden;
+}
+.moving-gallery-controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.gallery-motion-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+.motion-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  display: inline-block;
+  margin-right: 5px;
+}
+.motion-dot.paused {
+  background: #ef4444;
+}
+.moving-gallery-viewport {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 0.5rem 0 1.5rem;
+  mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 4%, black 96%, transparent);
+}
+.moving-gallery-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  animation: galleryMarquee 42s linear infinite;
+  will-change: transform;
+}
+.moving-gallery-viewport:hover .moving-gallery-track {
+  animation-play-state: paused;
+}
+.moving-gallery-viewport.is-paused .moving-gallery-track {
+  animation-play-state: paused;
+}
+@keyframes galleryMarquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+.moving-gallery-item {
+  position: relative;
+  width: 320px;
+  height: 380px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 10px 25px rgba(4, 20, 43, 0.12);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.moving-gallery-item:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 16px 36px rgba(4, 20, 43, 0.22);
+}
+.moving-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+.moving-gallery-item:hover img {
+  transform: scale(1.08);
+}
+.moving-gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(4, 20, 43, 0.92) 0%, rgba(4, 20, 43, 0.3) 55%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  color: var(--white);
+  transition: background 0.3s ease;
+}
+.moving-gallery-item:hover .moving-gallery-overlay {
+  background: linear-gradient(to top, rgba(4, 20, 43, 0.96) 0%, rgba(4, 20, 43, 0.4) 60%, transparent 100%);
+}
+.moving-gallery-badge {
+  display: inline-block;
+  align-self: flex-start;
+  background: var(--orange-500);
+  color: var(--white);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  margin-bottom: 0.4rem;
+}
+.moving-gallery-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 0.35rem;
+}
+.moving-gallery-desc {
+  font-size: 0.8rem;
+  color: var(--slate-300);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Lightbox Modal */
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 20, 43, 0.92);
+  backdrop-filter: blur(8px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  padding: 1.5rem;
+}
+.gallery-lightbox.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.gallery-lightbox-content {
+  position: relative;
+  max-width: 960px;
+  width: 100%;
+  background: var(--navy-950);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+}
+.gallery-lightbox-img {
+  width: 100%;
+  max-height: 70vh;
+  object-fit: cover;
+  display: block;
+}
+.gallery-lightbox-caption {
+  padding: 1.25rem 1.75rem;
+  background: var(--navy-900);
+}
+.gallery-lightbox-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  border: none;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s;
+}
+.gallery-lightbox-close:hover {
+  background: var(--orange-500);
+}
+
