@@ -439,18 +439,20 @@ get_header();
         </p>
       </div>
 
-      <!-- Quick Logo Strip -->
-      <div class="partners-logo-row" style="margin-bottom: 3.5rem;">
+      <!-- Sleek Trust & Alliances Grid (Compact 6-Partner Grid) -->
+      <div class="partners-logo-row" style="margin-bottom: 2.25rem;">
+        <!-- 1. CCCRN -->
         <div class="partner-logo-item">
           <div class="partner-logo-icon" style="background: rgba(15,76,129,0.12); color: var(--resort-sapphire);">
             CC
           </div>
           <div class="partner-logo-text">
             <span class="partner-logo-name">CCCRN Nigeria</span>
-            <span class="partner-logo-sub">Clinical Research & Health NGO</span>
+            <span class="partner-logo-sub">Healthcare Research & Conferences</span>
           </div>
         </div>
 
+        <!-- 2. IMKash Group -->
         <div class="partner-logo-item">
           <div class="partner-logo-icon" style="background: rgba(201,154,69,0.15); color: var(--estate-gold);">
             IMK
@@ -461,19 +463,21 @@ get_header();
           </div>
         </div>
 
+        <!-- 3. NMDPRA -->
         <div class="partner-logo-item">
           <div class="partner-logo-icon" style="background: rgba(242,92,5,0.15); color: var(--energy-orange);">
             NM
           </div>
           <div class="partner-logo-text">
             <span class="partner-logo-name">NMDPRA</span>
-            <span class="partner-logo-sub">Midstream & Downstream Authority</span>
+            <span class="partner-logo-sub">Downstream Petroleum Authority</span>
           </div>
         </div>
 
+        <!-- 4. REDAN -->
         <div class="partner-logo-item">
           <div class="partner-logo-icon" style="background: rgba(16,185,129,0.15); color: var(--agro-emerald);">
-            RED
+            RE
           </div>
           <div class="partner-logo-text">
             <span class="partner-logo-name">REDAN</span>
@@ -481,174 +485,33 @@ get_header();
           </div>
         </div>
 
+        <!-- 5. Bank of Agriculture -->
         <div class="partner-logo-item">
           <div class="partner-logo-icon" style="background: rgba(16,185,129,0.15); color: var(--agro-emerald);">
             BOA
           </div>
           <div class="partner-logo-text">
             <span class="partner-logo-name">Bank of Agriculture</span>
-            <span class="partner-logo-sub">Agro Credit & Off-Take</span>
+            <span class="partner-logo-sub">Agribusiness & Off-Take Alliance</span>
+          </div>
+        </div>
+
+        <!-- 6. Corporate Clients -->
+        <div class="partner-logo-item">
+          <div class="partner-logo-icon" style="background: rgba(29,79,138,0.15); color: var(--navy-800);">
+            CB
+          </div>
+          <div class="partner-logo-text">
+            <span class="partner-logo-name">Corporate & Banking Clients</span>
+            <span class="partner-logo-sub">Banking, FMCG & Government Summits</span>
           </div>
         </div>
       </div>
 
-      <!-- Detailed Partner Cards Grid -->
-      <div class="partners-cards-grid">
-        <!-- Partner 1: CCCRN -->
-        <article class="partner-card">
-          <div>
-            <div class="partner-card-header">
-              <div class="partner-card-brand">
-                <div class="partner-avatar" style="background: linear-gradient(135deg, #0f4c81, #0a2540); color: var(--white);">
-                  CC
-                </div>
-                <div>
-                  <h3 class="partner-card-title">CCCRN</h3>
-                  <span class="partner-card-sector">Healthcare Research & Conferences</span>
-                </div>
-              </div>
-              <span class="rc-badge" style="font-size:0.65rem;">Hospitality Client</span>
-            </div>
-            <p class="partner-card-desc">
-              Centre for Clinical Care & Clinical Research Nigeria (CCCRN) partners with Kelvin Cameo Resort Hotel to host high-level clinical health workshops, regional medical symposia, and executive retreat accommodations.
-            </p>
-          </div>
-          <div class="partner-card-tags">
-            <span class="partner-tag">1,000-Seat Banquet Hall</span>
-            <span class="partner-tag">Executive Suites</span>
-            <span class="partner-tag">Medical Summits</span>
-          </div>
-        </article>
-
-        <!-- Partner 2: IMKash Group -->
-        <article class="partner-card">
-          <div>
-            <div class="partner-card-header">
-              <div class="partner-card-brand">
-                <div class="partner-avatar" style="background: linear-gradient(135deg, #c99a45, #7a5814); color: var(--white);">
-                  IMK
-                </div>
-                <div>
-                  <h3 class="partner-card-title">IMKash Group</h3>
-                  <span class="partner-card-sector">Enterprise & Investment Alliance</span>
-                </div>
-              </div>
-              <span class="rc-badge" style="font-size:0.65rem;">Conglomerate Partner</span>
-            </div>
-            <p class="partner-card-desc">
-              A diversified corporate capital and conglomerate partner collaborating with Kelvin Cameo on multi-sector expansion, commercial infrastructure development, strategic investments, and executive best practices.
-            </p>
-          </div>
-          <div class="partner-card-tags">
-            <span class="partner-tag">Strategic Capital</span>
-            <span class="partner-tag">Real Estate Expansion</span>
-            <span class="partner-tag">Energy Logistics</span>
-          </div>
-        </article>
-
-        <!-- Partner 3: NMDPRA Compliance -->
-        <article class="partner-card">
-          <div>
-            <div class="partner-card-header">
-              <div class="partner-card-brand">
-                <div class="partner-avatar" style="background: linear-gradient(135deg, #ea580c, #9a3412); color: var(--white);">
-                  NM
-                </div>
-                <div>
-                  <h3 class="partner-card-title">NMDPRA</h3>
-                  <span class="partner-card-sector">Downstream Petroleum Authority</span>
-                </div>
-              </div>
-              <span class="rc-badge" style="font-size:0.65rem;">Statutory Authority</span>
-            </div>
-            <p class="partner-card-desc">
-              Statutory regulatory alliance with the Nigerian Midstream and Downstream Petroleum Regulatory Authority ensuring full calibration accuracy, safety protocols, and retail licensing across all Kelvin Cameo Energy stations.
-            </p>
-          </div>
-          <div class="partner-card-tags">
-            <span class="partner-tag">PMS & AGO Dispensing</span>
-            <span class="partner-tag">LPG Skid Licensing</span>
-            <span class="partner-tag">Safety Standards</span>
-          </div>
-        </article>
-
-        <!-- Partner 4: REDAN -->
-        <article class="partner-card">
-          <div>
-            <div class="partner-card-header">
-              <div class="partner-card-brand">
-                <div class="partner-avatar" style="background: linear-gradient(135deg, #dfb25e, #a87820); color: var(--white);">
-                  RE
-                </div>
-                <div>
-                  <h3 class="partner-card-title">REDAN</h3>
-                  <span class="partner-card-sector">Real Estate Developers Association</span>
-                </div>
-              </div>
-              <span class="rc-badge" style="font-size:0.65rem;">Industry Body</span>
-            </div>
-            <p class="partner-card-desc">
-              Real Estate Developers Association of Nigeria affiliate ensuring all Kelvin Cameo Real Estate layouts, residential communities, and commercial highway plots strictly conform to approved urban engineering standards.
-            </p>
-          </div>
-          <div class="partner-card-tags">
-            <span class="partner-tag">Verified Titles (C of O)</span>
-            <span class="partner-tag">Master-Planned Layouts</span>
-            <span class="partner-tag">Highway Commercial</span>
-          </div>
-        </article>
-
-        <!-- Partner 5: Bank of Agriculture & Off-Takers -->
-        <article class="partner-card">
-          <div>
-            <div class="partner-card-header">
-              <div class="partner-card-brand">
-                <div class="partner-avatar" style="background: linear-gradient(135deg, #059669, #064e3b); color: var(--white);">
-                  BOA
-                </div>
-                <div>
-                  <h3 class="partner-card-title">Bank of Agriculture</h3>
-                  <span class="partner-card-sector">Agribusiness & Off-Take Alliance</span>
-                </div>
-              </div>
-              <span class="rc-badge" style="font-size:0.65rem;">Agro Network</span>
-            </div>
-            <p class="partner-card-desc">
-              Institutional agricultural financing and commercial off-take partnerships enabling 2,500+ hectares of crop farming, modern storage silos, and input subsidies for 1,500+ rural outgrowers in host communities.
-            </p>
-          </div>
-          <div class="partner-card-tags">
-            <span class="partner-tag">Mechanized Tractorization</span>
-            <span class="partner-tag">Grain Silo Reserves</span>
-            <span class="partner-tag">Outgrower Scheme</span>
-          </div>
-        </article>
-
-        <!-- Partner 6: Commercial Banks & Corporate Clients -->
-        <article class="partner-card">
-          <div>
-            <div class="partner-card-header">
-              <div class="partner-card-brand">
-                <div class="partner-avatar" style="background: linear-gradient(135deg, #1d4f8a, #040d1a); color: var(--white);">
-                  CB
-                </div>
-                <div>
-                  <h3 class="partner-card-title">Corporate Clients</h3>
-                  <span class="partner-card-sector">Banking, FMCG & Government Summits</span>
-                </div>
-              </div>
-              <span class="rc-badge" style="font-size:0.65rem;">Banquet & Stays</span>
-            </div>
-            <p class="partner-card-desc">
-              Tier-1 financial institutions, federal agencies, and FMCG brands partnering with Kelvin Cameo for corporate executive accommodation, regional AGMs, product launches, and secure transit hospitality along the Abuja corridor.
-            </p>
-          </div>
-          <div class="partner-card-tags">
-            <span class="partner-tag">Corporate AGMs</span>
-            <span class="partner-tag">VIP Delegations</span>
-            <span class="partner-tag">24/7 Power & Security</span>
-          </div>
-        </article>
+      <div style="text-align: center;">
+        <a href="<?php echo kc_url('about'); ?>#partners" class="btn btn-navy btn-sm">
+          Learn More About Our Institutional Alliances →
+        </a>
       </div>
     </div>
   </section>
