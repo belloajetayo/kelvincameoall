@@ -1072,7 +1072,7 @@ get_header();
                   Abuja–Kaduna Expressway Corridor, Suleja, Niger State (Pool, Banquet Hall, Dining).
                 </div>
                 <div>
-                  <strong style="#0284c7;">• Branch 02 (The Annex):</strong> 
+                  <strong style="color:#0284c7;">• Branch 02 (The Annex):</strong> 
                   Executive Residential Quarter, Suleja, Niger State (Deluxe Rooms & Royal Treat Suite).
                 </div>
                 <div>
