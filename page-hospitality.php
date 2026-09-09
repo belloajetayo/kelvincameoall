@@ -91,45 +91,84 @@ get_header();
     </div>
   </section>
 
-  <!-- Rooms & Accommodation Section (Segmented: Branch 01 Main Hotel vs Branch 02 The Annex) -->
+    <!-- Rooms & Accommodation Section (Segmented: Branch 01 Main Hotel vs Branch 02 The Annex) -->
   <section id="rooms" class="section-padding" style="background:var(--sand-50);">
     <div class="container">
-      <div class="section-head" style="text-align:center; max-width:780px; margin:0 auto;">
-        <span class="section-badge" style="background:rgba(242,92,5,0.15); color:var(--orange-600);">Two Distinctive Hospitality Branches</span>
-        <h2 class="section-title">Rooms, Luxury Suites & Residences</h2>
+      <div class="section-head" style="text-align:center; max-width:820px; margin:0 auto 2rem;">
+        <span class="section-badge" style="background:rgba(234,88,12,0.12); color:var(--orange-600); border:1px solid rgba(234,88,12,0.25);">
+          ⭐ Handcrafted Hospitality • 10 Boutique Accommodations
+        </span>
+        <h2 class="section-title">Curated Suites, Executive Living & Presidential Residences</h2>
         <p class="section-subtitle">
-          Experience premium hospitality tailored to your budget and travel style across our two properties: <strong>Branch 01 (Main Hotel)</strong> and <strong>Branch 02 (The Annex)</strong>. Every room features plush orthopedic bedding, high-speed fiber Wi-Fi, split air conditioning, smart entertainment, and 24/7 uninterrupted power.
+          Experience five-star serenity along the Abuja–Kaduna highway corridor. Select between the grand vibrancy of <strong>Branch 01 (Main Hotel)</strong> — featuring our 1,000-seat grand banquet auditorium, resort swimming pool, cocktail lounge, and luxury serviced apartments — and the discreet, secluded comfort of <strong>Branch 02 (The Annex)</strong>, curated for undisturbed executive focus, corporate privacy, and tranquil overnight stays.
         </p>
       </div>
 
-      <!-- Rooms Catalogue Toolbar with Tabs & Controls -->
-      <div class="rooms-catalog-toolbar">
-        <div class="filter-tabs-wrapper room-tabs" style="margin:0;">
-          <button type="button" class="tab-btn tab-resort active" data-room-filter="all">All Accommodations (10)</button>
-          <button type="button" class="tab-btn tab-resort" data-room-filter="main">Branch 01: Main Hotel (5)</button>
-          <button type="button" class="tab-btn tab-resort" data-room-filter="annex">Branch 02: The Annex (5)</button>
+      <!-- 5-Point Luxury Resort Guarantee Bar -->
+      <div class="resort-guarantee-bar">
+        <div class="guarantee-pill">
+          <span class="pill-icon">⚡</span>
+          <div><strong>24/7 Guaranteed Power</strong><span>Dual 250kVA Standby Plant</span></div>
         </div>
-
-        <div class="rooms-catalog-controls">
-          <span class="slider-hint-pill">👉 Scroll / Swipe Right ⟶</span>
-          <button type="button" class="slider-nav-btn prev-btn" id="roomCatalogPrevBtn" data-target="roomsScrollTrack" aria-label="Previous room">‹</button>
-          <button type="button" class="slider-nav-btn next-btn" id="roomCatalogNextBtn" data-target="roomsScrollTrack" aria-label="Next room">›</button>
+        <div class="guarantee-pill">
+          <span class="pill-icon">🛏️</span>
+          <div><strong>Orthopedic Rest</strong><span>High-Thread Egyptian Cotton</span></div>
+        </div>
+        <div class="guarantee-pill">
+          <span class="pill-icon">📶</span>
+          <div><strong>Fiber Optic Wi-Fi</strong><span>Dedicated High-Speed Bandwidth</span></div>
+        </div>
+        <div class="guarantee-pill">
+          <span class="pill-icon">❄️</span>
+          <div><strong>Whisper Split A/C</strong><span>Individual Climate Control</span></div>
+        </div>
+        <div class="guarantee-pill">
+          <span class="pill-icon">🛡️</span>
+          <div><strong>24/7 Guarded Compound</strong><span>Armed Security & 200+ Parking</span></div>
         </div>
       </div>
 
-      <!-- Unified Horizontal Rooms Catalogue Wrapper -->
-      <div class="rooms-slider-wrapper">
-        <button type="button" class="track-floating-btn prev" id="floatPrevBtn" aria-label="Scroll left">‹</button>
-        <button type="button" class="track-floating-btn next" id="floatNextBtn" aria-label="Scroll right">›</button>
+      <!-- Accommodation Filter Tabs -->
+      <div class="filter-tabs-wrapper room-tabs" style="margin: 2rem 0 2.5rem;">
+        <button type="button" class="tab-btn tab-resort active" data-room-filter="all">All Accommodations (10)</button>
+        <button type="button" class="tab-btn tab-resort" data-room-filter="main">Branch 01: Main Hotel (5)</button>
+        <button type="button" class="tab-btn tab-resort" data-room-filter="annex">Branch 02: The Annex (5)</button>
+      </div>
 
-        <!-- Continuous Horizontal Scroll Track -->
-        <div class="suites-scroll-track" id="roomsScrollTrack">
+      <!-- ====================================================================
+           BRANCH 01: MAIN HOTEL (Strictly Listed First)
+           ==================================================================== -->
+      <div class="branch-section-bar main-bar" data-branch-group="main">
+        <div class="branch-bar-title-group">
+          <span class="branch-pill main">Branch 01</span>
+          <div>
+            <h3 class="branch-bar-heading">Main Hotel — Luxury Rooms, Boutique Suites & Serviced Residences</h3>
+            <p class="branch-bar-sub">Direct access to the swimming pool, gourmet restaurant, cocktail bar, and the 1,000-seat grand banquet auditorium.</p>
+          </div>
+        </div>
+        <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20I%20want%20to%20inquire%20about%20staying%20at%20Branch%2001%20Main%20Hotel" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Inquire Main Hotel</a>
+      </div>
 
-        <!-- 1. Love Night Room (Main Hotel) -->
+      <!-- Main Hotel Suites Grid (Cards 1–5) -->
+      <div class="suites-grid" data-branch-grid="main">
+
+        <!-- 1. Love Night Room (Main Hotel - Authentic Photo) -->
         <article class="suite-card" data-room-cat="main">
           <div class="suite-card-media">
             <span class="suite-branch-badge branch-main">Branch 01 • Main Hotel</span>
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/single-room.jpg' ); ?>" alt="Love Night Room at Kelvin Cameo Resort Hotel" loading="lazy">
+            <div class="card-media-slider">
+              <div class="card-media-slides">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/love-night-room.jpg' ); ?>" alt="Love Night Room at Kelvin Cameo Resort Hotel" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/single-room.jpg' ); ?>" alt="Love Night Room Suite Interior" loading="lazy">
+              </div>
+              <button type="button" class="card-media-nav prev" aria-label="Previous photo">‹</button>
+              <button type="button" class="card-media-nav next" aria-label="Next photo">›</button>
+              <div class="card-media-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+              </div>
+              <span class="card-media-badge">📷 2 Photos</span>
+            </div>
           </div>
           <div class="suite-card-body">
             <div>
@@ -155,7 +194,7 @@ get_header();
                   data-room-name="Love Night Room"
                   data-room-price="50000"
                   data-room-branch="Branch 01 • Main Hotel"
-                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/single-room.jpg' ); ?>"
+                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/love-night-room.jpg' ); ?>"
                   data-paystack-url="https://paystack.com/buy/love-night-hdtfxs">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
@@ -166,42 +205,54 @@ get_header();
           </div>
         </article>
 
-        <!-- 2. Golden Nest Room (Main Hotel) -->
+        <!-- 2. Golden Nest Room (Main Hotel - Authentic Photo) -->
         <article class="suite-card" data-room-cat="main">
           <div class="suite-card-media">
             <span class="suite-branch-badge branch-main">Branch 01 • Main Hotel</span>
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-purple.jpg' ); ?>" alt="Golden Nest Room at Kelvin Cameo Resort Hotel" loading="lazy">
+            <div class="card-media-slider">
+              <div class="card-media-slides">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/golden-nest-room.jpg' ); ?>" alt="Golden Nest Room at Kelvin Cameo Resort Hotel" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-purple.jpg' ); ?>" alt="Golden Nest Room Ambience" loading="lazy">
+              </div>
+              <button type="button" class="card-media-nav prev" aria-label="Previous photo">‹</button>
+              <button type="button" class="card-media-nav next" aria-label="Next photo">›</button>
+              <div class="card-media-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+              </div>
+              <span class="card-media-badge">📷 2 Photos</span>
+            </div>
           </div>
           <div class="suite-card-body">
             <div>
-              <span class="suite-category-label">Signature Luxury Room</span>
+              <span class="suite-category-label">Warm Executive Sanctuary</span>
               <h3 class="suite-name">Golden Nest Room</h3>
               <p class="suite-desc">
-                Warm amber finishes, custom velvet ribbed headboard, bedside ambient sconces, executive armchair, carpeted floor, and full split-unit air conditioning.
+                Enriched with warm golden undertones, custom acoustic drapery, premium orthopedic king mattress, high-definition satellite TV, and executive workspace.
               </p>
               <div class="suite-amenities-row">
-                <span class="suite-amenity-tag">Ambient Sconces</span>
-                <span class="suite-amenity-tag">Lounge Chair</span>
-                <span class="suite-amenity-tag">Split AC</span>
-                <span class="suite-amenity-tag">Intercom</span>
+                <span class="suite-amenity-tag">King Bed</span>
+                <span class="suite-amenity-tag">Satellite TV</span>
+                <span class="suite-amenity-tag">Work Desk</span>
+                <span class="suite-amenity-tag">Fiber Wi-Fi</span>
               </div>
             </div>
             <div class="suite-footer">
               <div class="suite-price-block">
                 <span class="suite-price-currency">Tariff Per Night</span>
-                <div class="suite-price-amount">₦60,000<span>/night</span></div>
+                <div class="suite-price-amount">₦50,000<span>/night</span></div>
               </div>
               <div class="suite-action-btns">
                 <button type="button" class="btn btn-primary btn-sm btn-book-room" 
                   data-room-name="Golden Nest Room"
-                  data-room-price="60000"
+                  data-room-price="50000"
                   data-room-branch="Branch 01 • Main Hotel"
-                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-purple.jpg' ); ?>"
+                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/golden-nest-room.jpg' ); ?>"
                   data-paystack-url="https://paystack.com/buy/golden-nest-ugswqe">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
                 </button>
-                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Golden%20Nest%20Room%20(60k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
+                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Golden%20Nest%20Room%20(50k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
               </div>
             </div>
           </div>
@@ -211,38 +262,50 @@ get_header();
         <article class="suite-card" data-room-cat="main">
           <div class="suite-card-media">
             <span class="suite-branch-badge branch-main">Branch 01 • Main Hotel</span>
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-hall.jpg' ); ?>" alt="Blissful Breeze Suite at Kelvin Cameo Resort" loading="lazy">
+            <div class="card-media-slider">
+              <div class="card-media-slides">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-purple.jpg' ); ?>" alt="Blissful Breeze Suite at Kelvin Cameo Resort" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/suite-lounge.jpg' ); ?>" alt="Blissful Breeze Lounge Area" loading="lazy">
+              </div>
+              <button type="button" class="card-media-nav prev" aria-label="Previous photo">‹</button>
+              <button type="button" class="card-media-nav next" aria-label="Next photo">›</button>
+              <div class="card-media-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+              </div>
+              <span class="card-media-badge">📷 2 Photos</span>
+            </div>
           </div>
           <div class="suite-card-body">
             <div>
-              <span class="suite-category-label">Terrace Penthouse Suite</span>
+              <span class="suite-category-label">Boutique Luxury Suite</span>
               <h3 class="suite-name">Blissful Breeze Suite</h3>
               <p class="suite-desc">
-                Positioned on the highest floor with an expansive private terrace overlooking the resort courtyard and pool. Pure aeration, natural light, and unmatched serenity.
+                Spacious boutique suite commanding courtyard views. Features a private foyer, oversized king bed, executive lounge armchair, minibar fridge, and spa-inspired bath.
               </p>
               <div class="suite-amenities-row">
-                <span class="suite-amenity-tag">Private Balcony</span>
-                <span class="suite-amenity-tag">Poolside View</span>
-                <span class="suite-amenity-tag">Jacuzzi Bath</span>
-                <span class="suite-amenity-tag">Espresso Bar</span>
+                <span class="suite-amenity-tag">Courtyard View</span>
+                <span class="suite-amenity-tag">Minibar</span>
+                <span class="suite-amenity-tag">Lounge Seating</span>
+                <span class="suite-amenity-tag">Spa Bath</span>
               </div>
             </div>
             <div class="suite-footer">
               <div class="suite-price-block">
                 <span class="suite-price-currency">Tariff Per Night</span>
-                <div class="suite-price-amount">₦75,000<span>/night</span></div>
+                <div class="suite-price-amount">₦60,000<span>/night</span></div>
               </div>
               <div class="suite-action-btns">
                 <button type="button" class="btn btn-primary btn-sm btn-book-room" 
                   data-room-name="Blissful Breeze Suite"
-                  data-room-price="75000"
+                  data-room-price="60000"
                   data-room-branch="Branch 01 • Main Hotel"
-                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-hall.jpg' ); ?>"
-                  data-paystack-url="https://paystack.com/buy/blissful-breeze-aqlhld">
+                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-purple.jpg' ); ?>"
+                  data-paystack-url="https://paystack.com/buy/blissful-breeze-suite-jrcwry">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
                 </button>
-                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Blissful%20Breeze%20Suite%20(75k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
+                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Blissful%20Breeze%20Suite%20(60k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
               </div>
             </div>
           </div>
@@ -251,21 +314,33 @@ get_header();
         <!-- 4. Luxury Retreat Apartment (Main Hotel) -->
         <article class="suite-card" data-room-cat="main">
           <div class="suite-card-media">
-            <span class="suite-branch-badge branch-main">Branch 01 • Serviced Apartment</span>
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/dining-2.jpg' ); ?>" alt="Luxury Retreat Apartment at Kelvin Cameo Resort" loading="lazy">
+            <span class="suite-branch-badge branch-main">Branch 01 • Main Hotel</span>
+            <div class="card-media-slider">
+              <div class="card-media-slides">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-lounge.jpg' ); ?>" alt="Luxury Retreat Apartment Lounge" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-hall.jpg' ); ?>" alt="Luxury Retreat Apartment Bedroom" loading="lazy">
+              </div>
+              <button type="button" class="card-media-nav prev" aria-label="Previous photo">‹</button>
+              <button type="button" class="card-media-nav next" aria-label="Next photo">›</button>
+              <div class="card-media-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+              </div>
+              <span class="card-media-badge">📷 2 Photos</span>
+            </div>
           </div>
           <div class="suite-card-body">
             <div>
-              <span class="suite-category-label">Multi-Room Serviced Residence</span>
+              <span class="suite-category-label">Executive Serviced Residence</span>
               <h3 class="suite-name">Luxury Retreat Apartment</h3>
               <p class="suite-desc">
-                Fully serviced apartment featuring a sprawling private living parlor, dining room, fully equipped kitchenette, master bedroom ensuite, and private entrance.
+                Fully appointed luxury residential apartment featuring an expansive living parlor, plush leather seating, dining nook, microwave, and master ensuite bedroom.
               </p>
               <div class="suite-amenities-row">
-                <span class="suite-amenity-tag">Private Living Room</span>
-                <span class="suite-amenity-tag">Fitted Kitchenette</span>
-                <span class="suite-amenity-tag">Dining Area</span>
-                <span class="suite-amenity-tag">Extended Stays</span>
+                <span class="suite-amenity-tag">Private Parlor</span>
+                <span class="suite-amenity-tag">Dining Nook</span>
+                <span class="suite-amenity-tag">Kitchenette</span>
+                <span class="suite-amenity-tag">VIP Concierge</span>
               </div>
             </div>
             <div class="suite-footer">
@@ -278,8 +353,8 @@ get_header();
                   data-room-name="Luxury Retreat Apartment"
                   data-room-price="160000"
                   data-room-branch="Branch 01 • Main Hotel"
-                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/dining-2.jpg' ); ?>"
-                  data-paystack-url="https://paystack.com/buy/luxury-retreat-orufnn">
+                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-lounge.jpg' ); ?>"
+                  data-paystack-url="https://paystack.com/buy/luxury-retreat-apartment-nvadhl">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
                 </button>
@@ -292,52 +367,93 @@ get_header();
         <!-- 5. Royal Retreat Apartment (Main Hotel) -->
         <article class="suite-card" data-room-cat="main">
           <div class="suite-card-media">
-            <span class="suite-branch-badge branch-main">Branch 01 • Presidential Suite</span>
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-lounge.jpg' ); ?>" alt="Royal Retreat Apartment at Kelvin Cameo Resort" loading="lazy">
+            <span class="suite-branch-badge branch-main">Branch 01 • Main Hotel</span>
+            <div class="card-media-slider">
+              <div class="card-media-slides">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-hall.jpg' ); ?>" alt="Royal Retreat Apartment Presidential Suite" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-lounge.jpg' ); ?>" alt="Royal Retreat Apartment Living Area" loading="lazy">
+              </div>
+              <button type="button" class="card-media-nav prev" aria-label="Previous photo">‹</button>
+              <button type="button" class="card-media-nav next" aria-label="Next photo">›</button>
+              <div class="card-media-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+              </div>
+              <span class="card-media-badge">📷 2 Photos</span>
+            </div>
           </div>
           <div class="suite-card-body">
             <div>
-              <span class="suite-category-label">Presidential Penthouse Residence</span>
+              <span class="suite-category-label">Presidential Penthouse</span>
               <h3 class="suite-name">Royal Retreat Apartment</h3>
               <p class="suite-desc">
-                The pinnacle of hospitality excellence. A palatial 2-bedroom executive apartment with formal dining, security quarters interlink, jacuzzi, and dedicated chef services.
+                The pinnacle of Kelvin Cameo luxury. Expansive two-bedroom configuration, dual private bathrooms, chef's kitchenette, 65" 4K Smart TVs, and dedicated butler attention.
               </p>
               <div class="suite-amenities-row">
-                <span class="suite-amenity-tag">Dual Ensuite Bedrooms</span>
-                <span class="suite-amenity-tag">Full Kitchen</span>
-                <span class="suite-amenity-tag">Executive Dining</span>
-                <span class="suite-amenity-tag">Private Concierge</span>
+                <span class="suite-amenity-tag">2 Bedrooms</span>
+                <span class="suite-amenity-tag">Dual Baths</span>
+                <span class="suite-amenity-tag">Butler Service</span>
+                <span class="suite-amenity-tag">65" 4K TV</span>
               </div>
             </div>
             <div class="suite-footer">
               <div class="suite-price-block">
                 <span class="suite-price-currency">Tariff Per Night</span>
-                <div class="suite-price-amount">₦180,000<span>/night</span></div>
+                <div class="suite-price-amount">₦200,000<span>/night</span></div>
               </div>
               <div class="suite-action-btns">
                 <button type="button" class="btn btn-primary btn-sm btn-book-room" 
                   data-room-name="Royal Retreat Apartment"
-                  data-room-price="180000"
+                  data-room-price="200000"
                   data-room-branch="Branch 01 • Main Hotel"
-                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-lounge.jpg' ); ?>"
-                  data-paystack-url="https://paystack.com/buy/royal-retreat-mnbzbj">
+                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-hall.jpg' ); ?>"
+                  data-paystack-url="https://paystack.com/buy/royal-retreat-apartment-twvshd">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
                 </button>
-                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Royal%20Retreat%20Apartment%20(180k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
+                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Royal%20Retreat%20Apartment%20(200k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
               </div>
             </div>
           </div>
         </article>
 
+      </div> <!-- /.suites-grid (Main Hotel) -->
 
 
+      <!-- ====================================================================
+           BRANCH 02: THE ANNEX (Strictly Listed Second)
+           ==================================================================== -->
+      <div class="branch-section-bar annex-bar" data-branch-group="annex">
+        <div class="branch-bar-title-group">
+          <span class="branch-pill annex">Branch 02</span>
+          <div>
+            <h3 class="branch-bar-heading">The Annex Branch — Executive Rooms & Royal Treat Suite</h3>
+            <p class="branch-bar-sub">Affordable business comfort, quiet residential privacy, and modern executive suites from ₦25,000/night.</p>
+          </div>
+        </div>
+        <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20I%20want%20to%20inquire%20about%20staying%20at%20The%20Annex%20Branch" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Inquire The Annex</a>
+      </div>
 
-        <!-- 1. Deluxe Room (Annex) -->
+      <!-- The Annex Suites Grid (Cards 6–10) -->
+      <div class="suites-grid" data-branch-grid="annex">
+
+        <!-- 6. Deluxe Room (Annex) -->
         <article class="suite-card" data-room-cat="annex">
           <div class="suite-card-media">
             <span class="suite-branch-badge branch-annex">Branch 02 • The Annex</span>
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-deluxe.jpg' ); ?>" alt="Deluxe Room at Kelvin Cameo Resort Annex" loading="lazy">
+            <div class="card-media-slider">
+              <div class="card-media-slides">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-deluxe.jpg' ); ?>" alt="Deluxe Room at Kelvin Cameo Resort Annex" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/single-room.jpg' ); ?>" alt="Deluxe Room Bath and View" loading="lazy">
+              </div>
+              <button type="button" class="card-media-nav prev" aria-label="Previous photo">‹</button>
+              <button type="button" class="card-media-nav next" aria-label="Next photo">›</button>
+              <div class="card-media-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+              </div>
+              <span class="card-media-badge">📷 2 Photos</span>
+            </div>
           </div>
           <div class="suite-card-body">
             <div>
@@ -348,9 +464,9 @@ get_header();
               </p>
               <div class="suite-amenities-row">
                 <span class="suite-amenity-tag">Queen Bed</span>
+                <span class="suite-amenity-tag">Smart TV</span>
                 <span class="suite-amenity-tag">Air Conditioning</span>
-                <span class="suite-amenity-tag">Free Wi-Fi</span>
-                <span class="suite-amenity-tag">Flat LED TV</span>
+                <span class="suite-amenity-tag">Ensuite Bath</span>
               </div>
             </div>
             <div class="suite-footer">
@@ -364,7 +480,7 @@ get_header();
                   data-room-price="25000"
                   data-room-branch="Branch 02 • The Annex"
                   data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-deluxe.jpg' ); ?>"
-                  data-paystack-url="https://paystack.com/buy/deluxe-room-avbdle">
+                  data-paystack-url="https://paystack.com/buy/deluxe-room-fgzwtc">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
                 </button>
@@ -374,24 +490,89 @@ get_header();
           </div>
         </article>
 
-        <!-- 2. Executive Room (Annex) -->
+        <!-- 7. Executive Room (Annex) -->
         <article class="suite-card" data-room-cat="annex">
           <div class="suite-card-media">
             <span class="suite-branch-badge branch-annex">Branch 02 • The Annex</span>
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-executive.jpg' ); ?>" alt="Executive Room at Kelvin Cameo Resort Annex" loading="lazy">
+            <div class="card-media-slider">
+              <div class="card-media-slides">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-executive.jpg' ); ?>" alt="Executive Room at Kelvin Cameo Resort Annex" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-deluxe.jpg' ); ?>" alt="Executive Room Layout" loading="lazy">
+              </div>
+              <button type="button" class="card-media-nav prev" aria-label="Previous photo">‹</button>
+              <button type="button" class="card-media-nav next" aria-label="Next photo">›</button>
+              <div class="card-media-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+              </div>
+              <span class="card-media-badge">📷 2 Photos</span>
+            </div>
           </div>
           <div class="suite-card-body">
             <div>
-              <span class="suite-category-label">Business Comfort</span>
+              <span class="suite-category-label">Business Executive</span>
               <h3 class="suite-name">Executive Room</h3>
               <p class="suite-desc">
-                Generous living space designed for business travelers. Features an ergonomic workspace, upgraded bath fittings, mini-fridge, and complimentary tea setup.
+                Tailored for traveling corporate professionals. Includes an ergonomic work station, ultra-fast fiber Wi-Fi, premium toiletries, and personalized concierge desk service.
               </p>
               <div class="suite-amenities-row">
                 <span class="suite-amenity-tag">King Bed</span>
-                <span class="suite-amenity-tag">Work Desk</span>
+                <span class="suite-amenity-tag">Fiber Wi-Fi</span>
+                <span class="suite-amenity-tag">Work Station</span>
+                <span class="suite-amenity-tag">24/7 Power</span>
+              </div>
+            </div>
+            <div class="suite-footer">
+              <div class="suite-price-block">
+                <span class="suite-price-currency">Tariff Per Night</span>
+                <div class="suite-price-amount">₦30,000<span>/night</span></div>
+              </div>
+              <div class="suite-action-btns">
+                <button type="button" class="btn btn-primary btn-sm btn-book-room" 
+                  data-room-name="Executive Room"
+                  data-room-price="30000"
+                  data-room-branch="Branch 02 • The Annex"
+                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-executive.jpg' ); ?>"
+                  data-paystack-url="https://paystack.com/buy/executive-room-qyjqms">
+                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                  Book Now
+                </button>
+                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Executive%20Room%20(30k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- 8. Sunset Room (Annex) -->
+        <article class="suite-card" data-room-cat="annex">
+          <div class="suite-card-media">
+            <span class="suite-branch-badge branch-annex">Branch 02 • The Annex</span>
+            <div class="card-media-slider">
+              <div class="card-media-slides">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-sunset.jpg' ); ?>" alt="Sunset Room at Kelvin Cameo Resort Annex" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/single-room.jpg' ); ?>" alt="Sunset Room View" loading="lazy">
+              </div>
+              <button type="button" class="card-media-nav prev" aria-label="Previous photo">‹</button>
+              <button type="button" class="card-media-nav next" aria-label="Next photo">›</button>
+              <div class="card-media-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+              </div>
+              <span class="card-media-badge">📷 2 Photos</span>
+            </div>
+          </div>
+          <div class="suite-card-body">
+            <div>
+              <span class="suite-category-label">Panoramic Horizon View</span>
+              <h3 class="suite-name">Sunset Room</h3>
+              <p class="suite-desc">
+                West-facing windows capture magnificent golden hour views over Suleja hills. Equipped with a mini-refrigerator, tea kettle, reading sofa, and premium bedding.
+              </p>
+              <div class="suite-amenities-row">
+                <span class="suite-amenity-tag">Scenic Sunset</span>
+                <span class="suite-amenity-tag">Reading Sofa</span>
                 <span class="suite-amenity-tag">Mini Fridge</span>
-                <span class="suite-amenity-tag">Cable TV</span>
+                <span class="suite-amenity-tag">Tea Station</span>
               </div>
             </div>
             <div class="suite-footer">
@@ -401,73 +582,44 @@ get_header();
               </div>
               <div class="suite-action-btns">
                 <button type="button" class="btn btn-primary btn-sm btn-book-room" 
-                  data-room-name="Executive Room"
+                  data-room-name="Sunset Room"
                   data-room-price="35000"
                   data-room-branch="Branch 02 • The Annex"
-                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-executive.jpg' ); ?>"
-                  data-paystack-url="https://paystack.com/buy/executive-ncjolm">
-                  <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                  Book Now
-                </button>
-                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Executive%20Room%20(35k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- 3. Sunset Room (Annex) -->
-        <article class="suite-card" data-room-cat="annex">
-          <div class="suite-card-media">
-            <span class="suite-branch-badge branch-annex">Branch 02 • The Annex</span>
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-sunset.jpg' ); ?>" alt="Sunset Room at Kelvin Cameo Resort Annex" loading="lazy">
-          </div>
-          <div class="suite-card-body">
-            <div>
-              <span class="suite-category-label">Panoramic View</span>
-              <h3 class="suite-name">Sunset Room</h3>
-              <p class="suite-desc">
-                Oriented toward golden evening skies, this elegant room boasts oversized windows, premium drapes, custom vanity mirror, and plush armchair seating.
-              </p>
-              <div class="suite-amenities-row">
-                <span class="suite-amenity-tag">Sunset Vista</span>
-                <span class="suite-amenity-tag">King Bed</span>
-                <span class="suite-amenity-tag">Room Service</span>
-                <span class="suite-amenity-tag">High-Speed Wi-Fi</span>
-              </div>
-            </div>
-            <div class="suite-footer">
-              <div class="suite-price-block">
-                <span class="suite-price-currency">Tariff Per Night</span>
-                <div class="suite-price-amount">₦40,000<span>/night</span></div>
-              </div>
-              <div class="suite-action-btns">
-                <button type="button" class="btn btn-primary btn-sm btn-book-room" 
-                  data-room-name="Sunset Room"
-                  data-room-price="40000"
-                  data-room-branch="Branch 02 • The Annex"
                   data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-sunset.jpg' ); ?>"
-                  data-paystack-url="https://paystack.com/buy/sunset-pcoofy">
+                  data-paystack-url="https://paystack.com/buy/sunset-room-nxwzrk">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
                 </button>
-                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Sunset%20Room%20(40k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
+                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Sunset%20Room%20(35k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
               </div>
             </div>
           </div>
         </article>
 
-        <!-- 4. Prestige Room (Annex) -->
+        <!-- 9. Prestige Room (Annex) -->
         <article class="suite-card" data-room-cat="annex">
           <div class="suite-card-media">
             <span class="suite-branch-badge branch-annex">Branch 02 • The Annex</span>
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-prestige.jpg' ); ?>" alt="Prestige Room at Kelvin Cameo Resort Annex" loading="lazy">
+            <div class="card-media-slider">
+              <div class="card-media-slides">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-prestige.jpg' ); ?>" alt="Prestige Room at Kelvin Cameo Resort Annex" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/suite-lounge.jpg' ); ?>" alt="Prestige Room Amenities" loading="lazy">
+              </div>
+              <button type="button" class="card-media-nav prev" aria-label="Previous photo">‹</button>
+              <button type="button" class="card-media-nav next" aria-label="Next photo">›</button>
+              <div class="card-media-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+              </div>
+              <span class="card-media-badge">📷 2 Photos</span>
+            </div>
           </div>
           <div class="suite-card-body">
             <div>
               <span class="suite-category-label">Premier Comfort</span>
               <h3 class="suite-name">Prestige Room</h3>
               <p class="suite-desc">
-                The flagship offering at The Annex branch. Crafted for discerning guests with custom acoustic insulation, luxury bathrobes, and express concierge.
+                Crafted for discerning guests with custom acoustic insulation, luxury bathrobes, express concierge, and plush orthopedic king rest.
               </p>
               <div class="suite-amenities-row">
                 <span class="suite-amenity-tag">Soundproofed</span>
@@ -497,18 +649,30 @@ get_header();
           </div>
         </article>
 
-        <!-- 5. Royal Treat Suite (Annex Suite) -->
+        <!-- 10. Royal Treat Suite (Annex Regal Suite) -->
         <article class="suite-card" data-room-cat="annex">
           <div class="suite-card-media">
             <span class="suite-branch-badge branch-annex">Branch 02 • The Annex</span>
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/suite-lounge.jpg' ); ?>" alt="Royal Treat Suite at Kelvin Cameo Resort Annex" loading="lazy">
+            <div class="card-media-slider">
+              <div class="card-media-slides">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/suite-lounge.jpg' ); ?>" alt="Royal Treat Suite at Kelvin Cameo Resort Annex" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-prestige.jpg' ); ?>" alt="Royal Treat Suite Bedroom" loading="lazy">
+              </div>
+              <button type="button" class="card-media-nav prev" aria-label="Previous photo">‹</button>
+              <button type="button" class="card-media-nav next" aria-label="Next photo">›</button>
+              <div class="card-media-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+              </div>
+              <span class="card-media-badge">📷 2 Photos</span>
+            </div>
           </div>
           <div class="suite-card-body">
             <div>
               <span class="suite-category-label">Regal Annex Suite</span>
               <h3 class="suite-name">Royal Treat Suite</h3>
               <p class="suite-desc">
-                The premier crown jewel suite at The Annex branch. Indulge in regal comfort featuring an expansive master bedroom, gold-accented fixtures, separate guest powder room, and personalized 24-hour butler service.
+                The crown jewel suite of The Annex branch. Indulge in regal comfort featuring an expansive master bedroom, gold-accented fixtures, separate guest powder room, and personalized 24-hour butler service.
               </p>
               <div class="suite-amenities-row">
                 <span class="suite-amenity-tag">Regal Finish</span>
@@ -538,34 +702,8 @@ get_header();
           </div>
         </article>
 
-        </div> <!-- /.suites-scroll-track -->
-      </div> <!-- /.rooms-slider-wrapper -->
+      </div> <!-- /.suites-grid (The Annex) -->
 
-      <!-- Status & Legend Bar -->
-      <div class="rooms-scroll-statusbar">
-        <div style="display:flex; align-items:center; gap:1.5rem; flex-wrap:wrap;">
-          <div style="display:flex; align-items:center; gap:0.5rem;">
-            <span style="width:12px; height:12px; border-radius:50%; background:var(--orange-500); display:inline-block;"></span>
-            <span style="font-size:0.85rem; font-weight:700; color:var(--navy-900);">Rooms 1–5: Branch 01 (Main Hotel)</span>
-            <span style="font-size:0.75rem; color:var(--slate-500);">(Suites, Apartments & Banquets)</span>
-          </div>
-          <div style="display:flex; align-items:center; gap:0.5rem;">
-            <span style="width:12px; height:12px; border-radius:50%; background:#0284c7; display:inline-block;"></span>
-            <span style="font-size:0.85rem; font-weight:700; color:var(--navy-900);">Rooms 6–10: Branch 02 (The Annex)</span>
-            <span style="font-size:0.75rem; color:var(--slate-500);">(Executive, Sunset & Deluxe Rooms)</span>
-          </div>
-        </div>
-
-        <div style="display:flex; align-items:center; gap:0.75rem;">
-          <button type="button" id="autoScrollToggle" class="btn btn-outline-navy btn-sm" style="font-size:0.75rem; padding:0.35rem 0.85rem;" data-paused="false">
-            <span id="autoScrollStatusDot" style="width:8px; height:8px; border-radius:50%; background:#10b981; display:inline-block; margin-right:5px;"></span>
-            Auto-Scroll: ON
-          </button>
-          <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20want%20to%20inquire%20about%20booking%20a%20room" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm" style="font-size:0.75rem; padding:0.35rem 0.85rem;">
-            WhatsApp Reception
-          </a>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -1060,137 +1198,216 @@ get_header();
     </div>
   </section>
 
-  <!-- A Look Around The Resort Gallery Section -->
-  <section id="gallery" class="section-padding" style="background:var(--sand-50); border-top:1px solid var(--sand-200);">
+    <!-- A Look Around The Resort (Continuous Moving Gallery) -->
+  <section id="gallery" class="section-padding moving-gallery-section" style="background:var(--sand-50); border-top:1px solid var(--sand-200);">
     <div class="container">
-      <div class="section-head" style="text-align:center; max-width:760px; margin:0 auto 2.5rem;">
+      <div class="section-head" style="text-align:center; max-width:780px; margin:0 auto 2rem;">
         <span class="section-badge" style="background:rgba(242,92,5,0.15); color:var(--orange-600);">Visual Walkthrough</span>
         <h2 class="section-title">A Look Around The Resort</h2>
         <p class="section-subtitle">
-          Take a photographic tour through our sparkling pool, cozy cocktail bar, gourmet restaurant, 1,000-seat grand auditorium, billiards lounge, and manicured grounds.
+          Take a gliding photographic tour through our sparkling pool, cozy cocktail bar, gourmet dining, 1,000-seat grand auditorium, billiards lounge, and manicured grounds.
         </p>
       </div>
 
-      <!-- Gallery Filter Tabs -->
-      <div class="filter-tabs-wrapper gallery-filter-bar" style="margin-bottom:2.5rem;">
-        <button type="button" class="tab-btn tab-resort active" data-gallery-filter="all">All Resort Views (11)</button>
-        <button type="button" class="tab-btn tab-resort" data-gallery-filter="pool">Swimming Pool</button>
-        <button type="button" class="tab-btn tab-resort" data-gallery-filter="bar">Bar & Lounge</button>
-        <button type="button" class="tab-btn tab-resort" data-gallery-filter="restaurant">Dining & Restaurant</button>
-        <button type="button" class="tab-btn tab-resort" data-gallery-filter="banquet">Grand Banquet Hall</button>
-        <button type="button" class="tab-btn tab-resort" data-gallery-filter="games">Billiards & Games</button>
-        <button type="button" class="tab-btn tab-resort" data-gallery-filter="grounds">Grounds & Exterior</button>
+      <!-- Moving Gallery Controls Bar -->
+      <div class="moving-gallery-controls-bar">
+        <div class="filter-tabs-wrapper gallery-filter-bar" style="margin:0;">
+          <button type="button" class="tab-btn tab-resort active" data-gallery-filter="all">All Resort Views (11)</button>
+          <button type="button" class="tab-btn tab-resort" data-gallery-filter="pool">Swimming Pool</button>
+          <button type="button" class="tab-btn tab-resort" data-gallery-filter="bar">Bar & Lounge</button>
+          <button type="button" class="tab-btn tab-resort" data-gallery-filter="restaurant">Dining</button>
+          <button type="button" class="tab-btn tab-resort" data-gallery-filter="banquet">Grand Banquet Hall</button>
+          <button type="button" class="tab-btn tab-resort" data-gallery-filter="games">Billiards</button>
+          <button type="button" class="tab-btn tab-resort" data-gallery-filter="grounds">Grounds & Facade</button>
+        </div>
+
+        <div class="gallery-motion-actions">
+          <button type="button" class="slider-nav-btn" id="galleryPrevBtn" aria-label="Scroll left">‹</button>
+          <button type="button" class="slider-nav-btn" id="galleryNextBtn" aria-label="Scroll right">›</button>
+          <button type="button" class="btn btn-outline-navy btn-sm" id="galleryMotionToggle">
+            <span class="motion-dot"></span> <span id="galleryMotionLabel">Pause Motion</span>
+          </button>
+        </div>
       </div>
+    </div>
 
-      <!-- Gallery Grid -->
-      <div class="resort-gallery-grid">
-        <!-- 1. Swimming Pool -->
-        <div class="gallery-card gallery-item" data-category="pool">
-          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/swimming-pool.jpg' ); ?>" alt="Kelvin Cameo Resort Swimming Pool" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-badge">Swimming Pool</span>
-            <h4 class="gallery-title">Pristine Outdoor Pool</h4>
-            <p class="gallery-caption">Crystal-clear resort pool with sun loungers, poolside refreshments, and certified lifeguards.</p>
+    <!-- Continuous Horizontal Moving Viewport with Seamless Duplicate Loop -->
+    <div class="moving-gallery-viewport" id="movingGalleryViewport">
+      <div class="moving-gallery-track" id="movingGalleryTrack">
+        <div class="moving-gallery-item" data-category="pool">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/swimming-pool.jpg' ); ?>" alt="Pristine Outdoor Pool" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Swimming Pool</span>
+            <h4 class="moving-gallery-title">Pristine Outdoor Pool</h4>
+            <p class="moving-gallery-desc">Crystal-clear resort pool with sun loungers, poolside refreshments, and certified lifeguards.</p>
           </div>
         </div>
-
-        <!-- 2. Bar Counter -->
-        <div class="gallery-card gallery-item" data-category="bar">
-          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/bar-counter.jpg' ); ?>" alt="Cameo Cocktail Bar Counter" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-badge">Bar & Mixology</span>
-            <h4 class="gallery-title">Cameo Cocktail Bar</h4>
-            <p class="gallery-caption">Full-service cocktail bar offering premium spirits, signature blends, and artisan cocktails.</p>
+        <div class="moving-gallery-item" data-category="bar">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/bar-counter.jpg' ); ?>" alt="Cameo Cocktail Bar" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Bar & Mixology</span>
+            <h4 class="moving-gallery-title">Cameo Cocktail Bar</h4>
+            <p class="moving-gallery-desc">Full-service cocktail bar offering premium spirits, signature blends, and artisan cocktails.</p>
           </div>
         </div>
-
-        <!-- 3. VIP Bar Lounge -->
-        <div class="gallery-card gallery-item" data-category="bar">
-          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/bar-lounge.jpg' ); ?>" alt="VIP Lounge at Kelvin Cameo Resort" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-badge">VIP Lounge</span>
-            <h4 class="gallery-title">Executive Lounge Seating</h4>
-            <p class="gallery-caption">Plush mood-lit parlor crafted for discreet networking and evening social downtime.</p>
+        <div class="moving-gallery-item" data-category="bar">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/bar-lounge.jpg' ); ?>" alt="Executive Lounge Seating" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">VIP Lounge</span>
+            <h4 class="moving-gallery-title">Executive Lounge Seating</h4>
+            <p class="moving-gallery-desc">Plush mood-lit parlor crafted for discreet networking and evening social downtime.</p>
           </div>
         </div>
-
-        <!-- 4. Restaurant -->
-        <div class="gallery-card gallery-item" data-category="restaurant">
-          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/restaurant.jpg' ); ?>" alt="Kelvin Cameo Fine Dining Restaurant" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-badge">Gourmet Dining</span>
-            <h4 class="gallery-title">Cameo Restaurant</h4>
-            <p class="gallery-caption">Fresh Nigerian favorites (point-and-kill catfish, pepper soup) and continental specialties.</p>
+        <div class="moving-gallery-item" data-category="restaurant">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/restaurant.jpg' ); ?>" alt="Cameo Restaurant" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Gourmet Dining</span>
+            <h4 class="moving-gallery-title">Cameo Restaurant</h4>
+            <p class="moving-gallery-desc">Fresh Nigerian favorites (point-and-kill catfish, pepper soup) and continental specialties.</p>
           </div>
         </div>
-
-        <!-- 5. 1,000-Seat Grand Banquet Hall -->
-        <div class="gallery-card gallery-item" data-category="banquet">
-          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/banquet-hall.jpg' ); ?>" alt="Kelvin Cameo 1,000-Seat Grand Banquet Hall" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-badge">Event Auditorium</span>
-            <h4 class="gallery-title">1,000-Seat Grand Hall</h4>
-            <p class="gallery-caption">Soaring pillarless sightlines, crystal chandeliers, industrial AC, and VIP suites.</p>
+        <div class="moving-gallery-item" data-category="banquet">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/banquet-hall.jpg' ); ?>" alt="1,000-Seat Grand Hall" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Event Auditorium</span>
+            <h4 class="moving-gallery-title">1,000-Seat Grand Hall</h4>
+            <p class="moving-gallery-desc">Soaring pillarless sightlines, crystal chandeliers, industrial AC, and VIP suites.</p>
           </div>
         </div>
-
-        <!-- 6. Billiards & Snooker Table -->
-        <div class="gallery-card gallery-item" data-category="games">
-          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/lounge-pool-table.jpg' ); ?>" alt="Billiards and Pool Table Lounge" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-badge">Games & Leisure</span>
-            <h4 class="gallery-title">Billiards & Snooker Lounge</h4>
-            <p class="gallery-caption">Tournament-quality pool tables, sports broadcasts, and cold beverages.</p>
+        <div class="moving-gallery-item" data-category="games">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/lounge-pool-table.jpg' ); ?>" alt="Billiards & Snooker Lounge" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Games & Leisure</span>
+            <h4 class="moving-gallery-title">Billiards & Snooker Lounge</h4>
+            <p class="moving-gallery-desc">Tournament-quality pool tables, sports broadcasts, and cold beverages.</p>
           </div>
         </div>
-
-        <!-- 7. Games Recreation Hub -->
-        <div class="gallery-card gallery-item" data-category="games">
-          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/lounge-view.jpg' ); ?>" alt="Games Recreation Hub" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-badge">Recreation</span>
-            <h4 class="gallery-title">Clubhouse Recreation</h4>
-            <p class="gallery-caption">Comfortable lounge armchairs and board gaming corner for unwinding.</p>
+        <div class="moving-gallery-item" data-category="games">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/lounge-view.jpg' ); ?>" alt="Clubhouse Recreation" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Recreation</span>
+            <h4 class="moving-gallery-title">Clubhouse Recreation</h4>
+            <p class="moving-gallery-desc">Comfortable lounge armchairs and board gaming corner for unwinding.</p>
           </div>
         </div>
-
-        <!-- 8. Exterior Architecture -->
-        <div class="gallery-card gallery-item" data-category="grounds">
-          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/exterior.jpg' ); ?>" alt="Kelvin Cameo Resort Exterior Architecture" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-badge">Architecture</span>
-            <h4 class="gallery-title">Resort Architectural Facade</h4>
-            <p class="gallery-caption">Grand architectural presence with perimeter security and manicured palm avenues.</p>
+        <div class="moving-gallery-item" data-category="grounds">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/exterior.jpg' ); ?>" alt="Resort Architectural Facade" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Architecture</span>
+            <h4 class="moving-gallery-title">Resort Architectural Facade</h4>
+            <p class="moving-gallery-desc">Grand architectural presence with perimeter security and manicured palm avenues.</p>
           </div>
         </div>
-
-        <!-- 9. Evening Atmosphere -->
-        <div class="gallery-card gallery-item" data-category="grounds">
-          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/evening.jpg' ); ?>" alt="Evening Atmosphere at Kelvin Cameo Resort" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-badge">Night Ambiance</span>
-            <h4 class="gallery-title">Enchanting Evening Ambiance</h4>
-            <p class="gallery-caption">Warm architectural lighting illuminating the courtyard as twilight settles over Suleja.</p>
+        <div class="moving-gallery-item" data-category="grounds">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/evening.jpg' ); ?>" alt="Enchanting Evening Ambiance" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Night Ambiance</span>
+            <h4 class="moving-gallery-title">Enchanting Evening Ambiance</h4>
+            <p class="moving-gallery-desc">Warm architectural lighting illuminating the courtyard as twilight settles over Suleja.</p>
           </div>
         </div>
-
-        <!-- 10. Grand Entrance -->
-        <div class="gallery-card gallery-item" data-category="grounds">
-          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/entrance.jpg' ); ?>" alt="Kelvin Cameo Resort Entrance" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-badge">Porte-Cochère</span>
-            <h4 class="gallery-title">Grand Entrance & Reception</h4>
-            <p class="gallery-caption">Welcoming 24-hour reception desk, luggage assistance, and valet arrival parking.</p>
+        <div class="moving-gallery-item" data-category="grounds">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/entrance.jpg' ); ?>" alt="Grand Entrance & Reception" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Porte-Cochère</span>
+            <h4 class="moving-gallery-title">Grand Entrance & Reception</h4>
+            <p class="moving-gallery-desc">Welcoming 24-hour reception desk, luggage assistance, and valet arrival parking.</p>
           </div>
         </div>
-
-        <!-- 11. The Annex Branch -->
-        <div class="gallery-card gallery-item" data-category="grounds">
-          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/annex.jpg' ); ?>" alt="The Annex Branch of Kelvin Cameo Resort" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-badge">Branch 02</span>
-            <h4 class="gallery-title">The Annex Courtyard</h4>
-            <p class="gallery-caption">The quiet, secluded secondary branch offering private executive accommodations.</p>
+        <div class="moving-gallery-item" data-category="grounds">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/annex.jpg' ); ?>" alt="The Annex Courtyard" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Branch 02</span>
+            <h4 class="moving-gallery-title">The Annex Courtyard</h4>
+            <p class="moving-gallery-desc">The quiet, secluded secondary branch offering private executive accommodations.</p>
+          </div>
+        </div>
+        <div class="moving-gallery-item" data-category="pool">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/swimming-pool.jpg' ); ?>" alt="Pristine Outdoor Pool" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Swimming Pool</span>
+            <h4 class="moving-gallery-title">Pristine Outdoor Pool</h4>
+            <p class="moving-gallery-desc">Crystal-clear resort pool with sun loungers, poolside refreshments, and certified lifeguards.</p>
+          </div>
+        </div>
+        <div class="moving-gallery-item" data-category="bar">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/bar-counter.jpg' ); ?>" alt="Cameo Cocktail Bar" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Bar & Mixology</span>
+            <h4 class="moving-gallery-title">Cameo Cocktail Bar</h4>
+            <p class="moving-gallery-desc">Full-service cocktail bar offering premium spirits, signature blends, and artisan cocktails.</p>
+          </div>
+        </div>
+        <div class="moving-gallery-item" data-category="bar">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/bar-lounge.jpg' ); ?>" alt="Executive Lounge Seating" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">VIP Lounge</span>
+            <h4 class="moving-gallery-title">Executive Lounge Seating</h4>
+            <p class="moving-gallery-desc">Plush mood-lit parlor crafted for discreet networking and evening social downtime.</p>
+          </div>
+        </div>
+        <div class="moving-gallery-item" data-category="restaurant">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/restaurant.jpg' ); ?>" alt="Cameo Restaurant" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Gourmet Dining</span>
+            <h4 class="moving-gallery-title">Cameo Restaurant</h4>
+            <p class="moving-gallery-desc">Fresh Nigerian favorites (point-and-kill catfish, pepper soup) and continental specialties.</p>
+          </div>
+        </div>
+        <div class="moving-gallery-item" data-category="banquet">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/banquet-hall.jpg' ); ?>" alt="1,000-Seat Grand Hall" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Event Auditorium</span>
+            <h4 class="moving-gallery-title">1,000-Seat Grand Hall</h4>
+            <p class="moving-gallery-desc">Soaring pillarless sightlines, crystal chandeliers, industrial AC, and VIP suites.</p>
+          </div>
+        </div>
+        <div class="moving-gallery-item" data-category="games">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/lounge-pool-table.jpg' ); ?>" alt="Billiards & Snooker Lounge" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Games & Leisure</span>
+            <h4 class="moving-gallery-title">Billiards & Snooker Lounge</h4>
+            <p class="moving-gallery-desc">Tournament-quality pool tables, sports broadcasts, and cold beverages.</p>
+          </div>
+        </div>
+        <div class="moving-gallery-item" data-category="games">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/lounge-view.jpg' ); ?>" alt="Clubhouse Recreation" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Recreation</span>
+            <h4 class="moving-gallery-title">Clubhouse Recreation</h4>
+            <p class="moving-gallery-desc">Comfortable lounge armchairs and board gaming corner for unwinding.</p>
+          </div>
+        </div>
+        <div class="moving-gallery-item" data-category="grounds">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/exterior.jpg' ); ?>" alt="Resort Architectural Facade" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Architecture</span>
+            <h4 class="moving-gallery-title">Resort Architectural Facade</h4>
+            <p class="moving-gallery-desc">Grand architectural presence with perimeter security and manicured palm avenues.</p>
+          </div>
+        </div>
+        <div class="moving-gallery-item" data-category="grounds">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/evening.jpg' ); ?>" alt="Enchanting Evening Ambiance" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Night Ambiance</span>
+            <h4 class="moving-gallery-title">Enchanting Evening Ambiance</h4>
+            <p class="moving-gallery-desc">Warm architectural lighting illuminating the courtyard as twilight settles over Suleja.</p>
+          </div>
+        </div>
+        <div class="moving-gallery-item" data-category="grounds">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/entrance.jpg' ); ?>" alt="Grand Entrance & Reception" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Porte-Cochère</span>
+            <h4 class="moving-gallery-title">Grand Entrance & Reception</h4>
+            <p class="moving-gallery-desc">Welcoming 24-hour reception desk, luggage assistance, and valet arrival parking.</p>
+          </div>
+        </div>
+        <div class="moving-gallery-item" data-category="grounds">
+          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/annex.jpg' ); ?>" alt="The Annex Courtyard" loading="lazy">
+          <div class="moving-gallery-overlay">
+            <span class="moving-gallery-badge">Branch 02</span>
+            <h4 class="moving-gallery-title">The Annex Courtyard</h4>
+            <p class="moving-gallery-desc">The quiet, secluded secondary branch offering private executive accommodations.</p>
           </div>
         </div>
       </div>
