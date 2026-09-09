@@ -1017,6 +1017,124 @@ get_header();
     </div>
   </section>
 
+  <!-- Resort Location Map & Social Media Community Section -->
+  <section id="resort-location" class="section-padding" style="background:var(--white); border-top:1px solid var(--sand-200);">
+    <div class="container">
+      <div class="section-head" style="text-align:center; max-width:780px; margin:0 auto 2.5rem;">
+        <span class="section-badge" style="background:rgba(242,92,5,0.15); color:var(--orange-600);">Find Us & Stay Connected</span>
+        <h2 class="section-title">Resort Location & Social Media Hub</h2>
+        <p class="section-subtitle">
+          Kelvin Cameo Resort Hotel is situated along the major Abuja–Kaduna highway corridor in Suleja, Niger State — providing swift, seamless access from the Federal Capital Territory and northern business hubs. Connect with us across our active social channels.
+        </p>
+      </div>
+
+      <div class="resort-map-card">
+        <div class="grid-2-responsive">
+          <!-- Left: Google Maps Interactive Embed -->
+          <div>
+            <div class="resort-map-frame">
+              <iframe 
+                title="Kelvin Cameo Resort Hotel Map Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126093.8447849184!2d7.1084803!3d9.1822858!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104e0e5a6ef67253%3A0xe9f7ff8b09da7482!2sSuleja%2C%20Niger!5e0!3m2!1sen!2sng!4v1710000000000!5m2!1sen!2sng" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+            <div style="display:flex; gap:0.75rem; margin-top:1rem; flex-wrap:wrap;">
+              <a href="https://maps.google.com/?q=Suleja+Niger+State+Nigeria" target="_blank" rel="noopener" class="btn btn-navy btn-sm">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                Open in Google Maps ↗
+              </a>
+              <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Concierge,%20please%20send%20me%20the%20exact%20Google%20Maps%20live%20location%20pin%20for%20the%20Resort" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.073.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+                Request WhatsApp Pin
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: Branch Addresses & Official Social Channels -->
+          <div>
+            <h3 style="font-family:var(--font-display); font-size:1.5rem; font-weight:800; color:var(--navy-900); margin-bottom:0.75rem;">
+              Resort Location & Social Channels
+            </h3>
+            <p style="color:var(--slate-600); line-height:1.6; font-size:0.9rem; margin-bottom:1.25rem;">
+              Plan your visit or stay connected with updates on weekend events, live pool sessions, culinary specials, and presidential suites.
+            </p>
+
+            <div style="background:var(--white); border:1px solid var(--slate-200); border-radius:var(--radius-md); padding:1rem 1.25rem; margin-bottom:1.25rem;">
+              <div style="display:flex; flex-direction:column; gap:0.65rem; font-size:0.85rem; color:var(--slate-700);">
+                <div>
+                  <strong style="color:var(--orange-600);">• Branch 01 (Main Hotel & Grand Auditorium):</strong> 
+                  Abuja–Kaduna Expressway Corridor, Suleja, Niger State (Pool, Banquet Hall, Dining).
+                </div>
+                <div>
+                  <strong style="#0284c7;">• Branch 02 (The Annex):</strong> 
+                  Executive Residential Quarter, Suleja, Niger State (Deluxe Rooms & Royal Treat Suite).
+                </div>
+                <div>
+                  <strong style="color:var(--navy-900);">• Direct Concierge Desk:</strong> 
+                  <a href="tel:+2348055558197" style="color:var(--navy-900); font-weight:700;">+234 805 555 8197</a> | 
+                  <a href="mailto:concierge@kelvincameo.com" style="color:var(--navy-900); font-weight:700;">concierge@kelvincameo.com</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social Media Cards Grid -->
+            <div class="resort-social-grid">
+              <!-- Instagram -->
+              <a href="https://instagram.com/kelvincameoresort_ng" target="_blank" rel="noopener" class="resort-social-card">
+                <div class="resort-social-icon instagram">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                </div>
+                <div>
+                  <span class="resort-social-title">Instagram</span>
+                  <span class="resort-social-handle">@kelvincameoresort_ng</span>
+                </div>
+              </a>
+
+              <!-- Facebook -->
+              <a href="https://facebook.com/kelvincameoresort_ng" target="_blank" rel="noopener" class="resort-social-card">
+                <div class="resort-social-icon facebook">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </div>
+                <div>
+                  <span class="resort-social-title">Facebook</span>
+                  <span class="resort-social-handle">Kelvin Cameo Resort</span>
+                </div>
+              </a>
+
+              <!-- X / Twitter -->
+              <a href="https://x.com/kelvincameoresort_ng" target="_blank" rel="noopener" class="resort-social-card">
+                <div class="resort-social-icon twitter">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </div>
+                <div>
+                  <span class="resort-social-title">X (Twitter)</span>
+                  <span class="resort-social-handle">@kelvincameoresort_ng</span>
+                </div>
+              </a>
+
+              <!-- WhatsApp -->
+              <a href="https://wa.me/2348055558197" target="_blank" rel="noopener" class="resort-social-card">
+                <div class="resort-social-icon whatsapp">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.073.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+                </div>
+                <div>
+                  <span class="resort-social-title">WhatsApp Concierge</span>
+                  <span class="resort-social-handle">+234 805 555 8197</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Interactive Room Booking Modal with Paystack Gateway -->
   <div class="modal-backdrop" id="roomReservationModal" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal-card">
