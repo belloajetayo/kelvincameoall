@@ -11,12 +11,16 @@ get_header();
 
   <!-- Hero Section -->
   <section class="page-hero hero-resort" style="position: relative; overflow: hidden;">
-    <!-- Moving Exterior Background Slideshow -->
+    <!-- Moving Exterior Background Slideshow (Main Hotel & The Annex) -->
     <div class="hero-moving-bg-slider" aria-hidden="true">
+      <!-- Main Hotel Exterior Facade (Branch 01) -->
       <div class="hero-bg-slide active" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/exterior.jpg' ); ?>');"></div>
-      <div class="hero-bg-slide" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/evening.jpg' ); ?>');"></div>
-      <div class="hero-bg-slide" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/entrance.jpg' ); ?>');"></div>
+      <!-- The Annex Exterior Compound (Branch 02) -->
       <div class="hero-bg-slide" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/annex.jpg' ); ?>');"></div>
+      <!-- Resort Evening Illumination -->
+      <div class="hero-bg-slide" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/evening.jpg' ); ?>');"></div>
+      <!-- Grand Entrance & Valet Arrival -->
+      <div class="hero-bg-slide" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/entrance.jpg' ); ?>');"></div>
       <div class="hero-bg-overlay"></div>
     </div>
 
@@ -45,7 +49,6 @@ get_header();
         <div style="display:flex; gap:1.25rem; flex-wrap:wrap;">
           <a href="#rooms" class="btn btn-primary btn-lg">Explore Suites & Book</a>
           <a href="#banquet" class="btn btn-outline-white btn-lg">1,000-Seat Banquet Hall</a>
-          <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20want%20to%20inquire%20about%20booking%20a%20stay" class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener">WhatsApp Concierge</a>
         </div>
       </div>
     </div>
