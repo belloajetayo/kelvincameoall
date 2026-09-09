@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initExperiencePicker();
   initConciergeEstimator();
   initFaqAccordion();
+  initSiteKitAnalytics();
 });
 
 /* --------------------------------------------------------------------------
