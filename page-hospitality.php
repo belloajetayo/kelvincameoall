@@ -1002,8 +1002,6 @@ get_header();
       </div>
     </div>
   </section>
-    </div>
-  </section>
 
   <!-- Resort Amenities: Pool, Games Lounge, Dining -->
   <section class="section-padding" style="background:var(--white);">
