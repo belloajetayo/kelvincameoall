@@ -253,3 +253,132 @@ function kc_url( $slug, $static_fallback = '' ) {
 
     return esc_url( home_url( '/' . trim( $slug, '/' ) . '/' ) );
 }
+
+/**
+ * Handle Room Booking AJAX Submission & Email Notification.
+ */
+function kc_handle_room_booking() {
+    // Verify nonce
+    if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'kc_booking_nonce' ) ) {
+        wp_send_json_error( array( 'message' => 'Security token expired. Please reload the page.' ), 403 );
+    }
+
+    $name       = isset( $_POST['guest_name'] ) ? sanitize_text_field( wp_unslash( $_POST['guest_name'] ) ) : '';
+    $email      = isset( $_POST['guest_email'] ) ? sanitize_email( wp_unslash( $_POST['guest_email'] ) ) : '';
+    $phone      = isset( $_POST['guest_phone'] ) ? sanitize_text_field( wp_unslash( $_POST['guest_phone'] ) ) : '';
+    $room       = isset( $_POST['room_name'] ) ? sanitize_text_field( wp_unslash( $_POST['room_name'] ) ) : 'Standard Room';
+    $branch     = isset( $_POST['room_branch'] ) ? sanitize_text_field( wp_unslash( $_POST['room_branch'] ) ) : 'Main Hotel';
+    $checkin    = isset( $_POST['checkin_date'] ) ? sanitize_text_field( wp_unslash( $_POST['checkin_date'] ) ) : '';
+    $checkout   = isset( $_POST['checkout_date'] ) ? sanitize_text_field( wp_unslash( $_POST['checkout_date'] ) ) : '';
+    $guests     = isset( $_POST['guest_count'] ) ? intval( $_POST['guest_count'] ) : 1;
+    $nights     = isset( $_POST['nights_count'] ) ? intval( $_POST['nights_count'] ) : 1;
+    $total      = isset( $_POST['total_amount'] ) ? sanitize_text_field( wp_unslash( $_POST['total_amount'] ) ) : '';
+    $notes      = isset( $_POST['special_requests'] ) ? sanitize_textarea_field( wp_unslash( $_POST['special_requests'] ) ) : 'None';
+    $paystack   = isset( $_POST['paystack_url'] ) ? esc_url_raw( wp_unslash( $_POST['paystack_url'] ) ) : '';
+
+    if ( empty( $name ) || empty( $email ) || empty( $phone ) ) {
+        wp_send_json_error( array( 'message' => 'Please fill in all required fields (Name, Email, Phone).' ), 400 );
+    }
+
+    // Fallback room Paystack map
+    $room_paystack_map = array(
+        'Deluxe Room'              => 'https://paystack.com/buy/deluxe-room-avbdle',
+        'Executive Room'           => 'https://paystack.com/buy/executive-ncjolm',
+        'Sunset Room'              => 'https://paystack.com/buy/sunset-pcoofy',
+        'Prestige Room'            => 'https://paystack.com/buy/prestige-lknrmy',
+        'Love Night Room'          => 'https://paystack.com/buy/love-night-hdtfxs',
+        'Golden Nest Room'         => 'https://paystack.com/buy/golden-nest-ugswqe',
+        'Royal Treat Suite'        => 'https://paystack.com/buy/golden-nest-ugswqe',
+        'Blissful Breeze Suite'    => 'https://paystack.com/buy/blissful-breeze-aqlhld',
+        'Luxury Retreat Apartment' => 'https://paystack.com/buy/luxury-retreat-orufnn',
+        'Royal Retreat Apartment'  => 'https://paystack.com/buy/royal-retreat-mnbzbj',
+    );
+
+    if ( empty( $paystack ) && isset( $room_paystack_map[ $room ] ) ) {
+        $paystack = $room_paystack_map[ $room ];
+    }
+    if ( empty( $paystack ) ) {
+        $paystack = 'https://paystack.com/buy/deluxe-room-avbdle';
+    }
+
+    // Prepare Executive HTML Email
+    $to = array( 'kelvincameo73@gmail.com', get_option( 'admin_email' ) );
+    $subject = sprintf( '[New Room Booking] %s - %s (%s to %s)', $room, $name, $checkin, $checkout );
+
+    $clean_phone_digits = preg_replace( '/[^0-9]/', '', $phone );
+    if ( substr( $clean_phone_digits, 0, 1 ) === '0' ) {
+        $whatsapp_link = 'https://wa.me/234' . substr( $clean_phone_digits, 1 );
+    } else {
+        $whatsapp_link = 'https://wa.me/' . $clean_phone_digits;
+    }
+
+    $message  = '<!DOCTYPE html><html><body style="font-family: Arial, sans-serif; background:#f8fafc; margin:0; padding:24px; color:#1e293b;">';
+    $message .= '<div style="max-width:600px; margin:0 auto; background:#ffffff; border-radius:12px; overflow:hidden; border:1px solid #e2e8f0; box-shadow:0 4px 15px rgba(0,0,0,0.06);">';
+    $message .= '<div style="background: linear-gradient(135deg, #0b4ea2 0%, #ea580c 100%); padding:24px; text-align:center; color:#ffffff;">';
+    $message .= '<h2 style="margin:0; font-size:22px; font-weight:800; letter-spacing:-0.5px;">KELVIN CAMEO RESORT HOTEL</h2>';
+    $message .= '<p style="margin:4px 0 0; font-size:13px; opacity:0.9;">New Room Reservation Notification • RC: 1613032</p>';
+    $message .= '</div>';
+    $message .= '<div style="padding:28px;">';
+    $message .= '<h3 style="margin:0 0 16px; color:#0b4ea2; font-size:18px;">Reservation Summary</h3>';
+    $message .= '<table style="width:100%; border-collapse:collapse; font-size:14px; margin-bottom:20px;">';
+    $message .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0; color:#64748b; width:40%;"><strong>Selected Room:</strong></td><td style="padding:10px 0; font-weight:700; color:#0f172a;">' . esc_html( $room ) . '</td></tr>';
+    $message .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0; color:#64748b;"><strong>Branch Location:</strong></td><td style="padding:10px 0; color:#0f172a;">' . esc_html( $branch ) . '</td></tr>';
+    $message .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0; color:#64748b;"><strong>Guest Name:</strong></td><td style="padding:10px 0; font-weight:700; color:#0f172a;">' . esc_html( $name ) . '</td></tr>';
+    $message .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0; color:#64748b;"><strong>Phone / WhatsApp:</strong></td><td style="padding:10px 0; color:#0f172a;"><a href="tel:' . esc_attr( $phone ) . '" style="color:#0b4ea2; text-decoration:none; font-weight:700;">' . esc_html( $phone ) . '</a></td></tr>';
+    $message .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0; color:#64748b;"><strong>Email Address:</strong></td><td style="padding:10px 0; color:#0f172a;"><a href="mailto:' . esc_attr( $email ) . '" style="color:#0b4ea2; text-decoration:none;">' . esc_html( $email ) . '</a></td></tr>';
+    $message .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0; color:#64748b;"><strong>Check-In Date:</strong></td><td style="padding:10px 0; font-weight:700; color:#0f172a;">' . esc_html( $checkin ) . '</td></tr>';
+    $message .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0; color:#64748b;"><strong>Check-Out Date:</strong></td><td style="padding:10px 0; font-weight:700; color:#0f172a;">' . esc_html( $checkout ) . '</td></tr>';
+    $message .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0; color:#64748b;"><strong>Stay Duration:</strong></td><td style="padding:10px 0; color:#0f172a;">' . intval( $nights ) . ' Night(s)</td></tr>';
+    $message .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0; color:#64748b;"><strong>Guests:</strong></td><td style="padding:10px 0; color:#0f172a;">' . intval( $guests ) . ' Guest(s)</td></tr>';
+    $message .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0; color:#64748b;"><strong>Estimated Total:</strong></td><td style="padding:10px 0; font-size:16px; font-weight:800; color:#ea580c;">' . esc_html( $total ) . '</td></tr>';
+    $message .= '<tr><td style="padding:10px 0; color:#64748b; vertical-align:top;"><strong>Special Requests:</strong></td><td style="padding:10px 0; color:#334155;">' . nl2br( esc_html( $notes ) ) . '</td></tr>';
+    $message .= '</table>';
+    $message .= '<div style="text-align:center; margin-top:24px;">';
+    $message .= '<a href="' . esc_url( $whatsapp_link ) . '" style="display:inline-block; background:#25D366; color:#ffffff; font-weight:700; padding:12px 24px; border-radius:6px; text-decoration:none; margin-right:10px;">Chat with Guest on WhatsApp</a>';
+    $message .= '<a href="tel:' . esc_attr( $phone ) . '" style="display:inline-block; background:#0b4ea2; color:#ffffff; font-weight:700; padding:12px 24px; border-radius:6px; text-decoration:none;">Call Guest Directly</a>';
+    $message .= '</div>';
+    $message .= '</div>';
+    $message .= '<div style="background:#f1f5f9; padding:14px; text-align:center; font-size:12px; color:#64748b;">';
+    $message .= 'Kelvin Cameo Organization • RC: 1613032 • Automated Booking Gateway';
+    $message .= '</div>';
+    $message .= '</div></body></html>';
+
+    $headers = array(
+        'Content-Type: text/html; charset=UTF-8',
+        'From: Kelvin Cameo Portal <' . get_option( 'admin_email' ) . '>',
+        'Reply-To: ' . $name . ' <' . $email . '>',
+    );
+
+    wp_mail( $to, $subject, $message, $headers );
+
+    // Save in database log
+    $recent_bookings = get_option( 'kc_recent_bookings', array() );
+    if ( ! is_array( $recent_bookings ) ) {
+        $recent_bookings = array();
+    }
+    array_unshift( $recent_bookings, array(
+        'timestamp' => current_time( 'mysql' ),
+        'room'      => $room,
+        'branch'    => $branch,
+        'name'      => $name,
+        'email'     => $email,
+        'phone'     => $phone,
+        'checkin'   => $checkin,
+        'checkout'  => $checkout,
+        'nights'    => $nights,
+        'guests'    => $guests,
+        'total'     => $total,
+        'notes'     => $notes,
+    ) );
+    if ( count( $recent_bookings ) > 100 ) {
+        $recent_bookings = array_slice( $recent_bookings, 0, 100 );
+    }
+    update_option( 'kc_recent_bookings', $recent_bookings, false );
+
+    wp_send_json_success( array(
+        'message'      => 'Booking details recorded! Redirecting to secure Paystack payment...',
+        'paystack_url' => $paystack,
+    ) );
+}
+add_action( 'wp_ajax_kc_room_booking', 'kc_handle_room_booking' );
+add_action( 'wp_ajax_nopriv_kc_room_booking', 'kc_handle_room_booking' );
