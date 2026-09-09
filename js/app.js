@@ -58,18 +58,12 @@ function initMobileDrawer() {
       <div>
         <div class="drawer-header">
           <div style="display:flex; align-items:center; gap:0.65rem;">
-            <div class="brand-emblem-badge" style="width:38px; height:38px;" aria-label="Kelvin Cameo Logo">
-              <svg viewBox="0 0 100 100" width="26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="6" y="6" width="88" height="88" rx="22" fill="#0284c7"/>
-                <circle cx="50" cy="50" r="38" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="6 4" opacity="0.85"/>
-                <path d="M30 24 H39 V76 H30 Z" fill="#ffffff"/>
-                <path d="M39 48 L62 24 H74 L50 51 Z" fill="#f59e0b"/>
-                <path d="M46 47 L72 76 H60 L39 52 Z" fill="#bae6fd"/>
-              </svg>
+            <div class="brand-emblem-badge" style="width:38px; height:38px; border-radius:10px; background:#ffffff;" aria-label="Kelvin Cameo Logo">
+              <img src="/wp-content/themes/kelvincameoall/assets/logo-emblem.png" alt="Kelvin Cameo Monogram" style="width:100%; height:100%; object-fit:cover; border-radius:8px;" onerror="this.src='/assets/logo-emblem.png';" />
             </div>
             <div>
-              <strong style="font-family:var(--font-display); font-size:1.05rem; color:var(--sky-900);">KELVIN CAMEO</strong>
-              <div style="font-size:0.65rem; color:var(--sky-600); font-weight:700;">RC: 1613032</div>
+              <strong style="font-family:var(--font-display); font-size:1.05rem; color:var(--cobalt-900);">KELVIN <span style="color:var(--orange-500);">CAMEO</span></strong>
+              <div style="font-size:0.65rem; color:var(--cobalt-700); font-weight:700;">RC: 1613032</div>
             </div>
           </div>
           <button id="closeDrawerBtn" class="modal-close-btn" style="position:static;" aria-label="Close Navigation">✕</button>
