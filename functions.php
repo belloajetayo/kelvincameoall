@@ -92,6 +92,17 @@ function kelvin_cameo_scripts() {
         $js_version,
         true
     );
+
+    wp_localize_script(
+        'kelvin-cameo-app-js',
+        'kcData',
+        array(
+            'ajax_url'  => admin_url( 'admin-ajax.php' ),
+            'nonce'     => wp_create_nonce( 'kc_booking_nonce' ),
+            'home_url'  => home_url( '/' ),
+            'hotel_num' => '+2348055558197',
+        )
+    );
 }
 add_action( 'wp_enqueue_scripts', 'kelvin_cameo_scripts' );
 
