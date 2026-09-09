@@ -257,7 +257,7 @@ get_header();
         <!-- 2. Real Estate & Infrastructure Card -->
         <article class="sector-mega-card card-estate">
           <div class="sector-card-media">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/cameo-duplex-construction.jpg' ); ?>" alt="Kelvin Cameo Real Estate Duplex Developments" loading="lazy">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/cameo-real-estate-luxury.jpg' ); ?>" alt="Kelvin Cameo Real Estate - Luxury Smart Estates & Serviced Plots" loading="lazy">
             <span class="sector-pill-badge badge-estate">Division 02 • Real Estate</span>
           </div>
           <div class="sector-card-body">
