@@ -266,7 +266,7 @@
                   </div>
                   <div class="mega-card-content">
                     <h4>Rooms & Suites <span class="mega-badge">From ₦25,000</span></h4>
-                    <p>10 room tiers across The Annex & Main Hotel with Paystack checkout.</p>
+                    <p>10 room tiers across Main Hotel & The Annex with Paystack checkout.</p>
                   </div>
                 </a>
                 <a href="<?php echo kc_url('hospitality'); ?>#banquet" class="mega-link-card">
