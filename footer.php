@@ -54,8 +54,8 @@
         <div class="footer-col">
           <h5>Resort & Events</h5>
           <ul class="footer-links">
-            <li><a href="<?php echo kc_url('hospitality'); ?>#rooms" class="footer-link">The Annex Rooms (From ₦25,000)</a></li>
             <li><a href="<?php echo kc_url('hospitality'); ?>#rooms" class="footer-link">Main Hotel Suites (From ₦50,000)</a></li>
+            <li><a href="<?php echo kc_url('hospitality'); ?>#rooms" class="footer-link">The Annex Rooms (From ₦25,000)</a></li>
             <li><a href="<?php echo kc_url('hospitality'); ?>#rooms" class="footer-link">Luxury Apartments (From ₦160,000)</a></li>
             <li><a href="<?php echo kc_url('hospitality'); ?>#banquet" class="footer-link">Banquet Hall Packages</a></li>
             <li><a href="<?php echo kc_url('hospitality'); ?>#amenities" class="footer-link">Swimming Pool & Dining</a></li>
