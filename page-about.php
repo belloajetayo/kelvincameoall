@@ -40,7 +40,12 @@ get_header();
     <div class="container">
       <div class="split-media-grid">
         <div>
-          <span class="section-badge" style="background:rgba(242,92,5,0.15); color:var(--orange-600);">Our Corporate Identity</span>
+          <div style="display:inline-flex; align-items:center; gap:0.75rem; margin-bottom:0.75rem;">
+            <div class="brand-emblem-badge" style="width:42px; height:42px;" aria-label="Kelvin Cameo Logo">
+              <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/logo-emblem.png' ); ?>" alt="Kelvin Cameo Monogram" class="brand-emblem-img" width="42" height="42" />
+            </div>
+            <span class="section-badge" style="background:rgba(234,88,12,0.12); color:var(--orange-600); margin:0;">Our Corporate Identity • RC: 1613032</span>
+          </div>
           <h2 class="section-title" style="margin-top:0.5rem;">An Indigenous Conglomerate Built on Resilient Foundations</h2>
           <p style="color:var(--slate-600); line-height:1.75; margin-bottom:1.25rem;">
             Registered under the laws of the Federal Republic of Nigeria (<strong>RC: 1613032</strong>), Kelvin Cameo began with a resolute determination: to build indigenous businesses that deliver world-class products, generate sustainable youth employment, and drive grassroots infrastructural advancement.
