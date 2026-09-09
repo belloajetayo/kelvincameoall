@@ -343,15 +343,7 @@ function kc_handle_room_booking() {
     $message .= '</div>';
     $message .= '</div></body></html>';
 
-    $headers = array(
-        'Content-Type: text/html; charset=UTF-8',
-        'From: Kelvin Cameo Portal <' . get_option( 'admin_email' ) . '>',
-        'Reply-To: ' . $name . ' <' . $email . '>',
-    );
-
-    wp_mail( $to, $subject, $message, $headers );
-
-    // Save in database log
+    // Always log reservation to database first so booking is never lost
     $recent_bookings = get_option( 'kc_recent_bookings', array() );
     if ( ! is_array( $recent_bookings ) ) {
         $recent_bookings = array();
@@ -375,9 +367,26 @@ function kc_handle_room_booking() {
     }
     update_option( 'kc_recent_bookings', $recent_bookings, false );
 
+    $headers = array(
+        'Content-Type: text/html; charset=UTF-8',
+        'From: Kelvin Cameo Portal <' . get_option( 'admin_email' ) . '>',
+        'Reply-To: ' . $name . ' <' . $email . '>',
+    );
+
+    // Attempt email dispatch (gracefully caught if host disabled mail() before SMTP setup)
+    $mail_sent = false;
+    try {
+        if ( function_exists( 'mail' ) || has_action( 'phpmailer_init' ) ) {
+            $mail_sent = @wp_mail( $to, $subject, $message, $headers );
+        }
+    } catch ( \Throwable $e ) {
+        error_log( '[Kelvin Cameo Booking] Mail notice: ' . $e->getMessage() );
+    }
+
     wp_send_json_success( array(
         'message'      => 'Booking details recorded! Redirecting to secure Paystack payment...',
         'paystack_url' => $paystack,
+        'mail_sent'    => $mail_sent,
     ) );
 }
 add_action( 'wp_ajax_kc_room_booking', 'kc_handle_room_booking' );
