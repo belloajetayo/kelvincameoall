@@ -85,8 +85,17 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="page-hero hero-resort">
-    <div class="container">
+  <section class="page-hero hero-resort" style="position: relative; overflow: hidden;">
+    <!-- Moving Exterior Background Slideshow -->
+    <div class="hero-moving-bg-slider" aria-hidden="true">
+      <div class="hero-bg-slide active" style="background-image: url('assets/photos/resort/exterior.jpg');"></div>
+      <div class="hero-bg-slide" style="background-image: url('assets/photos/resort/evening.jpg');"></div>
+      <div class="hero-bg-slide" style="background-image: url('assets/photos/resort/entrance.jpg');"></div>
+      <div class="hero-bg-slide" style="background-image: url('assets/photos/resort/annex.jpg');"></div>
+      <div class="hero-bg-overlay"></div>
+    </div>
+
+    <div class="container" style="position: relative; z-index: 2;">
       <div class="page-hero-inner">
         <div class="breadcrumb-row">
           <a href="index.html">Home</a>
