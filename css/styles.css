@@ -5,48 +5,64 @@
    ========================================================================== */
 
 :root {
-  /* Brand Core - Sky Blue Modern Theme */
-  --sky-950: #082f49;
-  --sky-900: #0c4a6e;
-  --sky-800: #075985;
-  --sky-700: #0369a1;
-  --sky-600: #0284c7;
-  --sky-500: #0ea5e9;
-  --sky-400: #38bdf8;
-  --sky-300: #7dd3fc;
-  --sky-200: #bae6fd;
-  --sky-100: #e0f2fe;
-  --sky-50:  #f0f9ff;
+  /* Brand Core - Official 3D Monogram Royal Cobalt & Terracotta Orange */
+  --cobalt-950: #04142b;
+  --cobalt-900: #072247;
+  --cobalt-800: #0a336a;
+  --cobalt-700: #0b4ea2; /* Official 3D Monogram Royal Cobalt */
+  --cobalt-600: #105dc3;
+  --cobalt-500: #1a73e8;
+  --cobalt-400: #428cf4;
+  --cobalt-300: #7eb3f9;
+  --cobalt-200: #bad7fc;
+  --cobalt-100: #e3effd;
+  --cobalt-50:  #f3f8fe;
 
-  /* Remap Dark Navy to modern Sky Blue & Deep Cobalt */
-  --navy-950: #082f49;
-  --navy-900: #0c4a6e;
-  --navy-800: #075985;
-  --navy-700: #0369a1;
-  --navy-600: #0284c7;
+  /* Aliases mapped to Cobalt Blue system */
+  --sky-950: #04142b;
+  --sky-900: #072247;
+  --sky-800: #0a336a;
+  --sky-700: #0b4ea2;
+  --sky-600: #105dc3;
+  --sky-500: #1a73e8;
+  --sky-400: #428cf4;
+  --sky-300: #7eb3f9;
+  --sky-200: #bad7fc;
+  --sky-100: #e3effd;
+  --sky-50:  #f3f8fe;
+
+  --navy-950: #04142b;
+  --navy-900: #072247;
+  --navy-800: #0a336a;
+  --navy-700: #0b4ea2;
+  --navy-600: #105dc3;
   
-  --orange-600: #d44900;
-  --orange-500: #f25c05;
-  --orange-400: #ff7626;
-  --orange-100: #ffeedd;
-  --orange-50: #fff7f0;
+  /* Terracotta Sunset Orange (Official 3D Monogram Frame & Accent) */
+  --orange-700: #b43d00;
+  --orange-600: #c2410c;
+  --orange-500: #ea580c; /* Official 3D Monogram Terracotta Orange */
+  --orange-400: #f97316;
+  --orange-300: #fb923c;
+  --orange-200: #fed7aa;
+  --orange-100: #ffedd5;
+  --orange-50:  #fff7ed;
 
   /* Sector Accents */
-  --energy-orange: #f25c05;
+  --energy-orange: #ea580c;
   --energy-amber: #f59e0b;
-  --energy-glow: rgba(242, 92, 5, 0.28);
+  --energy-glow: rgba(234, 88, 12, 0.28);
 
-  --estate-gold: #0284c7;
-  --estate-champagne: #38bdf8;
-  --estate-glow: rgba(2, 132, 199, 0.25);
+  --estate-gold: #0b4ea2;
+  --estate-champagne: #ea580c;
+  --estate-glow: rgba(11, 78, 162, 0.25);
 
   --agro-emerald: #059669;
   --agro-green: #10b981;
   --agro-glow: rgba(16, 185, 129, 0.25);
 
-  --resort-sapphire: #0284c7;
-  --resort-coral: #f25c05;
-  --resort-glow: rgba(14, 165, 233, 0.3);
+  --resort-sapphire: #0b4ea2;
+  --resort-coral: #ea580c;
+  --resort-glow: rgba(234, 88, 12, 0.3);
 
   /* Backgrounds & Neutrals */
   --sand-50: #f8fafc;
@@ -63,23 +79,23 @@
   --slate-200: #e2e8f0;
   --slate-100: #f1f5f9;
 
-  --paystack-blue: #0ea5e9;
+  --paystack-blue: #0b4ea2;
   --whatsapp-green: #25D366;
 
   --white: #ffffff;
   --black: #000000;
 
-  /* Gradients System - Sky Blue & Dribbble Luxury */
-  --gradient-brand: linear-gradient(135deg, #0284c7 0%, #0ea5e9 50%, #38bdf8 100%);
-  --gradient-energy: linear-gradient(135deg, #ea580c 0%, #f59e0b 50%, #ef4444 100%);
-  --gradient-estate: linear-gradient(135deg, #0284c7 0%, #38bdf8 50%, #bae6fd 100%);
+  /* Gradients System - Royal Cobalt & Terracotta Orange */
+  --gradient-brand: linear-gradient(135deg, #0b4ea2 0%, #105dc3 55%, #ea580c 100%);
+  --gradient-energy: linear-gradient(135deg, #c2410c 0%, #ea580c 50%, #f97316 100%);
+  --gradient-estate: linear-gradient(135deg, #072247 0%, #0b4ea2 55%, #ea580c 100%);
   --gradient-agro: linear-gradient(135deg, #059669 0%, #10b981 50%, #84cc16 100%);
-  --gradient-resort: linear-gradient(135deg, #0284c7 0%, #0ea5e9 50%, #f25c05 100%);
-  --gradient-sky-hero: radial-gradient(circle at 15% 20%, rgba(56, 189, 248, 0.45) 0%, transparent 40%),
-                       radial-gradient(circle at 85% 75%, rgba(14, 165, 233, 0.35) 0%, transparent 45%),
-                       linear-gradient(145deg, #075985 0%, #0284c7 45%, #0ea5e9 100%);
-  --gradient-sky-mesh: radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.2) 0px, transparent 50%),
-                       radial-gradient(at 100% 100%, rgba(14, 165, 233, 0.15) 0px, transparent 50%),
+  --gradient-resort: linear-gradient(135deg, #0b4ea2 0%, #1a73e8 45%, #ea580c 100%);
+  --gradient-sky-hero: radial-gradient(circle at 18% 22%, rgba(16, 93, 195, 0.45) 0%, transparent 45%),
+                       radial-gradient(circle at 82% 78%, rgba(234, 88, 12, 0.28) 0%, transparent 45%),
+                       linear-gradient(145deg, #04142b 0%, #072247 45%, #0b4ea2 100%);
+  --gradient-sky-mesh: radial-gradient(at 0% 0%, rgba(11, 78, 162, 0.12) 0px, transparent 50%),
+                       radial-gradient(at 100% 100%, rgba(234, 88, 12, 0.10) 0px, transparent 50%),
                        #f8fafc;
 
   /* Typography */
@@ -88,12 +104,12 @@
   --font-serif: 'Playfair Display', Georgia, serif;
 
   /* Elevations */
-  --shadow-sm: 0 2px 8px rgba(2, 132, 199, 0.06);
-  --shadow-md: 0 8px 24px rgba(2, 132, 199, 0.1);
-  --shadow-lg: 0 16px 40px rgba(2, 132, 199, 0.15);
-  --shadow-xl: 0 24px 60px rgba(2, 132, 199, 0.2);
-  --shadow-orange: 0 10px 25px rgba(242, 92, 5, 0.28);
-  --shadow-sky: 0 12px 35px rgba(14, 165, 233, 0.35);
+  --shadow-sm: 0 2px 8px rgba(11, 78, 162, 0.08);
+  --shadow-md: 0 8px 24px rgba(11, 78, 162, 0.12);
+  --shadow-lg: 0 16px 40px rgba(11, 78, 162, 0.16);
+  --shadow-xl: 0 24px 60px rgba(11, 78, 162, 0.22);
+  --shadow-orange: 0 10px 25px rgba(234, 88, 12, 0.28);
+  --shadow-sky: 0 12px 35px rgba(11, 78, 162, 0.35);
 
   --radius-sm: 8px;
   --radius-md: 14px;
