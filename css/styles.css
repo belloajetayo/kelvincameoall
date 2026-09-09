@@ -222,7 +222,7 @@ ul, ol {
    Top Utility Bar
    ========================================================================== */
 .top-utility-bar {
-  background: linear-gradient(90deg, #075985 0%, #0284c7 60%, #0ea5e9 100%);
+  background: linear-gradient(90deg, #04142b 0%, #072247 50%, #0b4ea2 100%); border-bottom: 2px solid #ea580c;
   color: #ffffff;
   font-size: 0.8125rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
@@ -741,33 +741,33 @@ ul, ol {
 }
 
 .page-hero.hero-energy {
-  background: radial-gradient(circle at 80% 20%, rgba(242, 92, 5, 0.4) 0%, transparent 50%),
-              radial-gradient(circle at 10% 80%, rgba(56, 189, 248, 0.35) 0%, transparent 45%),
-              linear-gradient(145deg, #0369a1 0%, #0284c7 45%, #0ea5e9 100%);
+  background: radial-gradient(circle at 80% 20%, rgba(234, 88, 12, 0.45) 0%, transparent 50%),
+              radial-gradient(circle at 10% 80%, rgba(11, 78, 162, 0.35) 0%, transparent 45%),
+              linear-gradient(145deg, #072247 0%, #0b4ea2 45%, #ea580c 100%);
 }
 
 .page-hero.hero-estate {
-  background: radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.5) 0%, transparent 50%),
-              radial-gradient(circle at 10% 80%, rgba(14, 165, 233, 0.3) 0%, transparent 45%),
-              linear-gradient(145deg, #075985 0%, #0284c7 50%, #38bdf8 100%);
+  background: radial-gradient(circle at 80% 20%, rgba(234, 88, 12, 0.35) 0%, transparent 50%),
+              radial-gradient(circle at 10% 80%, rgba(16, 93, 195, 0.45) 0%, transparent 45%),
+              linear-gradient(145deg, #04142b 0%, #072247 45%, #0b4ea2 100%);
 }
 
 .page-hero.hero-agro {
   background: radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.45) 0%, transparent 50%),
-              radial-gradient(circle at 10% 80%, rgba(56, 189, 248, 0.3) 0%, transparent 45%),
-              linear-gradient(145deg, #065f46 0%, #0284c7 55%, #10b981 100%);
+              radial-gradient(circle at 10% 80%, rgba(11, 78, 162, 0.35) 0%, transparent 45%),
+              linear-gradient(145deg, #04142b 0%, #065f46 55%, #10b981 100%);
 }
 
 .page-hero.hero-resort {
-  background: radial-gradient(circle at 80% 20%, rgba(242, 92, 5, 0.4) 0%, transparent 50%),
-              radial-gradient(circle at 10% 80%, rgba(56, 189, 248, 0.4) 0%, transparent 50%),
-              linear-gradient(145deg, #0369a1 0%, #0ea5e9 50%, #38bdf8 100%);
+  background: radial-gradient(circle at 80% 20%, rgba(234, 88, 12, 0.45) 0%, transparent 50%),
+              radial-gradient(circle at 10% 80%, rgba(11, 78, 162, 0.45) 0%, transparent 50%),
+              linear-gradient(145deg, #04142b 0%, #0b4ea2 50%, #ea580c 100%);
 }
 
 .page-hero.hero-about {
   background: radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.45) 0%, transparent 50%),
               radial-gradient(circle at 10% 80%, rgba(14, 165, 233, 0.35) 0%, transparent 50%),
-              linear-gradient(145deg, #075985 0%, #0284c7 50%, #0ea5e9 100%);
+              linear-gradient(145deg, #0a336a 0%, #0b4ea2 50%, #1a73e8 100%);
 }
 
 .page-hero-inner {
@@ -1383,7 +1383,7 @@ ul, ol {
 
 /* Footer (Shared - Vibrant Sky Blue Conglomerate Theme) */
 .site-footer {
-  background: linear-gradient(180deg, #0c4a6e 0%, #075985 40%, #0369a1 100%);
+  background: linear-gradient(180deg, #072247 0%, #04142b 100%); border-top: 3px solid #ea580c;
   color: #e0f2fe;
   padding: 5rem 0 2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.15);
@@ -1422,7 +1422,7 @@ ul, ol {
 
 .footer-link {
   font-size: 0.875rem;
-  color: #bae6fd;
+  color: #bad7fc;
   transition: all var(--transition-fast);
 }
 
@@ -1438,7 +1438,7 @@ ul, ol {
   justify-content: space-between;
   padding-top: 2rem;
   font-size: 0.8125rem;
-  color: #bae6fd;
+  color: #bad7fc;
   flex-wrap: wrap;
   gap: 1rem;
 }
@@ -1585,7 +1585,7 @@ ul, ol {
 }
 
 .suite-branch-badge.branch-annex {
-  border-color: #38bdf8;
+  border-color: #7eb3f9;
   color: #e0f2fe;
 }
 
@@ -2360,7 +2360,7 @@ ul, ol {
 }
 
 .exp-tab-pill.active {
-  background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 100%);
+  background: linear-gradient(135deg, #0b4ea2 0%, #1a73e8 100%);
   color: var(--white);
   border-color: transparent;
   box-shadow: 0 10px 25px rgba(14, 165, 233, 0.38);
@@ -2393,7 +2393,7 @@ ul, ol {
   left: 0;
   right: 0;
   height: 5px;
-  background: linear-gradient(90deg, #0284c7 0%, #38bdf8 50%, #f59e0b 100%);
+  background: linear-gradient(90deg, #0b4ea2 0%, #7eb3f9 50%, #f59e0b 100%);
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
 }
 
@@ -2403,7 +2403,7 @@ ul, ol {
   gap: 0.45rem;
   padding: 0.3rem 0.85rem;
   background: #e0f2fe;
-  color: #0284c7;
+  color: #0b4ea2;
   border-radius: 9999px;
   font-size: 0.78rem;
   font-weight: 800;
@@ -2449,7 +2449,7 @@ ul, ol {
   height: 22px;
   border-radius: 50%;
   background: #e0f2fe;
-  color: #0284c7;
+  color: #0b4ea2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2516,7 +2516,7 @@ ul, ol {
   font-family: var(--font-display);
   font-size: 1.25rem;
   font-weight: 800;
-  color: #0284c7;
+  color: #0b4ea2;
 }
 
 /* ==========================================================================
@@ -2548,7 +2548,7 @@ ul, ol {
 .real-talk-card:hover {
   transform: translateY(-8px);
   background: var(--white);
-  border-color: #38bdf8;
+  border-color: #7eb3f9;
   box-shadow: 0 16px 36px rgba(14, 165, 233, 0.15);
 }
 
@@ -2556,7 +2556,7 @@ ul, ol {
   width: 54px;
   height: 54px;
   border-radius: 16px;
-  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  background: linear-gradient(135deg, #e0f2fe 0%, #bad7fc 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2588,7 +2588,7 @@ ul, ol {
   gap: 0.35rem;
   font-size: 0.75rem;
   font-weight: 700;
-  color: #0284c7;
+  color: #0b4ea2;
   background: #e0f2fe;
   padding: 0.3rem 0.75rem;
   border-radius: 9999px;
@@ -2640,7 +2640,7 @@ ul, ol {
 
 .concierge-chip-btn:hover {
   background: rgba(255, 255, 255, 0.14);
-  border-color: #38bdf8;
+  border-color: #7eb3f9;
   transform: translateX(4px);
 }
 
@@ -2707,7 +2707,7 @@ ul, ol {
 .faq-chevron {
   width: 20px;
   height: 20px;
-  color: #0284c7;
+  color: #0b4ea2;
   transition: transform var(--transition-fast);
   flex-shrink: 0;
 }
