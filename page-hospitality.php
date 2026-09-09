@@ -93,34 +93,28 @@ get_header();
         </p>
       </div>
 
-      <!-- Filter Tabs -->
-      <div class="filter-tabs-wrapper room-tabs">
-        <button type="button" class="tab-btn tab-resort active" data-room-filter="all">All Accommodations (10)</button>
-        <button type="button" class="tab-btn tab-resort" data-room-filter="main">Branch 01: Main Hotel (5)</button>
-        <button type="button" class="tab-btn tab-resort" data-room-filter="annex">Branch 02: The Annex (5)</button>
-      </div>
-
-      <!-- Branch 01 Section Indicator (Main Hotel First) -->
-      <div class="branch-section-bar main-bar">
-        <div class="branch-bar-title-group">
-          <span class="branch-pill main">Branch 01</span>
-          <div>
-            <h3 class="branch-bar-heading">Main Hotel — Luxury Rooms, Boutique Suites & Serviced Residences</h3>
-            <p class="branch-bar-sub">Direct access to the swimming pool, gourmet restaurant, cocktail bar, and the 1,000-seat grand banquet auditorium.</p>
-          </div>
+      <!-- Rooms Catalogue Toolbar with Tabs & Controls -->
+      <div class="rooms-catalog-toolbar">
+        <div class="filter-tabs-wrapper room-tabs" style="margin:0;">
+          <button type="button" class="tab-btn tab-resort active" data-room-filter="all">All Accommodations (10)</button>
+          <button type="button" class="tab-btn tab-resort" data-room-filter="main">Branch 01: Main Hotel (5)</button>
+          <button type="button" class="tab-btn tab-resort" data-room-filter="annex">Branch 02: The Annex (5)</button>
         </div>
-        <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
-          <span class="slider-hint-pill">⟵ Scroll to select ⟶</span>
-          <div class="slider-controls">
-            <button type="button" class="slider-nav-btn prev-btn" data-target="mainHotelTrack" aria-label="Previous room">‹</button>
-            <button type="button" class="slider-nav-btn next-btn" data-target="mainHotelTrack" aria-label="Next room">›</button>
-          </div>
-          <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20I%20want%20to%20inquire%20about%20staying%20at%20Branch%2001%20Main%20Hotel" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Inquire Main Hotel</a>
+
+        <div class="rooms-catalog-controls">
+          <span class="slider-hint-pill">👉 Scroll / Swipe Right ⟶</span>
+          <button type="button" class="slider-nav-btn prev-btn" id="roomCatalogPrevBtn" data-target="roomsScrollTrack" aria-label="Previous room">‹</button>
+          <button type="button" class="slider-nav-btn next-btn" id="roomCatalogNextBtn" data-target="roomsScrollTrack" aria-label="Next room">›</button>
         </div>
       </div>
 
-      <!-- Main Hotel Horizontal Scroll Track -->
-      <div class="suites-scroll-track" id="mainHotelTrack">
+      <!-- Unified Horizontal Rooms Catalogue Wrapper -->
+      <div class="rooms-slider-wrapper">
+        <button type="button" class="track-floating-btn prev" id="floatPrevBtn" aria-label="Scroll left">‹</button>
+        <button type="button" class="track-floating-btn next" id="floatNextBtn" aria-label="Scroll right">›</button>
+
+        <!-- Continuous Horizontal Scroll Track -->
+        <div class="suites-scroll-track" id="roomsScrollTrack">
 
         <!-- 1. Love Night Room (Main Hotel) -->
         <article class="suite-card" data-room-cat="main">
