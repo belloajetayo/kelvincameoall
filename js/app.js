@@ -633,7 +633,7 @@ function initConciergeEstimator() {
       if (resultList) {
         resultList.innerHTML = item.details.map(d => `
           <li style="display:flex; align-items:flex-start; gap:0.6rem; font-size:0.875rem; color:#334155; margin-bottom:0.5rem;">
-            <span style="color:#0284c7; font-weight:800;">✓</span>
+            <span style="color:#0b4ea2; font-weight:800;">✓</span>
             <span>${d}</span>
           </li>
         `).join('');
@@ -660,6 +660,66 @@ function initFaqAccordion() {
       if (!isOpen) {
         card.classList.add('open');
       }
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   Google Site Kit & GA4 Smart Conversion Tracking
+   -------------------------------------------------------------------------- */
+function initSiteKitAnalytics() {
+  function sendGaEvent(eventName, params) {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', eventName, params);
+    } else if (window.dataLayer && Array.isArray(window.dataLayer)) {
+      window.dataLayer.push({ event: eventName, ...params });
+    }
+  }
+
+  // Track all WhatsApp clicks
+  document.querySelectorAll('a[href*="wa.me"], a[href*="whatsapp.com"]').forEach(link => {
+    link.addEventListener('click', () => {
+      sendGaEvent('generate_lead', {
+        event_category: 'Engagement',
+        event_label: 'WhatsApp Click',
+        lead_channel: 'WhatsApp',
+        link_url: link.href
+      });
+    });
+  });
+
+  // Track direct telephone calls
+  document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+    link.addEventListener('click', () => {
+      sendGaEvent('contact', {
+        event_category: 'Engagement',
+        event_label: 'Phone Call',
+        lead_channel: 'Phone',
+        phone_number: link.href.replace('tel:', '')
+      });
+    });
+  });
+
+  // Track email clicks
+  document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+    link.addEventListener('click', () => {
+      sendGaEvent('contact', {
+        event_category: 'Engagement',
+        event_label: 'Email Inbound',
+        lead_channel: 'Email'
+      });
+    });
+  });
+
+  // Track Form Submissions & RFP buttons
+  document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', () => {
+      const formId = form.id || form.getAttribute('data-form-type') || 'inquiry-form';
+      sendGaEvent('generate_lead', {
+        event_category: 'Forms',
+        event_label: formId,
+        form_name: formId
+      });
     });
   });
 }
