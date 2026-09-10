@@ -127,7 +127,7 @@ get_header();
         <!-- Layout 1: Authentic Completed Residential Duplex Scheme -->
         <div class="estate-card">
           <div class="estate-img-wrap">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/cameo-duplex-construction.jpg' ); ?>" alt="Kelvin Cameo Building and Construction - Luxury Duplex Compound" loading="lazy">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/cameo-real-estate-luxury.jpg' ); ?>" alt="Kelvin Cameo Building and Construction - Luxury Duplex Compound" loading="lazy">
           </div>
           <div class="estate-body">
             <span class="branch-pill" style="background:var(--estate-gold); color:var(--navy-950); margin-bottom:0.5rem;">Completed Infrastructure & Plots</span>
