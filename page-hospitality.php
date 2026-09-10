@@ -453,22 +453,24 @@ get_header();
       <!-- The Annex Suites Grid (Cards 6–10) -->
       <div class="suites-grid" data-branch-grid="annex">
 
-        <!-- 6. Deluxe Room (Annex) -->
+        <!-- 6. Deluxe Room (Annex - Authentic Photos) -->
         <article class="suite-card" data-room-cat="annex">
           <div class="suite-card-media">
             <span class="suite-branch-badge branch-annex">Branch 02 • The Annex</span>
             <div class="card-media-slider">
               <div class="card-media-slides">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-deluxe.jpg' ); ?>" alt="Deluxe Room at Kelvin Cameo Resort Annex" class="active" loading="lazy">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/single-room.jpg' ); ?>" alt="Deluxe Room Bath and View" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/deluxe-room.jpg' ); ?>" alt="Deluxe Room at Kelvin Cameo Resort Annex" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/deluxe-room-tv.jpg' ); ?>" alt="Deluxe Room Wall TV and Marble Workstation" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/deluxe-room-bath.jpg' ); ?>" alt="Deluxe Room Ensuite Bathroom with Water Heater and Shower" loading="lazy">
               </div>
               <button type="button" class="card-media-nav prev" aria-label="Previous photo">‹</button>
               <button type="button" class="card-media-nav next" aria-label="Next photo">›</button>
               <div class="card-media-dots">
                 <span class="dot active"></span>
                 <span class="dot"></span>
+                <span class="dot"></span>
               </div>
-              <span class="card-media-badge">📷 2 Photos</span>
+              <span class="card-media-badge">📷 3 Photos</span>
             </div>
           </div>
           <div class="suite-card-body">
@@ -476,12 +478,13 @@ get_header();
               <span class="suite-category-label">Standard Luxury</span>
               <h3 class="suite-name">Deluxe Room</h3>
               <p class="suite-desc">
-                Cozy, modern retreat featuring a plush queen bed, ambient mood lighting, ensuite rain shower, and dedicated work desk ideal for solo travelers and short stays.
+                Cozy, modern retreat at The Annex featuring a dedicated marble-top workstation with wardrobe, wall-mounted satellite TV, and contemporary ensuite bathroom with electric water heater and glass shower enclosure.
               </p>
               <div class="suite-amenities-row">
                 <span class="suite-amenity-tag">Queen Bed</span>
-                <span class="suite-amenity-tag">Smart TV</span>
-                <span class="suite-amenity-tag">Air Conditioning</span>
+                <span class="suite-amenity-tag">Workstation Desk</span>
+                <span class="suite-amenity-tag">Water Heater</span>
+                <span class="suite-amenity-tag">Flat LED TV</span>
                 <span class="suite-amenity-tag">Ensuite Bath</span>
               </div>
             </div>
@@ -495,7 +498,7 @@ get_header();
                   data-room-name="Deluxe Room"
                   data-room-price="25000"
                   data-room-branch="Branch 02 • The Annex"
-                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-deluxe.jpg' ); ?>"
+                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/deluxe-room.jpg' ); ?>"
                   data-paystack-url="https://paystack.com/buy/deluxe-room-fgzwtc">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
