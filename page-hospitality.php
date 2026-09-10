@@ -271,36 +271,39 @@ get_header();
           </div>
         </article>
 
-        <!-- 3. Blissful Breeze Suite (Main Hotel) -->
+        <!-- 3. Blissful Breeze Suite (Main Hotel - Authentic Photos) -->
         <article class="suite-card" data-room-cat="main">
           <div class="suite-card-media">
             <span class="suite-branch-badge branch-main">Branch 01 • Main Hotel</span>
             <div class="card-media-slider">
               <div class="card-media-slides">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-purple.jpg' ); ?>" alt="Blissful Breeze Suite at Kelvin Cameo Resort" class="active" loading="lazy">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/suite-lounge.jpg' ); ?>" alt="Blissful Breeze Lounge Area" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/blissful-breeze-suite.jpg' ); ?>" alt="Blissful Breeze Suite Living Parlor at Kelvin Cameo Resort Hotel" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/blissful-breeze-bedroom.jpg' ); ?>" alt="Blissful Breeze Suite Bedroom" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/blissful-breeze-desk.jpg' ); ?>" alt="Blissful Breeze Suite Work Desk and Minibar" loading="lazy">
               </div>
               <button type="button" class="card-media-nav prev" aria-label="Previous photo">‹</button>
               <button type="button" class="card-media-nav next" aria-label="Next photo">›</button>
               <div class="card-media-dots">
                 <span class="dot active"></span>
                 <span class="dot"></span>
+                <span class="dot"></span>
               </div>
-              <span class="card-media-badge">📷 2 Photos</span>
+              <span class="card-media-badge">📷 3 Photos</span>
             </div>
           </div>
           <div class="suite-card-body">
             <div>
-              <span class="suite-category-label">Boutique Luxury Suite</span>
+              <span class="suite-category-label">Executive Living Suite</span>
               <h3 class="suite-name">Blissful Breeze Suite</h3>
               <p class="suite-desc">
-                Spacious boutique suite commanding courtyard views. Features a private foyer, oversized king bed, executive lounge armchair, minibar fridge, and spa-inspired bath.
+                Spacious multi-room luxury suite featuring a private living room parlor with plush L-shaped sectional sofa, modern wall art, fluted acoustic panel with smart TV, and ensuite master bedroom with dedicated workstation and minibar fridge.
               </p>
               <div class="suite-amenities-row">
-                <span class="suite-amenity-tag">Courtyard View</span>
-                <span class="suite-amenity-tag">Minibar</span>
-                <span class="suite-amenity-tag">Lounge Seating</span>
-                <span class="suite-amenity-tag">Spa Bath</span>
+                <span class="suite-amenity-tag">Private Parlor</span>
+                <span class="suite-amenity-tag">Sectional Sofa</span>
+                <span class="suite-amenity-tag">Work Desk</span>
+                <span class="suite-amenity-tag">Minibar Fridge</span>
+                <span class="suite-amenity-tag">Split AC</span>
               </div>
             </div>
             <div class="suite-footer">
@@ -313,7 +316,7 @@ get_header();
                   data-room-name="Blissful Breeze Suite"
                   data-room-price="60000"
                   data-room-branch="Branch 01 • Main Hotel"
-                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-purple.jpg' ); ?>"
+                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/blissful-breeze-suite.jpg' ); ?>"
                   data-paystack-url="https://paystack.com/buy/blissful-breeze-suite-jrcwry">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
