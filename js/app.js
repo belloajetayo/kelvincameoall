@@ -44,8 +44,8 @@ function initNavbarScroll() {
    Mobile Navigation Drawer
    -------------------------------------------------------------------------- */
 function initMobileDrawer() {
-  const toggleBtn = document.querySelector('.mobile-toggle');
-  if (!toggleBtn) return;
+  const toggleBtns = document.querySelectorAll('.mobile-toggle');
+  if (!toggleBtns.length) return;
 
   let drawer = document.getElementById('mobileNavDrawer');
   let backdrop = document.getElementById('drawerBackdrop');
@@ -108,7 +108,7 @@ function initMobileDrawer() {
     document.body.style.overflow = '';
   }
 
-  toggleBtn.addEventListener('click', openDrawer);
+  toggleBtns.forEach(btn => btn.addEventListener('click', openDrawer));
   backdrop.addEventListener('click', closeDrawer);
   if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
 
@@ -709,7 +709,21 @@ function openInquiryModal(details = {}) {
   }
 
   if (noteField && details.suiteName) {
-    noteField.value = `Interested in reserving: ${details.suiteName}. Please confirm current weekday/weekend tariff and availability.`;
+    const sType = details.serviceType || '';
+    if (sType === 'realestate' || sType === 'estate') {
+      noteField.value = `Interested in acquiring/inspecting: ${details.suiteName}. Please send layout map, title verification, and payment plan options.`;
+    } else if (sType === 'energy') {
+      noteField.value = `Interested in commercial energy inquiry: ${details.suiteName}. Please provide franchise terms and wholesale tariff.`;
+    } else if (sType === 'agriculture' || sType === 'agro') {
+      noteField.value = `Interested in agricultural commodity off-take: ${details.suiteName}. Please send current bulk supply pricing.`;
+    } else {
+      noteField.value = `Interested in reserving: ${details.suiteName}. Please confirm current weekday/weekend tariff and availability.`;
+    }
+  }
+
+  if (noteField && (details.checkin || details.checkout)) {
+    const datesInfo = `Requested Dates: Check-in ${details.checkin || 'N/A'} to Check-out ${details.checkout || 'N/A'} (${details.guests || '1-2'} guests)`;
+    noteField.value = noteField.value ? `${noteField.value}\n${datesInfo}` : datesInfo;
   }
 
   modal.classList.add('active');
@@ -893,6 +907,28 @@ const experienceData = {
   }
 };
 
+function getSectorUrl(sector) {
+  if (typeof kcData !== 'undefined' && kcData[sector + '_url']) {
+    return kcData[sector + '_url'];
+  }
+  if (window.location.pathname.endsWith('.html')) {
+    const map = {
+      energy: 'energy.html',
+      estate: 'real-estate.html',
+      agro: 'agriculture.html',
+      resort: 'hospitality.html'
+    };
+    return map[sector] || (sector + '.html');
+  }
+  const slugMap = {
+    energy: '/energy/',
+    estate: '/real-estate/',
+    agro: '/agriculture/',
+    resort: '/hospitality/'
+  };
+  return slugMap[sector] || ('/' + sector + '/');
+}
+
 function initExperiencePicker() {
   const tabPills = document.querySelectorAll('.exp-tab-pill');
   if (!tabPills.length) return;
@@ -929,7 +965,7 @@ function initExperiencePicker() {
         if (realTalk) realTalk.textContent = data.realTalk;
         if (ctaBtn) {
           ctaBtn.textContent = data.ctaText;
-          ctaBtn.href = data.ctaLink;
+          ctaBtn.href = getSectorUrl(sector);
         }
         if (whatsappBtn) {
           whatsappBtn.href = `https://wa.me/2348055558197?text=${encodeURIComponent(data.whatsappMsg)}`;

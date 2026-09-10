@@ -135,7 +135,7 @@ get_header();
             <p>Authentic master-built contemporary duplex residences and serviced plots featuring perimeter fencing, gated security access, paved drainage, and solar power.</p>
             <div style="display:flex; justify-content:space-between; align-items:center; padding-top:1rem; border-top:1px solid var(--slate-100);">
               <span style="font-weight:800; font-size:1.15rem; color:var(--navy-900);">Title: C of O / Gazette</span>
-              <button class="btn btn-estate btn-sm" data-modal="inquiryModal">Request Layout</button>
+              <button class="btn btn-estate btn-sm" data-modal="inquiryModal" data-service="realestate" data-suite-name="Cameo Imperial Residential Enclave">Request Layout</button>
             </div>
           </div>
         </div>
@@ -151,7 +151,7 @@ get_header();
             <p>Prime commercial frontage directly on the major transit highway, pre-approved for retail petrol filling stations, warehousing, and corporate plazas.</p>
             <div style="display:flex; justify-content:space-between; align-items:center; padding-top:1rem; border-top:1px solid var(--slate-100);">
               <span style="font-weight:800; font-size:1.15rem; color:var(--navy-900);">Commercial Title</span>
-              <button class="btn btn-estate btn-sm" data-modal="inquiryModal">Inquire Plots</button>
+              <button class="btn btn-estate btn-sm" data-modal="inquiryModal" data-service="realestate" data-suite-name="Cameo Highway Commercial Park">Inquire Plots</button>
             </div>
           </div>
         </div>
@@ -167,7 +167,7 @@ get_header();
             <p>Picturesque expansive retreat plots for luxury country residences, hobby farms, and private vacation compounds located just outside the city center.</p>
             <div style="display:flex; justify-content:space-between; align-items:center; padding-top:1rem; border-top:1px solid var(--slate-100);">
               <span style="font-weight:800; font-size:1.15rem; color:var(--navy-900);">Freehold Deed</span>
-              <button class="btn btn-estate btn-sm" data-modal="inquiryModal">Inquire Plots</button>
+              <button class="btn btn-estate btn-sm" data-modal="inquiryModal" data-service="realestate" data-suite-name="Cameo Sovereign Country Estates">Inquire Plots</button>
             </div>
           </div>
         </div>

@@ -97,10 +97,16 @@ function kelvin_cameo_scripts() {
         'kelvin-cameo-app-js',
         'kcData',
         array(
-            'ajax_url'  => admin_url( 'admin-ajax.php' ),
-            'nonce'     => wp_create_nonce( 'kc_booking_nonce' ),
-            'home_url'  => home_url( '/' ),
-            'hotel_num' => '+2348055558197',
+            'ajax_url'    => admin_url( 'admin-ajax.php' ),
+            'nonce'       => wp_create_nonce( 'kc_booking_nonce' ),
+            'home_url'    => home_url( '/' ),
+            'energy_url'  => kc_url( 'energy' ),
+            'estate_url'  => kc_url( 'real-estate' ),
+            'agro_url'    => kc_url( 'agriculture' ),
+            'resort_url'  => kc_url( 'hospitality' ),
+            'about_url'   => kc_url( 'about' ),
+            'contact_url' => kc_url( 'contact' ),
+            'hotel_num'   => '+2348055558197',
         )
     );
 }
@@ -471,3 +477,15 @@ function kc_handle_inquiry_submission() {
 }
 add_action( 'wp_ajax_kc_submit_inquiry', 'kc_handle_inquiry_submission' );
 add_action( 'wp_ajax_nopriv_kc_submit_inquiry', 'kc_handle_inquiry_submission' );
+
+/**
+ * Automatically 301-redirect all 404 (Not Found) requests directly to the homepage.
+ */
+function kc_redirect_404_to_homepage() {
+    if ( is_404() ) {
+        wp_safe_redirect( home_url( '/' ), 301 );
+        exit;
+    }
+}
+add_action( 'template_redirect', 'kc_redirect_404_to_homepage' );
+
