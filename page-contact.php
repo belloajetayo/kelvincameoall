@@ -64,7 +64,7 @@ get_header();
             </div>
             <div>
               <h4 style="font-size:1.1rem; font-weight:800; color:var(--navy-900); margin-bottom:0.25rem;">Corporate Email</h4>
-              <p style="font-size:0.875rem; color:var(--slate-600); margin-bottom:0.5rem;">Formal RFPs, partnership proposals, and billing verifications.</p>
+              <p style="font-size:0.875rem; color:var(--slate-600); margin-bottom:0.5rem;">Business proposals, partnership requests, and official inquiries.</p>
               <a href="mailto:kelvincameo73@gmail.com" style="font-weight:700; color:var(--navy-900); font-size:0.95rem;">kelvincameo73@gmail.com</a>
             </div>
           </div>

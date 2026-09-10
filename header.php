@@ -313,7 +313,7 @@
             Room Rates
           </a>
           <button class="btn btn-primary btn-sm" data-modal="inquiryModal">
-            Corporate RFP
+            Partner With Us
           </button>
           <button class="mobile-toggle" aria-label="Toggle navigation menu">
             <span></span>

@@ -113,8 +113,8 @@
       
       <div class="modal-header" style="margin-bottom: 1.5rem;">
         <span class="rc-badge" style="margin-bottom:0.5rem; display:inline-flex;">RC: 1613032</span>
-        <h3 style="font-family:var(--font-display); font-size: 1.5rem; font-weight: 800; color: var(--navy-900);">Kelvin Cameo Corporate RFP</h3>
-        <p style="font-size: 0.875rem; color: var(--slate-600);">Select your division of interest. Our executive desk will follow up promptly.</p>
+        <h3 style="font-family:var(--font-display); font-size: 1.5rem; font-weight: 800; color: var(--navy-900);">Partner With Us / Request a Quote</h3>
+        <p style="font-size: 0.875rem; color: var(--slate-600);">Tell us what your business or project needs. Our management team will follow up with an official quotation promptly.</p>
       </div>
 
       <form id="reservationRfpForm">
@@ -126,7 +126,7 @@
             <option value="agriculture">Kelvin Cameo Agriculture (Bulk Commodity Purchase / Farm Produce)</option>
             <option value="resort">Kelvin Cameo Resort Hotel (Room Stays from ₦25,000)</option>
             <option value="banquet">Kelvin Cameo 1,000-Seat Banquet Hall (₦1.05M / ₦850k)</option>
-            <option value="corporate">General Strategic Partnership / Institutional RFP</option>
+            <option value="corporate">General Business Partnership / Corporate Inquiry</option>
           </select>
         </div>
 

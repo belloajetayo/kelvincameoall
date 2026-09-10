@@ -37,7 +37,7 @@ get_header();
             Chat on WhatsApp
           </a>
           <button type="button" class="btn btn-outline-white btn-lg" data-open-modal="inquiry">
-            Submit Corporate RFP
+            Request a Business Quote
           </button>
         </div>
 
@@ -238,7 +238,7 @@ get_header();
                 Explore Energy Division
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
-              <a href="<?php echo kc_url('energy'); ?>#dealership" class="btn btn-energy btn-sm">Franchise RFP</a>
+              <a href="<?php echo kc_url('energy'); ?>#dealership" class="btn btn-energy btn-sm">Station Dealership</a>
             </div>
           </div>
         </article>
@@ -595,7 +595,7 @@ get_header();
                   Talk Directly on WhatsApp
                 </a>
                 <button type="button" class="btn btn-primary btn-sm" data-open-modal="inquiry" style="width:100%;">
-                  Submit Official RFP Form
+                  Request a Business Quote
                 </button>
               </div>
             </div>
@@ -691,7 +691,7 @@ get_header();
             Chat on WhatsApp (+234 805 555 8197)
           </a>
           <button type="button" class="btn btn-outline-white btn-lg" data-open-modal="inquiry">
-            Submit Corporate RFP
+            Request a Business Quote
           </button>
         </div>
       </div>

@@ -435,7 +435,7 @@ function kc_handle_inquiry_submission() {
 
     // Send email
     $to = array( 'kelvincameo73@gmail.com', get_option( 'admin_email' ) );
-    $subject = sprintf( '[Corporate Inquiry / RFP] %s - %s', ucfirst( $service ), $name );
+    $subject = sprintf( '[Business Inquiry / Quote] %s - %s', ucfirst( $service ), $name );
     $headers = array(
         'Content-Type: text/html; charset=UTF-8',
         'From: Kelvin Cameo Portal <' . get_option( 'admin_email' ) . '>',
@@ -449,7 +449,7 @@ function kc_handle_inquiry_submission() {
     $msg .= '<div style="max-width:600px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e2e8f0;">';
     $msg .= '<div style="background:linear-gradient(135deg,#0b4ea2,#ea580c);padding:24px;text-align:center;color:#fff;">';
     $msg .= '<h2 style="margin:0;">KELVIN CAMEO ORGANIZATION</h2>';
-    $msg .= '<p style="margin:4px 0 0;font-size:13px;opacity:0.9;">New Inquiry / Corporate RFP • RC: 1613032</p>';
+    $msg .= '<p style="margin:4px 0 0;font-size:13px;opacity:0.9;">New Business Inquiry / Quote Request • RC: 1613032</p>';
     $msg .= '</div>';
     $msg .= '<div style="padding:28px;">';
     $msg .= '<table style="width:100%;border-collapse:collapse;font-size:14px;">';

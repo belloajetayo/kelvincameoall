@@ -261,7 +261,7 @@ get_header();
               <textarea class="form-control" rows="3" placeholder="Specify estimated monthly volume, site coordinates, or requirements..."></textarea>
             </div>
             <button type="submit" class="btn btn-energy btn-lg" style="width:100%;">
-              Submit Energy RFP
+              Request Fuel & Energy Quote
             </button>
           </form>
         </div>

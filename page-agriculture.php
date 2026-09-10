@@ -31,7 +31,7 @@ get_header();
 
         <div style="display:flex; gap:1.25rem; flex-wrap:wrap;">
           <a href="#operations" class="btn btn-agro btn-lg">Explore Farm Operations</a>
-          <a href="#supply-rfp" class="btn btn-outline-white btn-lg">Bulk Supply Off-Take RFP</a>
+          <a href="#supply-rfp" class="btn btn-outline-white btn-lg">Order Bulk Farm Produce</a>
         </div>
       </div>
     </div>
