@@ -506,22 +506,24 @@ get_header();
           </div>
         </article>
 
-        <!-- 7. Executive Room (Annex) -->
+        <!-- 7. Executive Room (The Annex - Authentic Photos) -->
         <article class="suite-card" data-room-cat="annex">
           <div class="suite-card-media">
             <span class="suite-branch-badge branch-annex">Branch 02 • The Annex</span>
             <div class="card-media-slider">
               <div class="card-media-slides">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-executive.jpg' ); ?>" alt="Executive Room at Kelvin Cameo Resort Annex" class="active" loading="lazy">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-deluxe.jpg' ); ?>" alt="Executive Room Layout" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/executive-room.jpg' ); ?>" alt="Executive Room at Kelvin Cameo Resort The Annex" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/executive-room-desk.jpg' ); ?>" alt="Executive Room Work Desk, Wardrobe, and TV" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/executive-room-bath.jpg' ); ?>" alt="Executive Room Ensuite Bathroom with Water Heater and Shower" loading="lazy">
               </div>
               <button type="button" class="card-media-nav prev" aria-label="Previous photo">‹</button>
               <button type="button" class="card-media-nav next" aria-label="Next photo">›</button>
               <div class="card-media-dots">
                 <span class="dot active"></span>
                 <span class="dot"></span>
+                <span class="dot"></span>
               </div>
-              <span class="card-media-badge">📷 2 Photos</span>
+              <span class="card-media-badge">📷 3 Photos</span>
             </div>
           </div>
           <div class="suite-card-body">
@@ -529,12 +531,13 @@ get_header();
               <span class="suite-category-label">Business Executive</span>
               <h3 class="suite-name">Executive Room</h3>
               <p class="suite-desc">
-                Tailored for traveling corporate professionals. Includes an ergonomic work station, ultra-fast fiber Wi-Fi, premium toiletries, and personalized concierge desk service.
+                Authentic corporate executive room featuring a king bed with plush ribbed emerald headboard, bedside intercom telephone, dedicated marble-top workstation with wardrobe and TV, and modern ensuite bathroom with water heater and glass shower enclosure.
               </p>
               <div class="suite-amenities-row">
                 <span class="suite-amenity-tag">King Bed</span>
-                <span class="suite-amenity-tag">Fiber Wi-Fi</span>
-                <span class="suite-amenity-tag">Work Station</span>
+                <span class="suite-amenity-tag">Work Desk</span>
+                <span class="suite-amenity-tag">Water Heater</span>
+                <span class="suite-amenity-tag">Intercom Phone</span>
                 <span class="suite-amenity-tag">24/7 Power</span>
               </div>
             </div>
@@ -548,7 +551,7 @@ get_header();
                   data-room-name="Executive Room"
                   data-room-price="30000"
                   data-room-branch="Branch 02 • The Annex"
-                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-executive.jpg' ); ?>"
+                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/executive-room.jpg' ); ?>"
                   data-paystack-url="https://paystack.com/buy/executive-room-qyjqms">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
