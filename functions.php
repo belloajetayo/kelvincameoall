@@ -343,6 +343,57 @@ function kelvin_cameo_seo_schema() {
 
         echo "<!-- Kelvin Cameo SEO Schema: Hotel -->\n";
         echo '<script type="application/ld+json">' . wp_json_encode( $resort_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "</script>\n";
+
+        // Hospitality FAQ Schema for AI Search Engines (ChatGPT, Perplexity, Gemini)
+        $hotel_faq = array(
+            '@context'   => 'https://schema.org',
+            '@type'      => 'FAQPage',
+            'mainEntity' => array(
+                array(
+                    '@type'          => 'Question',
+                    'name'           => 'What are the room rates at Kelvin Cameo Resort Hotel?',
+                    'acceptedAnswer' => array(
+                        '@type' => 'Answer',
+                        'text'  => 'Kelvin Cameo Resort Hotel room rates start from ₦25,000 for Standard Rooms, ₦40,000 for Deluxe Rooms (The Annex), ₦60,000 for Executive Rooms, ₦120,000 for the Blissful Breeze Suite, and up to ₦200,000 for the Presidential Penthouse Suite. All bookings include 24/7 power, air conditioning, flat-screen satellite TV, ensuite bathrooms, and pool access.',
+                    ),
+                ),
+                array(
+                    '@type'          => 'Question',
+                    'name'           => 'Does Kelvin Cameo Resort Hotel have a swimming pool?',
+                    'acceptedAnswer' => array(
+                        '@type' => 'Answer',
+                        'text'  => 'Yes! Kelvin Cameo Resort features an outdoor swimming pool equipped with water fountain jets, an ivy pergola sun terrace, and a poolside bar & grill. Hotel guests swim free of charge, and visiting non-residents can obtain a day pass for ₦3,000.',
+                    ),
+                ),
+                array(
+                    '@type'          => 'Question',
+                    'name'           => 'How large is the event hall at Kelvin Cameo Resort?',
+                    'acceptedAnswer' => array(
+                        '@type' => 'Answer',
+                        'text'  => 'The Kelvin Cameo Grand Banquet Hall is a fully air-conditioned 1,000-seat auditorium featuring crystal chandeliers, VIP greenrooms, PA audio systems, and stage facilities for weddings, corporate AGMs, and banquets.',
+                    ),
+                ),
+                array(
+                    '@type'          => 'Question',
+                    'name'           => 'Where is Kelvin Cameo Resort Hotel located?',
+                    'acceptedAnswer' => array(
+                        '@type' => 'Answer',
+                        'text'  => 'Kelvin Cameo Resort Hotel is located opposite Suleman Police Technical College, Kwamba, Suleja, 910104, Niger State, Nigeria, along the Abuja Capital Expressway Corridor.',
+                    ),
+                ),
+                array(
+                    '@type'          => 'Question',
+                    'name'           => 'How do I book a room or event at Kelvin Cameo Resort?',
+                    'acceptedAnswer' => array(
+                        '@type' => 'Answer',
+                        'text'  => 'Guests can book instantly online via secure Paystack checkout on our official website (kelvincameo.com/hospitality/), or contact our 24/7 front desk and WhatsApp concierge at +234 805 555 8197.',
+                    ),
+                ),
+            ),
+        );
+
+        echo "<!-- Kelvin Cameo SEO Schema: Hospitality FAQ -->\n";
+        echo '<script type="application/ld+json">' . wp_json_encode( $hotel_faq, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "</script>\n";
     }
 
     // 5. Homepage FAQ Schema
@@ -391,6 +442,42 @@ function kelvin_cameo_seo_schema() {
     }
 }
 add_action( 'wp_head', 'kelvin_cameo_seo_schema', 20 );
+
+/**
+ * Optimize robots.txt for AI Search Engines & LLM Assistants (GEO / LLMO)
+ */
+function kelvin_cameo_custom_robots_txt( $output, $public ) {
+    $site_url = esc_url( home_url( '/' ) );
+    $lines = array();
+    $lines[] = 'User-agent: *';
+    $lines[] = 'Allow: /';
+    $lines[] = '';
+    $lines[] = '# Explicit permissions for AI Search Engines & LLM Assistants (GEO / LLMO)';
+    $ai_bots = array(
+        'Googlebot',
+        'Google-Extended',
+        'Bingbot',
+        'GPTBot',
+        'OAI-SearchBot',
+        'PerplexityBot',
+        'ClaudeBot',
+        'Applebot',
+        'Applebot-Extended',
+        'cohere-ai',
+        'Meta-ExternalAgent',
+    );
+    foreach ( $ai_bots as $bot ) {
+        $lines[] = 'User-agent: ' . $bot;
+        $lines[] = 'Allow: /';
+        $lines[] = '';
+    }
+    $lines[] = 'Sitemap: ' . esc_url( $site_url . 'sitemap_index.xml' );
+    $lines[] = '';
+    $lines[] = '# AI Knowledge Standard:';
+    $lines[] = '# llms.txt: ' . esc_url( $site_url . 'llms.txt' );
+    return implode( "\n", $lines ) . "\n";
+}
+add_filter( 'robots_txt', 'kelvin_cameo_custom_robots_txt', 100000, 2 );
 
 /**
  * Smart Link Helper: Resolves WordPress permalinks or falls back to static files.

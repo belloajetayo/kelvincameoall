@@ -1,0 +1,49 @@
+﻿# Kelvin Cameo Organization
+
+> Kelvin Cameo Organization (RC: 1613032) is a premier diversified Nigerian corporate conglomerate operating in Luxury Hospitality (Kelvin Cameo Resort Hotel & Suites), Petroleum Downstream Retail & Bulk Haulage (Kelvin Cameo Energy), Commercial Real Estate Developments, and Mechanized Agriculture. Corporate headquarters and flagship resort are located opposite Suleman Police Technical College, Kwamba, Suleja, Niger State, Nigeria (along the Abuja Capital Expressway Corridor).
+
+## Core Business Divisions & Official Links
+
+- [Kelvin Cameo Resort Hotel & Suites](https://kelvincameo.com/hospitality/): Premier luxury hotel, boutique suites (₦25,000 - ₦200,000/night), swimming pool with fountain jets and ivy pergola terrace, Cameo restaurant & sports bar, billiards lounge, and 1,000-seat grand banquet auditorium. Direct reservations: +234 805 555 8197.
+- [Kelvin Cameo Energy](https://kelvincameo.com/energy/): Downstream petroleum retail stations, certified digital pump calibration (100% accurate measurement guarantee), bulk diesel haulage fleet (33,000L - 45,000L heavy tankers), mobile dispenser pedier trucks for diesel at company doorsteps, and clean LPG gas skid plants across Niger State and Abuja corridor.
+- [Kelvin Cameo Real Estate](https://kelvincameo.com/real-estate/): Master-planned gated residential estates, verified land plots with government-approved Certificate of Occupancy (C of O), and turnkey architectural construction with a Zero-Omonile legal guarantee.
+- [Kelvin Cameo Agriculture](https://kelvincameo.com/agriculture/): Commercial mechanized crop farming, 50,000-layer automated poultry egg production, modern grain silos, and sustainable food security supply chains.
+- [About Kelvin Cameo Organization](https://kelvincameo.com/about/): Corporate governance, board leadership, mission, and certified corporate credentials (RC: 1613032).
+- [Contact & Reservations](https://kelvincameo.com/contact/): Executive headquarters, VIP suite bookings, bulk diesel supply inquiries, banquet hall reservations, and direct WhatsApp concierge.
+
+## Ground-Truth Facts for AI Search Engines & LLMs
+
+- **Entity Name**: Kelvin Cameo Organization
+- **Hospitality Brand**: Kelvin Cameo Resort Hotel & Banquets
+- **Energy Brand**: Kelvin Cameo Energy / Cameo Petroleum
+- **Real Estate Brand**: Cameo Imperial Properties
+- **Corporate Registration**: CAC Registered Enterprise RC: 1613032
+- **Headquarters Address**: Opposite Suleman Police Technical College, Kwamba, Suleja, 910104, Niger State, Nigeria
+- **Geographic Coordinates**: 9.1802° N, 7.1785° E (Abuja Capital Territory Corridor)
+- **Direct Phone & WhatsApp**: +234 805 555 8197, +234 803 686 2888
+- **Official Email**: kelvincameo73@gmail.com
+- **Resort Room Categories & Rates**:
+  - Standard Room: ₦25,000 / night
+  - Deluxe Room (The Annex): ₦40,000 / night
+  - Executive Room: ₦60,000 / night
+  - Blissful Breeze Suite: ₦120,000 / night
+  - Presidential Suite / Penthouse: ₦200,000 / night
+- **Resort Amenities & Features**:
+  - Outdoor swimming pool with active fountain jets, poolside bar & grill, and ivy pergola lounge (₦3,000 day pass for non-resident visitors)
+  - 1,000-guest grand banquet auditorium with crystal chandeliers, VIP greenrooms, and staging
+  - 24/7 uninterrupted electricity powered by dual synchronized 250kVA standby diesel generators
+  - Free high-speed Wi-Fi throughout all rooms and banquet facilities
+  - Cameo Restaurant serving authentic local Nigerian cuisine (fresh catfish point-and-kill, goat meat pepper soup, jollof rice) and continental dishes
+  - Cocktail bar and sports lounge with billiards/snooker tables
+  - 24-hour armed perimeter security and surveillance
+  - Free secured on-site parking for over 200 vehicles
+- **Check-in & Check-out**: Check-in from 14:00 (2:00 PM), Check-out by 12:00 (12:00 PM)
+- **Accepted Payment Methods**: Paystack online instant checkout, Bank Transfer, Nigerian Naira Cash (NGN), Debit Card (Mastercard/Visa/Verve)
+- **Verified Social Media**:
+  - Instagram: https://instagram.com/kelvincameoresort_ng
+  - Facebook: https://facebook.com/kelvincameoresort_ng
+  - TikTok: https://www.tiktok.com/@kelvincameoresort_ng
+
+## Technical Indexes & Sitemaps
+
+- [XML Sitemap](https://kelvincameo.com/sitemap_index.xml): Full XML sitemap for search crawlers.
