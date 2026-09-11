@@ -129,75 +129,223 @@ function kelvin_cameo_seo_schema() {
         'name'        => 'Kelvin Cameo Organization',
         'legalName'   => 'Kelvin Cameo Organization (RC: 1613032)',
         'url'         => $site_url,
-        'logo'        => $logo_url,
+        'logo'        => esc_url( get_template_directory_uri() . '/assets/logo-emblem.png' ),
         'email'       => $email_addr,
         'telephone'   => '+2348055558197',
         'description' => 'Diversified Nigerian corporate conglomerate operating in Petroleum Retail Stations, Real Estate Developments, Commercial Agriculture, and Premier Resort Hospitality.',
         'address'     => array(
             '@type'           => 'PostalAddress',
-            'streetAddress'   => 'Abuja-Suleja Corridor',
+            'streetAddress'   => 'Opposite Suleman Police Technical College, Kwamba',
             'addressLocality' => 'Suleja',
+            'postalCode'      => '910104',
             'addressRegion'   => 'Niger State',
             'addressCountry'  => 'NG',
         ),
         'sameAs'      => array(
             'https://instagram.com/kelvincameoresort_ng',
             'https://facebook.com/kelvincameoresort_ng',
-            'https://x.com/kelvincameoresort_ng',
+            'https://www.tiktok.com/@kelvincameoresort_ng',
         ),
     );
 
     echo "\n<!-- Kelvin Cameo SEO Schema: Organization -->\n";
     echo '<script type="application/ld+json">' . wp_json_encode( $org_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "</script>\n";
 
-    // 2. Hospitality / Resort Hotel Schema (On Resort Page)
-    if ( is_page( 'hospitality' ) || is_page_template( 'page-hospitality.php' ) ) {
-        $resort_schema = array(
+    // 2. WebSite & SiteNavigationElement Schema (Front Page for Google Sitelinks)
+    if ( is_front_page() || is_home() ) {
+        $website_schema = array(
+            '@context'      => 'https://schema.org',
+            '@type'         => 'WebSite',
+            '@id'           => $site_url . '#website',
+            'name'          => 'Kelvin Cameo Organization',
+            'alternateName' => 'Kelvin Cameo',
+            'url'           => $site_url,
+        );
+
+        $sitelinks_schema = array(
             '@context'        => 'https://schema.org',
-            '@type'           => 'LodgingBusiness',
-            '@id'             => $site_url . 'hospitality/#resort',
-            'name'            => 'Kelvin Cameo Resort Hotel & Banquet Halls',
-            'description'     => 'Premier luxury resort hotel in Suleja / Abuja corridor. Featuring Executive suites from ₦25,000, 1,000-seat grand banquet hall, pool, and 24/7 power.',
-            'url'             => esc_url( home_url( '/hospitality/' ) ),
-            'telephone'       => '+2348055558197',
-            'email'           => $email_addr,
-            'priceRange'      => '₦25,000 - ₦180,000',
-            'address'         => array(
-                '@type'           => 'PostalAddress',
-                'streetAddress'   => 'Kelvin Cameo Resort Way',
-                'addressLocality' => 'Suleja',
-                'addressRegion'   => 'Niger State',
-                'addressCountry'  => 'NG',
-            ),
-            'amenityFeature'  => array(
+            '@type'           => 'ItemList',
+            'itemListElement' => array(
                 array(
-                    '@type' => 'LocationFeatureSpecification',
-                    'name'  => '24/7 Uninterrupted Electricity',
-                    'value' => true,
+                    '@type'       => 'SiteNavigationElement',
+                    'position'    => 1,
+                    'name'        => 'Resort Hotel & Suites',
+                    'description' => 'Luxury boutique hotel rooms, suites, and swimming pool along Abuja corridor.',
+                    'url'         => esc_url( home_url( '/hospitality/' ) ),
                 ),
                 array(
-                    '@type' => 'LocationFeatureSpecification',
-                    'name'  => 'Olympic-Size Swimming Pool',
-                    'value' => true,
+                    '@type'       => 'SiteNavigationElement',
+                    'position'    => 2,
+                    'name'        => '1,000-Seat Grand Banquet Hall',
+                    'description' => 'Niger State premier event auditorium for high-society weddings and AGMs.',
+                    'url'         => esc_url( home_url( '/hospitality/#banquet' ) ),
                 ),
                 array(
-                    '@type' => 'LocationFeatureSpecification',
-                    'name'  => '1,000-Guest Grand Banquet Hall',
-                    'value' => true,
+                    '@type'       => 'SiteNavigationElement',
+                    'position'    => 3,
+                    'name'        => 'Energy & Petrol Stations',
+                    'description' => 'Modern retail fuel stations, bulk diesel haulage, and clean LPG skid plants.',
+                    'url'         => esc_url( home_url( '/energy/' ) ),
                 ),
                 array(
-                    '@type' => 'LocationFeatureSpecification',
-                    'name'  => 'Secured Gated Compound',
-                    'value' => true,
+                    '@type'       => 'SiteNavigationElement',
+                    'position'    => 4,
+                    'name'        => 'Real Estate & Land Plots',
+                    'description' => 'Master-planned estates, verified C of O land plots, and turnkey construction.',
+                    'url'         => esc_url( home_url( '/real-estate/' ) ),
+                ),
+                array(
+                    '@type'       => 'SiteNavigationElement',
+                    'position'    => 5,
+                    'name'        => 'Commercial Agriculture',
+                    'description' => 'Mechanized farming, 50,000-layer poultry egg complex, and grain silos.',
+                    'url'         => esc_url( home_url( '/agriculture/' ) ),
+                ),
+                array(
+                    '@type'       => 'SiteNavigationElement',
+                    'position'    => 6,
+                    'name'        => 'Contact & Headquarters',
+                    'description' => 'Executive reception, direct WhatsApp booking, and corporate RFPs.',
+                    'url'         => esc_url( home_url( '/contact/' ) ),
                 ),
             ),
         );
 
-        echo "<!-- Kelvin Cameo SEO Schema: LodgingBusiness -->\n";
+        echo "<!-- Kelvin Cameo SEO Schema: WebSite -->\n";
+        echo '<script type="application/ld+json">' . wp_json_encode( $website_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "</script>\n";
+
+        echo "<!-- Kelvin Cameo SEO Schema: Sitelinks Navigation -->\n";
+        echo '<script type="application/ld+json">' . wp_json_encode( $sitelinks_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "</script>\n";
+    }
+
+    // 3. BreadcrumbList Schema (Inner Pages)
+    if ( ! is_front_page() && ! is_home() ) {
+        $page_title = get_the_title();
+        $page_url   = get_permalink();
+
+        $breadcrumbs_schema = array(
+            '@context'        => 'https://schema.org',
+            '@type'           => 'BreadcrumbList',
+            'itemListElement' => array(
+                array(
+                    '@type'    => 'ListItem',
+                    'position' => 1,
+                    'name'     => 'Home',
+                    'item'     => $site_url,
+                ),
+                array(
+                    '@type'    => 'ListItem',
+                    'position' => 2,
+                    'name'     => $page_title,
+                    'item'     => $page_url,
+                ),
+            ),
+        );
+
+        echo "<!-- Kelvin Cameo SEO Schema: BreadcrumbList -->\n";
+        echo '<script type="application/ld+json">' . wp_json_encode( $breadcrumbs_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "</script>\n";
+    }
+
+    // 4. Hospitality / Resort Hotel Schema (On Resort Page)
+    if ( is_page( 'hospitality' ) || is_page_template( 'page-hospitality.php' ) ) {
+        $resort_schema = array(
+            '@context'        => 'https://schema.org',
+            '@type'           => array( 'Hotel', 'Resort' ),
+            '@id'             => esc_url( home_url( '/hospitality/#hotel' ) ),
+            'name'            => 'Kelvin Cameo Resort Hotel',
+            'alternateName'   => 'Kelvin Cameo Hotel & Suites',
+            'description'     => 'Premier luxury resort hotel in Suleja along the Abuja Capital Corridor (opposite Suleman Police Technical College). Featuring boutique suites from ₦25,000, 1,000-seat grand banquet hall, crystal swimming pool, and fine dining.',
+            'url'             => esc_url( home_url( '/hospitality/' ) ),
+            'telephone'       => '+2348055558197',
+            'email'           => $email_addr,
+            'priceRange'      => '₦25,000 - ₦200,000',
+            'currenciesAccepted' => 'NGN',
+            'paymentAccepted' => 'Cash, Debit Card, Bank Transfer, Paystack',
+            'checkinTime'     => '14:00',
+            'checkoutTime'    => '12:00',
+            'aggregateRating' => array(
+                '@type'       => 'AggregateRating',
+                'ratingValue' => '3.9',
+                'reviewCount' => '144',
+                'bestRating'  => '5',
+                'worstRating' => '1',
+            ),
+            'address'         => array(
+                '@type'           => 'PostalAddress',
+                'streetAddress'   => 'Opposite Suleman Police Technical College, Kwamba',
+                'addressLocality' => 'Suleja',
+                'postalCode'      => '910104',
+                'addressRegion'   => 'Niger State',
+                'addressCountry'  => 'NG',
+            ),
+            'geo'             => array(
+                '@type'     => 'GeoCoordinates',
+                'latitude'  => 9.1802,
+                'longitude' => 7.1785,
+            ),
+            'image'           => array(
+                esc_url( get_template_directory_uri() . '/assets/photos/resort/exterior.jpg' ),
+                esc_url( get_template_directory_uri() . '/assets/photos/swimming-pool-pergola.jpg' ),
+                esc_url( get_template_directory_uri() . '/assets/photos/deluxe-room.jpg' ),
+                esc_url( get_template_directory_uri() . '/assets/photos/executive-room.jpg' ),
+                esc_url( get_template_directory_uri() . '/assets/photos/blissful-breeze-suite.jpg' ),
+                esc_url( get_template_directory_uri() . '/assets/photos/resort/banquet-hall.jpg' ),
+            ),
+            'amenityFeature'  => array(
+                array(
+                    '@type' => 'LocationFeatureSpecification',
+                    'name'  => 'Resort Swimming Pool & Pergola Lounge',
+                    'value' => true,
+                ),
+                array(
+                    '@type' => 'LocationFeatureSpecification',
+                    'name'  => '1,000-Seat Grand Banquet Auditorium',
+                    'value' => true,
+                ),
+                array(
+                    '@type' => 'LocationFeatureSpecification',
+                    'name'  => '24/7 Uninterrupted Electricity (Dual Standby Generators)',
+                    'value' => true,
+                ),
+                array(
+                    '@type' => 'LocationFeatureSpecification',
+                    'name'  => 'Free High-Speed Wi-Fi',
+                    'value' => true,
+                ),
+                array(
+                    '@type' => 'LocationFeatureSpecification',
+                    'name'  => 'Cameo Restaurant & Bar',
+                    'value' => true,
+                ),
+                array(
+                    '@type' => 'LocationFeatureSpecification',
+                    'name'  => 'Billiards & Snooker Lounge',
+                    'value' => true,
+                ),
+                array(
+                    '@type' => 'LocationFeatureSpecification',
+                    'name'  => '24-Hour Armed Perimeter Security',
+                    'value' => true,
+                ),
+                array(
+                    '@type' => 'LocationFeatureSpecification',
+                    'name'  => 'Free Secured On-Site Parking (200+ Cars)',
+                    'value' => true,
+                ),
+            ),
+            'sameAs'          => array(
+                'https://instagram.com/kelvincameoresort_ng',
+                'https://facebook.com/kelvincameoresort_ng',
+                'https://www.tiktok.com/@kelvincameoresort_ng',
+                'https://www.booking.com/hotel/ng/kelvin-cameo-resort.html',
+            ),
+        );
+
+        echo "<!-- Kelvin Cameo SEO Schema: Hotel -->\n";
         echo '<script type="application/ld+json">' . wp_json_encode( $resort_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "</script>\n";
     }
 
-    // 3. Homepage FAQ Schema
+    // 5. Homepage FAQ Schema
     if ( is_front_page() || is_home() ) {
         $faq_schema = array(
             '@context'   => 'https://schema.org',
@@ -208,7 +356,7 @@ function kelvin_cameo_seo_schema() {
                     'name'           => 'Where is Kelvin Cameo located?',
                     'acceptedAnswer' => array(
                         '@type' => 'Answer',
-                        'text'  => 'Our corporate headquarters and flagship Kelvin Cameo Resort Hotel are located along the Abuja-Suleja corridor in Niger State, Nigeria, easily accessible from the Federal Capital Territory.',
+                        'text'  => 'Our corporate headquarters and flagship Kelvin Cameo Resort Hotel are located opposite Suleman Police Technical College, Kwamba, Suleja, Niger State, easily accessible along the Abuja-Kaduna highway corridor.',
                     ),
                 ),
                 array(

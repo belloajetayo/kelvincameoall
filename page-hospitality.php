@@ -1547,40 +1547,6 @@ get_header();
   </div>
 
 
-  <!-- Schema.org Rich Snippet for Kelvin Cameo Resort Hotel -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": ["Hotel", "Resort"],
-    "name": "Kelvin Cameo Resort Hotel",
-    "alternateName": "Kelvin Cameo Hotel & Banquets",
-    "description": "Premier luxury resort hotel, Love Night & Golden Nest suites, serviced apartments, and 1,000-seat grand event hall along the Abuja-Kaduna highway corridor in Suleja, Niger State.",
-    "url": "https://kelvincameo.com/hospitality/",
-    "telephone": "+2348055558197",
-    "email": "concierge@kelvincameo.com",
-    "priceRange": "₦25,000 - ₦200,000",
-    "currenciesAccepted": "NGN",
-    "paymentAccepted": "Cash, Debit Card, Credit Card, Bank Transfer, Paystack",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Abuja-Kaduna Expressway Corridor",
-      "addressLocality": "Suleja",
-      "addressRegion": "Niger State",
-      "addressCountry": "NG"
-    },
-    "amenityFeature": [
-      { "@type": "LocationFeatureSpecification", "name": "Resort Swimming Pool", "value": true },
-      { "@type": "LocationFeatureSpecification", "name": "1,000-Seat Grand Banquet Auditorium", "value": true },
-      { "@type": "LocationFeatureSpecification", "name": "Free High-Speed Fiber Wi-Fi", "value": true },
-      { "@type": "LocationFeatureSpecification", "name": "24/7 Dual 250kVA Standby Power", "value": true },
-      { "@type": "LocationFeatureSpecification", "name": "Cameo Restaurant & Catfish Point & Kill", "value": true },
-      { "@type": "LocationFeatureSpecification", "name": "Full Cocktail Bar & VIP Lounge", "value": true },
-      { "@type": "LocationFeatureSpecification", "name": "Billiards & Snooker Room", "value": true },
-      { "@type": "LocationFeatureSpecification", "name": "24-Hour Armed Perimeter Security", "value": true }
-    ]
-  }
-  </script>
-
 <?php
 get_footer();
 
