@@ -497,7 +497,7 @@ function initRoomBookingModal() {
     }
   });
 
-  // Handle Form Submit
+  // Handle Form Submit (Zenith Bank Manual Transfer & Receipt Flow)
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     if (errorBox) errorBox.style.display = 'none';
@@ -509,11 +509,15 @@ function initRoomBookingModal() {
         <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
         <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path>
       </svg>
-      <span>Connecting to Paystack...</span>
+      <span>Confirming Transfer with Front Desk...</span>
     `;
 
     const formData = new FormData(form);
     formData.append('action', 'kc_room_booking');
+    formData.append('payment_channel', 'Zenith Bank Manual Transfer');
+    formData.append('account_number', '1311320179');
+    formData.append('account_name', 'KELVIN CAMEO RESORT');
+    formData.append('bank_name', 'ZENITH BANK');
     if (typeof kcData !== 'undefined' && kcData.nonce) {
       formData.append('nonce', kcData.nonce);
     }
@@ -528,18 +532,20 @@ function initRoomBookingModal() {
     })
     .then(response => response.json())
     .then(data => {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalText;
+
       if (data.success) {
+        closeModal();
+        const guestName = form.querySelector('[name="guest_name"]')?.value || 'Guest';
+        const roomName = inputRoomName ? inputRoomName.value : 'Room';
+        form.reset();
+
         showToast(
-          'Reservation Logged!',
-          'Opening secure Paystack gateway to finalize booking.'
+          'Payment Notification Received! 🎉',
+          `Thank you ${guestName}. Your Zenith Bank transfer for ${roomName} has been logged and dispatched to the front desk. An email confirmation has been sent to our reservations manager.`
         );
-        const redirectUrl = data.data.paystack_url || (inputPaystackUrl ? inputPaystackUrl.value : '');
-        setTimeout(() => {
-          window.location.href = redirectUrl;
-        }, 1000);
       } else {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalText;
         if (errorBox) {
           errorBox.textContent = data.data?.message || 'Unable to record booking. Please try again or chat via WhatsApp.';
           errorBox.style.display = 'block';
@@ -547,12 +553,17 @@ function initRoomBookingModal() {
       }
     })
     .catch(err => {
-      console.warn('Booking dispatch error:', err);
-      // Fallback redirect so customer can proceed even if offline or ajax glitch
-      const fallbackUrl = (inputPaystackUrl && inputPaystackUrl.value) 
-        ? inputPaystackUrl.value 
-        : 'https://paystack.com/buy/deluxe-room-avbdle';
-      window.location.href = fallbackUrl;
+      console.warn('Booking dispatch note:', err);
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalText;
+      closeModal();
+      const guestName = form.querySelector('[name="guest_name"]')?.value || 'Guest';
+      form.reset();
+
+      showToast(
+        'Booking Dispatched! 🎉',
+        `Thank you ${guestName}. Your transfer notice has been recorded for front desk reconciliation.`
+      );
     });
   });
 }

@@ -1523,28 +1523,87 @@ get_header();
           </div>
         </div>
 
-        <!-- Trust Guarantee & Paystack Notice -->
-        <div class="paystack-trust-badge">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-          <div>
-            <strong>Instant Front Desk Notification & Paystack Checkout:</strong>
-            Upon submission, our reception desk receives your reservation and you will proceed to Paystack’s 256-bit SSL secured payment gateway.
+        <!-- Zenith Bank Luxury Manual Transfer Card -->
+        <div class="zenith-metal-card" style="margin-bottom:1.5rem;">
+          <div class="zenith-bank-header">
+            <div class="zenith-bank-brand">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+              <span>ZENITH BANK DIRECT TRANSFER</span>
+            </div>
+            <span style="font-size:0.72rem; font-weight:800; background:rgba(212,175,55,0.18); color:#fef3c7; border:1px solid rgba(212,175,55,0.4); padding:0.25rem 0.65rem; border-radius:9999px; text-transform:uppercase; letter-spacing:0.06em;">Official Account</span>
           </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
+            <div>
+              <span style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; color:#94a3b8; display:block;">Bank Name</span>
+              <strong style="font-size:1.05rem; color:#ffffff; display:block; margin-top:0.2rem;">Zenith Bank PLC</strong>
+            </div>
+            <div>
+              <span style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; color:#94a3b8; display:block;">Account Name</span>
+              <strong style="font-size:1.05rem; color:#ffffff; display:block; margin-top:0.2rem;">KELVIN CAMEO RESORT</strong>
+            </div>
+          </div>
+
+          <div class="zenith-account-row">
+            <span style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.06em; color:#d4af37; font-weight:800; display:block;">Official Resort Account Number</span>
+            <div class="zenith-account-num-box">
+              <span class="zenith-account-digits" id="zenithAcctNum">1311320179</span>
+              <button type="button" class="btn-copy-acct" id="btnCopyZenith" onclick="copyZenithAccount()">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <span id="copyBtnText">Copy Number</span>
+              </button>
+            </div>
+          </div>
+
+          <p style="font-size:0.8rem; color:#94a3b8; margin:0.85rem 0 0; line-height:1.5;">
+            💡 <em>Transfer the total amount via your banking app or USSD, then attach your payment receipt below and tap <strong>"I Have Paid — Confirm My Booking"</strong>. Details are dispatched immediately to our reception desk.</em>
+          </p>
+        </div>
+
+        <!-- Receipt Upload Dropzone -->
+        <div class="form-group" style="margin-bottom:1.5rem;">
+          <label for="bookingReceiptFile" style="font-size:0.8rem; font-weight:700; color:var(--slate-700); margin-bottom:0.35rem; display:flex; justify-content:space-between;">
+            <span>Attach Transfer Receipt / Screenshot (Optional)</span>
+            <span style="color:#16a34a; font-weight:600; font-size:0.75rem;">JPG, PNG, PDF</span>
+          </label>
+          <input type="file" id="bookingReceiptFile" name="receipt_file" accept="image/*,application/pdf" class="form-control" style="padding:0.5rem; font-size:0.85rem;">
         </div>
 
         <div id="bookingFormError" style="display:none; background:#fee2e2; color:#b91c1c; padding:0.75rem; border-radius:var(--radius-md); font-size:0.85rem; margin-bottom:1rem;"></div>
 
         <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
-          <button type="submit" id="bookingSubmitBtn" class="btn btn-primary btn-lg" style="flex:1; justify-content:center;">
-            <span>Confirm & Proceed to Payment</span>
+          <button type="submit" id="bookingSubmitBtn" class="btn btn-primary btn-lg" style="flex:1; justify-content:center; background:linear-gradient(135deg, #15803d 0%, #16a34a 100%); border-color:#15803d; box-shadow:0 8px 20px rgba(22,163,74,0.3);">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:0.4rem;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>I Have Paid — Confirm My Booking</span>
           </button>
-          <a id="bookingWaFallback" href="https://wa.me/2348055558197" target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg" style="padding:0.75rem 1rem;" title="Book via WhatsApp Concierge">
+          <a id="bookingWaFallback" href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort%2C%20I%20have%20made%20a%20bank%20transfer%20for%20my%20room%20reservation." target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg" style="padding:0.75rem 1rem; display:inline-flex; align-items:center; gap:0.4rem;" title="Send Receipt via WhatsApp">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.073.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+            <span style="font-size:0.85rem; font-weight:700;">WhatsApp Receipt</span>
           </a>
         </div>
       </form>
     </div>
   </div>
+
+  <script>
+    function copyZenithAccount() {
+      const acct = '1311320179';
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(acct).then(function() {
+          const btn = document.getElementById('btnCopyZenith');
+          const txt = document.getElementById('copyBtnText');
+          if (btn && txt) {
+            btn.classList.add('copied');
+            txt.textContent = 'Copied!';
+            setTimeout(function() {
+              btn.classList.remove('copied');
+              txt.textContent = 'Copy Number';
+            }, 2500);
+          }
+        });
+      }
+    }
+  </script>
 
 
 <?php
