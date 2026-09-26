@@ -10,29 +10,77 @@ get_header();
 ?>
 
   <!-- ====================================================================
-       HERO — Confident & Minimal
+       HERO — Prestigious Conglomerate Experience with Live Sector Slider
        ==================================================================== -->
   <section class="hp-hero">
-    <div class="container">
+    <!-- Ambient Ken Burns Background Slideshow (Authentic Operating Sectors) -->
+    <div class="hp-hero-bg-slider" aria-hidden="true">
+      <div class="hp-hero-slide active" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/exterior.jpg' ); ?>');" data-index="0"></div>
+      <div class="hp-hero-slide" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/kelvin-filling-station-canopy.jpg' ); ?>');" data-index="1"></div>
+      <div class="hp-hero-slide" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/cameo-real-estate-luxury.jpg' ); ?>');" data-index="2"></div>
+      <div class="hp-hero-slide" style="background-image: url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1600&q=80');" data-index="3"></div>
+      <div class="hp-hero-overlay"></div>
+    </div>
+
+    <div class="container hp-hero-content-wrap">
       <div class="hp-hero-inner">
-        <span class="hp-hero-badge">RC: 1613032 &mdash; Verified &amp; Active in Nigeria</span>
+        <!-- Live Verified Badge with Animated Pulse Indicator -->
+        <div class="hp-hero-badge">
+          <span class="hp-pulse-dot" aria-hidden="true"></span>
+          <span>RC: 1613032 &mdash; Verified &amp; Active Conglomerate &bull; Nigeria</span>
+        </div>
 
         <h1 class="hp-hero-title">
-          Honest Fuel. Safe Land.<br>
-          Fresh Food. Luxurious Weekends.
+          <span class="hp-hero-line-1">Honest Fuel. Safe Land.</span><br>
+          <span class="hp-hero-line-2">Fresh Food. <span class="hp-title-highlight">Luxurious Weekends.</span></span>
         </h1>
 
         <p class="hp-hero-desc">
-          A diversified Nigerian conglomerate delivering calibrated petroleum, dispute-free real estate, farm-gate produce, and uncompromised luxury hospitality — every single day.
+          A diversified Nigerian multi-sector group delivering calibrated petroleum, dispute-free real estate, farm-gate agricultural produce, and premier resort hospitality — built on daily verifiable integrity.
         </p>
+
+        <!-- Interactive 4-Sector Selector Pills -->
+        <div class="hp-hero-sectors" role="tablist" aria-label="Operating Sectors">
+          <button class="hp-sector-pill active" data-slide="0" type="button" role="tab" aria-selected="true">
+            <span class="pill-num">01</span> Resort Hotel &amp; Suites
+          </button>
+          <button class="hp-sector-pill" data-slide="1" type="button" role="tab" aria-selected="false">
+            <span class="pill-num">02</span> Energy &amp; Fuel Stations
+          </button>
+          <button class="hp-sector-pill" data-slide="2" type="button" role="tab" aria-selected="false">
+            <span class="pill-num">03</span> Real Estate &amp; Land
+          </button>
+          <button class="hp-sector-pill" data-slide="3" type="button" role="tab" aria-selected="false">
+            <span class="pill-num">04</span> Commercial Agriculture
+          </button>
+        </div>
 
         <div class="hp-hero-actions">
           <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%2C%20I%20would%20like%20to%20speak%20with%20your%20team." target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="flex-shrink:0;">
+              <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/>
+            </svg>
             Chat on WhatsApp
           </a>
           <a href="#sectors" class="btn btn-outline-white btn-lg">
-            Explore Our Divisions
+            Explore All 4 Divisions &darr;
           </a>
+        </div>
+
+        <!-- Micro-Trust Guarantee Strip -->
+        <div class="hp-hero-trust-bar">
+          <div class="hp-trust-item">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            <span>10L = 10L Calibrated Pumps</span>
+          </div>
+          <div class="hp-trust-item">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            <span>C of O Verifiable Land Titles</span>
+          </div>
+          <div class="hp-trust-item">
+            <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            <span>24/7 Power Guarantee &bull; 1,000-Seat Hall</span>
+          </div>
         </div>
       </div>
     </div>

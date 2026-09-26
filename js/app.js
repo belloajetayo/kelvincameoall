@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initConciergeEstimator();
   initFaqAccordion();
   initSiteKitAnalytics();
+  initHpHeroSlider();
 });
 
 /* --------------------------------------------------------------------------
@@ -1216,6 +1217,60 @@ function initHeroMovingBackground() {
       }
     }, 5500);
   });
+}
+
+/* --------------------------------------------------------------------------
+   Homepage Hero Background Slideshow & Interactive Sector Pills
+   -------------------------------------------------------------------------- */
+function initHpHeroSlider() {
+  const heroSlider = document.querySelector('.hp-hero-bg-slider');
+  if (!heroSlider) return;
+
+  const slides = heroSlider.querySelectorAll('.hp-hero-slide');
+  const pills = document.querySelectorAll('.hp-sector-pill');
+  if (!slides.length) return;
+
+  let current = 0;
+  let timer = null;
+
+  function goToSlide(index) {
+    if (index < 0 || index >= slides.length) return;
+
+    slides[current]?.classList.remove('active');
+    pills[current]?.classList.remove('active');
+    pills[current]?.setAttribute('aria-selected', 'false');
+
+    current = index;
+
+    slides[current]?.classList.add('active');
+    pills[current]?.classList.add('active');
+    pills[current]?.setAttribute('aria-selected', 'true');
+  }
+
+  function startAutoPlay() {
+    stopAutoPlay();
+    timer = setInterval(() => {
+      if (document.hidden) return;
+      const next = (current + 1) % slides.length;
+      goToSlide(next);
+    }, 5500);
+  }
+
+  function stopAutoPlay() {
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+    }
+  }
+
+  pills.forEach((pill, idx) => {
+    pill.addEventListener('click', () => {
+      goToSlide(idx);
+      startAutoPlay();
+    });
+  });
+
+  startAutoPlay();
 }
 
 /* --------------------------------------------------------------------------
