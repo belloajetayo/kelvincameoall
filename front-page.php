@@ -214,8 +214,13 @@ get_header();
               <span>RC: 1613032</span>
             </div>
 
-            <div class="founder-emblem-halo">
-              <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/logo-emblem.png' ); ?>" alt="Kelvin Cameo Official Monogram" />
+            <div class="founder-photo-halo-wrap">
+              <div class="founder-photo-halo">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/director-alh-kamorudeen-oladejo.jpg' ); ?>" alt="Kelvin Cameo - Founder &amp; Group Managing Director" class="founder-photo-img" />
+              </div>
+              <div class="founder-mini-seal" title="Kelvin Cameo Official Monogram">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/logo-emblem.png' ); ?>" alt="Kelvin Cameo Official Monogram" />
+              </div>
             </div>
 
             <h3 class="founder-name-plate">Kelvin Cameo</h3>
