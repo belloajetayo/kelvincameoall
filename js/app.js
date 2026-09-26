@@ -22,6 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initConciergeEstimator();
   initFaqAccordion();
   initSiteKitAnalytics();
+  init3DTiltEffects();
+  initChairmanPhotoSwitcher();
 });
 
 /* --------------------------------------------------------------------------
@@ -808,7 +810,7 @@ function initGalleryFilter() {
    Animated Number Counters for Corporate Milestones
    -------------------------------------------------------------------------- */
 function initStatsCounter() {
-  const statNumbers = document.querySelectorAll('.stat-number');
+  const statNumbers = document.querySelectorAll('.stat-number, .hp-stat-number');
   if (!statNumbers.length) return;
 
   let hasAnimated = false;
@@ -1436,3 +1438,95 @@ function initMovingGallery() {
     if (e.key === 'ArrowRight') setLightboxData(currentLightboxIdx + 1);
   });
 }
+
+/* --------------------------------------------------------------------------
+   3D Astra Perspective Tilt Physics & Specular Cursor Tracking
+   (Emil Kowalski Physics & Zero-Lag rAF Interpolation)
+   -------------------------------------------------------------------------- */
+function init3DTiltEffects() {
+  const tiltElements = document.querySelectorAll('[data-tilt]');
+  if (!tiltElements.length) return;
+
+  // Don't bind hover tilt on coarse pointer (touch devices) to conserve CPU
+  if (window.matchMedia('(hover: none)').matches) return;
+
+  tiltElements.forEach(card => {
+    let bounds;
+    let mouseX = 0;
+    let mouseY = 0;
+    let isHovered = false;
+    let rAF;
+
+    function updateBounds() {
+      bounds = card.getBoundingClientRect();
+    }
+
+    function onMouseEnter() {
+      isHovered = true;
+      updateBounds();
+      card.style.transition = 'transform 100ms ease-out, box-shadow 200ms ease-out';
+      rAF = requestAnimationFrame(render);
+    }
+
+    function onMouseMove(e) {
+      if (!bounds) updateBounds();
+      const x = e.clientX - bounds.left;
+      const y = e.clientY - bounds.top;
+      mouseX = (x / bounds.width) - 0.5; // -0.5 to 0.5
+      mouseY = (y / bounds.height) - 0.5; // -0.5 to 0.5
+    }
+
+    function onMouseLeave() {
+      isHovered = false;
+      card.style.transition = 'transform 350ms cubic-bezier(0.23, 1, 0.32, 1), box-shadow 350ms ease-out';
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      cancelAnimationFrame(rAF);
+    }
+
+    function render() {
+      if (!isHovered) return;
+      const maxTilt = 8.5; // Subtle, high-end 8.5deg tilt
+      const rotateX = (-mouseY * maxTilt).toFixed(2);
+      const rotateY = (mouseX * maxTilt).toFixed(2);
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+      rAF = requestAnimationFrame(render);
+    }
+
+    card.addEventListener('mouseenter', onMouseEnter, { passive: true });
+    card.addEventListener('mousemove', onMouseMove, { passive: true });
+    card.addEventListener('mouseleave', onMouseLeave, { passive: true });
+  });
+}
+
+/* --------------------------------------------------------------------------
+   Chairman Photo Switcher (Executive Vision / Throne / Commemorative)
+   -------------------------------------------------------------------------- */
+function initChairmanPhotoSwitcher() {
+  const switchBtns = document.querySelectorAll('.switch-btn');
+  const mainImg = document.getElementById('chairmanMainImg');
+  if (!switchBtns.length || !mainImg) return;
+
+  switchBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetSrc = btn.getAttribute('data-img');
+      if (!targetSrc || mainImg.src === targetSrc) return;
+
+      switchBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Fast crossfade
+      mainImg.style.opacity = '0.3';
+      mainImg.style.transform = 'scale(0.97)';
+
+      const tempImg = new Image();
+      tempImg.onload = () => {
+        mainImg.src = targetSrc;
+        mainImg.style.opacity = '1';
+        mainImg.style.transform = 'scale(1)';
+      };
+      tempImg.src = targetSrc;
+    });
+  });
+}
+
