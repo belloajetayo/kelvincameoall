@@ -4802,6 +4802,34 @@ ul, ol {
   flex-direction: column;
   align-items: center;
   gap: 0.25rem;
+  padding: 1.25rem 0.75rem;
+  border-radius: var(--radius-md);
+  transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.hp-stat:hover {
+  transform: translateY(-3px);
+  background-color: var(--sand-50);
+  box-shadow: 0 10px 25px rgba(4, 20, 43, 0.05);
+}
+
+.hp-stat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--sand-100);
+  color: var(--cobalt-700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+  transition: all var(--transition-fast);
+}
+
+.hp-stat:hover .hp-stat-icon {
+  background: var(--orange-500);
+  color: #ffffff;
+  transform: scale(1.08) rotate(-2deg);
 }
 .hp-stat-number {
   font-family: var(--font-display);

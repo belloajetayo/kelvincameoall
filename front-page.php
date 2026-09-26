@@ -93,18 +93,30 @@ get_header();
     <div class="container">
       <div class="hp-stats-row">
         <div class="hp-stat">
+          <div class="hp-stat-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          </div>
           <span class="hp-stat-number" data-target="4">0</span>
           <span class="hp-stat-label">Operating Sectors</span>
         </div>
         <div class="hp-stat">
+          <div class="hp-stat-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v20M21 2v20M12 2v20"></path></svg>
+          </div>
           <span class="hp-stat-number" data-target="100">0</span><span class="hp-stat-suffix">%</span>
           <span class="hp-stat-label">Calibrated Fuel Pumps</span>
         </div>
         <div class="hp-stat">
+          <div class="hp-stat-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+          </div>
           <span class="hp-stat-number" data-target="2500">0</span><span class="hp-stat-suffix">+</span>
           <span class="hp-stat-label">Hectares in Agriculture</span>
         </div>
         <div class="hp-stat">
+          <div class="hp-stat-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+          </div>
           <span class="hp-stat-number" data-target="1000">0</span>
           <span class="hp-stat-label">Seat Banquet Hall</span>
         </div>
@@ -181,7 +193,7 @@ get_header();
         <!-- Hospitality -->
         <a href="<?php echo kc_url('hospitality'); ?>" class="hp-division-card hp-card-resort">
           <div class="hp-division-img">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/golden-nest-room.jpg' ); ?>" alt="Kelvin Cameo Resort Hotel" loading="lazy">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/exterior.jpg' ); ?>" alt="Kelvin Cameo Resort Hotel &amp; Suites" loading="lazy">
           </div>
           <div class="hp-division-body">
             <span class="hp-division-tag">Division 04</span>
@@ -196,6 +208,48 @@ get_header();
           </div>
         </a>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       STRATEGIC PARTNERS & INSTITUTIONAL ALLIANCES
+       ==================================================================== -->
+  <section class="partners-strip" aria-label="Institutional Clients and Strategic Alliances">
+    <div class="container">
+      <div class="partners-strip-title">Institutional Alliances &amp; Trusted Corporate Clients</div>
+      <div class="partners-logo-row">
+        <div class="partner-logo-item">
+          <div class="partner-avatar" style="width:34px; height:34px; border-radius:8px; background:linear-gradient(135deg, #0b4ea2, #04142b); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.75rem;">CC</div>
+          <div>
+            <strong style="display:block; font-size:0.85rem; color:var(--navy-900);">CCCRN Nigeria</strong>
+            <span style="font-size:0.7rem; color:var(--slate-500);">Health Research &amp; Retreats Host</span>
+          </div>
+        </div>
+
+        <div class="partner-logo-item">
+          <div class="partner-avatar" style="width:34px; height:34px; border-radius:8px; background:linear-gradient(135deg, #ea580c, #c2410c); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.75rem;">NM</div>
+          <div>
+            <strong style="display:block; font-size:0.85rem; color:var(--navy-900);">NMDPRA Certified</strong>
+            <span style="font-size:0.7rem; color:var(--slate-500);">100% Calibrated Retail Skids</span>
+          </div>
+        </div>
+
+        <div class="partner-logo-item">
+          <div class="partner-avatar" style="width:34px; height:34px; border-radius:8px; background:linear-gradient(135deg, #10b981, #047857); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.75rem;">AG</div>
+          <div>
+            <strong style="display:block; font-size:0.85rem; color:var(--navy-900);">Commercial Agro Off-Takers</strong>
+            <span style="font-size:0.7rem; color:var(--slate-500);">Direct Farm-Gate Grains &amp; Poultry</span>
+          </div>
+        </div>
+
+        <div class="partner-logo-item">
+          <div class="partner-avatar" style="width:34px; height:34px; border-radius:8px; background:linear-gradient(135deg, #d4af37, #b45309); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.75rem;">RC</div>
+          <div>
+            <strong style="display:block; font-size:0.85rem; color:var(--navy-900);">Corporate Affairs Commission</strong>
+            <span style="font-size:0.7rem; color:var(--slate-500);">RC: 1613032 Statutory Compliance</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -327,7 +381,14 @@ get_header();
           <a href="<?php echo kc_url('about'); ?>" class="btn btn-navy btn-lg">Read Our Corporate Profile</a>
         </div>
         <div class="hp-trust-media">
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80" alt="Corporate Architecture" loading="lazy">
+          <div class="hp-trust-media-inner" style="position:relative; border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-xl);">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/fuel-tankers-fleet.jpg' ); ?>" alt="Kelvin Cameo Corporate Heavy Tanker Logistics Fleet" loading="lazy" style="width:100%; height:100%; min-height:360px; object-fit:cover; display:block;">
+            <div style="position:absolute; bottom:1.25rem; left:1.25rem; right:1.25rem; background:rgba(4,20,43,0.92); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.2); padding:1rem 1.25rem; border-radius:var(--radius-md); color:#ffffff;">
+              <span class="rc-badge" style="margin-bottom:0.35rem; display:inline-flex;">RC: 1613032</span>
+              <div style="font-size:0.875rem; font-weight:700; color:#bad7fc;">Kelvin Cameo Heavy Logistics &amp; Downstream Fleet</div>
+              <div style="font-size:0.75rem; color:rgba(255,255,255,0.75); margin-top:2px;">Certified NMDPRA Petroleum Haulage &bull; Operating across Nigeria</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -395,17 +456,27 @@ get_header();
   <section class="hp-cta">
     <div class="container">
       <div class="hp-cta-inner">
-        <h2 class="hp-cta-title">Ready to Experience Kelvin Cameo?</h2>
+        <span class="rc-badge" style="margin-bottom:1.25rem; display:inline-flex; background:rgba(255,255,255,0.15); border-color:rgba(255,255,255,0.3); color:#ffffff;">RC: 1613032 &bull; Direct Corporate Access</span>
+        <h2 class="hp-cta-title">Ready to Partner With Kelvin Cameo?</h2>
         <p class="hp-cta-desc">
-          Whether you need dependable petrol, titled real estate, nutritious farm produce, or a serene weekend with guaranteed 24/7 power — we are here.
+          Whether you need bulk calibrated petroleum, dispute-free real estate, farm-gate agricultural supply, or a serene weekend with guaranteed 24/7 power &bull; our executive desks are ready to assist.
         </p>
         <div class="hp-cta-actions">
           <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%2C%20I%20would%20like%20to%20discuss%20a%20booking%20or%20service." target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/>
+            </svg>
             Chat on WhatsApp
           </a>
-          <a href="<?php echo kc_url('contact'); ?>" class="btn btn-outline-white btn-lg">
-            Contact Us
+          <a href="tel:+2348055558197" class="btn btn-outline-white btn-lg">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            +234 805 555 8197
           </a>
+          <button class="btn btn-primary btn-lg" data-modal="inquiryModal">
+            Partner With Us / RFP &rarr;
+          </button>
         </div>
       </div>
     </div>
