@@ -11,13 +11,13 @@
     <div class="container container-wide">
       <div class="footer-top-grid">
         <div class="footer-brand-col">
-          <div style="display:flex; align-items:center; gap:0.85rem; margin-bottom:1.25rem;">
-            <div class="brand-emblem-badge" style="width:48px; height:48px; border-radius:13px; background:#ffffff; box-shadow:0 4px 14px rgba(0,0,0,0.25);" aria-label="Kelvin Cameo Logo">
-              <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/logo-emblem.png' ); ?>" alt="Kelvin Cameo Monogram" style="width:100%; height:100%; object-fit:cover; border-radius:11px;" />
+          <div style="display:flex; align-items:center; gap:0.65rem; margin-bottom:0.85rem;">
+            <div class="brand-emblem-badge" style="width:40px; height:40px; border-radius:10px; background:#ffffff; box-shadow:0 4px 14px rgba(0,0,0,0.25);" aria-label="Kelvin Cameo Logo">
+              <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/logo-emblem.png' ); ?>" alt="Kelvin Cameo Monogram" style="width:100%; height:100%; object-fit:cover; border-radius:8px;" />
             </div>
             <div>
-              <h4 style="font-family:var(--font-display); font-size:1.15rem; font-weight:800; color:var(--white); margin:0;">KELVIN <span style="color:var(--orange-400);">CAMEO</span></h4>
-              <span style="font-size:0.7rem; color:#bad7fc; font-weight:700; letter-spacing:0.04em;">RC: 1613032 • CONGLOMERATE</span>
+              <h4 style="font-family:var(--font-display); font-size:1.05rem; font-weight:800; color:var(--white); margin:0;">KELVIN <span style="color:var(--orange-400);">CAMEO</span></h4>
+              <span style="font-size:0.65rem; color:#bad7fc; font-weight:700; letter-spacing:0.04em;">RC: 1613032 • CONGLOMERATE</span>
             </div>
           </div>
           <p class="footer-bio">
@@ -65,13 +65,13 @@
 
         <div class="footer-col">
           <h5>Headquarters</h5>
-          <p style="font-size:0.875rem; color:var(--slate-400); margin-bottom:0.75rem; line-height:1.5;">
+          <p style="font-size:0.8125rem; color:var(--slate-400); margin-bottom:0.5rem; line-height:1.45;">
             Suleja, Niger State (Abuja Capital Corridor), Nigeria.
           </p>
-          <p style="font-size:0.875rem; color:var(--slate-400); margin-bottom:0.35rem;">
+          <p style="font-size:0.8125rem; color:var(--slate-400); margin-bottom:0.25rem;">
             <strong>Phone:</strong> +234 805 555 8197
           </p>
-          <p style="font-size:0.875rem; color:var(--slate-400); margin-bottom:1.25rem;">
+          <p style="font-size:0.8125rem; color:var(--slate-400); margin-bottom:0.85rem;">
             <strong>Email:</strong> <a href="mailto:kelvincameo73@gmail.com" style="color:var(--slate-300); text-decoration:none;">kelvincameo73@gmail.com</a>
           </p>
           <div class="social-links-row">

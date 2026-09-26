@@ -71,7 +71,7 @@
       <nav class="navbar" aria-label="Main Navigation">
         <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="brand-logo-wrap" title="Kelvin Cameo (RC: 1613032)">
           <div class="brand-emblem-badge" aria-label="Kelvin Cameo Brand Emblem">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/logo-emblem.png' ); ?>" alt="Kelvin Cameo Monogram" class="brand-emblem-img" width="46" height="46" />
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/logo-emblem.png' ); ?>" alt="Kelvin Cameo Monogram" class="brand-emblem-img" width="38" height="38" />
           </div>
           <div class="brand-text-block">
             <span class="brand-title">KELVIN <span style="color:var(--orange-500);">CAMEO</span></span>
