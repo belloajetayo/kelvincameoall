@@ -10,45 +10,28 @@ get_header();
 ?>
 
   <!-- ====================================================================
-       HERO — 3D Astra Depth & Ambient Orbital Glow
+       HERO — Confident & Minimal
        ==================================================================== -->
-  <section class="hp-hero hp-hero-3d" id="hero">
-    <div class="hp-hero-ambient-mesh" aria-hidden="true">
-      <div class="ambient-orb ambient-orb-sky"></div>
-      <div class="ambient-orb ambient-orb-gold"></div>
-      <div class="ambient-orb ambient-orb-emerald"></div>
-      <div class="ambient-grid-overlay"></div>
-    </div>
-
-    <div class="container hp-hero-container">
+  <section class="hp-hero">
+    <div class="container">
       <div class="hp-hero-inner">
-        <div class="hp-hero-badge-wrap">
-          <span class="hp-hero-badge 3d-badge">
-            <span class="badge-pulse"></span>
-            <span>RC: 1613032 &bull; Fully Certified &amp; Operational in Nigeria</span>
-          </span>
-        </div>
+        <span class="hp-hero-badge">RC: 1613032 &mdash; Verified &amp; Active in Nigeria</span>
 
         <h1 class="hp-hero-title">
           Honest Fuel. Safe Land.<br>
-          <span class="text-gradient-gold">Fresh Food. Luxurious Weekends.</span>
+          Fresh Food. Luxurious Weekends.
         </h1>
 
         <p class="hp-hero-desc">
-          Nigeria&rsquo;s trusted multi-sector powerhouse delivering calibrated downstream petroleum, verified title real estate, mechanized commercial agriculture, and premier luxury hospitality &mdash; anchored on unyielding integrity.
+          A diversified Nigerian conglomerate delivering calibrated petroleum, dispute-free real estate, farm-gate produce, and uncompromised luxury hospitality — every single day.
         </p>
 
         <div class="hp-hero-actions">
-          <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Organization%2C%20I%20would%20like%20to%20inquire%20about%20your%20services." target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg 3d-btn">
-            <span>Chat on WhatsApp</span>
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.668-.699c.969.585 1.961.948 2.793.948 3.179 0 5.766-2.587 5.767-5.766.001-3.182-2.585-5.767-5.768-5.767zm3.364 8.169c-.14.394-.712.723-1.002.768-.27.042-.622.062-1.802-.426-1.507-.624-2.483-2.158-2.559-2.257-.074-.1-1.003-1.335-1.003-2.546 0-1.211.636-1.808.862-2.052.227-.244.496-.305.662-.305.166 0 .332.002.477.01.153.008.358-.058.56.427.207.497.708 1.727.771 1.854.062.127.104.275.021.439-.083.165-.125.268-.248.413-.124.145-.262.324-.374.436-.124.124-.253.259-.109.506.145.248.643 1.061 1.381 1.718.949.845 1.751 1.107 2.001 1.231.25.124.394.103.539-.063.146-.165.623-.724.789-.972.166-.248.332-.207.56-.124.228.083 1.449.684 1.698.808.249.124.415.186.477.29.062.104.062.6-.078.994z"/></svg>
+          <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%2C%20I%20would%20like%20to%20speak%20with%20your%20team." target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
+            Chat on WhatsApp
           </a>
-          <a href="#sectors" class="btn btn-outline-white btn-lg 3d-btn">
-            <span>Explore 4 Sectors</span>
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-          <a href="#chairman" class="btn btn-ghost-gold btn-lg 3d-btn">
-            <span>Meet Our Chairman &rarr;</span>
+          <a href="#sectors" class="btn btn-outline-white btn-lg">
+            Explore Our Divisions
           </a>
         </div>
       </div>
@@ -56,231 +39,178 @@ get_header();
   </section>
 
   <!-- ====================================================================
-       STATS BAR — Tabular Figures & 3D Tactile Strip
+       STATS BAR — Compact Horizontal Numbers
        ==================================================================== -->
   <section class="hp-stats-bar">
     <div class="container">
-      <div class="hp-stats-row 3d-stats-row">
-        <div class="hp-stat 3d-stat-card" data-tilt>
-          <span class="hp-stat-number tabular-num" data-target="4">4</span>
-          <span class="hp-stat-label">Operating Pillars</span>
+      <div class="hp-stats-row">
+        <div class="hp-stat">
+          <span class="hp-stat-number" data-target="4">0</span>
+          <span class="hp-stat-label">Operating Sectors</span>
         </div>
-        <div class="hp-stat 3d-stat-card" data-tilt>
-          <div class="stat-num-wrap">
-            <span class="hp-stat-number tabular-num" data-target="100">100</span><span class="hp-stat-suffix">%</span>
-          </div>
-          <span class="hp-stat-label">NMDPRA Calibrated Pumps</span>
+        <div class="hp-stat">
+          <span class="hp-stat-number" data-target="100">0</span><span class="hp-stat-suffix">%</span>
+          <span class="hp-stat-label">Calibrated Fuel Pumps</span>
         </div>
-        <div class="hp-stat 3d-stat-card" data-tilt>
-          <div class="stat-num-wrap">
-            <span class="hp-stat-number tabular-num" data-target="2500">2,500</span><span class="hp-stat-suffix">+</span>
-          </div>
-          <span class="hp-stat-label">Mechanized Agro Hectares</span>
+        <div class="hp-stat">
+          <span class="hp-stat-number" data-target="2500">0</span><span class="hp-stat-suffix">+</span>
+          <span class="hp-stat-label">Hectares in Agriculture</span>
         </div>
-        <div class="hp-stat 3d-stat-card" data-tilt>
-          <div class="stat-num-wrap">
-            <span class="hp-stat-number tabular-num" data-target="1000">1,000</span><span class="hp-stat-suffix">+</span>
-          </div>
-          <span class="hp-stat-label">Seat Grand Auditorium</span>
+        <div class="hp-stat">
+          <span class="hp-stat-number" data-target="1000">0</span>
+          <span class="hp-stat-label">Seat Banquet Hall</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ====================================================================
-       DIVISIONS — Asymmetric 3D Bento Matrix (Gapless & Tactile)
+       DIVISIONS — Clean 2×2 Bento Grid
        ==================================================================== -->
   <section class="hp-divisions" id="sectors">
     <div class="container">
-      <div class="hp-section-head text-center">
-        <span class="section-tag-pill">Pillar Operating Divisions</span>
-        <h2 class="hp-section-title">Engineered For National Impact</h2>
-        <p class="hp-section-sub">Four specialized economic sectors delivering certified precision, verified land titles, commercial food security, and luxury resort hospitality.</p>
+      <div class="hp-section-head">
+        <h2 class="hp-section-title">Our Operating Divisions</h2>
+        <p class="hp-section-sub">Four specialized sectors delivering end-to-end solutions across energy, property, agriculture, and hospitality.</p>
       </div>
 
-      <div class="hp-bento-grid">
+      <div class="hp-divisions-grid">
 
-        <!-- Bento Card 1: Energy & Fuel (Wide 7 cols) -->
-        <article class="bento-card bento-energy 3d-tilt-card" data-tilt>
-          <div class="bento-bg-media">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/kelvin-filling-station-canopy.jpg' ); ?>" alt="Kelvin Cameo Filling Station Canopy" loading="lazy">
-            <div class="bento-media-overlay"></div>
+        <!-- Energy -->
+        <a href="<?php echo kc_url('energy'); ?>" class="hp-division-card hp-card-energy">
+          <div class="hp-division-img">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/kelvin-filling-station-canopy.jpg' ); ?>" alt="Kelvin Cameo Filling Station" loading="lazy">
           </div>
-          <div class="bento-content">
-            <div class="bento-top-meta">
-              <span class="bento-sector-badge badge-energy">Downstream Energy</span>
-              <span class="bento-spec-badge">10L = 10L Calibrated</span>
-            </div>
-            <h3 class="bento-title">Kelvin Cameo Energy</h3>
-            <p class="bento-desc">Modern retail petroleum dispensing (PMS, AGO, DPK), 50-tonne automated LPG cooking gas skids, and commercial solar microgrids.</p>
-            <div class="bento-footer-row">
-              <a href="<?php echo kc_url('energy'); ?>" class="bento-action-link">
-                <span>Explore Energy Operations</span>
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
-            </div>
+          <div class="hp-division-body">
+            <span class="hp-division-tag">Division 01</span>
+            <h3 class="hp-division-name">Energy &amp; Fuel</h3>
+            <p class="hp-division-desc">Digitally calibrated retail filling stations supplying PMS, AGO, DPK, engine lubricants, and 50-tonne LPG cooking gas skids.</p>
+            <span class="hp-division-link">Explore Energy &rarr;</span>
           </div>
-        </article>
+        </a>
 
-        <!-- Bento Card 2: Real Estate (5 cols) -->
-        <article class="bento-card bento-estate 3d-tilt-card" data-tilt>
-          <div class="bento-bg-media">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/cameo-duplex-construction.jpg' ); ?>" alt="Kelvin Cameo Real Estate Duplex Construction" loading="lazy">
-            <div class="bento-media-overlay"></div>
+        <!-- Real Estate -->
+        <a href="<?php echo kc_url('real-estate'); ?>" class="hp-division-card hp-card-estate">
+          <div class="hp-division-img">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/cameo-real-estate-luxury.jpg' ); ?>" alt="Kelvin Cameo Real Estate" loading="lazy">
           </div>
-          <div class="bento-content">
-            <div class="bento-top-meta">
-              <span class="bento-sector-badge badge-estate">Master-Planned Property</span>
-              <span class="bento-spec-badge">C of O Verified</span>
-            </div>
-            <h3 class="bento-title">Kelvin Cameo Real Estate</h3>
-            <p class="bento-desc">Gated luxury residential layouts, commercial highway filling station parcels, and dispute-free land banking with guaranteed legal titles.</p>
-            <div class="bento-footer-row">
-              <a href="<?php echo kc_url('real-estate'); ?>" class="bento-action-link">
-                <span>View Property Layouts</span>
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
-            </div>
+          <div class="hp-division-body">
+            <span class="hp-division-tag">Division 02</span>
+            <h3 class="hp-division-name">Real Estate</h3>
+            <p class="hp-division-desc">Gated residential communities, commercial highway parcels, and strategic land banking with verified government titles (C of O).</p>
+            <span class="hp-division-link">Explore Properties &rarr;</span>
           </div>
-        </article>
+        </a>
 
-        <!-- Bento Card 3: Agriculture (5 cols) -->
-        <article class="bento-card bento-agro 3d-tilt-card" data-tilt>
-          <div class="bento-bg-media">
-            <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=80" alt="Mechanized Agriculture Silos" loading="lazy">
-            <div class="bento-media-overlay"></div>
+        <!-- Agriculture -->
+        <a href="<?php echo kc_url('agriculture'); ?>" class="hp-division-card hp-card-agro">
+          <div class="hp-division-img">
+            <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=80" alt="Kelvin Cameo Agriculture" loading="lazy">
           </div>
-          <div class="bento-content">
-            <div class="bento-top-meta">
-              <span class="bento-sector-badge badge-agro">Commercial Agro-Allied</span>
-              <span class="bento-spec-badge">2,500+ Hectares</span>
-            </div>
-            <h3 class="bento-title">Kelvin Cameo Agriculture</h3>
-            <p class="bento-desc">Mechanized grain plantations, 50,000-bird layer poultry complexes, cattle feedlots, 10,000 MT silos, and smallholder farmer empowerment.</p>
-            <div class="bento-footer-row">
-              <a href="<?php echo kc_url('agriculture'); ?>" class="bento-action-link">
-                <span>Explore Agribusiness</span>
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
-            </div>
+          <div class="hp-division-body">
+            <span class="hp-division-tag">Division 03</span>
+            <h3 class="hp-division-name">Agriculture</h3>
+            <p class="hp-division-desc">2,500+ hectares of mechanized grain farming, 50,000-bird poultry complexes, cattle ranches, and 10,000 MT grain silos.</p>
+            <span class="hp-division-link">Explore Farm Operations &rarr;</span>
           </div>
-        </article>
+        </a>
 
-        <!-- Bento Card 4: Hospitality & Resort (Wide 7 cols) -->
-        <article class="bento-card bento-resort 3d-tilt-card" data-tilt>
-          <div class="bento-bg-media">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/golden-nest-room.jpg' ); ?>" alt="Kelvin Cameo Resort Hotel Luxury Suite" loading="lazy">
-            <div class="bento-media-overlay"></div>
+        <!-- Hospitality -->
+        <a href="<?php echo kc_url('hospitality'); ?>" class="hp-division-card hp-card-resort">
+          <div class="hp-division-img">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/golden-nest-room.jpg' ); ?>" alt="Kelvin Cameo Resort Hotel" loading="lazy">
           </div>
-          <div class="bento-content">
-            <div class="bento-top-meta">
-              <span class="bento-sector-badge badge-resort">Luxury Hospitality &bull; Suleja</span>
-              <span class="bento-spec-badge">24/7 Power Guarantee</span>
-            </div>
-            <h3 class="bento-title">Kelvin Cameo Resort Hotel &amp; Suites</h3>
-            <p class="bento-desc">10 authentic accommodation classes from &#8358;25,000/night, sparkling swimming pool, snooker lounge, fine dining, and 1,000-seat grand banquet hall.</p>
-            <div class="bento-footer-row">
-              <a href="<?php echo kc_url('hospitality'); ?>" class="bento-action-link">
-                <span>Explore Suites &amp; Banquet Hall</span>
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </a>
-              <a href="<?php echo kc_url('reserve'); ?>" class="bento-pill-action">Book A Room</a>
-            </div>
+          <div class="hp-division-body">
+            <span class="hp-division-tag">Division 04</span>
+            <h3 class="hp-division-name">Resort Hotel</h3>
+            <p class="hp-division-desc">Premier luxury oasis along the Abuja corridor — 10 accommodation tiers, swimming pool, and a majestic 1,000-seat banquet hall.</p>
+            <span class="hp-division-link">Explore Resort &amp; Suites &rarr;</span>
           </div>
-        </article>
+        </a>
 
       </div>
     </div>
   </section>
 
   <!-- ====================================================================
-       EXECUTIVE CHAIRMAN & CEO — 3D Holographic Showcase
-       Alhaji Kamarudeen Oladejo (Asiwaju of Owu Kingdom)
+       MEET OUR FOUNDER & GROUP MANAGING DIRECTOR
        ==================================================================== -->
-  <section class="hp-chairman-section" id="chairman">
+  <section class="founder-section" id="founder">
     <div class="container">
-      <div class="chairman-container-inner">
-
-        <!-- Left: 3D Holographic Interactive Portrait Card -->
-        <div class="chairman-visual-col">
-          <div class="chairman-3d-card" data-tilt>
-            <div class="chairman-card-glare"></div>
-
-            <div class="chairman-image-holder">
-              <!-- Default: High-Res Executive Magazine Vision / Toggle with Throne Portrait -->
-              <img id="chairmanMainImg" src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/chairman-forbes-portrait.jpg' ); ?>" alt="Alhaji Kamarudeen Oladejo, Asiwaju of Owu Kingdom — Chairman &amp; CEO" class="chairman-portrait-img">
-              <div class="chairman-vignette"></div>
+      <div class="founder-container-inner">
+        <!-- Founder Portrait & Emblem Card -->
+        <div class="founder-media-wrap">
+          <div class="founder-portrait-frame">
+            <div class="founder-seal-float">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span>RC: 1613032</span>
             </div>
 
-            <!-- Crown & Title Floating Badge -->
-            <div class="chairman-floating-crest">
-              <div class="crest-icon">👑</div>
-              <div class="crest-text">
-                <span class="crest-title">ASIWAJU OF OWU KINGDOM</span>
-                <span class="crest-sub">Traditional Honor &bull; Industrial Leadership</span>
-              </div>
+            <div class="founder-emblem-halo">
+              <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/logo-emblem.png' ); ?>" alt="Kelvin Cameo Official Monogram" />
             </div>
 
-            <!-- Card Bottom Plate -->
-            <div class="chairman-card-plate">
-              <h3 class="chairman-card-name">Alhaji Kamarudeen Oladejo</h3>
-              <p class="chairman-card-role">Chairman &amp; Chief Executive Officer</p>
-              <div class="chairman-entities-list">
-                <span>Kelvin Cameo Resort Hotel</span>
-                <span class="sep">&bull;</span>
-                <span>Kelvin Energy Limited</span>
-              </div>
+            <h3 class="founder-name-plate">Kelvin Cameo</h3>
+            <span class="founder-title-badge">Founder &amp; Group Managing Director</span>
+            
+            <p class="founder-bio-brief">
+              Industrialist, indigenous investor, and chief executive steering Nigeria's fastest-growing multi-sector conglomerate across Energy, Real Estate, Agriculture, and Hospitality.
+            </p>
 
-              <!-- Interactive Switcher -->
-              <div class="chairman-photo-switcher">
-                <button type="button" class="switch-btn active" data-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/chairman-forbes-portrait.jpg' ); ?>">Executive Vision</button>
-                <button type="button" class="switch-btn" data-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/alhaji-kamarudeen-oladejo-portrait.jpg' ); ?>">Royal Throne Portrait</button>
-                <button type="button" class="switch-btn" data-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/alhaji-kamarudeen-oladejo-ceo.jpg' ); ?>">Full Commemorative</button>
+            <div class="founder-stats-strip">
+              <div class="founder-stat-item">
+                <span class="founder-stat-num text-gradient-gold">4 Sectors</span>
+                <span class="founder-stat-lbl">Active Divisions</span>
+              </div>
+              <div class="founder-stat-item">
+                <span class="founder-stat-num text-gradient-gold">100%</span>
+                <span class="founder-stat-lbl">Statutory Compliance</span>
+              </div>
+              <div class="founder-stat-item">
+                <span class="founder-stat-num text-gradient-gold">1,000+</span>
+                <span class="founder-stat-lbl">Seats Grand Hall</span>
+              </div>
+              <div class="founder-stat-item">
+                <span class="founder-stat-num text-gradient-gold">0 Drama</span>
+                <span class="founder-stat-lbl">Zero-Omonile Land</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Right: Executive Vision & Narrative -->
-        <div class="chairman-narrative-col">
-          <span class="section-tag-pill tag-gold">Executive Leadership &amp; Direction</span>
-
-          <h2 class="chairman-headline">
-            Building An Indigenous Empire On <span class="text-gradient-gold">Calibrated Trust</span> &amp; Vision.
+        <!-- Founder Narrative & Vision -->
+        <div class="founder-content-wrap">
+          <span class="founder-eyebrow">Meet Our Founder</span>
+          <h2 class="founder-headline">
+            Building An Indigenous Conglomerate On <span class="text-gradient-gold">Uncompromising Integrity</span>.
           </h2>
 
-          <p class="chairman-lead">
-            Under the visionary stewardship of <strong>Alhaji Kamarudeen Oladejo</strong> &mdash; esteemed <em>Asiwaju of Owu Kingdom</em> &mdash; Kelvin Cameo has evolved into one of Nigeria&rsquo;s most formidable indigenous conglomerates, with market-leading operations across downstream energy, master-planned infrastructure, commercial agriculture, and luxury hospitality.
+          <p class="founder-narrative">
+            Under the visionary leadership of <strong>Kelvin Cameo</strong>, our organization was founded with a singular conviction: that Nigerian enterprise must be anchored on trust, verified quality, and genuine value for everyday citizens. 
           </p>
 
-          <p class="chairman-body">
-            A pillar of strength, visionary investor, and philanthropist, Alhaji Kamarudeen Oladejo leads with an uncompromising philosophy: that true Nigerian enterprise must guarantee exact measurements at every fuel pump, certified legal security on every plot of land, food abundance at fair farm-gate pricing, and an authentic sanctuary where light and comfort never waver.
+          <p class="founder-narrative">
+            Whether it's ensuring our fuel pumps dispense every single millilitre paid for, securing dispute-free land titles with guaranteed legal backing, producing clean food at farm-gate prices, or offering an uncompromised luxury resort where the power never fails — Kelvin Cameo's hands-on leadership defines our operational excellence.
           </p>
 
-          <!-- Executive Pull Quote with 3D Border -->
-          <div class="chairman-quote-box 3d-tilt-card" data-tilt>
-            <div class="quote-mark">&ldquo;</div>
-            <blockquote class="chairman-quote-text">
-              True Nigerian enterprise isn&rsquo;t built on shortcuts; it is earned through unyielding integrity, calibrated honesty, and genuine value delivered to every family, traveler, and corporate partner who honors us with their trust.
+          <!-- Executive Pull Quote -->
+          <div class="founder-quote-card">
+            <blockquote class="founder-quote-text">
+              "True Nigerian enterprise isn't built on shortcuts; it's earned through unyielding integrity, calibrated honesty, and genuine value delivered to every family, traveler, and business that honors us with their trust."
             </blockquote>
-            <cite class="chairman-quote-cite">
-              <strong>Alhaji Kamarudeen Oladejo</strong>
-              <span>Chairman &amp; CEO &bull; Asiwaju of Owu Kingdom</span>
-            </cite>
+            <span class="founder-creed-tag">— Kelvin Cameo &bull; Founder &amp; Group Managing Director</span>
           </div>
 
-          <!-- Action Buttons -->
-          <div class="chairman-cta-group">
-            <a href="<?php echo kc_url('about'); ?>#governance" class="btn btn-gold-solid btn-lg 3d-btn">
+          <div class="founder-action-row">
+            <a href="<?php echo kc_url('about'); ?>#governance" class="btn-gold-luxury">
               <span>Read Full Executive Profile</span>
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
-            <a href="https://wa.me/2348055558197?text=Hello%20Executive%20Office%20of%20Alhaji%20Kamarudeen%20Oladejo%2C%20I%20would%20like%20to%20connect." target="_blank" rel="noopener" class="btn btn-outline-dark btn-lg 3d-btn">
-              <span>Executive Desk on WhatsApp</span>
+            <a href="https://wa.me/2348055558197?text=Hello%20Mr.%20Kelvin%20Cameo%2C%20I%20would%20like%20to%20connect%20with%20your%20executive%20office." target="_blank" rel="noopener" class="btn-gold-outline">
+              Connect on WhatsApp
             </a>
           </div>
         </div>
-
       </div>
     </div>
   </section>
