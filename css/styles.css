@@ -4665,14 +4665,40 @@ ul, ol {
   font-size: 0.92rem;
   color: var(--slate-600);
   line-height: 1.65;
-  flex: 1;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
+}
+.hp-division-highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.35rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-top: 1px dashed var(--sand-200);
+  padding-top: 1rem;
+}
+.hp-division-highlights li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  font-size: 0.825rem;
+  color: var(--slate-700);
+  font-weight: 600;
+  line-height: 1.45;
+}
+.hp-division-highlights li svg {
+  width: 15px;
+  height: 15px;
+  color: #10b981;
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 .hp-division-link {
   font-size: 0.85rem;
   font-weight: 700;
   color: var(--cobalt-700);
   transition: color var(--transition-fast);
+  margin-top: auto;
 }
 .hp-card-energy:hover .hp-division-link { color: var(--energy-orange); }
 .hp-card-estate:hover .hp-division-link { color: var(--cobalt-600); }

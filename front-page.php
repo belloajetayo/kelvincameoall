@@ -83,8 +83,13 @@ get_header();
           </div>
           <div class="hp-division-body">
             <span class="hp-division-tag">Division 01</span>
-            <h3 class="hp-division-name">Energy &amp; Fuel</h3>
-            <p class="hp-division-desc">Digitally calibrated retail filling stations supplying PMS, AGO, DPK, engine lubricants, and 50-tonne LPG cooking gas skids.</p>
+            <h3 class="hp-division-name">Energy &amp; Fuel Stations</h3>
+            <p class="hp-division-desc">Digitally calibrated retail fuel stations supplying PMS, AGO, DPK, engine lubricants, and 50-tonne automated LPG skids.</p>
+            <ul class="hp-division-highlights">
+              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 10L = 10L NMDPRA Calibrated Dispensing</li>
+              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 50-Tonne Automated LPG Cooking Gas Skids</li>
+              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Bulk AGO Deliveries &amp; Commercial Solar Microgrids</li>
+            </ul>
             <span class="hp-division-link">Explore Energy &rarr;</span>
           </div>
         </a>
@@ -96,8 +101,13 @@ get_header();
           </div>
           <div class="hp-division-body">
             <span class="hp-division-tag">Division 02</span>
-            <h3 class="hp-division-name">Real Estate</h3>
-            <p class="hp-division-desc">Gated residential communities, commercial highway parcels, and strategic land banking with verified government titles (C of O).</p>
+            <h3 class="hp-division-name">Real Estate &amp; Land Banking</h3>
+            <p class="hp-division-desc">Master-planned gated residential communities, commercial highway parcels, and strategic land banking with verified government titles (C of O).</p>
+            <ul class="hp-division-highlights">
+              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Verifiable C of O &amp; Gazette Titles (Zero-Omonile)</li>
+              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Gated Residential Layouts &amp; Highway Commercial Plots</li>
+              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Guaranteed Physical Site Inspections along Abuja Corridor</li>
+            </ul>
             <span class="hp-division-link">Explore Properties &rarr;</span>
           </div>
         </a>
@@ -109,8 +119,13 @@ get_header();
           </div>
           <div class="hp-division-body">
             <span class="hp-division-tag">Division 03</span>
-            <h3 class="hp-division-name">Agriculture</h3>
+            <h3 class="hp-division-name">Agriculture &amp; Silos</h3>
             <p class="hp-division-desc">2,500+ hectares of mechanized grain farming, 50,000-bird poultry complexes, cattle ranches, and 10,000 MT grain silos.</p>
+            <ul class="hp-division-highlights">
+              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 2,500+ Hectares Mechanized Maize &amp; Soya Farming</li>
+              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Automated 50,000-Layer Poultry Farm &amp; Feedlots</li>
+              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 10,000 MT Storage Silos &amp; Corporate Off-Take</li>
+            </ul>
             <span class="hp-division-link">Explore Farm Operations &rarr;</span>
           </div>
         </a>
@@ -122,8 +137,13 @@ get_header();
           </div>
           <div class="hp-division-body">
             <span class="hp-division-tag">Division 04</span>
-            <h3 class="hp-division-name">Resort Hotel</h3>
+            <h3 class="hp-division-name">Resort Hotel &amp; Suites</h3>
             <p class="hp-division-desc">Premier luxury oasis along the Abuja corridor — 10 accommodation tiers, swimming pool, and a majestic 1,000-seat banquet hall.</p>
+            <ul class="hp-division-highlights">
+              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 10 Accommodation Tiers (From &#8358;25,000 to &#8358;180,000/night)</li>
+              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Guaranteed 24/7 Power (Dual Caterpillar Standby + Solar)</li>
+              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 1,000-Seat Grand Banquet Hall for Weddings &amp; AGMs</li>
+            </ul>
             <span class="hp-division-link">Explore Resort &amp; Suites &rarr;</span>
           </div>
         </a>
@@ -260,209 +280,7 @@ get_header();
     </div>
   </section>
 
-  <!-- ====================================================================
-       CONGLOMERATE FAST-CRAWL DIRECTORY & SITE INDEX
-       ==================================================================== -->
-  <section class="hp-site-directory" id="site-directory" aria-label="Kelvin Cameo Conglomerate Sitelinks Directory">
-    <div class="container">
-      <div class="hp-section-head">
-        <span class="directory-eyebrow">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          Conglomerate Directory &bull; RC: 1613032
-        </span>
-        <h2 class="hp-section-title">Explore All Divisions &amp; Official Portals</h2>
-        <p class="hp-section-sub">Direct access to the full operating scope of Kelvin Cameo across downstream energy, master-planned property, commercial agriculture, and luxury hospitality.</p>
-      </div>
 
-      <div class="directory-grid">
-        <!-- Directory Card 1: Hospitality & Resort -->
-        <article class="directory-card directory-card-resort" itemscope itemtype="https://schema.org/SiteNavigationElement">
-          <div class="directory-top-meta">
-            <div class="directory-icon-pill pill-resort">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 7v14M21 7v14M6 11h4M14 11h4M6 15h4M14 15h4M9 3h6v4H9z"/></svg>
-              <span>Hospitality &bull; Suleja</span>
-            </div>
-            <span class="directory-num">01</span>
-          </div>
-          <h3 itemprop="name" class="directory-title">
-            <a itemprop="url" href="<?php echo kc_url('hospitality'); ?>">Kelvin Cameo Resort Hotel &amp; Suites</a>
-          </h3>
-          <p class="directory-desc">
-            10 Authentic accommodation classes from &#8358;25,000 to &#8358;180,000/night, 24/7 uninterrupted power guarantee, crystal swimming pool, and 1,000-guest grand banquet hall.
-          </p>
-          <div class="directory-links-wrap">
-            <a href="<?php echo kc_url('hospitality'); ?>#rooms" class="dir-chip">
-              <span>View Room Classes &amp; Tariffs</span>
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-            <a href="<?php echo kc_url('hospitality'); ?>#banquet" class="dir-chip">
-              <span>1,000-Seat Banquet Hall Rates</span>
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-            <a href="<?php echo kc_url('reserve'); ?>" class="dir-chip dir-chip-highlight">
-              <span>Online Room Reservation Desk</span>
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- Directory Card 2: Energy & Petrol Stations -->
-        <article class="directory-card directory-card-energy" itemscope itemtype="https://schema.org/SiteNavigationElement">
-          <div class="directory-top-meta">
-            <div class="directory-icon-pill pill-energy">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22h12M4 9h10M4 22V4a2 2 0 012-2h6a2 2 0 012 2v18M14 13h2a2 2 0 012 2v2a2 2 0 002 2h0a2 2 0 002-2V9.83a2 2 0 00-.59-1.42L19 6"/></svg>
-              <span>Downstream Energy</span>
-            </div>
-            <span class="directory-num">02</span>
-          </div>
-          <h3 itemprop="name" class="directory-title">
-            <a itemprop="url" href="<?php echo kc_url('energy'); ?>">Kelvin Cameo Energy &amp; Fuel Stations</a>
-          </h3>
-          <p class="directory-desc">
-            Modern retail fuel stations delivering certified 10L = 10L pump calibration, 50-tonne automated LPG skids, bulk AGO deliveries, and solar microgrid installations.
-          </p>
-          <div class="directory-links-wrap">
-            <a href="<?php echo kc_url('energy'); ?>#stations" class="dir-chip">
-              <span>Retail Filling Station Network</span>
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-            <a href="<?php echo kc_url('energy'); ?>#lpg" class="dir-chip">
-              <span>50-Tonne LPG Cooking Gas</span>
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-            <a href="<?php echo kc_url('energy'); ?>#solar" class="dir-chip dir-chip-highlight">
-              <span>Commercial Solar Microgrids</span>
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- Directory Card 3: Real Estate & Land -->
-        <article class="directory-card directory-card-estate" itemscope itemtype="https://schema.org/SiteNavigationElement">
-          <div class="directory-top-meta">
-            <div class="directory-icon-pill pill-estate">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-              <span>Real Estate &bull; C of O</span>
-            </div>
-            <span class="directory-num">03</span>
-          </div>
-          <h3 itemprop="name" class="directory-title">
-            <a itemprop="url" href="<?php echo kc_url('real-estate'); ?>">Kelvin Cameo Real Estate &amp; Land</a>
-          </h3>
-          <p class="directory-desc">
-            Master-planned gated estates, commercial highway filling station plots, and verifiable C of O / Gazette land banking along Abuja-Suleja economic growth corridor.
-          </p>
-          <div class="directory-links-wrap">
-            <a href="<?php echo kc_url('real-estate'); ?>#residential" class="dir-chip">
-              <span>Gated Residential Layouts</span>
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-            <a href="<?php echo kc_url('real-estate'); ?>#commercial" class="dir-chip">
-              <span>Highway Commercial Plots</span>
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-            <a href="<?php echo kc_url('real-estate'); ?>#inquire" class="dir-chip dir-chip-highlight">
-              <span>Book Physical Site Inspection</span>
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- Directory Card 4: Agriculture & Agro-Allied -->
-        <article class="directory-card directory-card-agro" itemscope itemtype="https://schema.org/SiteNavigationElement">
-          <div class="directory-top-meta">
-            <div class="directory-icon-pill pill-agro">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12A10 10 0 0 1 12 2z"/><path d="M12 6v12M8 10l4-4 4 4"/></svg>
-              <span>Commercial Agro</span>
-            </div>
-            <span class="directory-num">04</span>
-          </div>
-          <h3 itemprop="name" class="directory-title">
-            <a itemprop="url" href="<?php echo kc_url('agriculture'); ?>">Kelvin Cameo Agriculture &amp; Silos</a>
-          </h3>
-          <p class="directory-desc">
-            2,500+ Hectares of mechanized maize &amp; soya farming, automated 50,000-layer poultry egg complex, disease-screened cattle feedlots, and 10,000 MT storage silos.
-          </p>
-          <div class="directory-links-wrap">
-            <a href="<?php echo kc_url('agriculture'); ?>#farming" class="dir-chip">
-              <span>Mechanized Grain Plantations</span>
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-            <a href="<?php echo kc_url('agriculture'); ?>#livestock" class="dir-chip">
-              <span>Commercial Layer Poultry Farm</span>
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-            <a href="<?php echo kc_url('agriculture'); ?>#offtake" class="dir-chip dir-chip-highlight">
-              <span>Corporate Commodity Off-Take</span>
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- Directory Card 5: Corporate Heritage & About -->
-        <article class="directory-card directory-card-corp" itemscope itemtype="https://schema.org/SiteNavigationElement">
-          <div class="directory-top-meta">
-            <div class="directory-icon-pill pill-corp">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <span>Corporate &bull; CAC Reg</span>
-            </div>
-            <span class="directory-num">05</span>
-          </div>
-          <h3 itemprop="name" class="directory-title">
-            <a itemprop="url" href="<?php echo kc_url('about'); ?>">Corporate Heritage &amp; Governance</a>
-          </h3>
-          <p class="directory-desc">
-            Incorporated under the Corporate Affairs Commission (RC: 1613032). Read our founding history, executive board profile, and community philanthropic foundation.
-          </p>
-          <div class="directory-links-wrap">
-            <a href="<?php echo kc_url('about'); ?>#governance" class="dir-chip">
-              <span>Executive Board &amp; Leadership</span>
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-            <a href="<?php echo kc_url('about'); ?>#foundation" class="dir-chip">
-              <span>Kelvin Cameo Foundation (CSR)</span>
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-            <a href="<?php echo kc_url('about'); ?>#vision" class="dir-chip dir-chip-highlight">
-              <span>Conglomerate Vision &amp; Creed</span>
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- Directory Card 6: Universal Headquarters & Desk -->
-        <article class="directory-card directory-card-contact" itemscope itemtype="https://schema.org/SiteNavigationElement">
-          <div class="directory-top-meta">
-            <div class="directory-icon-pill pill-contact">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              <span>Universal Desk &bull; 24/7</span>
-            </div>
-            <span class="directory-num">06</span>
-          </div>
-          <h3 itemprop="name" class="directory-title">
-            <a itemprop="url" href="<?php echo kc_url('contact'); ?>">Contact Headquarters &amp; Desk</a>
-          </h3>
-          <p class="directory-desc">
-            Located along Maje, Minna Road, opposite Technical College in Suleja, Niger State. Reach our corporate reception, order bulk supplies, or request quotes.
-          </p>
-          <div class="directory-links-wrap">
-            <a href="tel:+2348055558197" class="dir-chip">
-              <span>Direct Call: +234 805 555 8197</span>
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-            <a href="https://wa.me/2348055558197" target="_blank" rel="noopener" class="dir-chip dir-chip-highlight">
-              <span>WhatsApp 24/7 Concierge</span>
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-            <a href="<?php echo kc_url('reception'); ?>" class="dir-chip">
-              <span>Hotel Reception Desk Portal</span>
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
 
   <!-- ====================================================================
        FAQ — Clean Accordion
