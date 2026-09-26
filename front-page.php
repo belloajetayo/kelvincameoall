@@ -96,28 +96,36 @@ get_header();
           <div class="hp-stat-icon">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
           </div>
-          <span class="hp-stat-number" data-target="4">0</span>
+          <div class="hp-stat-val-wrap">
+            <span class="hp-stat-number" data-target="4">4</span>
+          </div>
           <span class="hp-stat-label">Operating Sectors</span>
         </div>
         <div class="hp-stat">
           <div class="hp-stat-icon">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v20M21 2v20M12 2v20"></path></svg>
           </div>
-          <span class="hp-stat-number" data-target="100">0</span><span class="hp-stat-suffix">%</span>
+          <div class="hp-stat-val-wrap">
+            <span class="hp-stat-number" data-target="100">100</span><span class="hp-stat-suffix">%</span>
+          </div>
           <span class="hp-stat-label">Calibrated Fuel Pumps</span>
         </div>
         <div class="hp-stat">
           <div class="hp-stat-icon">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
           </div>
-          <span class="hp-stat-number" data-target="2500">0</span><span class="hp-stat-suffix">+</span>
+          <div class="hp-stat-val-wrap">
+            <span class="hp-stat-number" data-target="2500">2,500</span><span class="hp-stat-suffix">+</span>
+          </div>
           <span class="hp-stat-label">Hectares in Agriculture</span>
         </div>
         <div class="hp-stat">
           <div class="hp-stat-icon">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
           </div>
-          <span class="hp-stat-number" data-target="1000">0</span>
+          <div class="hp-stat-val-wrap">
+            <span class="hp-stat-number" data-target="1000">1,000</span><span class="hp-stat-suffix">+</span>
+          </div>
           <span class="hp-stat-label">Seat Banquet Hall</span>
         </div>
       </div>

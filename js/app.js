@@ -809,40 +809,54 @@ function initGalleryFilter() {
    Animated Number Counters for Corporate Milestones
    -------------------------------------------------------------------------- */
 function initStatsCounter() {
-  const statNumbers = document.querySelectorAll('.stat-number');
+  const statNumbers = document.querySelectorAll('.stat-number, .hp-stat-number');
   if (!statNumbers.length) return;
+
+  const statsSection = document.querySelector('.stats-section, .hp-stats-bar');
+  if (!statsSection) return;
 
   let hasAnimated = false;
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !hasAnimated) {
-        hasAnimated = true;
-        statNumbers.forEach(counter => {
-          const target = parseInt(counter.getAttribute('data-target'), 10);
-          if (isNaN(target)) return;
+  const runAnimation = () => {
+    if (hasAnimated) return;
+    hasAnimated = true;
+    statNumbers.forEach(counter => {
+      const target = parseInt(counter.getAttribute('data-target'), 10);
+      if (isNaN(target)) return;
 
-          let current = 0;
-          const increment = Math.ceil(target / 45);
-          const duration = 1200;
-          const stepTime = Math.abs(Math.floor(duration / (target / increment)));
+      let current = 0;
+      const steps = 35;
+      const increment = target / steps;
+      let step = 0;
 
-          const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-              counter.textContent = target;
-              clearInterval(timer);
-            } else {
-              counter.textContent = current;
-            }
-          }, stepTime);
-        });
-      }
+      const timer = setInterval(() => {
+        step++;
+        current += increment;
+        if (step >= steps || current >= target) {
+          counter.textContent = target >= 1000 ? target.toLocaleString() : target;
+          clearInterval(timer);
+        } else {
+          const val = Math.floor(current);
+          counter.textContent = val >= 1000 ? val.toLocaleString() : val;
+        }
+      }, 30);
     });
-  }, { threshold: 0.3 });
+  };
 
-  const statsSection = document.querySelector('.stats-section');
-  if (statsSection) observer.observe(statsSection);
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          runAnimation();
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    observer.observe(statsSection);
+  } else {
+    runAnimation();
+  }
 }
 
 /* --------------------------------------------------------------------------
