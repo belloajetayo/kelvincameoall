@@ -108,6 +108,20 @@
         <a href="<?php echo kc_url('contact'); ?>" itemprop="url"><span itemprop="name">Headquarters &amp; Help Desk</span></a>
       </div>
 
+      <!-- Fast-Crawl Editorial Guides & SEO Articles -->
+      <div class="footer-crawl-index" aria-label="Hospitality &amp; Industry Guides" itemscope itemtype="https://schema.org/SiteNavigationElement" style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px dashed rgba(255,255,255,0.08);">
+        <span class="crawl-index-label">Featured Guides:</span>
+        <a href="<?php echo kc_url('best-hotels-in-suleja-abuja-corridor'); ?>" itemprop="url"><span itemprop="name">Best Hotels in Suleja</span></a>
+        <span class="crawl-sep">&bull;</span>
+        <a href="<?php echo kc_url('1000-seat-grand-banquet-hall-suleja-abuja'); ?>" itemprop="url"><span itemprop="name">1,000-Seat Banquet Hall</span></a>
+        <span class="crawl-sep">&bull;</span>
+        <a href="<?php echo kc_url('weekend-getaway-from-abuja-kelvin-cameo-resort'); ?>" itemprop="url"><span itemprop="name">Abuja Weekend Getaways</span></a>
+        <span class="crawl-sep">&bull;</span>
+        <a href="<?php echo kc_url('hotel-with-24-hours-light-suleja-uninterrupted-power'); ?>" itemprop="url"><span itemprop="name">Hotel with 24 Hours Light</span></a>
+        <span class="crawl-sep">&bull;</span>
+        <a href="<?php echo kc_url('honest-fuel-calibrated-pumps-niger-state'); ?>" itemprop="url"><span itemprop="name">Calibrated Fuel (10L = 10L)</span></a>
+      </div>
+
       <div class="footer-bottom-bar">
         <span>&copy; <?php echo date('Y'); ?> Kelvin Cameo (RC: 1613032). All rights reserved.</span>
         <div style="display:flex; gap:1.5rem;">

@@ -790,10 +790,19 @@ add_action( 'wp_ajax_kc_submit_inquiry', 'kc_handle_inquiry_submission' );
 add_action( 'wp_ajax_nopriv_kc_submit_inquiry', 'kc_handle_inquiry_submission' );
 
 /**
- * Automatically 301-redirect all 404 (Not Found) requests directly to the homepage.
+ * Automatically 301-redirect all 404 (Not Found) requests directly to the homepage,
+ * while ensuring valid post or page slugs resolve seamlessly.
  */
 function kc_redirect_404_to_homepage() {
     if ( is_404() ) {
+        $path = trim( parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), '/' );
+        if ( ! empty( $path ) ) {
+            $matched_post = get_page_by_path( $path, OBJECT, array( 'post', 'page' ) );
+            if ( $matched_post && $matched_post->post_status === 'publish' ) {
+                wp_safe_redirect( get_permalink( $matched_post->ID ), 301 );
+                exit;
+            }
+        }
         wp_safe_redirect( home_url( '/' ), 301 );
         exit;
     }
@@ -806,3 +815,11 @@ add_action( 'template_redirect', 'kc_redirect_404_to_homepage' );
 if ( file_exists( get_stylesheet_directory() . '/inc/hotel-management.php' ) ) {
     require_once get_stylesheet_directory() . '/inc/hotel-management.php';
 }
+
+/**
+ * Kelvin Cameo High-Ranking SEO Posts Seeder Engine
+ */
+if ( file_exists( get_stylesheet_directory() . '/inc/seo-posts-seeder.php' ) ) {
+    require_once get_stylesheet_directory() . '/inc/seo-posts-seeder.php';
+}
+

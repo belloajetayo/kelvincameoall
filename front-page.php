@@ -405,6 +405,86 @@ get_header();
 
 
   <!-- ====================================================================
+       EDITORIAL INSIGHTS & HOSPITALITY GUIDES — SEO & Content Hub
+       ==================================================================== -->
+  <section class="hp-insights section-padding" id="insights" style="background: var(--sand-50); border-top: 1px solid var(--sand-200); border-bottom: 1px solid var(--sand-200);">
+    <div class="container">
+      <div class="hp-section-head" style="margin-bottom: 2.5rem;">
+        <span class="badge badge-primary">EDITORIAL GUIDES &amp; HOSPITALITY INSIGHTS</span>
+        <h2 class="hp-section-title">Knowledge, Transparency &amp; Travel Guides</h2>
+        <p class="hp-section-sub">Authoritative reports from our executive desks &mdash; designed for travelers, event organizers, and corporate partners.</p>
+      </div>
+
+      <div class="hp-insights-grid">
+        <!-- Card 1: Best Hotels in Suleja -->
+        <article class="hp-insight-card">
+          <a href="<?php echo kc_url('best-hotels-in-suleja-abuja-corridor'); ?>" class="hp-insight-img-wrap">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/exterior.jpg' ); ?>" alt="Best Hotels in Suleja" loading="lazy">
+            <span class="hp-insight-badge">Hospitality &bull; Ranked #1</span>
+          </a>
+          <div class="hp-insight-content">
+            <span class="hp-insight-meta">5 min read &bull; Suleja / Abuja Corridor</span>
+            <h3 class="hp-insight-title">
+              <a href="<?php echo kc_url('best-hotels-in-suleja-abuja-corridor'); ?>">Top 7 Reasons Kelvin Cameo Resort is Ranked the Best Hotel in Suleja</a>
+            </h3>
+            <p class="hp-insight-desc">
+              Discover why travelers and executives rate Kelvin Cameo #1 for 24/7 power, Olympic pool, serene Kwamba location, and suites from &#8358;25,000.
+            </p>
+            <a href="<?php echo kc_url('best-hotels-in-suleja-abuja-corridor'); ?>" class="hp-insight-link">Read Full Guide &rarr;</a>
+          </div>
+        </article>
+
+        <!-- Card 2: 1,000-Seat Banquet Hall -->
+        <article class="hp-insight-card">
+          <a href="<?php echo kc_url('1000-seat-grand-banquet-hall-suleja-abuja'); ?>" class="hp-insight-img-wrap">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/banquet-hall.jpg' ); ?>" alt="1,000-Seat Grand Banquet Hall Suleja" loading="lazy">
+            <span class="hp-insight-badge">Events &bull; 1,000 Seats</span>
+          </a>
+          <div class="hp-insight-content">
+            <span class="hp-insight-meta">4 min read &bull; Weddings &amp; AGMs</span>
+            <h3 class="hp-insight-title">
+              <a href="<?php echo kc_url('1000-seat-grand-banquet-hall-suleja-abuja'); ?>">Inside the 1,000-Seat Grand Banquet Hall in Suleja: Premier Venue Guide</a>
+            </h3>
+            <p class="hp-insight-desc">
+              Explore the crystal chandeliers, industrial cooling, VIP suites, and 200+ vehicle parking for high-society weddings and conferences.
+            </p>
+            <a href="<?php echo kc_url('1000-seat-grand-banquet-hall-suleja-abuja'); ?>" class="hp-insight-link">Read Full Guide &rarr;</a>
+          </div>
+        </article>
+
+        <!-- Card 3: Weekend Getaway from Abuja -->
+        <article class="hp-insight-card">
+          <a href="<?php echo kc_url('weekend-getaway-from-abuja-kelvin-cameo-resort'); ?>" class="hp-insight-img-wrap">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/swimming-pool.jpg' ); ?>" alt="Weekend Getaway from Abuja" loading="lazy">
+            <span class="hp-insight-badge">Travel &bull; 35 Mins from Abuja</span>
+          </a>
+          <div class="hp-insight-content">
+            <span class="hp-insight-meta">4 min read &bull; Staycation Itinerary</span>
+            <h3 class="hp-insight-title">
+              <a href="<?php echo kc_url('weekend-getaway-from-abuja-kelvin-cameo-resort'); ?>">The Ultimate Weekend Getaway from Abuja: Relaxing at Kelvin Cameo</a>
+            </h3>
+            <p class="hp-insight-desc">
+              Escape the Abuja bustle in 35 minutes past Zuma Rock with poolside relaxation, fresh catfish peppersoup, and snooker lounge.
+            </p>
+            <a href="<?php echo kc_url('weekend-getaway-from-abuja-kelvin-cameo-resort'); ?>" class="hp-insight-link">Read Full Guide &rarr;</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Quick Text Links for Remaining Guides -->
+      <div class="hp-insights-secondary" style="margin-top: 2rem; padding: 1.25rem 1.5rem; background: var(--white); border-radius: var(--radius-md); border: 1px solid var(--sand-200); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div style="display:flex; align-items:center; gap: 1rem; flex-wrap: wrap;">
+          <span style="font-weight: 700; font-size: 0.85rem; color: var(--navy-900);">More Special Reports:</span>
+          <a href="<?php echo kc_url('hotel-with-24-hours-light-suleja-uninterrupted-power'); ?>" style="font-size: 0.85rem; color: var(--cobalt-700); text-decoration: underline; font-weight: 600;">Why 24/7 Light Sets Our Resort Apart &rarr;</a>
+          <span style="color: var(--slate-300);">&bull;</span>
+          <a href="<?php echo kc_url('honest-fuel-calibrated-pumps-niger-state'); ?>" style="font-size: 0.85rem; color: var(--cobalt-700); text-decoration: underline; font-weight: 600;">10L = 10L Calibrated Fuel Integrity &rarr;</a>
+        </div>
+        <a href="#sectors" class="btn btn-outline btn-sm">Explore All 4 Sectors</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
        FAQ — Clean Accordion
        ==================================================================== -->
   <section class="hp-faq">

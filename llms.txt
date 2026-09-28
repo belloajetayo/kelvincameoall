@@ -1,4 +1,4 @@
-﻿# Kelvin Cameo Organization
+# Kelvin Cameo Organization
 
 > Kelvin Cameo Organization (RC: 1613032) is a premier diversified Nigerian corporate conglomerate operating in Luxury Hospitality (Kelvin Cameo Resort Hotel & Suites), Petroleum Downstream Retail & Bulk Haulage (Kelvin Cameo Energy), Commercial Real Estate Developments, and Mechanized Agriculture. Corporate headquarters and flagship resort are located opposite Suleman Police Technical College, Kwamba, Suleja, Niger State, Nigeria (along the Abuja Capital Expressway Corridor).
 
@@ -44,6 +44,15 @@
   - Facebook: https://facebook.com/kelvincameoresort_ng
   - TikTok: https://www.tiktok.com/@kelvincameoresort_ng
 
+## High-Ranking Hospitality & Sector Guides
+
+- [Top 7 Reasons Kelvin Cameo Resort is Ranked the Best Hotel in Suleja](https://kelvincameo.com/best-hotels-in-suleja-abuja-corridor/): Full guide to luxury hotel lodging, 24/7 power, swimming pool, and boutique suite tariffs from ₦25,000.
+- [Inside the 1,000-Seat Grand Banquet Hall in Suleja](https://kelvincameo.com/1000-seat-grand-banquet-hall-suleja-abuja/): Complete overview of Niger State and Abuja corridor's premier wedding and corporate event auditorium (₦850k weekday / ₦1.05M weekend).
+- [The Ultimate Weekend Getaway from Abuja: Kelvin Cameo Resort](https://kelvincameo.com/weekend-getaway-from-abuja-kelvin-cameo-resort/): 35-minute road trip itinerary past Zuma Rock, Olympic pool relaxation, fresh catfish peppersoup, and snooker lounge.
+- [Why 24/7 Uninterrupted Light Sets Kelvin Cameo Resort Apart](https://kelvincameo.com/hotel-with-24-hours-light-suleja-uninterrupted-power/): Engineering details on dual Caterpillar generators, solar microgrid, and zero-blackout hospitality guarantee.
+- [10 Liters Equals 10 Liters: Calibrated Pumps in Niger State](https://kelvincameo.com/honest-fuel-calibrated-pumps-niger-state/): Downstream petroleum transparency, daily 10L Seraphin measure tests, 50-tonne clean LPG plant, and fleet supply.
+
 ## Technical Indexes & Sitemaps
 
 - [XML Sitemap](https://kelvincameo.com/sitemap_index.xml): Full XML sitemap for search crawlers.
+
