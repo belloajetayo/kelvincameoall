@@ -459,9 +459,10 @@ get_header();
             <span class="suite-branch-badge branch-annex">Branch 02 • The Annex</span>
             <div class="card-media-slider">
               <div class="card-media-slides">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/deluxe-room.jpg' ); ?>" alt="Deluxe Room at Kelvin Cameo Resort Annex" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/deluxe-room.jpg' ); ?>" alt="Deluxe Room Queen Bed with Burgundy Headboard at Kelvin Cameo Resort Annex" class="active" loading="lazy">
                 <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/deluxe-room-tv.jpg' ); ?>" alt="Deluxe Room Wall TV and Marble Workstation" loading="lazy">
                 <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/deluxe-room-bath.jpg' ); ?>" alt="Deluxe Room Ensuite Bathroom with Water Heater and Shower" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/deluxe-room-overview.jpg' ); ?>" alt="Deluxe Room Interior Layout" loading="lazy">
               </div>
               <button type="button" class="card-media-nav prev" aria-label="Previous photo">‹</button>
               <button type="button" class="card-media-nav next" aria-label="Next photo">›</button>
@@ -469,8 +470,9 @@ get_header();
                 <span class="dot active"></span>
                 <span class="dot"></span>
                 <span class="dot"></span>
+                <span class="dot"></span>
               </div>
-              <span class="card-media-badge">📷 3 Photos</span>
+              <span class="card-media-badge">📷 4 Photos</span>
             </div>
           </div>
           <div class="suite-card-body">
