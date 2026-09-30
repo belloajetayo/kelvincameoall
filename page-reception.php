@@ -1971,7 +1971,7 @@ $reserve_url = home_url('/reserve/');
             <div>
               <div class="folio-brand-title">Kelvin Cameo Resort Hotel</div>
               <div class="folio-brand-sub">Luxury Suites, Accommodations & Hospitality</div>
-              <div class="folio-brand-sub">Opposite Suleman Police Technical College, Kwamba, Suleja, Niger State (Abuja Capital Corridor) • RC: 1613032</div>
+              <div class="folio-brand-sub">Opposite Suleiman Barau Technical College, Kwamba, Suleja, Niger State (Abuja Capital Corridor) • RC: 1613032</div>
               <div class="folio-brand-sub">Zenith Bank: 1311320179 • desk@kelvincameo.com</div>
             </div>
             <div class="folio-badge-official">

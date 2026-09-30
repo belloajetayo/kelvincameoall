@@ -135,7 +135,7 @@ function kelvin_cameo_seo_schema() {
         'description' => 'Diversified Nigerian corporate conglomerate operating in Petroleum Retail Stations, Real Estate Developments, Commercial Agriculture, and Premier Resort Hospitality.',
         'address'     => array(
             '@type'           => 'PostalAddress',
-            'streetAddress'   => 'Opposite Suleman Police Technical College, Kwamba',
+            'streetAddress'   => 'Opposite Suleiman Barau Technical College, Kwamba',
             'addressLocality' => 'Suleja',
             'postalCode'      => '910104',
             'addressRegion'   => 'Niger State',
@@ -326,7 +326,7 @@ function kelvin_cameo_seo_schema() {
             '@id'             => esc_url( home_url( '/hospitality/#hotel' ) ),
             'name'            => 'Kelvin Cameo Resort Hotel',
             'alternateName'   => 'Kelvin Cameo Hotel & Suites',
-            'description'     => 'Premier luxury resort hotel in Suleja along the Abuja Capital Corridor (opposite Suleman Police Technical College). Featuring boutique suites from ₦25,000, 1,000-seat grand banquet hall, crystal swimming pool, and fine dining.',
+            'description'     => 'Premier luxury resort hotel in Suleja along the Abuja Capital Corridor (Opposite Suleiman Barau Technical College). Featuring boutique suites from ₦25,000, 1,000-seat grand banquet hall, crystal swimming pool, and fine dining.',
             'url'             => esc_url( home_url( '/hospitality/' ) ),
             'telephone'       => '+2348055558197',
             'email'           => $email_addr,
@@ -344,7 +344,7 @@ function kelvin_cameo_seo_schema() {
             ),
             'address'         => array(
                 '@type'           => 'PostalAddress',
-                'streetAddress'   => 'Opposite Suleman Police Technical College, Kwamba',
+                'streetAddress'   => 'Opposite Suleiman Barau Technical College, Kwamba',
                 'addressLocality' => 'Suleja',
                 'postalCode'      => '910104',
                 'addressRegion'   => 'Niger State',
@@ -450,7 +450,7 @@ function kelvin_cameo_seo_schema() {
                     'name'           => 'Where is Kelvin Cameo Resort Hotel located?',
                     'acceptedAnswer' => array(
                         '@type' => 'Answer',
-                        'text'  => 'Kelvin Cameo Resort Hotel is located opposite Suleman Police Technical College, Kwamba, Suleja, 910104, Niger State, Nigeria, along the Abuja Capital Expressway Corridor.',
+                        'text'  => 'Kelvin Cameo Resort Hotel is located Opposite Suleiman Barau Technical College, Kwamba, Suleja, 910104, Niger State, Nigeria, along the Abuja Capital Expressway Corridor.',
                     ),
                 ),
                 array(
@@ -479,7 +479,7 @@ function kelvin_cameo_seo_schema() {
                     'name'           => 'Where is Kelvin Cameo located?',
                     'acceptedAnswer' => array(
                         '@type' => 'Answer',
-                        'text'  => 'Our corporate headquarters and flagship Kelvin Cameo Resort Hotel are located opposite Suleman Police Technical College, Kwamba, Suleja, Niger State, easily accessible along the Abuja-Kaduna highway corridor.',
+                        'text'  => 'Our corporate headquarters and flagship Kelvin Cameo Resort Hotel are located Opposite Suleiman Barau Technical College, Kwamba, Suleja, Niger State, easily accessible along the Abuja-Kaduna highway corridor.',
                     ),
                 ),
                 array(

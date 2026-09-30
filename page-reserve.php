@@ -721,7 +721,7 @@ $site_home = home_url('/');
 
   <!-- FOOTER -->
   <footer class="reserve-footer">
-    Kelvin Cameo Resort Hotel • Opposite Suleman Police Technical College, Kwamba, Suleja, Niger State (Abuja Capital Corridor) • RC: 1613032
+    Kelvin Cameo Resort Hotel • Opposite Suleiman Barau Technical College, Kwamba, Suleja, Niger State (Abuja Capital Corridor) • RC: 1613032
   </footer>
 
   <!-- SCRIPT -->

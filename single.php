@@ -113,7 +113,7 @@ if ( ! $featured_img_url ) {
       "currenciesAccepted": "NGN",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Opposite Suleman Police Technical College, Kwamba",
+        "streetAddress": "Opposite Suleiman Barau Technical College, Kwamba",
         "addressLocality": "Suleja",
         "addressRegion": "Niger State",
         "postalCode": "910104",
@@ -194,7 +194,7 @@ if ( ! $featured_img_url ) {
           <img src="<?php echo esc_url( $featured_img_url ); ?>" alt="<?php echo esc_attr( $post_title ); ?>" class="featured-img" loading="eager">
           <figcaption class="featured-caption">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Kelvin Cameo Corporate Estate &bull; Opposite Suleman Police Technical College, Kwamba, Suleja (Abuja Corridor)
+            Kelvin Cameo Corporate Estate &bull; Opposite Suleiman Barau Technical College, Kwamba, Suleja (Abuja Corridor)
           </figcaption>
         </figure>
       <?php endif; ?>
@@ -287,7 +287,7 @@ if ( ! $featured_img_url ) {
           </li>
           <li>
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-            Opposite Police Technical College (Armed Security)
+            Opposite Suleiman Barau Technical College (24/7 Security)
           </li>
           <li>
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -310,16 +310,18 @@ if ( ! $featured_img_url ) {
         </div>
       </div>
 
-      <!-- Banquet Hall Promotion -->
+      <!-- Banquet Hall Promotion with 4 Confirmed Packages -->
       <div class="sidebar-card banquet-card">
         <div class="sidebar-card-badge">1,000 CAPACITY</div>
         <h4 class="sidebar-card-title">Grand Banquet Auditorium</h4>
-        <p class="sidebar-card-subtitle">Abuja corridor's largest event hall for weddings, AGMs &amp; conferences.</p>
-        <div class="banquet-pricing-mini">
-          <div><span class="day-lbl">Weekday:</span> <strong>₦850,000</strong></div>
-          <div><span class="day-lbl">Weekend:</span> <strong>₦1,050,000</strong></div>
+        <p class="sidebar-card-subtitle">Abuja corridor's premier event venue with 4 official booking packages.</p>
+        <div class="banquet-pricing-mini" style="display:flex; flex-direction:column; gap:4px; font-size:0.8rem; margin:10px 0;">
+          <div style="display:flex; justify-content:space-between;"><span class="day-lbl">Mini Hall:</span> <strong>₦250,000</strong></div>
+          <div style="display:flex; justify-content:space-between;"><span class="day-lbl">Space Only:</span> <strong>₦850,000</strong></div>
+          <div style="display:flex; justify-content:space-between;"><span class="day-lbl">Celebrations:</span> <strong>₦1,050,000</strong></div>
+          <div style="display:flex; justify-content:space-between;"><span class="day-lbl">+ Apartment:</span> <strong>₦1,200,000</strong></div>
         </div>
-        <a href="https://wa.me/2348055558197?text=Hello%2C%20I%20am%20inquiring%20about%20booking%20the%201000-seat%20Banquet%20Hall." target="_blank" rel="noreferrer" class="btn btn-outline btn-block">
+        <a href="https://wa.me/2348055558197?text=Hello%2C%20I%20am%20inquiring%20about%20booking%20the%201000-seat%20Banquet%20Hall%20packages." target="_blank" rel="noreferrer" class="btn btn-outline btn-block">
           Inspect Hall / Inquire
         </a>
       </div>
@@ -361,7 +363,7 @@ if ( ! $featured_img_url ) {
         <p class="address-text">
           <strong>Kelvin Cameo Resort Hotel</strong><br>
           Along Maje, Minna Road,<br>
-          Opposite Suleman Police Technical College,<br>
+          Opposite Suleiman Barau Technical College,<br>
           Kwamba, Suleja, Niger State (Abuja Corridor).
         </p>
         <a href="https://maps.google.com/?q=Kelvin+Cameo+Resort+Suleja" target="_blank" rel="noreferrer" class="map-link">
