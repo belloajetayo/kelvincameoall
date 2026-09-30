@@ -1018,8 +1018,17 @@ get_header();
                 <span>Instant WhatsApp Coordinator</span>
               </a>
             </div>
-            <div id="banquetFormSuccess" style="display:none; margin-top: 1rem; background: #ecfdf5; border: 1px solid #10b981; border-radius: var(--radius-md); padding: 1rem; color: #065f46; font-size: 0.9rem;">
-              🎉 <strong>Date Request Logged!</strong> Our events coordinator has received your request and will call/WhatsApp you shortly to confirm date lock-in and hall inspection.
+            <div id="banquetFormSuccess" style="display:none; margin-top: 1rem; background: #ecfdf5; border: 1px solid #10b981; border-radius: var(--radius-md); padding: 1.25rem; color: #065f46; font-size: 0.95rem;">
+              <div style="font-weight: 800; font-size: 1.05rem; color: #047857; margin-bottom: 0.35rem;">
+                🎉 Date Availability Request Registered!
+              </div>
+              <p style="margin: 0 0 0.85rem; line-height: 1.5; font-size: 0.88rem;">
+                Our events coordinator has received your request. Tap the direct button below to immediately ping our team on WhatsApp with your date details for rapid confirmation!
+              </p>
+              <a id="btnBanquetSuccessWhatsAppPing" href="#" target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem 1.5rem; font-size: 0.95rem; box-shadow: 0 4px 14px rgba(37,211,102,0.3);">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.073.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+                <span>Tap to Ping Events Coordinator on WhatsApp</span>
+              </a>
             </div>
           </form>
         </div>
@@ -1781,6 +1790,48 @@ get_header();
           </a>
         </div>
       </form>
+
+      <!-- Success State with Direct WhatsApp Ping to Front Desk -->
+      <div id="bookingSuccessView" style="display:none; text-align:center; padding:1.25rem 0.5rem;">
+        <div style="width:64px; height:64px; margin:0 auto 1rem; border-radius:50%; background:linear-gradient(135deg, #10b981 0%, #059669 100%); display:flex; align-items:center; justify-content:center; color:#fff; box-shadow:0 8px 24px rgba(16,185,129,0.35);">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; font-weight:800; color:#10b981; display:inline-block; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.25); border-radius:9999px; padding:0.25rem 0.75rem; margin-bottom:0.5rem;">
+          Booking Dispatched to Reception
+        </span>
+        <h3 style="font-size:1.35rem; font-weight:800; color:var(--slate-900); margin:0 0 0.5rem;">
+          Transfer Notification Logged!
+        </h3>
+        <p style="font-size:0.9rem; color:var(--slate-600); max-width:440px; margin:0 auto 1.25rem; line-height:1.5;">
+          Your reservation details and Zenith Bank payment notification have been recorded in our front desk reception PMS and dispatched to hotel management.
+        </p>
+
+        <div style="background:var(--slate-50); border:1px solid var(--slate-200); border-radius:var(--radius-md); padding:1rem 1.25rem; text-align:left; margin-bottom:1.5rem; font-size:0.88rem; display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+          <div>
+            <span style="font-size:0.72rem; text-transform:uppercase; color:var(--slate-500); font-weight:700; display:block;">Booking Reference</span>
+            <strong id="successBookingRef" style="font-size:1rem; color:var(--navy-900); font-family:monospace; letter-spacing:0.05em;">KC-ROOM-...</strong>
+          </div>
+          <div>
+            <span style="font-size:0.72rem; text-transform:uppercase; color:var(--slate-500); font-weight:700; display:block;">Total Tariff</span>
+            <strong id="successTotalAmount" style="font-size:1rem; color:var(--orange-600);">₦0</strong>
+          </div>
+          <div style="grid-column: 1 / -1; border-top:1px dashed var(--slate-200); padding-top:0.6rem;">
+            <span style="font-size:0.72rem; text-transform:uppercase; color:var(--slate-500); font-weight:700; display:block;">Room &amp; Dates</span>
+            <strong id="successRoomDetails" style="font-size:0.9rem; color:var(--slate-800);">Room • Dates</strong>
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:0.75rem;">
+          <a id="btnBookingSuccessWhatsAppPing" href="https://wa.me/2348055558197" target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg" style="width:100%; justify-content:center; padding:0.9rem 1.5rem; font-size:1rem; box-shadow:0 6px 20px rgba(37,211,102,0.35);">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="margin-right:0.5rem;"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.073.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+            <span>Tap to Ping Reception via WhatsApp</span>
+          </a>
+
+          <button type="button" id="btnDoneBookingSuccess" class="btn btn-outline" style="width:100%; justify-content:center; padding:0.65rem 1rem; font-size:0.85rem; border-color:var(--slate-300); color:var(--slate-700);">
+            Close Window
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 

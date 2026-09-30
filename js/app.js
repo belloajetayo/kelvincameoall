@@ -473,6 +473,10 @@ function initRoomBookingModal() {
       }
     }
 
+    form.style.display = 'block';
+    const successView = document.getElementById('bookingSuccessView');
+    if (successView) successView.style.display = 'none';
+
     setDefaultDates();
     updateCostCalculation();
 
@@ -487,6 +491,11 @@ function initRoomBookingModal() {
     modal.classList.remove('active');
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    setTimeout(() => {
+      form.style.display = 'block';
+      const successView = document.getElementById('bookingSuccessView');
+      if (successView) successView.style.display = 'none';
+    }, 250);
   }
 
   bookBtns.forEach(btn => {
@@ -498,6 +507,11 @@ function initRoomBookingModal() {
 
   if (closeBtn) {
     closeBtn.addEventListener('click', closeModal);
+  }
+
+  const btnDoneSuccess = document.getElementById('btnDoneBookingSuccess');
+  if (btnDoneSuccess) {
+    btnDoneSuccess.addEventListener('click', closeModal);
   }
 
   modal.addEventListener('click', (e) => {
@@ -549,14 +563,38 @@ function initRoomBookingModal() {
       submitBtn.innerHTML = originalText;
 
       if (data.success) {
-        closeModal();
         const guestName = form.querySelector('[name="guest_name"]')?.value || 'Guest';
         const roomName = inputRoomName ? inputRoomName.value : 'Room';
-        form.reset();
+        const roomBranch = inputRoomBranch ? inputRoomBranch.value : '';
+        const checkinVal = checkinInput ? checkinInput.value : '';
+        const checkoutVal = checkoutInput ? checkoutInput.value : '';
+        const nights = inputNights ? inputNights.value : '1';
+        const total = inputTotalAmount ? inputTotalAmount.value : '';
+
+        const successView = document.getElementById('bookingSuccessView');
+        const refEl = document.getElementById('successBookingRef');
+        const totalEl = document.getElementById('successTotalAmount');
+        const roomDetailsEl = document.getElementById('successRoomDetails');
+        const pingBtn = document.getElementById('btnBookingSuccessWhatsAppPing');
+
+        if (successView) {
+          form.style.display = 'none';
+          successView.style.display = 'block';
+
+          if (refEl) refEl.textContent = data.data?.booking_ref || 'KC-ROOM-CONFIRMED';
+          if (totalEl) totalEl.textContent = data.data?.total || total || 'Confirmed';
+          if (roomDetailsEl) roomDetailsEl.textContent = `${roomName} (${roomBranch}) • ${checkinVal} to ${checkoutVal} (${nights} night${nights > 1 ? 's' : ''})`;
+          if (pingBtn) {
+            pingBtn.href = data.data?.manager_whatsapp_url || `https://wa.me/2348055558197?text=${encodeURIComponent('Hello Reception, I have booked ' + roomName + ' and made bank transfer.')}`;
+          }
+        } else {
+          closeModal();
+          form.reset();
+        }
 
         showToast(
           'Payment Notification Received! 🎉',
-          `Thank you ${guestName}. Your Zenith Bank transfer for ${roomName} has been logged and dispatched to the front desk. An email confirmation has been sent to our reservations manager.`
+          `Thank you ${guestName}. Your Zenith Bank transfer for ${roomName} has been logged and dispatched to the front desk. Tap WhatsApp to ping reception directly!`
         );
       } else {
         if (errorBox) {
@@ -569,13 +607,23 @@ function initRoomBookingModal() {
       console.warn('Booking dispatch note:', err);
       submitBtn.disabled = false;
       submitBtn.innerHTML = originalText;
-      closeModal();
-      const guestName = form.querySelector('[name="guest_name"]')?.value || 'Guest';
-      form.reset();
+
+      const successView = document.getElementById('bookingSuccessView');
+      const pingBtn = document.getElementById('btnBookingSuccessWhatsAppPing');
+      const roomName = inputRoomName ? inputRoomName.value : 'Room';
+      const fallbackUrl = `https://wa.me/2348055558197?text=${encodeURIComponent('Hello Reception, I made a transfer for ' + roomName + ' but encountered a network delay. Please verify.')}`;
+
+      if (successView) {
+        form.style.display = 'none';
+        successView.style.display = 'block';
+        if (pingBtn) pingBtn.href = fallbackUrl;
+      } else {
+        closeModal();
+      }
 
       showToast(
-        'Booking Dispatched! 🎉',
-        `Thank you ${guestName}. Your transfer notice has been recorded for front desk reconciliation.`
+        'Offline / Backup Alert Ready',
+        'Tap the WhatsApp button to alert front desk directly.'
       );
     });
   });
@@ -849,6 +897,11 @@ function initBanquetChecker() {
         successBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
 
+      const pingBtn = document.getElementById('btnBanquetSuccessWhatsAppPing');
+      if (pingBtn && data && data.data && data.data.manager_whatsapp_url) {
+        pingBtn.href = data.data.manager_whatsapp_url;
+      }
+
       updateWhatsAppLink();
 
       if (typeof showToast === 'function') {
@@ -865,6 +918,10 @@ function initBanquetChecker() {
 
       if (successBox) {
         successBox.style.display = 'block';
+      }
+      const pingBtn = document.getElementById('btnBanquetSuccessWhatsAppPing');
+      if (pingBtn && waBtn) {
+        pingBtn.href = waBtn.href;
       }
       updateWhatsAppLink();
 

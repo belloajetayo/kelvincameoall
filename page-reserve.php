@@ -704,6 +704,14 @@ $site_home = home_url('/');
         Please save your reference code. An official receipt will be issued upon arrival at the desk.
       </p>
 
+      <div style="margin: 18px 0 14px;">
+        <a id="successWhatsAppPingBtn" href="#" target="_blank" rel="noopener" class="btn-paid-submit" style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: #fff; padding: 12px 20px; font-size: 14px; width: 100%; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 6px 20px rgba(37,211,102,0.35);">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.073.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+          <span>Tap to Ping Front Desk on WhatsApp</span>
+        </a>
+        <small style="color: var(--kc-slate-400); display: block; font-size: 11px; margin-top: 6px;">Fast-tracks your Zenith transfer verification &amp; room key ready on arrival.</small>
+      </div>
+
       <div style="display: flex; gap: 10px; justify-content: center;">
         <button type="button" class="btn-outline" onclick="window.print()">🖨️ Print Voucher</button>
         <a href="<?php echo esc_url($site_home); ?>" class="btn-paid-submit" style="padding: 8px 20px; font-size: 13px; width: auto; text-decoration: none;">Done & Return Home</a>
@@ -844,6 +852,11 @@ $site_home = home_url('/');
               document.getElementById('successRoomDisplay').innerText = `${res.data.room_number} (${res.data.room_type})`;
               document.getElementById('successDatesDisplay').innerText = `${checkIn} to ${checkOut} (${nights} nights)`;
               document.getElementById('successAmountDisplay').innerText = '₦' + Number(res.data.amount_paid).toLocaleString();
+              
+              const pingBtn = document.getElementById('successWhatsAppPingBtn');
+              if (pingBtn && res.data.manager_whatsapp_url) {
+                pingBtn.href = res.data.manager_whatsapp_url;
+              }
               document.getElementById('successModal').classList.add('active');
             } else {
               alert(res.data && res.data.message ? res.data.message : 'Error submitting payment');

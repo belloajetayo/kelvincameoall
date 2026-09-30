@@ -1644,13 +1644,28 @@ $reserve_url = home_url('/reserve/');
           </div>
           <div class="form-group">
             <label>Notification Email for Transfer Alerts *</label>
-            <input type="email" name="notification_email" id="settingNotificationEmail" class="form-control" value="admin@kelvincameo.com" required>
+            <input type="email" name="notification_email" id="settingNotificationEmail" class="form-control" value="kelvincameo73@gmail.com" required>
             <small style="color: var(--kc-slate-500); font-size: 11px;">An alert is dispatched to this email every time a guest taps 'I Have Paid'.</small>
+          </div>
+          <div class="form-group">
+            <label>Manager WhatsApp Alert Number *</label>
+            <input type="text" name="manager_phone" id="settingManagerPhone" class="form-control" value="+2348055558197" placeholder="+234 805 555 8197" required>
+            <small style="color: var(--kc-slate-500); font-size: 11px;">Direct phone line targeted for 1-click WhatsApp booking pings.</small>
+          </div>
+          <div class="form-group">
+            <label>WhatsApp / SMS Webhook URL (Optional)</label>
+            <input type="url" name="webhook_url" id="settingWebhookUrl" class="form-control" placeholder="https://your-webhook-endpoint.com/api">
+            <small style="color: var(--kc-slate-500); font-size: 11px;">Zapier, Make, Telegram Bot, or custom server endpoint to receive real-time JSON pings.</small>
+          </div>
+          <div class="form-group">
+            <label>CallMeBot Free WhatsApp API Key (Optional)</label>
+            <input type="text" name="callmebot_apikey" id="settingCallmebotKey" class="form-control" placeholder="e.g. 123456">
+            <small style="color: var(--kc-slate-500); font-size: 11px;">Free automated WhatsApp pings straight to your phone via api.callmebot.com.</small>
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" onclick="KCHotelApp.closeModals()">Cancel</button>
-          <button type="submit" class="btn btn-gold">Save Bank Details</button>
+          <button type="submit" class="btn btn-gold">Save Bank &amp; Alert Settings</button>
         </div>
       </form>
     </div>
@@ -2334,7 +2349,10 @@ $reserve_url = home_url('/reserve/');
         document.getElementById('settingBankName').value = b.bank_name || 'ZENITH BANK';
         document.getElementById('settingAccountName').value = b.account_name || 'KELVIN CAMEO RESORT';
         document.getElementById('settingAccountNumber').value = b.account_number || '1311320179';
-        document.getElementById('settingNotificationEmail').value = b.notification_email || 'admin@kelvincameo.com';
+        document.getElementById('settingNotificationEmail').value = b.notification_email || 'kelvincameo73@gmail.com';
+        document.getElementById('settingManagerPhone').value = b.manager_phone || '+2348055558197';
+        document.getElementById('settingWebhookUrl').value = b.webhook_url || '';
+        document.getElementById('settingCallmebotKey').value = b.callmebot_apikey || '';
 
         document.getElementById('bankSettingsModal').classList.add('active');
       },

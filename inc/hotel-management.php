@@ -13,10 +13,13 @@ if (!defined('ABSPATH')) {
  */
 function kc_hotel_get_bank_details() {
     return [
-        'bank_name' => get_option('kc_hotel_bank_name', 'ZENITH BANK'),
-        'account_name' => get_option('kc_hotel_bank_account_name', 'KELVIN CAMEO RESORT'),
-        'account_number' => get_option('kc_hotel_bank_account_number', '1311320179'),
-        'notification_email' => get_option('kc_hotel_notification_email', get_option('admin_email'))
+        'bank_name'          => get_option('kc_hotel_bank_name', 'ZENITH BANK'),
+        'account_name'        => get_option('kc_hotel_bank_account_name', 'KELVIN CAMEO RESORT'),
+        'account_number'      => get_option('kc_hotel_bank_account_number', '1311320179'),
+        'notification_email'  => get_option('kc_hotel_notification_email', 'kelvincameo73@gmail.com'),
+        'manager_phone'       => get_option('kc_hotel_manager_phone', '+2348055558197'),
+        'webhook_url'         => get_option('kc_notification_webhook_url', ''),
+        'callmebot_apikey'    => get_option('kc_callmebot_apikey', '')
     ];
 }
 
@@ -317,11 +320,17 @@ function kc_hotel_ajax_save_bank_settings() {
     $account_name = sanitize_text_field($_POST['account_name'] ?? '');
     $account_number = sanitize_text_field($_POST['account_number'] ?? '');
     $notification_email = sanitize_email($_POST['notification_email'] ?? '');
+    $manager_phone = sanitize_text_field($_POST['manager_phone'] ?? '');
+    $webhook_url = esc_url_raw($_POST['webhook_url'] ?? '');
+    $callmebot_apikey = sanitize_text_field($_POST['callmebot_apikey'] ?? '');
 
     if ($bank_name) update_option('kc_hotel_bank_name', $bank_name);
     if ($account_name) update_option('kc_hotel_bank_account_name', $account_name);
     if ($account_number) update_option('kc_hotel_bank_account_number', $account_number);
     if ($notification_email) update_option('kc_hotel_notification_email', $notification_email);
+    if ($manager_phone) update_option('kc_hotel_manager_phone', $manager_phone);
+    if (isset($_POST['webhook_url'])) update_option('kc_notification_webhook_url', $webhook_url);
+    if (isset($_POST['callmebot_apikey'])) update_option('kc_callmebot_apikey', $callmebot_apikey);
 
     wp_send_json_success([
         'message' => 'Bank details & notification settings saved successfully!',
@@ -636,6 +645,42 @@ function kc_hotel_ajax_guest_submit_transfer() {
         } catch (\Throwable $e) {}
     }
 
+    // Generate Manager WhatsApp Ping URL (+234 805 555 8197)
+    $manager_phone = get_option('kc_hotel_manager_phone', '+2348055558197');
+    $clean_mgr_phone = preg_replace('/[^0-9]/', '', $manager_phone);
+    if (substr($clean_mgr_phone, 0, 1) === '0') {
+        $clean_mgr_phone = '234' . substr($clean_mgr_phone, 1);
+    }
+    if (empty($clean_mgr_phone)) {
+        $clean_mgr_phone = '2348055558197';
+    }
+
+    $whatsapp_ping_text = "🏨 *KELVIN CAMEO RESORT — NEW RESERVATION ALERT*\n"
+        . "────────────────────────\n"
+        . "📌 *Ref:* {$booking_ref}\n"
+        . "🛌 *Room:* {$matched_room['type']} (#{$room_number}, {$matched_room['branch']})\n"
+        . "📅 *Stay:* {$check_in} to {$check_out} ({$nights} Nights)\n"
+        . "👤 *Guest:* {$guest_name}\n"
+        . "📞 *Phone:* {$guest_phone}\n"
+        . "💰 *Total:* ₦" . number_format($total_amount) . "\n"
+        . "🏦 *Payment Mode:* Zenith Bank Transfer (1311320179)\n"
+        . "👤 *Sender Name:* {$sender_name}\n"
+        . "🏛️ *Sender Bank:* {$sender_bank}\n"
+        . ($notes ? "📝 *Notes:* {$notes}\n" : "")
+        . "────────────────────────\n"
+        . "Please confirm credit in Zenith Bank and assign room key at reception desk.";
+
+    $manager_whatsapp_url = 'https://wa.me/' . $clean_mgr_phone . '?text=' . rawurlencode($whatsapp_ping_text);
+
+    if (function_exists('kc_dispatch_server_whatsapp_ping')) {
+        kc_dispatch_server_whatsapp_ping('New Booking: ' . $matched_room['type'] . ' - ' . $guest_name, $whatsapp_ping_text, [
+            'ref' => $booking_ref,
+            'guest' => $guest_name,
+            'phone' => $guest_phone,
+            'amount' => $total_amount
+        ]);
+    }
+
     wp_send_json_success([
         'message' => "Thank you! Your payment alert for $booking_ref has been received. Our front desk has been pinged and is verifying your transfer.",
         'booking_id' => $booking_id,
@@ -652,7 +697,8 @@ function kc_hotel_ajax_guest_submit_transfer() {
         'room_type' => $matched_room['type'],
         'branch' => $matched_room['branch'],
         'sender_name' => $sender_name,
-        'sender_bank' => $sender_bank
+        'sender_bank' => $sender_bank,
+        'manager_whatsapp_url' => $manager_whatsapp_url
     ]);
 }
 

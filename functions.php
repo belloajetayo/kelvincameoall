@@ -568,6 +568,55 @@ function kc_url( $slug, $static_fallback = '' ) {
 }
 
 /**
+ * Dispatch Automated Multi-Channel Manager Notifications (WhatsApp Webhook / CallMeBot / SMS / Email).
+ */
+function kc_dispatch_server_whatsapp_ping( $title, $text, $meta = array() ) {
+    // 1. Log notification to circular buffer for audit
+    $logs = get_option( 'kc_notification_logs', array() );
+    if ( ! is_array( $logs ) ) {
+        $logs = array();
+    }
+    array_unshift( $logs, array(
+        'time'    => current_time( 'mysql' ),
+        'title'   => sanitize_text_field( $title ),
+        'message' => $text,
+        'meta'    => $meta,
+    ) );
+    if ( count( $logs ) > 50 ) {
+        $logs = array_slice( $logs, 0, 50 );
+    }
+    update_option( 'kc_notification_logs', $logs, false );
+
+    // 2. Dispatch to custom Webhook URL (Zapier / Make / Webhook / Telegram bridge)
+    $webhook_url = get_option( 'kc_notification_webhook_url', '' );
+    if ( ! empty( $webhook_url ) && filter_var( $webhook_url, FILTER_VALIDATE_URL ) ) {
+        wp_remote_post( $webhook_url, array(
+            'timeout'  => 5,
+            'blocking' => false,
+            'headers'  => array( 'Content-Type' => 'application/json; charset=utf-8' ),
+            'body'     => wp_json_encode( array(
+                'event'     => 'kelvin_cameo_alert',
+                'title'     => $title,
+                'message'   => $text,
+                'meta'      => $meta,
+                'timestamp' => current_time( 'c' ),
+            ) ),
+        ) );
+    }
+
+    // 3. Dispatch via CallMeBot Free WhatsApp API (if configured)
+    $callmebot_key = get_option( 'kc_callmebot_apikey', '' );
+    $callmebot_num = get_option( 'kc_callmebot_phone', '2348055558197' );
+    if ( ! empty( $callmebot_key ) && ! empty( $callmebot_num ) ) {
+        $clean_num = preg_replace( '/[^0-9]/', '', $callmebot_num );
+        $endpoint = 'https://api.callmebot.com/whatsapp.php?phone=' . rawurlencode( $clean_num )
+                  . '&text=' . rawurlencode( $text )
+                  . '&apikey=' . rawurlencode( $callmebot_key );
+        wp_remote_get( $endpoint, array( 'timeout' => 5, 'blocking' => false ) );
+    }
+}
+
+/**
  * Handle Room Booking AJAX Submission & Email Notification.
  */
 function kc_handle_room_booking() {
@@ -689,6 +738,9 @@ function kc_handle_room_booking() {
     global $wpdb;
     $table_hotel_bookings = $wpdb->prefix . 'kc_hotel_bookings';
     $booking_ref = 'KC-' . date('y') . '-' . strtoupper(wp_generate_password(5, false));
+    $sender_name = isset($_POST['sender_name']) ? sanitize_text_field(wp_unslash($_POST['sender_name'])) : $name;
+    $sender_bank = isset($_POST['sender_bank']) ? sanitize_text_field(wp_unslash($_POST['sender_bank'])) : 'Zenith Bank';
+    $transfer_ref = isset($_POST['transfer_ref']) ? sanitize_text_field(wp_unslash($_POST['transfer_ref'])) : 'Web Transfer Alert';
 
     if ($wpdb->get_var("SHOW TABLES LIKE '$table_hotel_bookings'") === $table_hotel_bookings) {
         $clean_total = floatval(preg_replace('/[^0-9.]/', '', $total));
@@ -702,10 +754,6 @@ function kc_handle_room_booking() {
                 break;
             }
         }
-
-        $sender_name = isset($_POST['sender_name']) ? sanitize_text_field(wp_unslash($_POST['sender_name'])) : $name;
-        $sender_bank = isset($_POST['sender_bank']) ? sanitize_text_field(wp_unslash($_POST['sender_bank'])) : 'Zenith Bank';
-        $transfer_ref = isset($_POST['transfer_ref']) ? sanitize_text_field(wp_unslash($_POST['transfer_ref'])) : 'Web Transfer Alert';
 
         $full_notes = trim("Guest reported booking from Website on " . current_time('mysql') . ".\nSender: $sender_name\nBank: $sender_bank" . ($notes ? "\nNotes: $notes" : ''));
 
@@ -748,7 +796,7 @@ function kc_handle_room_booking() {
         'Reply-To: ' . $name . ' <' . $email . '>',
     );
 
-    // Attempt email dispatch (gracefully caught if host disabled mail() before SMTP setup)
+    // Attempt email dispatch
     $mail_sent = false;
     try {
         if ( function_exists( 'mail' ) || has_action( 'phpmailer_init' ) ) {
@@ -758,9 +806,56 @@ function kc_handle_room_booking() {
         error_log( '[Kelvin Cameo Booking] Mail notice: ' . $e->getMessage() );
     }
 
+    // Generate Direct WhatsApp Ping URL to Manager line (+234 805 555 8197)
+    $manager_phone = get_option('kc_hotel_manager_phone', '+2348055558197');
+    $clean_mgr_phone = preg_replace('/[^0-9]/', '', $manager_phone);
+    if (substr($clean_mgr_phone, 0, 1) === '0') {
+        $clean_mgr_phone = '234' . substr($clean_mgr_phone, 1);
+    }
+    if (empty($clean_mgr_phone)) {
+        $clean_mgr_phone = '2348055558197';
+    }
+
+    $whatsapp_ping_text = "🏨 *KELVIN CAMEO RESORT — NEW RESERVATION ALERT*\n"
+        . "────────────────────────\n"
+        . "📌 *Ref:* {$booking_ref}\n"
+        . "🛌 *Room:* {$room} ({$branch})\n"
+        . "📅 *Stay:* {$checkin} to {$checkout} ({$nights} Nights)\n"
+        . "👤 *Guest:* {$name}\n"
+        . "📞 *Phone:* {$phone}\n"
+        . "💰 *Total:* {$total}\n"
+        . "🏦 *Payment Mode:* Zenith Bank Transfer (1311320179)\n"
+        . "👤 *Sender Name:* {$sender_name}\n"
+        . "🏛️ *Sender Bank:* {$sender_bank}\n"
+        . ($notes && $notes !== 'None' ? "📝 *Notes:* {$notes}\n" : "")
+        . "────────────────────────\n"
+        . "Please confirm credit in Zenith Bank and assign room key at reception desk.";
+
+    $manager_whatsapp_url = 'https://wa.me/' . $clean_mgr_phone . '?text=' . rawurlencode($whatsapp_ping_text);
+
+    // Server-side automated ping
+    kc_dispatch_server_whatsapp_ping('New Booking: ' . $room . ' - ' . $name, $whatsapp_ping_text, [
+        'ref' => $booking_ref,
+        'guest' => $name,
+        'phone' => $phone,
+        'amount' => $total
+    ]);
+
     wp_send_json_success( array(
-        'message'      => 'Transfer notification received! Booking recorded for front desk reconciliation.',
-        'mail_sent'    => $mail_sent,
+        'message'              => 'Transfer notification received! Booking recorded for front desk reconciliation.',
+        'mail_sent'            => $mail_sent,
+        'booking_ref'          => $booking_ref,
+        'room'                 => $room,
+        'branch'               => $branch,
+        'guest_name'           => $name,
+        'guest_phone'          => $phone,
+        'checkin'              => $checkin,
+        'checkout'             => $checkout,
+        'nights'               => $nights,
+        'total'                => $total,
+        'sender_name'          => $sender_name,
+        'sender_bank'          => $sender_bank,
+        'manager_whatsapp_url' => $manager_whatsapp_url,
     ) );
 }
 add_action( 'wp_ajax_kc_room_booking', 'kc_handle_room_booking' );
@@ -781,12 +876,15 @@ function kc_handle_inquiry_submission() {
         wp_send_json_error( array( 'message' => 'Please provide your name, email, and telephone line.' ), 400 );
     }
 
+    $inquiry_ref = 'KC-INQ-' . strtoupper(wp_generate_password(5, false));
+
     // Save inquiry to options
     $inquiries = get_option( 'kc_recent_inquiries', array() );
     if ( ! is_array( $inquiries ) ) {
         $inquiries = array();
     }
     array_unshift( $inquiries, array(
+        'ref'       => $inquiry_ref,
         'timestamp' => current_time( 'mysql' ),
         'service'   => $service,
         'name'      => $name,
@@ -802,7 +900,7 @@ function kc_handle_inquiry_submission() {
 
     // Send email
     $to = array( 'kelvincameo73@gmail.com', get_option( 'admin_email' ) );
-    $subject = sprintf( '[Business Inquiry / Quote] %s - %s', ucfirst( $service ), $name );
+    $subject = sprintf( '[%s Inquiry / Quote] %s (%s)', $inquiry_ref, $name, ucfirst( $service ) );
     $headers = array(
         'Content-Type: text/html; charset=UTF-8',
         'From: Kelvin Cameo Portal <' . get_option( 'admin_email' ) . '>',
@@ -816,11 +914,12 @@ function kc_handle_inquiry_submission() {
     $msg .= '<div style="max-width:600px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e2e8f0;">';
     $msg .= '<div style="background:linear-gradient(135deg,#0b4ea2,#ea580c);padding:24px;text-align:center;color:#fff;">';
     $msg .= '<h2 style="margin:0;">KELVIN CAMEO ORGANIZATION</h2>';
-    $msg .= '<p style="margin:4px 0 0;font-size:13px;opacity:0.9;">New Business Inquiry / Quote Request • RC: 1613032</p>';
+    $msg .= '<p style="margin:4px 0 0;font-size:13px;opacity:0.9;">New Business Inquiry / Quote Request • ' . esc_html($inquiry_ref) . '</p>';
     $msg .= '</div>';
     $msg .= '<div style="padding:28px;">';
     $msg .= '<table style="width:100%;border-collapse:collapse;font-size:14px;">';
-    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;width:35%;"><strong>Sector / Service:</strong></td><td style="padding:10px 0;font-weight:700;color:#0b4ea2;">' . esc_html( ucfirst( $service ) ) . '</td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;width:35%;"><strong>Inquiry Ref:</strong></td><td style="padding:10px 0;font-weight:700;font-family:monospace;color:#0b4ea2;">' . esc_html( $inquiry_ref ) . '</td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Sector / Service:</strong></td><td style="padding:10px 0;font-weight:700;color:#0b4ea2;">' . esc_html( ucfirst( $service ) ) . '</td></tr>';
     $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Contact Name:</strong></td><td style="padding:10px 0;font-weight:700;">' . esc_html( $name ) . '</td></tr>';
     $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Phone Line:</strong></td><td style="padding:10px 0;"><a href="tel:' . esc_attr( $phone ) . '">' . esc_html( $phone ) . '</a></td></tr>';
     $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Email:</strong></td><td style="padding:10px 0;"><a href="mailto:' . esc_attr( $email ) . '">' . esc_html( $email ) . '</a></td></tr>';
@@ -840,7 +939,43 @@ function kc_handle_inquiry_submission() {
         error_log( '[Kelvin Cameo Inquiry] Mail note: ' . $e->getMessage() );
     }
 
-    wp_send_json_success( array( 'message' => 'Thank you! Your request has been dispatched to our executive desk.' ) );
+    // Generate Manager WhatsApp Ping URL for Inquiries
+    $manager_phone = get_option('kc_hotel_manager_phone', '+2348055558197');
+    $clean_mgr_phone = preg_replace('/[^0-9]/', '', $manager_phone);
+    if (substr($clean_mgr_phone, 0, 1) === '0') {
+        $clean_mgr_phone = '234' . substr($clean_mgr_phone, 1);
+    }
+    if (empty($clean_mgr_phone)) {
+        $clean_mgr_phone = '2348055558197';
+    }
+
+    $inquiry_ping_text = "🏛️ *KELVIN CAMEO RESORT — BANQUET / INQUIRY REQUEST*\n"
+        . "────────────────────────\n"
+        . "📌 *Ref:* {$inquiry_ref}\n"
+        . "📦 *Service/Tier:* {$service}\n"
+        . "👤 *Organizer:* {$name}\n"
+        . "📞 *Phone:* {$phone}\n"
+        . "✉️ *Email:* {$email}\n"
+        . "🗓️ *Target Date / Attendance:* {$timeline}\n"
+        . ($notes ? "📝 *Notes:* {$notes}\n" : "")
+        . "────────────────────────\n"
+        . "Please check hall calendar availability and follow up.";
+
+    $manager_whatsapp_url = 'https://wa.me/' . $clean_mgr_phone . '?text=' . rawurlencode($inquiry_ping_text);
+
+    // Server-side ping
+    kc_dispatch_server_whatsapp_ping('New Inquiry: ' . $service . ' - ' . $name, $inquiry_ping_text, [
+        'ref' => $inquiry_ref,
+        'name' => $name,
+        'phone' => $phone,
+        'service' => $service
+    ]);
+
+    wp_send_json_success( array(
+        'message'              => 'Thank you! Your request has been dispatched to our executive desk.',
+        'inquiry_ref'          => $inquiry_ref,
+        'manager_whatsapp_url' => $manager_whatsapp_url,
+    ) );
 }
 add_action( 'wp_ajax_kc_submit_inquiry', 'kc_handle_inquiry_submission' );
 add_action( 'wp_ajax_nopriv_kc_submit_inquiry', 'kc_handle_inquiry_submission' );
