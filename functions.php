@@ -442,7 +442,7 @@ function kelvin_cameo_seo_schema() {
                     'name'           => 'How large is the event hall at Kelvin Cameo Resort and what are the hire packages?',
                     'acceptedAnswer' => array(
                         '@type' => 'Answer',
-                        'text'  => 'The Kelvin Cameo Grand Banquet Hall is a fully air-conditioned 1,000-seat auditorium. We offer two transparent packages: The Full Banquet & Celebrations Package at ₦1,050,000 (includes hall, high-capacity cooling, chiavari/banquet chairs, clothed tables, banquet lighting, VIP bridal suite access, and standard sound), and the À La Carte Space Only Package at ₦850,000.',
+                        'text'  => 'Kelvin Cameo Resort features a 1,000-seat grand banquet hall auditorium and a dedicated mini event hall. We offer four official booking packages: the Mini Hall at ₦250,000; the À La Carte / Space Only Package at ₦850,000; the Celebrations Full Package at ₦1,050,000 (all-inclusive production with chairs, tables, industrial cooling, bridal suite, and standby power); and the Grand Celebrations Package with Complimentary Apartment at ₦1,200,000.',
                     ),
                 ),
                 array(

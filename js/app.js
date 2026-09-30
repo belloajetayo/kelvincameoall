@@ -762,7 +762,7 @@ function initBanquetChecker() {
   const form = document.getElementById('banquetDateInquiryForm');
   if (!form) return;
 
-  const pkgSelect = document.getElementById('banquetPackage');
+  const pkgSelect = document.getElementById('banquetPackageSelect') || document.getElementById('banquetPackage');
   const dateInput = document.getElementById('banquetTargetDate');
   const typeSelect = document.getElementById('banquetEventType');
   const guestSelect = document.getElementById('banquetGuestCount');

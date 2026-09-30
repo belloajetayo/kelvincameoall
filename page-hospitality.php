@@ -779,9 +779,79 @@ get_header();
           </div>
         </div>
 
-        <!-- Banquet Pricing Packages -->
+        <!-- Banquet Pricing Packages (4 Official Options) -->
         <div class="banquet-pricing-grid">
-          <!-- Tier 1: Celebrations Full Package -->
+          <!-- Option 1: Mini Hall (₦250,000) -->
+          <div class="banquet-tier-card">
+            <div>
+              <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--slate-400); font-weight:700;">Intimate Meetings &amp; Gatherings</span>
+              <h4 class="banquet-tier-title">Mini Hall</h4>
+              <div class="banquet-tier-price" style="color:var(--white);">₦250,000</div>
+              <div class="banquet-perks-list">
+                <div class="banquet-perk-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Dedicated Mini Event Hall Access</span>
+                </div>
+                <div class="banquet-perk-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Air Conditioning &amp; General Lighting</span>
+                </div>
+                <div class="banquet-perk-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Standby Generator Power Backup</span>
+                </div>
+                <div class="banquet-perk-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Paved Perimeter Vehicle Parking</span>
+                </div>
+                <div class="banquet-perk-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>On-Site Security Officers</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20I%20want%20to%20inquire%20about%20the%20Mini%20Hall%20(250,000)" target="_blank" rel="noopener" class="btn btn-secondary btn-lg" style="width:100%; margin-bottom:0.75rem;">Inquire via WhatsApp</a>
+              <a href="#banquet-checker" class="btn btn-outline-white btn-sm" style="width:100%; display:block; text-align:center;">Check Date Availability</a>
+            </div>
+          </div>
+
+          <!-- Option 2: À La Carte / Space Only (₦850,000) -->
+          <div class="banquet-tier-card">
+            <div>
+              <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--slate-400); font-weight:700;">Standard Space Rental</span>
+              <h4 class="banquet-tier-title">À La Carte / Space Only</h4>
+              <div class="banquet-tier-price" style="color:var(--white);">₦850,000</div>
+              <div class="banquet-perks-list">
+                <div class="banquet-perk-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Full Hall Space Access (8 Hours Rental)</span>
+                </div>
+                <div class="banquet-perk-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Standard Lighting &amp; General Ventilation</span>
+                </div>
+                <div class="banquet-perk-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Dedicated Standby Generator Power During Event</span>
+                </div>
+                <div class="banquet-perk-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Paved Vehicle Parking for Guests &amp; Attendees</span>
+                </div>
+                <div class="banquet-perk-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Perimeter Security Officers</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20I%20want%20to%20inquire%20about%20the%20A%20La%20Carte%20Space%20Only%20Banquet%20Package%20(850,000)" target="_blank" rel="noopener" class="btn btn-secondary btn-lg" style="width:100%; margin-bottom:0.75rem;">Inquire via WhatsApp</a>
+              <a href="#banquet-checker" class="btn btn-outline-white btn-sm" style="width:100%; display:block; text-align:center;">Check Date Availability</a>
+            </div>
+          </div>
+
+          <!-- Option 3: Celebrations Full Package (₦1,050,000) -->
           <div class="banquet-tier-card featured">
             <span class="banquet-tier-ribbon">Most Popular</span>
             <div>
@@ -795,7 +865,7 @@ get_header();
                 </div>
                 <div class="banquet-perk-item">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>Industrial Chilling Air Conditioning & Ventilation</span>
+                  <span>Industrial Chilling Air Conditioning &amp; Ventilation</span>
                 </div>
                 <div class="banquet-perk-item">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -803,7 +873,7 @@ get_header();
                 </div>
                 <div class="banquet-perk-item">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>Standard Banquet Chairs, Round Tables & Stage Platform</span>
+                  <span>Standard Banquet Chairs, Round Tables &amp; Stage Platform</span>
                 </div>
                 <div class="banquet-perk-item">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -811,47 +881,52 @@ get_header();
                 </div>
                 <div class="banquet-perk-item">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>Armed Uniformed Security & Traffic Wardens</span>
+                  <span>Armed Uniformed Security &amp; Traffic Wardens</span>
                 </div>
               </div>
             </div>
             <div>
               <a href="https://paystack.com/buy/banquet-hall--celebrations-vuwyfa" target="_blank" rel="noopener" class="btn btn-primary btn-lg" style="width:100%; margin-bottom:0.75rem;">Paystack Instant Booking (₦1,050,000)</a>
-              <button type="button" class="btn btn-outline-white btn-sm" style="width:100%;" data-modal="inquiryModal" data-service="banquet" data-suite-name="1,000-Seat Grand Banquet Hall (Celebrations Full Package)">Hold Event Date</button>
+              <a href="#banquet-checker" class="btn btn-outline-white btn-sm" style="width:100%; display:block; text-align:center;">Check Date Availability</a>
             </div>
           </div>
 
-          <!-- Tier 2: À La Carte Hall Rental -->
-          <div class="banquet-tier-card">
+          <!-- Option 4: Package Including a Complimentary Apartment (₦1,200,000) -->
+          <div class="banquet-tier-card" style="border-color: rgba(212,175,55,0.45); background: linear-gradient(145deg, rgba(212,175,55,0.08) 0%, rgba(15, 31, 56, 0.6) 100%); position: relative;">
+            <span class="banquet-tier-ribbon" style="background: linear-gradient(135deg, #d4af37, #f59e0b);">VIP + Stay</span>
             <div>
-              <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--slate-400); font-weight:700;">Standard Space Rental</span>
-              <h4 class="banquet-tier-title">À La Carte Package</h4>
-              <div class="banquet-tier-price" style="color:var(--white);">₦850,000</div>
+              <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--estate-gold); font-weight:700;">Hall + Complimentary Apartment</span>
+              <h4 class="banquet-tier-title">Package With Complimentary Apartment</h4>
+              <div class="banquet-tier-price" style="color:var(--estate-gold);">₦1,200,000</div>
               <div class="banquet-perks-list">
                 <div class="banquet-perk-item">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>Full Hall Space Access (8 Hours Rental)</span>
+                  <span>Full Celebrations Banquet Hall Package</span>
                 </div>
                 <div class="banquet-perk-item">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>Standard Lighting & General Ventilation</span>
+                  <span><strong>Complimentary Hotel Apartment Stay Included</strong></span>
                 </div>
                 <div class="banquet-perk-item">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>Dedicated Standby Generator Power During Event</span>
+                  <span>Industrial Chilling Air Conditioning &amp; Power Backup</span>
                 </div>
                 <div class="banquet-perk-item">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>Paved Vehicle Parking for Guests & Attendees</span>
+                  <span>Standard Banquet Chairs, Round Tables &amp; Stage Platform</span>
                 </div>
                 <div class="banquet-perk-item">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>Perimeter Security Officers</span>
+                  <span>VIP Green Dressing Suite for Bride / VIP Guests</span>
+                </div>
+                <div class="banquet-perk-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>Perimeter Security Officers &amp; Paved Parking</span>
                 </div>
               </div>
             </div>
             <div>
-              <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20I%20want%20to%20inquire%20about%20the%20A%20La%20Carte%20Banquet%20Package%20(850,000)" target="_blank" rel="noopener" class="btn btn-secondary btn-lg" style="width:100%; margin-bottom:0.75rem;">Inquire via WhatsApp</a>
+              <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20I%20want%20to%20inquire%20about%20the%201,200,000%20Banquet%20Package%20with%20Complimentary%20Apartment" target="_blank" rel="noopener" class="btn btn-primary btn-lg" style="width:100%; margin-bottom:0.75rem; background: linear-gradient(135deg, #d4af37, #ea580c);">Inquire via WhatsApp (₦1,200,000)</a>
               <a href="#banquet-checker" class="btn btn-outline-white btn-sm" style="width:100%; display:block; text-align:center;">Check Date Availability</a>
             </div>
           </div>
@@ -875,8 +950,10 @@ get_header();
             <div class="form-group" style="margin-bottom: 1rem;">
               <label for="banquetPackageSelect" style="color: var(--slate-300); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.4rem;">Select Package *</label>
               <select id="banquetPackageSelect" name="package_choice" class="form-control" style="background: #060e1e; color: #fff; border-color: rgba(255,255,255,0.2); padding: 0.75rem 1rem;" required>
-                <option value="Celebrations Full Package (₦1,050,000)" selected>Celebrations Full Package — ₦1,050,000 (10 Hours + Industrial Chilling A/C + Dual Backup Generators)</option>
-                <option value="À La Carte Space Package (₦850,000)">À La Carte Space Package — ₦850,000 (8 Hours Hall Space + Standby Generator)</option>
+                <option value="Mini Hall (₦250,000)">Mini Hall — ₦250,000 (Meetings, Workshops &amp; Intimate Events)</option>
+                <option value="À La Carte / Space Only (₦850,000)">À La Carte / Space Only — ₦850,000 (Hall Space + Standby Generator)</option>
+                <option value="Celebrations Full Package (₦1,050,000)" selected>Celebrations Full Package — ₦1,050,000 (10 Hours + Industrial Cooling + Chairs + Tables + Bridal Suite)</option>
+                <option value="Package with Complimentary Apartment (₦1,200,000)">Package with Complimentary Apartment — ₦1,200,000 (Full Celebrations Package + Complimentary Apartment)</option>
               </select>
             </div>
 
