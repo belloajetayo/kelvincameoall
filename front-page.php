@@ -473,13 +473,21 @@ get_header();
 
       <!-- Quick Text Links for Remaining Guides -->
       <div class="hp-insights-secondary" style="margin-top: 2rem; padding: 1.25rem 1.5rem; background: var(--white); border-radius: var(--radius-md); border: 1px solid var(--sand-200); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-        <div style="display:flex; align-items:center; gap: 1rem; flex-wrap: wrap;">
-          <span style="font-weight: 700; font-size: 0.85rem; color: var(--navy-900);">More Special Reports:</span>
-          <a href="<?php echo kc_url('hotel-with-24-hours-light-suleja-uninterrupted-power'); ?>" style="font-size: 0.85rem; color: var(--cobalt-700); text-decoration: underline; font-weight: 600;">Why 24/7 Light Sets Our Resort Apart &rarr;</a>
+        <div style="display:flex; align-items:center; gap: 0.75rem 1.25rem; flex-wrap: wrap; font-size: 0.85rem;">
+          <span style="font-weight: 800; color: var(--navy-900);">Featured Guides:</span>
+          <a href="<?php echo kc_url('suleja-hotel-room-rates-and-tariffs-guide'); ?>" style="color: var(--cobalt-700); text-decoration: underline; font-weight: 600;">Room Rates &amp; Tariffs (₦25k &ndash; ₦200k) &rarr;</a>
           <span style="color: var(--slate-300);">&bull;</span>
-          <a href="<?php echo kc_url('honest-fuel-calibrated-pumps-niger-state'); ?>" style="font-size: 0.85rem; color: var(--cobalt-700); text-decoration: underline; font-weight: 600;">10L = 10L Calibrated Fuel Integrity &rarr;</a>
+          <a href="<?php echo kc_url('wedding-reception-venues-suleja-abuja-expressway-prices'); ?>" style="color: var(--cobalt-700); text-decoration: underline; font-weight: 600;">Wedding Packages (4 Official Tiers) &rarr;</a>
+          <span style="color: var(--slate-300);">&bull;</span>
+          <a href="<?php echo kc_url('swimming-pool-day-pass-and-weekend-relaxation-suleja'); ?>" style="color: var(--cobalt-700); text-decoration: underline; font-weight: 600;">Pool Experience &amp; Day Passes &rarr;</a>
+          <span style="color: var(--slate-300);">&bull;</span>
+          <a href="<?php echo kc_url('romantic-couples-staycation-suleja-love-night-suite'); ?>" style="color: var(--cobalt-700); text-decoration: underline; font-weight: 600;">Love Night &amp; Romantic Suites &rarr;</a>
+          <span style="color: var(--slate-300);">&bull;</span>
+          <a href="<?php echo kc_url('dining-cameo-restaurant-fresh-catfish-peppersoup-suleja'); ?>" style="color: var(--cobalt-700); text-decoration: underline; font-weight: 600;">Cameo Restaurant &amp; Catfish Peppersoup &rarr;</a>
+          <span style="color: var(--slate-300);">&bull;</span>
+          <a href="<?php echo kc_url('business-travel-and-corporate-retreats-in-suleja'); ?>" style="color: var(--cobalt-700); text-decoration: underline; font-weight: 600;">Executive Business Travel &rarr;</a>
         </div>
-        <a href="#sectors" class="btn btn-outline btn-sm">Explore All 4 Sectors</a>
+        <a href="<?php echo kc_url('hospitality'); ?>" class="btn btn-outline btn-sm">Explore Resort Hotel</a>
       </div>
     </div>
   </section>
