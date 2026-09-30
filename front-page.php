@@ -415,18 +415,8 @@ get_header();
         <p class="hp-section-sub">Authoritative reports from our executive desks &mdash; designed for travelers, event organizers, and corporate partners.</p>
       </div>
 
-      <!-- Interactive Topic Filter Tabs -->
-      <div class="hp-insights-tabs-nav" role="tablist" aria-label="Filter guides by topic">
-        <button type="button" class="hp-tab-btn active" data-filter="all">All Guides <span class="hp-tab-count">10+</span></button>
-        <button type="button" class="hp-tab-btn" data-filter="rooms">🛏️ Rooms &amp; Tariffs</button>
-        <button type="button" class="hp-tab-btn" data-filter="banquet">🏛️ Banquet &amp; Weddings</button>
-        <button type="button" class="hp-tab-btn" data-filter="leisure">🏊 Pool &amp; Getaway</button>
-        <button type="button" class="hp-tab-btn" data-filter="dining">🍽️ Cameo Dining</button>
-        <button type="button" class="hp-tab-btn" data-filter="business">⚡ Power &amp; Corporate</button>
-      </div>
-
       <!-- Spotlight Feature: Flagship Guide -->
-      <article class="hp-spotlight-feature hp-insight-filterable" data-topic="rooms leisure">
+      <article class="hp-spotlight-feature" data-topic="rooms leisure">
         <div class="hp-spotlight-media">
           <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/exterior.jpg' ); ?>" alt="Kelvin Cameo Resort Front Facade in Suleja" loading="lazy">
           <div class="hp-spotlight-badge-group">
@@ -460,194 +450,17 @@ get_header();
         </div>
       </article>
 
-      <!-- 6-Card Curated Editorial Grid -->
-      <div class="hp-insights-grid">
-        <!-- Card 1: 2026 Room Rates & Tariffs -->
-        <article class="hp-insight-card hp-insight-filterable" data-topic="rooms">
-          <a href="<?php echo kc_url('suleja-hotel-room-rates-and-tariffs-guide'); ?>" class="hp-insight-img-wrap">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/deluxe-room.jpg' ); ?>" alt="Kelvin Cameo Hotel Room Tariffs Suleja" loading="lazy">
-            <span class="hp-insight-badge">🛏️ Rooms &amp; Tariffs</span>
-            <span class="hp-insight-highlight-chip">₦25k &ndash; ₦200k</span>
-          </a>
-          <div class="hp-insight-content">
-            <div class="hp-insight-meta">
-              <span>5 min read</span>
-              <span>&bull;</span>
-              <span>Official 2026 Price List</span>
-            </div>
-            <h3 class="hp-insight-title">
-              <a href="<?php echo kc_url('suleja-hotel-room-rates-and-tariffs-guide'); ?>">Suleja Hotel Room Rates &amp; Tariffs Guide: Transparent 2026 Breakdown</a>
-            </h3>
-            <p class="hp-insight-desc">
-              Verified rates across all 7 room tiers &mdash; from Standard Luxury Deluxe (₦25k) and Love Night (₦45k) to Presidential Suite (₦200k) with zero hidden fees.
-            </p>
-            <div class="hp-insight-card-footer">
-              <a href="<?php echo kc_url('suleja-hotel-room-rates-and-tariffs-guide'); ?>" class="hp-insight-link">Read Guide &rarr;</a>
-              <a href="<?php echo kc_url('reserve'); ?>" style="font-size:0.8rem; color:var(--slate-500); text-decoration:none; font-weight:600;">Check Dates</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Card 2: 1,000-Seat Banquet Hall -->
-        <article class="hp-insight-card hp-insight-filterable" data-topic="banquet">
-          <a href="<?php echo kc_url('1000-seat-grand-banquet-hall-suleja-abuja'); ?>" class="hp-insight-img-wrap">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/banquet-hall.jpg' ); ?>" alt="1,000-Seat Grand Banquet Hall Suleja" loading="lazy">
-            <span class="hp-insight-badge">🏛️ Banquet &amp; Events</span>
-            <span class="hp-insight-highlight-chip">4 Official Packages</span>
-          </a>
-          <div class="hp-insight-content">
-            <div class="hp-insight-meta">
-              <span>4 min read</span>
-              <span>&bull;</span>
-              <span>Weddings &amp; AGMs</span>
-            </div>
-            <h3 class="hp-insight-title">
-              <a href="<?php echo kc_url('1000-seat-grand-banquet-hall-suleja-abuja'); ?>">Inside the 1,000-Seat Grand Banquet Hall: Premier Venue Guide</a>
-            </h3>
-            <p class="hp-insight-desc">
-              Explore our 4 official packages (₦250k, ₦850k, ₦1.05M, and ₦1.2M), crystal chandeliers, central air conditioning, and 200+ car parking.
-            </p>
-            <div class="hp-insight-card-footer">
-              <a href="<?php echo kc_url('1000-seat-grand-banquet-hall-suleja-abuja'); ?>" class="hp-insight-link">Read Guide &rarr;</a>
-              <a href="<?php echo kc_url('banquet-hall'); ?>" style="font-size:0.8rem; color:var(--slate-500); text-decoration:none; font-weight:600;">Check Venue</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Card 3: Romantic Staycation & Love Night Suite -->
-        <article class="hp-insight-card hp-insight-filterable" data-topic="rooms leisure">
-          <a href="<?php echo kc_url('romantic-couples-staycation-suleja-love-night-suite'); ?>" class="hp-insight-img-wrap">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/love-night-room.jpg' ); ?>" alt="Romantic Couples Staycation Love Night Suite" loading="lazy">
-            <span class="hp-insight-badge">❤️ Romantic Suites</span>
-            <span class="hp-insight-highlight-chip">₦45,000/night</span>
-          </a>
-          <div class="hp-insight-content">
-            <div class="hp-insight-meta">
-              <span>4 min read</span>
-              <span>&bull;</span>
-              <span>Honeymoon &amp; Couples</span>
-            </div>
-            <h3 class="hp-insight-title">
-              <a href="<?php echo kc_url('romantic-couples-staycation-suleja-love-night-suite'); ?>">Romantic Couples Staycation in Suleja: Love Night Suite &amp; Packages</a>
-            </h3>
-            <p class="hp-insight-desc">
-              Discover intimate couples getaways featuring mood lighting, Queen plush bed, breakfast in bed, chilled wine service, and tranquil Kwamba privacy.
-            </p>
-            <div class="hp-insight-card-footer">
-              <a href="<?php echo kc_url('romantic-couples-staycation-suleja-love-night-suite'); ?>" class="hp-insight-link">Read Guide &rarr;</a>
-              <a href="<?php echo kc_url('reserve'); ?>?room=love-night" style="font-size:0.8rem; color:var(--slate-500); text-decoration:none; font-weight:600;">Book Suite</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Card 4: Swimming Pool Day Pass -->
-        <article class="hp-insight-card hp-insight-filterable" data-topic="leisure">
-          <a href="<?php echo kc_url('swimming-pool-day-pass-and-weekend-relaxation-suleja'); ?>" class="hp-insight-img-wrap">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/swimming-pool.jpg' ); ?>" alt="Crystal Swimming Pool Suleja" loading="lazy">
-            <span class="hp-insight-badge">🏊 Pool &amp; Leisure</span>
-            <span class="hp-insight-highlight-chip">Day Pass: ₦3,000</span>
-          </a>
-          <div class="hp-insight-content">
-            <div class="hp-insight-meta">
-              <span>4 min read</span>
-              <span>&bull;</span>
-              <span>Open 7 Days a Week</span>
-            </div>
-            <h3 class="hp-insight-title">
-              <a href="<?php echo kc_url('swimming-pool-day-pass-and-weekend-relaxation-suleja'); ?>">Crystal Swimming Pool Day Pass &amp; Weekend Relaxation Guide</a>
-            </h3>
-            <p class="hp-insight-desc">
-              Dive into Suleja&rsquo;s cleanest outdoor pool, lounge under ivy sun pergolas, sip cold drinks at the poolside bar, and enjoy fresh evening grills.
-            </p>
-            <div class="hp-insight-card-footer">
-              <a href="<?php echo kc_url('swimming-pool-day-pass-and-weekend-relaxation-suleja'); ?>" class="hp-insight-link">Read Guide &rarr;</a>
-              <a href="<?php echo kc_url('hospitality'); ?>#pool" style="font-size:0.8rem; color:var(--slate-500); text-decoration:none; font-weight:600;">View Pool</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Card 5: Cameo Restaurant & Catfish Peppersoup -->
-        <article class="hp-insight-card hp-insight-filterable" data-topic="dining">
-          <a href="<?php echo kc_url('dining-cameo-restaurant-fresh-catfish-peppersoup-suleja'); ?>" class="hp-insight-img-wrap">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/restaurant.jpg' ); ?>" alt="Dining at Cameo Restaurant Suleja" loading="lazy">
-            <span class="hp-insight-badge">🍽️ Dining &amp; Lounge</span>
-            <span class="hp-insight-highlight-chip">Chef Specialties</span>
-          </a>
-          <div class="hp-insight-content">
-            <div class="hp-insight-meta">
-              <span>4 min read</span>
-              <span>&bull;</span>
-              <span>Farm-to-Table Cuisine</span>
-            </div>
-            <h3 class="hp-insight-title">
-              <a href="<?php echo kc_url('dining-cameo-restaurant-fresh-catfish-peppersoup-suleja'); ?>">Dining at Cameo Restaurant: Fresh Catfish Peppersoup &amp; Grills</a>
-            </h3>
-            <p class="hp-insight-desc">
-              Savor live-pond spiced catfish peppersoup, grilled suya platters, continental breakfast spreads, and cocktail lounge hospitality in Kwamba.
-            </p>
-            <div class="hp-insight-card-footer">
-              <a href="<?php echo kc_url('dining-cameo-restaurant-fresh-catfish-peppersoup-suleja'); ?>" class="hp-insight-link">Read Guide &rarr;</a>
-              <a href="<?php echo kc_url('hospitality'); ?>#dining" style="font-size:0.8rem; color:var(--slate-500); text-decoration:none; font-weight:600;">View Menu</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Card 6: 24/7 Uninterrupted Light Guarantee -->
-        <article class="hp-insight-card hp-insight-filterable" data-topic="business">
-          <a href="<?php echo kc_url('hotel-with-24-hours-light-suleja-uninterrupted-power'); ?>" class="hp-insight-img-wrap">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/evening.jpg' ); ?>" alt="24/7 Power Hotel Suleja" loading="lazy">
-            <span class="hp-insight-badge">⚡ 24/7 Power Policy</span>
-            <span class="hp-insight-highlight-chip">Dual Caterpillar</span>
-          </a>
-          <div class="hp-insight-content">
-            <div class="hp-insight-meta">
-              <span>4 min read</span>
-              <span>&bull;</span>
-              <span>Zero Blackouts</span>
-            </div>
-            <h3 class="hp-insight-title">
-              <a href="<?php echo kc_url('hotel-with-24-hours-light-suleja-uninterrupted-power'); ?>">Why 24/7 Uninterrupted Light Sets Kelvin Cameo Apart in Suleja</a>
-            </h3>
-            <p class="hp-insight-desc">
-              Discover how our dual synchronized Caterpillar diesel plants and commercial solar hybrid microgrid guarantee nonstop air conditioning and hot water.
-            </p>
-            <div class="hp-insight-card-footer">
-              <a href="<?php echo kc_url('hotel-with-24-hours-light-suleja-uninterrupted-power'); ?>" class="hp-insight-link">Read Guide &rarr;</a>
-              <a href="<?php echo kc_url('hospitality'); ?>" style="font-size:0.8rem; color:var(--slate-500); text-decoration:none; font-weight:600;">Explore Resort</a>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <!-- Secondary Curated Guides Row -->
-      <div class="hp-insights-compact-row">
-        <a href="<?php echo kc_url('wedding-reception-venues-suleja-abuja-expressway-prices'); ?>" class="hp-compact-guide-card hp-insight-filterable" data-topic="banquet">
-          <div class="hp-compact-guide-icon">💍</div>
-          <div class="hp-compact-guide-info">
-            <div class="hp-compact-guide-cat">Weddings &bull; 4 Packages</div>
-            <div class="hp-compact-guide-title">Wedding Reception Venues in Suleja &amp; Abuja Corridor: Pricing Guide</div>
-          </div>
-          <span class="hp-compact-guide-arrow">&rarr;</span>
-        </a>
-
-        <a href="<?php echo kc_url('business-travel-and-corporate-retreats-in-suleja'); ?>" class="hp-compact-guide-card hp-insight-filterable" data-topic="business">
-          <div class="hp-compact-guide-icon">💼</div>
-          <div class="hp-compact-guide-info">
-            <div class="hp-compact-guide-cat">Corporate &bull; Workstations</div>
-            <div class="hp-compact-guide-title">Business Travel &amp; Corporate Retreats in Suleja: High-Speed Wi-Fi</div>
-          </div>
-          <span class="hp-compact-guide-arrow">&rarr;</span>
-        </a>
-
-        <a href="<?php echo kc_url('weekend-getaway-from-abuja-kelvin-cameo-resort'); ?>" class="hp-compact-guide-card hp-insight-filterable" data-topic="leisure">
-          <div class="hp-compact-guide-icon">🚗</div>
-          <div class="hp-compact-guide-info">
-            <div class="hp-compact-guide-cat">Staycation &bull; 35 Mins Away</div>
-            <div class="hp-compact-guide-title">The Ultimate Weekend Getaway from Abuja: Relaxing at Kelvin Cameo</div>
-          </div>
-          <span class="hp-compact-guide-arrow">&rarr;</span>
-        </a>
-      </div>
+      <!-- Advanced Post Plugin & Editorial Showcase -->
+      <?php
+      if ( function_exists( 'kc_render_post_plugin_showcase' ) ) {
+          echo kc_render_post_plugin_showcase( array(
+              'layout'         => 'carousel',
+              'posts_per_page' => 12,
+              'show_filters'   => 'yes',
+              'show_switcher'  => 'yes',
+          ) );
+      }
+      ?>
 
       <!-- Concierge Callout Bar -->
       <div class="hp-insights-concierge-bar">

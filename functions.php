@@ -1015,21 +1015,10 @@ if ( file_exists( get_stylesheet_directory() . '/inc/seo-posts-seeder.php' ) ) {
 }
 
 /**
- * Diagnostic Plugin Inspector
+ * Kelvin Cameo Post Plugin & Editorial Showcase Engine
  */
-add_action( 'rest_api_init', function () {
-    register_rest_route( 'kc/v1', '/plugins', array(
-        'methods'             => 'GET',
-        'callback'            => function () {
-            if ( ! function_exists( 'get_plugins' ) ) {
-                require_once ABSPATH . 'wp-admin/includes/plugin.php';
-            }
-            return array(
-                'active'    => get_option( 'active_plugins' ),
-                'installed' => array_keys( get_plugins() ),
-            );
-        },
-        'permission_callback' => '__return_true',
-    ) );
-} );
+if ( file_exists( get_stylesheet_directory() . '/inc/post-plugin-engine.php' ) ) {
+    require_once get_stylesheet_directory() . '/inc/post-plugin-engine.php';
+}
+
 
