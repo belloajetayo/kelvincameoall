@@ -1956,7 +1956,7 @@ $reserve_url = home_url('/reserve/');
             <div>
               <div class="folio-brand-title">Kelvin Cameo Resort Hotel</div>
               <div class="folio-brand-sub">Luxury Suites, Accommodations & Hospitality</div>
-              <div class="folio-brand-sub">Port Harcourt, Rivers State, Nigeria • RC: 1613032</div>
+              <div class="folio-brand-sub">Opposite Suleman Police Technical College, Kwamba, Suleja, Niger State (Abuja Capital Corridor) • RC: 1613032</div>
               <div class="folio-brand-sub">Zenith Bank: 1311320179 • desk@kelvincameo.com</div>
             </div>
             <div class="folio-badge-official">
@@ -2066,6 +2066,25 @@ $reserve_url = home_url('/reserve/');
       lastPendingCount: 0,
 
       init: function() {
+        // Automatically attach staff session token to all AJAX calls
+        const origFetch = window.fetch;
+        const app = this;
+        window.fetch = function(url, options) {
+          if (url === app.ajaxUrl && options && options.body instanceof FormData) {
+            if (app.currentPinToken && !options.body.has('token')) {
+              options.body.append('token', app.currentPinToken);
+            }
+          }
+          return origFetch.apply(this, arguments).then(function(res) {
+            if (res.status === 403 && !app.isLoggedIn) {
+              sessionStorage.removeItem('kc_hotel_token');
+              app.currentPinToken = '';
+              document.getElementById('pinGateModal').classList.add('active');
+            }
+            return res;
+          });
+        };
+
         this.initClock();
         
         if (this.isLoggedIn || this.currentPinToken) {

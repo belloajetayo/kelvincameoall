@@ -91,6 +91,25 @@ function kc_hotel_init_db() {
 }
 
 /**
+ * Reconcile Room Inventory Rates with Published Website Tariffs
+ */
+function kc_hotel_reconcile_room_rates() {
+    global $wpdb;
+    $table_rooms = $wpdb->prefix . 'kc_hotel_rooms';
+    if ($wpdb->get_var("SHOW TABLES LIKE '$table_rooms'") !== $table_rooms) {
+        return;
+    }
+    $reconcile_ver = get_option('kc_hotel_rates_ver', '0');
+    if ($reconcile_ver !== '2026.1') {
+        $wpdb->query("UPDATE $table_rooms SET rate = 55000.00 WHERE room_type LIKE '%Golden Nest%' AND rate != 55000.00");
+        $wpdb->query("UPDATE $table_rooms SET rate = 45000.00 WHERE room_type LIKE '%Prestige%' AND rate != 45000.00");
+        $wpdb->query("UPDATE $table_rooms SET rate = 60000.00 WHERE room_type LIKE '%Royal Treat%' AND rate != 60000.00");
+        $wpdb->query("UPDATE $table_rooms SET rate = 60000.00 WHERE room_type LIKE '%Blissful Breeze%' AND rate != 60000.00");
+        update_option('kc_hotel_rates_ver', '2026.1');
+    }
+}
+
+/**
  * 2. Room Inventory Fetcher
  */
 function kc_hotel_get_room_inventory() {
@@ -100,6 +119,8 @@ function kc_hotel_get_room_inventory() {
     if ($wpdb->get_var("SHOW TABLES LIKE '$table_rooms'") !== $table_rooms) {
         kc_hotel_init_db();
     }
+
+    kc_hotel_reconcile_room_rates();
 
     $rows = $wpdb->get_results("SELECT * FROM $table_rooms ORDER BY branch ASC, room_number ASC", ARRAY_A);
     $inventory = [];
@@ -242,8 +263,22 @@ function kc_hotel_get_dashboard_data() {
 }
 
 // -----------------------------------------------------------------------------
-// AJAX ENDPOINTS
+// AJAX ENDPOINTS & SECURITY GUARDS
 // -----------------------------------------------------------------------------
+
+/**
+ * Verify Front Desk Staff Session or Logged-in WordPress Administrator/Staff
+ */
+function kc_hotel_verify_staff_session() {
+    if (is_user_logged_in() && current_user_can('edit_posts')) {
+        return true;
+    }
+    $token = sanitize_text_field($_REQUEST['token'] ?? ($_SERVER['HTTP_X_KC_HOTEL_TOKEN'] ?? ''));
+    if (!empty($token) && wp_verify_nonce($token, 'kc_hotel_reception_session')) {
+        return true;
+    }
+    return false;
+}
 
 // Verify Security PIN
 add_action('wp_ajax_kc_hotel_verify_pin', 'kc_hotel_ajax_verify_pin');
@@ -260,18 +295,24 @@ function kc_hotel_ajax_verify_pin() {
     }
 }
 
-// Get Dashboard Data
+// Get Dashboard Data (Protected)
 add_action('wp_ajax_kc_hotel_get_dashboard', 'kc_hotel_ajax_get_dashboard');
 add_action('wp_ajax_nopriv_kc_hotel_get_dashboard', 'kc_hotel_ajax_get_dashboard');
 function kc_hotel_ajax_get_dashboard() {
+    if (!kc_hotel_verify_staff_session()) {
+        wp_send_json_error(['message' => 'Unauthorized: Valid staff session token required.'], 403);
+    }
     $data = kc_hotel_get_dashboard_data();
     wp_send_json_success($data);
 }
 
-// Save Bank Settings
+// Save Bank Settings (Protected - Restricted to Administrator)
 add_action('wp_ajax_kc_hotel_save_bank_settings', 'kc_hotel_ajax_save_bank_settings');
-add_action('wp_ajax_nopriv_kc_hotel_save_bank_settings', 'kc_hotel_ajax_save_bank_settings');
 function kc_hotel_ajax_save_bank_settings() {
+    if (!is_user_logged_in() || !current_user_can('manage_options')) {
+        wp_send_json_error(['message' => 'Unauthorized: Administrator privileges required to change bank account settings.'], 403);
+    }
+
     $bank_name = sanitize_text_field($_POST['bank_name'] ?? '');
     $account_name = sanitize_text_field($_POST['account_name'] ?? '');
     $account_number = sanitize_text_field($_POST['account_number'] ?? '');
@@ -288,10 +329,13 @@ function kc_hotel_ajax_save_bank_settings() {
     ]);
 }
 
-// Create New Booking (Internal Front Desk)
+// Create New Booking (Internal Front Desk - Protected)
 add_action('wp_ajax_kc_hotel_create_booking', 'kc_hotel_ajax_create_booking');
 add_action('wp_ajax_nopriv_kc_hotel_create_booking', 'kc_hotel_ajax_create_booking');
 function kc_hotel_ajax_create_booking() {
+    if (!kc_hotel_verify_staff_session()) {
+        wp_send_json_error(['message' => 'Unauthorized: Valid staff session token required.'], 403);
+    }
     global $wpdb;
     $table = $wpdb->prefix . 'kc_hotel_bookings';
 
@@ -560,7 +604,7 @@ function kc_hotel_ajax_guest_submit_transfer() {
       </div>
 
       <div style='background: #f8fafc; padding: 12px 24px; text-align: center; font-size: 11px; color: #94a3b8; border-top: 1px solid #e2e8f0;'>
-        Kelvin Cameo Resort Hotel & Suite • Port Harcourt, Nigeria • RC: 1613032
+        Kelvin Cameo Resort Hotel • Opposite Suleman Police Technical College, Kwamba, Suleja, Niger State (Abuja Capital Corridor) • RC: 1613032
       </div>
     </div>";
 
@@ -619,6 +663,9 @@ function kc_hotel_ajax_guest_submit_transfer() {
 add_action('wp_ajax_kc_hotel_verify_transfer', 'kc_hotel_ajax_verify_transfer');
 add_action('wp_ajax_nopriv_kc_hotel_verify_transfer', 'kc_hotel_ajax_verify_transfer');
 function kc_hotel_ajax_verify_transfer() {
+    if (!kc_hotel_verify_staff_session()) {
+        wp_send_json_error(['message' => 'Unauthorized: Valid staff session token required.'], 403);
+    }
     global $wpdb;
     $table = $wpdb->prefix . 'kc_hotel_bookings';
 
@@ -687,6 +734,9 @@ function kc_hotel_ajax_verify_transfer() {
 add_action('wp_ajax_kc_hotel_save_room', 'kc_hotel_ajax_save_room');
 add_action('wp_ajax_nopriv_kc_hotel_save_room', 'kc_hotel_ajax_save_room');
 function kc_hotel_ajax_save_room() {
+    if (!kc_hotel_verify_staff_session()) {
+        wp_send_json_error(['message' => 'Unauthorized: Valid staff session token required.'], 403);
+    }
     global $wpdb;
     $table_rooms = $wpdb->prefix . 'kc_hotel_rooms';
 
@@ -768,6 +818,9 @@ function kc_hotel_ajax_save_room() {
 add_action('wp_ajax_kc_hotel_delete_room', 'kc_hotel_ajax_delete_room');
 add_action('wp_ajax_nopriv_kc_hotel_delete_room', 'kc_hotel_ajax_delete_room');
 function kc_hotel_ajax_delete_room() {
+    if (!kc_hotel_verify_staff_session()) {
+        wp_send_json_error(['message' => 'Unauthorized: Valid staff session token required.'], 403);
+    }
     global $wpdb;
     $table_rooms = $wpdb->prefix . 'kc_hotel_rooms';
     $table_bookings = $wpdb->prefix . 'kc_hotel_bookings';
@@ -801,6 +854,9 @@ function kc_hotel_ajax_delete_room() {
 add_action('wp_ajax_kc_hotel_update_status', 'kc_hotel_ajax_update_status');
 add_action('wp_ajax_nopriv_kc_hotel_update_status', 'kc_hotel_ajax_update_status');
 function kc_hotel_ajax_update_status() {
+    if (!kc_hotel_verify_staff_session()) {
+        wp_send_json_error(['message' => 'Unauthorized: Valid staff session token required.'], 403);
+    }
     global $wpdb;
     $table = $wpdb->prefix . 'kc_hotel_bookings';
 
@@ -820,6 +876,9 @@ function kc_hotel_ajax_update_status() {
 add_action('wp_ajax_kc_hotel_record_payment', 'kc_hotel_ajax_record_payment');
 add_action('wp_ajax_nopriv_kc_hotel_record_payment', 'kc_hotel_ajax_record_payment');
 function kc_hotel_ajax_record_payment() {
+    if (!kc_hotel_verify_staff_session()) {
+        wp_send_json_error(['message' => 'Unauthorized: Valid staff session token required.'], 403);
+    }
     global $wpdb;
     $table = $wpdb->prefix . 'kc_hotel_bookings';
 
@@ -875,6 +934,9 @@ function kc_hotel_ajax_record_payment() {
 add_action('wp_ajax_kc_hotel_get_sales_analytics', 'kc_hotel_ajax_get_sales_analytics');
 add_action('wp_ajax_nopriv_kc_hotel_get_sales_analytics', 'kc_hotel_ajax_get_sales_analytics');
 function kc_hotel_ajax_get_sales_analytics() {
+    if (!kc_hotel_verify_staff_session()) {
+        wp_send_json_error(['message' => 'Unauthorized: Valid staff session token required.'], 403);
+    }
     global $wpdb;
     $table_bookings = $wpdb->prefix . 'kc_hotel_bookings';
     $table_rooms = $wpdb->prefix . 'kc_hotel_rooms';

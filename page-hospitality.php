@@ -716,7 +716,7 @@ get_header();
                   data-room-price="60000"
                   data-room-branch="Branch 02 • The Annex"
                   data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/suite-lounge.jpg' ); ?>"
-                  data-paystack-url="https://paystack.com/buy/golden-nest-ugswqe">
+                  data-paystack-url="">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
                 </button>
@@ -852,9 +852,99 @@ get_header();
             </div>
             <div>
               <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20I%20want%20to%20inquire%20about%20the%20A%20La%20Carte%20Banquet%20Package%20(850,000)" target="_blank" rel="noopener" class="btn btn-secondary btn-lg" style="width:100%; margin-bottom:0.75rem;">Inquire via WhatsApp</a>
-              <button type="button" class="btn btn-outline-white btn-sm" style="width:100%;" data-modal="inquiryModal" data-service="banquet" data-suite-name="1,000-Seat Grand Banquet Hall (À La Carte Package)">Hold Event Date</button>
+              <a href="#banquet-checker" class="btn btn-outline-white btn-sm" style="width:100%; display:block; text-align:center;">Check Date Availability</a>
             </div>
           </div>
+        </div>
+
+        <!-- Dedicated Banquet Hall Date Checker & RFP Engine -->
+        <div class="banquet-date-checker-card" id="banquet-checker" style="margin-top: 3.5rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(212,175,55,0.35); border-radius: var(--radius-xl); padding: clamp(1.25rem, 4vw, 2.5rem); box-shadow: 0 20px 40px rgba(0,0,0,0.4); backdrop-filter: blur(10px);">
+          <div style="text-align: center; max-width: 720px; margin: 0 auto 2rem;">
+            <span class="rc-badge" style="background: rgba(212,175,55,0.18); color: #fef08a; border-color: rgba(212,175,55,0.4); margin-bottom: 0.75rem; display: inline-flex;">
+              🗓️ Real-Time Event Date Availability Check
+            </span>
+            <h3 style="font-family: var(--font-display); font-size: 1.85rem; font-weight: 800; color: var(--white); margin: 0 0 0.5rem;">
+              Check Your Event Date &amp; Hold Your Hall Reservation
+            </h3>
+            <p style="color: var(--slate-300); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+              High-season wedding dates, corporate AGMs, and weekend summits book out months in advance. Select your intended date below to hold the date with our executive event coordination desk.
+            </p>
+          </div>
+
+          <form id="banquetDateInquiryForm">
+            <div class="form-group" style="margin-bottom: 1rem;">
+              <label for="banquetPackageSelect" style="color: var(--slate-300); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.4rem;">Select Package *</label>
+              <select id="banquetPackageSelect" name="package_choice" class="form-control" style="background: #060e1e; color: #fff; border-color: rgba(255,255,255,0.2); padding: 0.75rem 1rem;" required>
+                <option value="Celebrations Full Package (₦1,050,000)" selected>Celebrations Full Package — ₦1,050,000 (10 Hours + Industrial Chilling A/C + Dual Backup Generators)</option>
+                <option value="À La Carte Space Package (₦850,000)">À La Carte Space Package — ₦850,000 (8 Hours Hall Space + Standby Generator)</option>
+              </select>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+              <div class="form-group">
+                <label for="banquetEventType" style="color: var(--slate-300); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.4rem;">Event Type *</label>
+                <select id="banquetEventType" name="event_type" class="form-control" style="background: #060e1e; color: #fff; border-color: rgba(255,255,255,0.2); padding: 0.75rem 1rem;" required>
+                  <option value="Wedding Reception">Wedding Reception &amp; Gala</option>
+                  <option value="Corporate AGM / Summit">Corporate AGM / Annual Conference / Summit</option>
+                  <option value="Birthday / Anniversary Milestone">Birthday Celebration / Milestone Anniversary</option>
+                  <option value="Religious Convention / Retreat">Religious Convention / Retreat</option>
+                  <option value="Political / Civic Convention">Political / Civic Convention</option>
+                  <option value="Award Gala / Dinner">Award Night / Banquet Dinner</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="banquetTargetDate" style="color: var(--slate-300); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.4rem;">Target Event Date *</label>
+                <input type="date" id="banquetTargetDate" name="event_date" class="form-control" style="background: #060e1e; color: #fff; border-color: rgba(255,255,255,0.2); padding: 0.75rem 1rem;" required>
+              </div>
+
+              <div class="form-group">
+                <label for="banquetGuestCount" style="color: var(--slate-300); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.4rem;">Estimated Attendance *</label>
+                <select id="banquetGuestCount" name="guest_count" class="form-control" style="background: #060e1e; color: #fff; border-color: rgba(255,255,255,0.2); padding: 0.75rem 1rem;">
+                  <option value="Up to 250 Guests">Up to 250 Guests</option>
+                  <option value="250 to 500 Guests">250 to 500 Guests</option>
+                  <option value="500 to 800 Guests" selected>500 to 800 Guests</option>
+                  <option value="800 to 1,000 Guests (Max Capacity)">800 to 1,000 Guests (Grand Capacity)</option>
+                </select>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+              <div class="form-group">
+                <label for="banquetContactName" style="color: var(--slate-300); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.4rem;">Organizer / Couple Name *</label>
+                <input type="text" id="banquetContactName" name="full_name" class="form-control" placeholder="e.g. Chief &amp; Mrs. Danladi" style="background: #060e1e; color: #fff; border-color: rgba(255,255,255,0.2); padding: 0.75rem 1rem;" required>
+              </div>
+
+              <div class="form-group">
+                <label for="banquetContactPhone" style="color: var(--slate-300); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.4rem;">Phone / WhatsApp Line *</label>
+                <input type="tel" id="banquetContactPhone" name="phone" class="form-control" placeholder="0803 123 4567" style="background: #060e1e; color: #fff; border-color: rgba(255,255,255,0.2); padding: 0.75rem 1rem;" required>
+              </div>
+
+              <div class="form-group">
+                <label for="banquetContactEmail" style="color: var(--slate-300); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.4rem;">Email Address *</label>
+                <input type="email" id="banquetContactEmail" name="email" class="form-control" placeholder="organizer@domain.com" style="background: #060e1e; color: #fff; border-color: rgba(255,255,255,0.2); padding: 0.75rem 1rem;" required>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 1.5rem;">
+              <label for="banquetSpecialNotes" style="color: var(--slate-300); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 0.4rem;">Special Requests / Stage / Decor Requirements</label>
+              <textarea id="banquetSpecialNotes" name="notes" class="form-control" rows="2" placeholder="e.g. Need bridal suite access from 7 AM, stage for 10-piece band, caterers arrival at 9 AM..." style="background: #060e1e; color: #fff; border-color: rgba(255,255,255,0.2); padding: 0.75rem 1rem;"></textarea>
+            </div>
+
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <button type="submit" id="btnSubmitBanquetDate" class="btn btn-primary btn-lg" style="flex: 1; justify-content: center; min-width: 250px;">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right: 0.5rem;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Hold My Event Date &amp; Request Availability</span>
+              </button>
+              <a id="btnBanquetWhatsAppFast" href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20want%20to%20check%20availability%20for%20the%201,000-Seat%20Grand%20Banquet%20Hall." target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg" style="padding: 0.75rem 1.5rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86.174.086.275.073.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/></svg>
+                <span>Instant WhatsApp Coordinator</span>
+              </a>
+            </div>
+            <div id="banquetFormSuccess" style="display:none; margin-top: 1rem; background: #ecfdf5; border: 1px solid #10b981; border-radius: var(--radius-md); padding: 1rem; color: #065f46; font-size: 0.9rem;">
+              🎉 <strong>Date Request Logged!</strong> Our events coordinator has received your request and will call/WhatsApp you shortly to confirm date lock-in and hall inspection.
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -1525,12 +1615,25 @@ get_header();
           </div>
         </div>
 
+        <!-- Instant Paystack Online Card Option (Shown if room has Paystack gateway link) -->
+        <div id="modalPaystackOptionBox" style="display:none; margin-bottom: 1.25rem; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 1px solid #86efac; border-radius: var(--radius-md); padding: 14px 16px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.75rem;">
+            <div>
+              <span style="font-size:0.7rem; text-transform:uppercase; letter-spacing:0.06em; color:#15803d; font-weight:800; display:block;">Option 1: Instant Card Checkout</span>
+              <strong style="font-size:0.95rem; color:#14532d;">Pay with Debit Card / USSD via Paystack</strong>
+            </div>
+            <a id="modalPaystackLink" href="#" target="_blank" rel="noopener" class="btn btn-primary btn-sm" style="background:#09a5db; border-color:#09a5db; box-shadow:0 4px 12px rgba(9,165,219,0.3); font-weight:700;">
+              Proceed to Paystack &rarr;
+            </a>
+          </div>
+        </div>
+
         <!-- Zenith Bank Luxury Manual Transfer Card -->
-        <div class="zenith-metal-card" style="margin-bottom:1.5rem;">
+        <div class="zenith-metal-card" style="margin-bottom:1.25rem;">
           <div class="zenith-bank-header">
             <div class="zenith-bank-brand">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
-              <span>ZENITH BANK DIRECT TRANSFER</span>
+              <span>Option 2: ZENITH BANK DIRECT TRANSFER</span>
             </div>
             <span style="font-size:0.72rem; font-weight:800; background:rgba(212,175,55,0.18); color:#fef3c7; border:1px solid rgba(212,175,55,0.4); padding:0.25rem 0.65rem; border-radius:9999px; text-transform:uppercase; letter-spacing:0.06em;">Official Account</span>
           </div>
@@ -1558,8 +1661,25 @@ get_header();
           </div>
 
           <p style="font-size:0.8rem; color:#94a3b8; margin:0.85rem 0 0; line-height:1.5;">
-            💡 <em>Transfer the total amount via your banking app or USSD, then attach your payment receipt below and tap <strong>"I Have Paid — Confirm My Booking"</strong>. Details are dispatched immediately to our reception desk.</em>
+            💡 <em>Transfer the total amount via your banking app or USSD, enter your sender details below, and tap <strong>"I Have Paid — Confirm My Booking"</strong>. Details are dispatched immediately to our reception desk.</em>
           </p>
+        </div>
+
+        <!-- Transfer Verification Inputs -->
+        <div class="form-group-row">
+          <div class="form-group">
+            <label for="bookingSenderName" style="font-size:0.8rem; font-weight:700; color:var(--slate-700); margin-bottom:0.25rem; display:block;">Sender Account Name *</label>
+            <input type="text" id="bookingSenderName" name="sender_name" class="form-control" placeholder="Name on your bank account" required>
+          </div>
+          <div class="form-group">
+            <label for="bookingSenderBank" style="font-size:0.8rem; font-weight:700; color:var(--slate-700); margin-bottom:0.25rem; display:block;">Sender Bank Name *</label>
+            <input type="text" id="bookingSenderBank" name="sender_bank" class="form-control" placeholder="e.g. Zenith, GTB, Access, Kuda" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="bookingTransferRef" style="font-size:0.8rem; font-weight:700; color:var(--slate-700); margin-bottom:0.25rem; display:block;">Transfer Reference / Session ID (Optional)</label>
+          <input type="text" id="bookingTransferRef" name="transfer_ref" class="form-control" placeholder="e.g. 100004829375839201">
         </div>
 
         <!-- Receipt Upload Dropzone -->

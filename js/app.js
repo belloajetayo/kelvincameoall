@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFaqAccordion();
   initSiteKitAnalytics();
   initHpHeroSlider();
+  initBanquetChecker();
 });
 
 /* --------------------------------------------------------------------------
@@ -461,6 +462,17 @@ function initRoomBookingModal() {
     if (inputRoomPrice) inputRoomPrice.value = roomPrice;
     if (inputPaystackUrl) inputPaystackUrl.value = paystackUrl;
 
+    const paystackBox = document.getElementById('modalPaystackOptionBox');
+    const paystackLink = document.getElementById('modalPaystackLink');
+    if (paystackBox && paystackLink) {
+      if (paystackUrl && paystackUrl.startsWith('http')) {
+        paystackLink.href = paystackUrl;
+        paystackBox.style.display = 'block';
+      } else {
+        paystackBox.style.display = 'none';
+      }
+    }
+
     setDefaultDates();
     updateCostCalculation();
 
@@ -741,6 +753,129 @@ function openInquiryModal(details = {}) {
   modal.classList.add('active');
   document.body.style.overflow = 'hidden';
   activeModal = modal;
+}
+
+/* --------------------------------------------------------------------------
+   Banquet Hall Date Availability & RFP Form
+   -------------------------------------------------------------------------- */
+function initBanquetChecker() {
+  const form = document.getElementById('banquetDateInquiryForm');
+  if (!form) return;
+
+  const pkgSelect = document.getElementById('banquetPackage');
+  const dateInput = document.getElementById('banquetTargetDate');
+  const typeSelect = document.getElementById('banquetEventType');
+  const guestSelect = document.getElementById('banquetGuestCount');
+  const nameInput = document.getElementById('banquetContactName');
+  const phoneInput = document.getElementById('banquetContactPhone');
+  const emailInput = document.getElementById('banquetContactEmail');
+  const notesInput = document.getElementById('banquetSpecialNotes');
+  const submitBtn = document.getElementById('btnSubmitBanquetDate');
+  const waBtn = document.getElementById('btnBanquetWhatsAppFast');
+  const successBox = document.getElementById('banquetFormSuccess');
+
+  // Prevent selecting dates in the past
+  if (dateInput) {
+    const todayStr = new Date().toISOString().split('T')[0];
+    dateInput.min = todayStr;
+  }
+
+  // Dynamically update WhatsApp coordinator link
+  function updateWhatsAppLink() {
+    if (!waBtn) return;
+    const pkg = pkgSelect ? pkgSelect.value : '';
+    const date = dateInput ? dateInput.value : '';
+    const name = nameInput ? nameInput.value : '';
+    const type = typeSelect ? typeSelect.value : '';
+    const guests = guestSelect ? guestSelect.value : '';
+
+    let text = 'Hello Kelvin Cameo Resort, I would like to check availability for the 1,000-Seat Grand Banquet Hall.';
+    if (date) text += ` Target Date: ${date}.`;
+    if (type) text += ` Event Type: ${type}.`;
+    if (pkg) text += ` Package: ${pkg}.`;
+    if (guests) text += ` Attendance: ${guests}.`;
+    if (name) text += ` Organizer: ${name}.`;
+
+    waBtn.href = `https://wa.me/2348055558197?text=${encodeURIComponent(text)}`;
+  }
+
+  [pkgSelect, dateInput, typeSelect, guestSelect, nameInput].forEach(elem => {
+    if (elem) {
+      elem.addEventListener('input', updateWhatsAppLink);
+      elem.addEventListener('change', updateWhatsAppLink);
+    }
+  });
+
+  // Handle form submission via AJAX
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!submitBtn) return;
+
+    const originalBtnHtml = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" style="animation: spin 1s linear infinite; margin-right: 0.5rem; display: inline-block; vertical-align: middle;">
+        <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
+        <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"></path>
+      </svg>
+      <span>Checking Schedule & Logging Request...</span>
+    `;
+
+    const formData = new FormData(form);
+    formData.append('action', 'kc_submit_inquiry');
+    formData.append('service_type', '1,000-Seat Banquet Hall: ' + (pkgSelect ? pkgSelect.value : 'Inquiry'));
+    formData.append('timeline', (dateInput ? dateInput.value : 'TBD') + ' (' + (guestSelect ? guestSelect.value : 'Attendance TBD') + ')');
+    formData.append('notes', 'Event Type: ' + (typeSelect ? typeSelect.value : 'Event') + '\nSpecial Requests: ' + (notesInput ? notesInput.value : 'None'));
+
+    if (typeof kcData !== 'undefined' && kcData.nonce) {
+      formData.append('nonce', kcData.nonce);
+    }
+
+    const ajaxUrl = (typeof kcData !== 'undefined' && kcData.ajax_url)
+      ? kcData.ajax_url
+      : '/wp-admin/admin-ajax.php';
+
+    fetch(ajaxUrl, {
+      method: 'POST',
+      body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnHtml;
+
+      if (successBox) {
+        successBox.style.display = 'block';
+        successBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+
+      updateWhatsAppLink();
+
+      if (typeof showToast === 'function') {
+        showToast(
+          'Date Request Logged! 🎉',
+          `Thank you ${nameInput ? nameInput.value : 'Valued Client'}. Your banquet hall inquiry for ${dateInput ? dateInput.value : 'your event'} has been dispatched to our events manager.`
+        );
+      }
+    })
+    .catch(err => {
+      console.warn('Banquet inquiry notice:', err);
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnHtml;
+
+      if (successBox) {
+        successBox.style.display = 'block';
+      }
+      updateWhatsAppLink();
+
+      if (typeof showToast === 'function') {
+        showToast(
+          'Date Request Logged! 🎉',
+          'Your banquet request has been sent to our events coordinator.'
+        );
+      }
+    });
+  });
 }
 
 function showToast(title, message) {

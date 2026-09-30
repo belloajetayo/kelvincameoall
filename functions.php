@@ -426,7 +426,7 @@ function kelvin_cameo_seo_schema() {
                     'name'           => 'What are the room rates at Kelvin Cameo Resort Hotel?',
                     'acceptedAnswer' => array(
                         '@type' => 'Answer',
-                        'text'  => 'Kelvin Cameo Resort Hotel room rates start from ₦25,000 for Standard Rooms, ₦40,000 for Deluxe Rooms (The Annex), ₦60,000 for Executive Rooms, ₦120,000 for the Blissful Breeze Suite, and up to ₦200,000 for the Presidential Penthouse Suite. All bookings include 24/7 power, air conditioning, flat-screen satellite TV, ensuite bathrooms, and pool access.',
+                        'text'  => 'Kelvin Cameo Resort Hotel room rates start from ₦25,000 for Standard Luxury and Annex Deluxe Rooms, ₦30,000 for Superior, ₦35,000 for Executive, ₦40,000 for Studio, ₦45,000 for Prestige, ₦55,000 for Golden Nest Suite, ₦60,000 for Royal Treat Suite and Blissful Breeze Suite, up to ₦200,000 for the 2-Bedroom Royal Retreat Presidential Apartment. All bookings include 24/7 power, air conditioning, flat-screen satellite TV, ensuite bathrooms, and pool access.',
                     ),
                 ),
                 array(
@@ -439,10 +439,10 @@ function kelvin_cameo_seo_schema() {
                 ),
                 array(
                     '@type'          => 'Question',
-                    'name'           => 'How large is the event hall at Kelvin Cameo Resort?',
+                    'name'           => 'How large is the event hall at Kelvin Cameo Resort and what are the hire packages?',
                     'acceptedAnswer' => array(
                         '@type' => 'Answer',
-                        'text'  => 'The Kelvin Cameo Grand Banquet Hall is a fully air-conditioned 1,000-seat auditorium featuring crystal chandeliers, VIP greenrooms, PA audio systems, and stage facilities for weddings, corporate AGMs, and banquets.',
+                        'text'  => 'The Kelvin Cameo Grand Banquet Hall is a fully air-conditioned 1,000-seat auditorium. We offer two transparent packages: The Full Banquet & Celebrations Package at ₦1,050,000 (includes hall, high-capacity cooling, chiavari/banquet chairs, clothed tables, banquet lighting, VIP bridal suite access, and standard sound), and the À La Carte Space Only Package at ₦850,000.',
                     ),
                 ),
                 array(
@@ -685,6 +685,63 @@ function kc_handle_room_booking() {
         $recent_bookings = array_slice( $recent_bookings, 0, 100 );
     }
     update_option( 'kc_recent_bookings', $recent_bookings, false );
+
+    // Insert into Front Desk Hotel Management PMS Table (wp_kc_hotel_bookings)
+    global $wpdb;
+    $table_hotel_bookings = $wpdb->prefix . 'kc_hotel_bookings';
+    $booking_ref = 'KC-' . date('y') . '-' . strtoupper(wp_generate_password(5, false));
+
+    if ($wpdb->get_var("SHOW TABLES LIKE '$table_hotel_bookings'") === $table_hotel_bookings) {
+        $clean_total = floatval(preg_replace('/[^0-9.]/', '', $total));
+        $inventory = function_exists('kc_hotel_get_room_inventory') ? kc_hotel_get_room_inventory() : [];
+        $matched_room_num = 'Web';
+        $rate_per_night = $clean_total / max(1, intval($nights));
+        foreach ($inventory as $r) {
+            if (strcasecmp($r['type'], $room) === 0 || stripos($r['type'], $room) !== false) {
+                $matched_room_num = $r['number'];
+                $rate_per_night = floatval($r['rate']);
+                break;
+            }
+        }
+
+        $sender_name = isset($_POST['sender_name']) ? sanitize_text_field(wp_unslash($_POST['sender_name'])) : $name;
+        $sender_bank = isset($_POST['sender_bank']) ? sanitize_text_field(wp_unslash($_POST['sender_bank'])) : 'Zenith Bank';
+        $transfer_ref = isset($_POST['transfer_ref']) ? sanitize_text_field(wp_unslash($_POST['transfer_ref'])) : 'Web Transfer Alert';
+
+        $full_notes = trim("Guest reported booking from Website on " . current_time('mysql') . ".\nSender: $sender_name\nBank: $sender_bank" . ($notes ? "\nNotes: $notes" : ''));
+
+        $wpdb->insert(
+            $table_hotel_bookings,
+            [
+                'booking_ref'          => $booking_ref,
+                'guest_name'           => $name,
+                'guest_phone'          => $phone,
+                'guest_email'          => $email,
+                'room_number'          => $matched_room_num,
+                'room_type'            => $room,
+                'branch'               => $branch,
+                'check_in'             => $checkin,
+                'check_out'            => $checkout,
+                'nights'               => intval($nights),
+                'rate_per_night'       => $rate_per_night,
+                'total_amount'         => $clean_total,
+                'amount_paid'          => $clean_total,
+                'balance_due'          => 0.00,
+                'payment_status'       => 'pending',
+                'payment_method'       => 'transfer',
+                'payment_reference'    => $transfer_ref,
+                'booking_status'       => 'reserved',
+                'notes'                => $full_notes,
+                'receptionist_name'    => 'Online Web Portal',
+                'transfer_claimed'     => 1,
+                'transfer_sender_name' => $sender_name,
+                'transfer_sender_bank' => $sender_bank,
+                'transfer_verified'    => 0,
+                'created_at'           => current_time('mysql'),
+                'updated_at'           => current_time('mysql')
+            ]
+        );
+    }
 
     $headers = array(
         'Content-Type: text/html; charset=UTF-8',

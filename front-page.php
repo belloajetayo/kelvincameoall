@@ -208,7 +208,7 @@ get_header();
             <h3 class="hp-division-name">Resort Hotel &amp; Suites</h3>
             <p class="hp-division-desc">Premier luxury oasis along the Abuja corridor — 10 accommodation tiers, swimming pool, and a majestic 1,000-seat banquet hall.</p>
             <ul class="hp-division-highlights">
-              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 10 Accommodation Tiers (From &#8358;25,000 to &#8358;180,000/night)</li>
+              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 10 Accommodation Tiers (From &#8358;25,000 to &#8358;200,000/night)</li>
               <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Guaranteed 24/7 Power (Dual Caterpillar Standby + Solar)</li>
               <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 1,000-Seat Grand Banquet Hall for Weddings &amp; AGMs</li>
             </ul>
