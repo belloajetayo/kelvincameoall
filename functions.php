@@ -601,7 +601,6 @@ function kc_handle_room_booking() {
         'Prestige Room'            => 'https://paystack.com/buy/prestige-lknrmy',
         'Love Night Room'          => 'https://paystack.com/buy/love-night-hdtfxs',
         'Golden Nest Room'         => 'https://paystack.com/buy/golden-nest-ugswqe',
-        'Royal Treat Suite'        => 'https://paystack.com/buy/golden-nest-ugswqe',
         'Blissful Breeze Suite'    => 'https://paystack.com/buy/blissful-breeze-suite-jrcwry',
         'Luxury Retreat Apartment' => 'https://paystack.com/buy/luxury-retreat-apartment-nvadhl',
         'Royal Retreat Apartment'  => 'https://paystack.com/buy/royal-retreat-apartment-twvshd',
