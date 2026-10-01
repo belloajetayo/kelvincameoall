@@ -297,7 +297,7 @@ function kc_hotel_ajax_verify_pin() {
         $token = wp_create_nonce('kc_hotel_reception_session');
         wp_send_json_success(['token' => $token, 'message' => 'PIN accepted']);
     } else {
-        wp_send_json_error(['message' => 'Invalid Security PIN. Please enter 1613.']);
+        wp_send_json_error(['message' => 'Invalid Security PIN. Please enter authorized staff PIN.']);
     }
 }
 
