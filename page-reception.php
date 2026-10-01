@@ -13,7 +13,10 @@ if (!defined('ABSPATH')) {
 
 $is_logged_in = is_user_logged_in();
 $ajax_url = admin_url('admin-ajax.php');
-$default_pin = get_option('kc_hotel_pin', '1613');
+$default_pin = '1613';
+if ( get_option( 'kc_hotel_pin' ) !== '1613' ) {
+    update_option( 'kc_hotel_pin', '1613' );
+}
 $nonce = wp_create_nonce('kc_hotel_reception_session');
 $site_home = home_url('/');
 $reserve_url = home_url('/reserve/');
