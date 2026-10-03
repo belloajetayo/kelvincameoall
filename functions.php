@@ -981,6 +981,171 @@ add_action( 'wp_ajax_kc_submit_inquiry', 'kc_handle_inquiry_submission' );
 add_action( 'wp_ajax_nopriv_kc_submit_inquiry', 'kc_handle_inquiry_submission' );
 
 /**
+ * Handle Career & Job Application AJAX Submission
+ */
+function kc_handle_job_application_submission() {
+    $full_name  = sanitize_text_field( $_POST['full_name'] ?? '' );
+    $phone      = sanitize_text_field( $_POST['phone'] ?? '' );
+    $email      = sanitize_email( $_POST['email'] ?? '' );
+    $position   = sanitize_text_field( $_POST['position'] ?? 'General Application' );
+    $education  = sanitize_text_field( $_POST['education'] ?? 'Not Specified' );
+    $experience = sanitize_text_field( $_POST['experience'] ?? 'Not Specified' );
+    $branch     = sanitize_text_field( $_POST['branch'] ?? 'Any Branch' );
+    $location   = sanitize_text_field( $_POST['location'] ?? '' );
+    $cv_link    = esc_url_raw( $_POST['cv_link'] ?? '' );
+    $cover_note = sanitize_textarea_field( $_POST['cover_note'] ?? '' );
+
+    if ( empty( $full_name ) || empty( $phone ) ) {
+        wp_send_json_error( array( 'message' => 'Please provide your full name and phone/WhatsApp number.' ) );
+    }
+
+    $app_ref = 'KC-JOB-' . date('y') . '-' . strtoupper( wp_generate_password( 5, false, false ) );
+
+    // Store in circular buffer
+    $apps = get_option( 'kc_job_applications', array() );
+    if ( ! is_array( $apps ) ) {
+        $apps = array();
+    }
+    array_unshift( $apps, array(
+        'ref'        => $app_ref,
+        'name'       => $full_name,
+        'phone'      => $phone,
+        'email'      => $email,
+        'position'   => $position,
+        'education'  => $education,
+        'experience' => $experience,
+        'branch'     => $branch,
+        'location'   => $location,
+        'cv_link'    => $cv_link,
+        'cover_note' => $cover_note,
+        'created_at' => current_time( 'mysql' ),
+        'status'     => 'received'
+    ) );
+    if ( count( $apps ) > 100 ) {
+        $apps = array_slice( $apps, 0, 100 );
+    }
+    update_option( 'kc_job_applications', $apps, false );
+
+    // Send email alert to hotel management
+    $to = array( 'kelvincameo73@gmail.com', get_option( 'admin_email' ) );
+    $subject = sprintf( '💼 [JOB APPLICATION] %s - %s (%s)', $app_ref, $position, $full_name );
+    $headers = array(
+        'Content-Type: text/html; charset=UTF-8',
+        'From: Kelvin Cameo Recruitment <' . get_option( 'admin_email' ) . '>',
+        'Reply-To: ' . $full_name . ' <' . ($email ?: 'no-reply@kelvincameo.com') . '>',
+    );
+
+    $clean_phone = preg_replace( '/[^0-9]/', '', $phone );
+    $wa_applicant_url = ( substr( $clean_phone, 0, 1 ) === '0' ) ? 'https://wa.me/234' . substr( $clean_phone, 1 ) : 'https://wa.me/' . $clean_phone;
+
+    $msg  = '<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;background:#f8fafc;padding:24px;color:#1e293b;">';
+    $msg .= '<div style="max-width:620px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 4px 12px rgba(0,0,0,0.06);">';
+    $msg .= '<div style="background:#060e1e;border-bottom:3px solid #f25c05;padding:24px;text-align:center;color:#fff;">';
+    $msg .= '<h2 style="margin:0;color:#f25c05;font-size:20px;letter-spacing:1px;">KELVIN CAMEO RESORT & CONGLOMERATE</h2>';
+    $msg .= '<p style="margin:6px 0 0;font-size:13px;color:#94a3b8;">Talent Acquisition & HR Notification • Ref: ' . esc_html($app_ref) . '</p>';
+    $msg .= '</div>';
+    $msg .= '<div style="padding:28px;">';
+    $msg .= '<div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:12px 16px;margin-bottom:20px;">';
+    $msg .= '<strong style="color:#1e40af;font-size:15px;">New Job Application Received</strong>';
+    $msg .= '<div style="color:#1d4ed8;font-size:13px;margin-top:2px;">Role: <strong>' . esc_html($position) . '</strong> • Location: ' . esc_html($location ?: 'Not specified') . '</div>';
+    $msg .= '</div>';
+    $msg .= '<table style="width:100%;border-collapse:collapse;font-size:14px;">';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;width:35%;"><strong>Application Ref:</strong></td><td style="padding:10px 0;font-weight:700;font-family:monospace;color:#0b4ea2;">' . esc_html( $app_ref ) . '</td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Applicant Name:</strong></td><td style="padding:10px 0;font-weight:700;">' . esc_html( $full_name ) . '</td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Target Position:</strong></td><td style="padding:10px 0;font-weight:700;color:#f25c05;">' . esc_html( $position ) . '</td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Phone / WhatsApp:</strong></td><td style="padding:10px 0;"><a href="tel:' . esc_attr( $phone ) . '">' . esc_html( $phone ) . '</a></td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Email:</strong></td><td style="padding:10px 0;">' . ( $email ? '<a href="mailto:' . esc_attr( $email ) . '">' . esc_html( $email ) . '</a>' : '<span style="color:#94a3b8;">None provided</span>' ) . '</td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Qualification:</strong></td><td style="padding:10px 0;">' . esc_html( $education ) . '</td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Experience:</strong></td><td style="padding:10px 0;">' . esc_html( $experience ) . '</td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Branch Preference:</strong></td><td style="padding:10px 0;">' . esc_html( $branch ) . '</td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Residential Area:</strong></td><td style="padding:10px 0;">' . esc_html( $location ?: 'Not specified' ) . '</td></tr>';
+    if ( ! empty( $cv_link ) ) {
+        $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>CV / Portfolio Link:</strong></td><td style="padding:10px 0;"><a href="' . esc_url( $cv_link ) . '" target="_blank" style="color:#0b4ea2;font-weight:700;text-decoration:underline;">View Submitted Resume / Document ↗</a></td></tr>';
+    }
+    if ( ! empty( $cover_note ) ) {
+        $msg .= '<tr><td style="padding:10px 0;color:#64748b;vertical-align:top;"><strong>Statement / Pitch:</strong></td><td style="padding:10px 0;">' . nl2br( esc_html( $cover_note ) ) . '</td></tr>';
+    }
+    $msg .= '</table>';
+    $msg .= '<div style="text-align:center;margin-top:24px;">';
+    $msg .= '<a href="' . esc_url( $wa_applicant_url ) . '" style="background:#25D366;color:#fff;font-weight:700;padding:12px 24px;border-radius:6px;text-decoration:none;display:inline-block;margin-right:10px;">Chat Candidate on WhatsApp</a>';
+    $msg .= '<a href="tel:' . esc_attr( $phone ) . '" style="background:#060e1e;color:#fff;font-weight:700;padding:12px 24px;border-radius:6px;text-decoration:none;display:inline-block;">Call Candidate</a>';
+    $msg .= '</div>';
+    $msg .= '</div>';
+    $msg .= '<div style="background:#f8fafc;padding:12px 24px;text-align:center;font-size:11px;color:#94a3b8;border-top:1px solid #e2e8f0;">';
+    $msg .= 'Kelvin Cameo Organization • Suleja, Niger State • RC: 1613032';
+    $msg .= '</div>';
+    $msg .= '</div></body></html>';
+
+    try {
+        @wp_mail( $to, $subject, $msg, $headers );
+    } catch ( \Throwable $e ) {
+        error_log( '[Kelvin Cameo Job App] Mail note: ' . $e->getMessage() );
+    }
+
+    // Candidate Confirmation Email
+    if ( $email ) {
+        $cand_subject = "Application Received: " . $position . " at Kelvin Cameo Resort (" . $app_ref . ")";
+        $cand_msg  = '<div style="font-family:Arial,sans-serif;max-width:580px;margin:0 auto;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">';
+        $cand_msg .= '<div style="background:#060e1e;padding:20px 24px;color:#fff;border-bottom:2px solid #f25c05;">';
+        $cand_msg .= '<h3 style="margin:0;color:#f25c05;">Kelvin Cameo Resort & Suite</h3>';
+        $cand_msg .= '<p style="margin:4px 0 0;font-size:12px;color:#94a3b8;">Human Resources & Talent Desk • Suleja, Niger State</p>';
+        $cand_msg .= '</div>';
+        $cand_msg .= '<div style="padding:24px;color:#1e293b;line-height:1.6;">';
+        $cand_msg .= '<p>Dear <strong>' . esc_html($full_name) . '</strong>,</p>';
+        $cand_msg .= '<p>Thank you for applying for the position of <strong>' . esc_html($position) . '</strong> at Kelvin Cameo Resort Hotel. Your application reference is <strong style="color:#0b4ea2;">' . esc_html($app_ref) . '</strong>.</p>';
+        $cand_msg .= '<p>Our human resources and front office management team will review your qualifications. If shortlisted, you will be invited for an interview at our executive complex in Kwamba, Suleja.</p>';
+        $cand_msg .= '<p style="margin-top:20px;font-size:13px;color:#64748b;">Best regards,<br><strong>HR & Talent Desk</strong><br>Kelvin Cameo Organization (RC: 1613032)</p>';
+        $cand_msg .= '</div></div>';
+        try {
+            @wp_mail( $email, $cand_subject, $cand_msg, $headers );
+        } catch ( \Throwable $e ) {}
+    }
+
+    // Manager WhatsApp Ping
+    $manager_phone = get_option('kc_hotel_manager_phone', '+2348055558197');
+    $clean_mgr_phone = preg_replace('/[^0-9]/', '', $manager_phone);
+    if (substr($clean_mgr_phone, 0, 1) === '0') {
+        $clean_mgr_phone = '234' . substr($clean_mgr_phone, 1);
+    }
+    if (empty($clean_mgr_phone)) {
+        $clean_mgr_phone = '2348055558197';
+    }
+
+    $job_ping_text = "💼 *KELVIN CAMEO — NEW JOB APPLICATION*\n"
+        . "────────────────────────\n"
+        . "📌 *Ref:* {$app_ref}\n"
+        . "👤 *Applicant:* {$full_name}\n"
+        . "💼 *Position:* {$position}\n"
+        . "📞 *Phone:* {$phone}\n"
+        . ($email ? "✉️ *Email:* {$email}\n" : "")
+        . "🎓 *Qualification:* {$education}\n"
+        . "⏳ *Experience:* {$experience}\n"
+        . "📍 *Location:* {$location}\n"
+        . ($cv_link ? "📎 *CV Link:* {$cv_link}\n" : "")
+        . "────────────────────────\n"
+        . "Applicant has submitted their details for recruitment consideration.";
+
+    $hr_whatsapp_url = 'https://wa.me/' . $clean_mgr_phone . '?text=' . rawurlencode($job_ping_text);
+
+    // Trigger server-side webhook/CallMeBot ping
+    kc_dispatch_server_whatsapp_ping('Job Application: ' . $position . ' - ' . $full_name, $job_ping_text, [
+        'ref'        => $app_ref,
+        'name'       => $full_name,
+        'phone'      => $phone,
+        'position'   => $position,
+        'experience' => $experience,
+    ]);
+
+    wp_send_json_success( array(
+        'message'         => 'Application submitted successfully! Our HR desk has received your information.',
+        'app_ref'         => $app_ref,
+        'hr_whatsapp_url' => $hr_whatsapp_url,
+    ) );
+}
+add_action( 'wp_ajax_kc_submit_job_application', 'kc_handle_job_application_submission' );
+add_action( 'wp_ajax_nopriv_kc_submit_job_application', 'kc_handle_job_application_submission' );
+
+/**
  * Automatically 301-redirect all 404 (Not Found) requests directly to the homepage,
  * while ensuring valid post or page slugs resolve seamlessly.
  */

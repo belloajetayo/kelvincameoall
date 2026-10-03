@@ -326,7 +326,7 @@ function kelvin_cameo_seo_schema() {
             '@id'             => esc_url( home_url( '/hospitality/#hotel' ) ),
             'name'            => 'Kelvin Cameo Resort Hotel',
             'alternateName'   => 'Kelvin Cameo Hotel & Suites',
-            'description'     => 'Premier luxury resort hotel in Suleja along the Abuja Capital Corridor (Opposite Suleiman Barau Technical College). Featuring boutique suites from ₦25,000, 1,000-seat grand banquet hall, crystal swimming pool, and fine dining.',
+            'description'     => 'Premier luxury resort hotel in Suleja along the Abuja Capital Corridor (opposite Suleiman Barau Technical College). Featuring boutique suites from ₦25,000, 1,000-seat grand banquet hall, crystal swimming pool, and fine dining.',
             'url'             => esc_url( home_url( '/hospitality/' ) ),
             'telephone'       => '+2348055558197',
             'email'           => $email_addr,
@@ -426,7 +426,7 @@ function kelvin_cameo_seo_schema() {
                     'name'           => 'What are the room rates at Kelvin Cameo Resort Hotel?',
                     'acceptedAnswer' => array(
                         '@type' => 'Answer',
-                        'text'  => 'Kelvin Cameo Resort Hotel room rates start from ₦25,000 for Standard Rooms, ₦40,000 for Deluxe Rooms (The Annex), ₦60,000 for Executive Rooms, ₦120,000 for the Blissful Breeze Suite, and up to ₦200,000 for the Presidential Penthouse Suite. All bookings include 24/7 power, air conditioning, flat-screen satellite TV, ensuite bathrooms, and pool access.',
+                        'text'  => 'Kelvin Cameo Resort Hotel room rates start from ₦25,000 for Standard Luxury and Annex Deluxe Rooms, ₦30,000 for Superior, ₦35,000 for Executive, ₦40,000 for Studio, ₦45,000 for Prestige, ₦55,000 for Golden Nest Suite, ₦60,000 for Royal Treat Suite and Blissful Breeze Suite, up to ₦200,000 for the 2-Bedroom Royal Retreat Presidential Apartment. All bookings include 24/7 power, air conditioning, flat-screen satellite TV, ensuite bathrooms, and pool access.',
                     ),
                 ),
                 array(
@@ -439,10 +439,10 @@ function kelvin_cameo_seo_schema() {
                 ),
                 array(
                     '@type'          => 'Question',
-                    'name'           => 'How large is the event hall at Kelvin Cameo Resort?',
+                    'name'           => 'How large is the event hall at Kelvin Cameo Resort and what are the hire packages?',
                     'acceptedAnswer' => array(
                         '@type' => 'Answer',
-                        'text'  => 'The Kelvin Cameo Grand Banquet Hall is a fully air-conditioned 1,000-seat auditorium featuring crystal chandeliers, VIP greenrooms, PA audio systems, and stage facilities for weddings, corporate AGMs, and banquets.',
+                        'text'  => 'Kelvin Cameo Resort features a 1,000-seat grand banquet hall auditorium and a dedicated mini event hall. We offer four official booking packages: the Mini Hall at ₦250,000; the À La Carte / Space Only Package at ₦850,000; the Celebrations Full Package at ₦1,050,000 (all-inclusive production with chairs, tables, industrial cooling, bridal suite, and standby power); and the Grand Celebrations Package with Complimentary Apartment at ₦1,200,000.',
                     ),
                 ),
                 array(
@@ -450,7 +450,7 @@ function kelvin_cameo_seo_schema() {
                     'name'           => 'Where is Kelvin Cameo Resort Hotel located?',
                     'acceptedAnswer' => array(
                         '@type' => 'Answer',
-                        'text'  => 'Kelvin Cameo Resort Hotel is located Opposite Suleiman Barau Technical College, Kwamba, Suleja, 910104, Niger State, Nigeria, along the Abuja Capital Expressway Corridor.',
+                        'text'  => 'Kelvin Cameo Resort Hotel is located opposite Suleiman Barau Technical College, Kwamba, Suleja, 910104, Niger State, Nigeria, along the Abuja Capital Expressway Corridor.',
                     ),
                 ),
                 array(
@@ -479,7 +479,7 @@ function kelvin_cameo_seo_schema() {
                     'name'           => 'Where is Kelvin Cameo located?',
                     'acceptedAnswer' => array(
                         '@type' => 'Answer',
-                        'text'  => 'Our corporate headquarters and flagship Kelvin Cameo Resort Hotel are located Opposite Suleiman Barau Technical College, Kwamba, Suleja, Niger State, easily accessible along the Abuja-Kaduna highway corridor.',
+                        'text'  => 'Our corporate headquarters and flagship Kelvin Cameo Resort Hotel are located opposite Suleiman Barau Technical College, Kwamba, Suleja, Niger State, easily accessible along the Abuja-Kaduna highway corridor.',
                     ),
                 ),
                 array(
@@ -568,6 +568,55 @@ function kc_url( $slug, $static_fallback = '' ) {
 }
 
 /**
+ * Dispatch Automated Multi-Channel Manager Notifications (WhatsApp Webhook / CallMeBot / SMS / Email).
+ */
+function kc_dispatch_server_whatsapp_ping( $title, $text, $meta = array() ) {
+    // 1. Log notification to circular buffer for audit
+    $logs = get_option( 'kc_notification_logs', array() );
+    if ( ! is_array( $logs ) ) {
+        $logs = array();
+    }
+    array_unshift( $logs, array(
+        'time'    => current_time( 'mysql' ),
+        'title'   => sanitize_text_field( $title ),
+        'message' => $text,
+        'meta'    => $meta,
+    ) );
+    if ( count( $logs ) > 50 ) {
+        $logs = array_slice( $logs, 0, 50 );
+    }
+    update_option( 'kc_notification_logs', $logs, false );
+
+    // 2. Dispatch to custom Webhook URL (Zapier / Make / Webhook / Telegram bridge)
+    $webhook_url = get_option( 'kc_notification_webhook_url', '' );
+    if ( ! empty( $webhook_url ) && filter_var( $webhook_url, FILTER_VALIDATE_URL ) ) {
+        wp_remote_post( $webhook_url, array(
+            'timeout'  => 5,
+            'blocking' => false,
+            'headers'  => array( 'Content-Type' => 'application/json; charset=utf-8' ),
+            'body'     => wp_json_encode( array(
+                'event'     => 'kelvin_cameo_alert',
+                'title'     => $title,
+                'message'   => $text,
+                'meta'      => $meta,
+                'timestamp' => current_time( 'c' ),
+            ) ),
+        ) );
+    }
+
+    // 3. Dispatch via CallMeBot Free WhatsApp API (if configured)
+    $callmebot_key = get_option( 'kc_callmebot_apikey', '' );
+    $callmebot_num = get_option( 'kc_callmebot_phone', '2348055558197' );
+    if ( ! empty( $callmebot_key ) && ! empty( $callmebot_num ) ) {
+        $clean_num = preg_replace( '/[^0-9]/', '', $callmebot_num );
+        $endpoint = 'https://api.callmebot.com/whatsapp.php?phone=' . rawurlencode( $clean_num )
+                  . '&text=' . rawurlencode( $text )
+                  . '&apikey=' . rawurlencode( $callmebot_key );
+        wp_remote_get( $endpoint, array( 'timeout' => 5, 'blocking' => false ) );
+    }
+}
+
+/**
  * Handle Room Booking AJAX Submission & Email Notification.
  */
 function kc_handle_room_booking() {
@@ -601,7 +650,6 @@ function kc_handle_room_booking() {
         'Prestige Room'            => 'https://paystack.com/buy/prestige-lknrmy',
         'Love Night Room'          => 'https://paystack.com/buy/love-night-hdtfxs',
         'Golden Nest Room'         => 'https://paystack.com/buy/golden-nest-ugswqe',
-        'Royal Treat Suite'        => 'https://paystack.com/buy/golden-nest-ugswqe',
         'Blissful Breeze Suite'    => 'https://paystack.com/buy/blissful-breeze-suite-jrcwry',
         'Luxury Retreat Apartment' => 'https://paystack.com/buy/luxury-retreat-apartment-nvadhl',
         'Royal Retreat Apartment'  => 'https://paystack.com/buy/royal-retreat-apartment-twvshd',
@@ -686,13 +734,69 @@ function kc_handle_room_booking() {
     }
     update_option( 'kc_recent_bookings', $recent_bookings, false );
 
+    // Insert into Front Desk Hotel Management PMS Table (wp_kc_hotel_bookings)
+    global $wpdb;
+    $table_hotel_bookings = $wpdb->prefix . 'kc_hotel_bookings';
+    $booking_ref = 'KC-' . date('y') . '-' . strtoupper(wp_generate_password(5, false));
+    $sender_name = isset($_POST['sender_name']) ? sanitize_text_field(wp_unslash($_POST['sender_name'])) : $name;
+    $sender_bank = isset($_POST['sender_bank']) ? sanitize_text_field(wp_unslash($_POST['sender_bank'])) : 'Zenith Bank';
+    $transfer_ref = isset($_POST['transfer_ref']) ? sanitize_text_field(wp_unslash($_POST['transfer_ref'])) : 'Web Transfer Alert';
+
+    if ($wpdb->get_var("SHOW TABLES LIKE '$table_hotel_bookings'") === $table_hotel_bookings) {
+        $clean_total = floatval(preg_replace('/[^0-9.]/', '', $total));
+        $inventory = function_exists('kc_hotel_get_room_inventory') ? kc_hotel_get_room_inventory() : [];
+        $matched_room_num = 'Web';
+        $rate_per_night = $clean_total / max(1, intval($nights));
+        foreach ($inventory as $r) {
+            if (strcasecmp($r['type'], $room) === 0 || stripos($r['type'], $room) !== false) {
+                $matched_room_num = $r['number'];
+                $rate_per_night = floatval($r['rate']);
+                break;
+            }
+        }
+
+        $full_notes = trim("Guest reported booking from Website on " . current_time('mysql') . ".\nSender: $sender_name\nBank: $sender_bank" . ($notes ? "\nNotes: $notes" : ''));
+
+        $wpdb->insert(
+            $table_hotel_bookings,
+            [
+                'booking_ref'          => $booking_ref,
+                'guest_name'           => $name,
+                'guest_phone'          => $phone,
+                'guest_email'          => $email,
+                'room_number'          => $matched_room_num,
+                'room_type'            => $room,
+                'branch'               => $branch,
+                'check_in'             => $checkin,
+                'check_out'            => $checkout,
+                'nights'               => intval($nights),
+                'rate_per_night'       => $rate_per_night,
+                'total_amount'         => $clean_total,
+                'amount_paid'          => $clean_total,
+                'balance_due'          => 0.00,
+                'payment_status'       => 'pending',
+                'payment_method'       => 'transfer',
+                'payment_reference'    => $transfer_ref,
+                'booking_status'       => 'reserved',
+                'notes'                => $full_notes,
+                'receptionist_name'    => 'Online Web Portal',
+                'transfer_claimed'     => 1,
+                'transfer_sender_name' => $sender_name,
+                'transfer_sender_bank' => $sender_bank,
+                'transfer_verified'    => 0,
+                'created_at'           => current_time('mysql'),
+                'updated_at'           => current_time('mysql')
+            ]
+        );
+    }
+
     $headers = array(
         'Content-Type: text/html; charset=UTF-8',
         'From: Kelvin Cameo Portal <' . get_option( 'admin_email' ) . '>',
         'Reply-To: ' . $name . ' <' . $email . '>',
     );
 
-    // Attempt email dispatch (gracefully caught if host disabled mail() before SMTP setup)
+    // Attempt email dispatch
     $mail_sent = false;
     try {
         if ( function_exists( 'mail' ) || has_action( 'phpmailer_init' ) ) {
@@ -702,9 +806,56 @@ function kc_handle_room_booking() {
         error_log( '[Kelvin Cameo Booking] Mail notice: ' . $e->getMessage() );
     }
 
+    // Generate Direct WhatsApp Ping URL to Manager line (+234 805 555 8197)
+    $manager_phone = get_option('kc_hotel_manager_phone', '+2348055558197');
+    $clean_mgr_phone = preg_replace('/[^0-9]/', '', $manager_phone);
+    if (substr($clean_mgr_phone, 0, 1) === '0') {
+        $clean_mgr_phone = '234' . substr($clean_mgr_phone, 1);
+    }
+    if (empty($clean_mgr_phone)) {
+        $clean_mgr_phone = '2348055558197';
+    }
+
+    $whatsapp_ping_text = "🏨 *KELVIN CAMEO RESORT — NEW RESERVATION ALERT*\n"
+        . "────────────────────────\n"
+        . "📌 *Ref:* {$booking_ref}\n"
+        . "🛌 *Room:* {$room} ({$branch})\n"
+        . "📅 *Stay:* {$checkin} to {$checkout} ({$nights} Nights)\n"
+        . "👤 *Guest:* {$name}\n"
+        . "📞 *Phone:* {$phone}\n"
+        . "💰 *Total:* {$total}\n"
+        . "🏦 *Payment Mode:* Zenith Bank Transfer (1311320179)\n"
+        . "👤 *Sender Name:* {$sender_name}\n"
+        . "🏛️ *Sender Bank:* {$sender_bank}\n"
+        . ($notes && $notes !== 'None' ? "📝 *Notes:* {$notes}\n" : "")
+        . "────────────────────────\n"
+        . "Please confirm credit in Zenith Bank and assign room key at reception desk.";
+
+    $manager_whatsapp_url = 'https://wa.me/' . $clean_mgr_phone . '?text=' . rawurlencode($whatsapp_ping_text);
+
+    // Server-side automated ping
+    kc_dispatch_server_whatsapp_ping('New Booking: ' . $room . ' - ' . $name, $whatsapp_ping_text, [
+        'ref' => $booking_ref,
+        'guest' => $name,
+        'phone' => $phone,
+        'amount' => $total
+    ]);
+
     wp_send_json_success( array(
-        'message'      => 'Transfer notification received! Booking recorded for front desk reconciliation.',
-        'mail_sent'    => $mail_sent,
+        'message'              => 'Transfer notification received! Booking recorded for front desk reconciliation.',
+        'mail_sent'            => $mail_sent,
+        'booking_ref'          => $booking_ref,
+        'room'                 => $room,
+        'branch'               => $branch,
+        'guest_name'           => $name,
+        'guest_phone'          => $phone,
+        'checkin'              => $checkin,
+        'checkout'             => $checkout,
+        'nights'               => $nights,
+        'total'                => $total,
+        'sender_name'          => $sender_name,
+        'sender_bank'          => $sender_bank,
+        'manager_whatsapp_url' => $manager_whatsapp_url,
     ) );
 }
 add_action( 'wp_ajax_kc_room_booking', 'kc_handle_room_booking' );
@@ -725,12 +876,15 @@ function kc_handle_inquiry_submission() {
         wp_send_json_error( array( 'message' => 'Please provide your name, email, and telephone line.' ), 400 );
     }
 
+    $inquiry_ref = 'KC-INQ-' . strtoupper(wp_generate_password(5, false));
+
     // Save inquiry to options
     $inquiries = get_option( 'kc_recent_inquiries', array() );
     if ( ! is_array( $inquiries ) ) {
         $inquiries = array();
     }
     array_unshift( $inquiries, array(
+        'ref'       => $inquiry_ref,
         'timestamp' => current_time( 'mysql' ),
         'service'   => $service,
         'name'      => $name,
@@ -746,7 +900,7 @@ function kc_handle_inquiry_submission() {
 
     // Send email
     $to = array( 'kelvincameo73@gmail.com', get_option( 'admin_email' ) );
-    $subject = sprintf( '[Business Inquiry / Quote] %s - %s', ucfirst( $service ), $name );
+    $subject = sprintf( '[%s Inquiry / Quote] %s (%s)', $inquiry_ref, $name, ucfirst( $service ) );
     $headers = array(
         'Content-Type: text/html; charset=UTF-8',
         'From: Kelvin Cameo Portal <' . get_option( 'admin_email' ) . '>',
@@ -760,11 +914,12 @@ function kc_handle_inquiry_submission() {
     $msg .= '<div style="max-width:600px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e2e8f0;">';
     $msg .= '<div style="background:linear-gradient(135deg,#0b4ea2,#ea580c);padding:24px;text-align:center;color:#fff;">';
     $msg .= '<h2 style="margin:0;">KELVIN CAMEO ORGANIZATION</h2>';
-    $msg .= '<p style="margin:4px 0 0;font-size:13px;opacity:0.9;">New Business Inquiry / Quote Request • RC: 1613032</p>';
+    $msg .= '<p style="margin:4px 0 0;font-size:13px;opacity:0.9;">New Business Inquiry / Quote Request • ' . esc_html($inquiry_ref) . '</p>';
     $msg .= '</div>';
     $msg .= '<div style="padding:28px;">';
     $msg .= '<table style="width:100%;border-collapse:collapse;font-size:14px;">';
-    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;width:35%;"><strong>Sector / Service:</strong></td><td style="padding:10px 0;font-weight:700;color:#0b4ea2;">' . esc_html( ucfirst( $service ) ) . '</td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;width:35%;"><strong>Inquiry Ref:</strong></td><td style="padding:10px 0;font-weight:700;font-family:monospace;color:#0b4ea2;">' . esc_html( $inquiry_ref ) . '</td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Sector / Service:</strong></td><td style="padding:10px 0;font-weight:700;color:#0b4ea2;">' . esc_html( ucfirst( $service ) ) . '</td></tr>';
     $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Contact Name:</strong></td><td style="padding:10px 0;font-weight:700;">' . esc_html( $name ) . '</td></tr>';
     $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Phone Line:</strong></td><td style="padding:10px 0;"><a href="tel:' . esc_attr( $phone ) . '">' . esc_html( $phone ) . '</a></td></tr>';
     $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Email:</strong></td><td style="padding:10px 0;"><a href="mailto:' . esc_attr( $email ) . '">' . esc_html( $email ) . '</a></td></tr>';
@@ -784,16 +939,226 @@ function kc_handle_inquiry_submission() {
         error_log( '[Kelvin Cameo Inquiry] Mail note: ' . $e->getMessage() );
     }
 
-    wp_send_json_success( array( 'message' => 'Thank you! Your request has been dispatched to our executive desk.' ) );
+    // Generate Manager WhatsApp Ping URL for Inquiries
+    $manager_phone = get_option('kc_hotel_manager_phone', '+2348055558197');
+    $clean_mgr_phone = preg_replace('/[^0-9]/', '', $manager_phone);
+    if (substr($clean_mgr_phone, 0, 1) === '0') {
+        $clean_mgr_phone = '234' . substr($clean_mgr_phone, 1);
+    }
+    if (empty($clean_mgr_phone)) {
+        $clean_mgr_phone = '2348055558197';
+    }
+
+    $inquiry_ping_text = "🏛️ *KELVIN CAMEO RESORT — BANQUET / INQUIRY REQUEST*\n"
+        . "────────────────────────\n"
+        . "📌 *Ref:* {$inquiry_ref}\n"
+        . "📦 *Service/Tier:* {$service}\n"
+        . "👤 *Organizer:* {$name}\n"
+        . "📞 *Phone:* {$phone}\n"
+        . "✉️ *Email:* {$email}\n"
+        . "🗓️ *Target Date / Attendance:* {$timeline}\n"
+        . ($notes ? "📝 *Notes:* {$notes}\n" : "")
+        . "────────────────────────\n"
+        . "Please check hall calendar availability and follow up.";
+
+    $manager_whatsapp_url = 'https://wa.me/' . $clean_mgr_phone . '?text=' . rawurlencode($inquiry_ping_text);
+
+    // Server-side ping
+    kc_dispatch_server_whatsapp_ping('New Inquiry: ' . $service . ' - ' . $name, $inquiry_ping_text, [
+        'ref' => $inquiry_ref,
+        'name' => $name,
+        'phone' => $phone,
+        'service' => $service
+    ]);
+
+    wp_send_json_success( array(
+        'message'              => 'Thank you! Your request has been dispatched to our executive desk.',
+        'inquiry_ref'          => $inquiry_ref,
+        'manager_whatsapp_url' => $manager_whatsapp_url,
+    ) );
 }
 add_action( 'wp_ajax_kc_submit_inquiry', 'kc_handle_inquiry_submission' );
 add_action( 'wp_ajax_nopriv_kc_submit_inquiry', 'kc_handle_inquiry_submission' );
 
 /**
- * Automatically 301-redirect all 404 (Not Found) requests directly to the homepage.
+ * Handle Career & Job Application AJAX Submission
+ */
+function kc_handle_job_application_submission() {
+    $full_name  = sanitize_text_field( $_POST['full_name'] ?? '' );
+    $phone      = sanitize_text_field( $_POST['phone'] ?? '' );
+    $email      = sanitize_email( $_POST['email'] ?? '' );
+    $position   = sanitize_text_field( $_POST['position'] ?? 'General Application' );
+    $education  = sanitize_text_field( $_POST['education'] ?? 'Not Specified' );
+    $experience = sanitize_text_field( $_POST['experience'] ?? 'Not Specified' );
+    $branch     = sanitize_text_field( $_POST['branch'] ?? 'Any Branch' );
+    $location   = sanitize_text_field( $_POST['location'] ?? '' );
+    $cv_link    = esc_url_raw( $_POST['cv_link'] ?? '' );
+    $cover_note = sanitize_textarea_field( $_POST['cover_note'] ?? '' );
+
+    if ( empty( $full_name ) || empty( $phone ) ) {
+        wp_send_json_error( array( 'message' => 'Please provide your full name and phone/WhatsApp number.' ) );
+    }
+
+    $app_ref = 'KC-JOB-' . date('y') . '-' . strtoupper( wp_generate_password( 5, false, false ) );
+
+    // Store in circular buffer
+    $apps = get_option( 'kc_job_applications', array() );
+    if ( ! is_array( $apps ) ) {
+        $apps = array();
+    }
+    array_unshift( $apps, array(
+        'ref'        => $app_ref,
+        'name'       => $full_name,
+        'phone'      => $phone,
+        'email'      => $email,
+        'position'   => $position,
+        'education'  => $education,
+        'experience' => $experience,
+        'branch'     => $branch,
+        'location'   => $location,
+        'cv_link'    => $cv_link,
+        'cover_note' => $cover_note,
+        'created_at' => current_time( 'mysql' ),
+        'status'     => 'received'
+    ) );
+    if ( count( $apps ) > 100 ) {
+        $apps = array_slice( $apps, 0, 100 );
+    }
+    update_option( 'kc_job_applications', $apps, false );
+
+    // Send email alert to hotel management
+    $to = array( 'kelvincameo73@gmail.com', get_option( 'admin_email' ) );
+    $subject = sprintf( '💼 [JOB APPLICATION] %s - %s (%s)', $app_ref, $position, $full_name );
+    $headers = array(
+        'Content-Type: text/html; charset=UTF-8',
+        'From: Kelvin Cameo Recruitment <' . get_option( 'admin_email' ) . '>',
+        'Reply-To: ' . $full_name . ' <' . ($email ?: 'no-reply@kelvincameo.com') . '>',
+    );
+
+    $clean_phone = preg_replace( '/[^0-9]/', '', $phone );
+    $wa_applicant_url = ( substr( $clean_phone, 0, 1 ) === '0' ) ? 'https://wa.me/234' . substr( $clean_phone, 1 ) : 'https://wa.me/' . $clean_phone;
+
+    $msg  = '<!DOCTYPE html><html><body style="font-family:Arial,sans-serif;background:#f8fafc;padding:24px;color:#1e293b;">';
+    $msg .= '<div style="max-width:620px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 4px 12px rgba(0,0,0,0.06);">';
+    $msg .= '<div style="background:#060e1e;border-bottom:3px solid #f25c05;padding:24px;text-align:center;color:#fff;">';
+    $msg .= '<h2 style="margin:0;color:#f25c05;font-size:20px;letter-spacing:1px;">KELVIN CAMEO RESORT & CONGLOMERATE</h2>';
+    $msg .= '<p style="margin:6px 0 0;font-size:13px;color:#94a3b8;">Talent Acquisition & HR Notification • Ref: ' . esc_html($app_ref) . '</p>';
+    $msg .= '</div>';
+    $msg .= '<div style="padding:28px;">';
+    $msg .= '<div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:12px 16px;margin-bottom:20px;">';
+    $msg .= '<strong style="color:#1e40af;font-size:15px;">New Job Application Received</strong>';
+    $msg .= '<div style="color:#1d4ed8;font-size:13px;margin-top:2px;">Role: <strong>' . esc_html($position) . '</strong> • Location: ' . esc_html($location ?: 'Not specified') . '</div>';
+    $msg .= '</div>';
+    $msg .= '<table style="width:100%;border-collapse:collapse;font-size:14px;">';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;width:35%;"><strong>Application Ref:</strong></td><td style="padding:10px 0;font-weight:700;font-family:monospace;color:#0b4ea2;">' . esc_html( $app_ref ) . '</td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Applicant Name:</strong></td><td style="padding:10px 0;font-weight:700;">' . esc_html( $full_name ) . '</td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Target Position:</strong></td><td style="padding:10px 0;font-weight:700;color:#f25c05;">' . esc_html( $position ) . '</td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Phone / WhatsApp:</strong></td><td style="padding:10px 0;"><a href="tel:' . esc_attr( $phone ) . '">' . esc_html( $phone ) . '</a></td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Email:</strong></td><td style="padding:10px 0;">' . ( $email ? '<a href="mailto:' . esc_attr( $email ) . '">' . esc_html( $email ) . '</a>' : '<span style="color:#94a3b8;">None provided</span>' ) . '</td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Qualification:</strong></td><td style="padding:10px 0;">' . esc_html( $education ) . '</td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Experience:</strong></td><td style="padding:10px 0;">' . esc_html( $experience ) . '</td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Branch Preference:</strong></td><td style="padding:10px 0;">' . esc_html( $branch ) . '</td></tr>';
+    $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>Residential Area:</strong></td><td style="padding:10px 0;">' . esc_html( $location ?: 'Not specified' ) . '</td></tr>';
+    if ( ! empty( $cv_link ) ) {
+        $msg .= '<tr style="border-bottom:1px solid #f1f5f9;"><td style="padding:10px 0;color:#64748b;"><strong>CV / Portfolio Link:</strong></td><td style="padding:10px 0;"><a href="' . esc_url( $cv_link ) . '" target="_blank" style="color:#0b4ea2;font-weight:700;text-decoration:underline;">View Submitted Resume / Document ↗</a></td></tr>';
+    }
+    if ( ! empty( $cover_note ) ) {
+        $msg .= '<tr><td style="padding:10px 0;color:#64748b;vertical-align:top;"><strong>Statement / Pitch:</strong></td><td style="padding:10px 0;">' . nl2br( esc_html( $cover_note ) ) . '</td></tr>';
+    }
+    $msg .= '</table>';
+    $msg .= '<div style="text-align:center;margin-top:24px;">';
+    $msg .= '<a href="' . esc_url( $wa_applicant_url ) . '" style="background:#25D366;color:#fff;font-weight:700;padding:12px 24px;border-radius:6px;text-decoration:none;display:inline-block;margin-right:10px;">Chat Candidate on WhatsApp</a>';
+    $msg .= '<a href="tel:' . esc_attr( $phone ) . '" style="background:#060e1e;color:#fff;font-weight:700;padding:12px 24px;border-radius:6px;text-decoration:none;display:inline-block;">Call Candidate</a>';
+    $msg .= '</div>';
+    $msg .= '</div>';
+    $msg .= '<div style="background:#f8fafc;padding:12px 24px;text-align:center;font-size:11px;color:#94a3b8;border-top:1px solid #e2e8f0;">';
+    $msg .= 'Kelvin Cameo Organization • Suleja, Niger State • RC: 1613032';
+    $msg .= '</div>';
+    $msg .= '</div></body></html>';
+
+    try {
+        @wp_mail( $to, $subject, $msg, $headers );
+    } catch ( \Throwable $e ) {
+        error_log( '[Kelvin Cameo Job App] Mail note: ' . $e->getMessage() );
+    }
+
+    // Candidate Confirmation Email
+    if ( $email ) {
+        $cand_subject = "Application Received: " . $position . " at Kelvin Cameo Resort (" . $app_ref . ")";
+        $cand_msg  = '<div style="font-family:Arial,sans-serif;max-width:580px;margin:0 auto;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">';
+        $cand_msg .= '<div style="background:#060e1e;padding:20px 24px;color:#fff;border-bottom:2px solid #f25c05;">';
+        $cand_msg .= '<h3 style="margin:0;color:#f25c05;">Kelvin Cameo Resort & Suite</h3>';
+        $cand_msg .= '<p style="margin:4px 0 0;font-size:12px;color:#94a3b8;">Human Resources & Talent Desk • Suleja, Niger State</p>';
+        $cand_msg .= '</div>';
+        $cand_msg .= '<div style="padding:24px;color:#1e293b;line-height:1.6;">';
+        $cand_msg .= '<p>Dear <strong>' . esc_html($full_name) . '</strong>,</p>';
+        $cand_msg .= '<p>Thank you for applying for the position of <strong>' . esc_html($position) . '</strong> at Kelvin Cameo Resort Hotel. Your application reference is <strong style="color:#0b4ea2;">' . esc_html($app_ref) . '</strong>.</p>';
+        $cand_msg .= '<p>Our human resources and front office management team will review your qualifications. If shortlisted, you will be invited for an interview at our executive complex in Kwamba, Suleja.</p>';
+        $cand_msg .= '<p style="margin-top:20px;font-size:13px;color:#64748b;">Best regards,<br><strong>HR & Talent Desk</strong><br>Kelvin Cameo Organization (RC: 1613032)</p>';
+        $cand_msg .= '</div></div>';
+        try {
+            @wp_mail( $email, $cand_subject, $cand_msg, $headers );
+        } catch ( \Throwable $e ) {}
+    }
+
+    // Manager WhatsApp Ping
+    $manager_phone = get_option('kc_hotel_manager_phone', '+2348055558197');
+    $clean_mgr_phone = preg_replace('/[^0-9]/', '', $manager_phone);
+    if (substr($clean_mgr_phone, 0, 1) === '0') {
+        $clean_mgr_phone = '234' . substr($clean_mgr_phone, 1);
+    }
+    if (empty($clean_mgr_phone)) {
+        $clean_mgr_phone = '2348055558197';
+    }
+
+    $job_ping_text = "💼 *KELVIN CAMEO — NEW JOB APPLICATION*\n"
+        . "────────────────────────\n"
+        . "📌 *Ref:* {$app_ref}\n"
+        . "👤 *Applicant:* {$full_name}\n"
+        . "💼 *Position:* {$position}\n"
+        . "📞 *Phone:* {$phone}\n"
+        . ($email ? "✉️ *Email:* {$email}\n" : "")
+        . "🎓 *Qualification:* {$education}\n"
+        . "⏳ *Experience:* {$experience}\n"
+        . "📍 *Location:* {$location}\n"
+        . ($cv_link ? "📎 *CV Link:* {$cv_link}\n" : "")
+        . "────────────────────────\n"
+        . "Applicant has submitted their details for recruitment consideration.";
+
+    $hr_whatsapp_url = 'https://wa.me/' . $clean_mgr_phone . '?text=' . rawurlencode($job_ping_text);
+
+    // Trigger server-side webhook/CallMeBot ping
+    kc_dispatch_server_whatsapp_ping('Job Application: ' . $position . ' - ' . $full_name, $job_ping_text, [
+        'ref'        => $app_ref,
+        'name'       => $full_name,
+        'phone'      => $phone,
+        'position'   => $position,
+        'experience' => $experience,
+    ]);
+
+    wp_send_json_success( array(
+        'message'         => 'Application submitted successfully! Our HR desk has received your information.',
+        'app_ref'         => $app_ref,
+        'hr_whatsapp_url' => $hr_whatsapp_url,
+    ) );
+}
+add_action( 'wp_ajax_kc_submit_job_application', 'kc_handle_job_application_submission' );
+add_action( 'wp_ajax_nopriv_kc_submit_job_application', 'kc_handle_job_application_submission' );
+
+/**
+ * Automatically 301-redirect all 404 (Not Found) requests directly to the homepage,
+ * while ensuring valid post or page slugs resolve seamlessly.
  */
 function kc_redirect_404_to_homepage() {
     if ( is_404() ) {
+        $path = trim( parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), '/' );
+        if ( ! empty( $path ) ) {
+            $matched_post = get_page_by_path( $path, OBJECT, array( 'post', 'page' ) );
+            if ( $matched_post && $matched_post->post_status === 'publish' ) {
+                wp_safe_redirect( get_permalink( $matched_post->ID ), 301 );
+                exit;
+            }
+        }
         wp_safe_redirect( home_url( '/' ), 301 );
         exit;
     }
@@ -806,3 +1171,19 @@ add_action( 'template_redirect', 'kc_redirect_404_to_homepage' );
 if ( file_exists( get_stylesheet_directory() . '/inc/hotel-management.php' ) ) {
     require_once get_stylesheet_directory() . '/inc/hotel-management.php';
 }
+
+/**
+ * Kelvin Cameo High-Ranking SEO Posts Seeder Engine
+ */
+if ( file_exists( get_stylesheet_directory() . '/inc/seo-posts-seeder.php' ) ) {
+    require_once get_stylesheet_directory() . '/inc/seo-posts-seeder.php';
+}
+
+/**
+ * Kelvin Cameo Post Plugin & Editorial Showcase Engine
+ */
+if ( file_exists( get_stylesheet_directory() . '/inc/post-plugin-engine.php' ) ) {
+    require_once get_stylesheet_directory() . '/inc/post-plugin-engine.php';
+}
+
+
