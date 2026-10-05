@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Seed high-ranking SEO blog posts into WordPress database.
  */
 function kc_seed_seo_articles() {
-    $seeder_version = '3.0';
+    $seeder_version = '4.0';
     $installed_ver  = get_option( 'kc_seo_posts_version', '0' );
 
     // Only run if version bumped or forced via query param
@@ -1120,6 +1120,409 @@ function kc_get_seo_articles_content() {
   <div class="faq-item">
     <h4 class="faq-question"><span class="faq-q-badge">Q:</span> Is room service available for hotel guests?</h4>
     <p class="faq-answer">Yes! 24-hour room service is available for all hotel rooms and suites. Simply dial reception from your in-room phone or message via WhatsApp.</p>
+  </div>
+</div>',
+        ),
+
+        // ====================================================================
+        // ARTICLE 12: THE COMPLETE GUIDE TO HOSTING EVENTS AT KELVIN CAMEO GRAND BANQUET HALL: PACKAGES, CAPACITIES & PLANNING TIPS
+        // ====================================================================
+        array(
+            'slug'     => 'complete-guide-hosting-events-kelvin-cameo-grand-banquet-hall',
+            'title'    => 'The Complete Guide to Hosting Events at Kelvin Cameo Grand Banquet Hall: Packages, Capacities & Planning Tips',
+            'category' => 'Events & Banquets',
+            'tags'     => array( 'Banquet Hall Suleja', 'Event Planning Abuja Corridor', '1000 Capacity Hall', 'Wedding Venue Niger State', 'Kelvin Cameo Events' ),
+            'excerpt'  => 'Planning a wedding, corporate summit, or anniversary in Suleja or Abuja corridor? Discover how Kelvin Cameo Grand Banquet Hall handles 1,000+ guests with 4 official packages from ₦250k, 24/7 Caterpillar AC, and 200+ car parking.',
+            'content'  => '<div class="takeaways-box">
+  <div class="takeaways-header">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    Key Highlights for Event Organizers
+  </div>
+  <ul class="takeaways-list">
+    <li><strong>Grand Capacity:</strong> 1,000 guests in banquet round-table layout or up to 1,500 guests in theater/conference setup.</li>
+    <li><strong>4 Confirmed Package Tiers:</strong> ₦250,000 Mini Hall (up to 150 guests); ₦850,000 À La Carte / Space Only; ₦1,050,000 Celebrations Full Package; ₦1,200,000 Package with Complimentary Bridal Apartment.</li>
+    <li><strong>Continuous Industrial Cooling:</strong> High-tonnage floor-standing package ACs driven continuously by dual Caterpillar diesel generators (zero mid-event blackouts).</li>
+    <li><strong>Logistics &amp; Parking:</strong> Paved, secured parking for 200+ vehicles with on-duty traffic marshals and CCTV surveillance.</li>
+    <li><strong>Strategic Location:</strong> Opposite Suleiman Barau Technical College, Kwamba, Suleja — smooth 35-minute highway drive from Abuja CBD.</li>
+  </ul>
+</div>
+
+<p>Organizing a high-profile event — whether a high-society wedding reception, a milestone 50th birthday, a corporate annual general meeting (AGM), or a national religious summit — demands a venue that combines grandeur with operational reliability. Planners along the Abuja-Niger State corridor often struggle with venues that suffer from power failures, insufficient air conditioning, or parking congestion.</p>
+
+<figure class="article-inline-figure">
+  <img src="$template_uri/assets/photos/resort/banquet-hall.jpg" alt="Kelvin Cameo Grand Banquet Hall Interior" class="article-inline-img" loading="lazy">
+  <figcaption class="article-inline-caption">
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    Kelvin Cameo Grand Banquet Hall — 1,000-seat capacity with crystal chandeliers and multi-zone industrial cooling.
+  </figcaption>
+</figure>
+
+<p>The <strong>Kelvin Cameo Grand Banquet Hall</strong> in Kwamba, Suleja was purposefully engineered to eliminate these bottlenecks, providing a world-class events arena that sets the standard across Niger State and the Federal Capital Territory borders.</p>
+
+<h2>Understanding the 4 Official Banquet Hall Packages</h2>
+<p>To ensure transparent budgeting without unexpected hidden fees, Kelvin Cameo Resort offers four official packages tailored to different event scales:</p>
+
+<div class="article-table-wrap">
+  <table class="article-table">
+    <thead>
+      <tr>
+        <th>Package Tier</th>
+        <th>Tariff</th>
+        <th>Capacity</th>
+        <th>Inclusions &amp; Amenities</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Mini Hall Package</strong></td>
+        <td>₦250,000</td>
+        <td>Up to 150 Guests</td>
+        <td>Dedicated intimate hall, central air conditioning, standard banquet seating, backup Caterpillar power, and dedicated parking. Ideal for bridal showers, birthdays, seminars, and family meetings.</td>
+      </tr>
+      <tr>
+        <td><strong>À La Carte / Space Only</strong></td>
+        <td>₦850,000</td>
+        <td>1,000 Guests</td>
+        <td>Full Grand Hall auditorium access, uninterrupted industrial AC, Caterpillar generator power, elevated stage, and perimeter security. Perfect for clients bringing custom modular decor and specialty Chiavari chairs.</td>
+      </tr>
+      <tr>
+        <td><strong>Celebrations Full Package</strong></td>
+        <td>₦1,050,000</td>
+        <td>1,000 Guests</td>
+        <td>Full Grand Hall, cushioned banquet chairs, clothed round tables, elevated VIP stage, private bridal holding suite with vanity mirrors, groom greenroom, full AC, cleaning crew, and parking marshals.</td>
+      </tr>
+      <tr>
+        <td><strong>Grand Package with Apartment</strong></td>
+        <td>₦1,200,000</td>
+        <td>1,000 Guests</td>
+        <td><strong>Everything in Celebrations Full Package PLUS a complimentary luxury apartment</strong> for the couple or event host on the night of the event. Complete bridal comfort without midnight travel stress.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="article-gallery-grid-2">
+  <figure class="article-inline-figure">
+    <img src="$template_uri/assets/photos/resort/apartment-lounge.jpg" alt="Complimentary Bridal Apartment Lounge" class="article-inline-img" loading="lazy">
+    <figcaption class="article-inline-caption">Complimentary luxury apartment lounge included in the ₦1.2M package tier.</figcaption>
+  </figure>
+  <figure class="article-inline-figure">
+    <img src="$template_uri/assets/photos/resort/evening.jpg" alt="Evening Atmosphere and Secure Parking at Kelvin Cameo Resort" class="article-inline-img" loading="lazy">
+    <figcaption class="article-inline-caption">Paved parking for 200+ guest cars with 24/7 security and illumination.</figcaption>
+  </figure>
+</div>
+
+<h2>Key Tips for a Stress-Free Event</h2>
+<ol>
+  <li><strong>Book 6 to 12 Weeks in Advance:</strong> Due to heavy weekend wedding demand across the Abuja corridor, popular Saturday dates fill up rapidly. Use our online date checker to hold your date early.</li>
+  <li><strong>Coordinate Decorator Setup Times:</strong> Kelvin Cameo facility managers provide early access for decorators and stage lighting crews to ensure sound checks and table arrangements are complete well before guests arrive.</li>
+  <li><strong>Lodge Out-of-Town Guests on Site:</strong> Avoid coordinating multiple hotel bookings across town. Kelvin Cameo Resort offers boutique rooms starting from ₦25,000 in The Annex, allowing bridal parties and VIP delegates to stay within the same secured perimeter.</li>
+  <li><strong>Dedicated Catering Bay:</strong> Have your food and beverage vendors utilize the private rear staging kitchen equipped with running water and separate access gates to keep guest corridors spotless.</li>
+</ol>
+
+<div class="article-faq-section">
+  <h3 class="article-faq-title">Banquet Hall Planning FAQs</h3>
+  
+  <div class="faq-item">
+    <h4 class="faq-question"><span class="faq-q-badge">Q:</span> How do I verify if my target date is available?</h4>
+    <p class="faq-answer">Check availability instantly online at <a href="/hospitality/#banquet">kelvincameo.com/hospitality/#banquet</a> or chat directly with our banquets desk on WhatsApp at <a href="https://wa.me/2348055558197">+234 805 555 8197</a>.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4 class="faq-question"><span class="faq-q-badge">Q:</span> Does the hall fee include generator fuel?</h4>
+    <p class="faq-answer">Yes, 100%. All stated packages include full generator fueling and continuous Caterpillar power throughout the entire duration of your event. There are zero surprise fuel surcharges.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4 class="faq-question"><span class="faq-q-badge">Q:</span> Are there changing rooms for the bride and groom?</h4>
+    <p class="faq-answer">Yes! Both the ₦1,050,000 and ₦1,200,000 packages include private, air-conditioned executive holding suites with private vanity mirrors and ensuite restrooms.</p>
+  </div>
+</div>',
+        ),
+
+        // ====================================================================
+        // ARTICLE 13: POOLSIDE BLISS IN SULEJA: EVERYTHING TO KNOW ABOUT THE KELVIN CAMEO RESORT POOL, DAY PASSES & PERGOLA SUN LOUNGE
+        // ====================================================================
+        array(
+            'slug'     => 'suleja-resort-swimming-pool-day-pass-pergola-lounge-guide',
+            'title'    => 'Poolside Bliss in Suleja: Everything to Know About the Kelvin Cameo Resort Pool, Day Passes & Pergola Sun Lounge',
+            'category' => 'Travel & Lifestyle',
+            'tags'     => array( 'Swimming Pool Suleja', 'Pool Day Pass Near Abuja', 'Suleja Relaxation', 'Poolside Bar Suleja', 'Kelvin Cameo Pool' ),
+            'excerpt'  => 'Cool off at Kelvin Cameo Resort\'s crystal swimming pool featuring fountain jets, ivy pergola sun terrace, ₦3,000 day passes (free for hotel guests), poolside suya, and chilled cocktails just 35 mins from Abuja.',
+            'content'  => '<div class="takeaways-box">
+  <div class="takeaways-header">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    Pool Facility Highlights &amp; Rates
+  </div>
+  <ul class="takeaways-list">
+    <li><strong>Pristine Water Quality:</strong> Multi-stage sand filtration and daily chemical balancing ensuring crystal-clear, hygienic swimming.</li>
+    <li><strong>Decorative Fountain Jets:</strong> Bubbling aeration water fountains providing soothing ambiance and back massage hydrotherapy.</li>
+    <li><strong>Complimentary for Hotel Guests:</strong> All resident hotel guests enjoy 100% free, unlimited pool access during their stay.</li>
+    <li><strong>Affordable Visitor Day Pass:</strong> Non-resident visitors can swim all day for only <strong>₦3,000 per person</strong>.</li>
+    <li><strong>Poolside Bar &amp; Grill:</strong> Freshly grilled suya, peppered chicken, live catfish peppersoup, and chilled cocktails served to your sun lounger.</li>
+    <li><strong>Location:</strong> Opposite Suleiman Barau Technical College, Kwamba, Suleja (35 mins from Abuja CBD).</li>
+  </ul>
+</div>
+
+<p>When the afternoon heat peaks or you are looking for the perfect weekend aquatic escape with family and friends, nothing beats relaxing by the water. Across Suleja, Madalla, and Abuja\'s satellite towns, finding a sparkling, hygienic swimming pool that combines resort luxury with delicious poolside food and secure parking can be a challenge.</p>
+
+<figure class="article-inline-figure">
+  <img src="$template_uri/assets/photos/resort/swimming-pool.jpg" alt="Kelvin Cameo Resort Outdoor Crystal Swimming Pool" class="article-inline-img" loading="lazy">
+  <figcaption class="article-inline-caption">
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    The Outdoor Crystal Swimming Pool at Kelvin Cameo Resort — Complete with aeration fountains and sun deck.
+  </figcaption>
+</figure>
+
+<p>The <strong>Outdoor Swimming Pool &amp; Pergola Sun Lounge at Kelvin Cameo Resort Hotel</strong> has earned a reputation as Niger State\'s premier aquatic retreat. Framed by palm trees, lush green borders, and an ivy pergola sun terrace, it delivers the tranquil vibe of an exotic country club.</p>
+
+<h2>Water Safety, Depth Profile &amp; Hygiene Standards</h2>
+<p>Cleanliness and safety are paramount at Kelvin Cameo Resort. Our pool maintenance protocol includes:</p>
+<ul>
+  <li>Continuous multi-stage commercial filtration powered around the clock by our dual Caterpillar power grid.</li>
+  <li>Daily pH, chlorine, and water clarity testing by trained pool technicians.</li>
+  <li>Graduated water depth designed to accommodate both beginner leisure waders and confident lap swimmers safely.</li>
+  <li>Lifeguard supervision on duty during peak afternoon and weekend hours.</li>
+</ul>
+
+<div class="article-gallery-grid-2">
+  <figure class="article-inline-figure">
+    <img src="$template_uri/assets/photos/swimming-pool-pergola.jpg" alt="Ivy Pergola Shaded Sun Terrace" class="article-inline-img" loading="lazy">
+    <figcaption class="article-inline-caption">Ivy pergola sun terrace — Shaded comfort with direct pool views.</figcaption>
+  </figure>
+  <figure class="article-inline-figure">
+    <img src="$template_uri/assets/photos/swimming-pool-sunny.jpg" alt="Sun Loungers on the Sunny Pool Deck" class="article-inline-img" loading="lazy">
+    <figcaption class="article-inline-caption">Poolside sun deck — Ideal for sunbathing, reading, and weekend getaways.</figcaption>
+  </figure>
+</div>
+
+<h2>Poolside Barbecue, Suya &amp; Cocktail Service</h2>
+<p>Swimming naturally works up an appetite. Our dedicated poolside waitstaff deliver straight to your lounger:</p>
+<ul>
+  <li><strong>Charcoal-Grilled Suya &amp; Wings:</strong> Spicy Nigerian beef suya coated in authentic yaji spice, peppered chicken wings, and roasted plantains.</li>
+  <li><strong>Live Catfish Peppersoup:</strong> Harvested straight from Kelvin Cameo aquaculture ponds and served piping hot with indigenous herbs.</li>
+  <li><strong>Chilled Drinks &amp; Cocktails:</strong> Exotic mojitos, chapman mocktails, chilled sodas, and ice-cold beers straight from our vintage cellar bar.</li>
+</ul>
+
+<h2>Hosting Pool Parties &amp; Birthday Hangouts</h2>
+<p>Looking for a vibrant, photogenic venue for a birthday celebration, bridal shower, or weekend reunion? The pergola pool terrace can be booked for private group gatherings. Our events team coordinates customized barbecue platters, music, and dedicated service staff.</p>
+
+<div class="article-faq-section">
+  <h3 class="article-faq-title">Swimming Pool FAQs</h3>
+  
+  <div class="faq-item">
+    <h4 class="faq-question"><span class="faq-q-badge">Q:</span> What is the pool entry fee for non-guests?</h4>
+    <p class="faq-answer">Day passes are available for ₦3,000 per person. Hotel guests enjoy complimentary, unlimited pool access throughout their stay.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4 class="faq-question"><span class="faq-q-badge">Q:</span> What are the swimming pool opening hours?</h4>
+    <p class="faq-answer">The pool is open daily from 8:00 AM to 10:00 PM for both hotel residents and day pass visitors.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4 class="faq-question"><span class="faq-q-badge">Q:</span> How do I reserve poolside cabanas or book a party?</h4>
+    <p class="faq-answer">Message our concierge desk directly on WhatsApp at <a href="https://wa.me/2348055558197">+234 805 555 8197</a> for party packages and reservations.</p>
+  </div>
+</div>',
+        ),
+
+        // ====================================================================
+        // ARTICLE 14: NIGHTLIFE & DRINKS IN SULEJA: INSIDE CAMEO VINTAGE BAR, POOLSIDE LOUNGE & SNOOKER SPORTS ROOM
+        // ====================================================================
+        array(
+            'slug'     => 'nightlife-bars-and-lounges-in-suleja-cameo-vintage-bar',
+            'title'    => 'Nightlife & Drinks in Suleja: Inside Cameo Vintage Bar, Poolside Lounge & Snooker Sports Room',
+            'category' => 'Dining & Nightlife',
+            'tags'     => array( 'Bars in Suleja', 'Nightlife Suleja', 'Cameo Vintage Bar', 'Snooker Lounge Suleja', 'Chilled Drinks Abuja Corridor' ),
+            'excerpt'  => 'Looking for a secure, upscale bar in Suleja? Explore Cameo Vintage Bar, poolside cocktails, and the air-conditioned snooker sports lounge at Kelvin Cameo Resort — featuring live European football, suya, and single malts.',
+            'content'  => '<div class="takeaways-box">
+  <div class="takeaways-header">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    Bar &amp; Lounge Highlights
+  </div>
+  <ul class="takeaways-list">
+    <li><strong>Cameo Vintage Cellar Bar:</strong> Premium collection of champagnes, single-malt scotch, cognacs, craft cocktails, and ice-cold draught beers.</li>
+    <li><strong>Poolside Open-Air Lounge:</strong> Enjoy cool evening breezes under starlit skies with live barbecue suya and chilled drinks by the illuminated pool.</li>
+    <li><strong>Snooker &amp; Sports Room:</strong> Professional slate billiards table and giant flat-screen satellite TVs broadcasting live Premier League and Champions League football.</li>
+    <li><strong>Farm-to-Table Kitchen:</strong> Signature live catfish peppersoup, grilled chicken, and savory small chops available late into the night.</li>
+    <li><strong>Executive Security:</strong> 24-hour guarded entrance opposite Suleiman Barau Technical College in Kwamba, Suleja.</li>
+  </ul>
+</div>
+
+<p>Finding an upscale, tranquil, and genuinely secure lounge in Suleja to unwind after a long day of business — or to catch weekend European football with friends — can be frustrating. Ordinary roadside bars often suffer from loud noise, poor security, and lukewarm drinks due to erratic power.</p>
+
+<figure class="article-inline-figure">
+  <img src="$template_uri/assets/photos/resort/bar-counter.jpg" alt="Cameo Vintage Bar Counter and Drink Selection" class="article-inline-img" loading="lazy">
+  <figcaption class="article-inline-caption">
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    Cameo Vintage Cellar Bar — Stocked with premium spirits, champagnes, and ice-cold beers backed by 24/7 power.
+  </figcaption>
+</figure>
+
+<p><strong>Kelvin Cameo Resort Hotel &amp; Suites</strong> delivers an elevated nightlife and lounge experience. Built for discerning executives, visiting Abuja professionals, and locals who appreciate quality, our bar destinations combine sophisticated style with absolute peace of mind.</p>
+
+<h2>1. Cameo Vintage Cellar Bar</h2>
+<p>Located in the main hotel complex, the Vintage Cellar Bar offers a refined, air-conditioned sanctuary. Furnished with comfortable leather armchairs, warm mood lighting, and polished wood finishes, it is the ideal spot for private business conversations or relaxing over a dram of fine whiskey.</p>
+<ul>
+  <li><strong>Single Malts &amp; Blended Scotch:</strong> Glenfiddich, Macallan, Johnnie Walker Gold &amp; Black, Chivas Regal.</li>
+  <li><strong>Cognacs &amp; Brandies:</strong> Hennessy VSOP &amp; XO, Remy Martin, Martell.</li>
+  <li><strong>Champagnes &amp; Sparkling Wines:</strong> Moët &amp; Chandon, Veuve Clicquot, crisp Prosecco, and fine South African vintage wines.</li>
+  <li><strong>Craft Cocktails:</strong> Mojito, Long Island Iced Tea, Old Fashioned, and our signature <em>Cameo Sunset Breeze</em>.</li>
+</ul>
+
+<div class="article-gallery-grid-2">
+  <figure class="article-inline-figure">
+    <img src="$template_uri/assets/photos/resort/lounge-pool-table.jpg" alt="Professional Slate Snooker Table in Recreation Lounge" class="article-inline-img" loading="lazy">
+    <figcaption class="article-inline-caption">Recreation sports lounge with professional tournament slate pool table.</figcaption>
+  </figure>
+  <figure class="article-inline-figure">
+    <img src="$template_uri/assets/photos/resort/dining-2.jpg" alt="Cameo Indoor Lounge and Dining Seating" class="article-inline-img" loading="lazy">
+    <figcaption class="article-inline-caption">Comfortable lounge seating with full food and beverage table service.</figcaption>
+  </figure>
+</div>
+
+<h2>2. Poolside Open-Air Evening Lounge</h2>
+<p>For those who prefer open-air relaxation, our illuminated poolside terrace offers an unforgettable evening setting. Feel the refreshing cool breeze blowing from the nearby Suleja hills while sipping a cocktail under the stars. Live barbecue grills operate throughout the evening, producing spicy beef suya, charred chicken, and piping-hot catfish peppersoup.</p>
+
+<h2>3. Sports &amp; Snooker Recreation Lounge</h2>
+<p>Sports enthusiasts will feel right at home. Our recreation lounge features a full-size tournament slate snooker table alongside high-definition satellite screens showing live English Premier League, UEFA Champions League, and international boxing events. Challenge friends to a game of pool while enjoying ice-cold drinks served directly to your table.</p>
+
+<div class="article-faq-section">
+  <h3 class="article-faq-title">Bars &amp; Nightlife FAQs</h3>
+  
+  <div class="faq-item">
+    <h4 class="faq-question"><span class="faq-q-badge">Q:</span> Do I need to be a hotel guest to visit the bar and lounge?</h4>
+    <p class="faq-answer">No! Our Vintage Bar, poolside lounge, and sports room are open to both resident hotel guests and walk-in visitors.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4 class="faq-question"><span class="faq-q-badge">Q:</span> What are the bar opening hours?</h4>
+    <p class="faq-answer">The bar operates daily from 10:00 AM until late night (1:00 AM+), with late-night room service available for in-house hotel residents 24/7.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4 class="faq-question"><span class="faq-q-badge">Q:</span> Is the bar safe at night?</h4>
+    <p class="faq-answer">Exceptionally safe. The resort complex has 24/7 perimeter security, gated access, active CCTV monitoring, and dedicated secure parking for 200+ cars.</p>
+  </div>
+</div>',
+        ),
+
+        // ====================================================================
+        // ARTICLE 15: WHY ABUJA EVENT PLANNERS & COUPLES ARE CHOOSING SULEJA FOR LUXURY WEDDINGS & BANQUETS (SAVE UP TO 60%)
+        // ====================================================================
+        array(
+            'slug'     => 'why-abuja-event-planners-choose-suleja-banquet-halls',
+            'title'    => 'Why Abuja Event Planners & Couples Are Choosing Suleja for Luxury Weddings & Banquets (Save Up to 60%)',
+            'category' => 'Events & Banquets',
+            'tags'     => array( 'Affordable Wedding Halls Near Abuja', 'Suleja Event Venues', 'Abuja Wedding Budgeting', 'Banquet Hall Packages', 'Kelvin Cameo Celebrations' ),
+            'excerpt'  => 'Why pay ₦3M–₦5M for wedding halls in central Abuja? Learn why savvy event planners choose Kelvin Cameo Resort in Suleja for 1,000-guest luxury from ₦1.05M, 24/7 industrial cooling, on-site suites from ₦25k, and a smooth 35-min drive.',
+            'content'  => '<div class="takeaways-box">
+  <div class="takeaways-header">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    Abuja vs. Suleja Wedding Budget Comparison
+  </div>
+  <ul class="takeaways-list">
+    <li><strong>Up to 60% Budget Savings:</strong> Premier banquet halls in Abuja Central/Maitama charge ₦2.5M to ₦5M. Kelvin Cameo Resort offers full 1,000-guest luxury for <strong>₦1,050,000</strong>.</li>
+    <li><strong>Complimentary Bridal Apartment:</strong> Our ₦1,200,000 package includes an executive luxury apartment for the couple on their wedding night.</li>
+    <li><strong>Zero Traffic Stress:</strong> Just a smooth 35-minute drive along the dual-carriage expressway past Zuma Rock, avoiding city center Saturday gridlock.</li>
+    <li><strong>On-Site Guest Lodging:</strong> Bridal party and out-of-town guests can lodge right inside the resort complex with boutique rooms from ₦25,000/night.</li>
+    <li><strong>Guaranteed Caterpillar Power:</strong> Dual industrial diesel generators ensure heavy-duty air conditioners never shut down mid-reception.</li>
+  </ul>
+</div>
+
+<p>Wedding budgets in Abuja have skyrocketed. In prime districts like Maitama, Wuse 2, and the Central Business District, securing a 1,000-capacity event center often costs upwards of ₦3,000,000 to ₦5,000,000 for space alone — before accounting for mandatory generator diesel surcharges, caution deposits, and decorator fees.</p>
+
+<figure class="article-inline-figure">
+  <img src="$template_uri/assets/photos/resort/banquet-hall.jpg" alt="Kelvin Cameo 1000-Seat Grand Banquet Hall Wedding Setup" class="article-inline-img" loading="lazy">
+  <figcaption class="article-inline-caption">
+    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    Kelvin Cameo Grand Banquet Hall — 1,000-capacity seating with crystal chandeliers, elevated stage, and industrial air conditioning.
+  </figcaption>
+</figure>
+
+<p>As a result, smart couples and professional event planners across the Federal Capital Territory are adopting a strategic alternative: <strong>hosting their luxury receptions at Kelvin Cameo Resort in Kwamba, Suleja</strong>. Just 35 minutes down the expressway past Zuma Rock, couples save millions without compromising an inch on elegance, status, or guest comfort.</p>
+
+<h2>The Financial Breakdown: Abuja vs. Kelvin Cameo Resort</h2>
+<div class="article-table-wrap">
+  <table class="article-table">
+    <thead>
+      <tr>
+        <th>Event Feature</th>
+        <th>Typical Abuja Venue</th>
+        <th>Kelvin Cameo Resort (Suleja)</th>
+        <th>Your Savings</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1,000-Capacity Hall Rental</strong></td>
+        <td>₦3,000,000 &ndash; ₦4,500,000</td>
+        <td><strong>₦1,050,000</strong> (Celebrations Full Package)</td>
+        <td>Save ₦2M &ndash; ₦3.4M (65%+)</td>
+      </tr>
+      <tr>
+        <td><strong>Generator Diesel Surcharge</strong></td>
+        <td>₦250,000 &ndash; ₦400,000 extra</td>
+        <td><strong>₦0</strong> (Included in package)</td>
+        <td>Save 100% on fuel fees</td>
+      </tr>
+      <tr>
+        <td><strong>Bridal Night Luxury Suite</strong></td>
+        <td>₦120,000 &ndash; ₦250,000</td>
+        <td><strong>FREE</strong> in ₦1.2M Package Tier</td>
+        <td>Included Complimentary</td>
+      </tr>
+      <tr>
+        <td><strong>Guest Lodging (Per Room)</strong></td>
+        <td>₦60,000 &ndash; ₦120,000/night</td>
+        <td><strong>₦25,000 &ndash; ₦60,000/night</strong></td>
+        <td>Save over 50% per room</td>
+      </tr>
+      <tr>
+        <td><strong>Parking Capacity</strong></td>
+        <td>Often cramped street parking</td>
+        <td><strong>200+ Paved Car Parking on site</strong></td>
+        <td>Stress-free guest logistics</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="article-gallery-grid-2">
+  <figure class="article-inline-figure">
+    <img src="$template_uri/assets/photos/resort/apartment-lounge.jpg" alt="Complimentary Luxury Bridal Apartment Lounge" class="article-inline-img" loading="lazy">
+    <figcaption class="article-inline-caption">Complimentary luxury bridal apartment included in the ₦1.2M package.</figcaption>
+  </figure>
+  <figure class="article-inline-figure">
+    <img src="$template_uri/assets/photos/resort/evening.jpg" alt="Illuminated Evening Arrival Portico at Kelvin Cameo Resort" class="article-inline-img" loading="lazy">
+    <figcaption class="article-inline-caption">Grand arrival portico and secure parking for 200+ vehicles under evening lights.</figcaption>
+  </figure>
+</div>
+
+<h2>What Couples Do With the ₦2.5 Million Saved</h2>
+<p>By saving between ₦2,000,000 and ₦3,500,000 on venue costs alone, couples reallocate their wedding budget toward what matters most:</p>
+<ul>
+  <li>Higher-tier photography, cinematic videography, and drone coverage.</li>
+  <li>Lavish floral installations and theatrical lighting.</li>
+  <li>Exquisite multi-course catering and top-shelf champagne for VIP tables.</li>
+  <li>A luxurious international honeymoon vacation to Dubai, Zanzibar, or Mauritius!</li>
+</ul>
+
+<h2>The Smooth 35-Minute Highway Journey</h2>
+<p>Many couples initially worry that guests won\'t want to travel outside the FCT. In reality, traveling from Gwarinpa, Kubwa, or Central Abuja to Kwamba, Suleja via the smooth dual-carriage expressway takes just <strong>30 to 35 minutes</strong> — often faster than navigating Saturday wedding traffic between Maitama, Garki, and Airport Road!</p>
+
+<div class="article-faq-section">
+  <h3 class="article-faq-title">Destination Wedding FAQs</h3>
+  
+  <div class="faq-item">
+    <h4 class="faq-question"><span class="faq-q-badge">Q:</span> Can our guests stay at the hotel on the wedding night?</h4>
+    <p class="faq-answer">Yes! Kelvin Cameo Resort has comfortable rooms starting from ₦25,000 (Deluxe), ₦45,000 (Love Night / Golden Nest), and ₦60,000 (Executive). Many wedding parties reserve a block of rooms for the entire weekend.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4 class="faq-question"><span class="faq-q-badge">Q:</span> How do we schedule a physical tour of the hall?</h4>
+    <p class="faq-answer">Tours are open daily! Simply chat with our events desk on WhatsApp at <a href="https://wa.me/2348055558197">+234 805 555 8197</a> to arrange an in-person walkthrough.</p>
   </div>
 </div>',
         ),

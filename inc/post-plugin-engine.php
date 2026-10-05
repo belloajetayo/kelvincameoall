@@ -65,6 +65,10 @@ function kc_get_post_display_image( $post_id, $slug = '' ) {
         'corporate'        => '/assets/photos/executive-room.jpg',
         'weekend-getaway'  => '/assets/photos/swimming-pool-pergola.jpg',
         'honest-fuel'      => '/assets/photos/fuel-attendants-dispensing.jpg',
+        'complete-guide'   => '/assets/photos/resort/banquet-hall.jpg',
+        'poolside-bliss'   => '/assets/photos/resort/swimming-pool.jpg',
+        'nightlife'        => '/assets/photos/resort/bar-counter.jpg',
+        'why-abuja'        => '/assets/photos/resort/apartment-lounge.jpg',
     );
 
     foreach ( $image_map as $key => $path ) {
@@ -129,6 +133,16 @@ function kc_get_post_topic_meta( $slug, $title = '' ) {
             'chip'    => 'Farm-to-Table Grill',
             'cta_url' => kc_url( 'hospitality' ) . '#dining',
             'cta_txt' => 'View Menu',
+        );
+    }
+
+    if ( strpos( $text, 'bar' ) !== false || strpos( $text, 'nightlife' ) !== false || strpos( $text, 'drinks' ) !== false || strpos( $text, 'snooker' ) !== false ) {
+        return array(
+            'topic'   => 'dining leisure',
+            'badge'   => '🍸 Vintage Bar &amp; Lounge',
+            'chip'    => 'Cold Drinks &amp; Sports',
+            'cta_url' => kc_url( 'hospitality' ) . '#dining',
+            'cta_txt' => 'Explore Bar',
         );
     }
 
