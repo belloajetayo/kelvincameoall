@@ -69,6 +69,12 @@ function kc_get_post_display_image( $post_id, $slug = '' ) {
         'poolside-bliss'   => '/assets/photos/resort/swimming-pool.jpg',
         'nightlife'        => '/assets/photos/resort/bar-counter.jpg',
         'why-abuja'        => '/assets/photos/resort/apartment-lounge.jpg',
+        'maize-processing' => '/assets/photos/agriculture/maize-milling-processing.jpg',
+        'maize'            => '/assets/photos/agriculture/maize-planting-field.jpg',
+        'grain'            => '/assets/photos/agriculture/maize-packaging-bags.jpg',
+        'packaging'        => '/assets/photos/agriculture/maize-packaging-bags.jpg',
+        'agro'             => '/assets/photos/agriculture/maize-harvest-cobs.jpg',
+        'farming'          => '/assets/photos/agriculture/maize-planting-field.jpg',
     );
 
     foreach ( $image_map as $key => $path ) {
@@ -85,6 +91,16 @@ function kc_get_post_display_image( $post_id, $slug = '' ) {
  */
 function kc_get_post_topic_meta( $slug, $title = '' ) {
     $text = strtolower( $slug . ' ' . $title );
+
+    if ( strpos( $text, 'maize' ) !== false || strpos( $text, 'grain' ) !== false || strpos( $text, 'farming' ) !== false || strpos( $text, 'processing' ) !== false || strpos( $text, 'packaging' ) !== false || strpos( $text, 'agro' ) !== false ) {
+        return array(
+            'topic'   => 'agriculture',
+            'badge'   => '🌽 Maize &amp; Agro-Allied',
+            'chip'    => 'Plant, Process &amp; Package',
+            'cta_url' => kc_url( 'agriculture' ) . '#maize-processing',
+            'cta_txt' => 'View Processing',
+        );
+    }
 
     if ( strpos( $text, 'wedding' ) !== false || strpos( $text, 'banquet' ) !== false || strpos( $text, '1000-seat' ) !== false ) {
         return array(
@@ -205,6 +221,7 @@ function kc_render_post_plugin_showcase( $atts = array() ) {
         <?php if ( $args['show_filters'] === 'yes' ) : ?>
         <div class="kc-filter-pills" role="tablist">
           <button type="button" class="kc-filter-btn active" data-filter="all">All Stories <span class="kc-count"><?php echo esc_html( $posts_query->found_posts ); ?></span></button>
+          <button type="button" class="kc-filter-btn" data-filter="agriculture">🌽 Maize &amp; Agro</button>
           <button type="button" class="kc-filter-btn" data-filter="rooms">🛏️ Rooms &amp; Tariffs</button>
           <button type="button" class="kc-filter-btn" data-filter="banquet">🏛️ Banquet &amp; Weddings</button>
           <button type="button" class="kc-filter-btn" data-filter="leisure">🏊 Pool &amp; Leisure</button>

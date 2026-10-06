@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Seed high-ranking SEO blog posts into WordPress database.
  */
 function kc_seed_seo_articles() {
-    $seeder_version = '4.0';
+    $seeder_version = '5.0';
     $installed_ver  = get_option( 'kc_seo_posts_version', '0' );
 
     // Only run if version bumped or forced via query param
@@ -1523,6 +1523,290 @@ function kc_get_seo_articles_content() {
   <div class="faq-item">
     <h4 class="faq-question"><span class="faq-q-badge">Q:</span> How do we schedule a physical tour of the hall?</h4>
     <p class="faq-answer">Tours are open daily! Simply chat with our events desk on WhatsApp at <a href="https://wa.me/2348055558197">+234 805 555 8197</a> to arrange an in-person walkthrough.</p>
+  </div>
+</div>',
+        ),
+
+        // ====================================================================
+        // ARTICLE 16: WE PLANT, PROCESS & PACKAGE MAIZE: INSIDE KELVIN CAMEO'S INTEGRATED VALUE CHAIN
+        // ====================================================================
+        array(
+            'slug'     => 'we-plant-process-package-maize-nigeria-integrated-value-chain',
+            'title'    => 'We Plant, Process & Package Maize: Inside Kelvin Cameo’s Integrated Grain Value Chain in Nigeria',
+            'category' => 'Agriculture & Agro-Allied',
+            'tags'     => array( 'Maize Processing Nigeria', 'Commercial Maize Farming', 'Packaged Maize Bags', 'Grain Milling Suleja', 'Cameo Agriculture' ),
+            'excerpt'  => 'Discover how Kelvin Cameo Agriculture manages the full lifecycle of yellow and white maize in Nigeria — from mechanized arable planting and industrial cleaning to precision packaging in 25kg and 50kg bags.',
+            'content'  => '<div class="takeaways-box">
+  <div class="takeaways-header">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    Key Takeaways / Executive Summary
+  </div>
+  <ul class="takeaways-list">
+    <li><strong>End-to-End Control:</strong> Kelvin Cameo Agriculture controls 100% of the grain journey — planting on extensive arable plantations, industrial processing &amp; de-stoning, and automated bagging.</li>
+    <li><strong>Moisture &amp; Quality Guarantee:</strong> Aerated drying towers guarantee grain moisture levels below 12%, protecting harvests against mold, pests, and aflatoxins.</li>
+    <li><strong>Packaging Sizes:</strong> Commercial-grade 25kg, 50kg, and 100kg polypropylene sacks with tamper-evident stitch sealing, ready for off-take and nationwide distribution.</li>
+    <li><strong>Bulk Supply Capabilities:</strong> Capacity to supply food processors, feed millers, poultry conglomerates, breweries, and retail wholesale markets across Nigeria.</li>
+    <li><strong>Direct Procurement:</strong> Submit inquiries via <a href="/agriculture/#supply-rfp">kelvincameo.com/agriculture/</a> or direct WhatsApp order desk (<a href="https://wa.me/2348055558197">+234 805 555 8197</a>).</li>
+  </ul>
+</div>
+
+<p>Maize is the undisputed backbone of Nigeria\'s food ecosystem — feeding millions of households and supplying critical raw materials to commercial poultry farms, livestock feed compounders, flour millers, and breweries. However, the Nigerian grain sector has historically struggled with inconsistent quality, stones and chaff contamination, poor storage leading to post-harvest rot, and unreliable middle-men.</p>
+
+<p><strong>Kelvin Cameo Agriculture</strong> solves this problem by pioneering an integrated, closed-loop agro-industrial model: <strong>We Plant. We Process. We Package.</strong></p>
+
+<figure class="article-inline-figure">
+  <img src="$template_uri/assets/photos/agriculture/maize-planting-field.jpg" alt="Vast Mechanized Maize Planting Field - Kelvin Cameo Agriculture" class="article-inline-img" loading="lazy">
+  <figcaption class="article-inline-caption">Phase 01: Mechanized crop planting on fertile arable plantations with pivot irrigation for dual-season harvests.</figcaption>
+</figure>
+
+<h2>Phase 01: Planting with Precision Agro-Technology</h2>
+<p>Our crop division cultivates high-yield, drought-tolerant hybrid yellow and white maize across extensive arable farmlands. Key operational pillars include:</p>
+<ul>
+  <li><strong>Certified Hybrid Seed Stock:</strong> We utilize high-germination hybrid seeds selected for high cob density, rapid canopy closure, and natural resistance to stem-borers and fungal blights.</li>
+  <li><strong>Full Tractorization:</strong> Heavy-duty tractor fleets handle deep ploughing, harrowing, ridging, and mechanical precision seed drilling, ensuring optimal plant spacing.</li>
+  <li><strong>Dual-Season Irrigation:</strong> Rather than relying solely on rain-fed seasons, our fields leverage hybrid irrigation systems, allowing continuous planting and dry-season harvesting.</li>
+</ul>
+
+<figure class="article-inline-figure">
+  <img src="$template_uri/assets/photos/agriculture/maize-harvest-cobs.jpg" alt="Harvested Fresh Golden Yellow Maize Cobs" class="article-inline-img" loading="lazy">
+  <figcaption class="article-inline-caption">Golden, nutrient-dense maize cobs harvested at peak physiological maturity.</figcaption>
+</figure>
+
+<h2>Phase 02: Industrial Cleaning, De-Stoning &amp; Aerated Drying</h2>
+<p>Once harvested, maize cobs are immediately transported to our centralized processing and milling complex. In traditional markets, open-air sun drying on roadsides exposes grains to sand, animal droppings, and rain. At Kelvin Cameo, every grain goes through closed industrial processing:</p>
+<ol>
+  <li><strong>Automated Shelling:</strong> High-speed mechanical shellers separate kernels from the cob with zero kernel cracking.</li>
+  <li><strong>Multi-Deck Vibrating Sieves &amp; Aspirators:</strong> Remove dust, chaff, broken kernels, and light organic impurities.</li>
+  <li><strong>Industrial De-Stoners &amp; Magnetic Grates:</strong> Heavy gravity separators remove stones, pebbles, and metallic fragments, achieving a 99.2% grain cleanliness benchmark.</li>
+  <li><strong>Aerated Grain Drying Towers:</strong> Moisture content is monitored with digital moisture meters and lowered to under 12%, ensuring long shelf life without aflatoxin buildup.</li>
+</ol>
+
+<figure class="article-inline-figure">
+  <img src="$template_uri/assets/photos/agriculture/maize-milling-processing.jpg" alt="Industrial Agro-Processing and Silo Storage Complex" class="article-inline-img" loading="lazy">
+  <figcaption class="article-inline-caption">Phase 02: Industrial processing, de-stoning, milling machinery, and 10,000 MT aerated vertical silo reserves.</figcaption>
+</figure>
+
+<h2>Phase 03: Automated Bagging &amp; High-Durability Packaging</h2>
+<p>Clean, moisture-calibrated maize is transferred to our high-throughput bagging line. Unlike manual shoveling that causes weight discrepancies and bag tears, Kelvin Cameo employs automated packaging:</p>
+
+<div class="article-table-wrapper">
+  <table class="article-comparison-table">
+    <thead>
+      <tr>
+        <th>Specification</th>
+        <th>Standard Open-Market Maize</th>
+        <th>Kelvin Cameo Packaged Maize</th>
+        <th>Why It Matters</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Moisture Content</strong></td>
+        <td>14% &ndash; 18% (Vulnerable to mold)</td>
+        <td><strong>&lt; 12.0% Verified</strong></td>
+        <td>Prevents aflatoxins &amp; extends storage life to 12+ months</td>
+      </tr>
+      <tr>
+        <td><strong>Foreign Material / Stones</strong></td>
+        <td>High (Manual pick required)</td>
+        <td><strong>&lt; 0.8% (Machine De-stoned)</strong></td>
+        <td>Protects your feed grinders and food processing blades</td>
+      </tr>
+      <tr>
+        <td><strong>Packaging Type</strong></td>
+        <td>Reused, unbranded torn bags</td>
+        <td><strong>Heavy Polypropylene (25kg/50kg)</strong></td>
+        <td>No spillage, moisture-barrier, and tamper-evident stitch seam</td>
+      </tr>
+      <tr>
+        <td><strong>Supply Reliability</strong></td>
+        <td>Seasonal shortages &amp; price spikes</td>
+        <td><strong>10,000 MT Silo Buffer</strong></td>
+        <td>Year-round off-take price stability for corporate contracts</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<figure class="article-inline-figure">
+  <img src="$template_uri/assets/photos/agriculture/maize-packaging-bags.jpg" alt="Packaged Clean Maize Bags Ready for Interstate Off-Take" class="article-inline-img" loading="lazy">
+  <figcaption class="article-inline-caption">Phase 03: Machine-weighed and double-stitch sealed 25kg &amp; 50kg bags ready for warehouse dispatch and haulage.</figcaption>
+</figure>
+
+<h2>Who We Supply: Corporate Off-Take &amp; Wholesale Contracts</h2>
+<p>Kelvin Cameo Agriculture provides steady, contracted grain supply to various institutional buyers:</p>
+<ul>
+  <li><strong>Poultry &amp; Livestock Feed Compounders:</strong> High-protein yellow maize with guaranteed zero-mold metrics for optimal broiler and layer nutrition.</li>
+  <li><strong>Flour &amp; Semolina Processors:</strong> Clean white maize suitable for human-grade flour, starch extraction, and regional food packaging.</li>
+  <li><strong>Breweries &amp; Confectionery Manufacturers:</strong> Grits with low fat content and standardized grain hardness.</li>
+  <li><strong>Commodity Traders &amp; Relief Organizations:</strong> Large-scale packaged grain reserves ready for rapid nationwide deployment.</li>
+</ul>
+
+<div class="article-faq-section">
+  <h3 class="article-faq-title">Frequently Asked Questions About Our Maize Supply</h3>
+  
+  <div class="faq-item">
+    <h4 class="faq-question"><span class="faq-q-badge">Q:</span> What bag sizes do you offer for commercial buyers?</h4>
+    <p class="faq-answer">We supply standard 25kg, 50kg, and 100kg heavy-duty woven polypropylene sacks. Bulk deliveries in open hoppers or flatbed trailer loads are also available for mega processors.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4 class="faq-question"><span class="faq-q-badge">Q:</span> Can you provide nationwide logistics and delivery?</h4>
+    <p class="faq-answer">Yes. Kelvin Cameo leverages its internal fleet logistics and heavy-duty haulage network to deliver direct from our processing depot to client warehouses across North and South Nigeria.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4 class="faq-question"><span class="faq-q-badge">Q:</span> How do we place a wholesale off-take order?</h4>
+    <p class="faq-answer">Submit a formal procurement request on our website at <a href="/agriculture/#supply-rfp">kelvincameo.com/agriculture/</a> or connect instantly with our commodity desk on WhatsApp at <a href="https://wa.me/2348055558197">+234 805 555 8197</a>.</p>
+  </div>
+</div>',
+        ),
+
+        // ====================================================================
+        // ARTICLE 17: WHY GRAIN BUYERS & FEED MILLERS CHOOSE PACKAGED DE-STONED MAIZE
+        // ====================================================================
+        array(
+            'slug'     => 'why-feed-millers-choose-packaged-de-stoned-maize-nigeria',
+            'title'    => 'Why Feed Millers & Food Processors in Nigeria Choose Machine De-Stoned & Packaged Maize',
+            'category' => 'Agriculture & Agro-Allied',
+            'tags'     => array( 'Poultry Feed Milling', 'De-Stoned Maize', 'Maize Packaging Nigeria', 'Agro Processing Off-Take', 'Clean Grain Supply' ),
+            'excerpt'  => 'Discover why leading feed millers, poultry farmers, and food manufacturers avoid dirty raw grains and rely on Kelvin Cameo’s machine-cleaned, moisture-tested 25kg/50kg packaged maize.',
+            'content'  => '<div class="takeaways-box">
+  <div class="takeaways-header">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    Key Takeaways / Executive Summary
+  </div>
+  <ul class="takeaways-list">
+    <li><strong>Equipment Protection:</strong> Unprocessed open-market maize contains up to 3% stones and metal scraps that break expensive hammer mills and grinder screens.</li>
+    <li><strong>Aflatoxin Prevention:</strong> Kelvin Cameo’s moisture control (&lt; 12%) stops Aspergillus mold growth, preserving bird liver health and egg-laying yields.</li>
+    <li><strong>Weight Accuracy:</strong> Calibrated electronic weighing guarantees exact net weight per 50kg bag, eliminating supplier shortchanging.</li>
+    <li><strong>Supply Stability:</strong> Supported by 10,000 MT aerated vertical silos, buffering off-takers against harvest volatility and off-season price spikes.</li>
+  </ul>
+</div>
+
+<p>Every commercial feed miller and food manufacturer knows the hidden cost of "cheap" uncleaned maize. When a single stone enters an industrial hammer mill spinning at 3,000 RPM, it instantly tears screens, breaks hammers, shuts down factory production for hours, and generates expensive repair bills.</p>
+
+<p>Furthermore, damp maize with moisture above 14% creates deadly aflatoxins that cause mortality in broiler chicks and crash layer egg production rates. This is why forward-thinking agro-processors across Nigeria have shifted to <strong>pre-cleaned, machine de-stoned, and moisture-controlled packaged maize from Kelvin Cameo Agriculture</strong>.</p>
+
+<figure class="article-inline-figure">
+  <img src="$template_uri/assets/photos/agriculture/maize-milling-processing.jpg" alt="Industrial Grain Milling and Processing Line" class="article-inline-img" loading="lazy">
+  <figcaption class="article-inline-caption">High-capacity mechanical de-stoners and hammer mills at Kelvin Cameo Agro-Processing facility.</figcaption>
+</figure>
+
+<h2>The 4 Hidden Costs of Buying Unprocessed Market Maize</h2>
+
+<h3>1. Frequent Machinery Breakdown</h3>
+<p>Traditional aggregators harvest and shell maize on dirt floors. Pebbles and stones are accidentally shoveled into bags. Our mechanical aspirators and high-density gravity separators remove 99.2% of stones and debris before the grain is ever bagged, keeping your plant equipment running smoothly.</p>
+
+<h3>2. Severe Moisture &amp; Weight Loss in Storage</h3>
+<p>Uncalibrated maize often carries 15% to 18% moisture. When stored in your warehouse, the water evaporates, leading to phantom weight loss of 2kg to 4kg per bag within weeks! Kelvin Cameo dries all grain to below 12% moisture in temperature-regulated silos before packaging, ensuring every kilogram you purchase remains intact.</p>
+
+<h3>3. Aflatoxin Contamination in Poultry &amp; Livestock</h3>
+<p>High moisture and damaged kernels create ideal conditions for Aspergillus fungi. In commercial poultry, aflatoxin causes immunosuppression, poor feed conversion, and sudden drops in egg production. Our grain testing guarantees clean, food-safe kernels safe for poultry and human consumption alike.</p>
+
+<h3>4. Bag Discrepancies and Inaccurate Scaling</h3>
+<p>Many traditional traders hand-fill bags to "approximate" eye level. At Kelvin Cameo, digital load-cell scales fill every bag to exact net weight specifications (25.0 kg or 50.0 kg), certified with double-stitch security seams.</p>
+
+<figure class="article-inline-figure">
+  <img src="$template_uri/assets/photos/agriculture/maize-packaging-bags.jpg" alt="Uniform Stacked Packaged Maize Sacks in Warehouse" class="article-inline-img" loading="lazy">
+  <figcaption class="article-inline-caption">Uniformly stacked 50kg polypropylene bags ready for distribution across Abuja, Niger State, and nationwide depots.</figcaption>
+</figure>
+
+<h2>How Our Outgrower Network Complements Our Farmland</h2>
+<p>In addition to our 2,500+ arable hectares under direct mechanized cultivation, Kelvin Cameo partners with over 1,500 vetted outgrower farmers across local farming communities. We provide high-germination seed inputs, tractorization ploughing services, and agricultural extension training, creating a reliable, traceable grain supply that guarantees year-round off-take stability.</p>
+
+<div class="article-faq-section">
+  <h3 class="article-faq-title">Feed Miller FAQs</h3>
+  
+  <div class="faq-item">
+    <h4 class="faq-question"><span class="faq-q-badge">Q:</span> Do you offer both yellow and white maize?</h4>
+    <p class="faq-answer">Yes! We plant, process, and package both high-carotene yellow maize (ideal for poultry feed compounding) and pure white maize (preferred for flour milling and confectionery).</p>
+  </div>
+
+  <div class="faq-item">
+    <h4 class="faq-question"><span class="faq-q-badge">Q:</span> What is your minimum wholesale order quantity?</h4>
+    <p class="faq-answer">We accommodate wholesale trial orders starting from 5 Metric Tonnes (100 bags of 50kg), up to multi-trailer institutional monthly contracts of 100+ MT.</p>
+  </div>
+</div>',
+        ),
+
+        // ====================================================================
+        // ARTICLE 18: STEP-BY-STEP GUIDE: FROM PLANTING TO PACKAGING MAIZE IN NIGERIA
+        // ====================================================================
+        array(
+            'slug'     => 'step-by-step-guide-maize-planting-processing-packaging-nigeria',
+            'title'    => 'Step-by-Step Guide: How Kelvin Cameo Plants, Processes & Packages Maize for Food Security',
+            'category' => 'Agriculture & Agro-Allied',
+            'tags'     => array( 'Maize Cultivation Guide', 'Agro-Processing Technology', 'Grain Storage Silos', 'Post-Harvest Management', 'Nigerian Agriculture' ),
+            'excerpt'  => 'A complete walkthrough of industrial maize production in Nigeria: soil preparation, planting, harvesting, de-stoning, silo storage, and modern automated packaging at Kelvin Cameo.',
+            'content'  => '<div class="takeaways-box">
+  <div class="takeaways-header">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    Key Takeaways / Executive Summary
+  </div>
+  <ul class="takeaways-list">
+    <li><strong>Step 1 (Land Preparation):</strong> Laser-guided disc ploughing and subsoiling to break hardpan layers across fertile arable acreage.</li>
+    <li><strong>Step 2 (Precision Planting):</strong> Tractor-mounted seed drills calibrate exact seed spacing and micro-dose organic soil nutrition.</li>
+    <li><strong>Step 3 (Harvesting &amp; Threshing):</strong> Combine and mechanical shellers prevent kernel cracking and eliminate ground contamination.</li>
+    <li><strong>Step 4 (Cleaning &amp; De-Stoning):</strong> 3-stage aspirators, magnetic separators, and density de-stoners guarantee clean pure grain.</li>
+    <li><strong>Step 5 (Silo Conditioning):</strong> 10,000 MT vertical silos circulate ambient air to keep grain moisture below 12%.</li>
+    <li><strong>Step 6 (Packaging):</strong> Digital weighing into durable 25kg/50kg woven sacks with tamper-evident stitch sealing for commercial transit.</li>
+  </ul>
+</div>
+
+<p>Modern commercial agriculture is not just about farming land — it is an exacting industrial engineering process. At <strong>Kelvin Cameo Agriculture (RC: 1613032)</strong>, our end-to-end grain workflow eliminates the 30% to 40% post-harvest loss typical in West Africa\'s traditional agricultural sector. Here is how our mechanized farm-to-factory system operates step by step.</p>
+
+<figure class="article-inline-figure">
+  <img src="$template_uri/assets/photos/agriculture/maize-planting-field.jpg" alt="Modern Tractorization and Seed Drilling - Kelvin Cameo Farm" class="article-inline-img" loading="lazy">
+  <figcaption class="article-inline-caption">Precision seed drilling and soil nutrition across Kelvin Cameo commercial plantations.</figcaption>
+</figure>
+
+<h2>Step 1 &amp; 2: Mechanized Land Preparation &amp; Precision Planting</h2>
+<p>Healthy crops begin with soil aeration. Our tractors execute deep ploughing to break up compact soil layers, followed by harrowing to generate fine tilth. Tractor-drawn pneumatic seeders plant certified hybrid maize seeds at uniform depth and spacing, ensuring every seedling receives equal sunlight, moisture, and root growth space.</p>
+
+<h2>Step 3: Harvesting at Optimal Physiological Maturity</h2>
+<p>When the "black layer" forms at the tip of the maize kernel, physiological maturity is reached. Mechanized harvesting gathers full cobs cleanly without dragging them through mud or soil. High-speed shelling units cleanly strip the kernels while keeping the cob core intact for use as clean biofuel or livestock roughage.</p>
+
+<figure class="article-inline-figure">
+  <img src="$template_uri/assets/photos/agriculture/maize-harvest-cobs.jpg" alt="Golden Mature Maize Cobs - High Starch and Protein" class="article-inline-img" loading="lazy">
+  <figcaption class="article-inline-caption">Evenly developed cobs displaying uniform kernel sizing and vibrant yellow carotene coloration.</figcaption>
+</figure>
+
+<h2>Step 4: Mechanical De-Stoning &amp; Aspiration Cleaning</h2>
+<p>Raw grains pass through a multi-tier cleaning cascade:</p>
+<ul>
+  <li><strong>Rotary Scalpers:</strong> Remove large debris such as cob pieces, husk fibers, and leaves.</li>
+  <li><strong>Aspirator Fans:</strong> Pull out lightweight dust, chaff, and immature hollow grains using controlled air currents.</li>
+  <li><strong>Gravity De-Stoners:</strong> Fluidize the grain bed using vibration and airflow to separate heavy stones and gravel based on specific gravity.</li>
+</ul>
+
+<h2>Step 5: Aerated Silo Reserves (10,000 Metric Tonnes)</h2>
+<p>To guard against seasonal price fluctuations and ensure contract fulfillment throughout the dry months, Kelvin Cameo stores grain in state-of-the-art vertical steel silos. Equipped with aeration fans, temperature sensors, and fumigation recirculation, these silos preserve seed viability, moisture levels (&lt; 12%), and freshness for over a year without synthetic chemical residues.</p>
+
+<figure class="article-inline-figure">
+  <img src="$template_uri/assets/photos/agriculture/maize-milling-processing.jpg" alt="Automated Silo Reserves and Processing Facility" class="article-inline-img" loading="lazy">
+  <figcaption class="article-inline-caption">10,000 MT storage silos and temperature-regulated grain drying towers.</figcaption>
+</figure>
+
+<h2>Step 6: Automated Bagging &amp; Transport-Ready Packaging</h2>
+<p>The final phase packages our clean, de-stoned grain into heavy-duty woven polypropylene sacks. Bags are filled via digital load cells to 25.0kg, 50.0kg, or 100.0kg net weight. Industrial thread stitching seals each bag, guaranteeing tamper protection. Once stitched, bags are palletized and forklifted directly onto Kelvin Cameo haulage trailers for direct delivery to feed mills, bakeries, and retail warehouses nationwide.</p>
+
+<figure class="article-inline-figure">
+  <img src="$template_uri/assets/photos/agriculture/maize-packaging-bags.jpg" alt="Palletized Packaged Maize Bags Ready for Dispatch" class="article-inline-img" loading="lazy">
+  <figcaption class="article-inline-caption">Finished 50kg bags, machine-stitched and ready for nationwide logistics off-take.</figcaption>
+</figure>
+
+<div class="article-faq-section">
+  <h3 class="article-faq-title">Contact Our Agro-Procurement Desk</h3>
+  
+  <div class="faq-item">
+    <h4 class="faq-question"><span class="faq-q-badge">Q:</span> Where is your processing and pickup facility located?</h4>
+    <p class="faq-answer">Our agricultural offices and distribution hub are located at Kelvin Cameo Organization, along Maje-Minna Road, opposite Suleiman Barau Technical College, Kwamba, Suleja, Niger State (Abuja Corridor).</p>
+  </div>
+
+  <div class="faq-item">
+    <h4 class="faq-question"><span class="faq-q-badge">Q:</span> How fast can a commercial order be dispatched?</h4>
+    <p class="faq-answer">With dedicated silo reserves and automated packaging lines, confirmed wholesale orders of 10 to 50 Metric Tonnes can typically be loaded and dispatched within 24 to 48 hours.</p>
   </div>
 </div>',
         ),
