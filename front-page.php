@@ -183,18 +183,18 @@ get_header();
         <!-- Agriculture -->
         <a href="<?php echo kc_url('agriculture'); ?>" class="hp-division-card hp-card-agro">
           <div class="hp-division-img">
-            <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=80" alt="Kelvin Cameo Agriculture" loading="lazy">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/agriculture/maize-planting-field.jpg' ); ?>" alt="Kelvin Cameo Agriculture - Maize Planting, Processing and Packaging" loading="lazy">
           </div>
           <div class="hp-division-body">
             <span class="hp-division-tag">Division 03</span>
-            <h3 class="hp-division-name">Agriculture &amp; Silos</h3>
-            <p class="hp-division-desc">2,500+ hectares of mechanized grain farming, 50,000-bird poultry complexes, cattle ranches, and 10,000 MT grain silos.</p>
+            <h3 class="hp-division-name">Agriculture &amp; Agro-Processing</h3>
+            <p class="hp-division-desc">2,500+ hectares of mechanized maize plantations, industrial grain processing &amp; packaging, poultry complexes, and 10,000 MT silos.</p>
             <ul class="hp-division-highlights">
-              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 2,500+ Hectares Mechanized Maize &amp; Soya Farming</li>
-              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Automated 50,000-Layer Poultry Farm &amp; Feedlots</li>
-              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 10,000 MT Storage Silos &amp; Corporate Off-Take</li>
+              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> We Plant, Process &amp; Package Clean Maize (25kg/50kg)</li>
+              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 2,500+ Hectares Arable Dual-Cycle Irrigated Land</li>
+              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 10,000 MT Storage Silos &amp; Bulk Corporate Off-Take</li>
             </ul>
-            <span class="hp-division-link">Explore Farm Operations &rarr;</span>
+            <span class="hp-division-link">Explore Farm &amp; Processing Line &rarr;</span>
           </div>
         </a>
 
