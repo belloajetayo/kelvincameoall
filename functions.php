@@ -1186,4 +1186,41 @@ if ( file_exists( get_stylesheet_directory() . '/inc/post-plugin-engine.php' ) )
     require_once get_stylesheet_directory() . '/inc/post-plugin-engine.php';
 }
 
+/**
+ * Auto-seed required core pages (such as banquet-hall) to ensure valid 200 OK HTTP responses.
+ */
+function kc_ensure_core_pages_exist() {
+    $needed_pages = array(
+        'banquet-hall' => array(
+            'title'    => '1,000-Seat Grand Banquet Hall & Events Center',
+            'template' => 'page-banquet-hall.php',
+        ),
+    );
+
+    foreach ( $needed_pages as $slug => $data ) {
+        $page = get_page_by_path( $slug, OBJECT, 'page' );
+        if ( ! $page ) {
+            $page_id = wp_insert_post( array(
+                'post_title'     => $data['title'],
+                'post_name'      => $slug,
+                'post_status'    => 'publish',
+                'post_type'      => 'page',
+                'comment_status' => 'closed',
+                'ping_status'    => 'closed',
+            ) );
+            if ( $page_id && ! is_wp_error( $page_id ) ) {
+                update_post_meta( $page_id, '_wp_page_template', $data['template'] );
+                flush_rewrite_rules( false );
+            }
+        } else {
+            $current_template = get_post_meta( $page->ID, '_wp_page_template', true );
+            if ( $current_template !== $data['template'] ) {
+                update_post_meta( $page->ID, '_wp_page_template', $data['template'] );
+            }
+        }
+    }
+}
+add_action( 'init', 'kc_ensure_core_pages_exist', 30 );
+
+
 
