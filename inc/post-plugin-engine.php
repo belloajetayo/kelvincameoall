@@ -79,6 +79,13 @@ function kc_get_post_display_image( $post_id, $slug = '' ) {
         'automobile'       => '/assets/photos/automotive/dealership-showroom.jpg',
         'car-sales'        => '/assets/photos/automotive/cng-suv-lexus.jpg',
         'car-shop'         => '/assets/photos/automotive/cng-toyota-corolla.jpg',
+        'prado'            => '/assets/photos/automotive/toyota-prado-suv.jpg',
+        'highlander'       => '/assets/photos/automotive/toyota-highlander-suv.jpg',
+        'sienna'           => '/assets/photos/automotive/toyota-sienna-minivan.jpg',
+        'rav4'             => '/assets/photos/automotive/toyota-rav4-suv.jpg',
+        'benz'             => '/assets/photos/automotive/mercedes-benz-c300.jpg',
+        'c300'             => '/assets/photos/automotive/mercedes-benz-c300.jpg',
+        'elantra'          => '/assets/photos/automotive/hyundai-elantra-sedan.jpg',
     );
 
     foreach ( $image_map as $key => $path ) {
