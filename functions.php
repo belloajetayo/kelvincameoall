@@ -1195,6 +1195,10 @@ function kc_ensure_core_pages_exist() {
             'title'    => '1,000-Seat Grand Banquet Hall & Events Center',
             'template' => 'page-banquet-hall.php',
         ),
+        'automobiles'  => array(
+            'title'    => 'Automobiles, Car Sales & CNG Clean Mobility',
+            'template' => 'page-automobiles.php',
+        ),
     );
 
     foreach ( $needed_pages as $slug => $data ) {

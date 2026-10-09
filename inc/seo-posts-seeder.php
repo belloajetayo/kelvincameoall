@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Seed high-ranking SEO blog posts into WordPress database.
  */
 function kc_seed_seo_articles() {
-    $seeder_version = '5.0';
+    $seeder_version = '6.0';
     $installed_ver  = get_option( 'kc_seo_posts_version', '0' );
 
     // Only run if version bumped or forced via query param
@@ -1807,6 +1807,187 @@ function kc_get_seo_articles_content() {
   <div class="faq-item">
     <h4 class="faq-question"><span class="faq-q-badge">Q:</span> How fast can a commercial order be dispatched?</h4>
     <p class="faq-answer">With dedicated silo reserves and automated packaging lines, confirmed wholesale orders of 10 to 50 Metric Tonnes can typically be loaded and dispatched within 24 to 48 hours.</p>
+  </div>
+</div>',
+        ),
+
+        // ====================================================================
+        // ARTICLE 19: INSIDE KELVIN CAMEO CAR SHOP: CERTIFIED VEHICLES & CNG MOBILITY
+        // ====================================================================
+        array(
+            'slug'     => 'car-sales-and-cng-vehicles-shop-suleja-abuja-corridor',
+            'title'    => 'Car Sales & CNG Vehicles in Suleja (Abuja Corridor): Browse Inventory, Prices & Dual-Fuel Savings',
+            'category' => 'Automobiles & Clean Mobility',
+            'tags'     => array( 'Car Sales Suleja', 'CNG Cars Nigeria', 'Tokunbo Cars Abuja', 'Buy CNG Vehicle', 'Kelvin Cameo Automobiles' ),
+            'excerpt'  => 'Looking to buy a clean foreign-used car or switch to fuel-saving CNG bi-fuel in Nigeria? Explore Kelvin Cameo Automobiles: certified sedans, SUVs, commercial buses, and 70% cheaper fuel costs.',
+            'content'  => '<div class="takeaways-box">
+  <div class="takeaways-header">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    Key Takeaways / Executive Summary
+  </div>
+  <ul class="takeaways-list">
+    <li><strong>Dual-Fuel Convenience:</strong> Every CNG car from Kelvin Cameo retains its original petrol tank &mdash; switch seamlessly between Petrol and CNG with zero engine hesitation.</li>
+    <li><strong>Massive Savings:</strong> Natural gas costs approximately ₦230 &ndash; ₦250 per SCM compared to ₦1,000+ per litre of petrol, cutting monthly fueling costs by up to 70%.</li>
+    <li><strong>Full Inventory:</strong> Certified clean Tokunbo Toyota Corollas, Camrys, Lexus RX SUVs, Hilux 4x4 pickups, and HiAce commercial buses available on the lot.</li>
+    <li><strong>Verified Papers:</strong> 100% genuine customs clearance, genuine duty papers, and 150-point mechanical inspection before sale.</li>
+    <li><strong>Direct Contact:</strong> Physical showroom opposite Suleiman Barau Technical College, Kwamba, Suleja. Call or WhatsApp <a href="https://wa.me/2348055558197">+234 805 555 8197</a>.</li>
+  </ul>
+</div>
+
+<p>With petrol prices remaining volatile across Nigeria, owning a vehicle is no longer just about comfort &mdash; it is about fuel efficiency and running economics. For families, corporate executives, and commercial transport operators along the Suleja-Abuja expressway corridor, the demand for reliable cars with sustainable operating costs has never been greater.</p>
+
+<p><strong>Kelvin Cameo Automobiles &amp; CNG Hub</strong> bridges this gap by offering a curated showroom of premium foreign-used (Tokunbo) automobiles, alongside certified <strong>Compressed Natural Gas (CNG) bi-fuel vehicles</strong> engineered to slash transport costs by up to 70%.</p>
+
+<figure class="article-inline-figure">
+  <img src="$template_uri/assets/photos/automotive/dealership-showroom.jpg" alt="Kelvin Cameo Automobile Showroom and Car Lot" class="article-inline-img" loading="lazy">
+  <figcaption class="article-inline-caption">Inside Kelvin Cameo Automobiles: Verified foreign-used cars and certified CNG bi-fuel vehicles.</figcaption>
+</figure>
+
+<h2>Why Buy Your Next Car from Kelvin Cameo?</h2>
+<ol>
+  <li><strong>Complete Documentation &amp; Genuine Custom Duty:</strong> We strictly avoid auction scrap and doubtful paperwork. Every vehicle in our lot carries authentic, verifiable customs duty and ownership documentation.</li>
+  <li><strong>150-Point Pre-Purchase Diagnostics:</strong> From computer OBD-II scans and transmission stall tests to AC performance and brake rotor thickness, each car undergoes rigorous mechanical vetting before entering the showroom.</li>
+  <li><strong>Pre-Fitted or Custom CNG Conversion:</strong> Choose between conventional petrol cars or units already equipped with certified Italian sequential bi-fuel CNG kits.</li>
+  <li><strong>Trade-In / Car Swap Facility:</strong> Upgrade your current vehicle with a seamless trade-in valuation directly at our Suleja car lot.</li>
+</ol>
+
+<figure class="article-inline-figure">
+  <img src="$template_uri/assets/photos/automotive/cng-toyota-camry.jpg" alt="Toyota Camry Sport CNG Dual-Fuel at Kelvin Cameo" class="article-inline-img" loading="lazy">
+  <figcaption class="article-inline-caption">High-trim Toyota Camry with factory-integrated sequential CNG injection system.</figcaption>
+</figure>
+
+<h2>Current Car Shop Lineup &amp; Pricing</h2>
+
+<div class="article-table-wrapper">
+  <table class="article-comparison-table">
+    <thead>
+      <tr>
+        <th>Vehicle Model</th>
+        <th>Configuration</th>
+        <th>Starting Price</th>
+        <th>Fuel Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Toyota Corolla LE</strong></td>
+        <td>1.8L Automatic &bull; Clean Tokunbo</td>
+        <td><strong>₦12,800,000</strong></td>
+        <td>Petrol + CNG Bi-Fuel</td>
+      </tr>
+      <tr>
+        <td><strong>Honda Accord EX-L</strong></td>
+        <td>2.4L Earth Dreams &bull; Leather &bull; Sunroof</td>
+        <td><strong>₦16,500,000</strong></td>
+        <td>Petrol + CNG Bi-Fuel</td>
+      </tr>
+      <tr>
+        <td><strong>Toyota Camry Sport</strong></td>
+        <td>2.5L Dynamic Force &bull; Full Option</td>
+        <td><strong>₦21,500,000</strong></td>
+        <td>Petrol + CNG Bi-Fuel</td>
+      </tr>
+      <tr>
+        <td><strong>Toyota HiAce Commuter</strong></td>
+        <td>16-Passenger &bull; Dual A/C &bull; High Roof</td>
+        <td><strong>₦26,000,000</strong></td>
+        <td>Petrol + CNG Bi-Fuel</td>
+      </tr>
+      <tr>
+        <td><strong>Lexus RX 350 AWD</strong></td>
+        <td>3.5L V6 &bull; Luxury Premium Package</td>
+        <td><strong>₦34,000,000</strong></td>
+        <td>Petrol (CNG Optional)</td>
+      </tr>
+      <tr>
+        <td><strong>Toyota Hilux 4x4 Double Cabin</strong></td>
+        <td>2.7L Utility &bull; Reinforced Bed</td>
+        <td><strong>₦38,500,000</strong></td>
+        <td>Petrol + CNG Bi-Fuel</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="article-faq-section">
+  <h3 class="article-faq-title">Car Buyer &amp; CNG FAQs</h3>
+  
+  <div class="faq-item">
+    <h4 class="faq-question"><span class="faq-q-badge">Q:</span> Can I test drive a car before paying?</h4>
+    <p class="faq-answer">Absolutely! Prospective buyers are welcome to bring their trusted mechanics for on-site scanning and highway test driving on the Maje-Minna expressway.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4 class="faq-question"><span class="faq-q-badge">Q:</span> Where can I refill CNG in Abuja and Suleja?</h4>
+    <p class="faq-answer">CNG mother-daughter refilling stations are rapidly expanding across the FCT and Niger State corridor, including along the Kubwa expressway and Airport Road corridor. Plus, with bi-fuel capability, your petrol tank is always ready whenever needed.</p>
+  </div>
+</div>',
+        ),
+
+        // ====================================================================
+        // ARTICLE 20: HOW TO SAVE 70% ON CAR FUEL IN NIGERIA WITH CNG
+        // ====================================================================
+        array(
+            'slug'     => 'how-to-save-70-percent-fuel-cost-cng-conversion-nigeria',
+            'title'    => 'How to Save Up to 70% on Fuel in Nigeria: The Ultimate Guide to Bi-Fuel CNG Conversion & Car Sales',
+            'category' => 'Automobiles & Clean Mobility',
+            'tags'     => array( 'CNG Conversion Cost Nigeria', 'Bi-Fuel Hybrid Car', 'Save Fuel Nigeria', 'CNG Kit Installation', 'Cheap Car Fuel Abuja' ),
+            'excerpt'  => 'Calculate your exact savings when switching to Compressed Natural Gas (CNG) in Nigeria. Learn how bi-fuel conversion works, engine safety facts, and why Kelvin Cameo is the leading hub for CNG mobility.',
+            'content'  => '<div class="takeaways-box">
+  <div class="takeaways-header">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    Key Takeaways / Executive Summary
+  </div>
+  <ul class="takeaways-list">
+    <li><strong>The Math:</strong> Traveling 1,000 km on petrol costs roughly ₦110,000+; the exact same trip on CNG costs less than ₦33,000 &mdash; putting ₦77,000 back into your pocket every week!</li>
+    <li><strong>Dual Fuel Safety:</strong> You don\'t lose petrol capabilities. You get an intelligent dual-fuel switch on your dashboard that toggles between petrol and natural gas on demand.</li>
+    <li><strong>Engine Benefits:</strong> Natural gas has a high octane rating (~120), meaning no engine knocking, cleaner spark plugs, and extended engine life.</li>
+    <li><strong>Fast Conversion:</strong> Professional installations completed in 48 hours at Kelvin Cameo\'s workshop using Type-1 and Type-2 certified pressure cylinders.</li>
+  </ul>
+</div>
+
+<p>Every vehicle owner in Nigeria has felt the pinch of skyrocketing pump prices. For commercial taxi operators, haulage logistics managers, and daily commuters driving between Suleja, Madalla, Kubwa, and Abuja CBD, fuel has become the single largest expense, devouring up to 50% of monthly income.</p>
+
+<p>The solution is not parking your car &mdash; it is changing what powers it. <strong>Compressed Natural Gas (CNG)</strong> is Nigeria\'s abundant, domestic clean energy resource, and switching to a bi-fuel setup is the fastest way to slash your expenses.</p>
+
+<figure class="article-inline-figure">
+  <img src="$template_uri/assets/photos/automotive/cng-conversion-kit.jpg" alt="Sequential CNG Dual-Fuel Injection Conversion Kit" class="article-inline-img" loading="lazy">
+  <figcaption class="article-inline-caption">High-precision Italian sequential bi-fuel conversion kits installed with computer mapping at Kelvin Cameo.</figcaption>
+</figure>
+
+<h2>How Does a Bi-Fuel CNG Car Work?</h2>
+<p>A bi-fuel conversion adds a specialized natural gas system to your existing petrol engine without removing any original parts:</p>
+<ol>
+  <li><strong>Seamless Switching:</strong> An electronic dashboard switch lets you select between Petrol and CNG. If your CNG runs out while driving on the highway, the vehicle automatically switches to petrol without stalling.</li>
+  <li><strong>Electronic ECU Mapping:</strong> A dedicated gas ECU reads your engine rpm and throttle position, injecting the exact micro-volume of compressed gas into the intake manifold.</li>
+  <li><strong>Blast-Resistant Cylinder:</strong> The seamless steel or composite cylinder is mounted securely in your boot or under chassis, rated to withstand over 200 bar of pressure with triple thermal and pressure-relief safety valves.</li>
+</ol>
+
+<figure class="article-inline-figure">
+  <img src="$template_uri/assets/photos/automotive/cng-suv-lexus.jpg" alt="Lexus Luxury SUV Equipped with CNG Dual-Fuel" class="article-inline-img" loading="lazy">
+  <figcaption class="article-inline-caption">Even luxury SUVs and commercial pickups run smoothly and quietly on dual-fuel CNG.</figcaption>
+</figure>
+
+<h2>Real-World Monthly Cost Comparison</h2>
+<p>Let\'s examine a commuter driving 60 kilometers daily between Suleja and Central Business District Abuja (1,800 km per month):</p>
+<ul>
+  <li><strong>On Petrol Only:</strong> ~180 litres of PMS @ ₦1,100/litre = <strong>₦198,000/month</strong></li>
+  <li><strong>On Bi-Fuel CNG:</strong> ~240 SCM of CNG @ ₦250/SCM = <strong>₦60,000/month</strong></li>
+  <li><strong>Net Monthly Savings:</strong> <strong>₦138,000 Every Single Month!</strong></li>
+</ul>
+<p>In less than 8 months, the fuel savings alone completely pay back the cost of vehicle purchase or conversion!</p>
+
+<div class="article-faq-section">
+  <h3 class="article-faq-title">Conversion Questions &amp; Answers</h3>
+  
+  <div class="faq-item">
+    <h4 class="faq-question"><span class="faq-q-badge">Q:</span> Will CNG damage my engine valves or cylinders?</h4>
+    <p class="faq-answer">No. In fact, natural gas is cleaner than petrol because it produces zero carbon soot. Your motor oil stays amber and translucent longer, and there is no crankcase fuel dilution.</p>
+  </div>
+
+  <div class="faq-item">
+    <h4 class="faq-question"><span class="faq-q-badge">Q:</span> How long does the conversion process take?</h4>
+    <p class="faq-answer">At Kelvin Cameo Automobiles, standard 4-cylinder and 6-cylinder installations take just 24 to 48 hours, including computerized road calibration and pressure testing.</p>
   </div>
 </div>',
         ),

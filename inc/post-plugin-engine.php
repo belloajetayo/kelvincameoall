@@ -75,6 +75,10 @@ function kc_get_post_display_image( $post_id, $slug = '' ) {
         'packaging'        => '/assets/photos/agriculture/maize-packaging-bags.jpg',
         'agro'             => '/assets/photos/agriculture/maize-harvest-cobs.jpg',
         'farming'          => '/assets/photos/agriculture/maize-planting-field.jpg',
+        'cng'              => '/assets/photos/automotive/cng-toyota-camry.jpg',
+        'automobile'       => '/assets/photos/automotive/dealership-showroom.jpg',
+        'car-sales'        => '/assets/photos/automotive/cng-suv-lexus.jpg',
+        'car-shop'         => '/assets/photos/automotive/cng-toyota-corolla.jpg',
     );
 
     foreach ( $image_map as $key => $path ) {
@@ -91,6 +95,16 @@ function kc_get_post_display_image( $post_id, $slug = '' ) {
  */
 function kc_get_post_topic_meta( $slug, $title = '' ) {
     $text = strtolower( $slug . ' ' . $title );
+
+    if ( strpos( $text, 'cng' ) !== false || strpos( $text, 'automobile' ) !== false || strpos( $text, 'car' ) !== false || strpos( $text, 'vehicle' ) !== false ) {
+        return array(
+            'topic'   => 'automobiles',
+            'badge'   => '🚗 Cars &amp; CNG Mobility',
+            'chip'    => 'Save Up to 70% Fuel',
+            'cta_url' => kc_url( 'automobiles' ),
+            'cta_txt' => 'Explore Car Shop',
+        );
+    }
 
     if ( strpos( $text, 'maize' ) !== false || strpos( $text, 'grain' ) !== false || strpos( $text, 'farming' ) !== false || strpos( $text, 'processing' ) !== false || strpos( $text, 'packaging' ) !== false || strpos( $text, 'agro' ) !== false ) {
         return array(
@@ -221,6 +235,7 @@ function kc_render_post_plugin_showcase( $atts = array() ) {
         <?php if ( $args['show_filters'] === 'yes' ) : ?>
         <div class="kc-filter-pills" role="tablist">
           <button type="button" class="kc-filter-btn active" data-filter="all">All Stories <span class="kc-count"><?php echo esc_html( $posts_query->found_posts ); ?></span></button>
+          <button type="button" class="kc-filter-btn" data-filter="automobiles">🚗 Cars &amp; CNG</button>
           <button type="button" class="kc-filter-btn" data-filter="agriculture">🌽 Maize &amp; Agro</button>
           <button type="button" class="kc-filter-btn" data-filter="rooms">🛏️ Rooms &amp; Tariffs</button>
           <button type="button" class="kc-filter-btn" data-filter="banquet">🏛️ Banquet &amp; Weddings</button>

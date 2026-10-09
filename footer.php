@@ -35,8 +35,9 @@
             <li><a href="<?php echo kc_url('energy'); ?>" class="footer-link">Kelvin Cameo Energy</a></li>
             <li><a href="<?php echo kc_url('real-estate'); ?>" class="footer-link">Kelvin Cameo Real Estate</a></li>
             <li><a href="<?php echo kc_url('agriculture'); ?>" class="footer-link">Kelvin Cameo Agriculture</a></li>
+            <li><a href="<?php echo kc_url('automobiles'); ?>" class="footer-link">Kelvin Cameo Automobiles &amp; CNG</a></li>
             <li><a href="<?php echo kc_url('hospitality'); ?>" class="footer-link">Kelvin Cameo Resort Hotel</a></li>
-            <li><a href="<?php echo kc_url('hospitality'); ?>#banquet" class="footer-link">1,000-Seat Banquet Hall</a></li>
+            <li><a href="<?php echo kc_url('banquet-hall'); ?>" class="footer-link">1,000-Seat Banquet Hall</a></li>
           </ul>
         </div>
 

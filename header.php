@@ -300,6 +300,13 @@
             </div>
           </li>
 
+          <!-- Automobiles & CNG -->
+          <li class="nav-item">
+            <a href="<?php echo kc_url('automobiles'); ?>" class="nav-link <?php echo is_page('automobiles') ? 'active' : ''; ?>">
+              Car Sales &amp; CNG
+            </a>
+          </li>
+
           <li class="nav-item">
             <a href="<?php echo kc_url('about'); ?>" class="nav-link <?php echo is_page('about') ? 'active' : ''; ?>">About</a>
           </li>

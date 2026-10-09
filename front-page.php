@@ -216,6 +216,24 @@ get_header();
           </div>
         </a>
 
+        <!-- Automobiles & CNG Clean Mobility -->
+        <a href="<?php echo kc_url('automobiles'); ?>" class="hp-division-card" style="background:var(--white);">
+          <div class="hp-division-img">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/automotive/cng-toyota-camry.jpg' ); ?>" alt="Kelvin Cameo Automobiles &amp; CNG Car Shop" loading="lazy">
+          </div>
+          <div class="hp-division-body">
+            <span class="hp-division-tag" style="background:rgba(2,132,199,0.12); color:#0284c7;">Division 05</span>
+            <h3 class="hp-division-name">Automobiles &amp; CNG Mobility</h3>
+            <p class="hp-division-desc">Certified foreign-used cars, commercial trucks, luxury SUVs, and bi-fuel CNG conversions cutting fuel costs by up to 70%.</p>
+            <ul class="hp-division-highlights">
+              <li><svg viewBox="0 0 20 20" fill="#0284c7"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Bi-Fuel CNG Cars (Toyota, Honda, Lexus &amp; Hilux)</li>
+              <li><svg viewBox="0 0 20 20" fill="#0284c7"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Up to 70% Cheaper Daily Running Expense vs. Petrol</li>
+              <li><svg viewBox="0 0 20 20" fill="#0284c7"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Certified 48-Hour Professional Conversion Workshop</li>
+            </ul>
+            <span class="hp-division-link" style="color:#0284c7;">Browse Car Shop &amp; CNG Inventory &rarr;</span>
+          </div>
+        </a>
+
       </div>
     </div>
   </section>
