@@ -719,7 +719,7 @@ $site_home = home_url('/');
     }
 
     /* THERMAL RECEIPT & MONTHLY REPORT PRINTING */
-    #thermalReceiptArea, #printableMonthlyArea {
+    #thermalReceiptArea, #printableMonthlyArea, #thermalShiftSlipArea {
       display: none;
     }
 
@@ -760,6 +760,26 @@ $site_home = home_url('/');
         margin: 0;
         padding: 15mm;
         font-family: 'Plus Jakarta Sans', sans-serif;
+        color: #000 !important;
+        background: #fff !important;
+      }
+
+      /* Mode 3: Thermal Shift Handover Slip */
+      body.printing-shift #thermalShiftSlipArea,
+      body.printing-shift #thermalShiftSlipArea * {
+        visibility: visible;
+      }
+      body.printing-shift #thermalShiftSlipArea {
+        display: block !important;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 80mm;
+        margin: 0;
+        padding: 4mm;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        line-height: 1.35;
         color: #000 !important;
         background: #fff !important;
       }
@@ -863,10 +883,20 @@ $site_home = home_url('/');
       </div>
 
       <!-- Staff on duty -->
-      <div class="staff-badge" id="staffBadgeBtn" title="Click to change staff name">
+      <div class="staff-badge" id="staffBadgeBtn" title="Click to change your name on duty">
         <span class="status-dot"></span>
         <span>Staff: <strong id="currentStaffNameDisplay">Bar Staff</strong></span>
       </div>
+
+      <!-- Close / Handover Shift Button (Dedicated to Staff) -->
+      <button type="button" class="nav-btn" id="openShiftModalBtn" style="border-color:#10b981; color:#10b981; font-weight:700;">
+        <span>🔄 Handover / Close Shift</span>
+      </button>
+
+      <!-- Past Shifts History -->
+      <button type="button" class="nav-btn" id="openShiftHistoryBtn">
+        <span>📜 Shifts History</span>
+      </button>
 
       <!-- Monthly Report Button -->
       <button type="button" class="nav-btn accent" id="openMonthlyReportBtn">
@@ -886,6 +916,11 @@ $site_home = home_url('/');
       <!-- Orders History -->
       <button type="button" class="nav-btn" id="openOrdersBtn">
         <span>🧾 Orders</span>
+      </button>
+
+      <!-- Admin Clear Test Sales Button (Only visible in admin mode) -->
+      <button type="button" class="nav-btn" id="adminClearTestBtn" style="display:none; border-color:#ef4444; color:#ef4444; font-weight:700;" title="Clear Test Sales & Prep for Tomorrow">
+        <span>🧹 Clear Test Data</span>
       </button>
 
       <!-- Lock Screen -->
@@ -1380,6 +1415,132 @@ $site_home = home_url('/');
   </div>
 
   <!-- ==============================================================
+       MODAL: STAFF SHIFT HANDOVER & CLOSING (Dedicated Per Staff)
+       ============================================================== -->
+  <div class="pos-modal-overlay" id="shiftModal">
+    <div class="pos-modal wide">
+      <div class="modal-head">
+        <div>
+          <h3 style="display:flex; align-items:center; gap:0.5rem;">
+            <span>🔄 Close Shift &amp; Handover to Next Attendant</span>
+          </h3>
+          <p style="font-size:0.8rem; color:#94a3b8; margin-top:0.25rem;">
+            Each staff member has their dedicated shift sales report &amp; inventory handover
+          </p>
+        </div>
+        <button type="button" class="modal-close" onclick="closeModal('shiftModal')">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        
+        <!-- Shift Personnel & Time Banner -->
+        <div style="background:#1e293b; border:1px solid #334155; border-radius:12px; padding:1.25rem; margin-bottom:1.5rem; display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:1rem;">
+          <div>
+            <label style="font-size:0.75rem; color:#94a3b8; text-transform:uppercase;">Outgoing Staff (Closing Duty)</label>
+            <input type="text" id="shiftOutgoingStaffInput" class="cart-meta-select" style="padding:0.6rem; font-weight:800; font-size:1.1rem; color:#38bdf8;" required>
+          </div>
+          <div>
+            <label style="font-size:0.75rem; color:#94a3b8; text-transform:uppercase;">Shift Started At</label>
+            <div style="font-size:1rem; font-weight:700; color:#cbd5e1; padding-top:0.5rem;" id="shiftStartTimeDisplay">--:--</div>
+          </div>
+          <div>
+            <label style="font-size:0.75rem; color:#94a3b8; text-transform:uppercase;">Shift Identifier</label>
+            <div style="font-size:1rem; font-weight:800; color:#d4af37; font-family:'JetBrains Mono'; padding-top:0.5rem;" id="shiftCodeDisplay">SHIFT-...</div>
+          </div>
+        </div>
+
+        <!-- Shift KPI Performance Cards -->
+        <h4 style="font-size:0.9rem; font-weight:800; color:#e2e8f0; margin-bottom:0.75rem;">
+          💰 Sales Performance For This Shift
+        </h4>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap:1rem; margin-bottom:1.5rem;">
+          <div style="background:#0f172a; padding:1rem; border-radius:10px; border-left:4px solid #10b981;">
+            <div style="font-size:0.75rem; color:#94a3b8;">Shift Total Revenue</div>
+            <div style="font-size:1.35rem; font-weight:800; color:#10b981; font-family:'JetBrains Mono';" id="shiftTotalRev">₦0</div>
+          </div>
+          <div style="background:#0f172a; padding:1rem; border-radius:10px; border-left:4px solid #38bdf8;">
+            <div style="font-size:0.75rem; color:#94a3b8;">POS (Card)</div>
+            <div style="font-size:1.35rem; font-weight:800; color:#38bdf8; font-family:'JetBrains Mono';" id="shiftPosRev">₦0</div>
+          </div>
+          <div style="background:#0f172a; padding:1rem; border-radius:10px; border-left:4px solid #f59e0b;">
+            <div style="font-size:0.75rem; color:#94a3b8;">Cash Collected</div>
+            <div style="font-size:1.35rem; font-weight:800; color:#f59e0b; font-family:'JetBrains Mono';" id="shiftCashRev">₦0</div>
+          </div>
+          <div style="background:#0f172a; padding:1rem; border-radius:10px; border-left:4px solid #a855f7;">
+            <div style="font-size:0.75rem; color:#94a3b8;">Bank Transfer</div>
+            <div style="font-size:1.35rem; font-weight:800; color:#a855f7; font-family:'JetBrains Mono';" id="shiftTransferRev">₦0</div>
+          </div>
+          <div style="background:#0f172a; padding:1rem; border-radius:10px; border-left:4px solid #d4af37;">
+            <div style="font-size:0.75rem; color:#94a3b8;">Drinks Sold</div>
+            <div style="font-size:1.35rem; font-weight:800; color:#d4af37;" id="shiftTotalBottles">0</div>
+          </div>
+        </div>
+
+        <!-- Items Sold During Shift Summary -->
+        <h4 style="font-size:0.9rem; font-weight:800; color:#e2e8f0; margin-bottom:0.75rem;">
+          🍾 Beverages Sold on this Shift
+        </h4>
+        <div style="background:#0f172a; border:1px solid #334155; border-radius:10px; max-height:160px; overflow-y:auto; margin-bottom:1.5rem; padding:0.5rem 1rem;" id="shiftItemsSoldContainer">
+          <p style="color:#64748b; font-size:0.85rem; padding:0.5rem 0;">No sales recorded on this shift yet.</p>
+        </div>
+
+        <!-- Handover To Incoming Staff Form -->
+        <div style="background:#1e293b; border:1px solid #334155; border-radius:12px; padding:1.25rem;">
+          <h4 style="font-size:0.95rem; font-weight:800; color:#10b981; margin-bottom:0.75rem;">
+            🤝 Handover to Incoming Staff
+          </h4>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin-bottom:1rem;">
+            <div>
+              <label style="font-size:0.8rem; color:#94a3b8; display:block; margin-bottom:0.35rem;">
+                Incoming Staff Member (Taking Over Next Shift) <span style="color:#ef4444;">*</span>
+              </label>
+              <input type="text" id="shiftIncomingStaffInput" class="cart-meta-select" style="padding:0.75rem; font-weight:700; font-size:1rem;" placeholder="e.g. Grace, Sunday, Michael, Blessing" required>
+            </div>
+            <div>
+              <label style="font-size:0.8rem; color:#94a3b8; display:block; margin-bottom:0.35rem;">
+                Handover Notes / Cash Balance / Observations
+              </label>
+              <input type="text" id="shiftNotesInput" class="cart-meta-select" style="padding:0.75rem;" placeholder="e.g. Cash in drawer verified ₦45,000. All crates intact.">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-foot">
+        <button type="button" class="btn-checkout" id="submitShiftPrintBtn" style="background:linear-gradient(135deg, #10b981, #059669);">
+          <span>🖨️ Print Shift Slip &amp; Handover</span>
+        </button>
+        <button type="button" class="nav-btn" id="submitShiftNoPrintBtn" style="padding:0.85rem;">
+          <span>Handover (Without Print)</span>
+        </button>
+        <button type="button" class="nav-btn" onclick="closeModal('shiftModal')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================================================
+       MODAL: PAST SHIFTS & HANDOVER HISTORY
+       ============================================================== -->
+  <div class="pos-modal-overlay" id="shiftHistoryModal">
+    <div class="pos-modal wide">
+      <div class="modal-head">
+        <div>
+          <h3>📜 Staff Shifts History &amp; Handover Records</h3>
+          <p style="font-size:0.8rem; color:#94a3b8;">Review shift reconciliation and reprint handover slips</p>
+        </div>
+        <button type="button" class="modal-close" onclick="closeModal('shiftHistoryModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="shiftHistoryListContainer"></div>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="nav-btn primary" onclick="closeModal('shiftHistoryModal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================================================
        PRINT AREA 1: ESC/POS THERMAL RECEIPT (58mm / 80mm)
        ============================================================== -->
   <div id="thermalReceiptArea">
@@ -1511,6 +1672,100 @@ $site_home = home_url('/');
     </div>
   </div>
 
+  <!-- ==============================================================
+       PRINT AREA 3: THERMAL SHIFT HANDOVER SLIP (58mm / 80mm)
+       ============================================================== -->
+  <div id="thermalShiftSlipArea">
+    <div class="receipt-center">
+      <div style="font-size:14px; font-weight:bold; letter-spacing:1px;">KELVIN CAMEO RESORT</div>
+      <div style="font-size:12px; font-weight:bold;">BAR, LOUNGE &amp; SUITES</div>
+      <div style="font-size:10px;">RC: 1613032 | Suleja, Abuja Corridor</div>
+      <div style="font-size:11px; font-weight:bold; margin-top:5px; border-top:1px dashed #000; border-bottom:1px dashed #000; padding:2px 0;">
+        *** SHIFT HANDOVER REPORT ***
+      </div>
+    </div>
+
+    <div class="receipt-row" style="margin-top:6px;">
+      <span>SHIFT CODE:</span>
+      <strong id="printShiftCode">SHIFT-001</strong>
+    </div>
+    <div class="receipt-row">
+      <span>DATE:</span>
+      <span id="printShiftDate">15/10/2026</span>
+    </div>
+    <div class="receipt-row">
+      <span>START:</span>
+      <span id="printShiftStartTime">--</span>
+    </div>
+    <div class="receipt-row">
+      <span>END:</span>
+      <span id="printShiftEndTime">--</span>
+    </div>
+    
+    <div class="receipt-divider"></div>
+
+    <div class="receipt-row">
+      <span>OUTGOING ATTENDANT:</span>
+      <strong id="printShiftOutgoing">Sunday</strong>
+    </div>
+    <div class="receipt-row">
+      <span>INCOMING ATTENDANT:</span>
+      <strong id="printShiftIncoming">Grace</strong>
+    </div>
+
+    <div class="receipt-double-divider"></div>
+
+    <div style="font-size:11px; font-weight:bold; text-align:center; margin-bottom:4px;">
+      SHIFT FINANCIAL SUMMARY
+    </div>
+    <div class="receipt-row">
+      <span>POS (CARD):</span>
+      <span id="printShiftPos">₦0</span>
+    </div>
+    <div class="receipt-row">
+      <span>CASH:</span>
+      <span id="printShiftCash">₦0</span>
+    </div>
+    <div class="receipt-row">
+      <span>TRANSFER:</span>
+      <span id="printShiftTransfer">₦0</span>
+    </div>
+    <div class="receipt-divider"></div>
+    <div class="receipt-row" style="font-size:13px; font-weight:bold;">
+      <span>TOTAL SHIFT SALES:</span>
+      <span id="printShiftTotal">₦0</span>
+    </div>
+    <div class="receipt-row">
+      <span>TOTAL BOTTLES SOLD:</span>
+      <strong id="printShiftBottles">0</strong>
+    </div>
+
+    <div class="receipt-double-divider"></div>
+
+    <div style="font-size:10px; font-weight:bold; margin-bottom:4px;">BEVERAGES SOLD THIS SHIFT:</div>
+    <div id="printShiftItemsList" style="font-size:10px;"></div>
+
+    <div class="receipt-divider"></div>
+
+    <div id="printShiftNotesRow" style="font-size:10px; margin:6px 0;">
+      <span>NOTES: </span><span id="printShiftNotes">Handed over cleanly.</span>
+    </div>
+
+    <div class="receipt-divider"></div>
+
+    <div style="margin-top:15px; font-size:10px;">
+      <div>Outgoing Signature: __________________</div>
+      <div style="margin-top:10px;">Incoming Signature: __________________</div>
+      <div style="margin-top:10px;">Manager Sign-off:   __________________</div>
+    </div>
+
+    <div class="receipt-center" style="font-size:9px; margin-top:12px;">
+      <div>Stock handed over &amp; verified</div>
+      <div>Kelvin Cameo Automated Bar Accounting</div>
+      <div>. . . . . . . . . . . . . . . . . . . . .</div>
+    </div>
+  </div>
+
   <div id="posToast">Notification</div>
 
   <!-- ==============================================================
@@ -1634,6 +1889,7 @@ $site_home = home_url('/');
       const icon  = document.getElementById('roleIcon');
       const label = document.getElementById('roleLabel');
       const optSetExact = document.getElementById('optSetExact');
+      const clearBtn = document.getElementById('adminClearTestBtn');
 
       if (currentRole === 'admin') {
         badge.className = 'role-badge admin';
@@ -1641,12 +1897,14 @@ $site_home = home_url('/');
         label.textContent = 'Admin / Manager';
         badge.title = 'Admin Mode Active (Full Privileges)';
         if (optSetExact) optSetExact.disabled = false;
+        if (clearBtn) clearBtn.style.display = 'inline-flex';
       } else {
         badge.className = 'role-badge staff';
         icon.textContent = '🛡️';
         label.textContent = 'Staff (Cashier)';
         badge.title = 'Click to enter Admin Password';
         if (optSetExact) optSetExact.disabled = true;
+        if (clearBtn) clearBtn.style.display = 'none';
       }
     }
 
@@ -1693,6 +1951,7 @@ $site_home = home_url('/');
       const fd = new FormData();
       fd.append('action', 'kc_bar_get_pos_data');
       fd.append('token', sessionToken);
+      fd.append('staff_name', currentStaff);
 
       fetch(AJAX_URL, { method: 'POST', body: fd })
         .then(r => r.json())
@@ -1704,6 +1963,14 @@ $site_home = home_url('/');
               currentRole = res.data.role;
               sessionStorage.setItem('kc_bar_role', currentRole);
               updateRoleBadgeUI();
+            }
+            if (res.data.active_shift) {
+              activeShiftData = res.data.active_shift;
+              shiftSummaryData = res.data.shift_summary;
+              if (activeShiftData.staff_name && activeShiftData.staff_name !== 'Bar Staff' && currentStaff === 'Bar Staff') {
+                currentStaff = activeShiftData.staff_name;
+                localStorage.setItem('kc_bar_staff', currentStaff);
+              }
             }
             updateCategoryBadges();
             renderProducts();
@@ -2325,6 +2592,250 @@ $site_home = home_url('/');
     }
 
     // -------------------------------------------------------------
+    // STAFF SHIFT HANDOVER & RECONCILIATION
+    // -------------------------------------------------------------
+    function openShiftModal() {
+      const fd = new FormData();
+      fd.append('action', 'kc_bar_get_active_shift');
+      fd.append('token', sessionToken);
+      fd.append('staff_name', currentStaff);
+
+      fetch(AJAX_URL, { method: 'POST', body: fd })
+        .then(r => r.json())
+        .then(res => {
+          if (res.success) {
+            const shift = res.data.shift;
+            const summary = res.data.summary;
+            activeShiftData = shift;
+            shiftSummaryData = summary;
+
+            document.getElementById('shiftOutgoingStaffInput').value = currentStaff;
+            document.getElementById('shiftStartTimeDisplay').textContent = shift.start_time;
+            document.getElementById('shiftCodeDisplay').textContent = shift.shift_code;
+
+            document.getElementById('shiftTotalRev').textContent = `₦${formatNaira(summary.total_revenue)}`;
+            document.getElementById('shiftPosRev').textContent = `₦${formatNaira(summary.pos_revenue)}`;
+            document.getElementById('shiftCashRev').textContent = `₦${formatNaira(summary.cash_revenue)}`;
+            document.getElementById('shiftTransferRev').textContent = `₦${formatNaira(summary.transfer_revenue)}`;
+            document.getElementById('shiftTotalBottles').textContent = summary.total_bottles;
+
+            const itemsBox = document.getElementById('shiftItemsSoldContainer');
+            if (summary.items_sold.length === 0) {
+              itemsBox.innerHTML = '<p style="color:#64748b; font-size:0.85rem; padding:0.5rem 0;">No drinks sold during this shift yet.</p>';
+            } else {
+              itemsBox.innerHTML = summary.items_sold.map(i => `
+                <div style="display:flex; justify-content:space-between; padding:0.35rem 0; border-bottom:1px solid #1e293b; font-size:0.85rem;">
+                  <span><strong>${i.qty}x</strong> ${escapeHtml(i.name)}</span>
+                  <span style="font-family:'JetBrains Mono'; color:#d4af37;">₦${formatNaira(i.amount)}</span>
+                </div>
+              `).join('');
+            }
+
+            document.getElementById('shiftIncomingStaffInput').value = '';
+            document.getElementById('shiftNotesInput').value = '';
+
+            openModal('shiftModal');
+          } else {
+            showToast(res.data?.message || 'Error loading shift info', true);
+          }
+        })
+        .catch(() => {
+          showToast('Failed to connect to server.', true);
+        });
+    }
+
+    function processShiftClose(shouldPrint = false) {
+      const outgoing = document.getElementById('shiftOutgoingStaffInput').value.trim();
+      const incoming = document.getElementById('shiftIncomingStaffInput').value.trim();
+      const notes    = document.getElementById('shiftNotesInput').value.trim();
+
+      if (!incoming) {
+        showToast('Please enter the name of the incoming staff taking over!', true);
+        document.getElementById('shiftIncomingStaffInput').focus();
+        return;
+      }
+
+      if (!confirm(`Confirm Shift Handover from ${outgoing || 'You'} to ${incoming}?`)) {
+        return;
+      }
+
+      const fd = new FormData();
+      fd.append('action', 'kc_bar_close_shift');
+      fd.append('token', sessionToken);
+      fd.append('outgoing_staff', outgoing || currentStaff);
+      fd.append('incoming_staff', incoming);
+      fd.append('notes', notes);
+
+      fetch(AJAX_URL, { method: 'POST', body: fd })
+        .then(r => r.json())
+        .then(res => {
+          if (res.success) {
+            lastClosedShift = res.data.closed_shift;
+            showToast(res.data.message);
+            closeModal('shiftModal');
+
+            // Switch current staff to the incoming staff member
+            currentStaff = res.data.new_active_staff;
+            localStorage.setItem('kc_bar_staff', currentStaff);
+            updateStaffDisplay();
+
+            // Reload POS data for fresh shift
+            loadPosData();
+
+            if (shouldPrint && lastClosedShift) {
+              printShiftSlip(lastClosedShift);
+            }
+          } else {
+            showToast(res.data?.message || 'Error closing shift', true);
+          }
+        })
+        .catch(() => {
+          showToast('Connection error during shift handover.', true);
+        });
+    }
+
+    function printShiftSlip(shiftData) {
+      if (!shiftData) return;
+
+      document.getElementById('printShiftCode').textContent = shiftData.shift_code || 'SHIFT';
+      document.getElementById('printShiftDate').textContent = shiftData.end_time || new Date().toLocaleString();
+      document.getElementById('printShiftStartTime').textContent = shiftData.start_time || '--';
+      document.getElementById('printShiftEndTime').textContent = shiftData.end_time || '--';
+
+      document.getElementById('printShiftOutgoing').textContent = shiftData.outgoing_staff || 'Staff';
+      document.getElementById('printShiftIncoming').textContent = shiftData.incoming_staff || 'Next Staff';
+
+      const totals = shiftData.totals || {};
+      document.getElementById('printShiftPos').textContent = `₦${formatNaira(totals.pos_revenue || 0)}`;
+      document.getElementById('printShiftCash').textContent = `₦${formatNaira(totals.cash_revenue || 0)}`;
+      document.getElementById('printShiftTransfer').textContent = `₦${formatNaira(totals.transfer_revenue || 0)}`;
+      document.getElementById('printShiftTotal').textContent = `₦${formatNaira(totals.total_revenue || 0)}`;
+      document.getElementById('printShiftBottles').textContent = totals.total_bottles || 0;
+
+      const itemsBox = document.getElementById('printShiftItemsList');
+      itemsBox.innerHTML = '';
+      if (shiftData.items_sold && shiftData.items_sold.length > 0) {
+        shiftData.items_sold.forEach(it => {
+          const row = document.createElement('div');
+          row.className = 'receipt-row';
+          row.innerHTML = `<span>${it.qty}x ${escapeHtml(it.name)}</span><span>₦${formatNaira(it.amount)}</span>`;
+          itemsBox.appendChild(row);
+        });
+      } else {
+        itemsBox.innerHTML = '<div>No drinks sold on this shift</div>';
+      }
+
+      document.getElementById('printShiftNotes').textContent = shiftData.notes || 'None';
+
+      document.body.className = 'printing-shift';
+      window.print();
+      setTimeout(() => { document.body.className = ''; }, 1000);
+    }
+
+    function openShiftHistory() {
+      const fd = new FormData();
+      fd.append('action', 'kc_bar_get_shift_history');
+      fd.append('token', sessionToken);
+
+      fetch(AJAX_URL, { method: 'POST', body: fd })
+        .then(r => r.json())
+        .then(res => {
+          if (res.success) {
+            const list = res.data.shifts || [];
+            const box = document.getElementById('shiftHistoryListContainer');
+            if (list.length === 0) {
+              box.innerHTML = '<div style="text-align:center; padding:2rem; color:#64748b;">No shift handover records saved yet.</div>';
+            } else {
+              box.innerHTML = list.map(s => {
+                const sJson = JSON.stringify(s).replace(/"/g, '&quot;');
+                return `
+                <div style="background:#1e293b; border:1px solid #334155; border-radius:10px; padding:1rem; margin-bottom:0.75rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+                  <div>
+                    <div style="font-weight:800; color:#fff; font-size:1rem; display:flex; align-items:center; gap:0.5rem;">
+                      <span style="color:#d4af37;">${s.shift_code}</span>
+                      <span style="font-size:0.75rem; background:#0f172a; padding:0.2rem 0.5rem; border-radius:4px; color:#38bdf8;">${s.status.toUpperCase()}</span>
+                    </div>
+                    <div style="font-size:0.85rem; color:#cbd5e1; margin:0.35rem 0;">
+                      Outgoing: <strong style="color:#38bdf8;">${escapeHtml(s.staff_name)}</strong> &rarr; Incoming: <strong style="color:#10b981;">${escapeHtml(s.incoming_staff || 'Pending')}</strong>
+                    </div>
+                    <div style="font-size:0.75rem; color:#94a3b8;">
+                      ${s.start_time} to ${s.end_time || 'Active'} &bull; Bottles Sold: ${s.total_bottles_sold}
+                    </div>
+                  </div>
+                  <div style="text-align:right;">
+                    <div style="font-size:1.25rem; font-weight:800; color:#10b981; font-family:'JetBrains Mono'; margin-bottom:0.4rem;">
+                      ₦${formatNaira(s.total_sales)}
+                    </div>
+                    <div style="font-size:0.75rem; color:#94a3b8; margin-bottom:0.4rem;">
+                      POS: ₦${formatNaira(s.pos_sales)} | Cash: ₦${formatNaira(s.cash_sales)}
+                    </div>
+                    <button type="button" class="nav-btn primary" onclick='reprintPastShift(${sJson})'>🖨️ Re-Print Slip</button>
+                  </div>
+                </div>
+              `;
+              }).join('');
+            }
+            openModal('shiftHistoryModal');
+          } else {
+            showToast(res.data?.message || 'Error fetching shifts', true);
+          }
+        })
+        .catch(() => {
+          showToast('Connection error', true);
+        });
+    }
+
+    function reprintPastShift(s) {
+      const shiftData = {
+        shift_code: s.shift_code,
+        outgoing_staff: s.staff_name,
+        incoming_staff: s.incoming_staff,
+        start_time: s.start_time,
+        end_time: s.end_time,
+        totals: {
+          pos_revenue: s.pos_sales,
+          cash_revenue: s.cash_sales,
+          transfer_revenue: s.transfer_sales,
+          total_revenue: s.total_sales,
+          total_bottles: s.total_bottles_sold,
+        },
+        items_sold: s.drinks_sold,
+        notes: s.notes,
+      };
+      printShiftSlip(shiftData);
+    }
+
+    function handleAdminClearTestData() {
+      if (currentRole !== 'admin') {
+        showToast('Admin password required.', true);
+        unlockAdminModal();
+        return;
+      }
+
+      if (!confirm('CONFIRM RESET: Clear today\'s test orders and start fresh for tomorrow?\n\n- All test orders and test logs will be deleted.\n- All current physical bottle stock counts will be PRESERVED as starting opening stock.\n- Live logging will start clean tomorrow.')) {
+        return;
+      }
+
+      const fd = new FormData();
+      fd.append('action', 'kc_bar_clear_test_data');
+      fd.append('token', sessionToken);
+
+      fetch(AJAX_URL, { method: 'POST', body: fd })
+        .then(r => r.json())
+        .then(res => {
+          if (res.success) {
+            showToast(res.data.message);
+            loadPosData();
+          } else {
+            showToast(res.data?.message || 'Error clearing test data', true);
+          }
+        })
+        .catch(() => {
+          showToast('Connection error.', true);
+        });
+    }
+
+    // -------------------------------------------------------------
     // EVENT LISTENERS & SETUP
     // -------------------------------------------------------------
     function setupEventListeners() {
@@ -2360,6 +2871,16 @@ $site_home = home_url('/');
       // Checkout Buttons
       document.getElementById('checkoutPrintBtn').addEventListener('click', () => processCheckout(true));
       document.getElementById('checkoutNoPrintBtn').addEventListener('click', () => processCheckout(false));
+
+      // Shift Actions
+      document.getElementById('openShiftModalBtn').addEventListener('click', openShiftModal);
+      document.getElementById('openShiftHistoryBtn').addEventListener('click', openShiftHistory);
+      document.getElementById('submitShiftPrintBtn').addEventListener('click', () => processShiftClose(true));
+      document.getElementById('submitShiftNoPrintBtn').addEventListener('click', () => processShiftClose(false));
+
+      // Admin Clear Test Sales
+      const clearBtn = document.getElementById('adminClearTestBtn');
+      if (clearBtn) clearBtn.addEventListener('click', handleAdminClearTestData);
 
       // Top Actions
       document.getElementById('openMonthlyReportBtn').addEventListener('click', loadMonthlyReport);

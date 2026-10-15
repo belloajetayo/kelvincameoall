@@ -24,6 +24,7 @@ function kc_bar_init_db() {
     $table_products = $wpdb->prefix . 'kc_bar_products';
     $table_orders   = $wpdb->prefix . 'kc_bar_orders';
     $table_logs     = $wpdb->prefix . 'kc_bar_daily_logs';
+    $table_shifts   = $wpdb->prefix . 'kc_bar_shifts';
 
     require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 
@@ -88,6 +89,33 @@ function kc_bar_init_db() {
         KEY date_idx (log_date)
     ) $charset_collate;";
     dbDelta($sql_logs);
+
+    // 4. Staff Shifts & Handover Reconciliation Table
+    $sql_shifts = "CREATE TABLE IF NOT EXISTS $table_shifts (
+        id bigint(20) NOT NULL AUTO_INCREMENT,
+        shift_code varchar(40) NOT NULL,
+        staff_name varchar(80) NOT NULL,
+        incoming_staff varchar(80) NOT NULL DEFAULT '',
+        start_time datetime NOT NULL,
+        end_time datetime DEFAULT NULL,
+        total_orders int(11) NOT NULL DEFAULT '0',
+        total_sales decimal(12,2) NOT NULL DEFAULT '0.00',
+        pos_sales decimal(12,2) NOT NULL DEFAULT '0.00',
+        cash_sales decimal(12,2) NOT NULL DEFAULT '0.00',
+        transfer_sales decimal(12,2) NOT NULL DEFAULT '0.00',
+        room_sales decimal(12,2) NOT NULL DEFAULT '0.00',
+        total_bottles_sold int(11) NOT NULL DEFAULT '0',
+        drinks_sold_json longtext,
+        stock_handover_json longtext,
+        notes text,
+        status varchar(30) NOT NULL DEFAULT 'active',
+        created_at datetime DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (id),
+        KEY staff_idx (staff_name),
+        KEY status_idx (status),
+        KEY start_idx (start_time)
+    ) $charset_collate;";
+    dbDelta($sql_shifts);
 
     // Seed Initial Products if empty
     kc_bar_seed_initial_products();
@@ -268,6 +296,121 @@ function kc_bar_ajax_verify_pin() {
 }
 
 /**
+ * Helper: Get or Create Active Staff Shift
+ */
+function kc_bar_get_or_create_active_shift($staff_name = 'Bar Staff') {
+    global $wpdb;
+    $table_shifts = $wpdb->prefix . 'kc_bar_shifts';
+
+    $active = $wpdb->get_row("SELECT * FROM $table_shifts WHERE status = 'active' ORDER BY id DESC LIMIT 1", ARRAY_A);
+    if ($active) {
+        if (!empty($staff_name) && $staff_name !== 'Bar Staff' && ($active['staff_name'] === 'Bar Staff' || empty($active['staff_name']))) {
+            $wpdb->update($table_shifts, array('staff_name' => $staff_name), array('id' => $active['id']));
+            $active['staff_name'] = $staff_name;
+        }
+        return $active;
+    }
+
+    $shift_code = 'SHIFT-' . current_time('Ymd') . '-' . strtoupper(wp_generate_password(4, false, false));
+    $wpdb->insert($table_shifts, array(
+        'shift_code'  => $shift_code,
+        'staff_name'  => !empty($staff_name) ? $staff_name : 'Bar Staff',
+        'start_time'  => current_time('mysql'),
+        'status'      => 'active',
+    ));
+
+    return $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_shifts WHERE id = %d", $wpdb->insert_id), ARRAY_A);
+}
+
+/**
+ * Helper: Calculate Active Shift Sales & Items Sold
+ */
+function kc_bar_get_active_shift_summary($active_shift) {
+    global $wpdb;
+    $table_orders = $wpdb->prefix . 'kc_bar_orders';
+
+    if (!$active_shift) {
+        return array(
+            'total_orders'     => 0,
+            'total_revenue'    => 0,
+            'pos_revenue'      => 0,
+            'cash_revenue'     => 0,
+            'transfer_revenue' => 0,
+            'room_revenue'     => 0,
+            'total_bottles'    => 0,
+            'items_sold'       => array(),
+        );
+    }
+
+    $start_time = $active_shift['start_time'];
+
+    $orders = $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT id, total_amount, total_items, payment_method, items_json 
+             FROM $table_orders 
+             WHERE created_at >= %s AND status = 'completed'
+             ORDER BY id ASC",
+            $start_time
+        ),
+        ARRAY_A
+    );
+
+    $total_orders     = count($orders);
+    $total_revenue    = 0;
+    $pos_revenue      = 0;
+    $cash_revenue     = 0;
+    $transfer_revenue = 0;
+    $room_revenue     = 0;
+    $total_bottles    = 0;
+    $items_sold       = array();
+
+    foreach ($orders as $ord) {
+        $amt = (float) $ord['total_amount'];
+        $total_revenue += $amt;
+        $total_bottles += (int) $ord['total_items'];
+
+        if ($ord['payment_method'] === 'pos') {
+            $pos_revenue += $amt;
+        } elseif ($ord['payment_method'] === 'cash') {
+            $cash_revenue += $amt;
+        } elseif ($ord['payment_method'] === 'transfer') {
+            $transfer_revenue += $amt;
+        } elseif ($ord['payment_method'] === 'room_charge') {
+            $room_revenue += $amt;
+        }
+
+        $items = json_decode($ord['items_json'], true) ?: array();
+        foreach ($items as $it) {
+            $name = $it['name'] ?? 'Drink';
+            $qty  = (int) ($it['qty'] ?? 1);
+            $sub  = (float) ($it['subtotal'] ?? 0);
+            if (!isset($items_sold[$name])) {
+                $items_sold[$name] = array(
+                    'name'     => $name,
+                    'category' => $it['category'] ?? '',
+                    'qty'      => 0,
+                    'amount'   => 0,
+                    'price'    => (float) ($it['price'] ?? 0),
+                );
+            }
+            $items_sold[$name]['qty']    += $qty;
+            $items_sold[$name]['amount'] += $sub;
+        }
+    }
+
+    return array(
+        'total_orders'     => $total_orders,
+        'total_revenue'    => $total_revenue,
+        'pos_revenue'      => $pos_revenue,
+        'cash_revenue'     => $cash_revenue,
+        'transfer_revenue' => $transfer_revenue,
+        'room_revenue'     => $room_revenue,
+        'total_bottles'    => $total_bottles,
+        'items_sold'       => array_values($items_sold),
+    );
+}
+
+/**
  * AJAX: Get POS Dashboard Data (Inventory, Shift Sales, Orders)
  */
 add_action('wp_ajax_kc_bar_get_pos_data', 'kc_bar_ajax_get_pos_data');
@@ -325,11 +468,18 @@ function kc_bar_ajax_get_pos_data() {
         $ord['items'] = json_decode($ord['items_json'], true) ?: array();
     }
 
+    // 4. Fetch Active Shift for Current Staff
+    $staff_requested = sanitize_text_field($_POST['staff_name'] ?? '');
+    $active_shift    = kc_bar_get_or_create_active_shift($staff_requested);
+    $shift_summary   = kc_bar_get_active_shift_summary($active_shift);
+
     wp_send_json_success(array(
         'role'          => $role,
         'products'      => $products,
         'sales_summary' => $sales_summary,
         'recent_orders' => $recent_orders,
+        'active_shift'  => $active_shift,
+        'shift_summary' => $shift_summary,
         'server_time'   => current_time('mysql'),
     ));
 }
@@ -680,13 +830,194 @@ function kc_bar_ajax_get_daily_sheet() {
 }
 
 /**
- * AJAX: Reset Daily Counts for New Shift / Day (Admin Only)
+ * AJAX: Get Active Shift & Live Performance for Current Staff
+ */
+add_action('wp_ajax_kc_bar_get_active_shift', 'kc_bar_ajax_get_active_shift');
+add_action('wp_ajax_nopriv_kc_bar_get_active_shift', 'kc_bar_ajax_get_active_shift');
+function kc_bar_ajax_get_active_shift() {
+    if (!kc_bar_verify_staff_session()) {
+        wp_send_json_error(array('message' => 'Unauthorized or session expired.'), 401);
+    }
+
+    $staff_name = sanitize_text_field($_POST['staff_name'] ?? '');
+    $active_shift = kc_bar_get_or_create_active_shift($staff_name);
+    $summary = kc_bar_get_active_shift_summary($active_shift);
+
+    wp_send_json_success(array(
+        'shift'   => $active_shift,
+        'summary' => $summary,
+    ));
+}
+
+/**
+ * AJAX: Staff Close Shift & Handover to Next Attendant
+ * Dedicated shift report recorded per staff name
+ */
+add_action('wp_ajax_kc_bar_close_shift', 'kc_bar_ajax_close_shift');
+add_action('wp_ajax_nopriv_kc_bar_close_shift', 'kc_bar_ajax_close_shift');
+function kc_bar_ajax_close_shift() {
+    if (!kc_bar_verify_staff_session()) {
+        wp_send_json_error(array('message' => 'Unauthorized or session expired.'), 401);
+    }
+
+    global $wpdb;
+    $table_products = $wpdb->prefix . 'kc_bar_products';
+    $table_shifts   = $wpdb->prefix . 'kc_bar_shifts';
+    $table_logs     = $wpdb->prefix . 'kc_bar_daily_logs';
+
+    $outgoing_staff = sanitize_text_field($_POST['outgoing_staff'] ?? '');
+    $incoming_staff = sanitize_text_field($_POST['incoming_staff'] ?? '');
+    $notes          = sanitize_textarea_field($_POST['notes'] ?? '');
+
+    if (empty($incoming_staff)) {
+        wp_send_json_error(array('message' => 'Please provide the name of the incoming staff member taking over the next shift.'));
+    }
+
+    $active_shift = kc_bar_get_or_create_active_shift($outgoing_staff);
+    if (!$active_shift) {
+        wp_send_json_error(array('message' => 'Could not find an active shift to close.'));
+    }
+
+    $shift_metrics = kc_bar_get_active_shift_summary($active_shift);
+
+    // 1. Snapshot physical stock handover
+    $products = $wpdb->get_results(
+        "SELECT id, name, category, price, opening_stock, new_stock, current_stock, total_sold, breakage 
+         FROM $table_products 
+         WHERE is_active = 1 
+         ORDER BY category ASC, name ASC",
+        ARRAY_A
+    );
+
+    $stock_handover = array();
+    $today = current_time('Y-m-d');
+
+    foreach ($products as $p) {
+        $stock_handover[] = array(
+            'id'            => $p['id'],
+            'name'          => $p['name'],
+            'category'      => $p['category'],
+            'price'         => (float) $p['price'],
+            'opening_stock' => (int) $p['opening_stock'],
+            'new_stock'     => (int) $p['new_stock'],
+            'total_sold'    => (int) $p['total_sold'],
+            'breakage'      => (int) $p['breakage'],
+            'closing_stock' => (int) $p['current_stock'],
+        );
+
+        // Also log to daily stock sheet logs
+        $ts = $p['opening_stock'] + $p['new_stock'];
+        $cs = max(0, $ts - $p['total_sold'] - $p['breakage']);
+        $amt = $p['total_sold'] * (float) $p['price'];
+
+        $wpdb->insert($table_logs, array(
+            'log_date'      => $today,
+            'product_id'    => $p['id'],
+            'product_name'  => $p['name'],
+            'category'      => $p['category'],
+            'price'         => $p['price'],
+            'opening_stock' => $p['opening_stock'],
+            'new_stock'     => $p['new_stock'],
+            'total_stock'   => $ts,
+            'qty_sold'      => $p['total_sold'],
+            'breakage'      => $p['breakage'],
+            'closing_stock' => $cs,
+            'amount'        => $amt,
+            'staff_name'    => !empty($outgoing_staff) ? $outgoing_staff : $active_shift['staff_name'],
+        ));
+    }
+
+    // 2. Finalize and close the active shift
+    $end_time = current_time('mysql');
+    $wpdb->update($table_shifts, array(
+        'staff_name'          => !empty($outgoing_staff) ? $outgoing_staff : $active_shift['staff_name'],
+        'incoming_staff'      => $incoming_staff,
+        'end_time'            => $end_time,
+        'total_orders'        => $shift_metrics['total_orders'],
+        'total_sales'         => $shift_metrics['total_revenue'],
+        'pos_sales'           => $shift_metrics['pos_revenue'],
+        'cash_sales'          => $shift_metrics['cash_revenue'],
+        'transfer_sales'      => $shift_metrics['transfer_revenue'],
+        'room_sales'          => $shift_metrics['room_revenue'],
+        'total_bottles_sold'  => $shift_metrics['total_bottles'],
+        'drinks_sold_json'    => wp_json_encode($shift_metrics['items_sold']),
+        'stock_handover_json' => wp_json_encode($stock_handover),
+        'notes'               => $notes,
+        'status'              => 'closed',
+    ), array('id' => $active_shift['id']));
+
+    // 3. Stock Rollover: Current Stock becomes Opening Stock for incoming staff, reset delta counters
+    $wpdb->query("UPDATE $table_products SET opening_stock = current_stock, new_stock = 0, total_sold = 0, breakage = 0");
+
+    // 4. Start the next shift immediately dedicated to the incoming staff!
+    $new_shift_code = 'SHIFT-' . current_time('Ymd') . '-' . strtoupper(wp_generate_password(4, false, false));
+    $wpdb->insert($table_shifts, array(
+        'shift_code'  => $new_shift_code,
+        'staff_name'  => $incoming_staff,
+        'start_time'  => current_time('mysql'),
+        'status'      => 'active',
+    ));
+    $new_shift_id = $wpdb->insert_id;
+
+    wp_send_json_success(array(
+        'message'            => "Shift successfully closed by {$outgoing_staff}! Handed over to {$incoming_staff}.",
+        'closed_shift'       => array(
+            'shift_code'         => $active_shift['shift_code'],
+            'outgoing_staff'     => !empty($outgoing_staff) ? $outgoing_staff : $active_shift['staff_name'],
+            'incoming_staff'     => $incoming_staff,
+            'start_time'         => date('d/m/Y h:i A', strtotime($active_shift['start_time'])),
+            'end_time'           => date('d/m/Y h:i A', strtotime($end_time)),
+            'totals'             => $shift_metrics,
+            'items_sold'         => $shift_metrics['items_sold'],
+            'stock_handover'     => $stock_handover,
+            'notes'              => $notes,
+        ),
+        'new_shift'          => array(
+            'id'                 => $new_shift_id,
+            'shift_code'         => $new_shift_code,
+            'staff_name'         => $incoming_staff,
+            'start_time'         => current_time('d/m/Y h:i A'),
+        ),
+        'new_active_staff'   => $incoming_staff,
+    ));
+}
+
+/**
+ * AJAX: Get Closed Shift History & Handover Reports
+ */
+add_action('wp_ajax_kc_bar_get_shift_history', 'kc_bar_ajax_get_shift_history');
+add_action('wp_ajax_nopriv_kc_bar_get_shift_history', 'kc_bar_ajax_get_shift_history');
+function kc_bar_ajax_get_shift_history() {
+    if (!kc_bar_verify_staff_session()) {
+        wp_send_json_error(array('message' => 'Unauthorized.'), 401);
+    }
+
+    global $wpdb;
+    $table_shifts = $wpdb->prefix . 'kc_bar_shifts';
+
+    $shifts = $wpdb->get_results(
+        "SELECT id, shift_code, staff_name, incoming_staff, start_time, end_time, total_orders, total_sales, pos_sales, cash_sales, transfer_sales, total_bottles_sold, drinks_sold_json, notes, status 
+         FROM $table_shifts 
+         ORDER BY id DESC 
+         LIMIT 25",
+        ARRAY_A
+    );
+
+    foreach ($shifts as &$s) {
+        $s['drinks_sold'] = json_decode($s['drinks_sold_json'] ?? '[]', true) ?: array();
+    }
+
+    wp_send_json_success(array('shifts' => $shifts));
+}
+
+/**
+ * AJAX: Reset Daily Shift (Admin Only)
  */
 add_action('wp_ajax_kc_bar_reset_day', 'kc_bar_ajax_reset_day');
 add_action('wp_ajax_nopriv_kc_bar_reset_day', 'kc_bar_ajax_reset_day');
 function kc_bar_ajax_reset_day() {
     if (!kc_bar_verify_admin_session()) {
-        wp_send_json_error(array('message' => 'Admin privileges required to close/reset shift (PIN: 1122).'), 403);
+        wp_send_json_error(array('message' => 'Admin privileges required to close/reset shift.'), 403);
     }
 
     global $wpdb;
@@ -695,7 +1026,6 @@ function kc_bar_ajax_reset_day() {
 
     $today = current_time('Y-m-d');
 
-    // Archive current numbers to daily logs before resetting
     $products = $wpdb->get_results("SELECT * FROM $table_products WHERE is_active = 1", ARRAY_A);
     foreach ($products as $p) {
         $ts = $p['opening_stock'] + $p['new_stock'];
@@ -719,10 +1049,55 @@ function kc_bar_ajax_reset_day() {
         ));
     }
 
-    // Set new opening_stock = current_stock, reset new_stock, total_sold, breakage to 0
     $wpdb->query("UPDATE $table_products SET opening_stock = current_stock, new_stock = 0, total_sold = 0, breakage = 0");
 
     wp_send_json_success(array('message' => 'Day archived and new shift started! Closing stocks rolled over to new Opening Stocks.'));
+}
+
+/**
+ * AJAX: Clear Test Orders & Start Fresh Tomorrow (Admin Only)
+ * Preserves all current physical stocks while wiping test orders & test shift noise
+ */
+add_action('wp_ajax_kc_bar_clear_test_data', 'kc_bar_ajax_clear_test_data');
+add_action('wp_ajax_nopriv_kc_bar_clear_test_data', 'kc_bar_ajax_clear_test_data');
+function kc_bar_ajax_clear_test_data() {
+    if (!kc_bar_verify_admin_session()) {
+        wp_send_json_error(array('message' => 'Admin privileges required.'), 403);
+    }
+
+    global $wpdb;
+    $table_products = $wpdb->prefix . 'kc_bar_products';
+    $table_orders   = $wpdb->prefix . 'kc_bar_orders';
+    $table_logs     = $wpdb->prefix . 'kc_bar_daily_logs';
+    $table_shifts   = $wpdb->prefix . 'kc_bar_shifts';
+
+    // 1. Delete all test orders
+    $wpdb->query("DELETE FROM $table_orders");
+    $wpdb->query("ALTER TABLE $table_orders AUTO_INCREMENT = 1");
+
+    // 2. Clear daily logs
+    $wpdb->query("DELETE FROM $table_logs");
+    $wpdb->query("ALTER TABLE $table_logs AUTO_INCREMENT = 1");
+
+    // 3. Clear shifts
+    $wpdb->query("DELETE FROM $table_shifts");
+    $wpdb->query("ALTER TABLE $table_shifts AUTO_INCREMENT = 1");
+
+    // 4. Reset product sales counts while preserving current actual stock as opening stock
+    $wpdb->query("UPDATE $table_products SET opening_stock = current_stock, new_stock = 0, total_sold = 0, breakage = 0");
+
+    // 5. Initialize fresh shift
+    $shift_code = 'SHIFT-' . current_time('Ymd') . '-LIVE01';
+    $wpdb->insert($table_shifts, array(
+        'shift_code'  => $shift_code,
+        'staff_name'  => 'Bar Staff',
+        'start_time'  => current_time('mysql'),
+        'status'      => 'active',
+    ));
+
+    wp_send_json_success(array(
+        'message' => 'All test orders and shift logs have been cleared! Physical bottle stock levels are preserved. The system is 100% clean and ready for tomorrow\'s live report.',
+    ));
 }
 
 /**
