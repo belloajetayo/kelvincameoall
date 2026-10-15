@@ -1294,7 +1294,7 @@ $site_home = home_url('/');
   </div>
 
   <!-- ==============================================================
-       MODAL: ADMIN PRODUCT & PRICE MANAGER (PIN 1122 Protected)
+       MODAL: ADMIN PRODUCT & PRICE MANAGER
        ============================================================== -->
   <div class="pos-modal-overlay" id="addDrinkModal">
     <div class="pos-modal">
@@ -1341,7 +1341,7 @@ $site_home = home_url('/');
   </div>
 
   <!-- ==============================================================
-       MODAL: ADMIN ROLE UNLOCK (Prompt for PIN 1122)
+       MODAL: ADMIN ROLE UNLOCK
        ============================================================== -->
   <div class="pos-modal-overlay" id="adminUnlockModal">
     <div class="pos-modal" style="max-width:400px; text-align:center;">
@@ -1541,7 +1541,7 @@ $site_home = home_url('/');
     });
 
     // -------------------------------------------------------------
-    // PIN SECURITY SYSTEM (Admin: 1122 | Staff: 1613)
+    // PIN SECURITY SYSTEM
     // -------------------------------------------------------------
     let enteredPin = '';
 
