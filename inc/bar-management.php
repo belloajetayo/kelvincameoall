@@ -263,7 +263,7 @@ function kc_bar_ajax_verify_pin() {
             'token'   => $token,
         ));
     } else {
-        wp_send_json_error(array('message' => 'Invalid Security PIN. Enter Staff PIN (1613) or Admin Password (1122).'));
+        wp_send_json_error(array('message' => 'Invalid Security PIN. Please try again or contact Management.'));
     }
 }
 
@@ -475,7 +475,7 @@ function kc_bar_ajax_update_stock() {
     // Strict Role Restriction: Only Admin can directly edit exact stock
     if ($action === 'set_exact' && $role !== 'admin') {
         wp_send_json_error(array(
-            'message' => 'Permission Denied: Only Admin can directly edit stock levels. Staff can only add new stock (N/S) or log breakage (B/C/S). Enter Admin Password (1122).',
+            'message' => 'Permission Denied: Only Admin can directly edit stock levels. Staff can only add new stock (N/S) or log breakage (B/C/S). Enter Admin Password.',
             'require_admin' => true
         ), 403);
     }
@@ -522,7 +522,7 @@ add_action('wp_ajax_kc_bar_admin_edit_product', 'kc_bar_ajax_admin_edit_product'
 add_action('wp_ajax_nopriv_kc_bar_admin_edit_product', 'kc_bar_ajax_admin_edit_product');
 function kc_bar_ajax_admin_edit_product() {
     if (!kc_bar_verify_admin_session()) {
-        wp_send_json_error(array('message' => 'Admin privileges required (PIN: 1122).'), 403);
+        wp_send_json_error(array('message' => 'Admin privileges required.'), 403);
     }
 
     global $wpdb;
@@ -557,7 +557,7 @@ add_action('wp_ajax_kc_bar_add_product', 'kc_bar_ajax_add_product');
 add_action('wp_ajax_nopriv_kc_bar_add_product', 'kc_bar_ajax_add_product');
 function kc_bar_ajax_add_product() {
     if (!kc_bar_verify_admin_session()) {
-        wp_send_json_error(array('message' => 'Admin privileges required to add new menu items (PIN: 1122).'), 403);
+        wp_send_json_error(array('message' => 'Admin privileges required to add new menu items.'), 403);
     }
 
     global $wpdb;

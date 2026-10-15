@@ -809,7 +809,7 @@ $site_home = home_url('/');
       <div class="brand-icon" style="margin: 0 auto 1rem; width: 48px; height: 48px;">KC</div>
       <h2 style="font-size: 1.3rem; font-weight:800; color:#fff;">Bar &amp; Lounge POS</h2>
       <p style="font-size:0.8rem; color:#94a3b8; margin-top:0.25rem;">
-        Staff PIN: <strong>1613</strong> | Admin PIN: <strong>1122</strong>
+        Authorized Staff &amp; Management Only &bull; Enter 4-Digit Security PIN
       </p>
       
       <div class="pin-dots" id="pinDots">
@@ -1301,7 +1301,7 @@ $site_home = home_url('/');
       <div class="modal-head">
         <div>
           <h3>Add New Drink to Bar Menu</h3>
-          <span style="font-size:0.75rem; color:#d4af37;">👑 Admin / Manager Privilege (PIN: 1122)</span>
+          <span style="font-size:0.75rem; color:#d4af37;">👑 Admin / Manager Privilege</span>
         </div>
         <button type="button" class="modal-close" onclick="closeModal('addDrinkModal')">&times;</button>
       </div>
@@ -1351,7 +1351,7 @@ $site_home = home_url('/');
       </div>
       <div class="modal-body">
         <p style="font-size:0.85rem; color:#94a3b8; margin-bottom:1.25rem;">
-          Enter the Manager/Admin PIN (<strong>1122</strong>) to unlock direct stock editing, price adjustments, and shift close privileges.
+          Enter Manager / Admin Security PIN to unlock direct stock editing, price adjustments, and shift close privileges.
         </p>
         <input type="password" id="adminPinInput" class="cart-meta-select" style="padding:0.75rem; text-align:center; font-size:1.5rem; letter-spacing:0.5rem;" maxlength="4" placeholder="••••">
         <button type="button" class="btn-checkout" id="submitAdminUnlockBtn" style="width:100%; margin-top:1rem;">
