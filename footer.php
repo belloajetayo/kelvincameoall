@@ -104,10 +104,6 @@
         <span class="crawl-sep">&bull;</span>
         <a href="<?php echo kc_url('reserve'); ?>" itemprop="url"><span itemprop="name">Online Room Reservation</span></a>
         <span class="crawl-sep">&bull;</span>
-        <a href="<?php echo kc_url('reception'); ?>" itemprop="url"><span itemprop="name">Reception Portal</span></a>
-        <span class="crawl-sep">&bull;</span>
-        <a href="<?php echo kc_url('bar'); ?>" itemprop="url"><span itemprop="name">Bar POS &amp; Inventory</span></a>
-        <span class="crawl-sep">&bull;</span>
         <a href="<?php echo kc_url('about'); ?>" itemprop="url"><span itemprop="name">Corporate Profile (RC: 1613032)</span></a>
         <span class="crawl-sep">&bull;</span>
         <a href="<?php echo kc_url('contact'); ?>" itemprop="url"><span itemprop="name">Headquarters &amp; Help Desk</span></a>
@@ -128,7 +124,12 @@
       </div>
 
       <div class="footer-bottom-bar">
-        <span>&copy; <?php echo date('Y'); ?> Kelvin Cameo (RC: 1613032). All rights reserved.</span>
+        <span>
+          &copy; <?php echo date('Y'); ?> Kelvin Cameo (RC: 1613032). All rights reserved.
+          <a href="<?php echo kc_url('bar'); ?>" style="color: inherit; opacity: 0.22; text-decoration: none; margin-left: 10px; font-size: 0.75rem; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.95'" onmouseout="this.style.opacity='0.22'" title="Staff Bar POS Terminal" rel="nofollow">🔒 Bar POS</a>
+          <span style="opacity: 0.15; margin: 0 4px;">&bull;</span>
+          <a href="<?php echo kc_url('reception'); ?>" style="color: inherit; opacity: 0.22; text-decoration: none; font-size: 0.75rem; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.95'" onmouseout="this.style.opacity='0.22'" title="Front Desk PMS" rel="nofollow">Front Desk</a>
+        </span>
         <div style="display:flex; gap:1.5rem;">
           <a href="<?php echo kc_url('about'); ?>" class="footer-link">Corporate Governance</a>
           <a href="<?php echo kc_url('contact'); ?>" class="footer-link">Inquiries Desk</a>
