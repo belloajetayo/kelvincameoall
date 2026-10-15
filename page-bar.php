@@ -857,7 +857,7 @@ $site_home = home_url('/');
 
     <div class="pos-top-actions">
       <!-- Active Role Badge with Quick Unlock -->
-      <div class="role-badge staff" id="roleBadgeBtn" title="Click to Switch / Unlock Admin (PIN: 1122)">
+      <div class="role-badge staff" id="roleBadgeBtn" title="Click to Switch / Unlock Admin Mode">
         <span id="roleIcon">🛡️</span>
         <span id="roleLabel">Staff (Cashier)</span>
       </div>
@@ -1645,14 +1645,14 @@ $site_home = home_url('/');
         badge.className = 'role-badge staff';
         icon.textContent = '🛡️';
         label.textContent = 'Staff (Cashier)';
-        badge.title = 'Click to enter Admin PIN (1122)';
+        badge.title = 'Click to enter Admin Password';
         if (optSetExact) optSetExact.disabled = true;
       }
     }
 
     function unlockAdminModal() {
       if (currentRole === 'admin') {
-        showToast('Admin Mode is already active (PIN: 1122).');
+        showToast('Admin Mode is already active.');
         return;
       }
       openModal('adminUnlockModal');
@@ -1681,7 +1681,7 @@ $site_home = home_url('/');
             showToast('👑 Admin Mode Unlocked! You have full stock editing privileges.');
             loadPosData();
           } else {
-            showToast('Incorrect Admin PIN. Admin password is 1122.', true);
+            showToast('Incorrect Admin PIN. Please try again.', true);
           }
         });
     }
@@ -2177,7 +2177,7 @@ $site_home = home_url('/');
 
     function resetDayShift() {
       if (currentRole !== 'admin') {
-        showToast('Admin privilege required (PIN: 1122) to close/reset shift.', true);
+        showToast('Admin privilege required to close/reset shift.', true);
         unlockAdminModal();
         return;
       }
@@ -2236,7 +2236,7 @@ $site_home = home_url('/');
 
       // Check role if action is set_exact
       if (type === 'set_exact' && currentRole !== 'admin') {
-        showToast('Only Admin (PIN: 1122) can directly edit current stock! Staff can only add new stock (N/S).', true);
+        showToast('Only Admin can directly edit current stock! Staff can only add new stock (N/S).', true);
         unlockAdminModal();
         return;
       }
@@ -2369,7 +2369,7 @@ $site_home = home_url('/');
       document.getElementById('openRestockBtn').addEventListener('click', () => openModal('restockModal'));
       document.getElementById('openAddDrinkModalBtn').addEventListener('click', () => {
         if (currentRole !== 'admin') {
-          showToast('Admin password (1122) required to add new menu drinks.', true);
+          showToast('Admin password required to add new menu drinks.', true);
           unlockAdminModal();
           return;
         }
