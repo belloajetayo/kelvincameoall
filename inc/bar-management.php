@@ -1,10 +1,11 @@
 <?php
 /**
  * Kelvin Cameo Bar & Lounge Management Engine
- * Point of Sale (POS), Beverage Inventory & Thermal Receipt Printing System
+ * Point of Sale (POS), Beverage Inventory, Role-Based Access & Monthly Audit Reports
  *
  * Official RC: 1613032
  * Categories: Wine & Spirits, Beer & Bitters, Drinks & Refreshments
+ * Admin PIN: 1122 | Staff PIN: 1613
  *
  * @package Kelvin_Cameo
  */
@@ -206,33 +207,63 @@ function kc_bar_seed_initial_products() {
 }
 
 /**
- * Staff PIN Authentication
+ * Access Level & Role Helper:
+ * Admin PIN: 1122
+ * Staff PIN: 1613
  */
-function kc_bar_verify_staff_session() {
+function kc_bar_get_current_role() {
     $token = sanitize_text_field($_REQUEST['token'] ?? ($_SERVER['HTTP_X_KC_BAR_TOKEN'] ?? ''));
-    if (!empty($token) && wp_verify_nonce($token, 'kc_bar_pos_session')) {
-        return true;
+    if (!empty($token)) {
+        if (wp_verify_nonce($token, 'kc_bar_admin_session')) {
+            return 'admin';
+        }
+        if (wp_verify_nonce($token, 'kc_bar_staff_session')) {
+            return 'staff';
+        }
     }
-    return is_user_logged_in();
+    if (current_user_can('manage_options')) {
+        return 'admin';
+    }
+    if (is_user_logged_in()) {
+        return 'staff';
+    }
+    return false;
+}
+
+function kc_bar_verify_staff_session() {
+    return kc_bar_get_current_role() !== false;
+}
+
+function kc_bar_verify_admin_session() {
+    return kc_bar_get_current_role() === 'admin';
 }
 
 /**
- * AJAX: Verify PIN
+ * AJAX: Verify PIN (Admin: 1122 | Staff: 1613)
  */
 add_action('wp_ajax_kc_bar_verify_pin', 'kc_bar_ajax_verify_pin');
 add_action('wp_ajax_nopriv_kc_bar_verify_pin', 'kc_bar_ajax_verify_pin');
 function kc_bar_ajax_verify_pin() {
     $pin = sanitize_text_field($_POST['pin'] ?? '');
-    $stored_pin = get_option('kc_bar_pin', '1613');
+    $admin_pin = get_option('kc_bar_admin_pin', '1122');
+    $staff_pin = get_option('kc_bar_pin', '1613');
 
-    if ($pin === $stored_pin || $pin === '1613') {
-        $token = wp_create_nonce('kc_bar_pos_session');
+    if ($pin === $admin_pin || $pin === '1122') {
+        $token = wp_create_nonce('kc_bar_admin_session');
         wp_send_json_success(array(
-            'message' => 'PIN Verified',
+            'message' => 'Admin Access Granted (Full Privileges)',
+            'role'    => 'admin',
+            'token'   => $token,
+        ));
+    } elseif ($pin === $staff_pin || $pin === '1613') {
+        $token = wp_create_nonce('kc_bar_staff_session');
+        wp_send_json_success(array(
+            'message' => 'Staff Access Granted (Sales & Restock Mode)',
+            'role'    => 'staff',
             'token'   => $token,
         ));
     } else {
-        wp_send_json_error(array('message' => 'Invalid Security PIN. Contact management.'));
+        wp_send_json_error(array('message' => 'Invalid Security PIN. Enter Staff PIN (1613) or Admin Password (1122).'));
     }
 }
 
@@ -242,7 +273,8 @@ function kc_bar_ajax_verify_pin() {
 add_action('wp_ajax_kc_bar_get_pos_data', 'kc_bar_ajax_get_pos_data');
 add_action('wp_ajax_nopriv_kc_bar_get_pos_data', 'kc_bar_ajax_get_pos_data');
 function kc_bar_ajax_get_pos_data() {
-    if (!kc_bar_verify_staff_session()) {
+    $role = kc_bar_get_current_role();
+    if (!$role) {
         wp_send_json_error(array('message' => 'Unauthorized or session expired.'), 401);
     }
 
@@ -250,7 +282,6 @@ function kc_bar_ajax_get_pos_data() {
     $table_products = $wpdb->prefix . 'kc_bar_products';
     $table_orders   = $wpdb->prefix . 'kc_bar_orders';
 
-    // Ensure database exists
     kc_bar_init_db();
 
     // 1. Fetch all active products
@@ -281,12 +312,12 @@ function kc_bar_ajax_get_pos_data() {
         ARRAY_A
     );
 
-    // 3. Fetch recent 30 orders
+    // 3. Fetch recent 40 orders
     $recent_orders = $wpdb->get_results(
         "SELECT id, receipt_no, items_json, total_items, total_amount, payment_method, staff_name, customer_name, table_number, room_number, created_at 
          FROM $table_orders 
          ORDER BY id DESC 
-         LIMIT 30",
+         LIMIT 40",
         ARRAY_A
     );
 
@@ -295,6 +326,7 @@ function kc_bar_ajax_get_pos_data() {
     }
 
     wp_send_json_success(array(
+        'role'          => $role,
         'products'      => $products,
         'sales_summary' => $sales_summary,
         'recent_orders' => $recent_orders,
@@ -421,11 +453,15 @@ function kc_bar_ajax_create_order() {
 
 /**
  * AJAX: Restock / Adjust Stock / Log Breakage
+ * ACCESS CONTROL:
+ * - Staff can ONLY 'restock' (N/S) or 'breakage' (B/C/S)
+ * - Only ADMIN (PIN: 1122) can 'set_exact' or edit prices/baseline
  */
 add_action('wp_ajax_kc_bar_update_stock', 'kc_bar_ajax_update_stock');
 add_action('wp_ajax_nopriv_kc_bar_update_stock', 'kc_bar_ajax_update_stock');
 function kc_bar_ajax_update_stock() {
-    if (!kc_bar_verify_staff_session()) {
+    $role = kc_bar_get_current_role();
+    if (!$role) {
         wp_send_json_error(array('message' => 'Unauthorized.'), 401);
     }
 
@@ -435,6 +471,14 @@ function kc_bar_ajax_update_stock() {
     $prod_id  = (int) ($_POST['product_id'] ?? 0);
     $action   = sanitize_text_field($_POST['action_type'] ?? 'restock'); // 'restock', 'breakage', 'set_exact'
     $qty      = (int) ($_POST['qty'] ?? 0);
+
+    // Strict Role Restriction: Only Admin can directly edit exact stock
+    if ($action === 'set_exact' && $role !== 'admin') {
+        wp_send_json_error(array(
+            'message' => 'Permission Denied: Only Admin can directly edit stock levels. Staff can only add new stock (N/S) or log breakage (B/C/S). Enter Admin Password (1122).',
+            'require_admin' => true
+        ), 403);
+    }
 
     $product = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table WHERE id = %d", $prod_id), ARRAY_A);
     if (!$product) {
@@ -446,7 +490,7 @@ function kc_bar_ajax_update_stock() {
             "UPDATE $table SET new_stock = new_stock + %d, current_stock = current_stock + %d WHERE id = %d",
             $qty, $qty, $prod_id
         ));
-        $msg = "Added $qty bottles to {$product['name']} stock.";
+        $msg = "Added $qty new bottles to {$product['name']} (New Stock Recorded).";
     } elseif ($action === 'breakage') {
         $wpdb->query($wpdb->prepare(
             "UPDATE $table SET breakage = breakage + %d, current_stock = GREATEST(0, current_stock - %d) WHERE id = %d",
@@ -458,7 +502,7 @@ function kc_bar_ajax_update_stock() {
             "UPDATE $table SET current_stock = %d WHERE id = %d",
             $qty, $prod_id
         ));
-        $msg = "Set {$product['name']} current stock to $qty.";
+        $msg = "[Admin Action] Set {$product['name']} exact current stock to $qty bottles.";
     } else {
         wp_send_json_error(array('message' => 'Invalid action type.'));
     }
@@ -472,13 +516,48 @@ function kc_bar_ajax_update_stock() {
 }
 
 /**
- * AJAX: Add New Product to Menu
+ * AJAX: Admin Only - Edit Product Price / Name
+ */
+add_action('wp_ajax_kc_bar_admin_edit_product', 'kc_bar_ajax_admin_edit_product');
+add_action('wp_ajax_nopriv_kc_bar_admin_edit_product', 'kc_bar_ajax_admin_edit_product');
+function kc_bar_ajax_admin_edit_product() {
+    if (!kc_bar_verify_admin_session()) {
+        wp_send_json_error(array('message' => 'Admin privileges required (PIN: 1122).'), 403);
+    }
+
+    global $wpdb;
+    $table = $wpdb->prefix . 'kc_bar_products';
+
+    $prod_id = (int) ($_POST['product_id'] ?? 0);
+    $price   = (float) ($_POST['price'] ?? 0);
+    $name    = sanitize_text_field($_POST['name'] ?? '');
+    $stock   = isset($_POST['stock']) ? (int) $_POST['stock'] : null;
+
+    if ($prod_id <= 0 || $price <= 0) {
+        wp_send_json_error(array('message' => 'Invalid product price or ID.'));
+    }
+
+    $update_data = array('price' => $price);
+    if (!empty($name)) {
+        $update_data['name'] = $name;
+    }
+    if ($stock !== null && $stock >= 0) {
+        $update_data['current_stock'] = $stock;
+    }
+
+    $wpdb->update($table, $update_data, array('id' => $prod_id));
+
+    wp_send_json_success(array('message' => 'Product updated successfully by Admin.'));
+}
+
+/**
+ * AJAX: Add New Product to Menu (Admin only)
  */
 add_action('wp_ajax_kc_bar_add_product', 'kc_bar_ajax_add_product');
 add_action('wp_ajax_nopriv_kc_bar_add_product', 'kc_bar_ajax_add_product');
 function kc_bar_ajax_add_product() {
-    if (!kc_bar_verify_staff_session()) {
-        wp_send_json_error(array('message' => 'Unauthorized.'), 401);
+    if (!kc_bar_verify_admin_session()) {
+        wp_send_json_error(array('message' => 'Admin privileges required to add new menu items (PIN: 1122).'), 403);
     }
 
     global $wpdb;
@@ -514,7 +593,7 @@ function kc_bar_ajax_add_product() {
     }
 
     wp_send_json_success(array(
-        'message' => "Successfully added $name to $category!",
+        'message' => "Successfully added $name to $category by Admin!",
         'id'      => $wpdb->insert_id,
     ));
 }
@@ -592,6 +671,7 @@ function kc_bar_ajax_get_daily_sheet() {
 
     wp_send_json_success(array(
         'date'               => current_time('d F Y'),
+        'role'               => kc_bar_get_current_role(),
         'rows'               => $ledger_rows,
         'grand_total_amount' => $grand_total_amount,
         'total_bottles_sold' => $total_bottles_sold,
@@ -600,20 +680,175 @@ function kc_bar_ajax_get_daily_sheet() {
 }
 
 /**
- * AJAX: Reset Daily Counts for New Shift / Day
+ * AJAX: Reset Daily Counts for New Shift / Day (Admin Only)
  */
 add_action('wp_ajax_kc_bar_reset_day', 'kc_bar_ajax_reset_day');
 add_action('wp_ajax_nopriv_kc_bar_reset_day', 'kc_bar_ajax_reset_day');
 function kc_bar_ajax_reset_day() {
+    if (!kc_bar_verify_admin_session()) {
+        wp_send_json_error(array('message' => 'Admin privileges required to close/reset shift (PIN: 1122).'), 403);
+    }
+
+    global $wpdb;
+    $table_products = $wpdb->prefix . 'kc_bar_products';
+    $table_logs     = $wpdb->prefix . 'kc_bar_daily_logs';
+
+    $today = current_time('Y-m-d');
+
+    // Archive current numbers to daily logs before resetting
+    $products = $wpdb->get_results("SELECT * FROM $table_products WHERE is_active = 1", ARRAY_A);
+    foreach ($products as $p) {
+        $ts = $p['opening_stock'] + $p['new_stock'];
+        $cs = max(0, $ts - $p['total_sold'] - $p['breakage']);
+        $amt = $p['total_sold'] * (float) $p['price'];
+
+        $wpdb->insert($table_logs, array(
+            'log_date'      => $today,
+            'product_id'    => $p['id'],
+            'product_name'  => $p['name'],
+            'category'      => $p['category'],
+            'price'         => $p['price'],
+            'opening_stock' => $p['opening_stock'],
+            'new_stock'     => $p['new_stock'],
+            'total_stock'   => $ts,
+            'qty_sold'      => $p['total_sold'],
+            'breakage'      => $p['breakage'],
+            'closing_stock' => $cs,
+            'amount'        => $amt,
+            'staff_name'    => 'Shift Close',
+        ));
+    }
+
+    // Set new opening_stock = current_stock, reset new_stock, total_sold, breakage to 0
+    $wpdb->query("UPDATE $table_products SET opening_stock = current_stock, new_stock = 0, total_sold = 0, breakage = 0");
+
+    wp_send_json_success(array('message' => 'Day archived and new shift started! Closing stocks rolled over to new Opening Stocks.'));
+}
+
+/**
+ * AJAX: Generate Comprehensive Monthly Sales & Inventory Report
+ * Formatted for End-of-Month Audit & Executive Printout
+ */
+add_action('wp_ajax_kc_bar_get_monthly_report', 'kc_bar_ajax_get_monthly_report');
+add_action('wp_ajax_nopriv_kc_bar_get_monthly_report', 'kc_bar_ajax_get_monthly_report');
+function kc_bar_ajax_get_monthly_report() {
     if (!kc_bar_verify_staff_session()) {
         wp_send_json_error(array('message' => 'Unauthorized.'), 401);
     }
 
     global $wpdb;
-    $table = $wpdb->prefix . 'kc_bar_products';
+    $table_products = $wpdb->prefix . 'kc_bar_products';
+    $table_orders   = $wpdb->prefix . 'kc_bar_orders';
 
-    // Set new opening_stock = current_stock, reset new_stock, total_sold, breakage to 0
-    $wpdb->query("UPDATE $table SET opening_stock = current_stock, new_stock = 0, total_sold = 0, breakage = 0");
+    $year  = (int) ($_POST['year'] ?? current_time('Y'));
+    $month = (int) ($_POST['month'] ?? current_time('m'));
 
-    wp_send_json_success(array('message' => 'New shift started! Closing stocks rolled over to new Opening Stocks.'));
+    if ($year < 2020 || $year > 2040) $year = (int) current_time('Y');
+    if ($month < 1 || $month > 12) $month = (int) current_time('m');
+
+    $month_str = str_pad($month, 2, '0', STR_PAD_LEFT);
+    $start_date = "$year-$month_str-01 00:00:00";
+    $end_date   = date('Y-m-t 23:59:59', strtotime($start_date));
+    $month_name = date('F Y', strtotime($start_date));
+
+    // 1. Total Financial Aggregates
+    $summary = $wpdb->get_row(
+        $wpdb->prepare(
+            "SELECT 
+                COUNT(*) as total_orders,
+                COALESCE(SUM(total_amount), 0) as total_revenue,
+                COALESCE(SUM(CASE WHEN payment_method = 'pos' THEN total_amount ELSE 0 END), 0) as pos_revenue,
+                COALESCE(SUM(CASE WHEN payment_method = 'cash' THEN total_amount ELSE 0 END), 0) as cash_revenue,
+                COALESCE(SUM(CASE WHEN payment_method = 'transfer' THEN total_amount ELSE 0 END), 0) as transfer_revenue,
+                COALESCE(SUM(CASE WHEN payment_method = 'room_charge' THEN total_amount ELSE 0 END), 0) as room_revenue,
+                COALESCE(SUM(total_items), 0) as total_bottles_sold
+             FROM $table_orders 
+             WHERE created_at BETWEEN %s AND %s AND status = 'completed'",
+            $start_date,
+            $end_date
+        ),
+        ARRAY_A
+    );
+
+    // 2. Fetch all products and compile monthly stats
+    $products = $wpdb->get_results(
+        "SELECT id, name, category, price, opening_stock, new_stock, current_stock, total_sold, breakage 
+         FROM $table_products 
+         WHERE is_active = 1 
+         ORDER BY category ASC, name ASC",
+        ARRAY_A
+    );
+
+    // 3. Extract itemized sales from orders in this month
+    $orders = $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT items_json FROM $table_orders 
+             WHERE created_at BETWEEN %s AND %s AND status = 'completed'",
+            $start_date,
+            $end_date
+        ),
+        ARRAY_A
+    );
+
+    $sold_per_product = array();
+    foreach ($orders as $ord) {
+        $items = json_decode($ord['items_json'], true) ?: array();
+        foreach ($items as $it) {
+            $p_id = (int) ($it['id'] ?? 0);
+            $qty  = (int) ($it['qty'] ?? 0);
+            if ($p_id > 0) {
+                $sold_per_product[$p_id] = ($sold_per_product[$p_id] ?? 0) + $qty;
+            }
+        }
+    }
+
+    $report_items = array();
+    $cat_totals = array('wine' => 0, 'beer' => 0, 'drinks' => 0);
+    $cat_rev    = array('wine' => 0, 'beer' => 0, 'drinks' => 0);
+
+    foreach ($products as $p) {
+        $pid = (int) $p['id'];
+        $sold_month = $sold_per_product[$pid] ?? (int) $p['total_sold'];
+        $price = (float) $p['price'];
+        $revenue = $sold_month * $price;
+
+        $cat = $p['category'];
+        if (isset($cat_totals[$cat])) {
+            $cat_totals[$cat] += $sold_month;
+            $cat_rev[$cat]    += $revenue;
+        }
+
+        $report_items[] = array(
+            'id'            => $pid,
+            'name'          => $p['name'],
+            'category'      => $cat,
+            'price'         => $price,
+            'opening_stock' => (int) $p['opening_stock'],
+            'new_stock'     => (int) $p['new_stock'],
+            'sold_qty'      => $sold_month,
+            'breakage'      => (int) $p['breakage'],
+            'closing_stock' => (int) $p['current_stock'],
+            'revenue'       => $revenue,
+        );
+    }
+
+    // Sort Top 5 Bestsellers by Revenue
+    $top_items = $report_items;
+    usort($top_items, function($a, $b) {
+        return $b['revenue'] <=> $a['revenue'];
+    });
+    $top_5 = array_slice($top_items, 0, 5);
+
+    wp_send_json_success(array(
+        'month_name'     => $month_name,
+        'year'           => $year,
+        'month'          => $month,
+        'summary'        => $summary,
+        'category_qty'   => $cat_totals,
+        'category_rev'   => $cat_rev,
+        'top_5'          => $top_5,
+        'items'          => $report_items,
+        'generated_at'   => current_time('d F Y, h:i A'),
+        'prepared_by'    => 'Kelvin Cameo Automated Bar Accounting Engine',
+    ));
 }

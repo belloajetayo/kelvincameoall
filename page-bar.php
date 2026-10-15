@@ -5,7 +5,7 @@
  *
  * Kelvin Cameo Resort Hotel & Lounge - Bar Management & POS System
  * Official RC: 1613032
- * Categories: Wine & Spirits, Beer & Bitters, Drinks & Refreshments
+ * Access Levels: Admin PIN (1122) | Staff PIN (1613)
  *
  * @package Kelvin_Cameo
  */
@@ -15,7 +15,6 @@ if (!defined('ABSPATH')) {
 }
 
 $ajax_url = admin_url('admin-ajax.php');
-$nonce    = wp_create_nonce('kc_bar_pos_session');
 $site_home = home_url('/');
 ?>
 <!DOCTYPE html>
@@ -27,7 +26,7 @@ $site_home = home_url('/');
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
   
   <style>
     :root {
@@ -41,9 +40,7 @@ $site_home = home_url('/');
       --kc-amber-500: #f59e0b;
       --kc-emerald-500: #10b981;
       --kc-emerald-600: #059669;
-      --kc-emerald-50: #ecfdf5;
       --kc-rose-500: #ef4444;
-      --kc-rose-50: #fef2f2;
       --kc-slate-50: #f8fafc;
       --kc-slate-100: #f1f5f9;
       --kc-slate-200: #e2e8f0;
@@ -69,7 +66,7 @@ $site_home = home_url('/');
     .pos-header {
       background: #060a14;
       border-bottom: 1px solid #1e293b;
-      padding: 0.75rem 1.25rem;
+      padding: 0.65rem 1.25rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -118,17 +115,43 @@ $site_home = home_url('/');
     .pos-top-actions {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.6rem;
+      flex-wrap: wrap;
     }
+
+    /* Role Badge */
+    .role-badge {
+      padding: 0.35rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .role-badge.staff {
+      background: #1e293b;
+      color: #38bdf8;
+      border: 1px solid #0284c7;
+    }
+    .role-badge.admin {
+      background: rgba(212,175,55,0.2);
+      color: #d4af37;
+      border: 1px solid #d4af37;
+      box-shadow: 0 0 10px rgba(212,175,55,0.25);
+    }
+
     .staff-badge {
       background: #1e293b;
       border: 1px solid #334155;
-      padding: 0.4rem 0.85rem;
+      padding: 0.4rem 0.75rem;
       border-radius: 9999px;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      font-size: 0.85rem;
+      gap: 0.4rem;
+      font-size: 0.82rem;
       color: #e2e8f0;
       cursor: pointer;
     }
@@ -139,18 +162,19 @@ $site_home = home_url('/');
       border-radius: 50%;
       box-shadow: 0 0 8px #10b981;
     }
+
     .nav-btn {
       background: #1e293b;
       color: #e2e8f0;
       border: 1px solid #334155;
-      padding: 0.5rem 0.85rem;
+      padding: 0.45rem 0.75rem;
       border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
+      font-size: 0.82rem;
+      font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.35rem;
       transition: all 0.2s;
     }
     .nav-btn:hover {
@@ -161,10 +185,16 @@ $site_home = home_url('/');
       background: linear-gradient(135deg, #d4af37, #b89327);
       color: #060e1e;
       border: none;
+      font-weight: 800;
+    }
+    .nav-btn.accent {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #fff;
+      border: none;
       font-weight: 700;
     }
 
-    /* MAIN CONTAINER: 2 COLUMNS */
+    /* MAIN CONTAINER */
     .pos-layout {
       flex: 1;
       display: flex;
@@ -172,7 +202,7 @@ $site_home = home_url('/');
       position: relative;
     }
 
-    /* LEFT: MENU & CATALOG */
+    /* LEFT CATALOG PANE */
     .pos-catalog-pane {
       flex: 1;
       display: flex;
@@ -182,9 +212,8 @@ $site_home = home_url('/');
       border-right: 1px solid #1e293b;
     }
 
-    /* Category Filter Pills Bar */
     .category-pills-bar {
-      padding: 1rem 1.25rem 0.5rem;
+      padding: 0.85rem 1.25rem 0.4rem;
       display: flex;
       gap: 0.6rem;
       flex-wrap: wrap;
@@ -195,20 +224,17 @@ $site_home = home_url('/');
       background: #1e293b;
       color: #94a3b8;
       border: 1px solid #334155;
-      padding: 0.55rem 1rem;
+      padding: 0.5rem 0.9rem;
       border-radius: 9999px;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.35rem;
       transition: all 0.2s;
     }
-    .cat-btn:hover {
-      background: #334155;
-      color: #fff;
-    }
+    .cat-btn:hover { background: #334155; color: #fff; }
     .cat-btn.active {
       background: #d4af37;
       color: #060e1e;
@@ -222,9 +248,8 @@ $site_home = home_url('/');
       font-size: 0.7rem;
     }
 
-    /* Search & Filter Header */
     .catalog-search-row {
-      padding: 0.5rem 1.25rem 1rem;
+      padding: 0.4rem 1.25rem 0.85rem;
       background: #060a14;
       display: flex;
       gap: 0.75rem;
@@ -239,14 +264,12 @@ $site_home = home_url('/');
       background: #0f172a;
       border: 1px solid #334155;
       color: #fff;
-      padding: 0.65rem 1rem 0.65rem 2.4rem;
+      padding: 0.6rem 1rem 0.6rem 2.4rem;
       border-radius: 10px;
       font-size: 0.9rem;
       outline: none;
     }
-    .search-input-wrap input:focus {
-      border-color: #d4af37;
-    }
+    .search-input-wrap input:focus { border-color: #d4af37; }
     .search-input-wrap svg {
       position: absolute;
       left: 0.85rem;
@@ -255,7 +278,6 @@ $site_home = home_url('/');
       color: #64748b;
     }
 
-    /* Product Grid */
     .products-grid-scroll {
       flex: 1;
       overflow-y: auto;
@@ -270,7 +292,7 @@ $site_home = home_url('/');
       background: #0f172a;
       border: 1px solid #1e293b;
       border-radius: 14px;
-      padding: 1rem;
+      padding: 0.95rem;
       cursor: pointer;
       display: flex;
       flex-direction: column;
@@ -278,16 +300,13 @@ $site_home = home_url('/');
       min-height: 125px;
       transition: all 0.2s ease;
       position: relative;
-      overflow: hidden;
     }
     .product-card:hover {
       border-color: #d4af37;
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.4);
     }
-    .product-card:active {
-      transform: scale(0.97);
-    }
+    .product-card:active { transform: scale(0.97); }
     .product-card.out-of-stock {
       opacity: 0.45;
       filter: grayscale(0.8);
@@ -333,20 +352,11 @@ $site_home = home_url('/');
       background: #1e293b;
       color: #94a3b8;
     }
-    .product-stock.ok {
-      background: rgba(16,185,129,0.15);
-      color: #10b981;
-    }
-    .product-stock.low {
-      background: rgba(245,158,11,0.15);
-      color: #f59e0b;
-    }
-    .product-stock.empty {
-      background: rgba(239,68,68,0.15);
-      color: #ef4444;
-    }
+    .product-stock.ok { background: rgba(16,185,129,0.15); color: #10b981; }
+    .product-stock.low { background: rgba(245,158,11,0.15); color: #f59e0b; }
+    .product-stock.empty { background: rgba(239,68,68,0.15); color: #ef4444; }
 
-    /* RIGHT: ORDER CART & CHECKOUT */
+    /* RIGHT: CART PANE */
     .pos-cart-pane {
       width: 420px;
       background: #060a14;
@@ -387,7 +397,6 @@ $site_home = home_url('/');
     }
     .clear-cart-btn:hover { color: #ef4444; }
 
-    /* Order Details / Table Selector */
     .cart-meta-bar {
       padding: 0.75rem 1.25rem;
       background: #0b1120;
@@ -407,7 +416,6 @@ $site_home = home_url('/');
       outline: none;
     }
 
-    /* Cart Items List */
     .cart-items-scroll {
       flex: 1;
       overflow-y: auto;
@@ -443,10 +451,7 @@ $site_home = home_url('/');
       justify-content: space-between;
       gap: 0.75rem;
     }
-    .cart-item-info {
-      flex: 1;
-      min-width: 0;
-    }
+    .cart-item-info { flex: 1; min-width: 0; }
     .cart-item-name {
       font-size: 0.9rem;
       font-weight: 700;
@@ -504,7 +509,6 @@ $site_home = home_url('/');
     }
     .cart-item-del:hover { color: #ef4444; }
 
-    /* Cart Summary & Checkout Footer */
     .cart-footer {
       padding: 1.25rem;
       background: #090e1a;
@@ -532,7 +536,6 @@ $site_home = home_url('/');
       font-family: 'JetBrains Mono', monospace;
     }
 
-    /* Payment Method Selector */
     .pay-methods-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -559,10 +562,7 @@ $site_home = home_url('/');
       color: #d4af37;
     }
 
-    .checkout-actions {
-      display: flex;
-      gap: 0.6rem;
-    }
+    .checkout-actions { display: flex; gap: 0.6rem; }
     .btn-checkout {
       flex: 1;
       background: linear-gradient(135deg, #10b981, #059669);
@@ -580,22 +580,15 @@ $site_home = home_url('/');
       box-shadow: 0 4px 15px rgba(16,185,129,0.3);
       transition: all 0.2s;
     }
-    .btn-checkout:hover {
-      filter: brightness(1.1);
-      transform: translateY(-1px);
-    }
-    .btn-checkout:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none;
-    }
+    .btn-checkout:hover { filter: brightness(1.1); transform: translateY(-1px); }
+    .btn-checkout:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-    /* MODALS & OVERLAYS */
+    /* MODALS */
     .pos-modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.8);
-      backdrop-filter: blur(5px);
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(6px);
       z-index: 1000;
       display: none;
       align-items: center;
@@ -607,26 +600,22 @@ $site_home = home_url('/');
       border: 1px solid #334155;
       border-radius: 18px;
       width: 100%;
-      max-width: 600px;
+      max-width: 620px;
       max-height: 90vh;
       display: flex;
       flex-direction: column;
       overflow: hidden;
       box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7);
     }
-    .pos-modal.wide { max-width: 950px; }
+    .pos-modal.wide { max-width: 980px; }
     .modal-head {
-      padding: 1.25rem 1.5rem;
+      padding: 1.15rem 1.5rem;
       border-bottom: 1px solid #1e293b;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .modal-head h3 {
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: #fff;
-    }
+    .modal-head h3 { font-size: 1.2rem; font-weight: 800; color: #fff; }
     .modal-close {
       background: none;
       border: none;
@@ -634,11 +623,7 @@ $site_home = home_url('/');
       font-size: 1.4rem;
       cursor: pointer;
     }
-    .modal-body {
-      padding: 1.5rem;
-      overflow-y: auto;
-      flex: 1;
-    }
+    .modal-body { padding: 1.5rem; overflow-y: auto; flex: 1; }
     .modal-foot {
       padding: 1rem 1.5rem;
       border-top: 1px solid #1e293b;
@@ -703,10 +688,8 @@ $site_home = home_url('/');
     }
     .pin-key:active { background: #d4af37; color: #060e1e; }
 
-    /* TABLE FOR DAILY LOGBOOK (LEDGER) */
-    .ledger-table-wrap {
-      overflow-x: auto;
-    }
+    /* TABLES */
+    .ledger-table-wrap { overflow-x: auto; }
     .ledger-table {
       width: 100%;
       border-collapse: collapse;
@@ -735,42 +718,62 @@ $site_home = home_url('/');
       color: #d4af37;
     }
 
-    /* THERMAL RECEIPT STYLING (ESC/POS 58mm / 80mm) */
-    #thermalReceiptArea {
+    /* THERMAL RECEIPT & MONTHLY REPORT PRINTING */
+    #thermalReceiptArea, #printableMonthlyArea {
       display: none;
     }
+
     @media print {
-      body * {
-        visibility: hidden;
-      }
-      #thermalReceiptArea, #thermalReceiptArea * {
+      body * { visibility: hidden; }
+      
+      /* Mode 1: Thermal Receipt */
+      body.printing-receipt #thermalReceiptArea,
+      body.printing-receipt #thermalReceiptArea * {
         visibility: visible;
       }
-      #thermalReceiptArea {
+      body.printing-receipt #thermalReceiptArea {
         display: block !important;
         position: absolute;
         left: 0;
         top: 0;
         width: 80mm;
         margin: 0;
-        padding: 5mm;
-        font-family: 'JetBrains Mono', 'Courier New', monospace;
+        padding: 4mm;
+        font-family: 'JetBrains Mono', monospace;
         font-size: 11px;
         line-height: 1.35;
         color: #000 !important;
         background: #fff !important;
       }
-      .receipt-center { text-align: center; }
-      .receipt-row { display: flex; justify-content: space-between; }
-      .receipt-divider { border-top: 1px dashed #000; margin: 4px 0; }
-      .receipt-double-divider { border-top: 2px solid #000; margin: 5px 0; }
-      @page {
+
+      /* Mode 2: Full Monthly A4 Report */
+      body.printing-monthly #printableMonthlyArea,
+      body.printing-monthly #printableMonthlyArea * {
+        visibility: visible;
+      }
+      body.printing-monthly #printableMonthlyArea {
+        display: block !important;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
         margin: 0;
-        size: 80mm auto;
+        padding: 15mm;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        color: #000 !important;
+        background: #fff !important;
+      }
+      @page {
+        margin: 10mm;
       }
     }
 
-    /* TOAST ALERTS */
+    .receipt-center { text-align: center; }
+    .receipt-row { display: flex; justify-content: space-between; }
+    .receipt-divider { border-top: 1px dashed #000; margin: 4px 0; }
+    .receipt-double-divider { border-top: 2px solid #000; margin: 5px 0; }
+
+    /* TOAST */
     #posToast {
       position: fixed;
       bottom: 2rem;
@@ -787,13 +790,9 @@ $site_home = home_url('/');
       opacity: 0;
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    #posToast.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
+    #posToast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
     #posToast.error { background: #ef4444; }
 
-    /* RESPONSIVE */
     @media (max-width: 900px) {
       .pos-layout { flex-direction: column; overflow-y: auto; }
       .pos-cart-pane { width: 100%; border-left: none; border-top: 1px solid #1e293b; max-height: 50vh; }
@@ -803,13 +802,15 @@ $site_home = home_url('/');
 <body>
 
   <!-- ==============================================================
-       PIN LOCK SCREEN (Defaults to 1613)
+       PIN LOCK / LOGIN SCREEN
        ============================================================== -->
   <div id="pinLockOverlay">
     <div class="pin-card">
       <div class="brand-icon" style="margin: 0 auto 1rem; width: 48px; height: 48px;">KC</div>
       <h2 style="font-size: 1.3rem; font-weight:800; color:#fff;">Bar &amp; Lounge POS</h2>
-      <p style="font-size:0.8rem; color:#94a3b8; margin-top:0.25rem;">Enter Staff Security PIN (Default: 1613)</p>
+      <p style="font-size:0.8rem; color:#94a3b8; margin-top:0.25rem;">
+        Staff PIN: <strong>1613</strong> | Admin PIN: <strong>1122</strong>
+      </p>
       
       <div class="pin-dots" id="pinDots">
         <div class="pin-dot"></div>
@@ -840,7 +841,7 @@ $site_home = home_url('/');
   </div>
 
   <!-- ==============================================================
-       POS TOP BAR
+       TOP BAR
        ============================================================== -->
   <header class="pos-header">
     <div class="pos-brand">
@@ -855,20 +856,26 @@ $site_home = home_url('/');
     </div>
 
     <div class="pos-top-actions">
+      <!-- Active Role Badge with Quick Unlock -->
+      <div class="role-badge staff" id="roleBadgeBtn" title="Click to Switch / Unlock Admin (PIN: 1122)">
+        <span id="roleIcon">🛡️</span>
+        <span id="roleLabel">Staff (Cashier)</span>
+      </div>
+
       <!-- Staff on duty -->
       <div class="staff-badge" id="staffBadgeBtn" title="Click to change staff name">
         <span class="status-dot"></span>
         <span>Staff: <strong id="currentStaffNameDisplay">Bar Staff</strong></span>
       </div>
 
-      <!-- Quick Shift Summary Button -->
-      <button type="button" class="nav-btn" id="openLedgerBtn">
-        <span>📋 Daily Stock Sheet</span>
+      <!-- Monthly Report Button -->
+      <button type="button" class="nav-btn accent" id="openMonthlyReportBtn">
+        <span>📊 Monthly Report</span>
       </button>
 
-      <!-- Recent Orders Button -->
-      <button type="button" class="nav-btn" id="openOrdersBtn">
-        <span>🧾 Orders History</span>
+      <!-- Daily Stock Sheet -->
+      <button type="button" class="nav-btn" id="openLedgerBtn">
+        <span>📋 Daily Sheet</span>
       </button>
 
       <!-- Restock / Spoilage Button -->
@@ -876,7 +883,12 @@ $site_home = home_url('/');
         <span>📦 Restock / Spill</span>
       </button>
 
-      <!-- Lock Screen Button -->
+      <!-- Orders History -->
+      <button type="button" class="nav-btn" id="openOrdersBtn">
+        <span>🧾 Orders</span>
+      </button>
+
+      <!-- Lock Screen -->
       <button type="button" class="nav-btn" id="lockPosBtn" title="Lock POS">
         <span>🔒 Lock</span>
       </button>
@@ -884,14 +896,14 @@ $site_home = home_url('/');
   </header>
 
   <!-- ==============================================================
-       MAIN WORKSPACE (2 Columns: Catalog + Cart)
+       MAIN WORKSPACE
        ============================================================== -->
   <main class="pos-layout">
     
-    <!-- LEFT: CATEGORIES & PRODUCT GRID -->
+    <!-- LEFT: CATALOG -->
     <section class="pos-catalog-pane">
       
-      <!-- 3 Primary Categories + All -->
+      <!-- Category Pills -->
       <div class="category-pills-bar" id="categoryBar">
         <button type="button" class="cat-btn active" data-category="all">
           <span>⚡ All Drinks</span>
@@ -911,18 +923,18 @@ $site_home = home_url('/');
         </button>
       </div>
 
-      <!-- Live Search Row -->
+      <!-- Search Row -->
       <div class="catalog-search-row">
         <div class="search-input-wrap">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
           <input type="text" id="productSearchInput" placeholder="Quick search drink by name (e.g. Heineken, Hennessy, Monster, Schweppes)...">
         </div>
-        <button type="button" class="nav-btn" id="openAddDrinkModalBtn" style="flex-shrink:0;">
-          <span>+ New Drink</span>
+        <button type="button" class="nav-btn primary" id="openAddDrinkModalBtn" style="flex-shrink:0;">
+          <span>+ Add Drink (Admin)</span>
         </button>
       </div>
 
-      <!-- Product Cards Grid -->
+      <!-- Products Grid -->
       <div class="products-grid-scroll">
         <div class="products-grid" id="productsGrid">
           <!-- Populated by JavaScript -->
@@ -931,7 +943,7 @@ $site_home = home_url('/');
 
     </section>
 
-    <!-- RIGHT: ORDER CART & THERMAL CHECKOUT -->
+    <!-- RIGHT: CART & CHECKOUT -->
     <aside class="pos-cart-pane">
       
       <div class="cart-header">
@@ -942,7 +954,6 @@ $site_home = home_url('/');
         <button type="button" class="clear-cart-btn" id="clearCartBtn">Clear All</button>
       </div>
 
-      <!-- Table / Room / Location Selector -->
       <div class="cart-meta-bar">
         <div>
           <label style="font-size:0.7rem; color:#94a3b8; display:block; margin-bottom:0.25rem;">Location / Table</label>
@@ -966,7 +977,6 @@ $site_home = home_url('/');
         </div>
       </div>
 
-      <!-- Cart Items List -->
       <div class="cart-items-scroll" id="cartItemsList">
         <div class="empty-cart-state" id="emptyCartState">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
@@ -975,7 +985,6 @@ $site_home = home_url('/');
         </div>
       </div>
 
-      <!-- Checkout & Payment Panel -->
       <div class="cart-footer">
         
         <div class="cart-total-row">
@@ -986,7 +995,6 @@ $site_home = home_url('/');
           <div class="cart-total-amount" id="cartGrandTotal">₦0</div>
         </div>
 
-        <!-- Payment Method Selection -->
         <div>
           <label style="font-size:0.75rem; color:#94a3b8; font-weight:700; display:block; margin-bottom:0.4rem; text-transform:uppercase;">
             Payment Method
@@ -1007,7 +1015,6 @@ $site_home = home_url('/');
           </div>
         </div>
 
-        <!-- Checkout Buttons -->
         <div class="checkout-actions">
           <button type="button" class="btn-checkout" id="checkoutPrintBtn" disabled>
             <span>🖨️ Charge &amp; Print Receipt</span>
@@ -1024,7 +1031,145 @@ $site_home = home_url('/');
   </main>
 
   <!-- ==============================================================
-       MODAL: DAILY STOCK SHEET / LEDGER (Exact Replica of Notebook)
+       MODAL: MONTHLY SALES & INVENTORY AUDIT REPORT
+       ============================================================== -->
+  <div class="pos-modal-overlay" id="monthlyReportModal">
+    <div class="pos-modal wide">
+      <div class="modal-head">
+        <div>
+          <h3 style="display:flex; align-items:center; gap:0.5rem;">
+            <span>📊 End-of-Month Beverage Audit &amp; Revenue Report</span>
+          </h3>
+          <p style="font-size:0.8rem; color:#94a3b8; margin-top:0.25rem;">
+            Executive Financial &amp; Stock Reconciliation for Kelvin Cameo Resort Bar
+          </p>
+        </div>
+        <button type="button" class="modal-close" onclick="closeModal('monthlyReportModal')">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        
+        <!-- Controls: Select Month & Year -->
+        <div style="display:flex; gap:1rem; align-items:center; background:#1e293b; padding:1rem; border-radius:12px; margin-bottom:1.5rem; flex-wrap:wrap;">
+          <div>
+            <label style="font-size:0.75rem; color:#94a3b8; display:block; margin-bottom:0.25rem;">Select Audit Month</label>
+            <select id="monthlySelectMonth" class="cart-meta-select" style="padding:0.5rem 1rem;">
+              <option value="1">January</option>
+              <option value="2">February</option>
+              <option value="3">March</option>
+              <option value="4">April</option>
+              <option value="5">May</option>
+              <option value="6">June</option>
+              <option value="7">July</option>
+              <option value="8">August</option>
+              <option value="9">September</option>
+              <option value="10" selected>October</option>
+              <option value="11">November</option>
+              <option value="12">December</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="font-size:0.75rem; color:#94a3b8; display:block; margin-bottom:0.25rem;">Select Year</label>
+            <select id="monthlySelectYear" class="cart-meta-select" style="padding:0.5rem 1rem;">
+              <option value="2026" selected>2026</option>
+              <option value="2027">2027</option>
+              <option value="2025">2025</option>
+            </select>
+          </div>
+
+          <div style="margin-top:auto;">
+            <button type="button" class="nav-btn primary" id="generateMonthlyBtn">🔄 Refresh Audit</button>
+          </div>
+
+          <div style="margin-left:auto; text-align:right;">
+            <span style="font-size:0.75rem; color:#94a3b8;">Audited Period:</span>
+            <div style="font-size:1.1rem; font-weight:800; color:#d4af37;" id="monthlyPeriodTitle">October 2026</div>
+          </div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:1rem; margin-bottom:1.5rem;">
+          <div style="background:#1e293b; padding:1rem; border-radius:10px; border-left:4px solid #10b981;">
+            <div style="font-size:0.75rem; color:#94a3b8;">Total Monthly Revenue</div>
+            <div style="font-size:1.4rem; font-weight:800; color:#10b981; font-family:'JetBrains Mono';" id="monthlyTotalRev">₦0</div>
+          </div>
+          <div style="background:#1e293b; padding:1rem; border-radius:10px; border-left:4px solid #38bdf8;">
+            <div style="font-size:0.75rem; color:#94a3b8;">POS Terminal Collections</div>
+            <div style="font-size:1.4rem; font-weight:800; color:#38bdf8; font-family:'JetBrains Mono';" id="monthlyPosRev">₦0</div>
+          </div>
+          <div style="background:#1e293b; padding:1rem; border-radius:10px; border-left:4px solid #f59e0b;">
+            <div style="font-size:0.75rem; color:#94a3b8;">Cash Collections</div>
+            <div style="font-size:1.4rem; font-weight:800; color:#f59e0b; font-family:'JetBrains Mono';" id="monthlyCashRev">₦0</div>
+          </div>
+          <div style="background:#1e293b; padding:1rem; border-radius:10px; border-left:4px solid #a855f7;">
+            <div style="font-size:0.75rem; color:#94a3b8;">Bank Transfer Collections</div>
+            <div style="font-size:1.4rem; font-weight:800; color:#a855f7; font-family:'JetBrains Mono';" id="monthlyTransferRev">₦0</div>
+          </div>
+          <div style="background:#1e293b; padding:1rem; border-radius:10px; border-left:4px solid #d4af37;">
+            <div style="font-size:0.75rem; color:#94a3b8;">Total Bottles/Cans Sold</div>
+            <div style="font-size:1.4rem; font-weight:800; color:#d4af37;" id="monthlyTotalBottles">0</div>
+          </div>
+        </div>
+
+        <!-- Top 5 Highest-Earning Beverages -->
+        <div style="background:#1e293b; padding:1rem; border-radius:12px; margin-bottom:1.5rem;">
+          <h4 style="font-size:0.95rem; font-weight:800; color:#d4af37; margin-bottom:0.75rem;">
+            🏆 Top 5 Highest-Revenue Beverages This Month
+          </h4>
+          <div id="monthlyTop5Container" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:0.75rem;">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- Full Itemized Audit Table -->
+        <h4 style="font-size:0.95rem; font-weight:800; color:#fff; margin-bottom:0.75rem;">
+          Detailed Monthly Stock Movement &amp; Value Realized
+        </h4>
+        <div class="ledger-table-wrap">
+          <table class="ledger-table" id="monthlyReportTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th style="text-align:left;">Product</th>
+                <th>Category</th>
+                <th>Price (₦)</th>
+                <th>O/S</th>
+                <th>New Stock (N/S)</th>
+                <th>Sold (Q/S)</th>
+                <th>Breakage</th>
+                <th>Closing (C/S)</th>
+                <th>Month Revenue (₦)</th>
+              </tr>
+            </thead>
+            <tbody id="monthlyReportTableBody">
+              <!-- Populated dynamically -->
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="6" style="text-align:right; font-weight:800;">MONTHLY AUDIT TOTAL:</td>
+                <td id="monthlyTotalSoldTable" style="font-weight:800; color:#10b981;">0</td>
+                <td>-</td>
+                <td>-</td>
+                <td id="monthlyTotalRevTable" style="font-weight:800; font-family:'JetBrains Mono';">₦0</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+      </div>
+
+      <div class="modal-foot">
+        <button type="button" class="btn-checkout" onclick="printMonthlyReport()" style="padding:0.6rem 1.25rem;">
+          <span>🖨️ Print Monthly Report (A4 / PDF)</span>
+        </button>
+        <button type="button" class="nav-btn" onclick="closeModal('monthlyReportModal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================================================
+       MODAL: DAILY STOCK SHEET / LEDGER
        ============================================================== -->
   <div class="pos-modal-overlay" id="ledgerModal">
     <div class="pos-modal wide">
@@ -1043,22 +1188,21 @@ $site_home = home_url('/');
 
       <div class="modal-body">
         
-        <!-- Summary Cards on Top -->
         <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:1rem; margin-bottom:1.5rem;">
           <div style="background:#1e293b; padding:1rem; border-radius:10px; border-left:4px solid #10b981;">
-            <div style="font-size:0.75rem; color:#94a3b8;">Total Revenue (All Sales)</div>
+            <div style="font-size:0.75rem; color:#94a3b8;">Today's Revenue</div>
             <div style="font-size:1.35rem; font-weight:800; color:#d4af37; font-family:'JetBrains Mono';" id="ledgerGrandTotalRev">₦0</div>
           </div>
           <div style="background:#1e293b; padding:1rem; border-radius:10px; border-left:4px solid #38bdf8;">
-            <div style="font-size:0.75rem; color:#94a3b8;">P.O.S Terminal Sales</div>
+            <div style="font-size:0.75rem; color:#94a3b8;">P.O.S Terminal</div>
             <div style="font-size:1.35rem; font-weight:800; color:#38bdf8; font-family:'JetBrains Mono';" id="ledgerPosRev">₦0</div>
           </div>
           <div style="background:#1e293b; padding:1rem; border-radius:10px; border-left:4px solid #f59e0b;">
-            <div style="font-size:0.75rem; color:#94a3b8;">Cash Sales</div>
+            <div style="font-size:0.75rem; color:#94a3b8;">Cash</div>
             <div style="font-size:1.35rem; font-weight:800; color:#f59e0b; font-family:'JetBrains Mono';" id="ledgerCashRev">₦0</div>
           </div>
           <div style="background:#1e293b; padding:1rem; border-radius:10px; border-left:4px solid #a855f7;">
-            <div style="font-size:0.75rem; color:#94a3b8;">Bank Transfer Sales</div>
+            <div style="font-size:0.75rem; color:#94a3b8;">Bank Transfer</div>
             <div style="font-size:1.35rem; font-weight:800; color:#a855f7; font-family:'JetBrains Mono';" id="ledgerTransferRev">₦0</div>
           </div>
         </div>
@@ -1080,9 +1224,7 @@ $site_home = home_url('/');
                 <th>Amount (₦)</th>
               </tr>
             </thead>
-            <tbody id="ledgerTableBody">
-              <!-- Populated by JS -->
-            </tbody>
+            <tbody id="ledgerTableBody"></tbody>
             <tfoot>
               <tr>
                 <td colspan="7" style="text-align:right; font-weight:800;">TOTALS:</td>
@@ -1098,20 +1240,23 @@ $site_home = home_url('/');
       </div>
 
       <div class="modal-foot">
-        <button type="button" class="nav-btn" onclick="printStockSheet()">🖨️ Print Stock Sheet</button>
-        <button type="button" class="nav-btn" id="startNewDayBtn" style="color:#f59e0b;">🔄 Roll Over to New Day</button>
+        <button type="button" class="nav-btn" onclick="printDailyLedger()">🖨️ Print Daily Sheet</button>
+        <button type="button" class="nav-btn" id="startNewDayBtn" style="color:#f59e0b;" title="Admin Only: Rolls closing stock into new opening stock">🔄 Close &amp; Roll Over Shift</button>
         <button type="button" class="nav-btn primary" onclick="closeModal('ledgerModal')">Done</button>
       </div>
     </div>
   </div>
 
   <!-- ==============================================================
-       MODAL: RESTOCK / BREAKAGE MANAGER
+       MODAL: RESTOCK / BREAKAGE (Role Sensitive)
        ============================================================== -->
   <div class="pos-modal-overlay" id="restockModal">
     <div class="pos-modal">
       <div class="modal-head">
-        <h3>Record Restock or Spoilage / Breakage</h3>
+        <div>
+          <h3>Record Restock or Spoilage / Breakage</h3>
+          <p style="font-size:0.75rem; color:#94a3b8;">Staff can add new stock. Only Admin can directly edit stock levels.</p>
+        </div>
         <button type="button" class="modal-close" onclick="closeModal('restockModal')">&times;</button>
       </div>
       <div class="modal-body">
@@ -1119,18 +1264,16 @@ $site_home = home_url('/');
         <form id="restockForm">
           <div style="margin-bottom:1rem;">
             <label style="font-size:0.85rem; color:#94a3b8; display:block; margin-bottom:0.35rem;">Select Beverage Product</label>
-            <select id="restockProdSelect" class="cart-meta-select" style="padding:0.65rem;" required>
-              <!-- Populated dynamically -->
-            </select>
+            <select id="restockProdSelect" class="cart-meta-select" style="padding:0.65rem;" required></select>
           </div>
 
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
             <div>
               <label style="font-size:0.85rem; color:#94a3b8; display:block; margin-bottom:0.35rem;">Action Type</label>
               <select id="restockActionType" class="cart-meta-select" style="padding:0.65rem;" required>
-                <option value="restock">New Stock In (N/S)</option>
+                <option value="restock">New Stock In (N/S) - All Staff</option>
                 <option value="breakage">Breakage / Complimentary (B/C/S)</option>
-                <option value="set_exact">Set Exact Current Stock</option>
+                <option value="set_exact" id="optSetExact">Set Exact Current Stock (Admin Only)</option>
               </select>
             </div>
             <div>
@@ -1151,12 +1294,15 @@ $site_home = home_url('/');
   </div>
 
   <!-- ==============================================================
-       MODAL: ADD NEW DRINK
+       MODAL: ADMIN PRODUCT & PRICE MANAGER (PIN 1122 Protected)
        ============================================================== -->
   <div class="pos-modal-overlay" id="addDrinkModal">
     <div class="pos-modal">
       <div class="modal-head">
-        <h3>Add New Drink to Bar Menu</h3>
+        <div>
+          <h3>Add New Drink to Bar Menu</h3>
+          <span style="font-size:0.75rem; color:#d4af37;">👑 Admin / Manager Privilege (PIN: 1122)</span>
+        </div>
         <button type="button" class="modal-close" onclick="closeModal('addDrinkModal')">&times;</button>
       </div>
       <div class="modal-body">
@@ -1195,7 +1341,28 @@ $site_home = home_url('/');
   </div>
 
   <!-- ==============================================================
-       MODAL: ORDERS HISTORY & RE-PRINT RECEIPT
+       MODAL: ADMIN ROLE UNLOCK (Prompt for PIN 1122)
+       ============================================================== -->
+  <div class="pos-modal-overlay" id="adminUnlockModal">
+    <div class="pos-modal" style="max-width:400px; text-align:center;">
+      <div class="modal-head">
+        <h3 style="width:100%; text-align:center;">👑 Enter Admin Password</h3>
+        <button type="button" class="modal-close" onclick="closeModal('adminUnlockModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:0.85rem; color:#94a3b8; margin-bottom:1.25rem;">
+          Enter the Manager/Admin PIN (<strong>1122</strong>) to unlock direct stock editing, price adjustments, and shift close privileges.
+        </p>
+        <input type="password" id="adminPinInput" class="cart-meta-select" style="padding:0.75rem; text-align:center; font-size:1.5rem; letter-spacing:0.5rem;" maxlength="4" placeholder="••••">
+        <button type="button" class="btn-checkout" id="submitAdminUnlockBtn" style="width:100%; margin-top:1rem;">
+          Unlock Admin Mode
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================================================
+       MODAL: ORDERS HISTORY
        ============================================================== -->
   <div class="pos-modal-overlay" id="ordersModal">
     <div class="pos-modal wide">
@@ -1204,11 +1371,7 @@ $site_home = home_url('/');
         <button type="button" class="modal-close" onclick="closeModal('ordersModal')">&times;</button>
       </div>
       <div class="modal-body">
-        
-        <div id="ordersListContainer">
-          <!-- Populated by JS -->
-        </div>
-
+        <div id="ordersListContainer"></div>
       </div>
       <div class="modal-foot">
         <button type="button" class="nav-btn primary" onclick="closeModal('ordersModal')">Close</button>
@@ -1217,7 +1380,7 @@ $site_home = home_url('/');
   </div>
 
   <!-- ==============================================================
-       HIDDEN PRINT AREA: ESC/POS THERMAL RECEIPT (58mm / 80mm)
+       PRINT AREA 1: ESC/POS THERMAL RECEIPT (58mm / 80mm)
        ============================================================== -->
   <div id="thermalReceiptArea">
     <div class="receipt-center">
@@ -1257,9 +1420,7 @@ $site_home = home_url('/');
 
     <div class="receipt-divider"></div>
 
-    <div id="printReceiptItems">
-      <!-- Items dynamically added -->
-    </div>
+    <div id="printReceiptItems"></div>
 
     <div class="receipt-double-divider"></div>
 
@@ -1282,7 +1443,74 @@ $site_home = home_url('/');
     </div>
   </div>
 
-  <!-- TOAST NOTIFICATION -->
+  <!-- ==============================================================
+       PRINT AREA 2: OFFICIAL A4 MONTHLY AUDIT REPORT
+       ============================================================== -->
+  <div id="printableMonthlyArea">
+    <div style="text-align:center; border-bottom:2px solid #000; padding-bottom:10px; margin-bottom:15px;">
+      <h2 style="font-size:20px; font-weight:800; text-transform:uppercase; margin-bottom:4px;">KELVIN CAMEO RESORT &amp; LOUNGE</h2>
+      <div style="font-size:12px; font-weight:bold;">RC: 1613032 | Suleja, Niger State (Abuja Corridor)</div>
+      <h3 style="font-size:15px; font-weight:800; margin-top:8px; text-decoration:underline;" id="printAuditHeaderTitle">
+        MONTHLY BEVERAGE INVENTORY &amp; REVENUE AUDIT REPORT - OCTOBER 2026
+      </h3>
+      <div style="font-size:11px; margin-top:4px;" id="printAuditGeneratedDate">Generated: 15 October 2026</div>
+    </div>
+
+    <!-- Summary Box -->
+    <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; border:1px solid #000; padding:10px; margin-bottom:15px; font-size:12px;">
+      <div><strong>TOTAL REVENUE:</strong><br><span id="printAuditTotalRev" style="font-size:14px; font-weight:bold;">₦0</span></div>
+      <div><strong>POS CARD:</strong><br><span id="printAuditPosRev">₦0</span></div>
+      <div><strong>CASH:</strong><br><span id="printAuditCashRev">₦0</span></div>
+      <div><strong>BANK TRANSFER:</strong><br><span id="printAuditTransferRev">₦0</span></div>
+    </div>
+
+    <!-- Table -->
+    <table style="width:100%; border-collapse:collapse; font-size:11px; margin-bottom:20px;" border="1">
+      <thead>
+        <tr style="background:#eee;">
+          <th style="padding:4px;">#</th>
+          <th style="text-align:left; padding:4px;">Product Name</th>
+          <th style="padding:4px;">Category</th>
+          <th style="padding:4px;">Price (₦)</th>
+          <th style="padding:4px;">Opening</th>
+          <th style="padding:4px;">New Stock</th>
+          <th style="padding:4px;">Sold Qty</th>
+          <th style="padding:4px;">Breakage</th>
+          <th style="padding:4px;">Closing Stock</th>
+          <th style="padding:4px; text-align:right;">Month Revenue (₦)</th>
+        </tr>
+      </thead>
+      <tbody id="printAuditTableBody"></tbody>
+      <tfoot>
+        <tr style="font-weight:bold; background:#eee;">
+          <td colspan="6" style="text-align:right; padding:4px;">TOTAL:</td>
+          <td id="printAuditTotalSold" style="text-align:center; padding:4px;">0</td>
+          <td colspan="2">-</td>
+          <td id="printAuditGrandTotal" style="text-align:right; padding:4px;">₦0</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <!-- Signature Audit Box -->
+    <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; margin-top:40px; font-size:11px;">
+      <div style="border-top:1px solid #000; padding-top:6px; text-align:center;">
+        <strong>PREPARED BY:</strong><br>
+        <span style="font-size:10px;">Bar Supervisor / Attendant on Duty</span><br><br>
+        Signature &amp; Date: ___________________
+      </div>
+      <div style="border-top:1px solid #000; padding-top:6px; text-align:center;">
+        <strong>VERIFIED BY:</strong><br>
+        <span style="font-size:10px;">Internal Auditor / Accountant</span><br><br>
+        Signature &amp; Date: ___________________
+      </div>
+      <div style="border-top:1px solid #000; padding-top:6px; text-align:center;">
+        <strong>APPROVED BY:</strong><br>
+        <span style="font-size:10px;">Managing Director / Board</span><br><br>
+        Signature &amp; Date: ___________________
+      </div>
+    </div>
+  </div>
+
   <div id="posToast">Notification</div>
 
   <!-- ==============================================================
@@ -1291,14 +1519,15 @@ $site_home = home_url('/');
   <script>
     const AJAX_URL = '<?php echo esc_url($ajax_url); ?>';
     let sessionToken = sessionStorage.getItem('kc_bar_token') || '';
+    let currentRole  = sessionStorage.getItem('kc_bar_role') || 'staff';
     let currentStaff = localStorage.getItem('kc_bar_staff') || 'Bar Staff';
 
-    // State
     let products = [];
     let cart = [];
     let currentCategory = 'all';
     let currentPayMethod = 'pos';
     let recentOrders = [];
+    let monthlyReportData = null;
 
     document.addEventListener('DOMContentLoaded', function() {
       initPinPad();
@@ -1312,7 +1541,7 @@ $site_home = home_url('/');
     });
 
     // -------------------------------------------------------------
-    // PIN SECURITY SYSTEM
+    // PIN SECURITY SYSTEM (Admin: 1122 | Staff: 1613)
     // -------------------------------------------------------------
     let enteredPin = '';
 
@@ -1374,10 +1603,13 @@ $site_home = home_url('/');
         .then(res => {
           if (res.success && res.data.token) {
             sessionToken = res.data.token;
+            currentRole  = res.data.role || 'staff';
             sessionStorage.setItem('kc_bar_token', sessionToken);
+            sessionStorage.setItem('kc_bar_role', currentRole);
             hidePinScreen();
+            updateRoleBadgeUI();
             loadPosData();
-            showToast('Welcome to Kelvin Cameo Bar POS');
+            showToast(res.data.message);
           } else {
             showToast(res.data?.message || 'Invalid PIN', true);
             enteredPin = '';
@@ -1393,7 +1625,65 @@ $site_home = home_url('/');
 
     function verifySession() {
       hidePinScreen();
+      updateRoleBadgeUI();
       loadPosData();
+    }
+
+    function updateRoleBadgeUI() {
+      const badge = document.getElementById('roleBadgeBtn');
+      const icon  = document.getElementById('roleIcon');
+      const label = document.getElementById('roleLabel');
+      const optSetExact = document.getElementById('optSetExact');
+
+      if (currentRole === 'admin') {
+        badge.className = 'role-badge admin';
+        icon.textContent = '👑';
+        label.textContent = 'Admin / Manager';
+        badge.title = 'Admin Mode Active (Full Privileges)';
+        if (optSetExact) optSetExact.disabled = false;
+      } else {
+        badge.className = 'role-badge staff';
+        icon.textContent = '🛡️';
+        label.textContent = 'Staff (Cashier)';
+        badge.title = 'Click to enter Admin PIN (1122)';
+        if (optSetExact) optSetExact.disabled = true;
+      }
+    }
+
+    function unlockAdminModal() {
+      if (currentRole === 'admin') {
+        showToast('Admin Mode is already active (PIN: 1122).');
+        return;
+      }
+      openModal('adminUnlockModal');
+      document.getElementById('adminPinInput').value = '';
+      document.getElementById('adminPinInput').focus();
+    }
+
+    function submitAdminUnlock() {
+      const pin = document.getElementById('adminPinInput').value.trim();
+      if (!pin) return;
+
+      const fd = new FormData();
+      fd.append('action', 'kc_bar_verify_pin');
+      fd.append('pin', pin);
+
+      fetch(AJAX_URL, { method: 'POST', body: fd })
+        .then(r => r.json())
+        .then(res => {
+          if (res.success && res.data.role === 'admin') {
+            sessionToken = res.data.token;
+            currentRole  = 'admin';
+            sessionStorage.setItem('kc_bar_token', sessionToken);
+            sessionStorage.setItem('kc_bar_role', 'admin');
+            updateRoleBadgeUI();
+            closeModal('adminUnlockModal');
+            showToast('👑 Admin Mode Unlocked! You have full stock editing privileges.');
+            loadPosData();
+          } else {
+            showToast('Incorrect Admin PIN. Admin password is 1122.', true);
+          }
+        });
     }
 
     // -------------------------------------------------------------
@@ -1410,6 +1700,11 @@ $site_home = home_url('/');
           if (res.success) {
             products = res.data.products || [];
             recentOrders = res.data.recent_orders || [];
+            if (res.data.role) {
+              currentRole = res.data.role;
+              sessionStorage.setItem('kc_bar_role', currentRole);
+              updateRoleBadgeUI();
+            }
             updateCategoryBadges();
             renderProducts();
             populateRestockSelect();
@@ -1605,7 +1900,7 @@ $site_home = home_url('/');
     }
 
     // -------------------------------------------------------------
-    // CHECKOUT & RECEIPT PRINTING
+    // CHECKOUT & PRINT RECEIPT
     // -------------------------------------------------------------
     function processCheckout(doPrint = true) {
       if (cart.length === 0) return;
@@ -1634,10 +1929,11 @@ $site_home = home_url('/');
             const orderData = res.data;
             showToast(`Order ${orderData.receipt_no} completed!`);
             
-            // Print receipt if requested
             if (doPrint) {
               prepareThermalReceipt(orderData);
+              document.body.className = 'printing-receipt';
               window.print();
+              setTimeout(() => { document.body.className = ''; }, 1000);
             }
 
             clearCart();
@@ -1687,6 +1983,140 @@ $site_home = home_url('/');
       else if (order.payment_method === 'room_charge') payName = 'HOTEL ROOM CHARGE';
 
       document.getElementById('printReceiptPayment').textContent = payName;
+    }
+
+    // -------------------------------------------------------------
+    // MONTHLY REPORT AUDIT & PRINT ENGINE
+    // -------------------------------------------------------------
+    function loadMonthlyReport() {
+      const month = document.getElementById('monthlySelectMonth').value;
+      const year  = document.getElementById('monthlySelectYear').value;
+
+      const fd = new FormData();
+      fd.append('action', 'kc_bar_get_monthly_report');
+      fd.append('token', sessionToken);
+      fd.append('month', month);
+      fd.append('year', year);
+
+      fetch(AJAX_URL, { method: 'POST', body: fd })
+        .then(r => r.json())
+        .then(res => {
+          if (res.success) {
+            monthlyReportData = res.data;
+            renderMonthlyReportUI(monthlyReportData);
+            openModal('monthlyReportModal');
+          } else {
+            showToast(res.data?.message || 'Error generating monthly report', true);
+          }
+        })
+        .catch(() => {
+          showToast('Connection error while generating report', true);
+        });
+    }
+
+    function renderMonthlyReportUI(data) {
+      document.getElementById('monthlyPeriodTitle').textContent = data.month_name;
+      document.getElementById('monthlyTotalRev').textContent = `₦${formatNaira(data.summary?.total_revenue || 0)}`;
+      document.getElementById('monthlyPosRev').textContent = `₦${formatNaira(data.summary?.pos_revenue || 0)}`;
+      document.getElementById('monthlyCashRev').textContent = `₦${formatNaira(data.summary?.cash_revenue || 0)}`;
+      document.getElementById('monthlyTransferRev').textContent = `₦${formatNaira(data.summary?.transfer_revenue || 0)}`;
+      document.getElementById('monthlyTotalBottles').textContent = formatNaira(data.summary?.total_bottles_sold || 0);
+
+      // Top 5 Bestsellers
+      const top5Box = document.getElementById('monthlyTop5Container');
+      top5Box.innerHTML = '';
+      if (data.top_5 && data.top_5.length > 0) {
+        data.top_5.forEach((item, idx) => {
+          const div = document.createElement('div');
+          div.style.background = '#0f172a';
+          div.style.border = '1px solid #334155';
+          div.style.borderRadius = '8px';
+          div.style.padding = '0.75rem';
+          div.innerHTML = `
+            <div style="font-size:0.75rem; color:#d4af37; font-weight:800;">#${idx + 1} TOP SELLER</div>
+            <div style="font-weight:700; color:#fff; font-size:0.9rem; margin:0.25rem 0;">${escapeHtml(item.name)}</div>
+            <div style="font-size:0.8rem; color:#94a3b8;">${item.sold_qty} sold &bull; ₦${formatNaira(item.revenue)}</div>
+          `;
+          top5Box.appendChild(div);
+        });
+      } else {
+        top5Box.innerHTML = '<div style="color:#64748b; font-size:0.85rem;">No sales recorded for this period yet.</div>';
+      }
+
+      // Detailed Audit Table
+      const tbody = document.getElementById('monthlyReportTableBody');
+      tbody.innerHTML = '';
+      let totalSold = 0;
+      let totalRev = 0;
+
+      data.items.forEach((it, idx) => {
+        totalSold += it.sold_qty;
+        totalRev  += it.revenue;
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${idx + 1}</td>
+          <td>${escapeHtml(it.name)}</td>
+          <td style="text-transform:capitalize; font-size:0.75rem;">${it.category}</td>
+          <td style="font-family:'JetBrains Mono';">₦${formatNaira(it.price)}</td>
+          <td>${it.opening_stock}</td>
+          <td>${it.new_stock}</td>
+          <td style="color:#10b981; font-weight:800;">${it.sold_qty}</td>
+          <td style="color:#ef4444;">${it.breakage}</td>
+          <td style="color:#d4af37; font-weight:700;">${it.closing_stock}</td>
+          <td style="font-weight:800; font-family:'JetBrains Mono';">${it.revenue > 0 ? '₦' + formatNaira(it.revenue) : '-'}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      document.getElementById('monthlyTotalSoldTable').textContent = totalSold;
+      document.getElementById('monthlyTotalRevTable').textContent = `₦${formatNaira(totalRev)}`;
+    }
+
+    function printMonthlyReport() {
+      if (!monthlyReportData) return;
+
+      const data = monthlyReportData;
+      document.getElementById('printAuditHeaderTitle').textContent = `MONTHLY BEVERAGE INVENTORY & REVENUE AUDIT REPORT - ${data.month_name.toUpperCase()}`;
+      document.getElementById('printAuditGeneratedDate').textContent = `Generated on ${data.generated_at} by ${data.prepared_by}`;
+
+      document.getElementById('printAuditTotalRev').textContent = `₦${formatNaira(data.summary?.total_revenue || 0)}`;
+      document.getElementById('printAuditPosRev').textContent = `₦${formatNaira(data.summary?.pos_revenue || 0)}`;
+      document.getElementById('printAuditCashRev').textContent = `₦${formatNaira(data.summary?.cash_revenue || 0)}`;
+      document.getElementById('printAuditTransferRev').textContent = `₦${formatNaira(data.summary?.transfer_revenue || 0)}`;
+
+      const printTbody = document.getElementById('printAuditTableBody');
+      printTbody.innerHTML = '';
+
+      let totalSold = 0;
+      let totalRev = 0;
+
+      data.items.forEach((it, idx) => {
+        totalSold += it.sold_qty;
+        totalRev  += it.revenue;
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="text-align:center; padding:3px;">${idx + 1}</td>
+          <td style="padding:3px;">${escapeHtml(it.name)}</td>
+          <td style="text-align:center; padding:3px; text-transform:capitalize;">${it.category}</td>
+          <td style="text-align:right; padding:3px;">₦${formatNaira(it.price)}</td>
+          <td style="text-align:center; padding:3px;">${it.opening_stock}</td>
+          <td style="text-align:center; padding:3px;">${it.new_stock}</td>
+          <td style="text-align:center; padding:3px; font-weight:bold;">${it.sold_qty}</td>
+          <td style="text-align:center; padding:3px;">${it.breakage}</td>
+          <td style="text-align:center; padding:3px; font-weight:bold;">${it.closing_stock}</td>
+          <td style="text-align:right; padding:3px; font-weight:bold;">${it.revenue > 0 ? '₦' + formatNaira(it.revenue) : '-'}</td>
+        `;
+        printTbody.appendChild(tr);
+      });
+
+      document.getElementById('printAuditTotalSold').textContent = totalSold;
+      document.getElementById('printAuditGrandTotal').textContent = `₦${formatNaira(totalRev)}`;
+
+      document.body.className = 'printing-monthly';
+      window.print();
+      setTimeout(() => { document.body.className = ''; }, 1000);
     }
 
     // -------------------------------------------------------------
@@ -1741,11 +2171,17 @@ $site_home = home_url('/');
         });
     }
 
-    function printStockSheet() {
+    function printDailyLedger() {
       window.print();
     }
 
     function resetDayShift() {
+      if (currentRole !== 'admin') {
+        showToast('Admin privilege required (PIN: 1122) to close/reset shift.', true);
+        unlockAdminModal();
+        return;
+      }
+
       if (!confirm('Start New Day / Shift? This will carry over all current Closing Stocks as the new Opening Stocks, and reset Sold counts to 0.')) {
         return;
       }
@@ -1761,12 +2197,14 @@ $site_home = home_url('/');
             showToast(res.data.message);
             closeModal('ledgerModal');
             loadPosData();
+          } else {
+            showToast(res.data?.message || 'Error resetting day', true);
           }
         });
     }
 
     // -------------------------------------------------------------
-    // RESTOCK & INVENTORY UPDATES
+    // RESTOCK & INVENTORY UPDATES (Role Checked)
     // -------------------------------------------------------------
     function populateRestockSelect() {
       const select = document.getElementById('restockProdSelect');
@@ -1787,12 +2225,19 @@ $site_home = home_url('/');
 
     function handleRestockSubmit(e) {
       e.preventDefault();
-      const pId = document.getElementById('restockProdSelect').value;
+      const pId  = document.getElementById('restockProdSelect').value;
       const type = document.getElementById('restockActionType').value;
-      const qty = document.getElementById('restockQty').value;
+      const qty  = document.getElementById('restockQty').value;
 
       if (!pId) {
         showToast('Please select a beverage.', true);
+        return;
+      }
+
+      // Check role if action is set_exact
+      if (type === 'set_exact' && currentRole !== 'admin') {
+        showToast('Only Admin (PIN: 1122) can directly edit current stock! Staff can only add new stock (N/S).', true);
+        unlockAdminModal();
         return;
       }
 
@@ -1812,6 +2257,9 @@ $site_home = home_url('/');
             loadPosData();
           } else {
             showToast(res.data?.message || 'Error updating stock.', true);
+            if (res.data?.require_admin) {
+              unlockAdminModal();
+            }
           }
         });
     }
@@ -1871,7 +2319,9 @@ $site_home = home_url('/');
       if (!ord) return;
 
       prepareThermalReceipt(ord);
+      document.body.className = 'printing-receipt';
       window.print();
+      setTimeout(() => { document.body.className = ''; }, 1000);
     }
 
     // -------------------------------------------------------------
@@ -1912,11 +2362,24 @@ $site_home = home_url('/');
       document.getElementById('checkoutNoPrintBtn').addEventListener('click', () => processCheckout(false));
 
       // Top Actions
+      document.getElementById('openMonthlyReportBtn').addEventListener('click', loadMonthlyReport);
+      document.getElementById('generateMonthlyBtn').addEventListener('click', loadMonthlyReport);
       document.getElementById('openLedgerBtn').addEventListener('click', loadDailyLedger);
       document.getElementById('openOrdersBtn').addEventListener('click', renderOrdersHistory);
       document.getElementById('openRestockBtn').addEventListener('click', () => openModal('restockModal'));
-      document.getElementById('openAddDrinkModalBtn').addEventListener('click', () => openModal('addDrinkModal'));
+      document.getElementById('openAddDrinkModalBtn').addEventListener('click', () => {
+        if (currentRole !== 'admin') {
+          showToast('Admin password (1122) required to add new menu drinks.', true);
+          unlockAdminModal();
+          return;
+        }
+        openModal('addDrinkModal');
+      });
       document.getElementById('startNewDayBtn').addEventListener('click', resetDayShift);
+
+      // Role badge unlock click
+      document.getElementById('roleBadgeBtn').addEventListener('click', unlockAdminModal);
+      document.getElementById('submitAdminUnlockBtn').addEventListener('click', submitAdminUnlock);
 
       // Staff Badge Click
       document.getElementById('staffBadgeBtn').addEventListener('click', () => {
@@ -1943,8 +2406,8 @@ $site_home = home_url('/');
 
     function handleAddDrinkSubmit(e) {
       e.preventDefault();
-      const name = document.getElementById('newDrinkName').value.trim();
-      const cat  = document.getElementById('newDrinkCat').value;
+      const name  = document.getElementById('newDrinkName').value.trim();
+      const cat   = document.getElementById('newDrinkCat').value;
       const price = document.getElementById('newDrinkPrice').value;
       const stock = document.getElementById('newDrinkStock').value;
 
@@ -1970,28 +2433,17 @@ $site_home = home_url('/');
         });
     }
 
-    // Modal helpers
-    function openModal(id) {
-      document.getElementById(id).style.display = 'flex';
-    }
-    function closeModal(id) {
-      document.getElementById(id).style.display = 'none';
-    }
+    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-    // Toast helper
     function showToast(msg, isError = false) {
       const toast = document.getElementById('posToast');
       toast.textContent = msg;
       toast.className = isError ? 'show error' : 'show';
-      setTimeout(() => {
-        toast.className = '';
-      }, 3500);
+      setTimeout(() => { toast.className = ''; }, 3500);
     }
 
-    // Utility helpers
-    function formatNaira(num) {
-      return Number(num).toLocaleString('en-NG');
-    }
+    function formatNaira(num) { return Number(num).toLocaleString('en-NG'); }
     function escapeHtml(str) {
       if (!str) return '';
       return String(str).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' })[m]);
