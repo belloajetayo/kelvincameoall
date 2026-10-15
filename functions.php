@@ -512,6 +512,251 @@ function kelvin_cameo_seo_schema() {
         echo "<!-- Kelvin Cameo SEO Schema: FAQPage -->\n";
         echo '<script type="application/ld+json">' . wp_json_encode( $faq_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "</script>\n";
     }
+
+    // 6. Automobiles & CNG AutoDealer Schema (For AI Search Engines & LLMs)
+    if ( is_page( 'automobiles' ) || is_page_template( 'page-automobiles.php' ) ) {
+        $auto_schema = array(
+            '@context'           => 'https://schema.org',
+            '@type'              => 'AutoDealer',
+            '@id'                => esc_url( home_url( '/automobiles/#dealer' ) ),
+            'name'               => 'Kelvin Cameo Automobile Dealership & CNG Hub',
+            'alternateName'      => 'Kelvin Cameo Auto & Clean Energy Mobility',
+            'description'        => 'Certified car dealership, foreign-used (Tokunbo) luxury vehicles, commercial haulage buses, and licensed bi-fuel Compressed Natural Gas (CNG) conversion workshop in Suleja along the Abuja corridor.',
+            'url'                => esc_url( home_url( '/automobiles/' ) ),
+            'telephone'          => '+2348055558197',
+            'email'              => $email_addr,
+            'priceRange'         => '₦9,800,000 - ₦48,000,000',
+            'currenciesAccepted' => 'NGN',
+            'paymentAccepted'    => 'Bank Transfer, Cash, POS, Auto Financing, Trade-In Swap',
+            'address'            => array(
+                '@type'           => 'PostalAddress',
+                'streetAddress'   => 'Opposite Suleiman Barau Technical College, Maje-Minna Road, Kwamba',
+                'addressLocality' => 'Suleja',
+                'postalCode'      => '910104',
+                'addressRegion'   => 'Niger State',
+                'addressCountry'  => 'NG',
+            ),
+            'hasOfferCatalog'    => array(
+                '@type'           => 'OfferCatalog',
+                'name'            => 'Available Car Inventory & CNG Vehicles',
+                'itemListElement' => array(
+                    array(
+                        '@type'       => 'Offer',
+                        'itemOffered' => array(
+                            '@type'          => 'Car',
+                            'name'           => 'Toyota Land Cruiser Prado TX',
+                            'brand'          => array( '@type' => 'Brand', 'name' => 'Toyota' ),
+                            'vehicleEngine'  => '2.7L VVT-i 4WD',
+                            'fuelType'       => 'Petrol (CNG Bi-Fuel Ready)',
+                            'vehicleSeatingCapacity' => 7,
+                            'itemCondition'  => 'https://schema.org/UsedCondition',
+                        ),
+                        'price'         => '48000000',
+                        'priceCurrency' => 'NGN',
+                    ),
+                    array(
+                        '@type'       => 'Offer',
+                        'itemOffered' => array(
+                            '@type'          => 'Car',
+                            'name'           => 'Toyota Highlander Limited AWD',
+                            'brand'          => array( '@type' => 'Brand', 'name' => 'Toyota' ),
+                            'vehicleEngine'  => '3.5L V6 Dual VVT-i',
+                            'fuelType'       => 'Petrol + CNG Hybrid',
+                            'vehicleSeatingCapacity' => 8,
+                            'itemCondition'  => 'https://schema.org/UsedCondition',
+                        ),
+                        'price'         => '24500000',
+                        'priceCurrency' => 'NGN',
+                    ),
+                    array(
+                        '@type'       => 'Offer',
+                        'itemOffered' => array(
+                            '@type'          => 'Car',
+                            'name'           => 'Toyota Sienna XLE Space Bus (CNG Bi-Fuel)',
+                            'brand'          => array( '@type' => 'Brand', 'name' => 'Toyota' ),
+                            'vehicleEngine'  => '3.5L V6',
+                            'fuelType'       => 'Petrol + CNG Bi-Fuel',
+                            'vehicleSeatingCapacity' => 8,
+                            'itemCondition'  => 'https://schema.org/UsedCondition',
+                        ),
+                        'price'         => '14500000',
+                        'priceCurrency' => 'NGN',
+                    ),
+                    array(
+                        '@type'       => 'Offer',
+                        'itemOffered' => array(
+                            '@type'          => 'Car',
+                            'name'           => 'Toyota RAV4 XLE AWD',
+                            'brand'          => array( '@type' => 'Brand', 'name' => 'Toyota' ),
+                            'vehicleEngine'  => '2.5L 4-Cylinder',
+                            'fuelType'       => 'Petrol (CNG Ready)',
+                            'vehicleSeatingCapacity' => 5,
+                            'itemCondition'  => 'https://schema.org/UsedCondition',
+                        ),
+                        'price'         => '17000000',
+                        'priceCurrency' => 'NGN',
+                    ),
+                    array(
+                        '@type'       => 'Offer',
+                        'itemOffered' => array(
+                            '@type'          => 'Car',
+                            'name'           => 'Mercedes-Benz C300 4MATIC Luxury Sport',
+                            'brand'          => array( '@type' => 'Brand', 'name' => 'Mercedes-Benz' ),
+                            'vehicleEngine'  => '2.0L Turbo 4-Cylinder',
+                            'fuelType'       => 'Petrol',
+                            'vehicleSeatingCapacity' => 5,
+                            'itemCondition'  => 'https://schema.org/UsedCondition',
+                        ),
+                        'price'         => '22000000',
+                        'priceCurrency' => 'NGN',
+                    ),
+                    array(
+                        '@type'       => 'Offer',
+                        'itemOffered' => array(
+                            '@type'          => 'Car',
+                            'name'           => 'Hyundai Elantra Limited (CNG Bi-Fuel)',
+                            'brand'          => array( '@type' => 'Brand', 'name' => 'Hyundai' ),
+                            'vehicleEngine'  => '1.8L 4-Cylinder',
+                            'fuelType'       => 'Petrol + CNG Bi-Fuel',
+                            'vehicleSeatingCapacity' => 5,
+                            'itemCondition'  => 'https://schema.org/UsedCondition',
+                        ),
+                        'price'         => '9800000',
+                        'priceCurrency' => 'NGN',
+                    ),
+                    array(
+                        '@type'       => 'Offer',
+                        'itemOffered' => array(
+                            '@type'          => 'Car',
+                            'name'           => 'Toyota Corolla LE (CNG Bi-Fuel)',
+                            'brand'          => array( '@type' => 'Brand', 'name' => 'Toyota' ),
+                            'vehicleEngine'  => '1.8L 4-Cylinder',
+                            'fuelType'       => 'Petrol + CNG Bi-Fuel',
+                            'vehicleSeatingCapacity' => 5,
+                            'itemCondition'  => 'https://schema.org/UsedCondition',
+                        ),
+                        'price'         => '12800000',
+                        'priceCurrency' => 'NGN',
+                    ),
+                    array(
+                        '@type'       => 'Offer',
+                        'itemOffered' => array(
+                            '@type'          => 'Car',
+                            'name'           => 'Toyota Camry Sport (CNG Bi-Fuel)',
+                            'brand'          => array( '@type' => 'Brand', 'name' => 'Toyota' ),
+                            'vehicleEngine'  => '2.5L Dynamic Force',
+                            'fuelType'       => 'Petrol + CNG Bi-Fuel',
+                            'vehicleSeatingCapacity' => 5,
+                            'itemCondition'  => 'https://schema.org/UsedCondition',
+                        ),
+                        'price'         => '21500000',
+                        'priceCurrency' => 'NGN',
+                    ),
+                    array(
+                        '@type'       => 'Offer',
+                        'itemOffered' => array(
+                            '@type'          => 'Car',
+                            'name'           => 'Lexus RX 350 AWD Luxury SUV',
+                            'brand'          => array( '@type' => 'Brand', 'name' => 'Lexus' ),
+                            'vehicleEngine'  => '3.5L V6 Dual VVT-i',
+                            'fuelType'       => 'Petrol (CNG Ready)',
+                            'vehicleSeatingCapacity' => 5,
+                            'itemCondition'  => 'https://schema.org/UsedCondition',
+                        ),
+                        'price'         => '34000000',
+                        'priceCurrency' => 'NGN',
+                    ),
+                    array(
+                        '@type'       => 'Offer',
+                        'itemOffered' => array(
+                            '@type'          => 'Car',
+                            'name'           => 'Toyota Hilux 4x4 Double Cabin (CNG)',
+                            'brand'          => array( '@type' => 'Brand', 'name' => 'Toyota' ),
+                            'vehicleEngine'  => '2.7L Petrol + CNG',
+                            'fuelType'       => 'Petrol + CNG Bi-Fuel',
+                            'vehicleSeatingCapacity' => 5,
+                            'itemCondition'  => 'https://schema.org/UsedCondition',
+                        ),
+                        'price'         => '38500000',
+                        'priceCurrency' => 'NGN',
+                    ),
+                    array(
+                        '@type'       => 'Offer',
+                        'itemOffered' => array(
+                            '@type'          => 'Car',
+                            'name'           => 'Toyota HiAce 16-Seater Commuter Bus (CNG)',
+                            'brand'          => array( '@type' => 'Brand', 'name' => 'Toyota' ),
+                            'vehicleEngine'  => '2.7L VVT-i Petrol + CNG',
+                            'fuelType'       => 'Petrol + CNG Bi-Fuel',
+                            'vehicleSeatingCapacity' => 16,
+                            'itemCondition'  => 'https://schema.org/UsedCondition',
+                        ),
+                        'price'         => '26000000',
+                        'priceCurrency' => 'NGN',
+                    ),
+                    array(
+                        '@type'       => 'Offer',
+                        'itemOffered' => array(
+                            '@type'          => 'Car',
+                            'name'           => 'Honda Accord EX-L (CNG Bi-Fuel)',
+                            'brand'          => array( '@type' => 'Brand', 'name' => 'Honda' ),
+                            'vehicleEngine'  => '2.4L Earth Dreams',
+                            'fuelType'       => 'Petrol + CNG Bi-Fuel',
+                            'vehicleSeatingCapacity' => 5,
+                            'itemCondition'  => 'https://schema.org/UsedCondition',
+                        ),
+                        'price'         => '16500000',
+                        'priceCurrency' => 'NGN',
+                    ),
+                ),
+            ),
+        );
+
+        $auto_faq = array(
+            '@context'   => 'https://schema.org',
+            '@type'      => 'FAQPage',
+            'mainEntity' => array(
+                array(
+                    '@type'          => 'Question',
+                    'name'           => 'Can I buy cars or convert my existing car to CNG at Kelvin Cameo?',
+                    'acceptedAnswer' => array(
+                        '@type' => 'Answer',
+                        'text'  => 'Yes! Kelvin Cameo operates a certified automobile dealership and clean CNG conversion hub in Suleja along the Abuja corridor. You can buy factory-fitted or professionally converted bi-fuel CNG cars (Toyota Corolla, Camry, Sienna, Hilux, HiAce, etc.) or bring your existing petrol car for certified CNG kit installation with lightweight composite cylinders.',
+                    ),
+                ),
+                array(
+                    '@type'          => 'Question',
+                    'name'           => 'What happens if CNG runs out while driving?',
+                    'acceptedAnswer' => array(
+                        '@type' => 'Answer',
+                        'text'  => 'All CNG cars sold or converted at Kelvin Cameo are 100% Bi-Fuel hybrids. The original petrol tank remains fully intact. If your CNG runs out, the engine switches automatically to petrol seamlessly without stalling, giving you absolute peace of mind for interstate and remote travel.',
+                    ),
+                ),
+                array(
+                    '@type'          => 'Question',
+                    'name'           => 'How much money does CNG save compared to petrol in Nigeria?',
+                    'acceptedAnswer' => array(
+                        '@type' => 'Answer',
+                        'text'  => 'CNG costs approximately ₦230 to ₦250 per Standard Cubic Meter (SCM) compared to petrol at over ₦1,000 per liter. Daily commuters and commercial transport operators along the Suleja-Abuja and Niger State routes report savings of 65% to 70%, often reducing monthly fuel bills from over ₦350,000 to under ₦90,000.',
+                    ),
+                ),
+                array(
+                    '@type'          => 'Question',
+                    'name'           => 'Where is Kelvin Cameo automobile showroom located?',
+                    'acceptedAnswer' => array(
+                        '@type' => 'Answer',
+                        'text'  => 'Kelvin Cameo Automobile Showroom & CNG Workshop is located opposite Suleiman Barau Technical College, along Maje-Minna Road, Kwamba, Suleja, Niger State (Abuja Corridor). Call or WhatsApp +234 805 555 8197 for car inspection, test drive, or conversion inquiries.',
+                    ),
+                ),
+            ),
+        );
+
+        echo "<!-- Kelvin Cameo SEO Schema: AutoDealer -->\n";
+        echo '<script type="application/ld+json">' . wp_json_encode( $auto_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "</script>\n";
+
+        echo "<!-- Kelvin Cameo SEO Schema: Automotive FAQ for AI -->\n";
+        echo '<script type="application/ld+json">' . wp_json_encode( $auto_faq, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "</script>\n";
+    }
 }
 add_action( 'wp_head', 'kelvin_cameo_seo_schema', 20 );
 
@@ -1173,6 +1418,13 @@ if ( file_exists( get_stylesheet_directory() . '/inc/hotel-management.php' ) ) {
 }
 
 /**
+ * Kelvin Cameo Bar & Beverage POS Management Engine
+ */
+if ( file_exists( get_stylesheet_directory() . '/inc/bar-management.php' ) ) {
+    require_once get_stylesheet_directory() . '/inc/bar-management.php';
+}
+
+/**
  * Kelvin Cameo High-Ranking SEO Posts Seeder Engine
  */
 if ( file_exists( get_stylesheet_directory() . '/inc/seo-posts-seeder.php' ) ) {
@@ -1187,7 +1439,7 @@ if ( file_exists( get_stylesheet_directory() . '/inc/post-plugin-engine.php' ) )
 }
 
 /**
- * Auto-seed required core pages (such as banquet-hall) to ensure valid 200 OK HTTP responses.
+ * Auto-seed required core pages (such as banquet-hall, automobiles, bar) to ensure valid 200 OK HTTP responses.
  */
 function kc_ensure_core_pages_exist() {
     $needed_pages = array(
@@ -1198,6 +1450,10 @@ function kc_ensure_core_pages_exist() {
         'automobiles'  => array(
             'title'    => 'Automobiles, Car Sales & CNG Clean Mobility',
             'template' => 'page-automobiles.php',
+        ),
+        'bar'          => array(
+            'title'    => 'Bar POS & Beverage Inventory System',
+            'template' => 'page-bar.php',
         ),
     );
 

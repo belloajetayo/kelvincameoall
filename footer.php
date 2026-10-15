@@ -94,6 +94,8 @@
         <span class="crawl-index-label">Direct Directory:</span>
         <a href="<?php echo kc_url('hospitality'); ?>" itemprop="url"><span itemprop="name">Resort Hotel &amp; Suites</span></a>
         <span class="crawl-sep">&bull;</span>
+        <a href="<?php echo kc_url('automobiles'); ?>" itemprop="url"><span itemprop="name">Automobiles &amp; CNG Hub</span></a>
+        <span class="crawl-sep">&bull;</span>
         <a href="<?php echo kc_url('energy'); ?>" itemprop="url"><span itemprop="name">Energy &amp; Petrol Stations</span></a>
         <span class="crawl-sep">&bull;</span>
         <a href="<?php echo kc_url('real-estate'); ?>" itemprop="url"><span itemprop="name">Real Estate &amp; Land</span></a>
@@ -103,6 +105,8 @@
         <a href="<?php echo kc_url('reserve'); ?>" itemprop="url"><span itemprop="name">Online Room Reservation</span></a>
         <span class="crawl-sep">&bull;</span>
         <a href="<?php echo kc_url('reception'); ?>" itemprop="url"><span itemprop="name">Reception Portal</span></a>
+        <span class="crawl-sep">&bull;</span>
+        <a href="<?php echo kc_url('bar'); ?>" itemprop="url"><span itemprop="name">Bar POS &amp; Inventory</span></a>
         <span class="crawl-sep">&bull;</span>
         <a href="<?php echo kc_url('about'); ?>" itemprop="url"><span itemprop="name">Corporate Profile (RC: 1613032)</span></a>
         <span class="crawl-sep">&bull;</span>
