@@ -622,10 +622,10 @@ function kc_bar_ajax_update_stock() {
     $action   = sanitize_text_field($_POST['action_type'] ?? 'restock'); // 'restock', 'breakage', 'set_exact'
     $qty      = (int) ($_POST['qty'] ?? 0);
 
-    // Strict Role Restriction: Only Admin can directly edit exact stock
-    if ($action === 'set_exact' && $role !== 'admin') {
+    // Strict Role Restriction: Only Admin can directly edit exact stock or remove stock
+    if (($action === 'set_exact' || $action === 'remove_stock') && $role !== 'admin') {
         wp_send_json_error(array(
-            'message' => 'Permission Denied: Only Admin can directly edit stock levels. Staff can only add new stock (N/S) or log breakage (B/C/S). Enter Admin Password.',
+            'message' => 'Permission Denied: Only Admin can directly edit or remove stock levels. Staff can only add new stock (N/S) or log breakage (B/C/S). Enter Admin Password.',
             'require_admin' => true
         ), 403);
     }
@@ -653,6 +653,12 @@ function kc_bar_ajax_update_stock() {
             $qty, $prod_id
         ));
         $msg = "[Admin Action] Set {$product['name']} exact current stock to $qty bottles.";
+    } elseif ($action === 'remove_stock') {
+        $wpdb->query($wpdb->prepare(
+            "UPDATE $table SET current_stock = GREATEST(0, current_stock - %d) WHERE id = %d",
+            $qty, $prod_id
+        ));
+        $msg = "[Admin Action] Removed $qty bottles from {$product['name']}.";
     } else {
         wp_send_json_error(array('message' => 'Invalid action type.'));
     }
@@ -745,6 +751,38 @@ function kc_bar_ajax_add_product() {
     wp_send_json_success(array(
         'message' => "Successfully added $name to $category by Admin!",
         'id'      => $wpdb->insert_id,
+    ));
+}
+
+/**
+ * AJAX: Delete / Remove Product from Bar Stock (Admin Only)
+ */
+add_action('wp_ajax_kc_bar_delete_product', 'kc_bar_ajax_delete_product');
+add_action('wp_ajax_nopriv_kc_bar_delete_product', 'kc_bar_ajax_delete_product');
+function kc_bar_ajax_delete_product() {
+    if (!kc_bar_verify_admin_session()) {
+        wp_send_json_error(array('message' => 'Admin privileges required to remove a product from inventory.'), 403);
+    }
+
+    global $wpdb;
+    $table = $wpdb->prefix . 'kc_bar_products';
+
+    $prod_id = (int) ($_POST['product_id'] ?? 0);
+    if ($prod_id <= 0) {
+        wp_send_json_error(array('message' => 'Invalid drink ID.'));
+    }
+
+    $product = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table WHERE id = %d", $prod_id), ARRAY_A);
+    if (!$product) {
+        wp_send_json_error(array('message' => 'Beverage not found in stock.'));
+    }
+
+    // Set is_active to 0 so it disappears from POS catalog & active ledger
+    $wpdb->update($table, array('is_active' => 0), array('id' => $prod_id));
+
+    wp_send_json_success(array(
+        'message' => "Successfully removed '{$product['name']}' from bar stock & POS menu.",
+        'product_id' => $prod_id
     ));
 }
 

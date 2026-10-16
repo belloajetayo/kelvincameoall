@@ -27,6 +27,12 @@ $site_home = home_url('/');
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+  <script>
+    (function() {
+      var savedTheme = localStorage.getItem('kc_bar_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
   
   <style>
     :root {
@@ -718,6 +724,341 @@ $site_home = home_url('/');
       color: #d4af37;
     }
 
+    /* CARD CART CONTROLS (+ and - buttons directly on drink cards) */
+    .card-cart-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(212,175,55,0.12);
+      border: 1px solid rgba(212,175,55,0.35);
+      border-radius: 8px;
+      padding: 0.2rem 0.35rem;
+      margin-top: 0.5rem;
+    }
+    .card-qty-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      line-height: 1;
+      transition: all 0.15s;
+    }
+    .card-qty-btn:hover {
+      background: #d4af37;
+      color: #060e1e;
+      border-color: #d4af37;
+    }
+    .card-qty-badge {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #d4af37;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* CARD ADMIN REMOVE ICON */
+    .card-admin-del {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      background: rgba(239,68,68,0.15);
+      border: 1px solid rgba(239,68,68,0.4);
+      color: #ef4444;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: all 0.2s;
+      z-index: 2;
+    }
+    .card-admin-del:hover {
+      opacity: 1;
+      background: #ef4444;
+      color: #fff;
+      transform: scale(1.1);
+    }
+
+    /* DAILY SHEET REMOVE BUTTON */
+    .btn-ledger-del {
+      background: rgba(239,68,68,0.12);
+      border: 1px solid rgba(239,68,68,0.3);
+      color: #ef4444;
+      padding: 0.25rem 0.55rem;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-ledger-del:hover {
+      background: #ef4444;
+      color: #ffffff;
+    }
+
+    /* ==============================================================
+       LIGHT MODE THEME STYLES
+       ============================================================== */
+    body[data-theme="light"] {
+      background: #f1f5f9;
+      color: #1e293b;
+    }
+    body[data-theme="light"] .pos-header {
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    body[data-theme="light"] .brand-text h1 {
+      color: #0f172a;
+    }
+    body[data-theme="light"] .brand-text p {
+      color: #64748b;
+    }
+    body[data-theme="light"] .brand-text h1 span.rc-tag {
+      background: rgba(184,147,39,0.12);
+      color: #b89327;
+      border-color: rgba(184,147,39,0.25);
+    }
+    body[data-theme="light"] .role-badge.staff {
+      background: #e0f2fe;
+      color: #0369a1;
+      border-color: #7dd3fc;
+    }
+    body[data-theme="light"] .role-badge.admin {
+      background: #fef9e7;
+      color: #b89327;
+      border-color: #d4af37;
+      box-shadow: 0 0 10px rgba(212,175,55,0.2);
+    }
+    body[data-theme="light"] .staff-badge {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+      color: #1e293b;
+    }
+    body[data-theme="light"] .nav-btn {
+      background: #ffffff;
+      color: #1e293b;
+      border-color: #cbd5e1;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    body[data-theme="light"] .nav-btn:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+      border-color: #94a3b8;
+    }
+    body[data-theme="light"] .nav-btn.primary {
+      background: linear-gradient(135deg, #d4af37, #b89327);
+      color: #060e1e;
+      border: none;
+    }
+    body[data-theme="light"] .pos-catalog-pane {
+      background: #f8fafc;
+      border-right: 1px solid #e2e8f0;
+    }
+    body[data-theme="light"] .category-pills-bar {
+      background: #ffffff;
+    }
+    body[data-theme="light"] .cat-btn {
+      background: #f1f5f9;
+      color: #64748b;
+      border-color: #e2e8f0;
+    }
+    body[data-theme="light"] .cat-btn:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+    body[data-theme="light"] .cat-btn.active {
+      background: #d4af37;
+      color: #060e1e;
+      border-color: #d4af37;
+    }
+    body[data-theme="light"] .cat-btn .badge {
+      background: rgba(0,0,0,0.08);
+      color: inherit;
+    }
+    body[data-theme="light"] .catalog-search-row {
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    body[data-theme="light"] .search-input-wrap input {
+      background: #ffffff;
+      border-color: #cbd5e1;
+      color: #0f172a;
+    }
+    body[data-theme="light"] .search-input-wrap input:focus {
+      border-color: #b89327;
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.15);
+    }
+    body[data-theme="light"] .search-input-wrap svg {
+      color: #94a3b8;
+    }
+    body[data-theme="light"] .product-card {
+      background: #ffffff;
+      border-color: #e2e8f0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    body[data-theme="light"] .product-card:hover {
+      border-color: #d4af37;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.09);
+    }
+    body[data-theme="light"] .product-title {
+      color: #0f172a;
+    }
+    body[data-theme="light"] .product-price {
+      color: #b89327;
+    }
+    body[data-theme="light"] .product-footer {
+      border-top-color: #f1f5f9;
+    }
+    body[data-theme="light"] .product-stock {
+      background: #f1f5f9;
+      color: #64748b;
+    }
+    body[data-theme="light"] .card-qty-btn {
+      background: #ffffff;
+      border-color: #cbd5e1;
+      color: #0f172a;
+    }
+    body[data-theme="light"] .card-qty-badge {
+      color: #b89327;
+    }
+    body[data-theme="light"] .pos-cart-pane {
+      background: #ffffff;
+      border-left: 1px solid #e2e8f0;
+    }
+    body[data-theme="light"] .cart-header {
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    body[data-theme="light"] .cart-header h2 {
+      color: #0f172a;
+    }
+    body[data-theme="light"] .clear-cart-btn {
+      color: #94a3b8;
+    }
+    body[data-theme="light"] .cart-meta-bar {
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    body[data-theme="light"] .cart-meta-select {
+      background: #ffffff;
+      border-color: #cbd5e1;
+      color: #0f172a;
+    }
+    body[data-theme="light"] .cart-item-row {
+      background: #f8fafc;
+      border-color: #e2e8f0;
+    }
+    body[data-theme="light"] .cart-item-name {
+      color: #0f172a;
+    }
+    body[data-theme="light"] .cart-item-sub {
+      color: #64748b;
+    }
+    body[data-theme="light"] .qty-btn {
+      background: #ffffff;
+      border-color: #cbd5e1;
+      color: #0f172a;
+    }
+    body[data-theme="light"] .qty-btn:hover {
+      background: #e2e8f0;
+    }
+    body[data-theme="light"] .qty-val {
+      color: #0f172a;
+    }
+    body[data-theme="light"] .cart-item-total {
+      color: #b89327;
+    }
+    body[data-theme="light"] .cart-footer {
+      background: #ffffff;
+      border-top: 1px solid #e2e8f0;
+    }
+    body[data-theme="light"] .cart-total-label {
+      color: #64748b;
+    }
+    body[data-theme="light"] .cart-total-amount {
+      color: #b89327;
+    }
+    body[data-theme="light"] .pay-method-btn {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+      color: #475569;
+    }
+    body[data-theme="light"] .pay-method-btn.active {
+      background: #fef9e7;
+      border-color: #b89327;
+      color: #b89327;
+    }
+    body[data-theme="light"] .pos-modal {
+      background: #ffffff;
+      border-color: #cbd5e1;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+      color: #1e293b;
+    }
+    body[data-theme="light"] .modal-head {
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    body[data-theme="light"] .modal-head h3 {
+      color: #0f172a;
+    }
+    body[data-theme="light"] .modal-foot {
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+    }
+    body[data-theme="light"] .modal-close {
+      color: #64748b;
+    }
+    body[data-theme="light"] .pin-card {
+      background: #ffffff;
+      border-color: #cbd5e1;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      color: #0f172a;
+    }
+    body[data-theme="light"] .pin-card h2 {
+      color: #0f172a;
+    }
+    body[data-theme="light"] .pin-key {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+      color: #0f172a;
+    }
+    body[data-theme="light"] .pin-key:hover {
+      background: #e2e8f0;
+    }
+    body[data-theme="light"] .ledger-table th {
+      background: #f1f5f9;
+      color: #0f172a;
+      border-color: #e2e8f0;
+    }
+    body[data-theme="light"] .ledger-table td {
+      border-color: #e2e8f0;
+      color: #1e293b;
+      background: #ffffff;
+    }
+    body[data-theme="light"] .ledger-table td:nth-child(2) {
+      color: #0f172a;
+    }
+    body[data-theme="light"] .ledger-table tfoot td {
+      background: #f8fafc;
+      color: #b89327;
+      border-color: #e2e8f0;
+    }
+    body[data-theme="light"] #pinLockOverlay {
+      background: #f1f5f9;
+    }
+
     /* THERMAL RECEIPT & MONTHLY REPORT PRINTING */
     #thermalReceiptArea, #printableMonthlyArea, #thermalShiftSlipArea {
       display: none;
@@ -921,6 +1262,12 @@ $site_home = home_url('/');
       <!-- Admin Clear Test Sales Button (Only visible in admin mode) -->
       <button type="button" class="nav-btn" id="adminClearTestBtn" style="display:none; border-color:#ef4444; color:#ef4444; font-weight:700;" title="Clear Test Sales & Prep for Tomorrow">
         <span>🧹 Clear Test Data</span>
+      </button>
+
+      <!-- Light / Dark Mode Switcher -->
+      <button type="button" class="nav-btn theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Switch Light or Dark Mode">
+        <span id="themeToggleIcon">☀️</span>
+        <span id="themeToggleText">Light Mode</span>
       </button>
 
       <!-- Lock Screen -->
@@ -1257,6 +1604,7 @@ $site_home = home_url('/');
                 <th>B/C/S</th>
                 <th>C/S</th>
                 <th>Amount (₦)</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody id="ledgerTableBody"></tbody>
@@ -1267,6 +1615,7 @@ $site_home = home_url('/');
                 <td>-</td>
                 <td>-</td>
                 <td id="ledgerTotalTableAmount" style="font-weight:800; font-family:'JetBrains Mono';">₦0</td>
+                <td>-</td>
               </tr>
             </tfoot>
           </table>
@@ -1309,11 +1658,16 @@ $site_home = home_url('/');
                 <option value="restock">New Stock In (N/S) - All Staff</option>
                 <option value="breakage">Breakage / Complimentary (B/C/S)</option>
                 <option value="set_exact" id="optSetExact">Set Exact Current Stock (Admin Only)</option>
+                <option value="remove_stock" id="optRemoveStock">Remove / Deduct Stock (Admin Only)</option>
               </select>
             </div>
             <div>
               <label style="font-size:0.85rem; color:#94a3b8; display:block; margin-bottom:0.35rem;">Quantity (Bottles/Cans)</label>
-              <input type="number" id="restockQty" class="cart-meta-select" style="padding:0.65rem;" min="1" value="1" required>
+              <div style="display:flex; align-items:center; gap:0.4rem;">
+                <button type="button" class="qty-btn" style="width:36px; height:36px; font-size:1.1rem; border-radius:8px;" onclick="stepRestockQty(-1)">-</button>
+                <input type="number" id="restockQty" class="cart-meta-select" style="padding:0.65rem; text-align:center; font-weight:700; width:100%;" min="1" value="1" required>
+                <button type="button" class="qty-btn" style="width:36px; height:36px; font-size:1.1rem; border-radius:8px;" onclick="stepRestockQty(1)">+</button>
+              </div>
             </div>
           </div>
 
@@ -1323,6 +1677,13 @@ $site_home = home_url('/');
 
           <button type="submit" class="btn-checkout" style="width:100%;">Save Inventory Update</button>
         </form>
+
+        <!-- Admin Only Delete Drink Action -->
+        <div id="adminRemoveProductArea" style="margin-top:1.25rem; padding-top:1rem; border-top:1px dashed #334155; display:none;">
+          <button type="button" class="nav-btn" style="width:100%; justify-content:center; background:rgba(239,68,68,0.15); color:#ef4444; border:1px solid #ef4444; font-weight:800; padding:0.65rem;" onclick="adminRemoveSelectedProduct()">
+            🗑️ Delete / Remove This Drink from Bar Menu (Admin Only)
+          </button>
+        </div>
 
       </div>
     </div>
@@ -1889,7 +2250,10 @@ $site_home = home_url('/');
       const icon  = document.getElementById('roleIcon');
       const label = document.getElementById('roleLabel');
       const optSetExact = document.getElementById('optSetExact');
+      const optRemoveStock = document.getElementById('optRemoveStock');
       const clearBtn = document.getElementById('adminClearTestBtn');
+      const adminRemoveArea = document.getElementById('adminRemoveProductArea');
+      const restockProdSelect = document.getElementById('restockProdSelect');
 
       if (currentRole === 'admin') {
         badge.className = 'role-badge admin';
@@ -1897,14 +2261,24 @@ $site_home = home_url('/');
         label.textContent = 'Admin / Manager';
         badge.title = 'Admin Mode Active (Full Privileges)';
         if (optSetExact) optSetExact.disabled = false;
+        if (optRemoveStock) optRemoveStock.disabled = false;
         if (clearBtn) clearBtn.style.display = 'inline-flex';
+        if (adminRemoveArea && restockProdSelect && restockProdSelect.value) {
+          adminRemoveArea.style.display = 'block';
+        }
       } else {
         badge.className = 'role-badge staff';
         icon.textContent = '🛡️';
         label.textContent = 'Staff (Cashier)';
         badge.title = 'Click to enter Admin Password';
         if (optSetExact) optSetExact.disabled = true;
+        if (optRemoveStock) optRemoveStock.disabled = true;
         if (clearBtn) clearBtn.style.display = 'none';
+        if (adminRemoveArea) adminRemoveArea.style.display = 'none';
+      }
+
+      if (products && products.length > 0) {
+        renderProducts();
       }
     }
 
@@ -2032,16 +2406,42 @@ $site_home = home_url('/');
           stockText = `Low: ${stock}`;
         }
 
+        const cartItem = cart.find(i => String(i.id) === String(p.id));
+        const inCartQty = cartItem ? cartItem.qty : 0;
+
         const card = document.createElement('div');
         card.className = `product-card ${isOutOfStock ? 'out-of-stock' : ''}`;
+
+        // Admin trash icon directly on card
+        let adminDelHtml = '';
+        if (currentRole === 'admin') {
+          adminDelHtml = `<button type="button" class="card-admin-del" onclick="event.stopPropagation(); adminRemoveProduct('${p.id}', '${escapeHtml(p.name)}')" title="Admin: Remove ${escapeHtml(p.name)} from bar stock">🗑️</button>`;
+        }
+
+        // Direct in-card + / - controls
+        let cartControlsHtml = '';
+        if (inCartQty > 0) {
+          cartControlsHtml = `
+            <div class="card-cart-controls" onclick="event.stopPropagation()">
+              <button type="button" class="card-qty-btn" onclick="updateCartQty('${p.id}', -1)" title="Reduce qty">-</button>
+              <span class="card-qty-badge">${inCartQty} in cart</span>
+              <button type="button" class="card-qty-btn" onclick="updateCartQty('${p.id}', 1)" title="Increase qty">+</button>
+            </div>
+          `;
+        }
+
         card.innerHTML = `
+          ${adminDelHtml}
           <div>
             <div class="prod-cat-tag ${p.category}">${p.category}</div>
             <div class="product-title">${escapeHtml(p.name)}</div>
           </div>
-          <div class="product-footer">
-            <div class="product-price">₦${formatNaira(p.price)}</div>
-            <div class="product-stock ${stockClass}">${stockText}</div>
+          <div>
+            <div class="product-footer">
+              <div class="product-price">₦${formatNaira(p.price)}</div>
+              <div class="product-stock ${stockClass}">${stockText}</div>
+            </div>
+            ${cartControlsHtml}
           </div>
         `;
 
@@ -2061,7 +2461,7 @@ $site_home = home_url('/');
     // CART OPERATIONS
     // -------------------------------------------------------------
     function addToCart(product) {
-      const existing = cart.find(item => item.id === product.id);
+      const existing = cart.find(item => String(item.id) === String(product.id));
       const stock = parseInt(product.current_stock);
 
       if (existing) {
@@ -2085,34 +2485,38 @@ $site_home = home_url('/');
       }
 
       renderCart();
+      renderProducts();
     }
 
     function updateCartQty(productId, delta) {
-      const item = cart.find(i => i.id === productId);
+      const item = cart.find(i => String(i.id) === String(productId));
       if (!item) return;
 
-      const product = products.find(p => p.id === productId);
+      const product = products.find(p => String(p.id) === String(productId));
       const stock = product ? parseInt(product.current_stock) : 999;
 
       const newQty = item.qty + delta;
       if (newQty <= 0) {
         removeFromCart(productId);
       } else if (newQty > stock) {
-        showToast(`Cannot exceed current stock (${stock} bottles)`, true);
+        showToast(`Cannot exceed current stock (${stock} bottles of ${item.name})`, true);
       } else {
         item.qty = newQty;
         renderCart();
+        renderProducts();
       }
     }
 
     function removeFromCart(productId) {
-      cart = cart.filter(i => i.id !== productId);
+      cart = cart.filter(i => String(i.id) !== String(productId));
       renderCart();
+      renderProducts();
     }
 
     function clearCart() {
       cart = [];
       renderCart();
+      renderProducts();
     }
 
     function renderCart() {
@@ -2150,12 +2554,12 @@ $site_home = home_url('/');
             <div class="cart-item-sub">₦${formatNaira(item.price)} each</div>
           </div>
           <div class="cart-item-qty">
-            <button type="button" class="qty-btn" onclick="updateCartQty(${item.id}, -1)">-</button>
+            <button type="button" class="qty-btn" onclick="updateCartQty('${item.id}', -1)" title="Decrease qty">-</button>
             <span class="qty-val">${item.qty}</span>
-            <button type="button" class="qty-btn" onclick="updateCartQty(${item.id}, 1)">+</button>
+            <button type="button" class="qty-btn" onclick="updateCartQty('${item.id}', 1)" title="Increase qty">+</button>
           </div>
           <div class="cart-item-total">₦${formatNaira(itemSubtotal)}</div>
-          <button type="button" class="cart-item-del" onclick="removeFromCart(${item.id})" title="Remove">✕</button>
+          <button type="button" class="cart-item-del" onclick="removeFromCart('${item.id}')" title="Remove item">✕</button>
         `;
         container.appendChild(row);
       });
@@ -2411,6 +2815,10 @@ $site_home = home_url('/');
             let counter = 1;
             data.rows.forEach(r => {
               const tr = document.createElement('tr');
+              const actionBtn = (currentRole === 'admin')
+                ? `<button type="button" class="btn-ledger-del" onclick="adminRemoveProduct('${r.id}', '${escapeHtml(r.name)}')" title="Admin: Remove this stock item">🗑️ Remove</button>`
+                : `<span style="color:#64748b;">-</span>`;
+
               tr.innerHTML = `
                 <td>${counter++}</td>
                 <td>${escapeHtml(r.name)}</td>
@@ -2423,6 +2831,7 @@ $site_home = home_url('/');
                 <td style="color:#ef4444;">${r.bcs}</td>
                 <td><strong style="color:#d4af37;">${r.cs}</strong></td>
                 <td style="font-weight:700; font-family:'JetBrains Mono';">${r.amount > 0 ? '₦' + formatNaira(r.amount) : '-'}</td>
+                <td>${actionBtn}</td>
               `;
               tbody.appendChild(tr);
             });
@@ -2473,8 +2882,17 @@ $site_home = home_url('/');
     // -------------------------------------------------------------
     // RESTOCK & INVENTORY UPDATES (Role Checked)
     // -------------------------------------------------------------
+    function stepRestockQty(delta) {
+      const inp = document.getElementById('restockQty');
+      if (!inp) return;
+      let val = (parseInt(inp.value) || 1) + delta;
+      if (val < 1) val = 1;
+      inp.value = val;
+    }
+
     function populateRestockSelect() {
       const select = document.getElementById('restockProdSelect');
+      const currentVal = select.value;
       select.innerHTML = '<option value="">-- Choose Drink --</option>';
       products.forEach(p => {
         const opt = document.createElement('option');
@@ -2483,11 +2901,18 @@ $site_home = home_url('/');
         select.appendChild(opt);
       });
 
-      select.addEventListener('change', () => {
-        const pId = parseInt(select.value);
-        const prod = products.find(p => p.id === pId);
+      if (currentVal) select.value = currentVal;
+
+      select.onchange = () => {
+        const pId = select.value;
+        const prod = products.find(p => String(p.id) === String(pId));
         document.getElementById('previewCurrentStockVal').textContent = prod ? `${prod.current_stock} bottles` : '--';
-      });
+        
+        const removeArea = document.getElementById('adminRemoveProductArea');
+        if (removeArea) {
+          removeArea.style.display = (currentRole === 'admin' && pId) ? 'block' : 'none';
+        }
+      };
     }
 
     function handleRestockSubmit(e) {
@@ -2501,9 +2926,9 @@ $site_home = home_url('/');
         return;
       }
 
-      // Check role if action is set_exact
-      if (type === 'set_exact' && currentRole !== 'admin') {
-        showToast('Only Admin can directly edit current stock! Staff can only add new stock (N/S).', true);
+      // Check role if action is set_exact or remove_stock
+      if ((type === 'set_exact' || type === 'remove_stock') && currentRole !== 'admin') {
+        showToast('Only Admin can edit or remove stock! Staff can only add new stock (N/S).', true);
         unlockAdminModal();
         return;
       }
@@ -2528,6 +2953,56 @@ $site_home = home_url('/');
               unlockAdminModal();
             }
           }
+        });
+    }
+
+    function adminRemoveSelectedProduct() {
+      const pId = document.getElementById('restockProdSelect').value;
+      if (!pId) {
+        showToast('Please select a beverage to remove.', true);
+        return;
+      }
+      const prod = products.find(p => String(p.id) === String(pId));
+      const name = prod ? prod.name : 'this beverage';
+      adminRemoveProduct(pId, name);
+    }
+
+    function adminRemoveProduct(productId, productName) {
+      if (currentRole !== 'admin') {
+        showToast('Admin privilege required to remove a product from inventory.', true);
+        unlockAdminModal();
+        return;
+      }
+
+      if (!confirm(`Are you sure you want to remove "${productName}" from the bar stock & POS menu?`)) {
+        return;
+      }
+
+      const fd = new FormData();
+      fd.append('action', 'kc_bar_delete_product');
+      fd.append('token', sessionToken);
+      fd.append('product_id', productId);
+
+      fetch(AJAX_URL, { method: 'POST', body: fd })
+        .then(r => r.json())
+        .then(res => {
+          if (res.success) {
+            showToast(res.data.message);
+            closeModal('restockModal');
+            // Remove from cart if present
+            removeFromCart(productId);
+            loadPosData();
+            // If daily ledger is open, reload it
+            const ledgerModal = document.getElementById('ledgerModal');
+            if (ledgerModal && ledgerModal.style.display === 'flex') {
+              loadDailyLedger();
+            }
+          } else {
+            showToast(res.data?.message || 'Error removing product.', true);
+          }
+        })
+        .catch(() => {
+          showToast('Network error while removing product.', true);
         });
     }
 
@@ -2919,6 +3394,39 @@ $site_home = home_url('/');
       // Forms
       document.getElementById('restockForm').addEventListener('submit', handleRestockSubmit);
       document.getElementById('addDrinkForm').addEventListener('submit', handleAddDrinkSubmit);
+
+      // Initialize Theme
+      initTheme();
+    }
+
+    // -------------------------------------------------------------
+    // LIGHT & DARK THEME ENGINE
+    // -------------------------------------------------------------
+    function initTheme() {
+      const saved = localStorage.getItem('kc_bar_theme') || 'dark';
+      applyTheme(saved);
+    }
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      document.body.setAttribute('data-theme', theme);
+      const icon = document.getElementById('themeToggleIcon');
+      const text = document.getElementById('themeToggleText');
+      if (theme === 'light') {
+        if (icon) icon.textContent = '🌙';
+        if (text) text.textContent = 'Dark Mode';
+      } else {
+        if (icon) icon.textContent = '☀️';
+        if (text) text.textContent = 'Light Mode';
+      }
+      localStorage.setItem('kc_bar_theme', theme);
+    }
+
+    function toggleTheme() {
+      const current = document.body.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      const next = current === 'light' ? 'dark' : 'light';
+      applyTheme(next);
+      showToast(next === 'light' ? '☀️ Switched to Light Mode' : '🌙 Switched to Dark Mode');
     }
 
     function updateStaffDisplay() {
