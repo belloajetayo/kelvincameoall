@@ -1830,7 +1830,8 @@ $reserve_url = home_url('/reserve/');
               <option value="Royal Treat Suite" data-rate="60000">👑 Royal Treat Suite (₦60,000/night)</option>
               <option value="Prestige Room" data-rate="45000">🌟 Prestige Room (₦45,000/night)</option>
               <option value="Executive Room" data-rate="30000">👔 Executive Room (₦30,000/night)</option>
-              <option value="Deluxe Room" data-rate="25000">💎 Deluxe Room (₦25,000/night)</option>
+              <option value="Deluxe (UK) Room" data-rate="25000">🇬🇧 Deluxe / UK Room (₦25,000/night)</option>
+              <option value="UK (Deluxe) Room" data-rate="20000">🇬🇧 UK Room / Deluxe (₦20,000/night)</option>
               <option value="Sunset Room" data-rate="35000">🌅 Sunset Room (₦35,000/night)</option>
               <option value="Luxury Retreat (2-Bed Apartment)" data-rate="160000">🏰 Luxury Retreat - 2-Bed (₦160,000/night)</option>
               <option value="Royal Retreat (3-Bed Apartment)" data-rate="200000">👑 Royal Retreat - 3-Bed (₦200,000/night)</option>
@@ -1989,8 +1990,11 @@ $reserve_url = home_url('/reserve/');
               <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Executive Room', 30000, 'The Annex', 'Work Desk, Plush Bedding, Hot Water, Wi-Fi')">
                 👔 Executive (₦30k)
               </button>
-              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Deluxe Room', 25000, 'The Annex', 'Comfort Double Bed, En-suite, Air Conditioning, Satellite TV')">
-                💎 Deluxe (₦25k)
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Deluxe (UK) Room', 25000, 'The Annex', 'Comfort Double Bed, En-suite, Air Conditioning, Satellite TV')">
+                🇬🇧 Deluxe / UK (₦25k)
+              </button>
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('UK (Deluxe) Room', 20000, 'The Annex', 'Comfort Double Bed, En-suite, Air Conditioning, Satellite TV')">
+                🇬🇧 UK Room / Deluxe (₦20k)
               </button>
             </div>
           </div>
@@ -2022,7 +2026,10 @@ $reserve_url = home_url('/reserve/');
                 <option value="Royal Treat Suite">
                 <option value="Prestige Room">
                 <option value="Executive Room">
+                <option value="Deluxe (UK) Room">
+                <option value="UK (Deluxe) Room">
                 <option value="Deluxe Room">
+                <option value="UK Room">
                 <option value="Sunset Room">
                 <option value="Luxury Retreat (2-Bed Apartment)">
                 <option value="Royal Retreat (3-Bed Apartment)">
@@ -2980,7 +2987,7 @@ $reserve_url = home_url('/reserve/');
         const container = document.getElementById('roomRackContainer');
         if (!container) return;
 
-        let rooms = this.data.rooms || [];
+        let rooms = this.data.rooms ? [...this.data.rooms] : [];
 
         if (this.activeWing !== 'all') {
           rooms = rooms.filter(r => r.branch === this.activeWing);
@@ -2999,6 +3006,22 @@ $reserve_url = home_url('/reserve/');
             return numMatch || typeMatch || guestMatch;
           });
         }
+
+        // Sort rooms: Occupied (guests who haven't checked out) & Reserved (booked) at the very top!
+        const statusPriority = {
+          'occupied': 1, // In-house guest (hasn't checked out yet)
+          'reserved': 2, // Booked room awaiting arrival
+          'cleaning': 3,
+          'maintenance': 4,
+          'available': 5
+        };
+        rooms.sort((a, b) => {
+          const pA = statusPriority[a.status] || 99;
+          const pB = statusPriority[b.status] || 99;
+          if (pA !== pB) return pA - pB;
+          if (a.branch !== b.branch) return a.branch.localeCompare(b.branch);
+          return a.number.localeCompare(b.number, undefined, { numeric: true });
+        });
 
         if (rooms.length === 0) {
           container.innerHTML = `<div style="grid-column: 1/-1; padding: 40px; text-align: center; background: #fff; border-radius: 12px; color: var(--kc-slate-500);">No rooms match the selected filter.</div>`;
@@ -3135,7 +3158,7 @@ $reserve_url = home_url('/reserve/');
         const tbody = document.getElementById('inventoryTableBody');
         if (!tbody) return;
 
-        let rooms = this.data.rooms || [];
+        let rooms = this.data.rooms ? [...this.data.rooms] : [];
 
         if (this.activeInventoryWing !== 'all') {
           rooms = rooms.filter(r => r.branch === this.activeInventoryWing);
@@ -3145,6 +3168,16 @@ $reserve_url = home_url('/reserve/');
           const q = this.searchQuery.toLowerCase();
           rooms = rooms.filter(r => r.number.toLowerCase().includes(q) || r.type.toLowerCase().includes(q));
         }
+
+        // Sort rooms: Occupied and Reserved at the top
+        const statusPriority = { 'occupied': 1, 'reserved': 2, 'cleaning': 3, 'maintenance': 4, 'available': 5 };
+        rooms.sort((a, b) => {
+          const pA = statusPriority[a.status] || 99;
+          const pB = statusPriority[b.status] || 99;
+          if (pA !== pB) return pA - pB;
+          if (a.branch !== b.branch) return a.branch.localeCompare(b.branch);
+          return a.number.localeCompare(b.number, undefined, { numeric: true });
+        });
 
         if (rooms.length === 0) {
           tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 30px; color: var(--kc-slate-400);">No rooms found.</td></tr>`;
@@ -3185,7 +3218,7 @@ $reserve_url = home_url('/reserve/');
         const tbody = document.getElementById('reservationsTableBody');
         if (!tbody) return;
 
-        let bookings = this.data.bookings || [];
+        let bookings = this.data.bookings ? [...this.data.bookings] : [];
 
         if (this.activeBookingStatus !== 'all') {
           bookings = bookings.filter(b => b.booking_status === this.activeBookingStatus);
@@ -3200,6 +3233,20 @@ $reserve_url = home_url('/reserve/');
             b.room_number.toLowerCase().includes(q)
           );
         }
+
+        // Sort bookings: In-house guests (haven't checked out) and booked rooms (reserved) at the very top!
+        const bookingStatusPriority = {
+          'checked_in': 1,  // In-house guests (haven't checked out yet)
+          'reserved': 2,    // Booked rooms
+          'checked_out': 3, // Already checked out
+          'cancelled': 4    // Cancelled
+        };
+        bookings.sort((a, b) => {
+          const pA = bookingStatusPriority[a.booking_status] || 99;
+          const pB = bookingStatusPriority[b.booking_status] || 99;
+          if (pA !== pB) return pA - pB;
+          return Number(b.id) - Number(a.id);
+        });
 
         if (bookings.length === 0) {
           tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 30px; color: var(--kc-slate-400);">No reservations match the criteria.</td></tr>`;
@@ -3462,9 +3509,21 @@ $reserve_url = home_url('/reserve/');
           ? filterCategory 
           : (document.getElementById('bookingCategorySelect') ? document.getElementById('bookingCategorySelect').value : 'all');
 
-        rooms.forEach(r => {
-          if (cat && cat !== 'all' && r.type !== cat) {
-            return;
+        // Put available rooms first in dropdown
+        const sortedRooms = [...rooms].sort((a, b) => {
+          if (a.status === 'available' && b.status !== 'available') return -1;
+          if (a.status !== 'available' && b.status === 'available') return 1;
+          return a.number.localeCompare(b.number, undefined, { numeric: true });
+        });
+
+        sortedRooms.forEach(r => {
+          if (cat && cat !== 'all') {
+            const rType = (r.type || '').toLowerCase();
+            const cType = cat.toLowerCase();
+            const isDeluxeUk = (cType.includes('deluxe') || cType.includes('uk')) && (rType.includes('deluxe') || rType.includes('uk'));
+            if (r.type !== cat && !isDeluxeUk && !rType.includes(cType) && !cType.includes(rType)) {
+              return;
+            }
           }
           const disabled = (r.status !== 'available' && r.number !== preselectRoom) ? 'disabled' : '';
           const occNote = r.status !== 'available' ? ` [${r.status.toUpperCase()}]` : '';

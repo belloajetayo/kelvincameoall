@@ -478,7 +478,7 @@ get_header();
           <div class="suite-card-body">
             <div>
               <span class="suite-category-label">Standard Luxury</span>
-              <h3 class="suite-name">Deluxe Room</h3>
+              <h3 class="suite-name">Deluxe Room <span style="font-size:0.85rem; font-weight:700; color:#d4af37;">(UK Room)</span></h3>
               <p class="suite-desc">
                 Cozy, modern retreat at The Annex featuring a dedicated marble-top workstation with wardrobe, wall-mounted satellite TV, and contemporary ensuite bathroom with electric water heater and glass shower enclosure.
               </p>

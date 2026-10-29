@@ -133,9 +133,17 @@ function kc_hotel_init_db() {
 function kc_hotel_reconcile_room_rates() {
     global $wpdb;
     $table_rooms = $wpdb->prefix . 'kc_hotel_rooms';
+    $table_bookings = $wpdb->prefix . 'kc_hotel_bookings';
     if ($wpdb->get_var("SHOW TABLES LIKE '$table_rooms'") !== $table_rooms) {
         return;
     }
+
+    // Automatically alias Deluxe Room to 'Deluxe (UK) Room' so it is also known as UK Room
+    $wpdb->query("UPDATE $table_rooms SET room_type = 'Deluxe (UK) Room' WHERE room_type = 'Deluxe Room' OR room_type = 'UK Room'");
+    if ($wpdb->get_var("SHOW TABLES LIKE '$table_bookings'") === $table_bookings) {
+        $wpdb->query("UPDATE $table_bookings SET room_type = 'Deluxe (UK) Room' WHERE room_type = 'Deluxe Room' OR room_type = 'UK Room'");
+    }
+
     // Only seed default baseline if version hasn't been set yet.
     // Staff/Receptionist custom price edits are preserved and never overwritten!
     $reconcile_ver = get_option('kc_hotel_rates_ver', '0');
@@ -258,6 +266,26 @@ function kc_hotel_get_dashboard_data() {
         }
     }
 
+    // Sort Room Rack: Rooms booked (reserved) and rooms with guests who haven't checked out (occupied) are at the top!
+    usort($room_rack, function($a, $b) {
+        $priority = [
+            'occupied'    => 1, // In-house guest (hasn't checked out)
+            'reserved'    => 2, // Room booked awaiting check-in
+            'cleaning'    => 3,
+            'maintenance' => 4,
+            'available'   => 5
+        ];
+        $pA = $priority[$a['status']] ?? 99;
+        $pB = $priority[$b['status']] ?? 99;
+        if ($pA !== $pB) {
+            return $pA - $pB;
+        }
+        if ($a['branch'] !== $b['branch']) {
+            return strcmp($a['branch'], $b['branch']);
+        }
+        return strnatcasecmp($a['number'], $b['number']);
+    });
+
     $total_rooms = count($inventory);
     $occupancy_rate = $total_rooms > 0 ? round(($occupied_count / $total_rooms) * 100) : 0;
 
@@ -284,9 +312,20 @@ function kc_hotel_get_dashboard_data() {
         "SELECT SUM(amount_paid) FROM $table_bookings WHERE booking_status != 'cancelled' AND booking_ref NOT IN ('KC-26-MYRGQ', 'KC-2026-101')"
     );
 
-    // All bookings list
+    // All bookings list: In-house guests (haven't checked out) and booked rooms (reserved) appear first at the top!
     $all_bookings = $wpdb->get_results(
-        "SELECT * FROM $table_bookings WHERE booking_ref NOT IN ('KC-26-MYRGQ', 'KC-2026-101') ORDER BY id DESC LIMIT 200", 
+        "SELECT * FROM $table_bookings 
+         WHERE booking_ref NOT IN ('KC-26-MYRGQ', 'KC-2026-101') 
+         ORDER BY 
+            CASE 
+                WHEN booking_status = 'checked_in' THEN 1
+                WHEN booking_status = 'reserved' THEN 2
+                WHEN booking_status = 'checked_out' THEN 3
+                WHEN booking_status = 'cancelled' THEN 4
+                ELSE 5
+            END ASC,
+            id DESC 
+         LIMIT 200", 
         ARRAY_A
     );
 
@@ -1449,7 +1488,18 @@ function kc_hotel_ajax_get_sales_analytics() {
     }
 
     $bookings = $wpdb->get_results(
-        "SELECT * FROM $table_bookings WHERE booking_status != 'cancelled' AND booking_ref NOT IN ('KC-26-MYRGQ', 'KC-2026-101') AND $where_date ORDER BY id DESC", 
+        "SELECT * FROM $table_bookings 
+         WHERE booking_status != 'cancelled' 
+           AND booking_ref NOT IN ('KC-26-MYRGQ', 'KC-2026-101') 
+           AND $where_date 
+         ORDER BY 
+            CASE 
+                WHEN booking_status = 'checked_in' THEN 1
+                WHEN booking_status = 'reserved' THEN 2
+                WHEN booking_status = 'checked_out' THEN 3
+                ELSE 4
+            END ASC,
+            id DESC", 
         ARRAY_A
     );
 
