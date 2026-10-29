@@ -1331,6 +1331,11 @@ $reserve_url = home_url('/reserve/');
         💰 Room Prices
       </button>
 
+      <!-- Add New Room to Inventory -->
+      <button class="btn btn-outline-light btn-sm" onclick="KCHotelApp.openAddRoomModal()" title="Add New Room (Love Night, Golden Nest, etc.)">
+        ➕ Add Room
+      </button>
+
       <button class="btn btn-outline-light btn-sm" onclick="KCHotelApp.openBankSettingsModal()" title="Bank Account & Email Settings">
         ⚙️ Bank Settings
       </button>
@@ -1422,6 +1427,15 @@ $reserve_url = home_url('/reserve/');
           <button class="filter-pill active" data-wing="all" onclick="KCHotelApp.setWingFilter('all')">All Wings (<span id="countWingAll">31</span>)</button>
           <button class="filter-pill" data-wing="Main Hotel" onclick="KCHotelApp.setWingFilter('Main Hotel')">Main Hotel (<span id="countWingMain">16</span>)</button>
           <button class="filter-pill" data-wing="The Annex" onclick="KCHotelApp.setWingFilter('The Annex')">The Annex (<span id="countWingAnnex">15</span>)</button>
+        </div>
+
+        <div style="display: flex; gap: 8px; align-items: center; margin-left: auto;">
+          <button class="btn btn-outline-light btn-sm" onclick="KCHotelApp.openAddRoomModal()" title="Add Room to Inventory">
+            ➕ Add Room
+          </button>
+          <button class="btn btn-gold btn-sm" onclick="KCHotelApp.openNewBookingModal()">
+            + New Reservation
+          </button>
         </div>
 
         <div class="legend-group">
@@ -1802,16 +1816,50 @@ $reserve_url = home_url('/reserve/');
             <textarea name="guest_address" class="form-control" rows="2" placeholder="e.g. 14 Admiralty Way, Lekki Phase 1, Lagos"></textarea>
           </div>
 
+          <!-- ROOM CATEGORY SELECTION -->
+          <div class="form-group">
+            <label style="display: flex; justify-content: space-between; align-items: center;">
+              <span>Room Category / Type</span>
+              <span style="font-size: 11px; color: var(--kc-gold-500); font-weight: 600;">Choose to filter rooms & auto-fill tariff</span>
+            </label>
+            <select id="bookingCategorySelect" class="form-control" onchange="KCHotelApp.onBookingCategoryChange(this.value)">
+              <option value="all">-- All Categories (Show All Available Rooms) --</option>
+              <option value="Love Night Room" data-rate="45000">💖 Love Night Room (₦45,000/night)</option>
+              <option value="Golden Nest Room" data-rate="55000">🪺 Golden Nest Room (₦55,000/night)</option>
+              <option value="Blissful Breeze Suite" data-rate="60000">🌬️ Blissful Breeze Suite (₦60,000/night)</option>
+              <option value="Royal Treat Suite" data-rate="60000">👑 Royal Treat Suite (₦60,000/night)</option>
+              <option value="Prestige Room" data-rate="45000">🌟 Prestige Room (₦45,000/night)</option>
+              <option value="Executive Room" data-rate="30000">👔 Executive Room (₦30,000/night)</option>
+              <option value="Deluxe Room" data-rate="25000">💎 Deluxe Room (₦25,000/night)</option>
+              <option value="Sunset Room" data-rate="35000">🌅 Sunset Room (₦35,000/night)</option>
+              <option value="Luxury Retreat (2-Bed Apartment)" data-rate="160000">🏰 Luxury Retreat - 2-Bed (₦160,000/night)</option>
+              <option value="Royal Retreat (3-Bed Apartment)" data-rate="200000">👑 Royal Retreat - 3-Bed (₦200,000/night)</option>
+            </select>
+          </div>
+
+          <!-- ROOM NUMBER & CUSTOM NUMBER -->
           <div class="form-row">
             <div class="form-group">
               <label>Select Room Assignment</label>
-              <select name="room_number" id="bookingRoomSelect" class="form-control" onchange="KCHotelApp.calculateBookingSummary()">
+              <select name="room_number" id="bookingRoomSelect" class="form-control" onchange="KCHotelApp.onBookingRoomSelectChange()">
                 <option value="">-- Choose an Available Room (or auto-assign) --</option>
               </select>
             </div>
             <div class="form-group">
-              <label>Custom Rate Per Night (₦) <span style="font-size: 11px; color: var(--kc-gold-500);">(Optional Override)</span></label>
-              <input type="number" name="custom_rate" id="bookingCustomRate" class="form-control" placeholder="Leave blank to use standard tariff" oninput="KCHotelApp.calculateBookingSummary()" min="0" step="1000">
+              <label>Or Enter Custom Room No.</label>
+              <input type="text" name="custom_room_number" id="bookingCustomRoomNumber" class="form-control" placeholder="e.g. M-109 (optional)" oninput="KCHotelApp.onCustomRoomNumberInput()">
+            </div>
+          </div>
+
+          <!-- NIGHTLY RATE & CATEGORY RECORD -->
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nightly Rate (₦) <span style="font-size: 11px; color: var(--kc-gold-500);">(Auto-filled / Editable)</span></label>
+              <input type="number" name="custom_rate" id="bookingCustomRate" class="form-control" placeholder="Standard tariff applies" oninput="KCHotelApp.calculateBookingSummary()" min="0" step="500">
+            </div>
+            <div class="form-group">
+              <label>Room Category Name</label>
+              <input type="text" name="room_type" id="bookingRoomTypeHidden" class="form-control" placeholder="e.g. Love Night Room" readonly style="background: rgba(255,255,255,0.05); color: var(--kc-slate-300);">
             </div>
           </div>
 
@@ -1917,6 +1965,36 @@ $reserve_url = home_url('/reserve/');
         <input type="hidden" name="id" id="roomEditId" value="0">
         <input type="hidden" name="remove_image" id="roomEditRemoveImage" value="0">
         <div class="modal-body">
+          <!-- QUICK CATEGORY PRESETS -->
+          <div style="margin-bottom: 16px; padding: 12px; background: rgba(212,175,55,0.08); border: 1px solid rgba(212,175,55,0.25); border-radius: var(--radius-md);">
+            <div style="font-size: 11px; font-weight: 700; color: var(--kc-gold-500); text-transform: uppercase; margin-bottom: 8px;">
+              ⚡ Quick Preset Categories (Click to Auto-Fill):
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Love Night Room', 45000, 'Main Hotel', 'King Bed, Ambient Lighting, Ensuite Bath, Free Wi-Fi')">
+                💖 Love Night (₦45k)
+              </button>
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Golden Nest Room', 55000, 'Main Hotel', 'Work Desk, Premium Bedding, City View, Smart TV')">
+                🪺 Golden Nest (₦55k)
+              </button>
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Blissful Breeze Suite', 60000, 'Main Hotel', 'Living Area, Balcony, Smart TV, Mini Bar')">
+                🌬️ Blissful Breeze (₦60k)
+              </button>
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Royal Treat Suite', 60000, 'The Annex', 'Luxury Parlour, Mini Bar, Dressing Area, VIP Amenities')">
+                👑 Royal Treat (₦60k)
+              </button>
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Prestige Room', 45000, 'The Annex', 'Spacious Layout, King Bed, Quiet Wing, Work Area')">
+                🌟 Prestige (₦45k)
+              </button>
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Executive Room', 30000, 'The Annex', 'Work Desk, Plush Bedding, Hot Water, Wi-Fi')">
+                👔 Executive (₦30k)
+              </button>
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Deluxe Room', 25000, 'The Annex', 'Comfort Double Bed, En-suite, Air Conditioning, Satellite TV')">
+                💎 Deluxe (₦25k)
+              </button>
+            </div>
+          </div>
+
           <div class="form-row">
             <div class="form-group">
               <label>Room Number *</label>
@@ -1936,7 +2014,19 @@ $reserve_url = home_url('/reserve/');
           <div class="form-row">
             <div class="form-group">
               <label>Room Category / Type *</label>
-              <input type="text" name="room_type" id="roomEditType" class="form-control" placeholder="e.g. Love Night Room, Blissful Breeze Suite" required>
+              <input type="text" name="room_type" id="roomEditType" class="form-control" list="hotelRoomTypePresets" placeholder="e.g. Love Night Room, Golden Nest Room" required>
+              <datalist id="hotelRoomTypePresets">
+                <option value="Love Night Room">
+                <option value="Golden Nest Room">
+                <option value="Blissful Breeze Suite">
+                <option value="Royal Treat Suite">
+                <option value="Prestige Room">
+                <option value="Executive Room">
+                <option value="Deluxe Room">
+                <option value="Sunset Room">
+                <option value="Luxury Retreat (2-Bed Apartment)">
+                <option value="Royal Retreat (3-Bed Apartment)">
+              </datalist>
             </div>
             <div class="form-group">
               <label>Nightly Rate (₦) *</label>
@@ -2323,7 +2413,12 @@ $reserve_url = home_url('/reserve/');
             Update room rates directly from front desk. Changes apply immediately and are saved permanently.
           </p>
         </div>
-        <button class="modal-close-btn" onclick="KCHotelApp.closeModals()">&times;</button>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button type="button" class="btn btn-gold btn-sm" onclick="KCHotelApp.openAddRoomModal()">
+            ➕ Add New Room
+          </button>
+          <button class="modal-close-btn" onclick="KCHotelApp.closeModals()">&times;</button>
+        </div>
       </div>
       <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
         
@@ -3356,14 +3451,21 @@ $reserve_url = home_url('/reserve/');
         `).join('');
       },
 
-      populateRoomSelect: function(preselectRoom) {
+      populateRoomSelect: function(preselectRoom, filterCategory) {
         const select = document.getElementById('bookingRoomSelect');
         if (!select) return;
 
         const rooms = this.data.rooms || [];
-        let html = '<option value="">-- Choose an Available Room --</option>';
+        let html = '<option value="">-- Choose an Available Room (or auto-assign) --</option>';
+
+        const cat = filterCategory !== undefined 
+          ? filterCategory 
+          : (document.getElementById('bookingCategorySelect') ? document.getElementById('bookingCategorySelect').value : 'all');
 
         rooms.forEach(r => {
+          if (cat && cat !== 'all' && r.type !== cat) {
+            return;
+          }
           const disabled = (r.status !== 'available' && r.number !== preselectRoom) ? 'disabled' : '';
           const occNote = r.status !== 'available' ? ` [${r.status.toUpperCase()}]` : '';
           const selected = r.number === preselectRoom ? 'selected' : '';
@@ -3376,23 +3478,85 @@ $reserve_url = home_url('/reserve/');
         this.calculateBookingSummary();
       },
 
+      onBookingCategoryChange: function(cat) {
+        const customRateEl = document.getElementById('bookingCustomRate');
+        const roomTypeHidden = document.getElementById('bookingRoomTypeHidden');
+        const catSelect = document.getElementById('bookingCategorySelect');
+        const selOpt = catSelect ? catSelect.options[catSelect.selectedIndex] : null;
+        const catRate = selOpt ? Number(selOpt.dataset.rate || 0) : 0;
+
+        if (cat && cat !== 'all') {
+          if (roomTypeHidden) roomTypeHidden.value = cat;
+          if (customRateEl && catRate > 0) {
+            customRateEl.value = catRate;
+          }
+        } else {
+          if (roomTypeHidden) roomTypeHidden.value = '';
+        }
+        this.populateRoomSelect(null, cat);
+      },
+
+      onBookingRoomSelectChange: function() {
+        const select = document.getElementById('bookingRoomSelect');
+        if (!select) return;
+        const opt = select.options[select.selectedIndex];
+        if (opt && opt.value) {
+          const rate = opt.dataset.rate ? Number(opt.dataset.rate) : 0;
+          const type = opt.dataset.type || '';
+          if (rate > 0) {
+            const customRateEl = document.getElementById('bookingCustomRate');
+            if (customRateEl) customRateEl.value = rate;
+          }
+          if (type) {
+            const roomTypeHidden = document.getElementById('bookingRoomTypeHidden');
+            if (roomTypeHidden) roomTypeHidden.value = type;
+            const catSelect = document.getElementById('bookingCategorySelect');
+            if (catSelect) {
+              for (let i = 0; i < catSelect.options.length; i++) {
+                if (catSelect.options[i].value === type) {
+                  catSelect.selectedIndex = i;
+                  break;
+                }
+              }
+            }
+          }
+          const custRoom = document.getElementById('bookingCustomRoomNumber');
+          if (custRoom) custRoom.value = '';
+        }
+        this.calculateBookingSummary();
+      },
+
+      onCustomRoomNumberInput: function() {
+        const custVal = (document.getElementById('bookingCustomRoomNumber') ? document.getElementById('bookingCustomRoomNumber').value : '').trim();
+        const roomSelect = document.getElementById('bookingRoomSelect');
+        if (custVal && roomSelect) {
+          roomSelect.value = '';
+        }
+        this.calculateBookingSummary();
+      },
+
       calculateBookingSummary: function() {
         const select = document.getElementById('bookingRoomSelect');
         const inEl = document.getElementById('bookingCheckIn');
         const outEl = document.getElementById('bookingCheckOut');
         const amountInput = document.getElementById('bookingAmountPaid');
         const customRateEl = document.getElementById('bookingCustomRate');
+        const custRoomInput = document.getElementById('bookingCustomRoomNumber');
+        const roomTypeHidden = document.getElementById('bookingRoomTypeHidden');
 
-        if (!select || !inEl || !outEl) return;
+        if (!inEl || !outEl) return;
 
-        const opt = select.options[select.selectedIndex];
-        const baseRate = opt && opt.dataset.rate ? Number(opt.dataset.rate) : 0;
-        const type = opt && opt.dataset.type ? opt.dataset.type : 'Select room';
+        const opt = select && select.selectedIndex >= 0 ? select.options[select.selectedIndex] : null;
+        const custRoom = custRoomInput ? custRoomInput.value.trim() : '';
 
-        let effectiveRate = baseRate;
+        let effectiveRate = 0;
+        let type = roomTypeHidden && roomTypeHidden.value ? roomTypeHidden.value : (opt && opt.dataset && opt.dataset.type ? opt.dataset.type : 'Standard Room');
+
         const customRateVal = customRateEl ? Number(customRateEl.value) : 0;
         if (customRateVal > 0) {
           effectiveRate = customRateVal;
+        } else if (opt && opt.dataset && opt.dataset.rate) {
+          effectiveRate = Number(opt.dataset.rate);
         }
 
         const d1 = inEl.value ? new Date(inEl.value) : new Date();
@@ -3402,15 +3566,30 @@ $reserve_url = home_url('/reserve/');
 
         const total = effectiveRate * nights;
 
-        document.getElementById('summaryRoomRateText').innerText = effectiveRate > 0 
-          ? `${type} @ ₦${effectiveRate.toLocaleString()}/night${customRateVal > 0 ? ' (Custom Tariff)' : ''}` 
-          : 'Select a room';
-        document.getElementById('summaryDurationText').innerText = `${nights} Night(s)`;
-        document.getElementById('summaryTotalBill').innerText = `₦${total.toLocaleString()}.00`;
+        const roomDisplay = custRoom ? `Room ${custRoom} (${type})` : (opt && opt.value ? `${opt.value} - ${type}` : `${type}`);
 
-        if (amountInput && (amountInput.value === '0' || amountInput.value === '')) {
-          amountInput.value = total;
+        const sumText = document.getElementById('summaryRoomRateText');
+        if (sumText) {
+          sumText.innerText = effectiveRate > 0 
+            ? `${roomDisplay} @ ₦${effectiveRate.toLocaleString()}/night` 
+            : 'Select or enter a room';
         }
+        const durText = document.getElementById('summaryDurationText');
+        if (durText) durText.innerText = `${nights} Night(s)`;
+        const totBill = document.getElementById('summaryTotalBill');
+        if (totBill) totBill.innerText = `₦${total.toLocaleString()}.00`;
+
+        if (amountInput && (amountInput.value === '0' || amountInput.value === '' || amountInput.dataset.autoFilled === '1')) {
+          amountInput.value = total;
+          amountInput.dataset.autoFilled = '1';
+        }
+      },
+
+      applyRoomPreset: function(type, rate, branch, features) {
+        if (type) document.getElementById('roomEditType').value = type;
+        if (rate) document.getElementById('roomEditRate').value = rate;
+        if (branch) document.getElementById('roomEditBranch').value = branch;
+        if (features) document.getElementById('roomEditFeatures').value = features;
       },
 
       openAddRoomModal: function() {
@@ -3496,16 +3675,23 @@ $reserve_url = home_url('/reserve/');
         const form = document.getElementById('roomEditForm');
         const fd = new FormData(form);
         fd.append('action', 'kc_hotel_save_room');
+        if (this.currentPinToken) {
+          fd.append('token', this.currentPinToken);
+        }
 
         const btn = document.getElementById('btnSaveRoomSubmit');
-        btn.innerText = 'Saving...';
-        btn.disabled = true;
+        if (btn) {
+          btn.innerText = 'Saving...';
+          btn.disabled = true;
+        }
 
         fetch(this.ajaxUrl, { method: 'POST', body: fd })
           .then(r => r.json())
           .then(res => {
-            btn.innerText = 'Save Room';
-            btn.disabled = false;
+            if (btn) {
+              btn.innerText = 'Save Room';
+              btn.disabled = false;
+            }
             if (res.success) {
               this.showToast(res.data.message || 'Room saved successfully!');
               this.closeModals();
@@ -3515,8 +3701,10 @@ $reserve_url = home_url('/reserve/');
             }
           })
           .catch(() => {
-            btn.innerText = 'Save Room';
-            btn.disabled = false;
+            if (btn) {
+              btn.innerText = 'Save Room';
+              btn.disabled = false;
+            }
             this.showToast('Network error saving room', 'error');
           });
       },
@@ -3529,6 +3717,9 @@ $reserve_url = home_url('/reserve/');
         const fd = new FormData();
         fd.append('action', 'kc_hotel_delete_room');
         fd.append('id', roomId);
+        if (this.currentPinToken) {
+          fd.append('token', this.currentPinToken);
+        }
 
         fetch(this.ajaxUrl, { method: 'POST', body: fd })
           .then(r => r.json())
@@ -3551,12 +3742,26 @@ $reserve_url = home_url('/reserve/');
         const fd = new FormData(form);
         fd.append('action', 'kc_hotel_create_booking');
         fd.append('receptionist_name', this.currentStaff || 'Front Desk Staff');
+        if (this.currentPinToken) {
+          fd.append('token', this.currentPinToken);
+        }
+
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const origText = submitBtn ? submitBtn.innerText : 'Confirm & Save Reservation';
+        if (submitBtn) {
+          submitBtn.innerText = 'Saving Reservation...';
+          submitBtn.disabled = true;
+        }
 
         fetch(this.ajaxUrl, { method: 'POST', body: fd })
           .then(r => r.json())
           .then(res => {
+            if (submitBtn) {
+              submitBtn.innerText = origText;
+              submitBtn.disabled = false;
+            }
             if (res.success) {
-              this.showToast('Reservation successfully created!');
+              this.showToast(res.data && res.data.message ? res.data.message : 'Reservation successfully created!');
               this.closeModals();
               form.reset();
               this.refreshDashboard();
@@ -3565,6 +3770,10 @@ $reserve_url = home_url('/reserve/');
             }
           })
           .catch(() => {
+            if (submitBtn) {
+              submitBtn.innerText = origText;
+              submitBtn.disabled = false;
+            }
             this.showToast('Network error saving booking', 'error');
           });
       },
@@ -3667,15 +3876,25 @@ $reserve_url = home_url('/reserve/');
       },
 
       openNewBookingModal: function(roomNumber) {
-        this.populateRoomSelect(roomNumber);
+        const catSelect = document.getElementById('bookingCategorySelect');
+        if (catSelect) catSelect.value = 'all';
+        const custRoom = document.getElementById('bookingCustomRoomNumber');
+        if (custRoom) custRoom.value = '';
+        const roomTypeHidden = document.getElementById('bookingRoomTypeHidden');
+        if (roomTypeHidden) roomTypeHidden.value = '';
+
+        this.populateRoomSelect(roomNumber, 'all');
+
         const today = new Date().toISOString().split('T')[0];
         const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
         const inEl = document.getElementById('bookingCheckIn');
         const outEl = document.getElementById('bookingCheckOut');
         if (inEl && !inEl.value) inEl.value = today;
         if (outEl && !outEl.value) outEl.value = tomorrow;
+
         const customRateEl = document.getElementById('bookingCustomRate');
-        if (customRateEl) customRateEl.value = '';
+        if (customRateEl && !roomNumber) customRateEl.value = '';
+
         document.getElementById('newBookingModal').classList.add('active');
         this.calculateBookingSummary();
       },

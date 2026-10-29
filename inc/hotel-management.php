@@ -421,7 +421,13 @@ function kc_hotel_ajax_create_booking() {
     $guest_email = sanitize_email($_POST['guest_email'] ?? '');
     $guest_id_number = sanitize_text_field($_POST['guest_id_number'] ?? '');
     $guest_address = sanitize_textarea_field($_POST['guest_address'] ?? '');
-    $room_number = sanitize_text_field($_POST['room_number'] ?? '');
+    $custom_room = strtoupper(trim(sanitize_text_field($_POST['custom_room_number'] ?? '')));
+    $room_number = strtoupper(trim(sanitize_text_field($_POST['room_number'] ?? '')));
+    if (!empty($custom_room)) {
+        $room_number = $custom_room;
+    }
+    $room_type_input = sanitize_text_field($_POST['room_type'] ?? '');
+    $custom_rate = floatval($_POST['custom_rate'] ?? 0);
     $check_in = sanitize_text_field($_POST['check_in'] ?? '');
     $check_out = sanitize_text_field($_POST['check_out'] ?? '');
     $amount_paid = floatval($_POST['amount_paid'] ?? 0);
@@ -451,6 +457,34 @@ function kc_hotel_ajax_create_booking() {
         }
     }
 
+    // If room number provided (e.g. M-109, LN-01, GN-05) but not in inventory, auto-register it!
+    if (!$matched_room && !empty($room_number)) {
+        $table_rooms = $wpdb->prefix . 'kc_hotel_rooms';
+        $r_type = !empty($room_type_input) ? $room_type_input : 'Love Night Room';
+        $r_branch = (strpos($room_number, 'A-') === 0) ? 'The Annex' : 'Main Hotel';
+        $r_rate = ($custom_rate > 0) ? $custom_rate : ((stripos($r_type, 'Golden Nest') !== false) ? 55000.00 : 45000.00);
+
+        $wpdb->insert($table_rooms, [
+            'room_number' => $room_number,
+            'room_type'   => $r_type,
+            'branch'      => $r_branch,
+            'rate'        => $r_rate,
+            'features'    => 'King Bed, Air Conditioning, Ensuite Bath, Satellite TV, Free Wi-Fi',
+            'status'      => 'available',
+            'created_at'  => current_time('mysql'),
+            'updated_at'  => current_time('mysql')
+        ]);
+        $matched_room = [
+            'id'       => $wpdb->insert_id,
+            'number'   => $room_number,
+            'type'     => $r_type,
+            'branch'   => $r_branch,
+            'rate'     => $r_rate,
+            'features' => 'King Bed, Air Conditioning, Ensuite Bath, Satellite TV, Free Wi-Fi',
+            'status'   => 'available'
+        ];
+    }
+
     // If room not chosen or not found, auto-assign the first available room
     if (!$matched_room) {
         $dash = kc_hotel_get_dashboard_data();
@@ -475,8 +509,10 @@ function kc_hotel_ajax_create_booking() {
         wp_send_json_error(['message' => 'No rooms configured in hotel inventory.']);
     }
 
+    $final_room_type = !empty($room_type_input) ? $room_type_input : ($matched_room['type'] ?: 'Love Night Room');
+    $final_branch = !empty($matched_room['branch']) ? $matched_room['branch'] : ((strpos($room_number, 'A-') === 0) ? 'The Annex' : 'Main Hotel');
+
     // Allow receptionist to override rate on the fly if custom_rate passed
-    $custom_rate = floatval($_POST['custom_rate'] ?? 0);
     if ($custom_rate > 0) {
         $rate_per_night = $custom_rate;
     } else {
@@ -510,8 +546,8 @@ function kc_hotel_ajax_create_booking() {
             'guest_id_number' => $guest_id_number,
             'guest_address' => $guest_address,
             'room_number' => $room_number,
-            'room_type' => $matched_room['type'],
-            'branch' => $matched_room['branch'],
+            'room_type' => $final_room_type,
+            'branch' => $final_branch,
             'check_in' => $check_in,
             'check_out' => $check_out,
             'nights' => $nights,
