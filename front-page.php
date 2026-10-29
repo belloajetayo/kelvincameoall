@@ -229,186 +229,629 @@ get_header();
   <!-- ====================================================================
        OPERATING DIVISIONS SHOWCASE — The Conglomerate Matrix
        ==================================================================== -->
-  <section class="hp-divisions" id="sectors" style="padding: 5.5rem 0 4rem;">
-    <div class="container container-wide">
-      <div class="hp-section-head">
-        <span class="rc-badge" style="margin-bottom:0.75rem; display:inline-flex;">Corporate Portfolio</span>
-        <h2 class="hp-section-title">Our Operating Divisions &amp; Portals</h2>
-        <p class="hp-section-sub">Five specialized divisions delivering institutional excellence across hospitality, energy, real estate, mechanized agriculture, and automotive solutions.</p>
+  <!-- ====================================================================
+       OUR OPERATING DIVISIONS & PORTALS — ANIMATED LUXURY HORIZONTAL SHOWCASE
+       ==================================================================== -->
+  <section class="hp-divisions" id="sectors" style="padding: 5.5rem 0 5rem; background: linear-gradient(180deg, #030814 0%, #061024 50%, #040916 100%); color: #ffffff; position: relative; overflow: hidden;">
+    
+    <!-- Decorative Ambient Glows -->
+    <div style="position: absolute; top: 10%; left: -100px; width: 350px; height: 350px; background: radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%); pointer-events: none; border-radius: 50%;"></div>
+    <div style="position: absolute; bottom: 10%; right: -100px; width: 450px; height: 450px; background: radial-gradient(circle, rgba(2,132,199,0.12) 0%, transparent 70%); pointer-events: none; border-radius: 50%;"></div>
+
+    <div class="container container-wide" style="position: relative; z-index: 2;">
+      
+      <!-- Section Header with Controls -->
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 2rem;">
+        <div style="max-width: 680px;">
+          <span class="rc-badge" style="background: rgba(212,175,55,0.15); color: #d4af37; border: 1px solid rgba(212,175,55,0.4); padding: 5px 14px; border-radius: 30px; font-weight: 800; font-size: 12px; letter-spacing: 0.8px; margin-bottom: 0.75rem; display: inline-flex; align-items: center; gap: 6px;">
+            <span style="width: 7px; height: 7px; background: #d4af37; border-radius: 50%; box-shadow: 0 0 8px #d4af37;"></span>
+            CORPORATE PORTFOLIO
+          </span>
+          <h2 class="hp-section-title" style="color: #ffffff; font-size: 2.35rem; font-weight: 800; letter-spacing: -0.5px; line-height: 1.2; margin: 0.5rem 0 0.85rem;">
+            Our Operating Divisions &amp; Portals
+          </h2>
+          <p class="hp-section-sub" style="color: #94a3b8; font-size: 1.05rem; line-height: 1.6; margin: 0;">
+            Five specialized corporate divisions delivering institutional excellence across hospitality, clean energy, commercial real estate, mechanized agriculture, and automotive solutions.
+          </p>
+        </div>
+
+        <!-- Slider Navigation & Autoplay Controls -->
+        <div class="hp-slider-controls" style="display: flex; align-items: center; gap: 10px;">
+          <div style="display: flex; align-items: center; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; padding: 4px 12px; font-size: 13px; font-weight: 700; color: #cbd5e1; gap: 6px;">
+            <span id="divisionSlideNum" style="color: #d4af37; font-size: 15px;">01</span>
+            <span style="opacity: 0.5;">/</span>
+            <span>06</span>
+          </div>
+
+          <button type="button" id="divisionPlayPauseBtn" onclick="KCDivisionsCarousel.toggleAutoplay()" class="btn btn-outline-light btn-sm" style="width: 38px; height: 38px; border-radius: 50%; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-color: rgba(255,255,255,0.2); color: #cbd5e1;" title="Pause / Play Horizontal Motion">
+            <span id="playPauseIcon">⏸</span>
+          </button>
+
+          <button type="button" onclick="KCDivisionsCarousel.prev()" class="btn btn-outline-light btn-sm" style="width: 42px; height: 42px; border-radius: 50%; padding: 0; display: inline-flex; align-items: center; justify-content: center; border-color: rgba(212,175,55,0.4); color: #d4af37; font-size: 18px; transition: all 0.2s;" title="Previous Division">
+            &larr;
+          </button>
+          
+          <button type="button" onclick="KCDivisionsCarousel.next()" class="btn btn-outline-light btn-sm" style="width: 42px; height: 42px; border-radius: 50%; padding: 0; display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #d4af37, #b89327); color: #040914; border: none; font-size: 18px; font-weight: 800; box-shadow: 0 4px 15px rgba(212,175,55,0.35); transition: all 0.2s;" title="Next Division">
+            &rarr;
+          </button>
+        </div>
       </div>
 
-      <div class="hp-divisions-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+      <!-- Category Filter Pills (Click to Slide Directly) -->
+      <div class="hp-division-pills-bar" style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 1.5rem; scrollbar-width: none; -webkit-overflow-scrolling: touch;">
+        <button type="button" class="hp-div-pill active" onclick="KCDivisionsCarousel.slideTo(0)" data-div-index="0">
+          🌐 All Divisions
+        </button>
+        <button type="button" class="hp-div-pill" onclick="KCDivisionsCarousel.slideTo(0)" data-div-index="0">
+          🏨 01. Resort &amp; Suites
+        </button>
+        <button type="button" class="hp-div-pill" onclick="KCDivisionsCarousel.slideTo(1)" data-div-index="1">
+          ⛽ 02. Petroleum &amp; Energy
+        </button>
+        <button type="button" class="hp-div-pill" onclick="KCDivisionsCarousel.slideTo(2)" data-div-index="2">
+          🏢 03. Real Estate
+        </button>
+        <button type="button" class="hp-div-pill" onclick="KCDivisionsCarousel.slideTo(3)" data-div-index="3">
+          🌾 04. Agriculture
+        </button>
+        <button type="button" class="hp-div-pill" onclick="KCDivisionsCarousel.slideTo(4)" data-div-index="4">
+          🚗 05. Automobiles &amp; CNG
+        </button>
+        <button type="button" class="hp-div-pill" onclick="KCDivisionsCarousel.slideTo(5)" data-div-index="5">
+          🏛️ 06. Grand Banquet Hall
+        </button>
+      </div>
+
+      <!-- ================================================================
+           ANIMATED HORIZONTAL CAROUSEL TRACK
+           ================================================================ -->
+      <div class="hp-divisions-carousel-wrap" style="position: relative; margin: 0 -12px;">
         
-        <!-- Division 1: Resort Hotel & Suites -->
-        <article class="hp-division-card" style="display: flex; flex-direction: column;">
-          <div class="hp-card-thumb-wrap">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/exterior.jpg' ); ?>" alt="Kelvin Cameo Resort Hotel Exterior" class="hp-card-thumb" loading="lazy">
-            <span class="hp-card-badge" style="background:var(--gold-gradient);">Division 01 &bull; Hospitality</span>
-          </div>
-          <div class="hp-card-body" style="display: flex; flex-direction: column; flex: 1;">
-            <div class="hp-card-eyebrow" style="color:var(--orange-600); font-weight:800;">Suleja, Niger State (Abuja Corridor)</div>
-            <h3 class="hp-card-title">Kelvin Cameo Resort Hotel &amp; Suites</h3>
-            <p class="hp-card-desc">
-              Premier destination featuring 31+ air-conditioned suites (Love Night, Golden Nest, Deluxe UK Room, Presidential), Olympic swimming pool, 24/7 power, and VIP sports bar.
-            </p>
-            <ul class="hp-card-specs" style="margin-bottom:1.5rem;">
-              <li><strong>Rooms:</strong> From ₦20,000 / Night</li>
-              <li><strong>Power:</strong> 24/7 Heavy Generator &amp; Solar Inverter</li>
-              <li><strong>Amenities:</strong> Pool, Shisha, Snooker &amp; Bush Bar</li>
-            </ul>
-            <div style="display:flex; gap:0.65rem; margin-top:auto;">
-              <a href="<?php echo kc_url('hospitality'); ?>" class="btn btn-outline-primary btn-sm" style="flex:1; justify-content:center;">
-                View Resort
-              </a>
-              <a href="<?php echo kc_url('reserve'); ?>" class="btn-gold btn-sm" style="flex:1; justify-content:center; border-radius:8px;">
-                Book Room
-              </a>
-            </div>
-          </div>
-        </article>
+        <div id="hpDivisionsTrack" class="hp-divisions-track" style="display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 10px 12px 28px; scrollbar-width: none;">
 
-        <!-- Division 2: Energy & Fuel Retail -->
-        <article class="hp-division-card" style="display: flex; flex-direction: column;">
-          <div class="hp-card-thumb-wrap">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/kelvin-filling-station-canopy-clean.jpg' ); ?>" alt="Kelvin Cameo Fuel Retail Station" class="hp-card-thumb" loading="lazy">
-            <span class="hp-card-badge">Division 02 &bull; Petroleum</span>
-          </div>
-          <div class="hp-card-body" style="display: flex; flex-direction: column; flex: 1;">
-            <div class="hp-card-eyebrow">Downstream Energy Distribution</div>
-            <h3 class="hp-card-title">Petroleum &amp; Clean Energy</h3>
-            <p class="hp-card-desc">
-              24/7 retail filling stations delivering calibrated PMS &amp; AGO with zero tolerance for meter manipulation. Supported by LPG gas plants and commercial solar microgrids.
-            </p>
-            <ul class="hp-card-specs" style="margin-bottom:1.5rem;">
-              <li><strong>Calibration:</strong> 10 Litres Dispensed = 10 Litres In Tank</li>
-              <li><strong>Supply:</strong> PMS, AGO, Dual Purpose Kerosene (DPK)</li>
-              <li><strong>Green Energy:</strong> Industrial Solar &amp; Microgrids</li>
-            </ul>
-            <div style="display:flex; gap:0.65rem; margin-top:auto;">
-              <a href="<?php echo kc_url('energy'); ?>" class="btn btn-outline-primary btn-sm" style="flex:1; justify-content:center;">
-                Energy Division
-              </a>
-              <button class="btn btn-primary btn-sm" data-modal="inquiryModal" style="flex:1; justify-content:center;">
-                Partner With Us
-              </button>
+          <!-- CARD 1: RESORT HOTEL & SUITES -->
+          <article class="hp-division-slide-card" data-card-idx="0">
+            <div class="hp-slide-media">
+              <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/exterior.jpg' ); ?>" alt="Kelvin Cameo Resort Hotel Exterior" class="hp-slide-img" loading="lazy">
+              <div class="hp-slide-overlay"></div>
+              <span class="hp-slide-badge badge-hospitality">DIV 01 &bull; HOSPITALITY</span>
+              <span class="hp-slide-loc">📍 Suleja &bull; Abuja Corridor</span>
             </div>
-          </div>
-        </article>
+            <div class="hp-slide-body">
+              <div class="hp-slide-eyebrow">Resort Hotel, Suites &amp; Leisure</div>
+              <h3 class="hp-slide-title">Kelvin Cameo Resort Hotel &amp; Suites</h3>
+              <p class="hp-slide-desc">
+                Premier destination featuring 50 luxury air-conditioned suites &amp; rooms (Love Night Rooms 401–415, Golden Nest 416–430, Executive Suites 422 &amp; 428, UK Rooms 401–414, Serviced Apartments), Olympic swimming pool, 24/7 power, and VIP cocktail bar.
+              </p>
+              <div class="hp-slide-specs">
+                <div class="hp-spec-item"><span class="spec-dot"></span> <strong>Rooms:</strong> 50 Suites &amp; Rooms from ₦25,000 / Night</div>
+                <div class="hp-spec-item"><span class="spec-dot"></span> <strong>Power:</strong> 24/7 Heavy Generator &amp; Inverter</div>
+                <div class="hp-spec-item"><span class="spec-dot"></span> <strong>Leisure:</strong> Pool, Shisha, Snooker &amp; Bush Bar</div>
+              </div>
+              <div class="hp-slide-actions">
+                <a href="<?php echo kc_url('hospitality'); ?>" class="btn btn-outline-gold btn-sm">
+                  View Resort Portal
+                </a>
+                <a href="<?php echo kc_url('reserve'); ?>" class="btn-gold btn-sm">
+                  Book Room
+                </a>
+              </div>
+            </div>
+          </article>
 
-        <!-- Division 3: Real Estate & Land -->
-        <article class="hp-division-card" style="display: flex; flex-direction: column;">
-          <div class="hp-card-thumb-wrap">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/cameo-real-estate-luxury.jpg' ); ?>" alt="Kelvin Cameo Real Estate Duplexes" class="hp-card-thumb" loading="lazy">
-            <span class="hp-card-badge">Division 03 &bull; Infrastructure</span>
-          </div>
-          <div class="hp-card-body" style="display: flex; flex-direction: column; flex: 1;">
-            <div class="hp-card-eyebrow">Prime Land &amp; Property Schemes</div>
-            <h3 class="hp-card-title">Master-Planned Real Estate</h3>
-            <p class="hp-card-desc">
-              Gated residential schemes and commercial highway frontages with registered, verifiable land titles. Guaranteed capital appreciation through institutional land banking.
-            </p>
-            <ul class="hp-card-specs" style="margin-bottom:1.5rem;">
-              <li><strong>Titles:</strong> C of O &amp; Verifiable Deed of Assignment</li>
-              <li><strong>Typologies:</strong> Residential Plots &amp; Commercial Highway</li>
-              <li><strong>Security:</strong> Perimeter Fencing &amp; Paved Layouts</li>
-            </ul>
-            <div style="display:flex; gap:0.65rem; margin-top:auto;">
-              <a href="<?php echo kc_url('real-estate'); ?>" class="btn btn-outline-primary btn-sm" style="flex:1; justify-content:center;">
-                View Properties
-              </a>
-              <a href="<?php echo kc_url('real-estate'); ?>#inquire" class="btn btn-primary btn-sm" style="flex:1; justify-content:center;">
-                Book Inspection
-              </a>
+          <!-- CARD 2: PETROLEUM & CLEAN ENERGY -->
+          <article class="hp-division-slide-card" data-card-idx="1">
+            <div class="hp-slide-media">
+              <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/kelvin-filling-station-canopy-clean.jpg' ); ?>" alt="Kelvin Cameo Fuel Retail Station" class="hp-slide-img" loading="lazy">
+              <div class="hp-slide-overlay"></div>
+              <span class="hp-slide-badge badge-energy">DIV 02 &bull; PETROLEUM</span>
+              <span class="hp-slide-loc">⛽ 24/7 Energy Retail</span>
             </div>
-          </div>
-        </article>
+            <div class="hp-slide-body">
+              <div class="hp-slide-eyebrow">Downstream Energy Distribution</div>
+              <h3 class="hp-slide-title">Petroleum &amp; Clean Energy Retail</h3>
+              <p class="hp-slide-desc">
+                24/7 commercial retail filling stations delivering calibrated PMS &amp; AGO with zero tolerance for meter manipulation. Supported by LPG cooking gas refilling plants and industrial solar microgrids.
+              </p>
+              <div class="hp-slide-specs">
+                <div class="hp-spec-item"><span class="spec-dot"></span> <strong>Calibration:</strong> 10 Litres Dispensed = 10 Litres In Tank</div>
+                <div class="hp-spec-item"><span class="spec-dot"></span> <strong>Supply:</strong> Calibrated PMS, AGO &amp; Dual Purpose Kerosene</div>
+                <div class="hp-spec-item"><span class="spec-dot"></span> <strong>Clean Power:</strong> Industrial Solar Microgrids &amp; LPG Gas</div>
+              </div>
+              <div class="hp-slide-actions">
+                <a href="<?php echo kc_url('energy'); ?>" class="btn btn-outline-gold btn-sm">
+                  Energy Division
+                </a>
+                <button type="button" class="btn-gold btn-sm" data-modal="inquiryModal">
+                  Partner With Us
+                </button>
+              </div>
+            </div>
+          </article>
 
-        <!-- Division 4: Commercial Agriculture -->
-        <article class="hp-division-card" style="display: flex; flex-direction: column;">
-          <div class="hp-card-thumb-wrap">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/agriculture/maize-planting-field.jpg' ); ?>" alt="Kelvin Cameo Commercial Farming Fields" class="hp-card-thumb" loading="lazy">
-            <span class="hp-card-badge">Division 04 &bull; Agriculture</span>
-          </div>
-          <div class="hp-card-body" style="display: flex; flex-direction: column; flex: 1;">
-            <div class="hp-card-eyebrow">Integrated Agro-Industrial Food Chain</div>
-            <h3 class="hp-card-title">Commercial Agriculture &amp; Agro-Allied</h3>
-            <p class="hp-card-desc">
-              Mechanized grain cultivation (maize, soya beans), modern poultry production, and cattle ranching. Hygienic milling, bagging, and wholesale institutional supply.
-            </p>
-            <ul class="hp-card-specs" style="margin-bottom:1.5rem;">
-              <li><strong>Crops:</strong> Hybrid Grains, Maize, Soya &amp; Feed Stuffs</li>
-              <li><strong>Livestock:</strong> Broilers, Layers, Commercial Cattle</li>
-              <li><strong>Offtake:</strong> Corporate Food Contracts &amp; Processing</li>
-            </ul>
-            <div style="display:flex; gap:0.65rem; margin-top:auto;">
-              <a href="<?php echo kc_url('agriculture'); ?>" class="btn btn-outline-primary btn-sm" style="flex:1; justify-content:center;">
-                Agro Division
-              </a>
-              <a href="<?php echo kc_url('agriculture'); ?>#offtake" class="btn btn-primary btn-sm" style="flex:1; justify-content:center;">
-                Bulk Contracts
-              </a>
+          <!-- CARD 3: REAL ESTATE & CAMEO ESTATES -->
+          <article class="hp-division-slide-card" data-card-idx="2">
+            <div class="hp-slide-media">
+              <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/cameo-real-estate-luxury.jpg' ); ?>" alt="Kelvin Cameo Real Estate Duplexes" class="hp-slide-img" loading="lazy">
+              <div class="hp-slide-overlay"></div>
+              <span class="hp-slide-badge badge-estate">DIV 03 &bull; INFRASTRUCTURE</span>
+              <span class="hp-slide-loc">🏢 Cameo Estates &bull; C of O</span>
             </div>
-          </div>
-        </article>
+            <div class="hp-slide-body">
+              <div class="hp-slide-eyebrow">Prime Commercial &amp; Residential Land</div>
+              <h3 class="hp-slide-title">Cameo Estates &amp; Commercial Realty</h3>
+              <p class="hp-slide-desc">
+                Master-planned residential estates, prime commercial plazas along the Maje–Minna highway, and luxury duplexes. 100% verified titles with Certificate of Occupancy (C of O) and zero land encumbrances.
+              </p>
+              <div class="hp-slide-specs">
+                <div class="hp-spec-item"><span class="spec-dot"></span> <strong>Assets:</strong> Prime Residential Plots &amp; Commercial Plazas</div>
+                <div class="hp-spec-item"><span class="spec-dot"></span> <strong>Titles:</strong> Guaranteed C of O &amp; Instant Plot Allocation</div>
+                <div class="hp-spec-item"><span class="spec-dot"></span> <strong>Terms:</strong> Flexible Corporate Milestone Payment Plans</div>
+              </div>
+              <div class="hp-slide-actions">
+                <a href="<?php echo kc_url('real-estate'); ?>" class="btn btn-outline-gold btn-sm">
+                  Estate Division
+                </a>
+                <a href="<?php echo kc_url('real-estate'); ?>#inventory" class="btn-gold btn-sm">
+                  Inspect Land
+                </a>
+              </div>
+            </div>
+          </article>
 
-        <!-- Division 5: Automobiles & CNG -->
-        <article class="hp-division-card" style="display: flex; flex-direction: column;">
-          <div class="hp-card-thumb-wrap">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/automotive/dealership-showroom.jpg' ); ?>" alt="Kelvin Cameo Automobiles Dealership Showroom" class="hp-card-thumb" loading="lazy">
-            <span class="hp-card-badge">Division 05 &bull; Mobility</span>
-          </div>
-          <div class="hp-card-body" style="display: flex; flex-direction: column; flex: 1;">
-            <div class="hp-card-eyebrow">Vehicle Sales &amp; Clean Fuel Technology</div>
-            <h3 class="hp-card-title">Automobiles &amp; CNG Mobility</h3>
-            <p class="hp-card-desc">
-              Certified car sales dealership offering inspected sedans, SUVs, and commercial trucks. Authorized CNG conversion center cutting fleet operational fuel costs by up to 60%.
-            </p>
-            <ul class="hp-card-specs" style="margin-bottom:1.5rem;">
-              <li><strong>Showroom:</strong> Toyota, Lexus, Mercedes-Benz, Hyundai</li>
-              <li><strong>CNG Tech:</strong> Certified Gas Conversion Kits &amp; Tanks</li>
-              <li><strong>Logistics:</strong> Haulage Tankers &amp; Corporate Fleets</li>
-            </ul>
-            <div style="display:flex; gap:0.65rem; margin-top:auto;">
-              <a href="<?php echo kc_url('automobiles'); ?>" class="btn btn-outline-primary btn-sm" style="flex:1; justify-content:center;">
-                Auto Showroom
-              </a>
-              <a href="<?php echo kc_url('automobiles'); ?>#cng" class="btn btn-primary btn-sm" style="flex:1; justify-content:center;">
-                CNG Conversion
-              </a>
+          <!-- CARD 4: MECHANIZED AGRICULTURE -->
+          <article class="hp-division-slide-card" data-card-idx="3">
+            <div class="hp-slide-media">
+              <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/agriculture/tractor-field.jpg' ); ?>" alt="Mechanized Farming Tractors at Kelvin Cameo Farms" class="hp-slide-img" loading="lazy">
+              <div class="hp-slide-overlay"></div>
+              <span class="hp-slide-badge badge-agro">DIV 04 &bull; AGRO-ALLIED</span>
+              <span class="hp-slide-loc">🌾 Commercial Farms</span>
             </div>
-          </div>
-        </article>
+            <div class="hp-slide-body">
+              <div class="hp-slide-eyebrow">Mechanized Farming &amp; Livestock</div>
+              <h3 class="hp-slide-title">Commercial Agriculture &amp; Agro-Allied</h3>
+              <p class="hp-slide-desc">
+                Extensive mechanized grain cultivation (maize, soya beans), modern commercial poultry production, and cattle ranching. Hygienic milling, automated bagging, and wholesale institutional food supply.
+              </p>
+              <div class="hp-slide-specs">
+                <div class="hp-spec-item"><span class="spec-dot"></span> <strong>Crops:</strong> Hybrid Grains, Maize, Soya &amp; Feed Stuffs</div>
+                <div class="hp-spec-item"><span class="spec-dot"></span> <strong>Livestock:</strong> Commercial Poultry (Layers/Broilers) &amp; Cattle</div>
+                <div class="hp-spec-item"><span class="spec-dot"></span> <strong>Offtake:</strong> Corporate Food Contracts &amp; Agro Processing</div>
+              </div>
+              <div class="hp-slide-actions">
+                <a href="<?php echo kc_url('agriculture'); ?>" class="btn btn-outline-gold btn-sm">
+                  Agro Division
+                </a>
+                <a href="<?php echo kc_url('agriculture'); ?>#offtake" class="btn-gold btn-sm">
+                  Bulk Contracts
+                </a>
+              </div>
+            </div>
+          </article>
 
-        <!-- Division 6: 1,000-Seat Grand Banquet Hall -->
-        <article class="hp-division-card" style="display: flex; flex-direction: column;">
-          <div class="hp-card-thumb-wrap">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/banquet-hall.jpg' ); ?>" alt="Kelvin Cameo 1,000-Seat Grand Banquet Hall" class="hp-card-thumb" loading="lazy">
-            <span class="hp-card-badge" style="background:#7c3aed;">Summit Center &bull; Events</span>
-          </div>
-          <div class="hp-card-body" style="display: flex; flex-direction: column; flex: 1;">
-            <div class="hp-card-eyebrow" style="color:#7c3aed; font-weight:800;">Weddings &bull; Summits &bull; AGMs</div>
-            <h3 class="hp-card-title">1,000-Seat Grand Banquet Hall</h3>
-            <p class="hp-card-desc">
-              Ultra-modern column-free amphitheater event hall with central chilling air-conditioning, 250kVA dedicated generator, banquet furniture, and private bridal dressing suite.
-            </p>
-            <ul class="hp-card-specs" style="margin-bottom:1.5rem;">
-              <li><strong>Capacity:</strong> 1,000 Banquet / 1,500 Theater Style</li>
-              <li><strong>Packages:</strong> ₦1.05M Full Service / ₦850,000 Hall Only</li>
-              <li><strong>Power:</strong> Guaranteed Zero-Blink 250kVA Gen</li>
-            </ul>
-            <div style="display:flex; gap:0.65rem; margin-top:auto;">
-              <a href="<?php echo kc_url('banquet-hall'); ?>" class="btn btn-outline-primary btn-sm" style="flex:1; justify-content:center;">
-                Hall Specs
-              </a>
-              <a href="<?php echo kc_url('banquet-hall'); ?>#reserve" class="btn btn-primary btn-sm" style="flex:1; justify-content:center;">
-                Reserve Date
-              </a>
+          <!-- CARD 5: AUTOMOBILES & CNG MOBILITY -->
+          <article class="hp-division-slide-card" data-card-idx="4">
+            <div class="hp-slide-media">
+              <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/automotive/dealership-showroom.jpg' ); ?>" alt="Kelvin Cameo Automobiles Dealership Showroom" class="hp-slide-img" loading="lazy">
+              <div class="hp-slide-overlay"></div>
+              <span class="hp-slide-badge badge-mobility">DIV 05 &bull; MOBILITY</span>
+              <span class="hp-slide-loc">🚗 Dealership &bull; CNG Tech</span>
             </div>
-          </div>
-        </article>
+            <div class="hp-slide-body">
+              <div class="hp-slide-eyebrow">Vehicle Sales &amp; Clean Fuel Technology</div>
+              <h3 class="hp-slide-title">Automobiles &amp; CNG Mobility Solutions</h3>
+              <p class="hp-slide-desc">
+                Certified car sales dealership offering inspected sedans, SUVs, and commercial trucks. Authorized pioneer CNG conversion center cutting fleet operational fuel costs by up to 60%.
+              </p>
+              <div class="hp-slide-specs">
+                <div class="hp-spec-item"><span class="spec-dot"></span> <strong>Showroom:</strong> Toyota, Lexus, Mercedes-Benz, Hyundai</div>
+                <div class="hp-spec-item"><span class="spec-dot"></span> <strong>CNG Tech:</strong> Certified Gas Conversion Kits &amp; Tanks</div>
+                <div class="hp-spec-item"><span class="spec-dot"></span> <strong>Logistics:</strong> Commercial Haulage Tankers &amp; Fleets</div>
+              </div>
+              <div class="hp-slide-actions">
+                <a href="<?php echo kc_url('automobiles'); ?>" class="btn btn-outline-gold btn-sm">
+                  Auto Showroom
+                </a>
+                <a href="<?php echo kc_url('automobiles'); ?>#cng" class="btn-gold btn-sm">
+                  CNG Conversion
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 6: 1,000-SEAT GRAND BANQUET HALL -->
+          <article class="hp-division-slide-card" data-card-idx="5">
+            <div class="hp-slide-media">
+              <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/banquet-hall.jpg' ); ?>" alt="Kelvin Cameo 1,000-Seat Grand Banquet Hall" class="hp-slide-img" loading="lazy">
+              <div class="hp-slide-overlay"></div>
+              <span class="hp-slide-badge badge-events">SUMMIT CENTER &bull; EVENTS</span>
+              <span class="hp-slide-loc">🏛️ 1,000-Seat Auditorium</span>
+            </div>
+            <div class="hp-slide-body">
+              <div class="hp-slide-eyebrow">Weddings &bull; Summits &bull; AGMs</div>
+              <h3 class="hp-slide-title">1,000-Seat Grand Banquet Hall</h3>
+              <p class="hp-slide-desc">
+                Ultra-modern column-free amphitheater event hall with central chilling air-conditioning, dedicated 250kVA standby generator, luxury banquet seating, and private VIP bridal dressing suite.
+              </p>
+              <div class="hp-slide-specs">
+                <div class="hp-spec-item"><span class="spec-dot"></span> <strong>Capacity:</strong> 1,000 Banquet / 1,500 Theater Style</div>
+                <div class="hp-spec-item"><span class="spec-dot"></span> <strong>Packages:</strong> ₦1.05M Full Service / ₦850,000 Hall Only</div>
+                <div class="hp-spec-item"><span class="spec-dot"></span> <strong>Power:</strong> Guaranteed Zero-Blink 250kVA Dedicated Gen</div>
+              </div>
+              <div class="hp-slide-actions">
+                <a href="<?php echo kc_url('banquet-hall'); ?>" class="btn btn-outline-gold btn-sm">
+                  Hall Specs
+                </a>
+                <a href="<?php echo kc_url('banquet-hall'); ?>#reserve" class="btn-gold btn-sm">
+                  Reserve Date
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <!-- Horizontal Carousel Progress & Indicator Dots -->
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 1.25rem; flex-wrap: wrap; gap: 1rem;">
+        
+        <!-- Progress Bar -->
+        <div style="flex: 1; min-width: 200px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
+          <div id="divisionScrollProgress" style="height: 100%; width: 16.66%; background: linear-gradient(90deg, #d4af37, #f59e0b); border-radius: 4px; transition: width 0.3s ease;"></div>
+        </div>
+
+        <!-- Dot Indicators -->
+        <div style="display: flex; gap: 8px;" id="divisionDotGroup">
+          <button type="button" class="hp-div-dot active" onclick="KCDivisionsCarousel.slideTo(0)" aria-label="Slide 1"></button>
+          <button type="button" class="hp-div-dot" onclick="KCDivisionsCarousel.slideTo(1)" aria-label="Slide 2"></button>
+          <button type="button" class="hp-div-dot" onclick="KCDivisionsCarousel.slideTo(2)" aria-label="Slide 3"></button>
+          <button type="button" class="hp-div-dot" onclick="KCDivisionsCarousel.slideTo(3)" aria-label="Slide 4"></button>
+          <button type="button" class="hp-div-dot" onclick="KCDivisionsCarousel.slideTo(4)" aria-label="Slide 5"></button>
+          <button type="button" class="hp-div-dot" onclick="KCDivisionsCarousel.slideTo(5)" aria-label="Slide 6"></button>
+        </div>
+
+        <!-- Touch/Swipe Hint -->
+        <div style="font-size: 12px; color: #64748b; font-weight: 600; display: flex; align-items: center; gap: 6px;">
+          <span>Swipe or drag horizontally &harr;</span>
+        </div>
 
       </div>
+
     </div>
+
+    <!-- STYLES & INTERACTIVE SCRIPT FOR HORIZONTAL ANIMATED CAROUSEL -->
+    <style>
+      .hp-divisions-track::-webkit-scrollbar { display: none; }
+      
+      .hp-div-pill {
+        padding: 7px 16px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.12);
+        color: #94a3b8;
+        border-radius: 30px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: all 0.25s ease;
+      }
+      .hp-div-pill:hover {
+        background: rgba(255,255,255,0.12);
+        color: #ffffff;
+        border-color: rgba(212,175,55,0.4);
+      }
+      .hp-div-pill.active {
+        background: linear-gradient(135deg, #d4af37, #b89327);
+        color: #040914;
+        border-color: transparent;
+        font-weight: 800;
+        box-shadow: 0 4px 15px rgba(212,175,55,0.3);
+      }
+
+      .hp-division-slide-card {
+        flex: 0 0 380px;
+        width: 380px;
+        max-width: 86vw;
+        scroll-snap-align: start;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(165deg, #0a172e 0%, #050c18 100%);
+        border: 1.5px solid rgba(212,175,55,0.25);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+      }
+      .hp-division-slide-card:hover {
+        transform: translateY(-8px);
+        border-color: rgba(212,175,55,0.7);
+        box-shadow: 0 20px 45px rgba(0,0,0,0.6), 0 0 25px rgba(212,175,55,0.18);
+      }
+
+      .hp-slide-media {
+        height: 215px;
+        position: relative;
+        overflow: hidden;
+        background: #020610;
+      }
+      .hp-slide-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .hp-division-slide-card:hover .hp-slide-img {
+        transform: scale(1.08);
+      }
+      .hp-slide-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(4,9,20,0.1) 0%, rgba(4,9,20,0.85) 100%);
+      }
+      .hp-slide-badge {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        padding: 5px 12px;
+        border-radius: 30px;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.6px;
+        z-index: 2;
+      }
+      .badge-hospitality { background: linear-gradient(135deg, #d4af37, #b89327); color: #040914; }
+      .badge-energy { background: linear-gradient(135deg, #0284c7, #0369a1); color: #ffffff; }
+      .badge-estate { background: linear-gradient(135deg, #10b981, #059669); color: #ffffff; }
+      .badge-agro { background: linear-gradient(135deg, #16a34a, #15803d); color: #ffffff; }
+      .badge-mobility { background: linear-gradient(135deg, #ea580c, #c2410c); color: #ffffff; }
+      .badge-events { background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: #ffffff; }
+
+      .hp-slide-loc {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        background: rgba(4,9,20,0.85);
+        backdrop-filter: blur(8px);
+        color: #cbd5e1;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 20px;
+        border: 1px solid rgba(255,255,255,0.15);
+        z-index: 2;
+      }
+
+      .hp-slide-body {
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+      }
+      .hp-slide-eyebrow {
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        color: #d4af37;
+        margin-bottom: 6px;
+      }
+      .hp-slide-title {
+        font-size: 20px;
+        font-weight: 800;
+        color: #ffffff;
+        line-height: 1.3;
+        margin: 0 0 10px;
+      }
+      .hp-slide-desc {
+        font-size: 13.5px;
+        color: #94a3b8;
+        line-height: 1.6;
+        margin: 0 0 16px;
+        flex: 1;
+      }
+
+      .hp-slide-specs {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 12px;
+        padding: 12px 14px;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .hp-spec-item {
+        font-size: 12.5px;
+        color: #cbd5e1;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .hp-spec-item strong {
+        color: #f1f5f9;
+      }
+      .spec-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #d4af37;
+        flex-shrink: 0;
+      }
+
+      .hp-slide-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: auto;
+      }
+      .btn-outline-gold {
+        flex: 1;
+        padding: 9px 12px;
+        border: 1.5px solid rgba(212,175,55,0.5);
+        color: #f59e0b;
+        background: transparent;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 700;
+        text-align: center;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .btn-outline-gold:hover {
+        background: rgba(212,175,55,0.15);
+        color: #ffffff;
+        border-color: #d4af37;
+      }
+
+      .hp-div-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.2);
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        transition: all 0.25s ease;
+      }
+      .hp-div-dot.active {
+        width: 28px;
+        border-radius: 10px;
+        background: #d4af37;
+        box-shadow: 0 0 10px rgba(212,175,55,0.6);
+      }
+
+      @media (max-width: 768px) {
+        .hp-division-slide-card {
+          flex: 0 0 310px;
+          width: 310px;
+        }
+        .hp-slide-media {
+          height: 180px;
+        }
+      }
+    </style>
+
+    <script>
+      const KCDivisionsCarousel = {
+        track: null,
+        autoPlayTimer: null,
+        isPlaying: true,
+        intervalMs: 3800,
+
+        init: function() {
+          this.track = document.getElementById('hpDivisionsTrack');
+          if (!this.track) return;
+
+          // Pause on hover
+          this.track.addEventListener('mouseenter', () => this.pause());
+          this.track.addEventListener('mouseleave', () => {
+            if (this.isPlaying) this.start();
+          });
+
+          // Track scroll progress and update active indicators
+          this.track.addEventListener('scroll', () => {
+            this.updateActiveIndicators();
+          }, { passive: true });
+
+          this.start();
+        },
+
+        start: function() {
+          clearInterval(this.autoPlayTimer);
+          this.autoPlayTimer = setInterval(() => {
+            this.next(true);
+          }, this.intervalMs);
+        },
+
+        pause: function() {
+          clearInterval(this.autoPlayTimer);
+        },
+
+        toggleAutoplay: function() {
+          const icon = document.getElementById('playPauseIcon');
+          if (this.isPlaying) {
+            this.pause();
+            this.isPlaying = false;
+            if (icon) icon.textContent = '▶';
+          } else {
+            this.isPlaying = true;
+            this.start();
+            if (icon) icon.textContent = '⏸';
+          }
+        },
+
+        next: function(isAuto = false) {
+          if (!this.track) return;
+          const card = this.track.querySelector('.hp-division-slide-card');
+          const step = card ? card.offsetWidth + 24 : 404;
+          const maxScroll = this.track.scrollWidth - this.track.clientWidth;
+
+          if (this.track.scrollLeft >= maxScroll - 20) {
+            // Loop back to start smoothly
+            this.track.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            this.track.scrollBy({ left: step, behavior: 'smooth' });
+          }
+        },
+
+        prev: function() {
+          if (!this.track) return;
+          const card = this.track.querySelector('.hp-division-slide-card');
+          const step = card ? card.offsetWidth + 24 : 404;
+          this.track.scrollBy({ left: -step, behavior: 'smooth' });
+        },
+
+        slideTo: function(index) {
+          if (!this.track) return;
+          const card = this.track.querySelector('.hp-division-slide-card');
+          const step = card ? card.offsetWidth + 24 : 404;
+          this.track.scrollTo({ left: index * step, behavior: 'smooth' });
+        },
+
+        updateActiveIndicators: function() {
+          if (!this.track) return;
+          const card = this.track.querySelector('.hp-division-slide-card');
+          const step = card ? card.offsetWidth + 24 : 404;
+          const maxScroll = this.track.scrollWidth - this.track.clientWidth;
+          
+          let curIdx = Math.round(this.track.scrollLeft / step);
+          if (curIdx < 0) curIdx = 0;
+          if (curIdx > 5) curIdx = 5;
+
+          // Update counter
+          const numEl = document.getElementById('divisionSlideNum');
+          if (numEl) numEl.textContent = String(curIdx + 1).padStart(2, '0');
+
+          // Update dots
+          const dots = document.querySelectorAll('#divisionDotGroup .hp-div-dot');
+          dots.forEach((d, i) => {
+            if (i === curIdx) d.classList.add('active');
+            else d.classList.remove('active');
+          });
+
+          // Update category pills
+          const pills = document.querySelectorAll('.hp-division-pills-bar .hp-div-pill');
+          pills.forEach((p) => {
+            const idx = Number(p.dataset.divIndex);
+            if (idx === curIdx) p.classList.add('active');
+            else p.classList.remove('active');
+          });
+
+          // Update progress line
+          const progressEl = document.getElementById('divisionScrollProgress');
+          if (progressEl) {
+            const pct = maxScroll > 0 ? Math.min(100, Math.max(16, ((this.track.scrollLeft) / maxScroll) * 100)) : 16;
+            progressEl.style.width = pct + '%';
+          }
+        }
+      };
+
+      document.addEventListener('DOMContentLoaded', function() {
+        KCDivisionsCarousel.init();
+      });
+    </script>
   </section>
 
   <!-- ====================================================================
