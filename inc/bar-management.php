@@ -122,6 +122,11 @@ function kc_bar_init_db() {
 
     // Ensure Games Category (Shisha, Table Tennis, Snooker) is active in DB
     kc_bar_ensure_games_category_products();
+
+    // Clear any transactions before September 27, 2026
+    $wpdb->query("DELETE FROM $table_orders WHERE created_at < '2026-09-27 00:00:00'");
+    $wpdb->query("DELETE FROM $table_logs WHERE created_at < '2026-09-27 00:00:00' OR log_date < '2026-09-27'");
+    $wpdb->query("DELETE FROM $table_shifts WHERE created_at < '2026-09-27 00:00:00' OR start_time < '2026-09-27 00:00:00'");
 }
 
 /**

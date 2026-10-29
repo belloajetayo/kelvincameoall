@@ -2785,7 +2785,7 @@ $reserve_url = home_url('/reserve/');
             if (!isBackground && spinner) spinner.style.animation = 'none';
             if (res.success && res.data) {
               if (res.data.bookings) {
-                res.data.bookings = res.data.bookings.filter(b => b.booking_ref !== 'KC-26-MYRGQ' && b.booking_ref !== 'KC-2026-101');
+                res.data.bookings = res.data.bookings.filter(b => (!b.created_at || b.created_at >= '2026-09-27') && b.booking_ref !== 'KC-26-MYRGQ' && b.booking_ref !== 'KC-2026-101');
               }
               this.data = res.data;
               if (res.data.active_shift) {

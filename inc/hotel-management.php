@@ -187,18 +187,26 @@ function kc_hotel_get_room_inventory() {
 }
 
 /**
- * Permanently purge specified test bookings from database
+ * Permanently purge specified test bookings and any transactions before September 27
  */
 function kc_hotel_cleanup_removed_test_bookings() {
     global $wpdb;
     $table_bookings = $wpdb->prefix . 'kc_hotel_bookings';
+    $table_shifts   = $wpdb->prefix . 'kc_hotel_shifts';
+
     if ($wpdb->get_var("SHOW TABLES LIKE '$table_bookings'") === $table_bookings) {
+        // Clear any transaction created before September 27, 2026
+        $wpdb->query("DELETE FROM $table_bookings WHERE created_at < '2026-09-27 00:00:00'");
         $wpdb->query(
             "DELETE FROM $table_bookings 
              WHERE booking_ref IN ('KC-26-MYRGQ', 'KC-2026-101') 
                 OR guest_name LIKE '%Dapo Alabi%' 
                 OR (guest_name LIKE '%Sanusi Danladi%' AND room_number LIKE '%201%')"
         );
+    }
+
+    if ($wpdb->get_var("SHOW TABLES LIKE '$table_shifts'") === $table_shifts) {
+        $wpdb->query("DELETE FROM $table_shifts WHERE created_at < '2026-09-27 00:00:00'");
     }
 }
 
@@ -344,31 +352,32 @@ function kc_hotel_get_dashboard_data() {
 
     // Daily KPIs
     $today_checkins = $wpdb->get_var($wpdb->prepare(
-        "SELECT COUNT(*) FROM $table_bookings WHERE check_in = %s AND booking_status != 'cancelled' AND booking_ref NOT IN ('KC-26-MYRGQ', 'KC-2026-101')", 
+        "SELECT COUNT(*) FROM $table_bookings WHERE check_in = %s AND booking_status != 'cancelled' AND created_at >= '2026-09-27 00:00:00' AND booking_ref NOT IN ('KC-26-MYRGQ', 'KC-2026-101')", 
         $today
     ));
     $today_checkouts = $wpdb->get_var($wpdb->prepare(
-        "SELECT COUNT(*) FROM $table_bookings WHERE check_out = %s AND booking_status != 'cancelled' AND booking_ref NOT IN ('KC-26-MYRGQ', 'KC-2026-101')", 
+        "SELECT COUNT(*) FROM $table_bookings WHERE check_out = %s AND booking_status != 'cancelled' AND created_at >= '2026-09-27 00:00:00' AND booking_ref NOT IN ('KC-26-MYRGQ', 'KC-2026-101')", 
         $today
     ));
 
     $today_revenue = $wpdb->get_var($wpdb->prepare(
-        "SELECT SUM(amount_paid) FROM $table_bookings WHERE DATE(created_at) = %s AND booking_status != 'cancelled' AND booking_ref NOT IN ('KC-26-MYRGQ', 'KC-2026-101')", 
+        "SELECT SUM(amount_paid) FROM $table_bookings WHERE DATE(created_at) = %s AND booking_status != 'cancelled' AND created_at >= '2026-09-27 00:00:00' AND booking_ref NOT IN ('KC-26-MYRGQ', 'KC-2026-101')", 
         $today
     ));
 
     $total_balance_due = $wpdb->get_var(
-        "SELECT SUM(balance_due) FROM $table_bookings WHERE booking_status IN ('checked_in', 'reserved') AND booking_ref NOT IN ('KC-26-MYRGQ', 'KC-2026-101')"
+        "SELECT SUM(balance_due) FROM $table_bookings WHERE booking_status IN ('checked_in', 'reserved') AND created_at >= '2026-09-27 00:00:00' AND booking_ref NOT IN ('KC-26-MYRGQ', 'KC-2026-101')"
     );
 
     $all_time_revenue = $wpdb->get_var(
-        "SELECT SUM(amount_paid) FROM $table_bookings WHERE booking_status != 'cancelled' AND booking_ref NOT IN ('KC-26-MYRGQ', 'KC-2026-101')"
+        "SELECT SUM(amount_paid) FROM $table_bookings WHERE booking_status != 'cancelled' AND created_at >= '2026-09-27 00:00:00' AND booking_ref NOT IN ('KC-26-MYRGQ', 'KC-2026-101')"
     );
 
     // All bookings list: In-house guests (haven't checked out) and booked rooms (reserved) appear first at the top!
     $all_bookings = $wpdb->get_results(
         "SELECT * FROM $table_bookings 
-         WHERE booking_ref NOT IN ('KC-26-MYRGQ', 'KC-2026-101') 
+         WHERE created_at >= '2026-09-27 00:00:00'
+           AND booking_ref NOT IN ('KC-26-MYRGQ', 'KC-2026-101') 
          ORDER BY 
             CASE 
                 WHEN booking_status = 'checked_in' THEN 1
@@ -1535,7 +1544,7 @@ function kc_hotel_ajax_get_sales_analytics() {
         $where_date = "DATE(created_at) >= '$month_start'";
         $days_in_period = 30;
     } else {
-        $first_booking = $wpdb->get_var("SELECT MIN(created_at) FROM $table_bookings WHERE booking_status != 'cancelled' AND booking_ref NOT IN ('KC-26-MYRGQ', 'KC-2026-101')");
+        $first_booking = $wpdb->get_var("SELECT MIN(created_at) FROM $table_bookings WHERE booking_status != 'cancelled' AND created_at >= '2026-09-27 00:00:00' AND booking_ref NOT IN ('KC-26-MYRGQ', 'KC-2026-101')");
         $days = $first_booking ? ceil((time() - strtotime($first_booking)) / 86400) : 1;
         $days_in_period = max(1, $days);
     }
@@ -1543,6 +1552,7 @@ function kc_hotel_ajax_get_sales_analytics() {
     $bookings = $wpdb->get_results(
         "SELECT * FROM $table_bookings 
          WHERE booking_status != 'cancelled' 
+           AND created_at >= '2026-09-27 00:00:00'
            AND booking_ref NOT IN ('KC-26-MYRGQ', 'KC-2026-101') 
            AND $where_date 
          ORDER BY 
