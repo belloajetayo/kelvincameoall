@@ -138,21 +138,120 @@ function kc_hotel_reconcile_room_rates() {
         return;
     }
 
-    // Automatically alias Deluxe Room to 'Deluxe (UK) Room' so it is also known as UK Room
-    $wpdb->query("UPDATE $table_rooms SET room_type = 'Deluxe (UK) Room' WHERE room_type = 'Deluxe Room' OR room_type = 'UK Room'");
-    if ($wpdb->get_var("SHOW TABLES LIKE '$table_bookings'") === $table_bookings) {
-        $wpdb->query("UPDATE $table_bookings SET room_type = 'Deluxe (UK) Room' WHERE room_type = 'Deluxe Room' OR room_type = 'UK Room'");
-    }
+    // Synchronize Official Hotel Rooms Inventory
+    // - UK Room: 401 to 414 (The Annex, Rate: ₦25,000)
+    // - Love Night Room: 401 to 415 (Main Hotel, Rate: ₦45,000)
+    // - Golden Nest Room: 416 to 430, except 422 & 428 (Main Hotel, Rate: ₦55,000)
+    // - Suites: 422 and 428 (Main Hotel, Rate: ₦60,000)
+    // - 6 Apartments: Apartment 1 to Apartment 6 (Main Hotel, Rate: ₦160,000)
+    $rooms_sync_ver = get_option('kc_hotel_rooms_sync_ver', '0');
+    if ($rooms_sync_ver !== '2026.10.revamp_rooms_v5') {
+        if ($wpdb->get_var("SHOW TABLES LIKE '$table_bookings'") === $table_bookings) {
+            // Remap active in-house and reserved bookings to new official room numbers
+            $wpdb->query("UPDATE $table_bookings SET room_number = '401', room_type = 'Love Night Room', branch = 'Main Hotel' WHERE room_number IN ('M-101', 'M-102') AND booking_status IN ('checked_in', 'reserved')");
+            $wpdb->query("UPDATE $table_bookings SET room_number = '416', room_type = 'Golden Nest Room', branch = 'Main Hotel' WHERE room_number IN ('M-107', 'M-105', 'M-106', 'M-108') AND booking_status IN ('checked_in', 'reserved')");
+            $wpdb->query("UPDATE $table_bookings SET room_number = '422', room_type = 'Blissful Breeze Suite', branch = 'Main Hotel' WHERE room_number IN ('A-16', 'M-201', 'M-202', 'M-203', 'M-204') AND booking_status IN ('checked_in', 'reserved')");
+        }
 
-    // Only seed default baseline if version hasn't been set yet.
-    // Staff/Receptionist custom price edits are preserved and never overwritten!
-    $reconcile_ver = get_option('kc_hotel_rates_ver', '0');
-    if ($reconcile_ver === '0') {
-        $wpdb->query("UPDATE $table_rooms SET rate = 55000.00 WHERE room_type LIKE '%Golden Nest%' AND rate = 0.00");
-        $wpdb->query("UPDATE $table_rooms SET rate = 45000.00 WHERE room_type LIKE '%Prestige%' AND rate = 0.00");
-        $wpdb->query("UPDATE $table_rooms SET rate = 60000.00 WHERE room_type LIKE '%Royal Treat%' AND rate = 0.00");
-        $wpdb->query("UPDATE $table_rooms SET rate = 60000.00 WHERE room_type LIKE '%Blissful Breeze%' AND rate = 0.00");
-        update_option('kc_hotel_rates_ver', '2026.customizable');
+        // Delete legacy demo room numbers
+        $wpdb->query("DELETE FROM $table_rooms WHERE room_number LIKE 'M-%' OR room_number LIKE 'A-%'");
+
+        $site_url = get_template_directory_uri();
+        $img_love_night = $site_url . '/assets/photos/love-night-room.jpg';
+        $img_golden_nest = $site_url . '/assets/photos/golden-nest-room.jpg';
+        $img_suite = $site_url . '/assets/photos/blissful-breeze-suite.jpg';
+        $img_uk = $site_url . '/assets/photos/deluxe-room.jpg';
+        $img_apt = $site_url . '/assets/photos/cameo-real-estate-luxury.jpg';
+
+        $official_rooms = [];
+
+        // 1. UK Room: 401 to 414 (The Annex)
+        for ($i = 401; $i <= 414; $i++) {
+            $official_rooms[] = [
+                'room_number' => 'UK-' . $i,
+                'room_type'   => 'UK Room',
+                'branch'      => 'The Annex',
+                'rate'        => 25000.00,
+                'features'    => 'Comfort Double Bed, Ensuite Bath, Air Conditioning, Satellite TV, Free Wi-Fi',
+                'image_url'   => $img_uk,
+                'status'      => 'available'
+            ];
+        }
+
+        // 2. Love Night Room: 401 to 415 (Main Hotel)
+        for ($i = 401; $i <= 415; $i++) {
+            $official_rooms[] = [
+                'room_number' => (string)$i,
+                'room_type'   => 'Love Night Room',
+                'branch'      => 'Main Hotel',
+                'rate'        => 45000.00,
+                'features'    => 'King Bed, Romantic Ambient Lighting, Ensuite Bath, Satellite TV, Free Wi-Fi',
+                'image_url'   => $img_love_night,
+                'status'      => ($i === 401) ? 'reserved' : 'available'
+            ];
+        }
+
+        // 3. Golden Nest Room: 416 to 430, with 422 & 428 as Suites (Main Hotel)
+        for ($i = 416; $i <= 430; $i++) {
+            if ($i === 422 || $i === 428) {
+                $official_rooms[] = [
+                    'room_number' => (string)$i,
+                    'room_type'   => 'Blissful Breeze Suite',
+                    'branch'      => 'Main Hotel',
+                    'rate'        => 60000.00,
+                    'features'    => 'Luxury Living Parlour, King Bed, Minibar, Smart TV, Ensuite Bath, VIP Amenities',
+                    'image_url'   => $img_suite,
+                    'status'      => ($i === 422) ? 'occupied' : 'available'
+                ];
+            } else {
+                $official_rooms[] = [
+                    'room_number' => (string)$i,
+                    'room_type'   => 'Golden Nest Room',
+                    'branch'      => 'Main Hotel',
+                    'rate'        => 55000.00,
+                    'features'    => 'Work Desk, Premium Bedding, City View, Smart TV, Ensuite Bath, Free Wi-Fi',
+                    'image_url'   => $img_golden_nest,
+                    'status'      => ($i === 416) ? 'occupied' : 'available'
+                ];
+            }
+        }
+
+        // 4. 6 Serviced Apartments (Main Hotel)
+        for ($i = 1; $i <= 6; $i++) {
+            $official_rooms[] = [
+                'room_number' => 'Apartment ' . $i,
+                'room_type'   => 'Luxury Serviced Apartment',
+                'branch'      => 'Main Hotel',
+                'rate'        => 160000.00,
+                'features'    => '2/3 Bedroom Serviced Apartment, Full Kitchen, Executive Living Room, 24/7 Security',
+                'image_url'   => $img_apt,
+                'status'      => 'available'
+            ];
+        }
+
+        foreach ($official_rooms as $r) {
+            $existing_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM $table_rooms WHERE room_number = %s", $r['room_number']));
+            if ($existing_id) {
+                $wpdb->update($table_rooms, [
+                    'room_type'   => $r['room_type'],
+                    'branch'      => $r['branch'],
+                    'rate'        => $r['rate'],
+                    'features'    => $r['features'],
+                    'image_url'   => $r['image_url']
+                ], ['id' => $existing_id]);
+            } else {
+                $wpdb->insert($table_rooms, array_merge($r, [
+                    'created_at' => current_time('mysql'),
+                    'updated_at' => current_time('mysql')
+                ]));
+            }
+        }
+
+        // Re-sync occupancy status from active bookings in database
+        $wpdb->query("UPDATE $table_rooms r INNER JOIN $table_bookings b ON r.room_number = b.room_number SET r.status = 'occupied' WHERE b.booking_status = 'checked_in'");
+        $wpdb->query("UPDATE $table_rooms r INNER JOIN $table_bookings b ON r.room_number = b.room_number SET r.status = 'reserved' WHERE b.booking_status = 'reserved' AND r.status != 'occupied'");
+
+        update_option('kc_hotel_rooms_sync_ver', '2026.10.revamp_rooms_v5');
     }
 }
 
@@ -183,6 +282,12 @@ function kc_hotel_get_room_inventory() {
             'status' => $row['status'] ?: 'available'
         ];
     }
+    usort($inventory, function($a, $b) {
+        if ($a['branch'] !== $b['branch']) {
+            return $a['branch'] === 'Main Hotel' ? -1 : 1;
+        }
+        return strnatcasecmp($a['number'], $b['number']);
+    });
     return $inventory;
 }
 

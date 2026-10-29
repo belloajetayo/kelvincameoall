@@ -1698,9 +1698,9 @@ $reserve_url = home_url('/reserve/');
     <section id="tabRoomRack">
       <div class="filter-bar">
         <div class="pill-group">
-          <button class="filter-pill active" data-wing="all" onclick="KCHotelApp.setWingFilter('all')">All Wings (<span id="countWingAll">31</span>)</button>
-          <button class="filter-pill" data-wing="Main Hotel" onclick="KCHotelApp.setWingFilter('Main Hotel')">Main Hotel (<span id="countWingMain">16</span>)</button>
-          <button class="filter-pill" data-wing="The Annex" onclick="KCHotelApp.setWingFilter('The Annex')">The Annex (<span id="countWingAnnex">15</span>)</button>
+          <button class="filter-pill active" data-wing="all" onclick="KCHotelApp.setWingFilter('all')">All Wings (<span id="countWingAll">50</span>)</button>
+          <button class="filter-pill" data-wing="Main Hotel" onclick="KCHotelApp.setWingFilter('Main Hotel')">Main Hotel (<span id="countWingMain">36</span>)</button>
+          <button class="filter-pill" data-wing="The Annex" onclick="KCHotelApp.setWingFilter('The Annex')">The Annex (<span id="countWingAnnex">14</span>)</button>
         </div>
 
         <div style="display: flex; gap: 8px; align-items: center; margin-left: auto;">
@@ -2104,18 +2104,12 @@ $reserve_url = home_url('/reserve/');
             <div class="form-group">
               <label>Room Category / Type</label>
               <select id="bookingCategorySelect" class="form-control" onchange="KCHotelApp.onBookingCategoryChange(this.value)">
-                <option value="all">-- All Room Categories --</option>
-                <option value="Love Night Room" data-rate="45000">💖 Love Night Room (₦45,000)</option>
-                <option value="Golden Nest Room" data-rate="55000">🪺 Golden Nest Room (₦55,000)</option>
-                <option value="Blissful Breeze Suite" data-rate="60000">🌬️ Blissful Breeze Suite (₦60,000)</option>
-                <option value="Royal Treat Suite" data-rate="60000">👑 Royal Treat Suite (₦60,000)</option>
-                <option value="Prestige Room" data-rate="45000">🌟 Prestige Room (₦45,000)</option>
-                <option value="Executive Room" data-rate="30000">👔 Executive Room (₦30,000)</option>
-                <option value="Deluxe (UK) Room" data-rate="25000">🇬🇧 Deluxe / UK Room (₦25,000)</option>
-                <option value="UK (Deluxe) Room" data-rate="20000">🇬🇧 UK Room / Deluxe (₦20,000)</option>
-                <option value="Sunset Room" data-rate="35000">🌅 Sunset Room (₦35,000)</option>
-                <option value="Luxury Retreat (2-Bed Apartment)" data-rate="160000">🏰 Luxury Retreat - 2-Bed (₦160k)</option>
-                <option value="Royal Retreat (3-Bed Apartment)" data-rate="200000">👑 Royal Retreat - 3-Bed (₦200k)</option>
+                <option value="all">-- All Room Categories (50 Rooms) --</option>
+                <option value="Love Night Room" data-rate="45000">💖 Love Night Room (₦45,000) • Rooms 401–415</option>
+                <option value="Golden Nest Room" data-rate="55000">🪺 Golden Nest Room (₦55,000) • Rooms 416–430</option>
+                <option value="Blissful Breeze Suite" data-rate="60000">🌬️ Suite (₦60,000) • Rooms 422 & 428</option>
+                <option value="UK Room" data-rate="25000">🇬🇧 UK Room (₦25,000) • Rooms 401–414</option>
+                <option value="Luxury Serviced Apartment" data-rate="160000">🏰 Serviced Apartment (₦160,000) • 6 Apartments</option>
               </select>
             </div>
             <div class="form-group">
@@ -2462,29 +2456,20 @@ $reserve_url = home_url('/reserve/');
               ⚡ Quick Preset Categories (Click to Auto-Fill):
             </div>
             <div style="display: flex; flex-wrap: wrap; gap: 6px;">
-              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Love Night Room', 45000, 'Main Hotel', 'King Bed, Ambient Lighting, Ensuite Bath, Free Wi-Fi')">
-                💖 Love Night (₦45k)
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Love Night Room', 45000, 'Main Hotel', 'King Bed, Ambient Mood Lighting, Ensuite Bath, Satellite TV, Free Wi-Fi')">
+                💖 Love Night (401–415) (₦45k)
               </button>
-              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Golden Nest Room', 55000, 'Main Hotel', 'Work Desk, Premium Bedding, City View, Smart TV')">
-                🪺 Golden Nest (₦55k)
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Golden Nest Room', 55000, 'Main Hotel', 'Work Desk, Premium Bedding, City View, Smart TV, Ensuite Bath')">
+                🪺 Golden Nest (416–430) (₦55k)
               </button>
-              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Blissful Breeze Suite', 60000, 'Main Hotel', 'Living Area, Balcony, Smart TV, Mini Bar')">
-                🌬️ Blissful Breeze (₦60k)
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Blissful Breeze Suite', 60000, 'Main Hotel', 'Luxury Living Parlour, King Bed, Minibar, Smart TV, VIP Amenities')">
+                🌬️ Suite (422 & 428) (₦60k)
               </button>
-              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Royal Treat Suite', 60000, 'The Annex', 'Luxury Parlour, Mini Bar, Dressing Area, VIP Amenities')">
-                👑 Royal Treat (₦60k)
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('UK Room', 25000, 'The Annex', 'Comfort Double Bed, Ensuite Bath, Air Conditioning, Satellite TV, Free Wi-Fi')">
+                🇬🇧 UK Room (401–414) (₦25k)
               </button>
-              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Prestige Room', 45000, 'The Annex', 'Spacious Layout, King Bed, Quiet Wing, Work Area')">
-                🌟 Prestige (₦45k)
-              </button>
-              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Executive Room', 30000, 'The Annex', 'Work Desk, Plush Bedding, Hot Water, Wi-Fi')">
-                👔 Executive (₦30k)
-              </button>
-              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Deluxe (UK) Room', 25000, 'The Annex', 'Comfort Double Bed, En-suite, Air Conditioning, Satellite TV')">
-                🇬🇧 Deluxe / UK (₦25k)
-              </button>
-              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('UK (Deluxe) Room', 20000, 'The Annex', 'Comfort Double Bed, En-suite, Air Conditioning, Satellite TV')">
-                🇬🇧 UK Room / Deluxe (₦20k)
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Luxury Serviced Apartment', 160000, 'Main Hotel', '2/3 Bedroom Serviced Apartment, Full Kitchen, Executive Living Room, 24/7 Security')">
+                🏰 Serviced Apartment (1–6) (₦160k)
               </button>
             </div>
           </div>
@@ -2492,7 +2477,7 @@ $reserve_url = home_url('/reserve/');
           <div class="form-row">
             <div class="form-group">
               <label>Room Number *</label>
-              <input type="text" name="room_number" id="roomEditNumber" class="form-control" placeholder="e.g. M-109 or A-18" required>
+              <input type="text" name="room_number" id="roomEditNumber" class="form-control" placeholder="e.g. 401, 416, 422, UK-401, Apartment 1" required>
             </div>
             <div class="form-group">
               <label>Wing / Branch *</label>
@@ -2513,16 +2498,9 @@ $reserve_url = home_url('/reserve/');
                 <option value="Love Night Room">
                 <option value="Golden Nest Room">
                 <option value="Blissful Breeze Suite">
-                <option value="Royal Treat Suite">
-                <option value="Prestige Room">
-                <option value="Executive Room">
-                <option value="Deluxe (UK) Room">
-                <option value="UK (Deluxe) Room">
-                <option value="Deluxe Room">
                 <option value="UK Room">
-                <option value="Sunset Room">
-                <option value="Luxury Retreat (2-Bed Apartment)">
-                <option value="Royal Retreat (3-Bed Apartment)">
+                <option value="Deluxe (UK) Room">
+                <option value="Luxury Serviced Apartment">
               </datalist>
             </div>
             <div class="form-group">
