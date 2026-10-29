@@ -119,6 +119,49 @@ function kc_bar_init_db() {
 
     // Seed Initial Products if empty
     kc_bar_seed_initial_products();
+
+    // Ensure Games Category (Shisha, Table Tennis, Snooker) is active in DB
+    kc_bar_ensure_games_category_products();
+}
+
+/**
+ * Ensure Games Category products exist in database
+ */
+function kc_bar_ensure_games_category_products() {
+    global $wpdb;
+    $table = $wpdb->prefix . 'kc_bar_products';
+    if ($wpdb->get_var("SHOW TABLES LIKE '$table'") !== $table) {
+        return;
+    }
+
+    $games = array(
+        array('name' => 'Shisha', 'category' => 'games', 'price' => 5000.00, 'os' => 20),
+        array('name' => 'Table Tennis', 'category' => 'games', 'price' => 2000.00, 'os' => 50),
+        array('name' => 'Snooker', 'category' => 'games', 'price' => 1000.00, 'os' => 50),
+    );
+
+    foreach ($games as $g) {
+        $existing_id = $wpdb->get_var($wpdb->prepare("SELECT id FROM $table WHERE name = %s", $g['name']));
+        if (!$existing_id) {
+            $wpdb->insert($table, array(
+                'name'          => $g['name'],
+                'category'      => $g['category'],
+                'price'         => $g['price'],
+                'opening_stock' => $g['os'],
+                'new_stock'     => 0,
+                'current_stock' => $g['os'],
+                'total_sold'    => 0,
+                'breakage'      => 0,
+                'is_active'     => 1,
+            ));
+        } else {
+            // Guarantee category is 'games' and item is active
+            $wpdb->update($table, array(
+                'category'  => 'games',
+                'is_active' => 1
+            ), array('id' => $existing_id));
+        }
+    }
 }
 
 /**
@@ -217,6 +260,13 @@ function kc_bar_seed_initial_products() {
         array('name' => 'Chivita Exotic', 'category' => 'drinks', 'price' => 4000, 'os' => 11),
         array('name' => 'Chivita Orange Juice', 'category' => 'drinks', 'price' => 4000, 'os' => 0),
         array('name' => 'Five Alive (85cl)', 'category' => 'drinks', 'price' => 4000, 'os' => 1),
+
+        // ==========================================
+        // CATEGORY 4: GAMES & LOUNGE (3 items)
+        // ==========================================
+        array('name' => 'Shisha', 'category' => 'games', 'price' => 5000, 'os' => 20),
+        array('name' => 'Table Tennis', 'category' => 'games', 'price' => 2000, 'os' => 50),
+        array('name' => 'Snooker', 'category' => 'games', 'price' => 1000, 'os' => 50),
     );
 
     foreach ($products as $p) {
@@ -728,7 +778,7 @@ function kc_bar_ajax_add_product() {
         wp_send_json_error(array('message' => 'Please provide a valid drink name and price.'));
     }
 
-    if (!in_array($category, array('wine', 'beer', 'drinks'))) {
+    if (!in_array($category, array('wine', 'beer', 'drinks', 'games'))) {
         $category = 'beer';
     }
 

@@ -328,6 +328,7 @@ $site_home = home_url('/');
     .prod-cat-tag.wine { color: #f43f5e; }
     .prod-cat-tag.beer { color: #f59e0b; }
     .prod-cat-tag.drinks { color: #38bdf8; }
+    .prod-cat-tag.games { color: #c084fc; }
 
     .product-title {
       font-size: 0.95rem;
@@ -636,6 +637,66 @@ $site_home = home_url('/');
       display: flex;
       justify-content: flex-end;
       gap: 0.75rem;
+    }
+
+    /* RESTOCK / INVENTORY ACTION CARDS (Touch-Friendly Large Design) */
+    .restock-action-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+    }
+    @media (max-width: 600px) {
+      .restock-action-grid { grid-template-columns: 1fr; }
+    }
+    .restock-action-card {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.95rem 1.15rem;
+      background: #1e293b;
+      border: 2px solid #334155;
+      border-radius: 12px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+      color: #e2e8f0;
+      position: relative;
+      outline: none;
+    }
+    .restock-action-card:hover {
+      background: #334155;
+      border-color: rgba(212, 175, 55, 0.6);
+      transform: translateY(-1px);
+    }
+    .restock-action-card.active {
+      background: rgba(212, 175, 55, 0.16);
+      border-color: #d4af37;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
+    }
+    .restock-action-card.active .action-card-title {
+      color: #fce079;
+    }
+    .restock-action-card.disabled {
+      opacity: 0.38;
+      cursor: not-allowed;
+      filter: grayscale(0.8);
+    }
+    .action-card-icon {
+      font-size: 1.65rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .action-card-title {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .action-card-desc {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      margin-top: 3px;
+      line-height: 1.3;
     }
 
     /* PIN LOCK SCREEN */
@@ -1017,6 +1078,28 @@ $site_home = home_url('/');
       background: #f8fafc;
       border-top: 1px solid #e2e8f0;
     }
+    body[data-theme="light"] .restock-action-card {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+      color: #1e293b;
+    }
+    body[data-theme="light"] .restock-action-card:hover {
+      background: #f1f5f9;
+      border-color: #b45309;
+    }
+    body[data-theme="light"] .restock-action-card.active {
+      background: #fef9c3;
+      border-color: #b45309;
+    }
+    body[data-theme="light"] .restock-action-card.active .action-card-title {
+      color: #78350f;
+    }
+    body[data-theme="light"] .action-card-title {
+      color: #0f172a;
+    }
+    body[data-theme="light"] .action-card-desc {
+      color: #64748b;
+    }
     body[data-theme="light"] .modal-close {
       color: #64748b;
     }
@@ -1288,7 +1371,7 @@ $site_home = home_url('/');
       <!-- Category Pills -->
       <div class="category-pills-bar" id="categoryBar">
         <button type="button" class="cat-btn active" data-category="all">
-          <span>⚡ All Drinks</span>
+          <span>⚡ All Items</span>
           <span class="badge" id="badgeAll">0</span>
         </button>
         <button type="button" class="cat-btn" data-category="wine">
@@ -1303,16 +1386,20 @@ $site_home = home_url('/');
           <span>🥤 Drinks &amp; Refreshments</span>
           <span class="badge" id="badgeDrinks">21</span>
         </button>
+        <button type="button" class="cat-btn" data-category="games">
+          <span>🎱 Games (Shisha, Snooker, TT)</span>
+          <span class="badge" id="badgeGames">3</span>
+        </button>
       </div>
 
       <!-- Search Row -->
       <div class="catalog-search-row">
         <div class="search-input-wrap">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          <input type="text" id="productSearchInput" placeholder="Quick search drink by name (e.g. Heineken, Hennessy, Monster, Schweppes)...">
+          <input type="text" id="productSearchInput" placeholder="Quick search drink or game (e.g. Shisha, Snooker, Heineken, Hennessy)...">
         </div>
         <button type="button" class="nav-btn primary" id="openAddDrinkModalBtn" style="flex-shrink:0;">
-          <span>+ Add Drink (Admin)</span>
+          <span>+ Add Product (Admin)</span>
         </button>
       </div>
 
@@ -1646,28 +1733,67 @@ $site_home = home_url('/');
       <div class="modal-body">
         
         <form id="restockForm">
-          <div style="margin-bottom:1rem;">
-            <label style="font-size:0.85rem; color:#94a3b8; display:block; margin-bottom:0.35rem;">Select Beverage Product</label>
-            <select id="restockProdSelect" class="cart-meta-select" style="padding:0.65rem;" required></select>
+          <div style="margin-bottom:1.15rem;">
+            <label style="font-size:0.88rem; font-weight:700; color:#cbd5e1; display:block; margin-bottom:0.4rem;">Select Product (Drinks or Games)</label>
+            <select id="restockProdSelect" class="cart-meta-select" style="padding:0.75rem 1rem; font-size:0.95rem; font-weight:600; border-radius:10px;" required></select>
           </div>
 
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;">
-            <div>
-              <label style="font-size:0.85rem; color:#94a3b8; display:block; margin-bottom:0.35rem;">Action Type</label>
-              <select id="restockActionType" class="cart-meta-select" style="padding:0.65rem;" required>
-                <option value="restock">New Stock In (N/S) - All Staff</option>
-                <option value="breakage">Breakage / Complimentary (B/C/S)</option>
-                <option value="set_exact" id="optSetExact">Set Exact Current Stock (Admin Only)</option>
-                <option value="remove_stock" id="optRemoveStock">Remove / Deduct Stock (Admin Only)</option>
-              </select>
+          <!-- BIG TOUCH-FRIENDLY ACTION TYPE CARDS -->
+          <div style="margin-bottom:1.25rem;">
+            <label style="font-size:0.88rem; font-weight:700; color:#cbd5e1; display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+              <span>Action Type</span>
+              <span id="actionTypeHint" style="font-size:0.78rem; font-weight:700; color:#10b981;">➕ Adding New Stock to Inventory</span>
+            </label>
+            <input type="hidden" id="restockActionType" value="restock">
+            
+            <div class="restock-action-grid">
+              <!-- 1. Restock -->
+              <button type="button" class="restock-action-card active" data-action="restock" onclick="selectRestockAction('restock')">
+                <div class="action-card-icon">➕</div>
+                <div class="action-card-info">
+                  <div class="action-card-title">New Stock In</div>
+                  <div class="action-card-desc">Add delivery intake (All Staff)</div>
+                </div>
+              </button>
+
+              <!-- 2. Breakage / Spoilage -->
+              <button type="button" class="restock-action-card" data-action="breakage" onclick="selectRestockAction('breakage')">
+                <div class="action-card-icon">⚠️</div>
+                <div class="action-card-info">
+                  <div class="action-card-title">Breakage / Spoilage</div>
+                  <div class="action-card-desc">Log damaged / comp items (All Staff)</div>
+                </div>
+              </button>
+
+              <!-- 3. Set Exact (Admin) -->
+              <button type="button" class="restock-action-card admin-only-card disabled" id="btnActionSetExact" data-action="set_exact" onclick="selectRestockAction('set_exact')">
+                <div class="action-card-icon">✏️</div>
+                <div class="action-card-info">
+                  <div class="action-card-title">Set Exact Stock</div>
+                  <div class="action-card-desc">Audit / Reset live count (Admin 👑)</div>
+                </div>
+              </button>
+
+              <!-- 4. Remove / Deduct (Admin) -->
+              <button type="button" class="restock-action-card admin-only-card disabled" id="btnActionRemoveStock" data-action="remove_stock" onclick="selectRestockAction('remove_stock')">
+                <div class="action-card-icon">➖</div>
+                <div class="action-card-info">
+                  <div class="action-card-title">Deduct / Remove Stock</div>
+                  <div class="action-card-desc">Minus quantity from shelf (Admin 👑)</div>
+                </div>
+              </button>
             </div>
-            <div>
-              <label style="font-size:0.85rem; color:#94a3b8; display:block; margin-bottom:0.35rem;">Quantity (Bottles/Cans)</label>
-              <div style="display:flex; align-items:center; gap:0.4rem;">
-                <button type="button" class="qty-btn" style="width:36px; height:36px; font-size:1.1rem; border-radius:8px;" onclick="stepRestockQty(-1)">-</button>
-                <input type="number" id="restockQty" class="cart-meta-select" style="padding:0.65rem; text-align:center; font-weight:700; width:100%;" min="1" value="1" required>
-                <button type="button" class="qty-btn" style="width:36px; height:36px; font-size:1.1rem; border-radius:8px;" onclick="stepRestockQty(1)">+</button>
-              </div>
+          </div>
+
+          <!-- QUANTITY ROW WITH BIG STEPPER BUTTONS -->
+          <div style="margin-bottom:1.25rem;">
+            <label style="font-size:0.88rem; font-weight:700; color:#cbd5e1; display:block; margin-bottom:0.45rem;">
+              Quantity (Units / Bottles / Cans / Games)
+            </label>
+            <div style="display:flex; align-items:center; gap:0.75rem; max-width:320px;">
+              <button type="button" class="qty-btn" style="width:48px; height:48px; font-size:1.6rem; font-weight:800; border-radius:12px; background:#334155; color:#fff;" onclick="stepRestockQty(-1)">-</button>
+              <input type="number" id="restockQty" class="cart-meta-select" style="padding:0.75rem; text-align:center; font-size:1.4rem; font-weight:800; border-radius:12px; border:2px solid #334155;" min="1" value="1" required>
+              <button type="button" class="qty-btn" style="width:48px; height:48px; font-size:1.6rem; font-weight:800; border-radius:12px; background:#334155; color:#fff;" onclick="stepRestockQty(1)">+</button>
             </div>
           </div>
 
@@ -1716,6 +1842,7 @@ $site_home = home_url('/');
                 <option value="wine">Wine &amp; Spirits</option>
                 <option value="beer" selected>Beer &amp; Bitters</option>
                 <option value="drinks">Drinks &amp; Refreshments</option>
+                <option value="games">🎱 Games &amp; Lounge (Shisha, Snooker, TT)</option>
               </select>
             </div>
             <div>
@@ -2251,6 +2378,8 @@ $site_home = home_url('/');
       const label = document.getElementById('roleLabel');
       const optSetExact = document.getElementById('optSetExact');
       const optRemoveStock = document.getElementById('optRemoveStock');
+      const btnSetExact = document.getElementById('btnActionSetExact');
+      const btnRemoveStock = document.getElementById('btnActionRemoveStock');
       const clearBtn = document.getElementById('adminClearTestBtn');
       const adminRemoveArea = document.getElementById('adminRemoveProductArea');
       const restockProdSelect = document.getElementById('restockProdSelect');
@@ -2262,6 +2391,8 @@ $site_home = home_url('/');
         badge.title = 'Admin Mode Active (Full Privileges)';
         if (optSetExact) optSetExact.disabled = false;
         if (optRemoveStock) optRemoveStock.disabled = false;
+        if (btnSetExact) btnSetExact.classList.remove('disabled');
+        if (btnRemoveStock) btnRemoveStock.classList.remove('disabled');
         if (clearBtn) clearBtn.style.display = 'inline-flex';
         if (adminRemoveArea && restockProdSelect && restockProdSelect.value) {
           adminRemoveArea.style.display = 'block';
@@ -2273,8 +2404,18 @@ $site_home = home_url('/');
         badge.title = 'Click to enter Admin Password';
         if (optSetExact) optSetExact.disabled = true;
         if (optRemoveStock) optRemoveStock.disabled = true;
+        if (btnSetExact) btnSetExact.classList.add('disabled');
+        if (btnRemoveStock) btnRemoveStock.classList.add('disabled');
         if (clearBtn) clearBtn.style.display = 'none';
         if (adminRemoveArea) adminRemoveArea.style.display = 'none';
+
+        // Revert any admin-only action back to 'restock'
+        const curAction = document.getElementById('restockActionType') ? document.getElementById('restockActionType').value : 'restock';
+        if (curAction === 'set_exact' || curAction === 'remove_stock') {
+          if (typeof selectRestockAction === 'function') {
+            selectRestockAction('restock');
+          }
+        }
       }
 
       if (products && products.length > 0) {
@@ -2360,16 +2501,19 @@ $site_home = home_url('/');
     }
 
     function updateCategoryBadges() {
-      let wine = 0, beer = 0, drinks = 0;
+      let wine = 0, beer = 0, drinks = 0, games = 0;
       products.forEach(p => {
         if (p.category === 'wine') wine++;
         else if (p.category === 'beer') beer++;
         else if (p.category === 'drinks') drinks++;
+        else if (p.category === 'games') games++;
       });
       document.getElementById('badgeAll').textContent = products.length;
       document.getElementById('badgeWine').textContent = wine;
       document.getElementById('badgeBeer').textContent = beer;
       document.getElementById('badgeDrinks').textContent = drinks;
+      const badgeGames = document.getElementById('badgeGames');
+      if (badgeGames) badgeGames.textContent = games;
     }
 
     function renderProducts() {
@@ -2386,7 +2530,7 @@ $site_home = home_url('/');
 
       if (filtered.length === 0) {
         grid.innerHTML = `<div style="grid-column: 1 / -1; text-align:center; padding:3rem; color:#64748b;">
-          No drinks found matching "${query}".
+          No items found matching "${query}".
         </div>`;
         return;
       }
@@ -2394,7 +2538,8 @@ $site_home = home_url('/');
       filtered.forEach(p => {
         const stock = parseInt(p.current_stock);
         let stockClass = 'ok';
-        let stockText = `${stock} in stock`;
+        const unitWord = (p.category === 'games') ? 'avail' : 'in stock';
+        let stockText = `${stock} ${unitWord}`;
         let isOutOfStock = false;
 
         if (stock <= 0) {
@@ -2430,10 +2575,16 @@ $site_home = home_url('/');
           `;
         }
 
+        let catLabel = p.category;
+        if (p.category === 'games') catLabel = '🎱 Games & Lounge';
+        else if (p.category === 'wine') catLabel = '🍷 Wine & Spirits';
+        else if (p.category === 'beer') catLabel = '🍺 Beer & Bitters';
+        else if (p.category === 'drinks') catLabel = '🥤 Refreshments';
+
         card.innerHTML = `
           ${adminDelHtml}
           <div>
-            <div class="prod-cat-tag ${p.category}">${p.category}</div>
+            <div class="prod-cat-tag ${p.category}">${catLabel}</div>
             <div class="product-title">${escapeHtml(p.name)}</div>
           </div>
           <div>
@@ -2882,6 +3033,57 @@ $site_home = home_url('/');
     // -------------------------------------------------------------
     // RESTOCK & INVENTORY UPDATES (Role Checked)
     // -------------------------------------------------------------
+    function selectRestockAction(action) {
+      if ((action === 'set_exact' || action === 'remove_stock') && currentRole !== 'admin') {
+        showToast('Admin password (1122) required for direct stock editing/removal.', true);
+        unlockAdminModal();
+        return;
+      }
+
+      const input = document.getElementById('restockActionType');
+      if (input) input.value = action;
+
+      // Update card visual states
+      document.querySelectorAll('.restock-action-card').forEach(card => {
+        if (card.dataset.action === action) {
+          card.classList.add('active');
+        } else {
+          card.classList.remove('active');
+        }
+      });
+
+      // Update hint text and color
+      const hint = document.getElementById('actionTypeHint');
+      if (hint) {
+        if (action === 'restock') {
+          hint.textContent = '➕ Adding New Stock to Inventory';
+          hint.style.color = '#10b981';
+        } else if (action === 'breakage') {
+          hint.textContent = '⚠️ Recording Damaged / Complimentary / Spoilage';
+          hint.style.color = '#f59e0b';
+        } else if (action === 'set_exact') {
+          hint.textContent = '✏️ Setting Exact Current Stock Level (Admin)';
+          hint.style.color = '#38bdf8';
+        } else if (action === 'remove_stock') {
+          hint.textContent = '➖ Deducting Stock Quantity from Inventory (Admin)';
+          hint.style.color = '#ef4444';
+        }
+      }
+    }
+
+    function openRestockModal(preselectedProductId = null) {
+      selectRestockAction('restock');
+      document.getElementById('restockQty').value = 1;
+      const select = document.getElementById('restockProdSelect');
+      if (preselectedProductId && select) {
+        select.value = preselectedProductId;
+      }
+      if (select && select.onchange) {
+        select.onchange();
+      }
+      openModal('restockModal');
+    }
+
     function stepRestockQty(delta) {
       const inp = document.getElementById('restockQty');
       if (!inp) return;
@@ -2893,11 +3095,12 @@ $site_home = home_url('/');
     function populateRestockSelect() {
       const select = document.getElementById('restockProdSelect');
       const currentVal = select.value;
-      select.innerHTML = '<option value="">-- Choose Drink --</option>';
+      select.innerHTML = '<option value="">-- Choose Item (Drink or Game) --</option>';
       products.forEach(p => {
         const opt = document.createElement('option');
         opt.value = p.id;
-        opt.textContent = `${p.name} (${p.category.toUpperCase()} - Current: ${p.current_stock})`;
+        const unitLabel = (p.category === 'games') ? 'units' : 'bottles/cans';
+        opt.textContent = `${p.name} (${p.category.toUpperCase()} - Current: ${p.current_stock} ${unitLabel})`;
         select.appendChild(opt);
       });
 
@@ -2906,7 +3109,8 @@ $site_home = home_url('/');
       select.onchange = () => {
         const pId = select.value;
         const prod = products.find(p => String(p.id) === String(pId));
-        document.getElementById('previewCurrentStockVal').textContent = prod ? `${prod.current_stock} bottles` : '--';
+        const unitLabel = (prod && prod.category === 'games') ? 'units' : 'bottles';
+        document.getElementById('previewCurrentStockVal').textContent = prod ? `${prod.current_stock} ${unitLabel}` : '--';
         
         const removeArea = document.getElementById('adminRemoveProductArea');
         if (removeArea) {
@@ -3362,7 +3566,7 @@ $site_home = home_url('/');
       document.getElementById('generateMonthlyBtn').addEventListener('click', loadMonthlyReport);
       document.getElementById('openLedgerBtn').addEventListener('click', loadDailyLedger);
       document.getElementById('openOrdersBtn').addEventListener('click', renderOrdersHistory);
-      document.getElementById('openRestockBtn').addEventListener('click', () => openModal('restockModal'));
+      document.getElementById('openRestockBtn').addEventListener('click', () => openRestockModal());
       document.getElementById('openAddDrinkModalBtn').addEventListener('click', () => {
         if (currentRole !== 'admin') {
           showToast('Admin password required to add new menu drinks.', true);
