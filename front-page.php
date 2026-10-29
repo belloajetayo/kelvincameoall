@@ -1,7 +1,7 @@
 <?php
 /**
  * Kelvin Cameo Organization (RC: 1613032)
- * Front Page Template — Clean Revamp
+ * Executive Front Page Template — World-Class Luxury Revamp
  *
  * @package Kelvin_Cameo
  */
@@ -10,36 +10,37 @@ get_header();
 ?>
 
   <!-- ====================================================================
-       HERO — Prestigious Conglomerate Experience with Live Sector Slider
+       HERO — Prestigious Conglomerate Experience with Ambient Sector Slider
        ==================================================================== -->
   <section class="hp-hero">
     <!-- Ambient Ken Burns Background Slideshow (Authentic Operating Sectors) -->
     <div class="hp-hero-bg-slider" aria-hidden="true">
       <div class="hp-hero-slide active" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/exterior.jpg' ); ?>');" data-index="0"></div>
-      <div class="hp-hero-slide" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/kelvin-filling-station-canopy.jpg' ); ?>');" data-index="1"></div>
+      <div class="hp-hero-slide" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/kelvin-filling-station-canopy-clean.jpg' ); ?>');" data-index="1"></div>
       <div class="hp-hero-slide" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/cameo-real-estate-luxury.jpg' ); ?>');" data-index="2"></div>
-      <div class="hp-hero-slide" style="background-image: url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1600&q=80');" data-index="3"></div>
+      <div class="hp-hero-slide" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/agriculture/maize-planting-field.jpg' ); ?>');" data-index="3"></div>
+      <div class="hp-hero-slide" style="background-image: url('<?php echo esc_url( get_template_directory_uri() . '/assets/photos/automotive/dealership-showroom.jpg' ); ?>');" data-index="4"></div>
       <div class="hp-hero-overlay"></div>
     </div>
 
     <div class="container hp-hero-content-wrap">
       <div class="hp-hero-inner">
         <!-- Live Verified Badge with Animated Pulse Indicator -->
-        <div class="hp-hero-badge">
-          <span class="hp-pulse-dot" aria-hidden="true"></span>
-          <span>RC: 1613032 &mdash; Verified &amp; Active Conglomerate &bull; Nigeria</span>
+        <div class="hp-hero-badge" style="background: rgba(3, 12, 26, 0.75); border: 1px solid rgba(245, 158, 11, 0.4); box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+          <span class="hp-pulse-dot" style="background:#22c55e;" aria-hidden="true"></span>
+          <span style="color:#fef08a; font-weight:800; letter-spacing:0.04em;">RC: 1613032 &bull; CAC VERIFIED CONGLOMERATE &bull; NIGERIA</span>
         </div>
 
         <h1 class="hp-hero-title">
-          <span class="hp-hero-line-1">Honest Fuel. Safe Land.</span><br>
-          <span class="hp-hero-line-2">Fresh Food. <span class="hp-title-highlight">Luxurious Weekends.</span></span>
+          <span class="hp-hero-line-1">Precision Energy. Dispute-Free Land.</span><br>
+          <span class="hp-hero-line-2">Commercial Agro. <span class="hp-title-highlight" style="background: linear-gradient(135deg, #fde047 0%, #f97316 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Premier Hospitality.</span></span>
         </h1>
 
         <p class="hp-hero-desc">
-          A diversified Nigerian multi-sector group delivering calibrated petroleum, dispute-free real estate, farm-gate agricultural produce, and premier resort hospitality — built on daily verifiable integrity.
+          Kelvin Cameo Organization (RC: 1613032) is a diversified multi-sector powerhouse delivering calibrated petroleum dispensing, verified master-planned real estate, industrial agro-processing, automotive mobility, and Suleja’s premier luxury resort hotel.
         </p>
 
-        <!-- Interactive 4-Sector Selector Pills -->
+        <!-- Interactive 5-Sector Selector Pills -->
         <div class="hp-hero-sectors" role="tablist" aria-label="Operating Sectors">
           <button class="hp-sector-pill active" data-slide="0" type="button" role="tab" aria-selected="true">
             <span class="pill-num">01</span> Resort Hotel &amp; Suites
@@ -53,33 +54,44 @@ get_header();
           <button class="hp-sector-pill" data-slide="3" type="button" role="tab" aria-selected="false">
             <span class="pill-num">04</span> Commercial Agriculture
           </button>
+          <button class="hp-sector-pill" data-slide="4" type="button" role="tab" aria-selected="false">
+            <span class="pill-num">05</span> Automobiles &amp; CNG
+          </button>
         </div>
 
-        <div class="hp-hero-actions">
-          <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%2C%20I%20would%20like%20to%20speak%20with%20your%20team." target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="flex-shrink:0;">
+        <div class="hp-hero-actions" style="margin-top: 1.75rem;">
+          <a href="<?php echo kc_url('reserve'); ?>" class="btn-gold btn-lg" style="padding: 0.85rem 1.75rem; border-radius: 12px; font-size: 1rem;">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+            Book Hotel Room
+          </a>
+          <a href="#sectors" class="btn btn-outline-white btn-lg" style="padding: 0.85rem 1.6rem; border-radius: 12px; font-size: 1rem;">
+            Explore All 5 Sectors &darr;
+          </a>
+          <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%2C%20I%20would%20like%20to%20make%20an%20inquiry%20regarding%20your%20services." target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg" style="padding: 0.85rem 1.5rem; border-radius: 12px; font-size: 1rem;">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
               <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/>
             </svg>
-            Chat on WhatsApp
-          </a>
-          <a href="#sectors" class="btn btn-outline-white btn-lg">
-            Explore All 4 Divisions &darr;
+            WhatsApp Concierge
           </a>
         </div>
 
         <!-- Micro-Trust Guarantee Strip -->
-        <div class="hp-hero-trust-bar">
+        <div class="hp-hero-trust-bar" style="margin-top: 2.25rem;">
           <div class="hp-trust-item">
-            <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-            <span>10L = 10L Calibrated Pumps</span>
+            <svg viewBox="0 0 20 20" fill="#22c55e" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            <span>24/7 Solar &amp; Gen Power</span>
           </div>
           <div class="hp-trust-item">
-            <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-            <span>C of O Verifiable Land Titles</span>
+            <svg viewBox="0 0 20 20" fill="#22c55e" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            <span>10L = 10L Calibrated Fuel</span>
           </div>
           <div class="hp-trust-item">
-            <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-            <span>24/7 Power Guarantee &bull; 1,000-Seat Hall</span>
+            <svg viewBox="0 0 20 20" fill="#22c55e" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            <span>C of O Verifiable Land</span>
+          </div>
+          <div class="hp-trust-item">
+            <svg viewBox="0 0 20 20" fill="#22c55e" width="16" height="16"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            <span>1,000-Seat Banquet Hall</span>
           </div>
         </div>
       </div>
@@ -87,540 +99,761 @@ get_header();
   </section>
 
   <!-- ====================================================================
-       STATS BAR — Compact Horizontal Numbers
+       INSTANT HOTEL BOOKING & AVAILABILITY BAR (Direct Hotel Engine)
+       ==================================================================== -->
+  <div class="container container-wide hp-booking-bar-wrap">
+    <div class="hp-booking-bar">
+      <form action="<?php echo kc_url('reserve'); ?>" method="get" class="hp-booking-grid">
+        <div class="hp-booking-field">
+          <label for="hpRoomSelect">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+            Select Room Category
+          </label>
+          <select id="hpRoomSelect" name="room" required>
+            <option value="love-night">Love Night Room (₦20,000 / Night)</option>
+            <option value="golden-nest">Golden Nest Room (₦20,000 / Night)</option>
+            <option value="deluxe-uk" selected>Deluxe (UK Room) (₦25,000 - ₦45,000)</option>
+            <option value="royal-treat">Royal Treat Suite (₦50,000 / Night)</option>
+            <option value="executive">Executive VIP Suite (₦60,000 / Night)</option>
+            <option value="apartment-3bed">3-Bedroom Luxury Apartment (₦160,000)</option>
+          </select>
+        </div>
+
+        <div class="hp-booking-field">
+          <label for="hpCheckIn">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg>
+            Check-In Date
+          </label>
+          <input type="date" id="hpCheckIn" name="checkin" value="<?php echo date('Y-m-d'); ?>" required>
+        </div>
+
+        <div class="hp-booking-field">
+          <label for="hpCheckOut">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg>
+            Check-Out Date
+          </label>
+          <input type="date" id="hpCheckOut" name="checkout" value="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" required>
+        </div>
+
+        <div class="hp-booking-field">
+          <label for="hpGuests">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            Number of Guests
+          </label>
+          <select id="hpGuests" name="guests">
+            <option value="1">1 Adult (Single)</option>
+            <option value="2" selected>2 Adults (Couple)</option>
+            <option value="3">3 Adults (Family)</option>
+            <option value="4+">4+ Adults / Delegation</option>
+          </select>
+        </div>
+
+        <div>
+          <button type="submit" class="btn-gold" style="width:100%; height:48px; border-radius:10px; font-size:0.95rem; justify-content:center;">
+            Check &amp; Reserve &rarr;
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       STATS STRIP — Verifiable Conglomerate Scale & Credibility Metrics
        ==================================================================== -->
   <section class="hp-stats-bar">
-    <div class="container">
+    <div class="container container-wide">
       <div class="hp-stats-row">
+        <!-- Stat 1 -->
         <div class="hp-stat">
-          <div class="hp-stat-icon">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+          <div class="hp-stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
           <div class="hp-stat-val-wrap">
-            <span class="hp-stat-number" data-target="4">4</span>
+            <span class="hp-stat-number" style="font-size:1.8rem; letter-spacing:0.02em;">1613032</span>
+            <span class="hp-stat-suffix" style="font-size:0.9rem; color:#f59e0b;">RC</span>
           </div>
-          <span class="hp-stat-label">Operating Sectors</span>
+          <div class="hp-stat-label">CAC Corporate Incorporation</div>
         </div>
+
+        <!-- Stat 2 -->
         <div class="hp-stat">
-          <div class="hp-stat-icon">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v20M21 2v20M12 2v20"></path></svg>
+          <div class="hp-stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
           </div>
           <div class="hp-stat-val-wrap">
-            <span class="hp-stat-number" data-target="100">100</span><span class="hp-stat-suffix">%</span>
+            <span class="hp-stat-number">31</span>
+            <span class="hp-stat-suffix">+</span>
           </div>
-          <span class="hp-stat-label">Calibrated Fuel Pumps</span>
+          <div class="hp-stat-label">Luxury Rooms &amp; Suites (From ₦20k)</div>
         </div>
+
+        <!-- Stat 3 -->
         <div class="hp-stat">
-          <div class="hp-stat-icon">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+          <div class="hp-stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
           </div>
           <div class="hp-stat-val-wrap">
-            <span class="hp-stat-number" data-target="2500">2,500</span><span class="hp-stat-suffix">+</span>
+            <span class="hp-stat-number">1,000</span>
+            <span class="hp-stat-suffix">Guests</span>
           </div>
-          <span class="hp-stat-label">Hectares in Agriculture</span>
+          <div class="hp-stat-label">Grand Banquet &amp; Summit Hall</div>
         </div>
+
+        <!-- Stat 4 -->
         <div class="hp-stat">
-          <div class="hp-stat-icon">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+          <div class="hp-stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v20M21 2v20M12 2v20"></path></svg>
           </div>
           <div class="hp-stat-val-wrap">
-            <span class="hp-stat-number" data-target="1000">1,000</span><span class="hp-stat-suffix">+</span>
+            <span class="hp-stat-number">100</span>
+            <span class="hp-stat-suffix">%</span>
           </div>
-          <span class="hp-stat-label">Seat Banquet Hall</span>
+          <div class="hp-stat-label">Calibrated Zero-Dispute Fuel Pumps</div>
+        </div>
+
+        <!-- Stat 5 -->
+        <div class="hp-stat">
+          <div class="hp-stat-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+          </div>
+          <div class="hp-stat-val-wrap">
+            <span class="hp-stat-number">5</span>
+            <span class="hp-stat-suffix">Sectors</span>
+          </div>
+          <div class="hp-stat-label">United Group Divisions</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ====================================================================
-       DIVISIONS — Clean 2×2 Bento Grid
+       OPERATING DIVISIONS SHOWCASE — The Conglomerate Matrix
        ==================================================================== -->
-  <section class="hp-divisions" id="sectors">
-    <div class="container">
+  <section class="hp-divisions" id="sectors" style="padding: 5.5rem 0 4rem;">
+    <div class="container container-wide">
       <div class="hp-section-head">
-        <h2 class="hp-section-title">Our Operating Divisions</h2>
-        <p class="hp-section-sub">Four specialized sectors delivering end-to-end solutions across energy, property, agriculture, and hospitality.</p>
+        <span class="rc-badge" style="margin-bottom:0.75rem; display:inline-flex;">Corporate Portfolio</span>
+        <h2 class="hp-section-title">Our Operating Divisions &amp; Portals</h2>
+        <p class="hp-section-sub">Five specialized divisions delivering institutional excellence across hospitality, energy, real estate, mechanized agriculture, and automotive solutions.</p>
       </div>
 
-      <div class="hp-divisions-grid">
-
-        <!-- Energy -->
-        <a href="<?php echo kc_url('energy'); ?>" class="hp-division-card hp-card-energy">
-          <div class="hp-division-img">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/kelvin-filling-station-canopy.jpg' ); ?>" alt="Kelvin Cameo Filling Station" loading="lazy">
+      <div class="hp-divisions-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
+        
+        <!-- Division 1: Resort Hotel & Suites -->
+        <article class="hp-division-card" style="display: flex; flex-direction: column;">
+          <div class="hp-card-thumb-wrap">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/exterior.jpg' ); ?>" alt="Kelvin Cameo Resort Hotel Exterior" class="hp-card-thumb" loading="lazy">
+            <span class="hp-card-badge" style="background:var(--gold-gradient);">Division 01 &bull; Hospitality</span>
           </div>
-          <div class="hp-division-body">
-            <span class="hp-division-tag">Division 01</span>
-            <h3 class="hp-division-name">Energy &amp; Fuel Stations</h3>
-            <p class="hp-division-desc">Digitally calibrated retail fuel stations supplying PMS, AGO, DPK, engine lubricants, and 50-tonne automated LPG skids.</p>
-            <ul class="hp-division-highlights">
-              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 10L = 10L NMDPRA Calibrated Dispensing</li>
-              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 50-Tonne Automated LPG Cooking Gas Skids</li>
-              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Bulk AGO Deliveries &amp; Commercial Solar Microgrids</li>
-            </ul>
-            <span class="hp-division-link">Explore Energy &rarr;</span>
-          </div>
-        </a>
-
-        <!-- Real Estate -->
-        <a href="<?php echo kc_url('real-estate'); ?>" class="hp-division-card hp-card-estate">
-          <div class="hp-division-img">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/cameo-real-estate-luxury.jpg' ); ?>" alt="Kelvin Cameo Real Estate" loading="lazy">
-          </div>
-          <div class="hp-division-body">
-            <span class="hp-division-tag">Division 02</span>
-            <h3 class="hp-division-name">Real Estate &amp; Land Banking</h3>
-            <p class="hp-division-desc">Master-planned gated residential communities, commercial highway parcels, and strategic land banking with verified government titles (C of O).</p>
-            <ul class="hp-division-highlights">
-              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Verifiable C of O &amp; Gazette Titles (Zero-Omonile)</li>
-              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Gated Residential Layouts &amp; Highway Commercial Plots</li>
-              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Guaranteed Physical Site Inspections along Abuja Corridor</li>
-            </ul>
-            <span class="hp-division-link">Explore Properties &rarr;</span>
-          </div>
-        </a>
-
-        <!-- Agriculture -->
-        <a href="<?php echo kc_url('agriculture'); ?>" class="hp-division-card hp-card-agro">
-          <div class="hp-division-img">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/agriculture/maize-planting-field.jpg' ); ?>" alt="Kelvin Cameo Agriculture - Maize Planting, Processing and Packaging" loading="lazy">
-          </div>
-          <div class="hp-division-body">
-            <span class="hp-division-tag">Division 03</span>
-            <h3 class="hp-division-name">Agriculture &amp; Agro-Processing</h3>
-            <p class="hp-division-desc">2,500+ hectares of mechanized maize plantations, industrial grain processing &amp; packaging, poultry complexes, and 10,000 MT silos.</p>
-            <ul class="hp-division-highlights">
-              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> We Plant, Process &amp; Package Clean Maize (25kg/50kg)</li>
-              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 2,500+ Hectares Arable Dual-Cycle Irrigated Land</li>
-              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 10,000 MT Storage Silos &amp; Bulk Corporate Off-Take</li>
-            </ul>
-            <span class="hp-division-link">Explore Farm &amp; Processing Line &rarr;</span>
-          </div>
-        </a>
-
-        <!-- Hospitality -->
-        <a href="<?php echo kc_url('hospitality'); ?>" class="hp-division-card hp-card-resort">
-          <div class="hp-division-img">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/exterior.jpg' ); ?>" alt="Kelvin Cameo Resort Hotel &amp; Suites" loading="lazy">
-          </div>
-          <div class="hp-division-body">
-            <span class="hp-division-tag">Division 04</span>
-            <h3 class="hp-division-name">Resort Hotel &amp; Suites</h3>
-            <p class="hp-division-desc">Premier luxury oasis along the Abuja corridor — 10 accommodation tiers, swimming pool, and a majestic 1,000-seat banquet hall.</p>
-            <ul class="hp-division-highlights">
-              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 10 Accommodation Tiers (From &#8358;25,000 to &#8358;200,000/night)</li>
-              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Guaranteed 24/7 Power (Dual Caterpillar Standby + Solar)</li>
-              <li><svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 1,000-Seat Grand Banquet Hall for Weddings &amp; AGMs</li>
-            </ul>
-            <span class="hp-division-link">Explore Resort &amp; Suites &rarr;</span>
-          </div>
-        </a>
-
-        <!-- Automobiles & CNG Clean Mobility -->
-        <a href="<?php echo kc_url('automobiles'); ?>" class="hp-division-card" style="background:var(--white);">
-          <div class="hp-division-img">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/automotive/cng-toyota-camry.jpg' ); ?>" alt="Kelvin Cameo Automobiles &amp; CNG Car Shop" loading="lazy">
-          </div>
-          <div class="hp-division-body">
-            <span class="hp-division-tag" style="background:rgba(2,132,199,0.12); color:#0284c7;">Division 05</span>
-            <h3 class="hp-division-name">Automobiles &amp; CNG Mobility</h3>
-            <p class="hp-division-desc">Certified foreign-used cars, commercial trucks, luxury SUVs, and bi-fuel CNG conversions cutting fuel costs by up to 70%.</p>
-            <ul class="hp-division-highlights">
-              <li><svg viewBox="0 0 20 20" fill="#0284c7"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Bi-Fuel CNG Cars (Toyota, Honda, Lexus &amp; Hilux)</li>
-              <li><svg viewBox="0 0 20 20" fill="#0284c7"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Up to 70% Cheaper Daily Running Expense vs. Petrol</li>
-              <li><svg viewBox="0 0 20 20" fill="#0284c7"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Certified 48-Hour Professional Conversion Workshop</li>
-            </ul>
-            <span class="hp-division-link" style="color:#0284c7;">Browse Car Shop &amp; CNG Inventory &rarr;</span>
-          </div>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ====================================================================
-       STRATEGIC PARTNERS & INSTITUTIONAL ALLIANCES
-       ==================================================================== -->
-  <section class="partners-strip" aria-label="Institutional Clients and Strategic Alliances">
-    <div class="container">
-      <div class="partners-strip-title">Institutional Alliances &amp; Trusted Corporate Clients</div>
-      <div class="partners-logo-row">
-        <div class="partner-logo-item">
-          <div class="partner-avatar" style="width:34px; height:34px; border-radius:8px; background:linear-gradient(135deg, #0b4ea2, #04142b); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.75rem;">CC</div>
-          <div>
-            <strong style="display:block; font-size:0.85rem; color:var(--navy-900);">CCCRN Nigeria</strong>
-            <span style="font-size:0.7rem; color:var(--slate-500);">Health Research &amp; Retreats Host</span>
-          </div>
-        </div>
-
-        <div class="partner-logo-item">
-          <div class="partner-avatar" style="width:34px; height:34px; border-radius:8px; background:linear-gradient(135deg, #ea580c, #c2410c); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.75rem;">NM</div>
-          <div>
-            <strong style="display:block; font-size:0.85rem; color:var(--navy-900);">NMDPRA Certified</strong>
-            <span style="font-size:0.7rem; color:var(--slate-500);">100% Calibrated Retail Skids</span>
-          </div>
-        </div>
-
-        <div class="partner-logo-item">
-          <div class="partner-avatar" style="width:34px; height:34px; border-radius:8px; background:linear-gradient(135deg, #10b981, #047857); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.75rem;">AG</div>
-          <div>
-            <strong style="display:block; font-size:0.85rem; color:var(--navy-900);">Commercial Agro Off-Takers</strong>
-            <span style="font-size:0.7rem; color:var(--slate-500);">Direct Farm-Gate Grains &amp; Poultry</span>
-          </div>
-        </div>
-
-        <div class="partner-logo-item">
-          <div class="partner-avatar" style="width:34px; height:34px; border-radius:8px; background:linear-gradient(135deg, #d4af37, #b45309); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.75rem;">RC</div>
-          <div>
-            <strong style="display:block; font-size:0.85rem; color:var(--navy-900);">Corporate Affairs Commission</strong>
-            <span style="font-size:0.7rem; color:var(--slate-500);">RC: 1613032 Statutory Compliance</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====================================================================
-       MEET OUR FOUNDER & GROUP MANAGING DIRECTOR
-       ==================================================================== -->
-  <section class="founder-section" id="founder">
-    <div class="container">
-      <div class="founder-container-inner">
-        <!-- Founder Portrait & Emblem Card -->
-        <div class="founder-media-wrap">
-          <div class="founder-portrait-frame">
-            <div class="founder-seal-float">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              <span>RC: 1613032</span>
-            </div>
-
-            <div class="founder-photo-halo-wrap">
-              <div class="founder-photo-halo">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/director-alh-kamorudeen-oladejo.jpg' ); ?>" alt="Kelvin Cameo - Founder &amp; Group Managing Director" class="founder-photo-img" />
-              </div>
-              <div class="founder-mini-seal" title="Kelvin Cameo Official Monogram">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/logo-emblem.png' ); ?>" alt="Kelvin Cameo Official Monogram" />
-              </div>
-            </div>
-
-            <h3 class="founder-name-plate">Kelvin Cameo</h3>
-            <span class="founder-title-badge">Founder &amp; Group Managing Director</span>
-            
-            <p class="founder-bio-brief">
-              Industrialist, indigenous investor, and chief executive steering Nigeria's fastest-growing multi-sector conglomerate across Energy, Real Estate, Agriculture, and Hospitality.
+          <div class="hp-card-body" style="display: flex; flex-direction: column; flex: 1;">
+            <div class="hp-card-eyebrow" style="color:var(--orange-600); font-weight:800;">Suleja, Niger State (Abuja Corridor)</div>
+            <h3 class="hp-card-title">Kelvin Cameo Resort Hotel &amp; Suites</h3>
+            <p class="hp-card-desc">
+              Premier destination featuring 31+ air-conditioned suites (Love Night, Golden Nest, Deluxe UK Room, Presidential), Olympic swimming pool, 24/7 power, and VIP sports bar.
             </p>
+            <ul class="hp-card-specs" style="margin-bottom:1.5rem;">
+              <li><strong>Rooms:</strong> From ₦20,000 / Night</li>
+              <li><strong>Power:</strong> 24/7 Heavy Generator &amp; Solar Inverter</li>
+              <li><strong>Amenities:</strong> Pool, Shisha, Snooker &amp; Bush Bar</li>
+            </ul>
+            <div style="display:flex; gap:0.65rem; margin-top:auto;">
+              <a href="<?php echo kc_url('hospitality'); ?>" class="btn btn-outline-primary btn-sm" style="flex:1; justify-content:center;">
+                View Resort
+              </a>
+              <a href="<?php echo kc_url('reserve'); ?>" class="btn-gold btn-sm" style="flex:1; justify-content:center; border-radius:8px;">
+                Book Room
+              </a>
+            </div>
+          </div>
+        </article>
 
-            <div class="founder-stats-strip">
-              <div class="founder-stat-item">
-                <span class="founder-stat-num text-gradient-gold">4 Sectors</span>
-                <span class="founder-stat-lbl">Active Divisions</span>
-              </div>
-              <div class="founder-stat-item">
-                <span class="founder-stat-num text-gradient-gold">100%</span>
-                <span class="founder-stat-lbl">Statutory Compliance</span>
-              </div>
-              <div class="founder-stat-item">
-                <span class="founder-stat-num text-gradient-gold">1,000+</span>
-                <span class="founder-stat-lbl">Seats Grand Hall</span>
-              </div>
-              <div class="founder-stat-item">
-                <span class="founder-stat-num text-gradient-gold">0 Drama</span>
-                <span class="founder-stat-lbl">Zero-Omonile Land</span>
-              </div>
+        <!-- Division 2: Energy & Fuel Retail -->
+        <article class="hp-division-card" style="display: flex; flex-direction: column;">
+          <div class="hp-card-thumb-wrap">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/kelvin-filling-station-canopy-clean.jpg' ); ?>" alt="Kelvin Cameo Fuel Retail Station" class="hp-card-thumb" loading="lazy">
+            <span class="hp-card-badge">Division 02 &bull; Petroleum</span>
+          </div>
+          <div class="hp-card-body" style="display: flex; flex-direction: column; flex: 1;">
+            <div class="hp-card-eyebrow">Downstream Energy Distribution</div>
+            <h3 class="hp-card-title">Petroleum &amp; Clean Energy</h3>
+            <p class="hp-card-desc">
+              24/7 retail filling stations delivering calibrated PMS &amp; AGO with zero tolerance for meter manipulation. Supported by LPG gas plants and commercial solar microgrids.
+            </p>
+            <ul class="hp-card-specs" style="margin-bottom:1.5rem;">
+              <li><strong>Calibration:</strong> 10 Litres Dispensed = 10 Litres In Tank</li>
+              <li><strong>Supply:</strong> PMS, AGO, Dual Purpose Kerosene (DPK)</li>
+              <li><strong>Green Energy:</strong> Industrial Solar &amp; Microgrids</li>
+            </ul>
+            <div style="display:flex; gap:0.65rem; margin-top:auto;">
+              <a href="<?php echo kc_url('energy'); ?>" class="btn btn-outline-primary btn-sm" style="flex:1; justify-content:center;">
+                Energy Division
+              </a>
+              <button class="btn btn-primary btn-sm" data-modal="inquiryModal" style="flex:1; justify-content:center;">
+                Partner With Us
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Division 3: Real Estate & Land -->
+        <article class="hp-division-card" style="display: flex; flex-direction: column;">
+          <div class="hp-card-thumb-wrap">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/cameo-real-estate-luxury.jpg' ); ?>" alt="Kelvin Cameo Real Estate Duplexes" class="hp-card-thumb" loading="lazy">
+            <span class="hp-card-badge">Division 03 &bull; Infrastructure</span>
+          </div>
+          <div class="hp-card-body" style="display: flex; flex-direction: column; flex: 1;">
+            <div class="hp-card-eyebrow">Prime Land &amp; Property Schemes</div>
+            <h3 class="hp-card-title">Master-Planned Real Estate</h3>
+            <p class="hp-card-desc">
+              Gated residential schemes and commercial highway frontages with registered, verifiable land titles. Guaranteed capital appreciation through institutional land banking.
+            </p>
+            <ul class="hp-card-specs" style="margin-bottom:1.5rem;">
+              <li><strong>Titles:</strong> C of O &amp; Verifiable Deed of Assignment</li>
+              <li><strong>Typologies:</strong> Residential Plots &amp; Commercial Highway</li>
+              <li><strong>Security:</strong> Perimeter Fencing &amp; Paved Layouts</li>
+            </ul>
+            <div style="display:flex; gap:0.65rem; margin-top:auto;">
+              <a href="<?php echo kc_url('real-estate'); ?>" class="btn btn-outline-primary btn-sm" style="flex:1; justify-content:center;">
+                View Properties
+              </a>
+              <a href="<?php echo kc_url('real-estate'); ?>#inquire" class="btn btn-primary btn-sm" style="flex:1; justify-content:center;">
+                Book Inspection
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Division 4: Commercial Agriculture -->
+        <article class="hp-division-card" style="display: flex; flex-direction: column;">
+          <div class="hp-card-thumb-wrap">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/agriculture/maize-planting-field.jpg' ); ?>" alt="Kelvin Cameo Commercial Farming Fields" class="hp-card-thumb" loading="lazy">
+            <span class="hp-card-badge">Division 04 &bull; Agriculture</span>
+          </div>
+          <div class="hp-card-body" style="display: flex; flex-direction: column; flex: 1;">
+            <div class="hp-card-eyebrow">Integrated Agro-Industrial Food Chain</div>
+            <h3 class="hp-card-title">Commercial Agriculture &amp; Agro-Allied</h3>
+            <p class="hp-card-desc">
+              Mechanized grain cultivation (maize, soya beans), modern poultry production, and cattle ranching. Hygienic milling, bagging, and wholesale institutional supply.
+            </p>
+            <ul class="hp-card-specs" style="margin-bottom:1.5rem;">
+              <li><strong>Crops:</strong> Hybrid Grains, Maize, Soya &amp; Feed Stuffs</li>
+              <li><strong>Livestock:</strong> Broilers, Layers, Commercial Cattle</li>
+              <li><strong>Offtake:</strong> Corporate Food Contracts &amp; Processing</li>
+            </ul>
+            <div style="display:flex; gap:0.65rem; margin-top:auto;">
+              <a href="<?php echo kc_url('agriculture'); ?>" class="btn btn-outline-primary btn-sm" style="flex:1; justify-content:center;">
+                Agro Division
+              </a>
+              <a href="<?php echo kc_url('agriculture'); ?>#offtake" class="btn btn-primary btn-sm" style="flex:1; justify-content:center;">
+                Bulk Contracts
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Division 5: Automobiles & CNG -->
+        <article class="hp-division-card" style="display: flex; flex-direction: column;">
+          <div class="hp-card-thumb-wrap">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/automotive/dealership-showroom.jpg' ); ?>" alt="Kelvin Cameo Automobiles Dealership Showroom" class="hp-card-thumb" loading="lazy">
+            <span class="hp-card-badge">Division 05 &bull; Mobility</span>
+          </div>
+          <div class="hp-card-body" style="display: flex; flex-direction: column; flex: 1;">
+            <div class="hp-card-eyebrow">Vehicle Sales &amp; Clean Fuel Technology</div>
+            <h3 class="hp-card-title">Automobiles &amp; CNG Mobility</h3>
+            <p class="hp-card-desc">
+              Certified car sales dealership offering inspected sedans, SUVs, and commercial trucks. Authorized CNG conversion center cutting fleet operational fuel costs by up to 60%.
+            </p>
+            <ul class="hp-card-specs" style="margin-bottom:1.5rem;">
+              <li><strong>Showroom:</strong> Toyota, Lexus, Mercedes-Benz, Hyundai</li>
+              <li><strong>CNG Tech:</strong> Certified Gas Conversion Kits &amp; Tanks</li>
+              <li><strong>Logistics:</strong> Haulage Tankers &amp; Corporate Fleets</li>
+            </ul>
+            <div style="display:flex; gap:0.65rem; margin-top:auto;">
+              <a href="<?php echo kc_url('automobiles'); ?>" class="btn btn-outline-primary btn-sm" style="flex:1; justify-content:center;">
+                Auto Showroom
+              </a>
+              <a href="<?php echo kc_url('automobiles'); ?>#cng" class="btn btn-primary btn-sm" style="flex:1; justify-content:center;">
+                CNG Conversion
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Division 6: 1,000-Seat Grand Banquet Hall -->
+        <article class="hp-division-card" style="display: flex; flex-direction: column;">
+          <div class="hp-card-thumb-wrap">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/banquet-hall.jpg' ); ?>" alt="Kelvin Cameo 1,000-Seat Grand Banquet Hall" class="hp-card-thumb" loading="lazy">
+            <span class="hp-card-badge" style="background:#7c3aed;">Summit Center &bull; Events</span>
+          </div>
+          <div class="hp-card-body" style="display: flex; flex-direction: column; flex: 1;">
+            <div class="hp-card-eyebrow" style="color:#7c3aed; font-weight:800;">Weddings &bull; Summits &bull; AGMs</div>
+            <h3 class="hp-card-title">1,000-Seat Grand Banquet Hall</h3>
+            <p class="hp-card-desc">
+              Ultra-modern column-free amphitheater event hall with central chilling air-conditioning, 250kVA dedicated generator, banquet furniture, and private bridal dressing suite.
+            </p>
+            <ul class="hp-card-specs" style="margin-bottom:1.5rem;">
+              <li><strong>Capacity:</strong> 1,000 Banquet / 1,500 Theater Style</li>
+              <li><strong>Packages:</strong> ₦1.05M Full Service / ₦850,000 Hall Only</li>
+              <li><strong>Power:</strong> Guaranteed Zero-Blink 250kVA Gen</li>
+            </ul>
+            <div style="display:flex; gap:0.65rem; margin-top:auto;">
+              <a href="<?php echo kc_url('banquet-hall'); ?>" class="btn btn-outline-primary btn-sm" style="flex:1; justify-content:center;">
+                Hall Specs
+              </a>
+              <a href="<?php echo kc_url('banquet-hall'); ?>#reserve" class="btn btn-primary btn-sm" style="flex:1; justify-content:center;">
+                Reserve Date
+              </a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       HOTEL LUXURY SUITES SPOTLIGHT — Flagship Rooms Showcase
+       ==================================================================== -->
+  <section class="hp-rooms-spotlight">
+    <div class="container container-wide">
+      <div class="hp-section-head">
+        <span class="rc-badge" style="margin-bottom:0.75rem; display:inline-flex;">Luxury Stays &bull; Suleja</span>
+        <h2 class="hp-section-title">Featured Suites &amp; Rooms</h2>
+        <p class="hp-section-sub">Experience serene comfort, executive ergonomic workspaces, rainfall showers, and guaranteed 24/7 power on the Abuja Capital Corridor.</p>
+      </div>
+
+      <div class="hp-rooms-grid">
+        
+        <!-- Room 1: Love Night -->
+        <div class="hp-room-card">
+          <div class="hp-room-thumb-wrap">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/love-night-room.jpg' ); ?>" alt="Love Night Room at Kelvin Cameo Resort" class="hp-room-thumb" loading="lazy">
+            <span class="hp-room-tag">Popular Choice</span>
+            <div class="hp-room-price-badge">₦20,000 &ndash; ₦25,000 <span style="font-size:0.75rem; font-weight:600; color:#cbd5e1;">/ night</span></div>
+          </div>
+          <div class="hp-room-body">
+            <h3>Love Night Room</h3>
+            <p>Romantic intimate ambiance with mood backlighting, plush queen mattress, smart streaming TV, and private ensuite bathroom.</p>
+            <div class="hp-room-features">
+              <span class="hp-room-feature-tag">Smart TV</span>
+              <span class="hp-room-feature-tag">24/7 Power</span>
+              <span class="hp-room-feature-tag">Air Conditioned</span>
+              <span class="hp-room-feature-tag">Free Wi-Fi</span>
+            </div>
+            <div class="hp-room-actions">
+              <a href="<?php echo kc_url('reserve'); ?>?room=love-night" class="btn-gold">Book Now</a>
+              <a href="<?php echo kc_url('hospitality'); ?>#rooms" class="btn btn-outline-primary">Details</a>
             </div>
           </div>
         </div>
 
-        <!-- Founder Narrative & Vision -->
-        <div class="founder-content-wrap">
-          <span class="founder-eyebrow">Meet Our Founder</span>
-          <h2 class="founder-headline">
-            Building An Indigenous Conglomerate On <span class="text-gradient-gold">Uncompromising Integrity</span>.
+        <!-- Room 2: Golden Nest -->
+        <div class="hp-room-card">
+          <div class="hp-room-thumb-wrap">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/golden-nest-room.jpg' ); ?>" alt="Golden Nest Room at Kelvin Cameo Resort" class="hp-room-thumb" loading="lazy">
+            <span class="hp-room-tag" style="background:#0b4ea2;">Serene Comfort</span>
+            <div class="hp-room-price-badge">₦20,000 &ndash; ₦25,000 <span style="font-size:0.75rem; font-weight:600; color:#cbd5e1;">/ night</span></div>
+          </div>
+          <div class="hp-room-body">
+            <h3>Golden Nest Room</h3>
+            <p>Peaceful executive retreat designed for deep relaxation, featuring warm wood accents, dedicated desk, and silent split-unit AC.</p>
+            <div class="hp-room-features">
+              <span class="hp-room-feature-tag">Silent AC</span>
+              <span class="hp-room-feature-tag">Work Desk</span>
+              <span class="hp-room-feature-tag">Rainfall Shower</span>
+              <span class="hp-room-feature-tag">Daily Housekeeping</span>
+            </div>
+            <div class="hp-room-actions">
+              <a href="<?php echo kc_url('reserve'); ?>?room=golden-nest" class="btn-gold">Book Now</a>
+              <a href="<?php echo kc_url('hospitality'); ?>#rooms" class="btn btn-outline-primary">Details</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Room 3: Deluxe Room (UK Room) -->
+        <div class="hp-room-card">
+          <div class="hp-room-thumb-wrap">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/deluxe-room.jpg' ); ?>" alt="Deluxe Room (UK Room) at Kelvin Cameo Resort" class="hp-room-thumb" loading="lazy">
+            <span class="hp-room-tag" style="background:#ea580c;">Executive Top Pick</span>
+            <div class="hp-room-price-badge">₦25,000 &ndash; ₦45,000 <span style="font-size:0.75rem; font-weight:600; color:#cbd5e1;">/ night</span></div>
+          </div>
+          <div class="hp-room-body">
+            <h3>Deluxe Room (UK Room)</h3>
+            <p>Spacious executive suite with luxury queen/king bedding, compact refrigerator, premium toiletries, and priority room service.</p>
+            <div class="hp-room-features">
+              <span class="hp-room-feature-tag">King Bed</span>
+              <span class="hp-room-feature-tag">Minibar Fridge</span>
+              <span class="hp-room-feature-tag">High-Speed Wi-Fi</span>
+              <span class="hp-room-feature-tag">Room Service</span>
+            </div>
+            <div class="hp-room-actions">
+              <a href="<?php echo kc_url('reserve'); ?>?room=deluxe-uk" class="btn-gold">Book Now</a>
+              <a href="<?php echo kc_url('hospitality'); ?>#rooms" class="btn btn-outline-primary">Details</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Additional Rooms Strip -->
+      <div style="margin-top: 2rem; background: #ffffff; border-radius: 16px; padding: 1.5rem 2rem; border: 1px solid #e2e8f0; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+        <div>
+          <h4 style="font-family:var(--font-display); font-size:1.15rem; font-weight:800; color:var(--cobalt-950); margin:0 0 0.25rem 0;">Looking for VIP Suites or 3-Bedroom Serviced Apartments?</h4>
+          <p style="font-size:0.875rem; color:#64748b; margin:0;">
+            We offer Royal Treat (₦50k), Executive VIP Suites (₦60k), and fully-furnished 3-Bedroom Luxury Apartments (₦160,000 / night).
+          </p>
+        </div>
+        <div style="display:flex; gap:0.75rem;">
+          <a href="<?php echo kc_url('hospitality'); ?>#rooms" class="btn btn-outline-primary btn-sm">
+            View All 10 Room Tiers &rarr;
+          </a>
+          <a href="<?php echo kc_url('reserve'); ?>" class="btn-gold btn-sm" style="border-radius:8px;">
+            Reserve Apartment / Suite
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       RESORT LIFESTYLE — Sports Bar, Games, Shisha & Swimming Pool
+       ==================================================================== -->
+  <section class="hp-lifestyle-strip">
+    <div class="container container-wide">
+      <div class="hp-section-head">
+        <span class="rc-badge" style="background:rgba(245,158,11,0.15); color:#fef08a; border-color:rgba(245,158,11,0.35); margin-bottom:0.75rem; display:inline-flex;">Leisure &bull; Recreation &bull; Nightlife</span>
+        <h2 class="hp-section-title" style="color:#ffffff;">The Resort Lifestyle Experience</h2>
+        <p class="hp-section-sub" style="color:#cbd5e1;">Unwind with friends, watch premier football clashes, shoot snooker, enjoy smooth shisha, and swim in our crystal blue pool.</p>
+      </div>
+
+      <div class="hp-lifestyle-grid">
+        
+        <!-- Lifestyle 1: Sports Bar & Games -->
+        <div class="hp-lifestyle-card">
+          <div class="hp-lifestyle-thumb-wrap">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/lounge-pool-table.jpg' ); ?>" alt="VIP Sports Bar & Snooker Table" class="hp-lifestyle-thumb" loading="lazy">
+          </div>
+          <div class="hp-lifestyle-body">
+            <h4>VIP Sports Bar, Snooker &amp; Games</h4>
+            <p>Equipped with tournament-grade snooker tables, competitive table tennis, ultra-HD match screening, and a dedicated restocked beverage lounge.</p>
+            <a href="<?php echo kc_url('bar'); ?>" class="btn btn-outline-white btn-sm" style="width:100%; justify-content:center;">
+              Explore Bar &amp; Games &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- Lifestyle 2: Shisha & Cocktails Lounge -->
+        <div class="hp-lifestyle-card">
+          <div class="hp-lifestyle-thumb-wrap">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/bar-counter.jpg' ); ?>" alt="Kelvin Cameo Bar Counter" class="hp-lifestyle-thumb" loading="lazy">
+          </div>
+          <div class="hp-lifestyle-body">
+            <h4>Premium Shisha &amp; Cocktail Bar</h4>
+            <p>Smooth exotic shisha flavors, chilled craft beers, premium spirits, fine wines, and custom cocktails served in an air-conditioned VIP lounge.</p>
+            <a href="<?php echo kc_url('bar'); ?>" class="btn btn-outline-white btn-sm" style="width:100%; justify-content:center;">
+              View Drink &amp; Shisha Menu &rarr;
+            </a>
+          </div>
+        </div>
+
+        <!-- Lifestyle 3: Swimming Pool & Bush Bar -->
+        <div class="hp-lifestyle-card">
+          <div class="hp-lifestyle-thumb-wrap">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/swimming-pool-sunny.jpg' ); ?>" alt="Olympic Swimming Pool at Kelvin Cameo Resort" class="hp-lifestyle-thumb" loading="lazy">
+          </div>
+          <div class="hp-lifestyle-body">
+            <h4>Olympic Swimming Pool &amp; Bush Bar</h4>
+            <p>Crystal-clean waters with ₦3,000 day passes, private sun cabanas, outdoor poolside grills, suya skewers, and fresh pepper soup.</p>
+            <a href="<?php echo kc_url('hospitality'); ?>#amenities" class="btn btn-outline-white btn-sm" style="width:100%; justify-content:center;">
+              Pool &amp; Dining Details &rarr;
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       INSTITUTIONAL STRATEGIC ALLIANCES & CLIENTS STRIP
+       ==================================================================== -->
+  <section class="partners-strip" aria-label="Institutional Clients and Strategic Alliances" style="background:#ffffff; border-top:1px solid #e2e8f0; border-bottom:1px solid #e2e8f0; padding:2.5rem 0;">
+    <div class="container container-wide">
+      <div style="text-align:center; margin-bottom:1.25rem;">
+        <span style="font-size:0.75rem; font-weight:800; color:#64748b; letter-spacing:0.08em; text-transform:uppercase;">Trusted By Corporate Institutions, NGOs &amp; Public Sector Delegations</span>
+      </div>
+      <div class="partners-logo-grid" style="display:flex; justify-content:center; align-items:center; gap:3rem; flex-wrap:wrap; opacity:0.85;">
+        <div style="font-weight:800; font-size:1.1rem; color:var(--cobalt-900);">CCCRN Health Alliance</div>
+        <div style="font-weight:800; font-size:1.1rem; color:var(--cobalt-900);">Federal Road Transport Alliances</div>
+        <div style="font-weight:800; font-size:1.1rem; color:var(--cobalt-900);">Niger State Commercial Guild</div>
+        <div style="font-weight:800; font-size:1.1rem; color:var(--cobalt-900);">Abuja Corridor Logistics Network</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       FOUNDER & EXECUTIVE GOVERNANCE
+       ==================================================================== -->
+  <section class="founder-section" id="founder" style="padding: 5.5rem 0; background: #ffffff;">
+    <div class="container container-wide">
+      <div class="founder-layout" style="display: grid; grid-template-columns: 1fr 1.35fr; gap: 3.5rem; align-items: center;">
+        
+        <!-- Founder Portrait Card -->
+        <div class="founder-portrait-card">
+          <div class="portrait-frame" style="border-radius:20px; overflow:hidden; box-shadow:0 20px 40px rgba(4,20,43,0.15); border:3px solid #f1f5f9;">
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/director-alh-kamorudeen-oladejo.jpg' ); ?>" alt="Alh. Kamorudeen Oladejo, Chairman & CEO" class="founder-img" loading="lazy" style="width:100%; height:auto; display:block;">
+          </div>
+          <div class="portrait-caption" style="margin-top:1rem; text-align:center;">
+            <h4 style="font-family:var(--font-display); font-size:1.2rem; font-weight:800; color:var(--cobalt-950); margin:0;">Alh. Kamorudeen Oladejo</h4>
+            <span style="font-size:0.85rem; color:var(--orange-600); font-weight:700;">Executive Chairman &bull; Kelvin Cameo Organization</span>
+          </div>
+        </div>
+
+        <!-- Vision Narrative -->
+        <div>
+          <span class="rc-badge" style="margin-bottom:0.75rem; display:inline-flex;">Executive Governance</span>
+          <h2 style="font-family:var(--font-display); font-size:2.25rem; font-weight:900; color:var(--cobalt-950); line-height:1.2; margin-bottom:1.25rem;">
+            "We build on what can be independently verified every single day."
           </h2>
-
-          <p class="founder-narrative">
-            Under the visionary leadership of <strong>Kelvin Cameo</strong>, our organization was founded with a singular conviction: that Nigerian enterprise must be anchored on trust, verified quality, and genuine value for everyday citizens. 
+          <p style="font-size:1rem; color:#475569; line-height:1.7; margin-bottom:1.25rem;">
+            At Kelvin Cameo Organization (RC: 1613032), our operating philosophy is uncompromising: when a customer buys fuel, our pump meters must read 100% exact. When an investor acquires land, the survey and title must be legally bulletproof. When a guest sleeps in our resort, power and security must be flawless 24 hours a day.
+          </p>
+          <p style="font-size:1rem; color:#475569; line-height:1.7; margin-bottom:2rem;">
+            We are deeply committed to socioeconomic empowerment across Suleja, Niger State, and the wider Federal Capital Territory corridor — creating sustainable employment, fostering local agro-allied industries, and setting international benchmarks for Nigerian enterprise.
           </p>
 
-          <p class="founder-narrative">
-            Whether it's ensuring our fuel pumps dispense every single millilitre paid for, securing dispute-free land titles with guaranteed legal backing, producing clean food at farm-gate prices, or offering an uncompromised luxury resort where the power never fails — Kelvin Cameo's hands-on leadership defines our operational excellence.
-          </p>
-
-          <!-- Executive Pull Quote -->
-          <div class="founder-quote-card">
-            <blockquote class="founder-quote-text">
-              "True Nigerian enterprise isn't built on shortcuts; it's earned through unyielding integrity, calibrated honesty, and genuine value delivered to every family, traveler, and business that honors us with their trust."
-            </blockquote>
-            <span class="founder-creed-tag">— Kelvin Cameo &bull; Founder &amp; Group Managing Director</span>
-          </div>
-
-          <div class="founder-action-row">
-            <a href="<?php echo kc_url('about'); ?>#governance" class="btn-gold-luxury">
-              <span>Read Full Executive Profile</span>
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <div style="display:flex; gap:1rem; align-items:center;">
+            <a href="<?php echo kc_url('about'); ?>" class="btn btn-primary btn-md">
+              Read Our Corporate Heritage &rarr;
             </a>
-            <a href="https://wa.me/2348055558197?text=Hello%20Mr.%20Kelvin%20Cameo%2C%20I%20would%20like%20to%20connect%20with%20your%20executive%20office." target="_blank" rel="noopener" class="btn-gold-outline">
-              Connect on WhatsApp
-            </a>
+            <button class="btn btn-outline-primary btn-md" data-modal="inquiryModal">
+              Direct Executive Inquiry
+            </button>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
   <!-- ====================================================================
-       TRUST & GOVERNANCE — Clean 2-Column
+       GUEST & CLIENT TESTIMONIALS
        ==================================================================== -->
-  <section class="hp-trust">
-    <div class="container">
-      <div class="hp-trust-grid">
-        <div class="hp-trust-content">
-          <h2 class="hp-section-title">Engineered for Performance,<br>Governed with Integrity</h2>
-          <p class="hp-trust-text">
-            Sustainable business success is grounded in transparent corporate governance, certified regulatory compliance, and tangible value creation for our clients, partners, and host communities.
+  <section class="hp-trust" style="padding: 5rem 0; background: #f8fafc; border-top:1px solid #e2e8f0; border-bottom:1px solid #e2e8f0;">
+    <div class="container container-wide">
+      <div class="hp-section-head">
+        <span class="rc-badge" style="margin-bottom:0.75rem; display:inline-flex;">Verified Client Experiences</span>
+        <h2 class="hp-section-title">Tested by Travelers, Businesses &amp; Investors</h2>
+        <p class="hp-section-sub">Real words from those who stay at our suites, pump at our stations, and develop on our land.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 2.5rem;">
+        
+        <!-- Review 1 -->
+        <div style="background:#ffffff; border-radius:16px; padding:2rem; box-shadow:0 8px 24px -6px rgba(4,20,43,0.06); border:1px solid #e2e8f0;">
+          <div style="color:#f59e0b; font-size:1.1rem; margin-bottom:0.75rem;">★★★★★</div>
+          <p style="font-size:0.95rem; color:#334155; line-height:1.6; font-style:italic; margin-bottom:1.25rem;">
+            "We hosted our NGO health summit in the Grand Banquet Hall and lodged over 20 delegates in the Deluxe and Love Night suites. Uninterrupted power, cold AC, and top-tier staff hospitality. Truly exceptional."
           </p>
-
-          <div class="hp-trust-list">
-            <div class="hp-trust-item">
-              <span class="hp-trust-check"></span>
-              <div>
-                <strong>Certified Legal Standing (RC: 1613032)</strong>
-                <p>Fully registered under the Corporate Affairs Commission with rigorous statutory audits.</p>
-              </div>
-            </div>
-            <div class="hp-trust-item">
-              <span class="hp-trust-check"></span>
-              <div>
-                <strong>Downstream NMDPRA Calibration</strong>
-                <p>Precision dispensing across PMS, AGO, DPK, and LPG with zero compromises.</p>
-              </div>
-            </div>
-            <div class="hp-trust-item">
-              <span class="hp-trust-check"></span>
-              <div>
-                <strong>1,500+ Smallholder Outgrowers Empowered</strong>
-                <p>Tractor mechanization, input credit, and guaranteed off-take for rural farmers.</p>
-              </div>
-            </div>
-          </div>
-
-          <a href="<?php echo kc_url('about'); ?>" class="btn btn-navy btn-lg">Read Our Corporate Profile</a>
-        </div>
-        <div class="hp-trust-media">
-          <div class="hp-trust-media-inner" style="position:relative; border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-xl);">
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/fuel-tankers-fleet.jpg' ); ?>" alt="Kelvin Cameo Corporate Heavy Tanker Logistics Fleet" loading="lazy" style="width:100%; height:100%; min-height:360px; object-fit:cover; display:block;">
-            <div style="position:absolute; bottom:1.25rem; left:1.25rem; right:1.25rem; background:rgba(4,20,43,0.92); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.2); padding:1rem 1.25rem; border-radius:var(--radius-md); color:#ffffff;">
-              <span class="rc-badge" style="margin-bottom:0.35rem; display:inline-flex;">RC: 1613032</span>
-              <div style="font-size:0.875rem; font-weight:700; color:#bad7fc;">Kelvin Cameo Heavy Logistics &amp; Downstream Fleet</div>
-              <div style="font-size:0.75rem; color:rgba(255,255,255,0.75); margin-top:2px;">Certified NMDPRA Petroleum Haulage &bull; Operating across Nigeria</div>
-            </div>
+          <div>
+            <strong style="display:block; color:var(--cobalt-950); font-size:0.95rem;">Dr. E. Okafor</strong>
+            <span style="font-size:0.8rem; color:#64748b;">Regional Director, Healthcare NGO</span>
           </div>
         </div>
+
+        <!-- Review 2 -->
+        <div style="background:#ffffff; border-radius:16px; padding:2rem; box-shadow:0 8px 24px -6px rgba(4,20,43,0.06); border:1px solid #e2e8f0;">
+          <div style="color:#f59e0b; font-size:1.1rem; margin-bottom:0.75rem;">★★★★★</div>
+          <p style="font-size:0.95rem; color:#334155; line-height:1.6; font-style:italic; margin-bottom:1.25rem;">
+            "Their fuel station on the Minna corridor has the most honest pumps in Suleja. My fleet drivers are strictly instructed to refuel only at Kelvin Cameo because their meter counts are 100% accurate."
+          </p>
+          <div>
+            <strong style="display:block; color:var(--cobalt-950); font-size:0.95rem;">Alhaji S. Bello</strong>
+            <span style="font-size:0.8rem; color:#64748b;">Logistics &amp; Interstate Haulage Operator</span>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div style="background:#ffffff; border-radius:16px; padding:2rem; box-shadow:0 8px 24px -6px rgba(4,20,43,0.06); border:1px solid #e2e8f0;">
+          <div style="color:#f59e0b; font-size:1.1rem; margin-bottom:0.75rem;">★★★★★</div>
+          <p style="font-size:0.95rem; color:#334155; line-height:1.6; font-style:italic; margin-bottom:1.25rem;">
+            "Acquiring two commercial plots along the growth corridor with verified C of O documentation gave me total peace of mind. The survey team was prompt, professional, and completely transparent."
+          </p>
+          <div>
+            <strong style="display:block; color:var(--cobalt-950); font-size:0.95rem;">Engr. Dapo Alabi</strong>
+            <span style="font-size:0.8rem; color:#64748b;">Commercial Property Developer</span>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-
-
   <!-- ====================================================================
-       EDITORIAL INSIGHTS & HOSPITALITY GUIDES — SEO & Content Hub
+       KNOWLEDGE, TRANSPARENCY & TRAVEL GUIDES (Preserving Plugin Loop)
        ==================================================================== -->
-  <section class="hp-insights section-padding" id="insights" style="background: var(--sand-50); border-top: 1px solid var(--sand-200); border-bottom: 1px solid var(--sand-200);">
-    <div class="container">
+  <?php if ( function_exists( 'kc_render_post_plugin_showcase' ) ) : ?>
+  <section class="hp-insights section-padding" id="insights" style="background: var(--sand-50); border-top: 1px solid var(--sand-200); border-bottom: 1px solid var(--sand-200); padding: 5rem 0;">
+    <div class="container container-wide">
       <div class="hp-section-head" style="margin-bottom: 2rem;">
-        <span class="badge badge-primary">EDITORIAL GUIDES &amp; HOSPITALITY HUB</span>
+        <span class="rc-badge" style="margin-bottom:0.75rem; display:inline-flex;">Corporate Insights</span>
         <h2 class="hp-section-title">Knowledge, Transparency &amp; Travel Guides</h2>
         <p class="hp-section-sub">Authoritative reports from our executive desks &mdash; designed for travelers, event organizers, and corporate partners.</p>
       </div>
 
-      <!-- Spotlight Feature: Flagship Guide -->
-      <article class="hp-spotlight-feature" data-topic="rooms leisure">
-        <div class="hp-spotlight-media">
-          <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/exterior.jpg' ); ?>" alt="Kelvin Cameo Resort Front Facade in Suleja" loading="lazy">
-          <div class="hp-spotlight-badge-group">
-            <span class="hp-spotlight-badge">⭐ FLAGSHIP GUIDE &bull; RANKED #1</span>
-            <span class="hp-spotlight-tariff-chip">Suites from ₦25,000/night</span>
-          </div>
-        </div>
-        <div class="hp-spotlight-content">
-          <div class="hp-spotlight-meta">
-            <span>5 min read</span>
-            <span>&bull;</span>
-            <span>Kwamba, Suleja (Opposite Suleiman Barau Tech College)</span>
-          </div>
-          <h3 class="hp-spotlight-title">
-            <a href="<?php echo kc_url('best-hotels-in-suleja-abuja-corridor'); ?>">Top 7 Reasons Kelvin Cameo Resort is Ranked the Best Hotel in Suleja</a>
-          </h3>
-          <p class="hp-spotlight-desc">
-            Explore why travelers and corporate executives rate Kelvin Cameo Resort #1 along the Abuja-Kaduna corridor &mdash; featuring 24/7 dual Caterpillar power, crystal swimming pool, luxury suites from &#8358;25,000, and a 1,000-seat grand banquet hall.
-          </p>
-          <div class="hp-spotlight-amenities">
-            <span class="hp-spotlight-pill">⚡ 24/7 Zero Blackouts</span>
-            <span class="hp-spotlight-pill">🏊 Crystal Swimming Pool</span>
-            <span class="hp-spotlight-pill">🏛️ 1,000-Seat Hall</span>
-            <span class="hp-spotlight-pill">🍽️ Fresh Catfish Grill</span>
-            <span class="hp-spotlight-pill">🔒 24/7 Armed Security</span>
-          </div>
-          <div class="hp-spotlight-actions">
-            <a href="<?php echo kc_url('best-hotels-in-suleja-abuja-corridor'); ?>" class="btn btn-primary btn-sm">Read Full Guide &rarr;</a>
-            <a href="<?php echo kc_url('reserve'); ?>" class="btn btn-outline btn-sm">Book a Suite</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Advanced Post Plugin & Editorial Showcase -->
       <?php
-      if ( function_exists( 'kc_render_post_plugin_showcase' ) ) {
-          echo kc_render_post_plugin_showcase( array(
-              'layout'         => 'carousel',
-              'posts_per_page' => 12,
-              'show_filters'   => 'yes',
-              'show_switcher'  => 'yes',
-          ) );
-      }
+      echo kc_render_post_plugin_showcase( array(
+          'layout'         => 'carousel',
+          'posts_per_page' => 12,
+          'show_filters'   => 'yes',
+          'show_switcher'  => 'yes',
+      ) );
       ?>
+    </div>
+  </section>
+  <?php endif; ?>
 
-      <!-- Concierge Callout Bar -->
-      <div class="hp-insights-concierge-bar">
-        <div class="hp-concierge-prompt">
-          <div class="hp-concierge-avatar">🛎️</div>
-          <div class="hp-concierge-text">
-            <h4>Have Questions or Need an Immediate Booking?</h4>
-            <p>Our front desk concierge is staffed 24/7 in Kwamba, Suleja (Opposite Suleiman Barau Technical College).</p>
-          </div>
-        </div>
-        <div class="hp-concierge-actions">
-          <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20inquiring%20about%20a%20reservation." target="_blank" rel="noopener" class="btn btn-sm" style="background:#25D366; color:#fff; border-color:#25D366; display:inline-flex; align-items:center; gap:0.4rem; font-weight:700;">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.99.57 1.776.848 2.795.849 3.18 0 5.768-2.587 5.768-5.766.001-3.18-2.585-5.636-5.767-5.636zm3.393 8.163c-.144.405-.837.774-1.17.823-.312.045-.694.062-2.18-.553-1.898-.786-3.125-2.733-3.22-2.859-.094-.126-.763-.984-.763-1.879 0-.895.467-1.336.634-1.517.166-.18.364-.225.485-.225.12 0 .241.002.346.007.11.006.257-.042.402.308.149.362.51 1.244.555 1.335.045.09.075.197.015.318-.06.121-.09.197-.18.303-.09.106-.189.237-.27.318-.09.09-.184.188-.079.369.105.18.468.772 1.004 1.25.688.613 1.269.803 1.449.893.18.09.285.076.39-.045.105-.121.45-.526.57-.706.12-.18.24-.15.405-.09.165.06 1.045.492 1.225.582.18.09.3.135.345.21.045.075.045.436-.099.841z"/></svg>
-            WhatsApp Concierge
-          </a>
-          <a href="<?php echo kc_url('reserve'); ?>" class="btn btn-outline btn-sm" style="color:#fff; border-color:rgba(255,255,255,0.4);">
-            Reserve Online
-          </a>
-          <a href="<?php echo kc_url('banquet-hall'); ?>" class="btn btn-outline btn-sm" style="color:#fde68a; border-color:#fde68a;">
-            Check Banquet Dates
-          </a>
-        </div>
+  <!-- ====================================================================
+       INTERACTIVE FAQ SECTION
+       ==================================================================== -->
+  <section class="hp-faq" style="padding: 5rem 0; background: #ffffff;">
+    <div class="container container-wide" style="max-width: 900px;">
+      <div class="hp-section-head">
+        <span class="rc-badge" style="margin-bottom:0.75rem; display:inline-flex;">Help &amp; Information</span>
+        <h2 class="hp-section-title">Frequently Asked Questions</h2>
+        <p class="hp-section-sub">Clear answers to questions regarding our rooms, event hall, fuel, and land acquisitions.</p>
+      </div>
+
+      <div class="faq-accordion" style="display:flex; flex-direction:column; gap:1rem; margin-top:2rem;">
+        
+        <details class="faq-item" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:1.25rem 1.5rem; cursor:pointer;" open>
+          <summary style="font-weight:800; font-size:1.05rem; color:var(--cobalt-950); list-style:none; display:flex; justify-content:space-between; align-items:center;">
+            How do I reserve a room at Kelvin Cameo Resort Hotel?
+            <span style="color:var(--orange-500); font-size:1.25rem;">&darr;</span>
+          </summary>
+          <p style="margin-top:0.85rem; font-size:0.9rem; color:#475569; line-height:1.6;">
+            You can book directly through our <a href="<?php echo kc_url('reserve'); ?>" style="color:var(--cobalt-600); font-weight:700;">Instant Online Reservation Page</a>. Choose your preferred room (Love Night, Golden Nest, Deluxe UK Room, etc.), dates, and confirm instantly. You can also chat directly with our 24/7 reception concierge on WhatsApp at +234 805 555 8197.
+          </p>
+        </details>
+
+        <details class="faq-item" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:1.25rem 1.5rem; cursor:pointer;">
+          <summary style="font-weight:800; font-size:1.05rem; color:var(--cobalt-950); list-style:none; display:flex; justify-content:space-between; align-items:center;">
+            What is included in the 1,000-Seat Grand Banquet Hall package?
+            <span style="color:var(--orange-500); font-size:1.25rem;">&darr;</span>
+          </summary>
+          <p style="margin-top:0.85rem; font-size:0.9rem; color:#475569; line-height:1.6;">
+            The full service package (₦1.05M) includes central chilling air-conditioning, full acoustic PA system, high-lux ambient lighting, banquet chairs and tables, dedicated 250kVA standby generator fuel, and an air-conditioned bridal dressing room. The hall-only package is also available at ₦850,000.
+          </p>
+        </details>
+
+        <details class="faq-item" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:1.25rem 1.5rem; cursor:pointer;">
+          <summary style="font-weight:800; font-size:1.05rem; color:var(--cobalt-950); list-style:none; display:flex; justify-content:space-between; align-items:center;">
+            How can corporate clients contract bulk fuel supply or station partnerships?
+            <span style="color:var(--orange-500); font-size:1.25rem;">&darr;</span>
+          </summary>
+          <p style="margin-top:0.85rem; font-size:0.9rem; color:#475569; line-height:1.6;">
+            Corporate fleet operators and industrial off-takers can trigger our <a href="#" data-modal="inquiryModal" style="color:var(--cobalt-600); font-weight:700;">Corporate Partnership Modal</a> or reach our Energy Desk at +234 805 555 8197 to arrange calibrated bulk PMS/AGO deliveries with documented quality compliance.
+          </p>
+        </details>
+
+        <details class="faq-item" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:1.25rem 1.5rem; cursor:pointer;">
+          <summary style="font-weight:800; font-size:1.05rem; color:var(--cobalt-950); list-style:none; display:flex; justify-content:space-between; align-items:center;">
+            Are land titles with Kelvin Cameo Real Estate verified by the Ministry?
+            <span style="color:var(--orange-500); font-size:1.25rem;">&darr;</span>
+          </summary>
+          <p style="margin-top:0.85rem; font-size:0.9rem; color:#475569; line-height:1.6;">
+            Yes. Every residential scheme and commercial plot sold by Kelvin Cameo possesses fully verifiable documentation, registered survey coordinates, and genuine Certificate of Occupancy (C of O) / Governor's Consent. Site inspections can be scheduled anytime free of charge.
+          </p>
+        </details>
+
       </div>
     </div>
   </section>
 
-  <!-- Interactive Topic Filtering Script -->
+  <!-- ====================================================================
+       GRAND PRE-FOOTER CORPORATE CALL TO ACTION
+       ==================================================================== -->
+  <section class="hp-cta" style="background: linear-gradient(135deg, #071e3d 0%, #030c1a 100%); color: #ffffff; padding: 5rem 0; border-top: 3px solid #f59e0b; text-align: center;">
+    <div class="container container-wide" style="max-width: 850px;">
+      <span class="rc-badge" style="background: rgba(245, 158, 11, 0.2); color: #fef08a; border-color: rgba(245, 158, 11, 0.4); margin-bottom: 1.25rem; display: inline-flex;">
+        RC: 1613032 &bull; Direct Corporate Access
+      </span>
+      <h2 style="font-family: var(--font-display); font-size: 2.5rem; font-weight: 900; color: #ffffff; line-height: 1.2; margin-bottom: 1rem;">
+        Experience Verifiable Excellence Across Nigeria
+      </h2>
+      <p style="font-size: 1.1rem; color: #cbd5e1; line-height: 1.6; margin-bottom: 2.25rem;">
+        Whether you are booking a luxury weekend stay, acquiring prime real estate, fueling an interstate fleet, or hosting a 1,000-guest summit — our team is ready to serve you with prompt integrity.
+      </p>
+
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;">
+        <a href="<?php echo kc_url('reserve'); ?>" class="btn-gold btn-lg" style="padding: 0.85rem 1.85rem; border-radius: 12px; font-size: 1rem;">
+          Book Hotel Room Online &rarr;
+        </a>
+        <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%2C%20I%20would%20like%20to%20speak%20with%20your%20team." target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg" style="padding: 0.85rem 1.75rem; border-radius: 12px; font-size: 1rem;">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/>
+          </svg>
+          Chat on WhatsApp
+        </a>
+        <button class="btn btn-outline-white btn-lg" data-modal="inquiryModal" style="padding: 0.85rem 1.75rem; border-radius: 12px; font-size: 1rem;">
+          Submit Corporate Inquiry
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Hero Slider Controller Script -->
   <script>
   document.addEventListener('DOMContentLoaded', function() {
-    var tabs = document.querySelectorAll('.hp-tab-btn');
-    var filterables = document.querySelectorAll('.hp-insight-filterable');
-    if (!tabs.length || !filterables.length) return;
+    var slides = document.querySelectorAll('.hp-hero-slide');
+    var pills = document.querySelectorAll('.hp-sector-pill');
+    var currentSlide = 0;
+    var slideTimer = null;
 
-    tabs.forEach(function(tab) {
-      tab.addEventListener('click', function() {
-        tabs.forEach(function(t) { t.classList.remove('active'); });
-        this.classList.add('active');
-        var filter = this.getAttribute('data-filter') || 'all';
+    function goToSlide(idx) {
+      if (idx < 0 || idx >= slides.length) return;
+      slides.forEach(function(s, i) {
+        if (i === idx) {
+          s.classList.add('active');
+        } else {
+          s.classList.remove('active');
+        }
+      });
+      pills.forEach(function(p, i) {
+        if (i === idx) {
+          p.classList.add('active');
+          p.setAttribute('aria-selected', 'true');
+        } else {
+          p.classList.remove('active');
+          p.setAttribute('aria-selected', 'false');
+        }
+      });
+      currentSlide = idx;
+    }
 
-        filterables.forEach(function(el) {
-          var topic = el.getAttribute('data-topic') || '';
-          if (filter === 'all' || topic.indexOf(filter) !== -1) {
-            el.style.display = '';
-            el.style.opacity = '0';
-            setTimeout(function() {
-              el.style.transition = 'opacity 0.25s ease';
-              el.style.opacity = '1';
-            }, 20);
-          } else {
-            el.style.display = 'none';
-          }
-        });
+    pills.forEach(function(pill) {
+      pill.addEventListener('click', function() {
+        var targetIndex = parseInt(this.getAttribute('data-slide'), 10);
+        goToSlide(targetIndex);
+        resetTimer();
       });
     });
+
+    function nextSlide() {
+      var next = (currentSlide + 1) % slides.length;
+      goToSlide(next);
+    }
+
+    function resetTimer() {
+      if (slideTimer) clearInterval(slideTimer);
+      slideTimer = setInterval(nextSlide, 7000);
+    }
+
+    resetTimer();
   });
   </script>
 
-  <!-- ====================================================================
-       FAQ — Clean Accordion
-       ==================================================================== -->
-  <section class="hp-faq">
-    <div class="container">
-      <div class="hp-section-head">
-        <h2 class="hp-section-title">Frequently Asked Questions</h2>
-        <p class="hp-section-sub">Straight answers to the questions our customers ask most often.</p>
-      </div>
-
-      <div class="hp-faq-list">
-        <div class="faq-card open">
-          <button type="button" class="faq-question-btn">
-            <span>Is the light really 24 hours at Kelvin Cameo Resort?</span>
-            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer-panel">
-            Yes, 100%. We operate dual synchronized heavy-duty Caterpillar generators supported by an industrial solar inverter microgrid. The air conditioners, hot water showers, and Wi-Fi run uninterrupted day and night.
-          </div>
-        </div>
-
-        <div class="faq-card">
-          <button type="button" class="faq-question-btn">
-            <span>How do I verify that your estate land titles are genuine?</span>
-            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer-panel">
-            We welcome and encourage verification. Before you commit a single naira, we provide the survey plan, layout beacon numbers, and title documents (C of O / Gazette numbers) so your lawyer or surveyor can conduct a search at the Ministry of Lands.
-          </div>
-        </div>
-
-        <div class="faq-card">
-          <button type="button" class="faq-question-btn">
-            <span>Can I book the 1,000-Seat Grand Banquet Hall for a wedding or AGM?</span>
-            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer-panel">
-            Absolutely! Our 1,000-seat grand auditorium is one of the premier event venues along the Abuja corridor. Weekday bookings start at &#8358;850,000 and weekends are &#8358;1,050,000. It comes fully air-conditioned, with two private VIP dressing suites, dedicated generator standby, and parking for 150+ cars.
-          </div>
-        </div>
-
-        <div class="faq-card">
-          <button type="button" class="faq-question-btn">
-            <span>How do your filling stations guarantee accurate fuel measurement?</span>
-            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
-          </button>
-          <div class="faq-answer-panel">
-            Our pumps are certified by the Nigerian Midstream and Downstream Petroleum Regulatory Authority (NMDPRA). We conduct daily internal 10-Litre and 20-Litre seraphin can tests to ensure the digital readout matches the physical volume exactly.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====================================================================
-       CTA BANNER — Clean & Confident
-       ==================================================================== -->
-  <section class="hp-cta">
-    <div class="container">
-      <div class="hp-cta-inner">
-        <span class="rc-badge" style="margin-bottom:1.25rem; display:inline-flex; background:rgba(255,255,255,0.15); border-color:rgba(255,255,255,0.3); color:#ffffff;">RC: 1613032 &bull; Direct Corporate Access</span>
-        <h2 class="hp-cta-title">Ready to Partner With Kelvin Cameo?</h2>
-        <p class="hp-cta-desc">
-          Whether you need bulk calibrated petroleum, dispute-free real estate, farm-gate agricultural supply, or a serene weekend with guaranteed 24/7 power &bull; our executive desks are ready to assist.
-        </p>
-        <div class="hp-cta-actions">
-          <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%2C%20I%20would%20like%20to%20discuss%20a%20booking%20or%20service." target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-              <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/>
-            </svg>
-            Chat on WhatsApp
-          </a>
-          <a href="tel:+2348055558197" class="btn btn-outline-white btn-lg">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-            </svg>
-            +234 805 555 8197
-          </a>
-          <button class="btn btn-primary btn-lg" data-modal="inquiryModal">
-            Partner With Us / RFP &rarr;
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
-
 <?php
 get_footer();
+?>
