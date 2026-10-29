@@ -865,6 +865,7 @@ $reserve_url = home_url('/reserve/');
       justify-content: center;
       z-index: 1000;
       padding: 16px;
+      overflow-y: auto;
     }
     .modal-backdrop.active {
       display: flex;
@@ -875,21 +876,28 @@ $reserve_url = home_url('/reserve/');
       max-width: 640px;
       width: 100%;
       box-shadow: var(--shadow-xl);
-      overflow: hidden;
       display: flex;
       flex-direction: column;
-      max-height: 92vh;
+      max-height: 88vh;
+      overflow: hidden;
+      margin: auto;
       animation: modalSlideUp 0.25s ease-out;
+      position: relative;
     }
     .modal-box.modal-lg,
-    #newBookingModal .modal-box {
-      max-width: 820px;
+    #newBookingModal .modal-box,
+    #adminEditBookingModal .modal-box {
+      max-width: 840px;
+    }
+    #roomEditModal .modal-box {
+      max-width: 660px;
     }
     .modal-box > form {
       display: flex;
       flex-direction: column;
-      flex: 1 1 auto;
+      flex: 1 1 100%;
       min-height: 0;
+      max-height: calc(88vh - 52px);
       overflow: hidden;
       margin: 0;
     }
@@ -930,24 +938,41 @@ $reserve_url = home_url('/reserve/');
     }
     .modal-body {
       padding: 16px 20px;
-      overflow-y: auto;
+      overflow-y: scroll !important;
+      overflow-x: hidden;
       flex: 1 1 auto;
-      min-height: 0;
+      min-height: 100px;
+      max-height: calc(88vh - 120px) !important;
       -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+    }
+    .modal-body::-webkit-scrollbar {
+      width: 8px;
+    }
+    .modal-body::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 4px;
+    }
+    .modal-body::-webkit-scrollbar-thumb {
+      background: var(--kc-gold-500);
+      border-radius: 4px;
+    }
+    .modal-body::-webkit-scrollbar-thumb:hover {
+      background: var(--kc-gold-600);
     }
     .modal-footer {
       padding: 12px 20px;
-      background: var(--kc-slate-50);
+      background: #f8fafc;
       border-top: 1px solid var(--kc-slate-200);
       display: flex;
       align-items: center;
       justify-content: flex-end;
       gap: 10px;
-      flex-shrink: 0;
-      position: sticky;
-      bottom: 0;
-      z-index: 20;
-      box-shadow: 0 -4px 12px rgba(0,0,0,0.06);
+      flex-shrink: 0 !important;
+      position: sticky !important;
+      bottom: 0 !important;
+      z-index: 30;
+      box-shadow: 0 -4px 14px rgba(0,0,0,0.08);
     }
 
     /* FORM STYLING */
@@ -2318,9 +2343,11 @@ $reserve_url = home_url('/reserve/');
           </div>
         </div>
 
-        <div class="modal-footer">
+        <div class="modal-footer" style="padding: 12px 20px; background: #f8fafc; border-top: 1px solid var(--kc-slate-200); display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex-shrink: 0; position: sticky; bottom: 0; z-index: 30; box-shadow: 0 -4px 14px rgba(0,0,0,0.08);">
           <button type="button" class="btn btn-secondary" onclick="KCHotelApp.closeModals()">Cancel</button>
-          <button type="submit" class="btn btn-gold" id="btnSaveRoomSubmit">Save Room</button>
+          <button type="submit" class="btn btn-gold" id="btnSaveRoomSubmit" style="padding: 10px 24px; font-weight: 700; font-size: 14px; box-shadow: 0 4px 14px rgba(212,175,55,0.4);">
+            💾 Save Room
+          </button>
         </div>
       </form>
     </div>
@@ -3920,6 +3947,8 @@ $reserve_url = home_url('/reserve/');
         document.getElementById('btnRemoveRoomImage').style.display = 'none';
 
         document.getElementById('roomEditModal').classList.add('active');
+        const rmBody = document.querySelector('#roomEditModal .modal-body');
+        if (rmBody) rmBody.scrollTop = 0;
       },
 
       openEditRoomModal: function(roomId) {
@@ -3950,6 +3979,8 @@ $reserve_url = home_url('/reserve/');
         }
 
         document.getElementById('roomEditModal').classList.add('active');
+        const rmBody = document.querySelector('#roomEditModal .modal-body');
+        if (rmBody) rmBody.scrollTop = 0;
       },
 
       previewLocalImage: function(input) {
