@@ -69,6 +69,9 @@
         <a href="<?php echo kc_url('reception'); ?>" class="top-portal-pill hide-mobile" title="Staff & Receptionist Portal">
           🔑 Reception Desk
         </a>
+        <a href="<?php echo kc_url('kitchen'); ?>" class="top-portal-pill hide-mobile" title="Kitchen & Restaurant Food POS">
+          🍳 Kitchen POS
+        </a>
       </div>
     </div>
   </aside>

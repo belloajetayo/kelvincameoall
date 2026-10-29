@@ -1347,6 +1347,11 @@ $site_home = home_url('/');
         <span>🧹 Clear Test Data</span>
       </button>
 
+      <!-- Switch to Kitchen POS -->
+      <a href="<?php echo home_url('/kitchen/'); ?>" class="nav-btn" style="border-color:#ea580c; color:#ea580c; text-decoration:none;" title="Switch to Kitchen POS">
+        <span>👨‍🍳 Kitchen POS</span>
+      </a>
+
       <!-- Light / Dark Mode Switcher -->
       <button type="button" class="nav-btn theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Switch Light or Dark Mode">
         <span id="themeToggleIcon">☀️</span>

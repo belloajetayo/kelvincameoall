@@ -1425,6 +1425,13 @@ if ( file_exists( get_stylesheet_directory() . '/inc/bar-management.php' ) ) {
 }
 
 /**
+ * Kelvin Cameo Kitchen & Restaurant POS Management Engine
+ */
+if ( file_exists( get_stylesheet_directory() . '/inc/kitchen-management.php' ) ) {
+    require_once get_stylesheet_directory() . '/inc/kitchen-management.php';
+}
+
+/**
  * Kelvin Cameo High-Ranking SEO Posts Seeder Engine
  */
 if ( file_exists( get_stylesheet_directory() . '/inc/seo-posts-seeder.php' ) ) {
@@ -1454,6 +1461,10 @@ function kc_ensure_core_pages_exist() {
         'bar'          => array(
             'title'    => 'Bar POS & Beverage Inventory System',
             'template' => 'page-bar.php',
+        ),
+        'kitchen'      => array(
+            'title'    => 'Kitchen POS & Food Inventory System',
+            'template' => 'page-kitchen.php',
         ),
     );
 

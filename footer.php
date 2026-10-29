@@ -59,6 +59,7 @@
             <li><a href="<?php echo kc_url('hospitality'); ?>#rooms" class="footer-link">Deluxe UK &bull; Executive Suites</a></li>
             <li><a href="<?php echo kc_url('bar'); ?>" class="footer-link">VIP Bar, Shisha &amp; Snooker</a></li>
             <li><a href="<?php echo kc_url('hospitality'); ?>#amenities" class="footer-link">Olympic Swimming Pool</a></li>
+            <li><a href="<?php echo kc_url('kitchen'); ?>" class="footer-link" style="color:#fdba74;">🍳 Kitchen Food POS</a></li>
             <li><a href="<?php echo kc_url('reception'); ?>" class="footer-link" style="color:#93c5fd;">Staff Reception Desk</a></li>
           </ul>
         </div>
@@ -213,6 +214,7 @@
         <a href="<?php echo kc_url('hospitality'); ?>#rooms" class="drawer-link" style="color:#94a3b8; font-size:0.85rem;">&bull; Rooms (From ₦20,000)</a>
         <a href="<?php echo kc_url('banquet-hall'); ?>" class="drawer-link" style="color:#e2e8f0;">1,000-Seat Grand Banquet Hall</a>
         <a href="<?php echo kc_url('bar'); ?>" class="drawer-link" style="color:#e2e8f0;">Sports Bar, Snooker &amp; Games</a>
+        <a href="<?php echo kc_url('kitchen'); ?>" class="drawer-link" style="color:#fdba74;">🍳 Kitchen &amp; Restaurant POS</a>
         <a href="<?php echo kc_url('reception'); ?>" class="drawer-link" style="color:#93c5fd;">Staff Reception Desk</a>
 
         <div style="padding:0.75rem 0.85rem 0.25rem; font-size:0.7rem; font-weight:800; color:#f97316; letter-spacing:0.08em; text-transform:uppercase;">Industrial Divisions</div>
