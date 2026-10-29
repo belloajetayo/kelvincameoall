@@ -1994,6 +1994,200 @@ $reserve_url = home_url('/reserve/');
     </div>
   </div>
 
+  <!-- MODAL 3B: ADMIN MASTER EDIT BOOKING MODAL (PIN: 1122) -->
+  <div id="adminEditBookingModal" class="modal-backdrop">
+    <div class="modal-box" style="max-width: 860px;">
+      <div class="modal-header" style="background: linear-gradient(135deg, #091e3a 0%, #1a2f4c 100%); border-bottom: 2px solid var(--kc-gold-500); padding: 14px 20px;">
+        <h2>
+          <span>👑</span>
+          <span>Admin Master Booking Editor • <span id="adminEditBookingRefDisplay" style="color: var(--kc-gold-400); font-family: monospace;">KC-26-XXXXX</span></span>
+        </h2>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 11px; background: rgba(212,175,55,0.2); color: #ffe89e; padding: 3px 8px; border-radius: 4px; font-weight: 700; border: 1px solid rgba(212,175,55,0.4);">
+            🔒 Admin (1122)
+          </span>
+          <button class="modal-close-btn" onclick="KCHotelApp.closeModals()">&times;</button>
+        </div>
+      </div>
+      <form id="adminEditBookingForm" onsubmit="KCHotelApp.handleAdminSaveBooking(event)">
+        <input type="hidden" name="id" id="adminEditBookingId" value="0">
+        <input type="hidden" name="admin_pin" id="adminEditBookingPin" value="1122">
+
+        <div class="modal-body" style="padding: 16px 20px;">
+          <!-- 1. GUEST DETAILS -->
+          <div class="form-section-title">👤 Guest Information</div>
+          <div class="form-row row-3">
+            <div class="form-group">
+              <label>Guest Full Name</label>
+              <input type="text" name="guest_name" id="adminEditGuestName" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" name="guest_phone" id="adminEditGuestPhone" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" name="guest_email" id="adminEditGuestEmail" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-row row-1-2">
+            <div class="form-group">
+              <label>ID / NIN / Passport No.</label>
+              <input type="text" name="guest_id_number" id="adminEditGuestIdNumber" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Residential / Business Address</label>
+              <input type="text" name="guest_address" id="adminEditGuestAddress" class="form-control">
+            </div>
+          </div>
+
+          <!-- 2. ROOM & DATES -->
+          <div class="form-section-title">🛏️ Room Assignment, Wing &amp; Dates</div>
+          <div class="form-row row-3">
+            <div class="form-group">
+              <label>Room Number</label>
+              <input type="text" name="room_number" id="adminEditRoomNumber" class="form-control" placeholder="e.g. M-107 or A-01" required>
+            </div>
+            <div class="form-group">
+              <label>Room Category / Type</label>
+              <input type="text" name="room_type" id="adminEditRoomType" class="form-control" placeholder="e.g. Love Night, Deluxe (UK)..." required>
+            </div>
+            <div class="form-group">
+              <label>Hotel Wing / Branch</label>
+              <select name="branch" id="adminEditBranch" class="form-control">
+                <option value="Main Hotel">Main Hotel</option>
+                <option value="The Annex">The Annex</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row row-3">
+            <div class="form-group">
+              <label>Nightly Rate (₦)</label>
+              <input type="number" name="rate_per_night" id="adminEditRatePerNight" class="form-control" min="0" step="500" oninput="KCHotelApp.recalcAdminEditTotals()">
+            </div>
+            <div class="form-group">
+              <label>Check-In Date</label>
+              <input type="date" name="check_in" id="adminEditCheckIn" class="form-control" required onchange="KCHotelApp.recalcAdminEditTotals()">
+            </div>
+            <div class="form-group">
+              <label>Check-Out Date</label>
+              <input type="date" name="check_out" id="adminEditCheckOut" class="form-control" required onchange="KCHotelApp.recalcAdminEditTotals()">
+            </div>
+          </div>
+
+          <div class="form-row row-3">
+            <div class="form-group">
+              <label>Duration (Nights)</label>
+              <input type="number" name="nights" id="adminEditNights" class="form-control" min="1" oninput="KCHotelApp.recalcAdminEditTotals(true)">
+            </div>
+            <div class="form-group">
+              <label>Total Stay Bill (₦)</label>
+              <input type="number" name="total_amount" id="adminEditTotalAmount" class="form-control" min="0" step="500" oninput="KCHotelApp.recalcAdminEditBalance()">
+            </div>
+            <div class="form-group">
+              <label>Amount Paid (₦)</label>
+              <input type="number" name="amount_paid" id="adminEditAmountPaid" class="form-control" min="0" step="500" oninput="KCHotelApp.recalcAdminEditBalance()">
+            </div>
+          </div>
+
+          <!-- 3. FINANCIAL STATUS & SETTLEMENT -->
+          <div class="form-section-title">💳 Financial Status, Payment &amp; Folio</div>
+          <div class="form-row row-3">
+            <div class="form-group">
+              <label>Balance Due (₦)</label>
+              <input type="number" name="balance_due" id="adminEditBalanceDue" class="form-control" min="0" step="500">
+            </div>
+            <div class="form-group">
+              <label>Payment Status</label>
+              <select name="payment_status" id="adminEditPaymentStatus" class="form-control">
+                <option value="paid">Paid (Fully Settled)</option>
+                <option value="partial">Partial Payment</option>
+                <option value="pending">Pending (Unpaid)</option>
+                <option value="paid_to_boss">Paid to Boss (Not at Desk)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Payment Method</label>
+              <select name="payment_method" id="adminEditPaymentMethod" class="form-control">
+                <option value="pos">POS Terminal</option>
+                <option value="transfer">Direct Bank Transfer (Zenith)</option>
+                <option value="cash">Cash at Desk</option>
+                <option value="paystack">Paystack Online</option>
+                <option value="paid_to_boss">Paid to Boss</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row row-3">
+            <div class="form-group">
+              <label>Booking Status</label>
+              <select name="booking_status" id="adminEditBookingStatus" class="form-control">
+                <option value="checked_in">Checked In (Active Guest)</option>
+                <option value="reserved">Reserved (Booked Ahead)</option>
+                <option value="checked_out">Checked Out (Completed)</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Payment Reference / TxID</label>
+              <input type="text" name="payment_reference" id="adminEditPaymentRef" class="form-control" placeholder="e.g. Zenith Ref / POS Approval">
+            </div>
+            <div class="form-group">
+              <label>Staff / Receptionist Handler</label>
+              <input type="text" name="receptionist_name" id="adminEditReceptionist" class="form-control" placeholder="e.g. Front Desk Staff">
+            </div>
+          </div>
+
+          <!-- SPECIAL NOTES / INSTITUTIONAL FLAGS -->
+          <div class="form-group">
+            <label>Special Guest Notes &amp; Institutional Flags <span style="font-size: 10px; color: var(--kc-gold-600);">(e.g. NGO / CCCRN, Paid to Boss, VIP)</span></label>
+            <input type="text" name="notes" id="adminEditNotes" class="form-control" placeholder="e.g. NGO / CCCRN, Paid to Boss, Corporate account">
+          </div>
+        </div>
+
+        <!-- STICKY BOTTOM MODAL FOOTER -->
+        <div class="modal-footer" style="display: flex; align-items: center; justify-content: space-between; background: #f8fafc; border-top: 1px solid var(--kc-slate-200); padding: 12px 20px;">
+          <div style="font-size: 12px; color: var(--kc-slate-600);">
+            🔒 Master Override Mode • Admin PIN 1122
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <button type="button" class="btn btn-secondary" onclick="KCHotelApp.closeModals()">Cancel</button>
+            <button type="submit" class="btn btn-gold" id="btnAdminSaveBooking" style="padding: 10px 24px; font-weight: 700; font-size: 14px; box-shadow: 0 4px 14px rgba(212,175,55,0.4);">
+              💾 Save All Changes (Admin)
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: ADMIN PIN AUTHORIZATION (1122) -->
+  <div id="adminBookingPinModal" class="modal-backdrop">
+    <div class="modal-box" style="max-width: 440px; text-align: center;">
+      <div class="modal-header" style="justify-content: center; position: relative;">
+        <h2>🔒 Admin Password Required</h2>
+        <button class="modal-close-btn" style="position: absolute; right: 16px;" onclick="KCHotelApp.closeModals()">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 24px;">
+        <div style="font-size: 36px; margin-bottom: 8px;">👑</div>
+        <h3 style="font-size: 16px; font-weight: 800; color: var(--kc-navy-950); margin-bottom: 6px;">Enter Admin Password</h3>
+        <p style="font-size: 12px; color: var(--kc-slate-500); margin-bottom: 16px;">
+          Editing in-house &amp; booking details requires Admin Password (<strong>1122</strong>).
+        </p>
+        <form onsubmit="event.preventDefault(); KCHotelApp.verifyAdminPinForBookingEdit();">
+          <input type="password" id="adminBookingPinInput" class="form-control" placeholder="••••" maxlength="6" style="text-align: center; font-size: 24px; letter-spacing: 5px; font-weight: 800; margin-bottom: 12px;" autofocus>
+          <div id="adminBookingPinError" style="color: var(--kc-danger); font-size: 12px; font-weight: 600; display: none; margin-bottom: 12px;">Incorrect Admin Password (1122).</div>
+          <div style="display: flex; gap: 10px; justify-content: center;">
+            <button type="button" class="btn btn-secondary" onclick="KCHotelApp.closeModals()">Cancel</button>
+            <button type="submit" class="btn btn-gold" style="font-weight: 700; padding: 10px 20px;">Unlock Editor</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- MODAL 4: ADD / EDIT ROOM MODAL -->
   <div id="roomEditModal" class="modal-backdrop">
     <div class="modal-box" style="max-width: 580px;">
@@ -2772,9 +2966,14 @@ $reserve_url = home_url('/reserve/');
             if (res.success && res.data.token) {
               sessionStorage.setItem('kc_hotel_token', res.data.token);
               this.currentPinToken = res.data.token;
+              if (res.data.role === 'admin' || pin === '1122') {
+                this.isAdmin = true;
+                sessionStorage.setItem('kc_hotel_role', 'admin');
+                if (res.data.admin_token) sessionStorage.setItem('kc_hotel_admin_token', res.data.admin_token);
+              }
               document.getElementById('pinGateModal').classList.remove('active');
               errEl.style.display = 'none';
-              this.showToast('Reception Desk unlocked successfully');
+              this.showToast(this.isAdmin ? '👑 Admin Master Mode Unlocked (PIN 1122)' : 'Reception Desk unlocked successfully');
               this.refreshDashboard();
             } else {
               errEl.style.display = 'block';
@@ -3351,6 +3550,7 @@ $reserve_url = home_url('/reserve/');
               <td>${statusBadge}</td>
               <td>
                 <div class="table-action-btns">
+                  <button class="btn btn-sm" style="background: rgba(212,175,55,0.18); color: #b45309; border: 1px solid rgba(212,175,55,0.6); font-weight: 700; padding: 4px 8px; border-radius: 4px;" onclick="KCHotelApp.requestAdminEditBooking(${b.id})" title="Edit Every Part of Booking (Admin 1122)">✏️ Edit</button>
                   <button class="btn btn-secondary btn-sm" onclick="KCHotelApp.openFolio(${b.id})" title="Print Folio">Folio</button>
                   ${bal > 0 && b.booking_status !== 'cancelled' ? `<button class="btn btn-gold btn-sm" onclick="KCHotelApp.openPaymentModal(${b.id})">+ Pay</button>` : ''}
                   ${b.booking_status === 'reserved' ? `<button class="btn btn-primary btn-sm" onclick="KCHotelApp.updateBookingStatus(${b.id}, 'checked_in')">Check-In</button>` : ''}
@@ -3929,6 +4129,160 @@ $reserve_url = home_url('/reserve/');
           })
           .catch(() => {
             this.showToast('Network error recording payment', 'error');
+          });
+      },
+
+      requestAdminEditBooking: function(bookingId) {
+        this.pendingEditBookingId = bookingId;
+        const role = sessionStorage.getItem('kc_hotel_role');
+        if (this.isAdmin || role === 'admin' || this.currentPinToken === 'admin-1122') {
+          this.openAdminEditBookingModal(bookingId);
+        } else {
+          const pinInput = document.getElementById('adminBookingPinInput');
+          if (pinInput) pinInput.value = '';
+          const errEl = document.getElementById('adminBookingPinError');
+          if (errEl) errEl.style.display = 'none';
+          document.getElementById('adminBookingPinModal').classList.add('active');
+          setTimeout(() => { if (pinInput) pinInput.focus(); }, 150);
+        }
+      },
+
+      verifyAdminPinForBookingEdit: function() {
+        const pinInput = document.getElementById('adminBookingPinInput');
+        const pin = pinInput ? pinInput.value.trim() : '';
+        const errEl = document.getElementById('adminBookingPinError');
+
+        if (pin === '1122') {
+          this.isAdmin = true;
+          sessionStorage.setItem('kc_hotel_role', 'admin');
+          document.getElementById('adminBookingPinModal').classList.remove('active');
+          this.showToast('👑 Admin Authorized (1122)');
+          if (this.pendingEditBookingId) {
+            this.openAdminEditBookingModal(this.pendingEditBookingId);
+          }
+        } else {
+          if (errEl) errEl.style.display = 'block';
+          if (pinInput) {
+            pinInput.value = '';
+            pinInput.focus();
+          }
+        }
+      },
+
+      openAdminEditBookingModal: function(bookingId) {
+        const b = (this.data.bookings || []).find(item => item.id == bookingId);
+        if (!b) {
+          this.showToast('Booking record not found', 'error');
+          return;
+        }
+
+        document.getElementById('adminEditBookingId').value = b.id;
+        document.getElementById('adminEditBookingRefDisplay').innerText = b.booking_ref;
+        document.getElementById('adminEditGuestName').value = b.guest_name || '';
+        document.getElementById('adminEditGuestPhone').value = b.guest_phone || '';
+        document.getElementById('adminEditGuestEmail').value = b.guest_email || '';
+        document.getElementById('adminEditGuestIdNumber').value = b.guest_id_number || '';
+        document.getElementById('adminEditGuestAddress').value = b.guest_address || '';
+
+        document.getElementById('adminEditRoomNumber').value = b.room_number || '';
+        document.getElementById('adminEditRoomType').value = b.room_type || '';
+        document.getElementById('adminEditBranch').value = b.branch || 'Main Hotel';
+
+        document.getElementById('adminEditRatePerNight').value = b.rate_per_night || 0;
+        document.getElementById('adminEditCheckIn').value = b.check_in || '';
+        document.getElementById('adminEditCheckOut').value = b.check_out || '';
+        document.getElementById('adminEditNights').value = b.nights || 1;
+
+        document.getElementById('adminEditTotalAmount').value = b.total_amount || 0;
+        document.getElementById('adminEditAmountPaid').value = b.amount_paid || 0;
+        document.getElementById('adminEditBalanceDue').value = b.balance_due || 0;
+
+        document.getElementById('adminEditPaymentStatus').value = b.payment_status || 'pending';
+        document.getElementById('adminEditPaymentMethod').value = b.payment_method || 'pos';
+        document.getElementById('adminEditPaymentRef').value = b.payment_reference || '';
+
+        document.getElementById('adminEditBookingStatus').value = b.booking_status || 'checked_in';
+        document.getElementById('adminEditReceptionist').value = b.receptionist_name || '';
+        document.getElementById('adminEditNotes').value = b.notes || '';
+
+        document.getElementById('adminEditBookingModal').classList.add('active');
+        const mBody = document.querySelector('#adminEditBookingModal .modal-body');
+        if (mBody) mBody.scrollTop = 0;
+      },
+
+      recalcAdminEditTotals: function(nightsOverridden = false) {
+        const inEl = document.getElementById('adminEditCheckIn');
+        const outEl = document.getElementById('adminEditCheckOut');
+        const rateEl = document.getElementById('adminEditRatePerNight');
+        const nightsEl = document.getElementById('adminEditNights');
+        const totEl = document.getElementById('adminEditTotalAmount');
+
+        let nights = Number(nightsEl ? nightsEl.value : 1);
+        if (!nightsOverridden && inEl && outEl && inEl.value && outEl.value) {
+          const d1 = new Date(inEl.value);
+          const d2 = new Date(outEl.value);
+          nights = Math.max(1, Math.ceil((d2 - d1) / (1000 * 60 * 60 * 24)));
+          if (nightsEl) nightsEl.value = nights;
+        }
+
+        const rate = Number(rateEl ? rateEl.value : 0);
+        const total = rate * nights;
+        if (totEl) totEl.value = total;
+
+        this.recalcAdminEditBalance();
+      },
+
+      recalcAdminEditBalance: function() {
+        const tot = Number(document.getElementById('adminEditTotalAmount') ? document.getElementById('adminEditTotalAmount').value : 0);
+        const paid = Number(document.getElementById('adminEditAmountPaid') ? document.getElementById('adminEditAmountPaid').value : 0);
+        const balEl = document.getElementById('adminEditBalanceDue');
+        const bal = Math.max(0, tot - paid);
+        if (balEl) balEl.value = bal;
+
+        const payStatusEl = document.getElementById('adminEditPaymentStatus');
+        if (payStatusEl) {
+          if (bal <= 0 && paid > 0) payStatusEl.value = 'paid';
+          else if (paid > 0) payStatusEl.value = 'partial';
+          else payStatusEl.value = 'pending';
+        }
+      },
+
+      handleAdminSaveBooking: function(e) {
+        e.preventDefault();
+        const form = document.getElementById('adminEditBookingForm');
+        const fd = new FormData(form);
+        fd.append('action', 'kc_hotel_admin_update_booking');
+        fd.append('admin_pin', '1122');
+        if (this.currentPinToken) fd.append('token', this.currentPinToken);
+
+        const btn = document.getElementById('btnAdminSaveBooking');
+        const origText = btn ? btn.innerText : 'Save All Changes (Admin)';
+        if (btn) {
+          btn.innerText = 'Saving Changes...';
+          btn.disabled = true;
+        }
+
+        fetch(this.ajaxUrl, { method: 'POST', body: fd })
+          .then(r => r.json())
+          .then(res => {
+            if (btn) {
+              btn.innerText = origText;
+              btn.disabled = false;
+            }
+            if (res.success) {
+              this.showToast(res.data && res.data.message ? res.data.message : 'Booking successfully updated!');
+              this.closeModals();
+              this.refreshDashboard();
+            } else {
+              this.showToast(res.data && res.data.message ? res.data.message : 'Failed to update booking', 'error');
+            }
+          })
+          .catch(() => {
+            if (btn) {
+              btn.innerText = origText;
+              btn.disabled = false;
+            }
+            this.showToast('Network error saving booking', 'error');
           });
       },
 

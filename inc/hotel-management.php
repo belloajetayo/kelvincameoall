@@ -439,22 +439,179 @@ function kc_hotel_verify_staff_session() {
     return false;
 }
 
-// Verify Security PIN
+/**
+ * Verify Administrator Session (PIN 1122 or WP Admin)
+ */
+function kc_hotel_verify_admin_session() {
+    if (is_user_logged_in() && current_user_can('manage_options')) {
+        return true;
+    }
+    $pin = sanitize_text_field($_REQUEST['admin_pin'] ?? ($_REQUEST['pin'] ?? ''));
+    $stored_admin_pin = get_option('kc_hotel_admin_pin', '1122');
+    if ($pin === '1122' || $pin === $stored_admin_pin) {
+        return true;
+    }
+    $admin_token = sanitize_text_field($_REQUEST['admin_token'] ?? '');
+    if (!empty($admin_token) && wp_verify_nonce($admin_token, 'kc_hotel_admin_session')) {
+        return true;
+    }
+    return false;
+}
+
+// Verify Security PIN (Admin: 1122 | Staff: 1613)
 add_action('wp_ajax_kc_hotel_verify_pin', 'kc_hotel_ajax_verify_pin');
 add_action('wp_ajax_nopriv_kc_hotel_verify_pin', 'kc_hotel_ajax_verify_pin');
 function kc_hotel_ajax_verify_pin() {
     $pin = isset($_POST['pin']) ? sanitize_text_field($_POST['pin']) : '';
-    $stored_pin = get_option('kc_hotel_pin', '1613');
+    $stored_admin_pin = get_option('kc_hotel_admin_pin', '1122');
+    $stored_staff_pin = get_option('kc_hotel_pin', '1613');
 
-    if ($pin === '1613' || $pin === $stored_pin || is_user_logged_in()) {
-        if ($stored_pin !== '1613') {
-            update_option('kc_hotel_pin', '1613');
-        }
+    if ($pin === '1122' || $pin === $stored_admin_pin || (is_user_logged_in() && current_user_can('manage_options'))) {
         $token = wp_create_nonce('kc_hotel_reception_session');
-        wp_send_json_success(['token' => $token, 'message' => 'PIN accepted']);
+        $admin_token = wp_create_nonce('kc_hotel_admin_session');
+        wp_send_json_success([
+            'role' => 'admin',
+            'token' => $token,
+            'admin_token' => $admin_token,
+            'message' => 'Admin authorized (Full Master Access - PIN 1122)'
+        ]);
+    } elseif ($pin === '1613' || $pin === $stored_staff_pin || is_user_logged_in()) {
+        $token = wp_create_nonce('kc_hotel_reception_session');
+        wp_send_json_success([
+            'role' => 'staff',
+            'token' => $token,
+            'message' => 'Staff PIN accepted'
+        ]);
     } else {
-        wp_send_json_error(['message' => 'Invalid Security PIN. Please enter authorized staff PIN.']);
+        wp_send_json_error(['message' => 'Invalid Security PIN. Please enter Staff PIN (1613) or Admin PIN (1122).']);
     }
+}
+
+/**
+ * AJAX: Admin Update Any Part of a Booking (Protected with PIN 1122)
+ */
+add_action('wp_ajax_kc_hotel_admin_update_booking', 'kc_hotel_ajax_admin_update_booking');
+add_action('wp_ajax_nopriv_kc_hotel_admin_update_booking', 'kc_hotel_ajax_admin_update_booking');
+function kc_hotel_ajax_admin_update_booking() {
+    if (!kc_hotel_verify_admin_session()) {
+        wp_send_json_error(['message' => 'Unauthorized: Admin password (1122) required to edit booking records.'], 403);
+    }
+
+    global $wpdb;
+    $table_bookings = $wpdb->prefix . 'kc_hotel_bookings';
+    $table_rooms    = $wpdb->prefix . 'kc_hotel_rooms';
+
+    $id = intval($_POST['id'] ?? 0);
+    if (!$id) {
+        wp_send_json_error(['message' => 'Invalid booking ID.']);
+    }
+
+    $existing = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_bookings WHERE id = %d", $id), ARRAY_A);
+    if (!$existing) {
+        wp_send_json_error(['message' => 'Booking record not found in database.']);
+    }
+
+    // Extract and sanitize fields
+    $guest_name       = sanitize_text_field($_POST['guest_name'] ?? $existing['guest_name']);
+    $guest_phone      = sanitize_text_field($_POST['guest_phone'] ?? $existing['guest_phone']);
+    $guest_email      = sanitize_email($_POST['guest_email'] ?? $existing['guest_email']);
+    $guest_id_number  = sanitize_text_field($_POST['guest_id_number'] ?? $existing['guest_id_number']);
+    $guest_address    = sanitize_textarea_field($_POST['guest_address'] ?? $existing['guest_address']);
+    $room_number      = sanitize_text_field($_POST['room_number'] ?? $existing['room_number']);
+    $room_type        = sanitize_text_field($_POST['room_type'] ?? $existing['room_type']);
+    $branch           = sanitize_text_field($_POST['branch'] ?? $existing['branch']);
+    $check_in         = sanitize_text_field($_POST['check_in'] ?? $existing['check_in']);
+    $check_out        = sanitize_text_field($_POST['check_out'] ?? $existing['check_out']);
+    
+    // Duration
+    $nights = intval($_POST['nights'] ?? 0);
+    if ($nights <= 0) {
+        $d1 = new DateTime($check_in);
+        $d2 = new DateTime($check_out);
+        $nights = max(1, $d1->diff($d2)->days);
+    }
+
+    $rate_per_night   = floatval($_POST['rate_per_night'] ?? $existing['rate_per_night']);
+    $total_amount     = floatval($_POST['total_amount'] ?? ($rate_per_night * $nights));
+    $amount_paid      = floatval($_POST['amount_paid'] ?? $existing['amount_paid']);
+    $balance_due      = isset($_POST['balance_due']) ? floatval($_POST['balance_due']) : max(0.00, $total_amount - $amount_paid);
+
+    $booking_status   = sanitize_text_field($_POST['booking_status'] ?? $existing['booking_status']);
+    $payment_status   = sanitize_text_field($_POST['payment_status'] ?? $existing['payment_status']);
+    $payment_method   = sanitize_text_field($_POST['payment_method'] ?? $existing['payment_method']);
+    $payment_reference= sanitize_text_field($_POST['payment_reference'] ?? $existing['payment_reference']);
+    $receptionist_name= sanitize_text_field($_POST['receptionist_name'] ?? $existing['receptionist_name']);
+    $notes            = sanitize_textarea_field($_POST['notes'] ?? $existing['notes']);
+
+    if (empty($_POST['payment_status'])) {
+        if ($balance_due <= 0 && $amount_paid > 0) {
+            $payment_status = 'paid';
+        } elseif ($amount_paid > 0) {
+            $payment_status = 'partial';
+        } else {
+            $payment_status = 'pending';
+        }
+    }
+
+    $update_data = [
+        'guest_name'        => $guest_name,
+        'guest_phone'       => $guest_phone,
+        'guest_email'       => $guest_email,
+        'guest_id_number'   => $guest_id_number,
+        'guest_address'     => $guest_address,
+        'room_number'       => $room_number,
+        'room_type'         => $room_type,
+        'branch'            => (stripos($branch, 'Annex') !== false) ? 'The Annex' : 'Main Hotel',
+        'check_in'          => $check_in,
+        'check_out'         => $check_out,
+        'nights'            => $nights,
+        'rate_per_night'    => $rate_per_night,
+        'total_amount'      => $total_amount,
+        'amount_paid'       => $amount_paid,
+        'balance_due'       => $balance_due,
+        'payment_status'    => $payment_status,
+        'payment_method'    => $payment_method,
+        'payment_reference' => $payment_reference,
+        'booking_status'    => $booking_status,
+        'notes'             => $notes,
+        'receptionist_name' => $receptionist_name,
+        'updated_at'        => current_time('mysql')
+    ];
+
+    $wpdb->update($table_bookings, $update_data, ['id' => $id]);
+
+    // Synchronize Room Status
+    $old_room = $existing['room_number'];
+    $new_room = $room_number;
+
+    if ($booking_status === 'checked_in') {
+        $wpdb->update($table_rooms, ['status' => 'occupied'], ['room_number' => $new_room]);
+    } elseif ($booking_status === 'reserved') {
+        $wpdb->update($table_rooms, ['status' => 'reserved'], ['room_number' => $new_room]);
+    } elseif (in_array($booking_status, ['checked_out', 'cancelled'])) {
+        $other_active = $wpdb->get_var($wpdb->prepare(
+            "SELECT COUNT(*) FROM $table_bookings WHERE room_number = %s AND id != %d AND booking_status = 'checked_in'",
+            $new_room, $id
+        ));
+        if (!$other_active) {
+            $wpdb->update($table_rooms, ['status' => 'available'], ['room_number' => $new_room]);
+        }
+    }
+
+    if ($old_room !== $new_room) {
+        $old_active = $wpdb->get_var($wpdb->prepare(
+            "SELECT COUNT(*) FROM $table_bookings WHERE room_number = %s AND id != %d AND booking_status = 'checked_in'",
+            $old_room, $id
+        ));
+        if (!$old_active) {
+            $wpdb->update($table_rooms, ['status' => 'available'], ['room_number' => $old_room]);
+        }
+    }
+
+    wp_send_json_success([
+        'message' => "Booking {$existing['booking_ref']} successfully updated by Admin!",
+        'booking' => array_merge($existing, $update_data)
+    ]);
 }
 
 // Get Dashboard Data (Protected)
