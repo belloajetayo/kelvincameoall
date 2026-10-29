@@ -2682,6 +2682,9 @@ $reserve_url = home_url('/reserve/');
           .then(res => {
             if (!isBackground && spinner) spinner.style.animation = 'none';
             if (res.success && res.data) {
+              if (res.data.bookings) {
+                res.data.bookings = res.data.bookings.filter(b => b.booking_ref !== 'KC-26-MYRGQ' && b.booking_ref !== 'KC-2026-101');
+              }
               this.data = res.data;
               if (res.data.active_shift) {
                 this.activeShift = res.data.active_shift;
