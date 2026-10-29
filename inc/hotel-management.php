@@ -40,6 +40,7 @@ function kc_hotel_init_db() {
         guest_phone varchar(40) NOT NULL,
         guest_email varchar(120) DEFAULT '',
         guest_id_number varchar(80) DEFAULT '',
+        guest_address text DEFAULT '',
         room_number varchar(20) NOT NULL,
         room_type varchar(80) NOT NULL,
         branch varchar(40) NOT NULL DEFAULT 'Main Hotel',
@@ -72,6 +73,12 @@ function kc_hotel_init_db() {
     ) $charset_collate;";
     dbDelta($sql_bookings);
 
+    // Migration check: Add guest_address column if table already existed without it
+    $col_check = $wpdb->get_results("SHOW COLUMNS FROM $table_bookings LIKE 'guest_address'");
+    if (empty($col_check)) {
+        $wpdb->query("ALTER TABLE $table_bookings ADD COLUMN guest_address text DEFAULT '' AFTER guest_id_number");
+    }
+
     // Rooms Inventory Table
     $table_rooms = $wpdb->prefix . 'kc_hotel_rooms';
     $sql_rooms = "CREATE TABLE IF NOT EXISTS $table_rooms (
@@ -91,10 +98,37 @@ function kc_hotel_init_db() {
         KEY status (status)
     ) $charset_collate;";
     dbDelta($sql_rooms);
+
+    // Front Desk Shifts Table
+    $table_shifts = $wpdb->prefix . 'kc_hotel_shifts';
+    $sql_shifts = "CREATE TABLE IF NOT EXISTS $table_shifts (
+        id bigint(20) NOT NULL AUTO_INCREMENT,
+        shift_code varchar(40) NOT NULL,
+        receptionist_name varchar(80) NOT NULL DEFAULT 'Front Desk Staff',
+        incoming_receptionist varchar(80) DEFAULT '',
+        start_time datetime NOT NULL,
+        end_time datetime DEFAULT NULL,
+        total_bookings int(11) NOT NULL DEFAULT 0,
+        total_collected decimal(12,2) NOT NULL DEFAULT 0.00,
+        pos_collected decimal(12,2) NOT NULL DEFAULT 0.00,
+        cash_collected decimal(12,2) NOT NULL DEFAULT 0.00,
+        transfer_collected decimal(12,2) NOT NULL DEFAULT 0.00,
+        checkins_count int(11) NOT NULL DEFAULT 0,
+        checkouts_count int(11) NOT NULL DEFAULT 0,
+        rooms_occupied int(11) NOT NULL DEFAULT 0,
+        rooms_available int(11) NOT NULL DEFAULT 0,
+        bookings_summary_json longtext DEFAULT NULL,
+        handover_notes text DEFAULT '',
+        status varchar(20) NOT NULL DEFAULT 'active',
+        created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY  (id),
+        KEY status (status)
+    ) $charset_collate;";
+    dbDelta($sql_shifts);
 }
 
 /**
- * Reconcile Room Inventory Rates with Published Website Tariffs
+ * Reconcile Room Inventory Rates with Published Website Tariffs (Default seed only)
  */
 function kc_hotel_reconcile_room_rates() {
     global $wpdb;
@@ -102,13 +136,15 @@ function kc_hotel_reconcile_room_rates() {
     if ($wpdb->get_var("SHOW TABLES LIKE '$table_rooms'") !== $table_rooms) {
         return;
     }
+    // Only seed default baseline if version hasn't been set yet.
+    // Staff/Receptionist custom price edits are preserved and never overwritten!
     $reconcile_ver = get_option('kc_hotel_rates_ver', '0');
-    if ($reconcile_ver !== '2026.1') {
-        $wpdb->query("UPDATE $table_rooms SET rate = 55000.00 WHERE room_type LIKE '%Golden Nest%' AND rate != 55000.00");
-        $wpdb->query("UPDATE $table_rooms SET rate = 45000.00 WHERE room_type LIKE '%Prestige%' AND rate != 45000.00");
-        $wpdb->query("UPDATE $table_rooms SET rate = 60000.00 WHERE room_type LIKE '%Royal Treat%' AND rate != 60000.00");
-        $wpdb->query("UPDATE $table_rooms SET rate = 60000.00 WHERE room_type LIKE '%Blissful Breeze%' AND rate != 60000.00");
-        update_option('kc_hotel_rates_ver', '2026.1');
+    if ($reconcile_ver === '0') {
+        $wpdb->query("UPDATE $table_rooms SET rate = 55000.00 WHERE room_type LIKE '%Golden Nest%' AND rate = 0.00");
+        $wpdb->query("UPDATE $table_rooms SET rate = 45000.00 WHERE room_type LIKE '%Prestige%' AND rate = 0.00");
+        $wpdb->query("UPDATE $table_rooms SET rate = 60000.00 WHERE room_type LIKE '%Royal Treat%' AND rate = 0.00");
+        $wpdb->query("UPDATE $table_rooms SET rate = 60000.00 WHERE room_type LIKE '%Blissful Breeze%' AND rate = 0.00");
+        update_option('kc_hotel_rates_ver', '2026.customizable');
     }
 }
 
@@ -309,6 +345,11 @@ function kc_hotel_ajax_get_dashboard() {
         wp_send_json_error(['message' => 'Unauthorized: Valid staff session token required.'], 403);
     }
     $data = kc_hotel_get_dashboard_data();
+    $staff_name = sanitize_text_field($_REQUEST['staff_name'] ?? 'Front Desk Staff');
+    $active_shift = kc_hotel_get_or_create_active_shift($staff_name);
+    $shift_summary = kc_hotel_get_active_shift_summary($active_shift);
+    $data['active_shift'] = $active_shift;
+    $data['shift_summary'] = $shift_summary;
     wp_send_json_success($data);
 }
 
@@ -342,6 +383,7 @@ function kc_hotel_ajax_save_bank_settings() {
 }
 
 // Create New Booking (Internal Front Desk - Protected)
+// No details are compulsory: smart fallbacks provided for fast walk-in check-in
 add_action('wp_ajax_kc_hotel_create_booking', 'kc_hotel_ajax_create_booking');
 add_action('wp_ajax_nopriv_kc_hotel_create_booking', 'kc_hotel_ajax_create_booking');
 function kc_hotel_ajax_create_booking() {
@@ -352,9 +394,14 @@ function kc_hotel_ajax_create_booking() {
     $table = $wpdb->prefix . 'kc_hotel_bookings';
 
     $guest_name = sanitize_text_field($_POST['guest_name'] ?? '');
+    if (empty($guest_name)) {
+        $guest_name = 'Walk-in Guest';
+    }
+
     $guest_phone = sanitize_text_field($_POST['guest_phone'] ?? '');
     $guest_email = sanitize_email($_POST['guest_email'] ?? '');
     $guest_id_number = sanitize_text_field($_POST['guest_id_number'] ?? '');
+    $guest_address = sanitize_textarea_field($_POST['guest_address'] ?? '');
     $room_number = sanitize_text_field($_POST['room_number'] ?? '');
     $check_in = sanitize_text_field($_POST['check_in'] ?? '');
     $check_out = sanitize_text_field($_POST['check_out'] ?? '');
@@ -363,23 +410,58 @@ function kc_hotel_ajax_create_booking() {
     $payment_reference = sanitize_text_field($_POST['payment_reference'] ?? '');
     $booking_status = sanitize_text_field($_POST['booking_status'] ?? 'checked_in');
     $notes = sanitize_textarea_field($_POST['notes'] ?? '');
-    $receptionist_name = sanitize_text_field($_POST['receptionist_name'] ?? 'Front Desk');
+    $receptionist_name = sanitize_text_field($_POST['receptionist_name'] ?? 'Front Desk Staff');
 
-    if (empty($guest_name) || empty($guest_phone) || empty($room_number) || empty($check_in) || empty($check_out)) {
-        wp_send_json_error(['message' => 'Required fields missing.']);
+    // Default dates if omitted: check-in today, check-out tomorrow
+    if (empty($check_in)) {
+        $check_in = current_time('Y-m-d');
+    }
+    if (empty($check_out)) {
+        $check_out = date('Y-m-d', strtotime('+1 day', strtotime($check_in)));
     }
 
     $inventory = kc_hotel_get_room_inventory();
     $matched_room = null;
-    foreach ($inventory as $r) {
-        if ($r['number'] === $room_number) {
-            $matched_room = $r;
-            break;
+
+    if (!empty($room_number)) {
+        foreach ($inventory as $r) {
+            if ($r['number'] === $room_number) {
+                $matched_room = $r;
+                break;
+            }
         }
     }
 
+    // If room not chosen or not found, auto-assign the first available room
     if (!$matched_room) {
-        wp_send_json_error(['message' => 'Selected room not recognized in inventory.']);
+        $dash = kc_hotel_get_dashboard_data();
+        if (!empty($dash['rooms'])) {
+            foreach ($dash['rooms'] as $dr) {
+                if ($dr['status'] === 'available') {
+                    $matched_room = $dr;
+                    $room_number = $dr['number'];
+                    break;
+                }
+            }
+        }
+    }
+
+    // Fallback to first room in inventory if still unassigned
+    if (!$matched_room && !empty($inventory)) {
+        $matched_room = $inventory[0];
+        $room_number = $matched_room['number'];
+    }
+
+    if (!$matched_room) {
+        wp_send_json_error(['message' => 'No rooms configured in hotel inventory.']);
+    }
+
+    // Allow receptionist to override rate on the fly if custom_rate passed
+    $custom_rate = floatval($_POST['custom_rate'] ?? 0);
+    if ($custom_rate > 0) {
+        $rate_per_night = $custom_rate;
+    } else {
+        $rate_per_night = floatval($matched_room['rate']);
     }
 
     $date1 = new DateTime($check_in);
@@ -387,7 +469,6 @@ function kc_hotel_ajax_create_booking() {
     $nights = $date1->diff($date2)->days;
     if ($nights < 1) $nights = 1;
 
-    $rate_per_night = $matched_room['rate'];
     $total_amount = $rate_per_night * $nights;
     $balance_due = max(0, $total_amount - $amount_paid);
 
@@ -398,7 +479,7 @@ function kc_hotel_ajax_create_booking() {
         $payment_status = 'partial';
     }
 
-    $booking_ref = 'KC-' . date('y') . '-' . strtoupper(wp_generate_password(5, false));
+    $booking_ref = 'KC-' . date('y') . '-' . strtoupper(wp_generate_password(5, false, false));
 
     $insert_result = $wpdb->insert(
         $table,
@@ -408,6 +489,7 @@ function kc_hotel_ajax_create_booking() {
             'guest_phone' => $guest_phone,
             'guest_email' => $guest_email,
             'guest_id_number' => $guest_id_number,
+            'guest_address' => $guest_address,
             'room_number' => $room_number,
             'room_type' => $matched_room['type'],
             'branch' => $matched_room['branch'],
@@ -430,13 +512,309 @@ function kc_hotel_ajax_create_booking() {
     if ($insert_result) {
         $booking_id = $wpdb->insert_id;
         wp_send_json_success([
-            'message' => "Reservation $booking_ref successfully created!",
+            'message' => "Reservation $booking_ref successfully created for Room $room_number!",
             'booking_id' => $booking_id,
             'booking_ref' => $booking_ref
         ]);
     } else {
         wp_send_json_error(['message' => 'Database error while saving reservation.']);
     }
+}
+
+/**
+ * -----------------------------------------------------------------------------
+ * RECEPTIONIST ROOM PRICE EDITOR (Individual Room or Category Bulk Update)
+ * -----------------------------------------------------------------------------
+ */
+add_action('wp_ajax_kc_hotel_update_room_price', 'kc_hotel_ajax_update_room_price');
+add_action('wp_ajax_nopriv_kc_hotel_update_room_price', 'kc_hotel_ajax_update_room_price');
+function kc_hotel_ajax_update_room_price() {
+    if (!kc_hotel_verify_staff_session()) {
+        wp_send_json_error(['message' => 'Unauthorized: Valid staff session token required.'], 403);
+    }
+    global $wpdb;
+    $table_rooms = $wpdb->prefix . 'kc_hotel_rooms';
+
+    $room_id = intval($_POST['room_id'] ?? 0);
+    $room_type = sanitize_text_field($_POST['room_type'] ?? '');
+    $new_rate = floatval($_POST['rate'] ?? 0);
+    $apply_to_all_same_type = !empty($_POST['apply_to_all_type']);
+
+    if ($new_rate <= 0) {
+        wp_send_json_error(['message' => 'Please provide a valid room rate greater than ₦0.']);
+    }
+
+    if ($apply_to_all_same_type && !empty($room_type)) {
+        $wpdb->update(
+            $table_rooms,
+            ['rate' => $new_rate],
+            ['room_type' => $room_type]
+        );
+        wp_send_json_success([
+            'message' => "All rooms in category '{$room_type}' updated to ₦" . number_format($new_rate, 2) . " successfully!",
+            'rate' => $new_rate,
+            'room_type' => $room_type
+        ]);
+    } elseif ($room_id > 0) {
+        $wpdb->update(
+            $table_rooms,
+            ['rate' => $new_rate],
+            ['id' => $room_id]
+        );
+        wp_send_json_success([
+            'message' => "Room tariff updated to ₦" . number_format($new_rate, 2) . " successfully!",
+            'rate' => $new_rate,
+            'room_id' => $room_id
+        ]);
+    } else {
+        wp_send_json_error(['message' => 'Invalid room specified for price update.']);
+    }
+}
+
+/**
+ * -----------------------------------------------------------------------------
+ * FRONT DESK SHIFTS & RECEPTIONIST HANDOVER
+ * -----------------------------------------------------------------------------
+ */
+
+/**
+ * Helper: Get or Create Active Receptionist Shift
+ */
+function kc_hotel_get_or_create_active_shift($receptionist_name = 'Front Desk Staff') {
+    global $wpdb;
+    $table_shifts = $wpdb->prefix . 'kc_hotel_shifts';
+
+    if ($wpdb->get_var("SHOW TABLES LIKE '$table_shifts'") !== $table_shifts) {
+        kc_hotel_init_db();
+    }
+
+    $active = $wpdb->get_row("SELECT * FROM $table_shifts WHERE status = 'active' ORDER BY id DESC LIMIT 1", ARRAY_A);
+    if ($active) {
+        if (!empty($receptionist_name) && $receptionist_name !== 'Front Desk Staff' && ($active['receptionist_name'] === 'Front Desk Staff' || empty($active['receptionist_name']))) {
+            $wpdb->update($table_shifts, ['receptionist_name' => $receptionist_name], ['id' => $active['id']]);
+            $active['receptionist_name'] = $receptionist_name;
+        }
+        return $active;
+    }
+
+    $shift_code = 'REC-SHIFT-' . current_time('Ymd') . '-' . strtoupper(wp_generate_password(4, false, false));
+    $wpdb->insert($table_shifts, [
+        'shift_code' => $shift_code,
+        'receptionist_name' => !empty($receptionist_name) ? $receptionist_name : 'Front Desk Staff',
+        'start_time' => current_time('mysql'),
+        'status' => 'active'
+    ]);
+
+    return $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_shifts WHERE id = %d", $wpdb->insert_id), ARRAY_A);
+}
+
+/**
+ * Helper: Calculate Active Shift Summary (Financials, Checkins/outs, Occupancy Snapshot)
+ */
+function kc_hotel_get_active_shift_summary($active_shift) {
+    global $wpdb;
+    $table_bookings = $wpdb->prefix . 'kc_hotel_bookings';
+
+    if (!$active_shift) {
+        return [
+            'total_bookings' => 0,
+            'total_collected' => 0.00,
+            'pos_collected' => 0.00,
+            'cash_collected' => 0.00,
+            'transfer_collected' => 0.00,
+            'checkins_count' => 0,
+            'checkouts_count' => 0,
+            'rooms_occupied' => 0,
+            'rooms_available' => 0,
+            'bookings' => []
+        ];
+    }
+
+    $start_time = $active_shift['start_time'];
+
+    $bookings = $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT id, booking_ref, guest_name, guest_phone, guest_address, room_number, room_type, check_in, check_out, total_amount, amount_paid, payment_method, payment_status, booking_status, created_at, receptionist_name
+             FROM $table_bookings
+             WHERE created_at >= %s
+             ORDER BY id DESC",
+            $start_time
+        ),
+        ARRAY_A
+    );
+
+    $total_bookings = count($bookings);
+    $total_collected = 0.00;
+    $pos_collected = 0.00;
+    $cash_collected = 0.00;
+    $transfer_collected = 0.00;
+    $checkins_count = 0;
+    $checkouts_count = 0;
+
+    foreach ($bookings as $b) {
+        $paid = (float)$b['amount_paid'];
+        $total_collected += $paid;
+        $pm = strtolower($b['payment_method'] ?? 'cash');
+        if (strpos($pm, 'pos') !== false) {
+            $pos_collected += $paid;
+        } elseif (strpos($pm, 'transfer') !== false) {
+            $transfer_collected += $paid;
+        } else {
+            $cash_collected += $paid;
+        }
+
+        if ($b['booking_status'] === 'checked_in') {
+            $checkins_count++;
+        } elseif ($b['booking_status'] === 'checked_out') {
+            $checkouts_count++;
+        }
+    }
+
+    // Room occupancy snapshot
+    $dash = kc_hotel_get_dashboard_data();
+    $rooms_occupied = $dash['kpis']['occupied'] ?? 0;
+    $rooms_available = $dash['kpis']['available'] ?? 0;
+
+    return [
+        'total_bookings' => $total_bookings,
+        'total_collected' => $total_collected,
+        'pos_collected' => $pos_collected,
+        'cash_collected' => $cash_collected,
+        'transfer_collected' => $transfer_collected,
+        'checkins_count' => $checkins_count,
+        'checkouts_count' => $checkouts_count,
+        'rooms_occupied' => $rooms_occupied,
+        'rooms_available' => $rooms_available,
+        'bookings' => $bookings
+    ];
+}
+
+/**
+ * AJAX: Fetch Active Shift Details & Live Summary
+ */
+add_action('wp_ajax_kc_hotel_get_active_shift', 'kc_hotel_ajax_get_active_shift');
+add_action('wp_ajax_nopriv_kc_hotel_get_active_shift', 'kc_hotel_ajax_get_active_shift');
+function kc_hotel_ajax_get_active_shift() {
+    if (!kc_hotel_verify_staff_session()) {
+        wp_send_json_error(['message' => 'Unauthorized: Valid staff session token required.'], 403);
+    }
+    $staff = sanitize_text_field($_REQUEST['staff_name'] ?? 'Front Desk Staff');
+    $active_shift = kc_hotel_get_or_create_active_shift($staff);
+    $summary = kc_hotel_get_active_shift_summary($active_shift);
+
+    wp_send_json_success([
+        'shift' => $active_shift,
+        'summary' => $summary
+    ]);
+}
+
+/**
+ * AJAX: Close Reception Shift & Handover to Incoming Attendant
+ */
+add_action('wp_ajax_kc_hotel_close_shift', 'kc_hotel_ajax_close_shift');
+add_action('wp_ajax_nopriv_kc_hotel_close_shift', 'kc_hotel_ajax_close_shift');
+function kc_hotel_ajax_close_shift() {
+    if (!kc_hotel_verify_staff_session()) {
+        wp_send_json_error(['message' => 'Unauthorized: Valid staff session token required.'], 403);
+    }
+    global $wpdb;
+    $table_shifts = $wpdb->prefix . 'kc_hotel_shifts';
+
+    $outgoing_staff = sanitize_text_field($_POST['outgoing_staff'] ?? '');
+    $incoming_staff = sanitize_text_field($_POST['incoming_staff'] ?? '');
+    $notes = sanitize_textarea_field($_POST['notes'] ?? '');
+
+    if (empty($incoming_staff)) {
+        wp_send_json_error(['message' => 'Please provide the name of the incoming receptionist taking over the shift.']);
+    }
+
+    $active_shift = kc_hotel_get_or_create_active_shift($outgoing_staff);
+    if (!$active_shift) {
+        wp_send_json_error(['message' => 'Could not find an active shift to close.']);
+    }
+
+    $summary = kc_hotel_get_active_shift_summary($active_shift);
+    $end_time = current_time('mysql');
+
+    // Update active shift to closed
+    $wpdb->update(
+        $table_shifts,
+        [
+            'receptionist_name' => !empty($outgoing_staff) ? $outgoing_staff : $active_shift['receptionist_name'],
+            'incoming_receptionist' => $incoming_staff,
+            'end_time' => $end_time,
+            'total_bookings' => $summary['total_bookings'],
+            'total_collected' => $summary['total_collected'],
+            'pos_collected' => $summary['pos_collected'],
+            'cash_collected' => $summary['cash_collected'],
+            'transfer_collected' => $summary['transfer_collected'],
+            'checkins_count' => $summary['checkins_count'],
+            'checkouts_count' => $summary['checkouts_count'],
+            'rooms_occupied' => $summary['rooms_occupied'],
+            'rooms_available' => $summary['rooms_available'],
+            'bookings_summary_json' => wp_json_encode($summary['bookings']),
+            'handover_notes' => $notes,
+            'status' => 'closed'
+        ],
+        ['id' => $active_shift['id']]
+    );
+
+    // Immediately start the new shift for incoming receptionist
+    $new_shift_code = 'REC-SHIFT-' . current_time('Ymd') . '-' . strtoupper(wp_generate_password(4, false, false));
+    $wpdb->insert(
+        $table_shifts,
+        [
+            'shift_code' => $new_shift_code,
+            'receptionist_name' => $incoming_staff,
+            'start_time' => current_time('mysql'),
+            'status' => 'active'
+        ]
+    );
+    $new_shift_id = $wpdb->insert_id;
+
+    wp_send_json_success([
+        'message' => "Shift successfully closed by {$outgoing_staff}! Handed over to {$incoming_staff}.",
+        'closed_shift' => [
+            'shift_code' => $active_shift['shift_code'],
+            'outgoing_receptionist' => !empty($outgoing_staff) ? $outgoing_staff : $active_shift['receptionist_name'],
+            'incoming_receptionist' => $incoming_staff,
+            'start_time' => date('d/m/Y h:i A', strtotime($active_shift['start_time'])),
+            'end_time' => date('d/m/Y h:i A', strtotime($end_time)),
+            'totals' => $summary,
+            'bookings' => $summary['bookings'],
+            'handover_notes' => $notes
+        ],
+        'new_shift' => [
+            'id' => $new_shift_id,
+            'shift_code' => $new_shift_code,
+            'receptionist_name' => $incoming_staff,
+            'start_time' => current_time('d/m/Y h:i A')
+        ],
+        'new_active_receptionist' => $incoming_staff
+    ]);
+}
+
+/**
+ * AJAX: Fetch Past Reception Shifts History
+ */
+add_action('wp_ajax_kc_hotel_get_shift_history', 'kc_hotel_ajax_get_shift_history');
+add_action('wp_ajax_nopriv_kc_hotel_get_shift_history', 'kc_hotel_ajax_get_shift_history');
+function kc_hotel_ajax_get_shift_history() {
+    if (!kc_hotel_verify_staff_session()) {
+        wp_send_json_error(['message' => 'Unauthorized.'], 403);
+    }
+    global $wpdb;
+    $table_shifts = $wpdb->prefix . 'kc_hotel_shifts';
+
+    $shifts = $wpdb->get_results(
+        "SELECT id, shift_code, receptionist_name, incoming_receptionist, start_time, end_time, total_bookings, total_collected, pos_collected, cash_collected, transfer_collected, checkins_count, checkouts_count, rooms_occupied, rooms_available, handover_notes, bookings_summary_json, status
+         FROM $table_shifts 
+         ORDER BY id DESC 
+         LIMIT 40",
+        ARRAY_A
+    );
+
+    wp_send_json_success(['shifts' => $shifts ?: []]);
 }
 
 // -----------------------------------------------------------------------------

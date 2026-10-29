@@ -1162,11 +1162,77 @@ $reserve_url = home_url('/reserve/');
       .sales-analytics-grid { grid-template-columns: 1fr; }
     }
 
+    /* STAFF ON DUTY BADGE */
+    .staff-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: var(--radius-md);
+      color: #34d399;
+      font-size: 13px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+    }
+    .staff-badge:hover {
+      background: rgba(16, 185, 129, 0.22);
+      border-color: #34d399;
+    }
+    .staff-badge .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #10b981;
+      animation: pulseDot 2s infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    /* THERMAL & RECEIPT PRINT UTILITIES */
+    #receptionThermalShiftSlipArea {
+      display: none;
+    }
+    .receipt-center { text-align: center; }
+    .receipt-row { display: flex; justify-content: space-between; }
+    .receipt-divider { border-top: 1px dashed #000; margin: 4px 0; }
+    .receipt-double-divider { border-top: 2px solid #000; margin: 5px 0; }
+
     /* PRINT STYLES */
     @media print {
       body * { visibility: hidden; }
-      #printableFolioArea, #printableFolioArea * { visibility: visible; }
-      #printableFolioArea {
+
+      /* Mode 1: Thermal Shift Handover Slip */
+      body.printing-shift #receptionThermalShiftSlipArea,
+      body.printing-shift #receptionThermalShiftSlipArea * {
+        visibility: visible;
+      }
+      body.printing-shift #receptionThermalShiftSlipArea {
+        display: block !important;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 80mm;
+        margin: 0 auto;
+        padding: 4mm;
+        font-family: 'JetBrains Mono', 'Courier New', monospace;
+        font-size: 11px;
+        line-height: 1.35;
+        color: #000 !important;
+        background: #fff !important;
+      }
+
+      /* Mode 2: Standard A4 Guest Folio / Receipt */
+      body:not(.printing-shift) #printableFolioArea,
+      body:not(.printing-shift) #printableFolioArea * {
+        visibility: visible;
+      }
+      body:not(.printing-shift) #printableFolioArea {
         position: absolute;
         left: 0;
         top: 0;
@@ -1177,6 +1243,7 @@ $reserve_url = home_url('/reserve/');
         border: none;
       }
       .no-print { display: none !important; }
+      @page { margin: 10mm; }
     }
   </style>
 </head>
@@ -1242,6 +1309,27 @@ $reserve_url = home_url('/reserve/');
       <a href="<?php echo esc_url($reserve_url); ?>" target="_blank" class="btn btn-outline-light btn-sm" title="Guest Booking & Transfer Page">
         Guest Booking Form ↗
       </a>
+
+      <!-- Staff on duty -->
+      <div class="staff-badge" id="receptionistBadgeBtn" onclick="KCHotelApp.promptChangeStaffName()" title="Click to change receptionist name on duty">
+        <span class="status-dot"></span>
+        <span>Staff: <strong id="currentReceptionistNameDisplay">Front Desk Staff</strong></span>
+      </div>
+
+      <!-- Shift Handover / Close -->
+      <button class="btn btn-outline-light btn-sm" onclick="KCHotelApp.openShiftModal()" style="border-color: #10b981; color: #10b981; font-weight: 700;" title="Shift Handover & Financial Reconciliation">
+        🔄 Handover / Close Shift
+      </button>
+
+      <!-- Shifts History -->
+      <button class="btn btn-outline-light btn-sm" onclick="KCHotelApp.openShiftHistoryModal()" title="Past Shifts & Handover History">
+        📜 Shifts History
+      </button>
+
+      <!-- Room Prices Manager -->
+      <button class="btn btn-outline-light btn-sm" onclick="KCHotelApp.openRoomPricesModal()" title="Edit Room Tariffs & Nightly Rates">
+        💰 Room Prices
+      </button>
 
       <button class="btn btn-outline-light btn-sm" onclick="KCHotelApp.openBankSettingsModal()" title="Bank Account & Email Settings">
         ⚙️ Bank Settings
@@ -1688,33 +1776,57 @@ $reserve_url = home_url('/reserve/');
         <div class="modal-body">
           <div class="form-row">
             <div class="form-group">
-              <label>Guest Full Name *</label>
-              <input type="text" name="guest_name" class="form-control" placeholder="e.g. Chief Emeka Nwosu" required>
+              <label>Guest Full Name <span style="font-size: 11px; color: var(--kc-slate-400);">(Optional - defaults to 'Walk-in Guest')</span></label>
+              <input type="text" name="guest_name" class="form-control" placeholder="e.g. Chief Emeka Nwosu (optional)">
             </div>
             <div class="form-group">
-              <label>Phone Number *</label>
-              <input type="tel" name="guest_phone" class="form-control" placeholder="e.g. +234 803 000 0000" required>
+              <label>Phone Number <span style="font-size: 11px; color: var(--kc-slate-400);">(Optional)</span></label>
+              <input type="tel" name="guest_phone" class="form-control" placeholder="e.g. +234 803 000 0000 (optional)">
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label>Email Address</label>
-              <input type="email" name="guest_email" class="form-control" placeholder="guest@example.com">
+              <input type="email" name="guest_email" class="form-control" placeholder="guest@example.com (optional)">
             </div>
             <div class="form-group">
               <label>ID / NIN / Passport No.</label>
-              <input type="text" name="guest_id_number" class="form-control" placeholder="e.g. NIN: 1234567890">
+              <input type="text" name="guest_id_number" class="form-control" placeholder="e.g. NIN: 1234567890 (optional)">
+            </div>
+          </div>
+
+          <!-- GUEST RESIDENTIAL / BUSINESS ADDRESS -->
+          <div class="form-group">
+            <label>Guest Residential / Business Address <span style="font-size: 11px; color: var(--kc-slate-400);">(Optional)</span></label>
+            <textarea name="guest_address" class="form-control" rows="2" placeholder="e.g. 14 Admiralty Way, Lekki Phase 1, Lagos"></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Select Room Assignment</label>
+              <select name="room_number" id="bookingRoomSelect" class="form-control" onchange="KCHotelApp.calculateBookingSummary()">
+                <option value="">-- Choose an Available Room (or auto-assign) --</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Custom Rate Per Night (₦) <span style="font-size: 11px; color: var(--kc-gold-500);">(Optional Override)</span></label>
+              <input type="number" name="custom_rate" id="bookingCustomRate" class="form-control" placeholder="Leave blank to use standard tariff" oninput="KCHotelApp.calculateBookingSummary()" min="0" step="1000">
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
-              <label>Select Room Assignment *</label>
-              <select name="room_number" id="bookingRoomSelect" class="form-control" onchange="KCHotelApp.calculateBookingSummary()" required>
-                <option value="">-- Choose an Available Room --</option>
-              </select>
+              <label>Check-In Date</label>
+              <input type="date" name="check_in" id="bookingCheckIn" class="form-control" onchange="KCHotelApp.calculateBookingSummary()">
             </div>
+            <div class="form-group">
+              <label>Check-Out Date</label>
+              <input type="date" name="check_out" id="bookingCheckOut" class="form-control" onchange="KCHotelApp.calculateBookingSummary()">
+            </div>
+          </div>
+
+          <div class="form-row">
             <div class="form-group">
               <label>Initial Booking Status</label>
               <select name="booking_status" class="form-control">
@@ -1722,23 +1834,16 @@ $reserve_url = home_url('/reserve/');
                 <option value="reserved">Confirmed Reservation (Future/Later)</option>
               </select>
             </div>
-          </div>
-
-          <div class="form-row">
             <div class="form-group">
-              <label>Check-In Date *</label>
-              <input type="date" name="check_in" id="bookingCheckIn" class="form-control" onchange="KCHotelApp.calculateBookingSummary()" required>
-            </div>
-            <div class="form-group">
-              <label>Check-Out Date *</label>
-              <input type="date" name="check_out" id="bookingCheckOut" class="form-control" onchange="KCHotelApp.calculateBookingSummary()" required>
+              <label>Amount Paid Now (₦)</label>
+              <input type="number" name="amount_paid" id="bookingAmountPaid" class="form-control" value="0" min="0" step="1000">
             </div>
           </div>
 
           <!-- DYNAMIC CALCULATION SUMMARY -->
           <div class="calc-summary-box">
             <div class="calc-summary-row">
-              <span>Room & Rate:</span>
+              <span>Room &amp; Rate:</span>
               <strong id="summaryRoomRateText">Select a room</strong>
             </div>
             <div class="calc-summary-row">
@@ -1769,10 +1874,6 @@ $reserve_url = home_url('/reserve/');
 
           <div class="form-row">
             <div class="form-group">
-              <label>Amount Paid Now (₦)</label>
-              <input type="number" name="amount_paid" id="bookingAmountPaid" class="form-control" value="0" min="0" step="1000">
-            </div>
-            <div class="form-group">
               <label>Payment Method</label>
               <select name="payment_method" id="bookingPaymentMethod" class="form-control" onchange="KCHotelApp.toggleBankHelper(this.value)">
                 <option value="transfer">Direct Bank Transfer (Zenith)</option>
@@ -1781,11 +1882,10 @@ $reserve_url = home_url('/reserve/');
                 <option value="paystack">Paystack Online</option>
               </select>
             </div>
-          </div>
-
-          <div class="form-group">
-            <label>Payment Reference / Transaction ID</label>
-            <input type="text" name="payment_reference" class="form-control" placeholder="e.g. Zenith Ref / POS Approval / Session ID">
+            <div class="form-group">
+              <label>Payment Reference / Transaction ID</label>
+              <input type="text" name="payment_reference" class="form-control" placeholder="e.g. Zenith Ref / POS Approval / Session ID">
+            </div>
           </div>
 
           <div class="form-group">
@@ -1990,6 +2090,7 @@ $reserve_url = home_url('/reserve/');
               <div style="font-size: 14px; font-weight: 700; color: var(--kc-navy-950); margin-top: 2px;" id="folioPrintGuestName">--</div>
               <div id="folioPrintGuestPhone">--</div>
               <div id="folioPrintGuestEmail">--</div>
+              <div id="folioPrintGuestAddress" style="font-size: 11px; color: var(--kc-slate-600); margin-top: 3px;">--</div>
             </div>
             <div>
               <div style="color: var(--kc-slate-400); font-weight: 700; text-transform: uppercase; font-size: 10px;">Stay Details</div>
@@ -2055,6 +2156,329 @@ $reserve_url = home_url('/reserve/');
     </div>
   </div>
 
+  <!-- MODAL 7: FRONT DESK SHIFT HANDOVER & CLOSING -->
+  <div id="receptionShiftModal" class="modal-backdrop">
+    <div class="modal-box" style="max-width: 760px;">
+      <div class="modal-header">
+        <div>
+          <h2>
+            🔄 Close Shift &amp; Handover to Next Receptionist
+          </h2>
+          <p style="font-size: 12px; color: var(--kc-slate-500); margin-top: 2px;">
+            Dedicated shift audit, payment reconciliation &amp; occupancy handover per receptionist
+          </p>
+        </div>
+        <button class="modal-close-btn" onclick="KCHotelApp.closeModals()">&times;</button>
+      </div>
+
+      <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+        
+        <!-- Shift Personnel & Time Banner -->
+        <div style="background: #0f172a; color: #fff; border-radius: 10px; padding: 14px 18px; margin-bottom: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px;">
+          <div>
+            <label style="font-size: 10px; color: #94a3b8; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 4px;">Outgoing Receptionist (Closing Duty)</label>
+            <input type="text" id="shiftOutgoingReceptionistInput" class="form-control" style="background: #1e293b; color: #38bdf8; border-color: #334155; font-weight: 700; font-size: 14px;" required>
+          </div>
+          <div>
+            <label style="font-size: 10px; color: #94a3b8; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 4px;">Shift Started At</label>
+            <div style="font-size: 13px; font-weight: 700; color: #cbd5e1; padding-top: 6px;" id="shiftStartTimeDisplay">--:--</div>
+          </div>
+          <div>
+            <label style="font-size: 10px; color: #94a3b8; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 4px;">Shift Code</label>
+            <div style="font-size: 13px; font-weight: 800; color: var(--kc-gold-500); font-family: 'JetBrains Mono', monospace; padding-top: 6px;" id="shiftCodeDisplay">REC-SHIFT-...</div>
+          </div>
+        </div>
+
+        <!-- Shift Financial Performance -->
+        <h4 style="font-size: 13px; font-weight: 700; color: var(--kc-navy-950); margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+          💰 Collections &amp; Payments Recorded On This Shift
+        </h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 18px;">
+          <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-left: 4px solid #10b981; padding: 10px; border-radius: 8px;">
+            <div style="font-size: 11px; color: #166534; font-weight: 600;">Total Collected</div>
+            <div style="font-size: 18px; font-weight: 800; color: #15803d; font-family: 'JetBrains Mono', monospace;" id="shiftTotalCollectedDisplay">₦0.00</div>
+          </div>
+          <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-left: 4px solid #0284c7; padding: 10px; border-radius: 8px;">
+            <div style="font-size: 11px; color: #0369a1; font-weight: 600;">POS Terminal (Card)</div>
+            <div style="font-size: 18px; font-weight: 800; color: #0284c7; font-family: 'JetBrains Mono', monospace;" id="shiftPosCollectedDisplay">₦0.00</div>
+          </div>
+          <div style="background: #fffbeb; border: 1px solid #fde68a; border-left: 4px solid #d97706; padding: 10px; border-radius: 8px;">
+            <div style="font-size: 11px; color: #92400e; font-weight: 600;">Cash in Drawer</div>
+            <div style="font-size: 18px; font-weight: 800; color: #d97706; font-family: 'JetBrains Mono', monospace;" id="shiftCashCollectedDisplay">₦0.00</div>
+          </div>
+          <div style="background: #faf5ff; border: 1px solid #e9d5ff; border-left: 4px solid #9333ea; padding: 10px; border-radius: 8px;">
+            <div style="font-size: 11px; color: #7e22ce; font-weight: 600;">Bank Transfer (Zenith)</div>
+            <div style="font-size: 18px; font-weight: 800; color: #9333ea; font-family: 'JetBrains Mono', monospace;" id="shiftTransferCollectedDisplay">₦0.00</div>
+          </div>
+        </div>
+
+        <!-- Occupancy & Movement Snapshot -->
+        <h4 style="font-size: 13px; font-weight: 700; color: var(--kc-navy-950); margin-bottom: 10px;">
+          🛏️ Room Occupancy &amp; Movement Handover Snapshot
+        </h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 18px;">
+          <div style="background: #f8fafc; border: 1px solid var(--kc-slate-200); padding: 8px 12px; border-radius: 6px;">
+            <div style="font-size: 10px; color: var(--kc-slate-500); text-transform: uppercase; font-weight: 600;">Occupied Rooms</div>
+            <div style="font-size: 16px; font-weight: 800; color: var(--kc-danger);" id="shiftRoomsOccupiedDisplay">0</div>
+          </div>
+          <div style="background: #f8fafc; border: 1px solid var(--kc-slate-200); padding: 8px 12px; border-radius: 6px;">
+            <div style="font-size: 10px; color: var(--kc-slate-500); text-transform: uppercase; font-weight: 600;">Available Rooms</div>
+            <div style="font-size: 16px; font-weight: 800; color: var(--kc-success);" id="shiftRoomsAvailableDisplay">0</div>
+          </div>
+          <div style="background: #f8fafc; border: 1px solid var(--kc-slate-200); padding: 8px 12px; border-radius: 6px;">
+            <div style="font-size: 10px; color: var(--kc-slate-500); text-transform: uppercase; font-weight: 600;">Check-Ins Handled</div>
+            <div style="font-size: 16px; font-weight: 800; color: var(--kc-blue-600);" id="shiftCheckinsDisplay">0</div>
+          </div>
+          <div style="background: #f8fafc; border: 1px solid var(--kc-slate-200); padding: 8px 12px; border-radius: 6px;">
+            <div style="font-size: 10px; color: var(--kc-slate-500); text-transform: uppercase; font-weight: 600;">Check-Outs Handled</div>
+            <div style="font-size: 16px; font-weight: 800; color: var(--kc-slate-700);" id="shiftCheckoutsDisplay">0</div>
+          </div>
+        </div>
+
+        <!-- Bookings Recorded This Shift -->
+        <h4 style="font-size: 13px; font-weight: 700; color: var(--kc-navy-950); margin-bottom: 8px;">
+          📋 Bookings &amp; Guests Processed on this Shift
+        </h4>
+        <div style="background: #f8fafc; border: 1px solid var(--kc-slate-200); border-radius: 8px; max-height: 160px; overflow-y: auto; margin-bottom: 18px; padding: 6px 12px;" id="shiftBookingsListContainer">
+          <p style="color: var(--kc-slate-400); font-size: 12px; padding: 10px 0;">No new bookings logged on this shift.</p>
+        </div>
+
+        <!-- Handover to Incoming Receptionist Form -->
+        <div style="background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: 10px; padding: 14px;">
+          <h4 style="font-size: 13px; font-weight: 800; color: #0f172a; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+            🤝 Reception Handover to Incoming Attendant
+          </h4>
+          <div class="form-row" style="margin-bottom: 0;">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label style="font-weight: 700;">Incoming Receptionist (Taking Over Shift) *</label>
+              <input type="text" id="shiftIncomingReceptionistInput" class="form-control" placeholder="e.g. Mary, Blessing, Paul, Cynthia" required>
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label style="font-weight: 700;">Handover Notes / Cash Balance / Room Keys</label>
+              <input type="text" id="shiftHandoverNotesInput" class="form-control" placeholder="e.g. Drawer cash ₦35,000 verified. Room 104 key with guest.">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="KCHotelApp.closeModals()">Cancel</button>
+        <button type="button" class="btn btn-outline-light" style="color: var(--kc-slate-700); border-color: var(--kc-slate-300);" onclick="KCHotelApp.submitShiftClose(false)">
+          Handover (Without Print)
+        </button>
+        <button type="button" class="btn btn-gold" onclick="KCHotelApp.submitShiftClose(true)">
+          🖨️ Print Shift Slip &amp; Handover
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 8: PAST SHIFTS & RECEPTION HANDOVER LOGS -->
+  <div id="receptionShiftHistoryModal" class="modal-backdrop">
+    <div class="modal-box" style="max-width: 860px;">
+      <div class="modal-header">
+        <div>
+          <h2>📜 Reception Shifts History &amp; Handover Records</h2>
+          <p style="font-size: 12px; color: var(--kc-slate-500); margin-top: 2px;">
+            Past staff shifts, handover times, financial summaries and slip reprints
+          </p>
+        </div>
+        <button class="modal-close-btn" onclick="KCHotelApp.closeModals()">&times;</button>
+      </div>
+      <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+        <div class="table-responsive">
+          <table class="data-table" id="shiftHistoryTable">
+            <thead>
+              <tr>
+                <th>Shift Code</th>
+                <th>Outgoing Staff</th>
+                <th>Incoming Staff</th>
+                <th>Start / End Time</th>
+                <th>Total Collected</th>
+                <th>Movement</th>
+                <th>Notes</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="shiftHistoryTableBody">
+              <tr><td colspan="8" style="text-align: center; color: var(--kc-slate-400);">Loading shifts...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="KCHotelApp.closeModals()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 9: ROOM PRICES & TARIFFS MANAGER -->
+  <div id="quickPriceEditModal" class="modal-backdrop">
+    <div class="modal-box" style="max-width: 820px;">
+      <div class="modal-header">
+        <div>
+          <h2>💰 Room Prices &amp; Nightly Tariffs Manager</h2>
+          <p style="font-size: 12px; color: var(--kc-slate-500); margin-top: 2px;">
+            Update room rates directly from front desk. Changes apply immediately and are saved permanently.
+          </p>
+        </div>
+        <button class="modal-close-btn" onclick="KCHotelApp.closeModals()">&times;</button>
+      </div>
+      <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+        
+        <!-- Category Bulk Update Strip -->
+        <h4 style="font-size: 13px; font-weight: 700; color: var(--kc-navy-950); margin-bottom: 10px;">
+          🏷️ Room Category Rates (Update All Rooms in Category)
+        </h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 24px;" id="priceCategoryCardsContainer">
+          <!-- Filled dynamically by KCHotelApp.renderPriceCategoryCards() -->
+        </div>
+
+        <!-- Individual Room Price Editor Table -->
+        <h4 style="font-size: 13px; font-weight: 700; color: var(--kc-navy-950); margin-bottom: 10px;">
+          🛏️ Individual Room Rates
+        </h4>
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Room No.</th>
+                <th>Room Category</th>
+                <th>Branch / Wing</th>
+                <th>Current Status</th>
+                <th>Nightly Rate (₦)</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="individualRoomPricesTableBody">
+              <!-- Filled dynamically by KCHotelApp.renderIndividualRoomPrices() -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" onclick="KCHotelApp.closeModals()">Done / Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- THERMAL & PRINTABLE SHIFT RECONCILIATION SLIP (58mm/80mm POS or A4) -->
+  <div id="receptionThermalShiftSlipArea">
+    <div class="receipt-center">
+      <div style="font-size:14px; font-weight:bold; letter-spacing:1px;">KELVIN CAMEO RESORT</div>
+      <div style="font-size:12px; font-weight:bold;">HOTEL, SUITES &amp; PROPERTY DESK</div>
+      <div style="font-size:10px;">RC: 1613032 | Suleja, Abuja Corridor</div>
+      <div style="font-size:10px;">desk@kelvincameo.com • 08055558197</div>
+      <div style="font-size:11px; font-weight:bold; margin-top:5px; border-top:1px dashed #000; border-bottom:1px dashed #000; padding:3px 0;">
+        *** FRONT DESK SHIFT HANDOVER SLIP ***
+      </div>
+    </div>
+
+    <div class="receipt-row" style="margin-top:6px;">
+      <span>SHIFT CODE:</span>
+      <strong id="printShiftCode">REC-SHIFT-...</strong>
+    </div>
+    <div class="receipt-row">
+      <span>DATE:</span>
+      <span id="printShiftDate">--</span>
+    </div>
+    <div class="receipt-row">
+      <span>SHIFT START:</span>
+      <span id="printShiftStartTime">--</span>
+    </div>
+    <div class="receipt-row">
+      <span>SHIFT END:</span>
+      <span id="printShiftEndTime">--</span>
+    </div>
+    
+    <div class="receipt-divider"></div>
+
+    <div class="receipt-row">
+      <span>OUTGOING RECEPTIONIST:</span>
+      <strong id="printShiftOutgoing">--</strong>
+    </div>
+    <div class="receipt-row">
+      <span>INCOMING RECEPTIONIST:</span>
+      <strong id="printShiftIncoming">--</strong>
+    </div>
+
+    <div class="receipt-double-divider"></div>
+
+    <div style="font-size:11px; font-weight:bold; text-align:center; margin-bottom:4px;">
+      SHIFT FINANCIAL RECONCILIATION
+    </div>
+    <div class="receipt-row">
+      <span>POS TERMINAL:</span>
+      <span id="printShiftPos">₦0.00</span>
+    </div>
+    <div class="receipt-row">
+      <span>CASH IN DRAWER:</span>
+      <span id="printShiftCash">₦0.00</span>
+    </div>
+    <div class="receipt-row">
+      <span>BANK TRANSFER (ZENITH):</span>
+      <span id="printShiftTransfer">₦0.00</span>
+    </div>
+    <div class="receipt-divider"></div>
+    <div class="receipt-row" style="font-size:13px; font-weight:bold;">
+      <span>TOTAL SHIFT COLLECTED:</span>
+      <span id="printShiftTotal">₦0.00</span>
+    </div>
+
+    <div class="receipt-double-divider"></div>
+
+    <div style="font-size:11px; font-weight:bold; text-align:center; margin-bottom:4px;">
+      OCCUPANCY &amp; MOVEMENT SNAPSHOT
+    </div>
+    <div class="receipt-row">
+      <span>ROOMS OCCUPIED:</span>
+      <strong id="printShiftRoomsOccupied">0</strong>
+    </div>
+    <div class="receipt-row">
+      <span>ROOMS AVAILABLE:</span>
+      <strong id="printShiftRoomsAvailable">0</strong>
+    </div>
+    <div class="receipt-row">
+      <span>CHECK-INS HANDLED:</span>
+      <strong id="printShiftCheckins">0</strong>
+    </div>
+    <div class="receipt-row">
+      <span>CHECK-OUTS HANDLED:</span>
+      <strong id="printShiftCheckouts">0</strong>
+    </div>
+    <div class="receipt-row">
+      <span>TOTAL BOOKINGS LOGGED:</span>
+      <strong id="printShiftBookingsCount">0</strong>
+    </div>
+
+    <div class="receipt-divider"></div>
+
+    <div style="font-size:10px; font-weight:bold; margin-bottom:4px;">GUESTS PROCESSED THIS SHIFT:</div>
+    <div id="printShiftBookingsList" style="font-size:10px;"></div>
+
+    <div class="receipt-divider"></div>
+
+    <div id="printShiftNotesRow" style="font-size:10px; margin:6px 0;">
+      <span>HANDOVER NOTES: </span><span id="printShiftNotes">--</span>
+    </div>
+
+    <div class="receipt-divider"></div>
+
+    <div style="margin-top:15px; font-size:10px;">
+      <div>Outgoing Signature: __________________</div>
+      <div style="margin-top:10px;">Incoming Signature: __________________</div>
+      <div style="margin-top:10px;">Manager / Auditor:  __________________</div>
+    </div>
+
+    <div class="receipt-center" style="font-size:9px; margin-top:12px;">
+      <div>Keys, Cash &amp; Rooms verified</div>
+      <div>Kelvin Cameo Hotel Management System</div>
+      <div>. . . . . . . . . . . . . . . . . . . . .</div>
+    </div>
+  </div>
+
   <div class="toast-container" id="toastContainer"></div>
 
   <!-- APPLICATION JAVASCRIPT -->
@@ -2064,6 +2488,10 @@ $reserve_url = home_url('/reserve/');
       isLoggedIn: <?php echo $is_logged_in ? 'true' : 'false'; ?>,
       defaultPin: '<?php echo esc_js($default_pin); ?>',
       currentPinToken: sessionStorage.getItem('kc_hotel_token') || '',
+      currentStaff: localStorage.getItem('kc_hotel_staff') || 'Front Desk Staff',
+      activeShift: null,
+      shiftSummary: null,
+      pastShifts: [],
       
       data: {
         rooms: [],
@@ -2102,6 +2530,11 @@ $reserve_url = home_url('/reserve/');
             return res;
           });
         };
+
+        const staffDisplay = document.getElementById('currentReceptionistNameDisplay');
+        if (staffDisplay) {
+          staffDisplay.innerText = this.currentStaff;
+        }
 
         this.initClock();
         
@@ -2215,6 +2648,19 @@ $reserve_url = home_url('/reserve/');
           });
       },
 
+      promptChangeStaffName: function() {
+        const current = this.currentStaff || 'Front Desk Staff';
+        const name = prompt('Enter your name / Receptionist on duty:', current);
+        if (name && name.trim()) {
+          this.currentStaff = name.trim();
+          localStorage.setItem('kc_hotel_staff', this.currentStaff);
+          const staffDisplay = document.getElementById('currentReceptionistNameDisplay');
+          if (staffDisplay) staffDisplay.innerText = this.currentStaff;
+          this.showToast(`Active receptionist updated to ${this.currentStaff}`);
+          this.refreshDashboard();
+        }
+      },
+
       lockDesk: function() {
         sessionStorage.removeItem('kc_hotel_token');
         this.currentPinToken = '';
@@ -2229,6 +2675,7 @@ $reserve_url = home_url('/reserve/');
 
         const fd = new FormData();
         fd.append('action', 'kc_hotel_get_dashboard');
+        fd.append('staff_name', this.currentStaff);
 
         fetch(this.ajaxUrl, { method: 'POST', body: fd })
           .then(r => r.json())
@@ -2236,6 +2683,14 @@ $reserve_url = home_url('/reserve/');
             if (!isBackground && spinner) spinner.style.animation = 'none';
             if (res.success && res.data) {
               this.data = res.data;
+              if (res.data.active_shift) {
+                this.activeShift = res.data.active_shift;
+                this.shiftSummary = res.data.shift_summary;
+                const staffDisplay = document.getElementById('currentReceptionistNameDisplay');
+                if (staffDisplay) {
+                  staffDisplay.innerText = this.activeShift.receptionist_name || this.currentStaff;
+                }
+              }
               this.renderKPIs();
               this.renderRoomRack();
               this.renderReservationsTable();
@@ -2499,8 +2954,9 @@ $reserve_url = home_url('/reserve/');
                   In: ${g.check_in} • Out: ${g.check_out} (${g.nights} night${g.nights > 1 ? 's' : ''})
                 </div>
                 <div style="font-size: 10px; color: var(--kc-slate-400); margin-top: 2px;">
-                  Ref: <strong>${g.booking_ref}</strong> • ${g.guest_phone}
+                  Ref: <strong>${g.booking_ref}</strong> • ${g.guest_phone || 'No phone'}
                 </div>
+                ${g.guest_address ? `<div style="font-size: 10px; color: var(--kc-slate-500); margin-top: 2px; max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${g.guest_address}">📍 ${g.guest_address}</div>` : ''}
               </div>
             `;
 
@@ -2672,7 +3128,8 @@ $reserve_url = home_url('/reserve/');
               <td><span class="ref-code">${b.booking_ref}</span></td>
               <td>
                 <div style="font-weight: 700; color: var(--kc-navy-950);">${b.guest_name}</div>
-                <div style="font-size: 11px; color: var(--kc-slate-500);">${b.guest_phone}</div>
+                <div style="font-size: 11px; color: var(--kc-slate-500);">${b.guest_phone || 'No phone'}</div>
+                ${b.guest_address ? `<div style="font-size: 10px; color: var(--kc-slate-500); max-width: 170px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${b.guest_address}">📍 ${b.guest_address}</div>` : ''}
               </td>
               <td>
                 <div style="font-weight: 700;">${b.room_number}</div>
@@ -2921,21 +3378,30 @@ $reserve_url = home_url('/reserve/');
         const inEl = document.getElementById('bookingCheckIn');
         const outEl = document.getElementById('bookingCheckOut');
         const amountInput = document.getElementById('bookingAmountPaid');
+        const customRateEl = document.getElementById('bookingCustomRate');
 
         if (!select || !inEl || !outEl) return;
 
         const opt = select.options[select.selectedIndex];
-        const rate = opt && opt.dataset.rate ? Number(opt.dataset.rate) : 0;
+        const baseRate = opt && opt.dataset.rate ? Number(opt.dataset.rate) : 0;
         const type = opt && opt.dataset.type ? opt.dataset.type : 'Select room';
 
-        const d1 = new Date(inEl.value);
-        const d2 = new Date(outEl.value);
+        let effectiveRate = baseRate;
+        const customRateVal = customRateEl ? Number(customRateEl.value) : 0;
+        if (customRateVal > 0) {
+          effectiveRate = customRateVal;
+        }
+
+        const d1 = inEl.value ? new Date(inEl.value) : new Date();
+        const d2 = outEl.value ? new Date(outEl.value) : new Date(Date.now() + 86400000);
         let nights = Math.ceil((d2 - d1) / (1000 * 60 * 60 * 24));
         if (isNaN(nights) || nights < 1) nights = 1;
 
-        const total = rate * nights;
+        const total = effectiveRate * nights;
 
-        document.getElementById('summaryRoomRateText').innerText = rate > 0 ? `${type} @ ₦${rate.toLocaleString()}/night` : 'Select a room';
+        document.getElementById('summaryRoomRateText').innerText = effectiveRate > 0 
+          ? `${type} @ ₦${effectiveRate.toLocaleString()}/night${customRateVal > 0 ? ' (Custom Tariff)' : ''}` 
+          : 'Select a room';
         document.getElementById('summaryDurationText').innerText = `${nights} Night(s)`;
         document.getElementById('summaryTotalBill').innerText = `₦${total.toLocaleString()}.00`;
 
@@ -3081,6 +3547,7 @@ $reserve_url = home_url('/reserve/');
         const form = document.getElementById('newBookingForm');
         const fd = new FormData(form);
         fd.append('action', 'kc_hotel_create_booking');
+        fd.append('receptionist_name', this.currentStaff || 'Front Desk Staff');
 
         fetch(this.ajaxUrl, { method: 'POST', body: fd })
           .then(r => r.json())
@@ -3173,8 +3640,13 @@ $reserve_url = home_url('/reserve/');
         document.getElementById('folioPrintRef').innerText = b.booking_ref;
         document.getElementById('folioPrintDate').innerText = b.created_at;
         document.getElementById('folioPrintGuestName').innerText = b.guest_name;
-        document.getElementById('folioPrintGuestPhone').innerText = 'Phone: ' + b.guest_phone;
+        document.getElementById('folioPrintGuestPhone').innerText = 'Phone: ' + (b.guest_phone || 'N/A');
         document.getElementById('folioPrintGuestEmail').innerText = b.guest_email ? 'Email: ' + b.guest_email : '';
+        const addrEl = document.getElementById('folioPrintGuestAddress');
+        if (addrEl) {
+          addrEl.innerText = b.guest_address ? 'Address: ' + b.guest_address : '';
+          addrEl.style.display = b.guest_address ? 'block' : 'none';
+        }
         document.getElementById('folioPrintRoom').innerText = `${b.room_number} - ${b.room_type} (${b.branch})`;
         document.getElementById('folioPrintCheckIn').innerText = b.check_in;
         document.getElementById('folioPrintCheckOut').innerText = b.check_out;
@@ -3193,7 +3665,16 @@ $reserve_url = home_url('/reserve/');
 
       openNewBookingModal: function(roomNumber) {
         this.populateRoomSelect(roomNumber);
+        const today = new Date().toISOString().split('T')[0];
+        const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+        const inEl = document.getElementById('bookingCheckIn');
+        const outEl = document.getElementById('bookingCheckOut');
+        if (inEl && !inEl.value) inEl.value = today;
+        if (outEl && !outEl.value) outEl.value = tomorrow;
+        const customRateEl = document.getElementById('bookingCustomRate');
+        if (customRateEl) customRateEl.value = '';
         document.getElementById('newBookingModal').classList.add('active');
+        this.calculateBookingSummary();
       },
 
       closeModals: function() {
@@ -3260,6 +3741,418 @@ $reserve_url = home_url('/reserve/');
         } else if (this.activeTab === 'inventory') {
           this.renderInventoryTable();
         }
+      },
+
+      // ==============================================================
+      // SHIFT MANAGEMENT & RECEPTIONIST HANDOVER
+      // ==============================================================
+      openShiftModal: function() {
+        const outgoingInput = document.getElementById('shiftOutgoingReceptionistInput');
+        if (outgoingInput) outgoingInput.value = this.currentStaff || 'Front Desk Staff';
+
+        const fd = new FormData();
+        fd.append('action', 'kc_hotel_get_active_shift');
+        fd.append('staff_name', this.currentStaff || 'Front Desk Staff');
+
+        fetch(this.ajaxUrl, { method: 'POST', body: fd })
+          .then(r => r.json())
+          .then(res => {
+            if (res.success && res.data) {
+              const shift = res.data.shift;
+              const summary = res.data.summary;
+              this.activeShift = shift;
+              this.shiftSummary = summary;
+
+              if (document.getElementById('shiftStartTimeDisplay')) {
+                document.getElementById('shiftStartTimeDisplay').innerText = shift.start_time ? new Date(shift.start_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--';
+              }
+              if (document.getElementById('shiftCodeDisplay')) {
+                document.getElementById('shiftCodeDisplay').innerText = shift.shift_code || 'REC-SHIFT-...';
+              }
+
+              // Financial badges
+              if (document.getElementById('shiftTotalCollectedDisplay')) {
+                document.getElementById('shiftTotalCollectedDisplay').innerText = '₦' + Number(summary.total_collected || 0).toLocaleString() + '.00';
+              }
+              if (document.getElementById('shiftPosCollectedDisplay')) {
+                document.getElementById('shiftPosCollectedDisplay').innerText = '₦' + Number(summary.pos_collected || 0).toLocaleString() + '.00';
+              }
+              if (document.getElementById('shiftCashCollectedDisplay')) {
+                document.getElementById('shiftCashCollectedDisplay').innerText = '₦' + Number(summary.cash_collected || 0).toLocaleString() + '.00';
+              }
+              if (document.getElementById('shiftTransferCollectedDisplay')) {
+                document.getElementById('shiftTransferCollectedDisplay').innerText = '₦' + Number(summary.transfer_collected || 0).toLocaleString() + '.00';
+              }
+
+              // Movement & Occupancy badges
+              if (document.getElementById('shiftRoomsOccupiedDisplay')) {
+                document.getElementById('shiftRoomsOccupiedDisplay').innerText = summary.rooms_occupied || 0;
+              }
+              if (document.getElementById('shiftRoomsAvailableDisplay')) {
+                document.getElementById('shiftRoomsAvailableDisplay').innerText = summary.rooms_available || 0;
+              }
+              if (document.getElementById('shiftCheckinsDisplay')) {
+                document.getElementById('shiftCheckinsDisplay').innerText = summary.checkins_count || 0;
+              }
+              if (document.getElementById('shiftCheckoutsDisplay')) {
+                document.getElementById('shiftCheckoutsDisplay').innerText = summary.checkouts_count || 0;
+              }
+
+              // Processed bookings list
+              const listContainer = document.getElementById('shiftBookingsListContainer');
+              if (listContainer) {
+                const bList = summary.bookings || [];
+                if (bList.length === 0) {
+                  listContainer.innerHTML = '<p style="color: var(--kc-slate-400); font-size: 12px; padding: 10px 0;">No new bookings logged on this shift.</p>';
+                } else {
+                  listContainer.innerHTML = bList.map(b => `
+                    <div style="display:flex; justify-content:space-between; align-items:center; padding: 6px 0; border-bottom: 1px dashed var(--kc-slate-200); font-size: 12px;">
+                      <div>
+                        <strong>${b.room_number}</strong> • <span>${b.guest_name}</span> <span style="color: var(--kc-slate-400);">(${b.booking_ref})</span>
+                      </div>
+                      <div style="text-align: right;">
+                        <span style="font-weight: 700; color: var(--kc-success);">₦${Number(b.amount_paid).toLocaleString()}</span>
+                        <span style="font-size: 10px; color: var(--kc-slate-500); text-transform: uppercase;">(${b.payment_method})</span>
+                      </div>
+                    </div>
+                  `).join('');
+                }
+              }
+
+              const incomingEl = document.getElementById('shiftIncomingReceptionistInput');
+              if (incomingEl) incomingEl.value = '';
+              const notesEl = document.getElementById('shiftHandoverNotesInput');
+              if (notesEl) notesEl.value = '';
+
+              document.getElementById('receptionShiftModal').classList.add('active');
+            } else {
+              this.showToast('Could not load active shift details', 'error');
+            }
+          })
+          .catch(() => {
+            this.showToast('Network error loading shift details', 'error');
+          });
+      },
+
+      submitShiftClose: function(printSlip = true) {
+        const outgoingInput = document.getElementById('shiftOutgoingReceptionistInput');
+        const incomingInput = document.getElementById('shiftIncomingReceptionistInput');
+        const notesInput = document.getElementById('shiftHandoverNotesInput');
+
+        const outgoing = (outgoingInput && outgoingInput.value.trim()) || this.currentStaff || 'Front Desk Staff';
+        const incoming = incomingInput ? incomingInput.value.trim() : '';
+        const notes = notesInput ? notesInput.value.trim() : '';
+
+        if (!incoming) {
+          alert('Please enter the name of the incoming receptionist taking over the desk!');
+          if (incomingInput) incomingInput.focus();
+          return;
+        }
+
+        const fd = new FormData();
+        fd.append('action', 'kc_hotel_close_shift');
+        fd.append('outgoing_staff', outgoing);
+        fd.append('incoming_staff', incoming);
+        fd.append('notes', notes);
+
+        fetch(this.ajaxUrl, { method: 'POST', body: fd })
+          .then(r => r.json())
+          .then(res => {
+            if (res.success && res.data) {
+              this.showToast(res.data.message || 'Shift closed and handed over!');
+              if (printSlip && res.data.closed_shift) {
+                this.printShiftSlip(res.data.closed_shift);
+              }
+              this.currentStaff = res.data.new_active_receptionist || incoming;
+              localStorage.setItem('kc_hotel_staff', this.currentStaff);
+              const staffDisplay = document.getElementById('currentReceptionistNameDisplay');
+              if (staffDisplay) staffDisplay.innerText = this.currentStaff;
+
+              this.closeModals();
+              this.refreshDashboard();
+            } else {
+              this.showToast(res.data && res.data.message ? res.data.message : 'Error closing shift', 'error');
+            }
+          })
+          .catch(() => {
+            this.showToast('Network error closing shift', 'error');
+          });
+      },
+
+      printShiftSlip: function(s) {
+        if (!s) return;
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('en-GB');
+
+        if (document.getElementById('printShiftCode')) document.getElementById('printShiftCode').innerText = s.shift_code || 'REC-SHIFT-...';
+        if (document.getElementById('printShiftDate')) document.getElementById('printShiftDate').innerText = dateStr;
+        if (document.getElementById('printShiftStartTime')) document.getElementById('printShiftStartTime').innerText = s.start_time || '--';
+        if (document.getElementById('printShiftEndTime')) document.getElementById('printShiftEndTime').innerText = s.end_time || '--';
+        if (document.getElementById('printShiftOutgoing')) document.getElementById('printShiftOutgoing').innerText = s.outgoing_receptionist || 'Staff';
+        if (document.getElementById('printShiftIncoming')) document.getElementById('printShiftIncoming').innerText = s.incoming_receptionist || 'Staff';
+
+        const totals = s.totals || {};
+        if (document.getElementById('printShiftPos')) document.getElementById('printShiftPos').innerText = '₦' + Number(totals.pos_collected || 0).toLocaleString() + '.00';
+        if (document.getElementById('printShiftCash')) document.getElementById('printShiftCash').innerText = '₦' + Number(totals.cash_collected || 0).toLocaleString() + '.00';
+        if (document.getElementById('printShiftTransfer')) document.getElementById('printShiftTransfer').innerText = '₦' + Number(totals.transfer_collected || 0).toLocaleString() + '.00';
+        if (document.getElementById('printShiftTotal')) document.getElementById('printShiftTotal').innerText = '₦' + Number(totals.total_collected || 0).toLocaleString() + '.00';
+
+        if (document.getElementById('printShiftRoomsOccupied')) document.getElementById('printShiftRoomsOccupied').innerText = totals.rooms_occupied || 0;
+        if (document.getElementById('printShiftRoomsAvailable')) document.getElementById('printShiftRoomsAvailable').innerText = totals.rooms_available || 0;
+        if (document.getElementById('printShiftCheckins')) document.getElementById('printShiftCheckins').innerText = totals.checkins_count || 0;
+        if (document.getElementById('printShiftCheckouts')) document.getElementById('printShiftCheckouts').innerText = totals.checkouts_count || 0;
+        if (document.getElementById('printShiftBookingsCount')) document.getElementById('printShiftBookingsCount').innerText = totals.total_bookings || 0;
+
+        const bListEl = document.getElementById('printShiftBookingsList');
+        if (bListEl) {
+          const bArr = s.bookings || [];
+          if (bArr.length === 0) {
+            bListEl.innerHTML = '<div>None recorded during shift.</div>';
+          } else {
+            bListEl.innerHTML = bArr.map(b => `
+              <div class="receipt-row">
+                <span>Room ${b.room_number}: ${b.guest_name.substring(0, 15)}</span>
+                <span>₦${Number(b.amount_paid).toLocaleString()}</span>
+              </div>
+            `).join('');
+          }
+        }
+
+        if (document.getElementById('printShiftNotes')) {
+          document.getElementById('printShiftNotes').innerText = s.handover_notes || 'Clean handover. All items accounted for.';
+        }
+
+        document.body.classList.add('printing-shift');
+        window.print();
+        setTimeout(() => {
+          document.body.classList.remove('printing-shift');
+        }, 1000);
+      },
+
+      openShiftHistoryModal: function() {
+        const tbody = document.getElementById('shiftHistoryTableBody');
+        if (tbody) tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--kc-slate-400);">Loading shifts history...</td></tr>';
+        document.getElementById('receptionShiftHistoryModal').classList.add('active');
+
+        const fd = new FormData();
+        fd.append('action', 'kc_hotel_get_shift_history');
+
+        fetch(this.ajaxUrl, { method: 'POST', body: fd })
+          .then(r => r.json())
+          .then(res => {
+            if (res.success && res.data && res.data.shifts) {
+              this.pastShifts = res.data.shifts;
+              if (this.pastShifts.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--kc-slate-400); padding: 20px;">No shift handover logs found yet.</td></tr>';
+                return;
+              }
+              tbody.innerHTML = this.pastShifts.map(s => {
+                const total = Number(s.total_collected || 0).toLocaleString();
+                const pos = Number(s.pos_collected || 0).toLocaleString();
+                const cash = Number(s.cash_collected || 0).toLocaleString();
+                const trans = Number(s.transfer_collected || 0).toLocaleString();
+                const start = s.start_time ? new Date(s.start_time).toLocaleString('en-GB', { dateStyle: 'short', timeStyle: 'short' }) : '--';
+                const end = s.end_time ? new Date(s.end_time).toLocaleString('en-GB', { timeStyle: 'short' }) : 'Active';
+
+                return `
+                  <tr>
+                    <td><strong style="font-family: 'JetBrains Mono', monospace; color: var(--kc-gold-600); font-size: 11px;">${s.shift_code}</strong></td>
+                    <td><strong>${s.receptionist_name}</strong></td>
+                    <td><span style="color: #10b981; font-weight: 700;">${s.incoming_receptionist || '--'}</span></td>
+                    <td style="font-size: 11px;">${start}<br><span style="color: var(--kc-slate-400);">to ${end}</span></td>
+                    <td>
+                      <div style="font-weight: 800; color: #15803d;">₦${total}</div>
+                      <div style="font-size: 10px; color: var(--kc-slate-500);">P:₦${pos} | C:₦${cash} | T:₦${trans}</div>
+                    </td>
+                    <td style="font-size: 11px;">
+                      <div>In: ${s.checkins_count || 0} • Out: ${s.checkouts_count || 0}</div>
+                      <div style="color: var(--kc-slate-500);">Occ: ${s.rooms_occupied || 0} / Avail: ${s.rooms_available || 0}</div>
+                    </td>
+                    <td style="font-size: 11px; max-width: 140px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${s.handover_notes || ''}">
+                      ${s.handover_notes || '<span style="color: var(--kc-slate-300);">None</span>'}
+                    </td>
+                    <td>
+                      <button class="btn btn-outline-light btn-sm" style="color: var(--kc-navy-950); border-color: var(--kc-slate-300); padding: 4px 8px; font-size: 11px;" onclick="KCHotelApp.reprintPastShift(${s.id})">
+                        🖨️ Slip
+                      </button>
+                    </td>
+                  </tr>
+                `;
+              }).join('');
+            } else {
+              tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--kc-danger); padding: 20px;">Could not load past shifts.</td></tr>';
+            }
+          })
+          .catch(() => {
+            tbody.innerHTML = '<tr><td colspan="8" style="text-align: center; color: var(--kc-danger); padding: 20px;">Network error loading past shifts.</td></tr>';
+          });
+      },
+
+      reprintPastShift: function(shiftId) {
+        const s = (this.pastShifts || []).find(item => item.id == shiftId);
+        if (!s) return;
+
+        let bList = [];
+        try {
+          if (s.bookings_summary_json) {
+            bList = JSON.parse(s.bookings_summary_json);
+          }
+        } catch(e) {}
+
+        const closedShift = {
+          shift_code: s.shift_code,
+          outgoing_receptionist: s.receptionist_name,
+          incoming_receptionist: s.incoming_receptionist || '--',
+          start_time: s.start_time ? new Date(s.start_time).toLocaleString('en-GB') : '--',
+          end_time: s.end_time ? new Date(s.end_time).toLocaleString('en-GB') : '--',
+          totals: {
+            total_collected: s.total_collected,
+            pos_collected: s.pos_collected,
+            cash_collected: s.cash_collected,
+            transfer_collected: s.transfer_collected,
+            rooms_occupied: s.rooms_occupied,
+            rooms_available: s.rooms_available,
+            checkins_count: s.checkins_count,
+            checkouts_count: s.checkouts_count,
+            total_bookings: s.total_bookings
+          },
+          bookings: bList,
+          handover_notes: s.handover_notes
+        };
+
+        this.printShiftSlip(closedShift);
+      },
+
+      // ==============================================================
+      // RECEPTIONIST ROOM PRICE EDITOR (Self-Service)
+      // ==============================================================
+      openRoomPricesModal: function() {
+        this.renderPriceCategoryCards();
+        this.renderIndividualRoomPrices();
+        document.getElementById('quickPriceEditModal').classList.add('active');
+      },
+
+      renderPriceCategoryCards: function() {
+        const container = document.getElementById('priceCategoryCardsContainer');
+        if (!container) return;
+
+        const rooms = this.data.rooms || [];
+        const categories = {};
+
+        rooms.forEach(r => {
+          if (!categories[r.type]) {
+            categories[r.type] = {
+              type: r.type,
+              count: 0,
+              rate: r.rate,
+              rooms: []
+            };
+          }
+          categories[r.type].count++;
+          categories[r.type].rooms.push(r);
+        });
+
+        const catKeys = Object.keys(categories);
+        if (catKeys.length === 0) {
+          container.innerHTML = '<p style="color: var(--kc-slate-400);">No room categories found.</p>';
+          return;
+        }
+
+        container.innerHTML = catKeys.map(k => {
+          const cat = categories[k];
+          const inputId = 'catRateInput_' + cat.type.replace(/[^a-zA-Z0-9]/g, '_');
+          return `
+            <div style="background: #f8fafc; border: 1px solid var(--kc-slate-200); border-radius: 10px; padding: 14px; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="font-weight: 800; font-size: 14px; color: var(--kc-navy-950);">${cat.type}</div>
+                <div style="font-size: 11px; color: var(--kc-slate-500); margin-top: 2px;">${cat.count} Room${cat.count > 1 ? 's' : ''} in inventory</div>
+              </div>
+              <div style="margin-top: 12px;">
+                <label style="font-size: 10px; font-weight: 700; color: var(--kc-slate-500); text-transform: uppercase; display: block; margin-bottom: 4px;">Nightly Rate (₦)</label>
+                <div style="display: flex; gap: 6px;">
+                  <input type="number" id="${inputId}" class="form-control" value="${cat.rate}" min="0" step="1000" style="font-weight: 700; font-size: 14px; padding: 6px 10px;">
+                  <button type="button" class="btn btn-gold btn-sm" onclick="KCHotelApp.handleUpdateRoomPrice(0, '${cat.type.replace(/'/g, "\\'")}', true, document.getElementById('${inputId}').value)">
+                    Save All
+                  </button>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join('');
+      },
+
+      renderIndividualRoomPrices: function() {
+        const tbody = document.getElementById('individualRoomPricesTableBody');
+        if (!tbody) return;
+
+        const rooms = this.data.rooms || [];
+        if (rooms.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--kc-slate-400); padding: 20px;">No rooms found in inventory.</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = rooms.map(r => {
+          const inputId = 'roomRateInput_' + r.id;
+          let statusBadge = '<span class="status-pill status-pill-available">Available</span>';
+          if (r.status === 'occupied') statusBadge = '<span class="status-pill status-pill-occupied">Occupied</span>';
+          else if (r.status === 'reserved') statusBadge = '<span class="status-pill status-pill-reserved">Reserved</span>';
+          else if (r.status === 'maintenance') statusBadge = '<span class="status-pill status-pill-maintenance">Maintenance</span>';
+          else if (r.status === 'cleaning') statusBadge = '<span class="status-pill status-pill-cleaning">Cleaning</span>';
+
+          return `
+            <tr>
+              <td><strong>Room ${r.number}</strong></td>
+              <td>${r.type}</td>
+              <td style="font-size: 11px; color: var(--kc-slate-500);">${r.branch}</td>
+              <td>${statusBadge}</td>
+              <td style="width: 160px;">
+                <div style="display: flex; align-items: center; gap: 4px;">
+                  <span style="font-size: 12px; font-weight: 700; color: var(--kc-slate-500);">₦</span>
+                  <input type="number" id="${inputId}" class="form-control" value="${r.rate}" min="0" step="500" style="padding: 4px 8px; font-weight: 700; font-size: 13px;">
+                </div>
+              </td>
+              <td>
+                <button type="button" class="btn btn-gold btn-sm" onclick="KCHotelApp.handleUpdateRoomPrice(${r.id}, '', false, document.getElementById('${inputId}').value)">
+                  Update
+                </button>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      },
+
+      handleUpdateRoomPrice: function(roomId, roomType, applyToAll, newPrice) {
+        const price = Number(newPrice);
+        if (isNaN(price) || price <= 0) {
+          alert('Please enter a valid room rate greater than ₦0.');
+          return;
+        }
+
+        const fd = new FormData();
+        fd.append('action', 'kc_hotel_update_room_price');
+        fd.append('room_id', roomId);
+        fd.append('room_type', roomType);
+        fd.append('rate', price);
+        if (applyToAll) fd.append('apply_to_all_type', '1');
+
+        fetch(this.ajaxUrl, { method: 'POST', body: fd })
+          .then(r => r.json())
+          .then(res => {
+            if (res.success) {
+              this.showToast(res.data && res.data.message ? res.data.message : 'Room price updated successfully!');
+              this.refreshDashboard();
+              // Re-render modal tables with updated rates
+              setTimeout(() => {
+                this.renderPriceCategoryCards();
+                this.renderIndividualRoomPrices();
+              }, 500);
+            } else {
+              this.showToast(res.data && res.data.message ? res.data.message : 'Error updating price', 'error');
+            }
+          })
+          .catch(() => {
+            this.showToast('Network error updating price', 'error');
+          });
       },
 
       showToast: function(msg, type = 'info') {
