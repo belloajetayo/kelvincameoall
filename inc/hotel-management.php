@@ -203,6 +203,58 @@ function kc_hotel_cleanup_removed_test_bookings() {
 }
 
 /**
+ * Reconcile guest reservations audit overrides (MR AJAYI 55k NGO/CCCRN paid to boss, MR LAWAL ABBA 50k)
+ */
+function kc_hotel_reconcile_guest_overrides() {
+    global $wpdb;
+    $table_bookings = $wpdb->prefix . 'kc_hotel_bookings';
+    $table_rooms    = $wpdb->prefix . 'kc_hotel_rooms';
+    if ($wpdb->get_var("SHOW TABLES LIKE '$table_bookings'") !== $table_bookings) {
+        return;
+    }
+
+    $ver = get_option('kc_hotel_guest_override_ver', '0');
+    if ($ver !== '2026.ajayi55k_lawal50k_v2') {
+        // 1. MR AJAYI: Amount 55k, checked out, flagged as NGO / CCCRN, Not Paid at Desk / Paid to Boss
+        $wpdb->query(
+            "UPDATE $table_bookings 
+             SET rate_per_night = 55000.00,
+                 total_amount = 55000.00,
+                 amount_paid = 55000.00,
+                 balance_due = 0.00,
+                 guest_name = 'MR AJAYI (NGO / CCCRN)',
+                 booking_status = 'checked_out',
+                 payment_status = 'paid_to_boss',
+                 payment_method = 'paid_to_boss',
+                 payment_reference = 'NGO/CCCRN - Paid to Boss',
+                 notes = '[NGO / CCCRN] Tariff: ₦55,000. Flagged: NGO / CCCRN. Not paid at front desk — paid directly to Boss. Guest checked out.'
+             WHERE id = 14 OR booking_ref = 'KC-26-RL2PF' OR guest_name LIKE '%AJAYI%'"
+        );
+
+        // Check if room M-203 has any other active reservation, else mark available
+        if ($wpdb->get_var("SHOW TABLES LIKE '$table_rooms'") === $table_rooms) {
+            $has_active = $wpdb->get_var("SELECT COUNT(*) FROM $table_bookings WHERE room_number = 'M-203' AND booking_status IN ('checked_in', 'reserved')");
+            if (!$has_active) {
+                $wpdb->query("UPDATE $table_rooms SET status = 'available' WHERE room_number = 'M-203' AND status = 'occupied'");
+            }
+        }
+
+        // 2. MR LAWAL ABBA: Amount 50k (not 45k)
+        $wpdb->query(
+            "UPDATE $table_bookings 
+             SET rate_per_night = 50000.00,
+                 total_amount = 50000.00,
+                 amount_paid = 50000.00,
+                 balance_due = 0.00,
+                 notes = '[2026-10-29] Rate updated to ₦50,000.00. Zenith Bank transfer verified by Front Desk.'
+             WHERE id = 16 OR booking_ref = 'KC-26-RESK1' OR guest_name LIKE '%LAWAL ABBA%'"
+        );
+
+        update_option('kc_hotel_guest_override_ver', '2026.ajayi55k_lawal50k_v2');
+    }
+}
+
+/**
  * 3. Dashboard Aggregator
  */
 function kc_hotel_get_dashboard_data() {
@@ -210,6 +262,7 @@ function kc_hotel_get_dashboard_data() {
     $table_bookings = $wpdb->prefix . 'kc_hotel_bookings';
 
     kc_hotel_cleanup_removed_test_bookings();
+    kc_hotel_reconcile_guest_overrides();
 
     $today = date('Y-m-d');
     $inventory = kc_hotel_get_room_inventory();
@@ -1520,7 +1573,8 @@ function kc_hotel_ajax_get_sales_analytics() {
         'pos' => ['label' => 'POS Terminal', 'amount' => 0.0, 'count' => 0],
         'transfer' => ['label' => 'Bank Transfer', 'amount' => 0.0, 'count' => 0],
         'cash' => ['label' => 'Cash at Desk', 'amount' => 0.0, 'count' => 0],
-        'paystack' => ['label' => 'Paystack Online', 'amount' => 0.0, 'count' => 0]
+        'paystack' => ['label' => 'Paystack Online', 'amount' => 0.0, 'count' => 0],
+        'paid_to_boss' => ['label' => 'Direct to Boss (NGO)', 'amount' => 0.0, 'count' => 0]
     ];
 
     $csv_rows = [];

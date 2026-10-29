@@ -3264,16 +3264,32 @@ $reserve_url = home_url('/reserve/');
           }
 
           const bal = Number(b.balance_due || 0);
-          const balHtml = bal > 0 
+          let balHtml = bal > 0 
             ? `<span style="color: var(--kc-danger); font-weight: 700;">₦${bal.toLocaleString()} Due</span>`
             : `<span style="color: var(--kc-success); font-weight: 700;">Settled</span>`;
+
+          if (b.payment_method === 'paid_to_boss' || b.payment_status === 'paid_to_boss') {
+            balHtml = `<span style="color: #b45309; background: rgba(212,175,55,0.18); padding: 2px 6px; border-radius: 4px; font-weight: 700; font-size: 11px;">👑 Paid to Boss (Not at Desk)</span>`;
+          }
+
+          let ngoBadge = '';
+          if (b.guest_name.includes('NGO') || b.guest_name.includes('CCCRN') || (b.notes && (b.notes.includes('NGO') || b.notes.includes('CCCRN')))) {
+            ngoBadge += `<span style="background: rgba(16,185,129,0.15); color: #059669; border: 1px solid #10b981; font-size: 10px; font-weight: 800; padding: 1px 6px; border-radius: 4px;">🏛️ NGO / CCCRN</span>`;
+          }
+          if (b.payment_method === 'paid_to_boss' || (b.notes && b.notes.toLowerCase().includes('paid to boss'))) {
+            ngoBadge += `<span style="background: rgba(212,175,55,0.15); color: #b45309; border: 1px solid #d4af37; font-size: 10px; font-weight: 800; padding: 1px 6px; border-radius: 4px;">👑 Paid to Boss</span>`;
+          }
 
           return `
             <tr>
               <td><span class="ref-code">${b.booking_ref}</span></td>
               <td>
-                <div style="font-weight: 700; color: var(--kc-navy-950);">${b.guest_name}</div>
+                <div style="font-weight: 700; color: var(--kc-navy-950); display: flex; align-items: center; flex-wrap: wrap; gap: 4px;">
+                  <span>${b.guest_name}</span>
+                  ${ngoBadge}
+                </div>
                 <div style="font-size: 11px; color: var(--kc-slate-500);">${b.guest_phone || 'No phone'}</div>
+                ${b.notes ? `<div style="font-size: 10px; color: #64748b; margin-top: 2px; font-style: italic;">📝 ${b.notes}</div>` : ''}
                 ${b.guest_address ? `<div style="font-size: 10px; color: var(--kc-slate-500); max-width: 170px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${b.guest_address}">📍 ${b.guest_address}</div>` : ''}
               </td>
               <td>
@@ -3490,10 +3506,10 @@ $reserve_url = home_url('/reserve/');
             <td><span class="ref-code">${b.booking_ref}</span></td>
             <td><strong>${b.guest_name}</strong></td>
             <td>${b.room_number} (${b.branch})</td>
-            <td><span class="ref-code" style="text-transform: uppercase;">${b.payment_method}</span></td>
+            <td><span class="ref-code" style="text-transform: uppercase;">${(b.payment_method || '').replace(/_/g, ' ')}</span></td>
             <td>${b.payment_reference || 'N/A'}</td>
             <td><strong style="color: var(--kc-navy-950);">₦${Number(b.amount_paid).toLocaleString()}</strong></td>
-            <td><span class="status-pill status-pill-available" style="font-size: 10px;">${b.payment_status}</span></td>
+            <td><span class="status-pill status-pill-available" style="font-size: 10px;">${(b.payment_status || '').replace(/_/g, ' ')}</span></td>
           </tr>
         `).join('');
       },
