@@ -864,7 +864,7 @@ $reserve_url = home_url('/reserve/');
       align-items: center;
       justify-content: center;
       z-index: 1000;
-      padding: 20px;
+      padding: 16px;
     }
     .modal-backdrop.active {
       display: flex;
@@ -878,8 +878,20 @@ $reserve_url = home_url('/reserve/');
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      max-height: 90vh;
+      max-height: 92vh;
       animation: modalSlideUp 0.25s ease-out;
+    }
+    .modal-box.modal-lg,
+    #newBookingModal .modal-box {
+      max-width: 820px;
+    }
+    .modal-box > form {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: hidden;
+      margin: 0;
     }
     @keyframes modalSlideUp {
       from { transform: translateY(20px); opacity: 0; }
@@ -888,14 +900,15 @@ $reserve_url = home_url('/reserve/');
     .modal-header {
       background: var(--kc-navy-950);
       color: #fff;
-      padding: 18px 24px;
+      padding: 14px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       border-bottom: 1px solid rgba(212,175,55,0.3);
+      flex-shrink: 0;
     }
     .modal-header h2 {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
       display: flex;
       align-items: center;
@@ -916,37 +929,73 @@ $reserve_url = home_url('/reserve/');
       color: #fff;
     }
     .modal-body {
-      padding: 24px;
+      padding: 16px 20px;
       overflow-y: auto;
+      flex: 1 1 auto;
+      min-height: 0;
+      -webkit-overflow-scrolling: touch;
     }
     .modal-footer {
-      padding: 16px 24px;
+      padding: 12px 20px;
       background: var(--kc-slate-50);
       border-top: 1px solid var(--kc-slate-200);
       display: flex;
       align-items: center;
       justify-content: flex-end;
       gap: 10px;
+      flex-shrink: 0;
+      position: sticky;
+      bottom: 0;
+      z-index: 20;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.06);
     }
 
     /* FORM STYLING */
     .form-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 16px;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .form-row.row-3 {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .form-row.row-1-2 {
+      grid-template-columns: 1fr 2fr;
+    }
+    @media (max-width: 768px) {
+      .form-row, .form-row.row-3, .form-row.row-1-2 {
+        grid-template-columns: 1fr !important;
+        gap: 8px;
+      }
+      .modal-box {
+        max-height: 96vh;
+      }
     }
     .form-group {
-      margin-bottom: 16px;
+      margin-bottom: 10px;
     }
     .form-group label {
       display: block;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       color: var(--kc-slate-700);
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       text-transform: uppercase;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.3px;
+    }
+    .form-section-title {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--kc-gold-600);
+      margin: 10px 0 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px dashed rgba(212,175,55,0.25);
+      padding-bottom: 3px;
     }
     .form-control {
       width: 100%;
@@ -1788,83 +1837,73 @@ $reserve_url = home_url('/reserve/');
       </div>
       <form id="newBookingForm" onsubmit="KCHotelApp.handleCreateBooking(event)">
         <div class="modal-body">
-          <div class="form-row">
-            <div class="form-group">
-              <label>Guest Full Name <span style="font-size: 11px; color: var(--kc-slate-400);">(Optional - defaults to 'Walk-in Guest')</span></label>
-              <input type="text" name="guest_name" class="form-control" placeholder="e.g. Chief Emeka Nwosu (optional)">
-            </div>
-            <div class="form-group">
-              <label>Phone Number <span style="font-size: 11px; color: var(--kc-slate-400);">(Optional)</span></label>
-              <input type="tel" name="guest_phone" class="form-control" placeholder="e.g. +234 803 000 0000 (optional)">
-            </div>
-          </div>
 
-          <div class="form-row">
+          <!-- 1. GUEST DETAILS -->
+          <div class="form-section-title">👤 Guest Information</div>
+          <div class="form-row row-3">
+            <div class="form-group">
+              <label>Guest Full Name</label>
+              <input type="text" name="guest_name" class="form-control" placeholder="e.g. Chief Emeka (optional)">
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" name="guest_phone" class="form-control" placeholder="e.g. 0803 000 0000 (optional)">
+            </div>
             <div class="form-group">
               <label>Email Address</label>
               <input type="email" name="guest_email" class="form-control" placeholder="guest@example.com (optional)">
             </div>
+          </div>
+
+          <div class="form-row row-1-2">
             <div class="form-group">
               <label>ID / NIN / Passport No.</label>
               <input type="text" name="guest_id_number" class="form-control" placeholder="e.g. NIN: 1234567890 (optional)">
             </div>
-          </div>
-
-          <!-- GUEST RESIDENTIAL / BUSINESS ADDRESS -->
-          <div class="form-group">
-            <label>Guest Residential / Business Address <span style="font-size: 11px; color: var(--kc-slate-400);">(Optional)</span></label>
-            <textarea name="guest_address" class="form-control" rows="2" placeholder="e.g. 14 Admiralty Way, Lekki Phase 1, Lagos"></textarea>
-          </div>
-
-          <!-- ROOM CATEGORY SELECTION -->
-          <div class="form-group">
-            <label style="display: flex; justify-content: space-between; align-items: center;">
-              <span>Room Category / Type</span>
-              <span style="font-size: 11px; color: var(--kc-gold-500); font-weight: 600;">Choose to filter rooms & auto-fill tariff</span>
-            </label>
-            <select id="bookingCategorySelect" class="form-control" onchange="KCHotelApp.onBookingCategoryChange(this.value)">
-              <option value="all">-- All Categories (Show All Available Rooms) --</option>
-              <option value="Love Night Room" data-rate="45000">💖 Love Night Room (₦45,000/night)</option>
-              <option value="Golden Nest Room" data-rate="55000">🪺 Golden Nest Room (₦55,000/night)</option>
-              <option value="Blissful Breeze Suite" data-rate="60000">🌬️ Blissful Breeze Suite (₦60,000/night)</option>
-              <option value="Royal Treat Suite" data-rate="60000">👑 Royal Treat Suite (₦60,000/night)</option>
-              <option value="Prestige Room" data-rate="45000">🌟 Prestige Room (₦45,000/night)</option>
-              <option value="Executive Room" data-rate="30000">👔 Executive Room (₦30,000/night)</option>
-              <option value="Deluxe (UK) Room" data-rate="25000">🇬🇧 Deluxe / UK Room (₦25,000/night)</option>
-              <option value="UK (Deluxe) Room" data-rate="20000">🇬🇧 UK Room / Deluxe (₦20,000/night)</option>
-              <option value="Sunset Room" data-rate="35000">🌅 Sunset Room (₦35,000/night)</option>
-              <option value="Luxury Retreat (2-Bed Apartment)" data-rate="160000">🏰 Luxury Retreat - 2-Bed (₦160,000/night)</option>
-              <option value="Royal Retreat (3-Bed Apartment)" data-rate="200000">👑 Royal Retreat - 3-Bed (₦200,000/night)</option>
-            </select>
-          </div>
-
-          <!-- ROOM NUMBER & CUSTOM NUMBER -->
-          <div class="form-row">
             <div class="form-group">
-              <label>Select Room Assignment</label>
-              <select name="room_number" id="bookingRoomSelect" class="form-control" onchange="KCHotelApp.onBookingRoomSelectChange()">
-                <option value="">-- Choose an Available Room (or auto-assign) --</option>
+              <label>Residential / Business Address</label>
+              <input type="text" name="guest_address" class="form-control" placeholder="e.g. 14 Admiralty Way, Lekki, Lagos (optional)">
+            </div>
+          </div>
+
+          <!-- 2. ROOM ASSIGNMENT & STAY -->
+          <div class="form-section-title">🛏️ Room &amp; Stay Duration</div>
+          <div class="form-row row-3">
+            <div class="form-group">
+              <label>Room Category / Type</label>
+              <select id="bookingCategorySelect" class="form-control" onchange="KCHotelApp.onBookingCategoryChange(this.value)">
+                <option value="all">-- All Room Categories --</option>
+                <option value="Love Night Room" data-rate="45000">💖 Love Night Room (₦45,000)</option>
+                <option value="Golden Nest Room" data-rate="55000">🪺 Golden Nest Room (₦55,000)</option>
+                <option value="Blissful Breeze Suite" data-rate="60000">🌬️ Blissful Breeze Suite (₦60,000)</option>
+                <option value="Royal Treat Suite" data-rate="60000">👑 Royal Treat Suite (₦60,000)</option>
+                <option value="Prestige Room" data-rate="45000">🌟 Prestige Room (₦45,000)</option>
+                <option value="Executive Room" data-rate="30000">👔 Executive Room (₦30,000)</option>
+                <option value="Deluxe (UK) Room" data-rate="25000">🇬🇧 Deluxe / UK Room (₦25,000)</option>
+                <option value="UK (Deluxe) Room" data-rate="20000">🇬🇧 UK Room / Deluxe (₦20,000)</option>
+                <option value="Sunset Room" data-rate="35000">🌅 Sunset Room (₦35,000)</option>
+                <option value="Luxury Retreat (2-Bed Apartment)" data-rate="160000">🏰 Luxury Retreat - 2-Bed (₦160k)</option>
+                <option value="Royal Retreat (3-Bed Apartment)" data-rate="200000">👑 Royal Retreat - 3-Bed (₦200k)</option>
               </select>
             </div>
             <div class="form-group">
-              <label>Or Enter Custom Room No.</label>
+              <label>Room Assignment</label>
+              <select name="room_number" id="bookingRoomSelect" class="form-control" onchange="KCHotelApp.onBookingRoomSelectChange()">
+                <option value="">-- Choose Available Room --</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Or Custom Room No.</label>
               <input type="text" name="custom_room_number" id="bookingCustomRoomNumber" class="form-control" placeholder="e.g. M-109 (optional)" oninput="KCHotelApp.onCustomRoomNumberInput()">
             </div>
           </div>
 
-          <!-- NIGHTLY RATE & CATEGORY RECORD -->
-          <div class="form-row">
+          <div class="form-row row-3">
             <div class="form-group">
-              <label>Nightly Rate (₦) <span style="font-size: 11px; color: var(--kc-gold-500);">(Auto-filled / Editable)</span></label>
-              <input type="number" name="custom_rate" id="bookingCustomRate" class="form-control" placeholder="Standard tariff applies" oninput="KCHotelApp.calculateBookingSummary()" min="0" step="500">
+              <label>Nightly Rate (₦) <span style="font-size: 10px; color: var(--kc-gold-600);">(Editable)</span></label>
+              <input type="number" name="custom_rate" id="bookingCustomRate" class="form-control" placeholder="Tariff applies" oninput="KCHotelApp.calculateBookingSummary()" min="0" step="500">
+              <input type="hidden" name="room_type" id="bookingRoomTypeHidden" value="">
             </div>
-            <div class="form-group">
-              <label>Room Category Name</label>
-              <input type="text" name="room_type" id="bookingRoomTypeHidden" class="form-control" placeholder="e.g. Love Night Room" readonly style="background: rgba(255,255,255,0.05); color: var(--kc-slate-300);">
-            </div>
-          </div>
-
-          <div class="form-row">
             <div class="form-group">
               <label>Check-In Date</label>
               <input type="date" name="check_in" id="bookingCheckIn" class="form-control" onchange="KCHotelApp.calculateBookingSummary()">
@@ -1875,53 +1914,29 @@ $reserve_url = home_url('/reserve/');
             </div>
           </div>
 
-          <div class="form-row">
+          <!-- DYNAMIC STAY CALCULATION STRIP -->
+          <div class="calc-summary-box" style="padding: 8px 14px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; border-radius: 8px;">
+            <div style="font-size: 12px; color: var(--kc-slate-700);">
+              <span style="color: var(--kc-gold-600); font-weight: 700;">ROOM:</span> <strong id="summaryRoomRateText">Select a room</strong>
+            </div>
+            <div style="font-size: 12px; color: var(--kc-slate-700);">
+              <span style="color: var(--kc-gold-600); font-weight: 700;">DURATION:</span> <strong id="summaryDurationText">1 Night</strong>
+            </div>
+            <div style="font-size: 13px; font-weight: 800; color: var(--kc-navy-950);">
+              TOTAL BILL: <strong id="summaryTotalBill" style="color: #15803d; font-size: 15px;">₦0.00</strong>
+            </div>
+          </div>
+
+          <!-- 3. PAYMENT & SETTLEMENT -->
+          <div class="form-section-title">💳 Payment &amp; Status</div>
+          <div class="form-row row-3">
             <div class="form-group">
-              <label>Initial Booking Status</label>
+              <label>Booking Status</label>
               <select name="booking_status" class="form-control">
                 <option value="checked_in">Instant Check-In (Guest is Here)</option>
-                <option value="reserved">Confirmed Reservation (Future/Later)</option>
+                <option value="reserved">Confirmed Reservation (Future)</option>
               </select>
             </div>
-            <div class="form-group">
-              <label>Amount Paid Now (₦)</label>
-              <input type="number" name="amount_paid" id="bookingAmountPaid" class="form-control" value="0" min="0" step="1000">
-            </div>
-          </div>
-
-          <!-- DYNAMIC CALCULATION SUMMARY -->
-          <div class="calc-summary-box">
-            <div class="calc-summary-row">
-              <span>Room &amp; Rate:</span>
-              <strong id="summaryRoomRateText">Select a room</strong>
-            </div>
-            <div class="calc-summary-row">
-              <span>Duration of Stay:</span>
-              <strong id="summaryDurationText">1 Night</strong>
-            </div>
-            <div class="calc-summary-row total-row">
-              <span>Total Stay Bill:</span>
-              <strong id="summaryTotalBill">₦0.00</strong>
-            </div>
-          </div>
-
-          <!-- BANK TRANSFER WIDGET IF TRANSFER SELECTED -->
-          <div id="deskBankCardBox" class="bank-card-highlight">
-            <div style="font-size: 11px; text-transform: uppercase; color: var(--kc-gold-500); font-weight: 700;">
-              Official Corporate Bank Transfer Account
-            </div>
-            <div style="font-size: 13px; font-weight: 700; margin-top: 2px;">
-              ZENITH BANK • KELVIN CAMEO RESORT
-            </div>
-            <div class="bank-account-num-row">
-              <span class="account-num-display" id="deskBankNumDisplay">1311320179</span>
-              <button type="button" class="btn btn-gold btn-sm" onclick="KCHotelApp.copyDeskAccountNumber()">
-                📋 Copy 1311320179
-              </button>
-            </div>
-          </div>
-
-          <div class="form-row">
             <div class="form-group">
               <label>Payment Method</label>
               <select name="payment_method" id="bookingPaymentMethod" class="form-control" onchange="KCHotelApp.toggleBankHelper(this.value)">
@@ -1932,21 +1947,48 @@ $reserve_url = home_url('/reserve/');
               </select>
             </div>
             <div class="form-group">
-              <label>Payment Reference / Transaction ID</label>
-              <input type="text" name="payment_reference" class="form-control" placeholder="e.g. Zenith Ref / POS Approval / Session ID">
+              <label>Amount Paid Now (₦)</label>
+              <input type="number" name="amount_paid" id="bookingAmountPaid" class="form-control" value="0" min="0" step="1000">
             </div>
           </div>
 
-          <div class="form-group">
-            <label>Special Guest Notes / Requests</label>
-            <textarea name="notes" class="form-control" rows="2" placeholder="e.g. Extra pillows, Late checkout request, VIP amenities"></textarea>
+          <!-- COMPACT BANK TRANSFER STRIP -->
+          <div id="deskBankCardBox" class="bank-card-highlight" style="display: none; padding: 8px 14px; margin-bottom: 10px; border-radius: 8px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 11px; text-transform: uppercase; color: var(--kc-gold-500); font-weight: 700;">Zenith Bank</span>
+                <span class="account-num-display" id="deskBankNumDisplay" style="font-size: 17px; letter-spacing: 1px; color: #ffe89e;">1311320179</span>
+                <span style="font-size: 11px; color: #cbd5e1;">• Kelvin Cameo Resort</span>
+              </div>
+              <button type="button" class="btn btn-gold btn-sm" style="padding: 3px 9px; font-size: 11px;" onclick="KCHotelApp.copyDeskAccountNumber()">
+                📋 Copy 1311320179
+              </button>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Payment Reference / Transaction ID</label>
+              <input type="text" name="payment_reference" class="form-control" placeholder="e.g. Zenith Ref / POS Approval / Session ID">
+            </div>
+            <div class="form-group">
+              <label>Special Guest Notes / Requests</label>
+              <input type="text" name="notes" class="form-control" placeholder="e.g. Extra pillows, Late checkout, VIP amenities">
+            </div>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" onclick="KCHotelApp.closeModals()">Cancel</button>
-          <button type="submit" class="btn btn-gold">
-            Confirm & Save Reservation
-          </button>
+
+        <!-- STICKY BOTTOM MODAL FOOTER WITH SAVE BUTTON -->
+        <div class="modal-footer" style="display: flex; align-items: center; justify-content: space-between; background: #f8fafc; border-top: 1px solid var(--kc-slate-200); padding: 12px 20px;">
+          <div style="font-size: 12px; color: var(--kc-slate-600);">
+            Staff on duty: <strong id="newBookingStaffDisplay">Front Desk Staff</strong>
+          </div>
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <button type="button" class="btn btn-secondary" onclick="KCHotelApp.closeModals()">Cancel</button>
+            <button type="submit" class="btn btn-gold" id="btnSubmitNewBooking" style="padding: 10px 24px; font-weight: 700; font-size: 14px; box-shadow: 0 4px 14px rgba(212,175,55,0.4);">
+              💾 Confirm &amp; Save Reservation
+            </button>
+          </div>
         </div>
       </form>
     </div>
@@ -3970,7 +4012,15 @@ $reserve_url = home_url('/reserve/');
         const customRateEl = document.getElementById('bookingCustomRate');
         if (customRateEl && !roomNumber) customRateEl.value = '';
 
+        const staffEl = document.getElementById('newBookingStaffDisplay');
+        if (staffEl) staffEl.innerText = this.currentStaff || 'Front Desk Staff';
+
+        const payEl = document.getElementById('bookingPaymentMethod');
+        if (payEl) this.toggleBankHelper(payEl.value);
+
         document.getElementById('newBookingModal').classList.add('active');
+        const modalBody = document.querySelector('#newBookingModal .modal-body');
+        if (modalBody) modalBody.scrollTop = 0;
         this.calculateBookingSummary();
       },
 
