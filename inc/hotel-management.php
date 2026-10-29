@@ -970,7 +970,7 @@ function kc_hotel_get_active_shift_summary($active_shift) {
         $pm = strtolower($b['payment_method'] ?? 'cash');
         if (strpos($pm, 'pos') !== false) {
             $pos_collected += $paid;
-        } elseif (strpos($pm, 'transfer') !== false) {
+        } elseif (strpos($pm, 'transfer') !== false || strpos($pm, 'zcash') !== false || strpos($pm, 'easywallet') !== false) {
             $transfer_collected += $paid;
         } else {
             $cash_collected += $paid;
@@ -1737,11 +1737,14 @@ function kc_hotel_ajax_get_sales_analytics() {
     ];
     $by_room_type = [];
     $by_method = [
-        'pos' => ['label' => 'POS Terminal', 'amount' => 0.0, 'count' => 0],
-        'transfer' => ['label' => 'Bank Transfer', 'amount' => 0.0, 'count' => 0],
-        'cash' => ['label' => 'Cash at Desk', 'amount' => 0.0, 'count' => 0],
-        'paystack' => ['label' => 'Paystack Online', 'amount' => 0.0, 'count' => 0],
-        'paid_to_boss' => ['label' => 'Direct to Boss (NGO)', 'amount' => 0.0, 'count' => 0]
+        'pos'              => ['label' => 'POS Terminal', 'amount' => 0.0, 'count' => 0],
+        'transfer'         => ['label' => 'Bank Transfer (Zenith)', 'amount' => 0.0, 'count' => 0],
+        'zcash_easywallet' => ['label' => 'Zcash / EasyWallet Reception Desk', 'amount' => 0.0, 'count' => 0],
+        'cash'             => ['label' => 'Cash at Desk', 'amount' => 0.0, 'count' => 0],
+        'ngo_cccrn'        => ['label' => 'NGO / CCCRN (Corporate)', 'amount' => 0.0, 'count' => 0],
+        'agoda'            => ['label' => 'Agoda (OTA Booking)', 'amount' => 0.0, 'count' => 0],
+        'complementary'    => ['label' => 'Complementary Room', 'amount' => 0.0, 'count' => 0],
+        'paid_to_boss'     => ['label' => 'Paid to Boss', 'amount' => 0.0, 'count' => 0]
     ];
 
     $csv_rows = [];
@@ -1754,6 +1757,8 @@ function kc_hotel_ajax_get_sales_analytics() {
         $wing = $b['branch'] ?: 'Main Hotel';
         $type = $b['room_type'];
         $meth = strtolower($b['payment_method']) ?: 'cash';
+        if ($meth === 'zcash' || $meth === 'easywallet') $meth = 'zcash_easywallet';
+        if ($meth === 'ngo' || strpos($meth, 'cccrn') !== false) $meth = 'ngo_cccrn';
 
         $gross_sales += $tot;
         $collected += $paid;

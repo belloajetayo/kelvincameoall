@@ -26,6 +26,12 @@ $reserve_url = home_url('/reserve/');
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    (function() {
+      var savedTheme = localStorage.getItem('kc_reception_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
   <title>Reception Desk & Hotel PMS | Kelvin Cameo Resort Hotel (RC 1613032)</title>
   
   <!-- Google Fonts: Plus Jakarta Sans & Playfair Display -->
@@ -1319,6 +1325,187 @@ $reserve_url = home_url('/reserve/');
       .no-print { display: none !important; }
       @page { margin: 10mm; }
     }
+  
+    /* ==============================================================
+       RECEPTION DASHBOARD — LUXURY DUAL THEME ENGINE (DARK & LIGHT)
+       ============================================================== */
+
+    /* DARK THEME (DEFAULT / OBSIDIAN LUXURY) */
+    body[data-theme="dark"], body:not([data-theme="light"]) {
+      background: #040914 !important;
+      color: #e2e8f0 !important;
+    }
+    body[data-theme="dark"] .top-bar, body:not([data-theme="light"]) .top-bar {
+      background: linear-gradient(135deg, #020610 0%, #060e1e 50%, #0a1936 100%) !important;
+      border-bottom: 1px solid rgba(212,175,55,0.4) !important;
+      box-shadow: 0 4px 25px rgba(0,0,0,0.6) !important;
+    }
+    body[data-theme="dark"] .room-matrix-strip, body:not([data-theme="light"]) .room-matrix-strip,
+    body[data-theme="dark"] .tab-container, body:not([data-theme="light"]) .tab-container,
+    body[data-theme="dark"] .nav-tabs-wrapper, body:not([data-theme="light"]) .nav-tabs-wrapper {
+      background: #0b1426 !important;
+      border-color: #1e293b !important;
+    }
+    body[data-theme="dark"] .tab-btn, body:not([data-theme="light"]) .tab-btn {
+      background: #111e38 !important;
+      color: #94a3b8 !important;
+      border: 1px solid #1e293b !important;
+    }
+    body[data-theme="dark"] .tab-btn:hover, body:not([data-theme="light"]) .tab-btn:hover {
+      background: #182a4d !important;
+      color: #ffffff !important;
+    }
+    body[data-theme="dark"] .tab-btn.active, body:not([data-theme="light"]) .tab-btn.active {
+      background: linear-gradient(135deg, #d4af37, #b89327) !important;
+      color: #040914 !important;
+      font-weight: 800 !important;
+      border-color: transparent !important;
+      box-shadow: 0 2px 10px rgba(212,175,55,0.4) !important;
+    }
+    body[data-theme="dark"] .table-card, body:not([data-theme="light"]) .table-card,
+    body[data-theme="dark"] .kpi-card, body:not([data-theme="light"]) .kpi-card,
+    body[data-theme="dark"] .stat-card, body:not([data-theme="light"]) .stat-card,
+    body[data-theme="dark"] .modal-box, body:not([data-theme="light"]) .modal-box {
+      background: #0b1426 !important;
+      border: 1px solid #1e293b !important;
+      color: #f1f5f9 !important;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4) !important;
+    }
+    body[data-theme="dark"] .table-card-head, body:not([data-theme="light"]) .table-card-head,
+    body[data-theme="dark"] .modal-header, body:not([data-theme="light"]) .modal-header,
+    body[data-theme="dark"] .modal-footer, body:not([data-theme="light"]) .modal-footer {
+      background: #060c18 !important;
+      border-color: #1e293b !important;
+    }
+    body[data-theme="dark"] .table th, body:not([data-theme="light"]) .table th {
+      background: #060c18 !important;
+      color: #cbd5e1 !important;
+      border-bottom: 2px solid #1e293b !important;
+    }
+    body[data-theme="dark"] .table td, body:not([data-theme="light"]) .table td {
+      border-bottom: 1px solid #142036 !important;
+      color: #cbd5e1 !important;
+    }
+    body[data-theme="dark"] .table tbody tr:hover, body:not([data-theme="light"]) .table tbody tr:hover {
+      background: rgba(255,255,255,0.03) !important;
+    }
+    body[data-theme="dark"] .room-card, body:not([data-theme="light"]) .room-card {
+      background: #0b1426 !important;
+      border: 1px solid #1e293b !important;
+      color: #e2e8f0 !important;
+    }
+    body[data-theme="dark"] .form-control, body:not([data-theme="light"]) .form-control {
+      background: #111e38 !important;
+      border: 1.5px solid #334155 !important;
+      color: #ffffff !important;
+    }
+    body[data-theme="dark"] .form-control:focus, body:not([data-theme="light"]) .form-control:focus {
+      border-color: #d4af37 !important;
+      box-shadow: 0 0 0 3px rgba(212,175,55,0.25) !important;
+    }
+    body[data-theme="dark"] .kpi-info h3, body:not([data-theme="light"]) .kpi-info h3 {
+      color: #94a3b8 !important;
+    }
+    body[data-theme="dark"] .kpi-val, body:not([data-theme="light"]) .kpi-val {
+      color: #ffffff !important;
+    }
+    body[data-theme="dark"] .bank-card-highlight, body:not([data-theme="light"]) .bank-card-highlight {
+      background: #081124 !important;
+      border-color: rgba(212,175,55,0.4) !important;
+    }
+
+    /* LIGHT THEME (EXECUTIVE RESORT STYLE) */
+    body[data-theme="light"] {
+      background: #f1f5f9 !important;
+      color: #0f172a !important;
+    }
+    body[data-theme="light"] .top-bar {
+      background: linear-gradient(135deg, #09172e 0%, #11284d 100%) !important;
+      border-bottom: 1px solid rgba(212,175,55,0.35) !important;
+      box-shadow: 0 4px 20px rgba(11,26,54,0.15) !important;
+    }
+    body[data-theme="light"] .room-matrix-strip,
+    body[data-theme="light"] .tab-container,
+    body[data-theme="light"] .nav-tabs-wrapper {
+      background: #ffffff !important;
+      border-color: #e2e8f0 !important;
+    }
+    body[data-theme="light"] .tab-btn {
+      background: #f8fafc !important;
+      color: #475569 !important;
+      border: 1px solid #e2e8f0 !important;
+    }
+    body[data-theme="light"] .tab-btn:hover {
+      background: #f1f5f9 !important;
+      color: #0f172a !important;
+    }
+    body[data-theme="light"] .tab-btn.active {
+      background: #0a2540 !important;
+      color: #ffffff !important;
+      font-weight: 800 !important;
+      border-color: #0a2540 !important;
+      box-shadow: 0 2px 10px rgba(10,37,64,0.3) !important;
+    }
+    body[data-theme="light"] .table-card,
+    body[data-theme="light"] .kpi-card,
+    body[data-theme="light"] .stat-card,
+    body[data-theme="light"] .modal-box {
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      color: #0f172a !important;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06) !important;
+    }
+    body[data-theme="light"] .table-card-head,
+    body[data-theme="light"] .modal-header,
+    body[data-theme="light"] .modal-footer {
+      background: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+    }
+    body[data-theme="light"] .table th {
+      background: #f8fafc !important;
+      color: #334155 !important;
+      border-bottom: 2px solid #e2e8f0 !important;
+    }
+    body[data-theme="light"] .table td {
+      border-bottom: 1px solid #f1f5f9 !important;
+      color: #1e293b !important;
+    }
+    body[data-theme="light"] .table tbody tr:hover {
+      background: #f8fafc !important;
+    }
+    body[data-theme="light"] .room-card {
+      background: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+      color: #0f172a !important;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+    }
+    body[data-theme="light"] .form-control {
+      background: #ffffff !important;
+      border: 1.5px solid #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    body[data-theme="light"] .form-control:focus {
+      border-color: #1a428a !important;
+      box-shadow: 0 0 0 3px rgba(26,66,138,0.15) !important;
+    }
+    body[data-theme="light"] .kpi-info h3 {
+      color: #64748b !important;
+    }
+    body[data-theme="light"] .kpi-val {
+      color: #0f172a !important;
+    }
+    body[data-theme="light"] .bank-card-highlight {
+      background: #f8fafc !important;
+      border: 1.5px solid #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    body[data-theme="light"] .bank-card-highlight span {
+      color: #334155 !important;
+    }
+    body[data-theme="light"] .bank-card-highlight span.account-num-display {
+      color: #0284c7 !important;
+    }
+
   </style>
 </head>
 <body>
@@ -1385,6 +1572,19 @@ $reserve_url = home_url('/reserve/');
       </a>
 
       <!-- Staff on duty -->
+      <!-- THEME TOGGLE BUTTON -->
+      <button type="button" class="btn btn-outline-light btn-sm" id="themeToggleBtn" onclick="KCHotelApp.toggleTheme()" style="padding: 6px 12px; font-size: 12px; border-radius: 8px;" title="Switch Light or Dark Mode">
+        <span id="themeToggleIcon">☀️</span>
+        <span id="themeToggleText">Light Mode</span>
+      </button>
+
+      <a href="<?php echo home_url('/kitchen/'); ?>" class="btn btn-outline-light btn-sm" title="Kitchen & Restaurant POS">
+        🍳 Kitchen POS
+      </a>
+      <a href="<?php echo home_url('/bar/'); ?>" class="btn btn-outline-light btn-sm" title="Bar & Lounge POS">
+        🍸 Bar POS
+      </a>
+
       <div class="staff-badge" id="receptionistBadgeBtn" onclick="KCHotelApp.promptChangeStaffName()" title="Click to change receptionist name on duty">
         <span class="status-dot"></span>
         <span>Staff: <strong id="currentReceptionistNameDisplay">Front Desk Staff</strong></span>
@@ -1742,11 +1942,18 @@ $reserve_url = home_url('/reserve/');
             <div class="kpi-subtext">Front Desk Vault</div>
           </div>
         </div>
+        <div class="kpi-card" style="border-left: 4px solid #0284c7;">
+          <div class="kpi-info">
+            <h3>NGO / CCCRN &amp; Agoda</h3>
+            <div class="kpi-val" id="ledgerNgoTotal">₦0</div>
+            <div class="kpi-subtext">Corporate &amp; OTA Portals</div>
+          </div>
+        </div>
         <div class="kpi-card" style="border-left: 4px solid #8b5cf6;">
           <div class="kpi-info">
-            <h3>Paystack / Online</h3>
-            <div class="kpi-val" id="ledgerPaystackTotal">₦0</div>
-            <div class="kpi-subtext">Online Gateways</div>
+            <h3>Complementary &amp; Boss</h3>
+            <div class="kpi-val" id="ledgerCompTotal">0 Rooms</div>
+            <div class="kpi-subtext">House &amp; Executive Allocations</div>
           </div>
         </div>
       </div>
@@ -1965,10 +2172,14 @@ $reserve_url = home_url('/reserve/');
             <div class="form-group">
               <label>Payment Method</label>
               <select name="payment_method" id="bookingPaymentMethod" class="form-control" onchange="KCHotelApp.toggleBankHelper(this.value)">
-                <option value="transfer">Direct Bank Transfer (Zenith)</option>
                 <option value="pos">POS Terminal (Card)</option>
+                <option value="transfer">Direct Bank Transfer (Zenith Bank)</option>
+                <option value="zcash_easywallet">Zcash / EasyWallet (Reception Account)</option>
                 <option value="cash">Cash at Desk</option>
-                <option value="paystack">Paystack Online</option>
+                <option value="ngo_cccrn">NGO / CCCRN (Corporate)</option>
+                <option value="agoda">Agoda (OTA Booking)</option>
+                <option value="complementary">Complementary Room</option>
+                <option value="paid_to_boss">Paid to Boss</option>
               </select>
             </div>
             <div class="form-group">
@@ -1977,17 +2188,32 @@ $reserve_url = home_url('/reserve/');
             </div>
           </div>
 
-          <!-- COMPACT BANK TRANSFER STRIP -->
-          <div id="deskBankCardBox" class="bank-card-highlight" style="display: none; padding: 8px 14px; margin-bottom: 10px; border-radius: 8px;">
-            <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
-              <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 11px; text-transform: uppercase; color: var(--kc-gold-500); font-weight: 700;">Zenith Bank</span>
-                <span class="account-num-display" id="deskBankNumDisplay" style="font-size: 17px; letter-spacing: 1px; color: #ffe89e;">1311320179</span>
-                <span style="font-size: 11px; color: #cbd5e1;">• Kelvin Cameo Resort</span>
+          <!-- COMPACT BANK TRANSFER & ZCASH / EASYWALLET STRIP -->
+          <div id="deskBankCardBox" class="bank-card-highlight" style="display: none; padding: 12px 16px; margin-bottom: 12px; border-radius: 10px; border: 1.5px solid rgba(212,175,55,0.45);">
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <!-- Account 1: Zenith Bank -->
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.12); padding-bottom: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-size: 11px; text-transform: uppercase; color: #f59e0b; font-weight: 800;">🏦 Zenith Bank:</span>
+                  <span class="account-num-display" id="deskBankNumDisplay" style="font-size: 16px; letter-spacing: 1px; color: #ffe89e; font-weight:800; font-family:'JetBrains Mono', monospace;">1311320179</span>
+                  <span style="font-size: 11px; opacity: 0.85;">(Kelvin Cameo Resort)</span>
+                </div>
+                <button type="button" class="btn btn-gold btn-sm" style="padding: 3px 10px; font-size: 11px;" onclick="KCHotelApp.copyDeskAccountNumber('1311320179')">
+                  📋 Copy Zenith (1311320179)
+                </button>
               </div>
-              <button type="button" class="btn btn-gold btn-sm" style="padding: 3px 9px; font-size: 11px;" onclick="KCHotelApp.copyDeskAccountNumber()">
-                📋 Copy 1311320179
-              </button>
+
+              <!-- Account 2: Zcash / EasyWallet Reception Account -->
+              <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-size: 11px; text-transform: uppercase; color: #38bdf8; font-weight: 800;">📱 Zcash / EasyWallet:</span>
+                  <span class="account-num-display" id="deskZcashNumDisplay" style="font-size: 15px; letter-spacing: 1px; color: #7dd3fc; font-weight:800; font-family:'JetBrains Mono', monospace;">Reception Account</span>
+                  <span style="font-size: 11px; opacity: 0.85;">(EasyWallet Reception Desk)</span>
+                </div>
+                <button type="button" class="btn btn-outline btn-sm" style="padding: 3px 10px; font-size: 11px; border-color:#38bdf8; color:#38bdf8;" onclick="KCHotelApp.copyDeskAccountNumber('Zcash / EasyWallet Reception Account')">
+                  📋 Copy Zcash / EasyWallet
+                </button>
+              </div>
             </div>
           </div>
 
@@ -2136,10 +2362,13 @@ $reserve_url = home_url('/reserve/');
             <div class="form-group">
               <label>Payment Method</label>
               <select name="payment_method" id="adminEditPaymentMethod" class="form-control">
-                <option value="pos">POS Terminal</option>
-                <option value="transfer">Direct Bank Transfer (Zenith)</option>
+                <option value="pos">POS Terminal (Card)</option>
+                <option value="transfer">Direct Bank Transfer (Zenith Bank)</option>
+                <option value="zcash_easywallet">Zcash / EasyWallet (Reception Account)</option>
                 <option value="cash">Cash at Desk</option>
-                <option value="paystack">Paystack Online</option>
+                <option value="ngo_cccrn">NGO / CCCRN (Corporate)</option>
+                <option value="agoda">Agoda (OTA Booking)</option>
+                <option value="complementary">Complementary Room</option>
                 <option value="paid_to_boss">Paid to Boss</option>
               </select>
             </div>
@@ -2397,10 +2626,14 @@ $reserve_url = home_url('/reserve/');
           <div class="form-group">
             <label>Payment Method *</label>
             <select name="method" class="form-control" required>
-              <option value="transfer">Direct Bank Transfer (Zenith)</option>
               <option value="pos">POS Terminal (Card)</option>
-              <option value="cash">Cash</option>
-              <option value="paystack">Paystack Gateway</option>
+              <option value="transfer">Direct Bank Transfer (Zenith Bank)</option>
+              <option value="zcash_easywallet">Zcash / EasyWallet (Reception Account)</option>
+              <option value="cash">Cash at Desk</option>
+              <option value="ngo_cccrn">NGO / CCCRN</option>
+              <option value="agoda">Agoda</option>
+              <option value="complementary">Complementary Room</option>
+              <option value="paid_to_boss">Paid to Boss</option>
             </select>
           </div>
 
@@ -2877,6 +3110,7 @@ $reserve_url = home_url('/reserve/');
       lastPendingCount: 0,
 
       init: function() {
+        this.updateThemeUI();
         // Automatically attach staff session token to all AJAX calls
         const origFetch = window.fetch;
         const app = this;
@@ -3217,8 +3451,71 @@ $reserve_url = home_url('/reserve/');
       toggleBankHelper: function(method) {
         const box = document.getElementById('deskBankCardBox');
         if (box) {
-          box.style.display = method === 'transfer' ? 'block' : 'none';
+          box.style.display = (method === 'transfer' || method === 'zcash_easywallet') ? 'block' : 'none';
         }
+      },
+
+      copyDeskAccountNumber: function(val) {
+        const textToCopy = val || (document.getElementById('deskBankNumDisplay') ? document.getElementById('deskBankNumDisplay').innerText.trim() : '1311320179');
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(textToCopy).then(() => {
+            alert('Account details copied to clipboard: ' + textToCopy);
+          });
+        } else {
+          alert('Account details: ' + textToCopy);
+        }
+      },
+
+      toggleTheme: function() {
+        const cur = document.documentElement.getAttribute('data-theme') || 'dark';
+        const next = cur === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('kc_reception_theme', next);
+        this.updateThemeUI(next);
+      },
+
+      updateThemeUI: function(theme) {
+        const t = theme || document.documentElement.getAttribute('data-theme') || 'dark';
+        const icon = document.getElementById('themeToggleIcon');
+        const text = document.getElementById('themeToggleText');
+        if (icon && text) {
+          if (t === 'light') {
+            icon.textContent = '🌙';
+            text.textContent = 'Dark Mode';
+          } else {
+            icon.textContent = '☀️';
+            text.textContent = 'Light Mode';
+          }
+        }
+      },
+
+      formatPaymentMethodBadge: function(method) {
+        const m = (method || '').toLowerCase();
+        if (m === 'ngo_cccrn' || m === 'ngo' || m.includes('cccrn')) {
+          return '<span class="badge" style="background: rgba(2, 132, 199, 0.2); color: #38bdf8; border: 1px solid rgba(2, 132, 199, 0.5); padding: 3px 8px; border-radius: 6px; font-weight: 800; font-size: 11px;">🏢 NGO / CCCRN</span>';
+        }
+        if (m === 'agoda') {
+          return '<span class="badge" style="background: rgba(234, 88, 12, 0.2); color: #fb923c; border: 1px solid rgba(234, 88, 12, 0.5); padding: 3px 8px; border-radius: 6px; font-weight: 800; font-size: 11px;">🌐 AGODA</span>';
+        }
+        if (m === 'complementary') {
+          return '<span class="badge" style="background: rgba(139, 92, 246, 0.2); color: #c084fc; border: 1px solid rgba(139, 92, 246, 0.5); padding: 3px 8px; border-radius: 6px; font-weight: 800; font-size: 11px;">🎁 COMPLEMENTARY</span>';
+        }
+        if (m === 'zcash_easywallet' || m === 'zcash' || m === 'easywallet') {
+          return '<span class="badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.5); padding: 3px 8px; border-radius: 6px; font-weight: 800; font-size: 11px;">📱 ZCASH / EASYWALLET</span>';
+        }
+        if (m === 'paid_to_boss') {
+          return '<span class="badge" style="background: rgba(245, 158, 11, 0.2); color: #fde047; border: 1px solid rgba(245, 158, 11, 0.5); padding: 3px 8px; border-radius: 6px; font-weight: 800; font-size: 11px;">👑 PAID TO BOSS</span>';
+        }
+        if (m === 'transfer') {
+          return '<span class="badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.5); padding: 3px 8px; border-radius: 6px; font-weight: 800; font-size: 11px;">🏦 ZENITH TRANSFER</span>';
+        }
+        if (m === 'pos') {
+          return '<span class="badge" style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.5); padding: 3px 8px; border-radius: 6px; font-weight: 800; font-size: 11px;">💳 POS CARD</span>';
+        }
+        if (m === 'cash') {
+          return '<span class="badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.5); padding: 3px 8px; border-radius: 6px; font-weight: 800; font-size: 11px;">💵 CASH</span>';
+        }
+        return '<span class="ref-code" style="text-transform: uppercase;">' + (method || '').replace(/_/g, ' ') + '</span>';
       },
 
       renderKPIs: function() {
@@ -3651,9 +3948,12 @@ $reserve_url = home_url('/reserve/');
             const item = s.by_method[m];
             const pct = Math.round((item.amount / collected) * 100);
             let col = '#3b82f6';
-            if (m === 'transfer') col = '#10b981';
+            if (m === 'transfer' || m === 'zcash_easywallet') col = '#10b981';
             else if (m === 'cash') col = '#f59e0b';
-            else if (m === 'paystack') col = '#8b5cf6';
+            else if (m === 'ngo_cccrn') col = '#0284c7';
+            else if (m === 'agoda') col = '#ea580c';
+            else if (m === 'complementary') col = '#8b5cf6';
+            else if (m === 'paid_to_boss') col = '#d97706';
             return `
               <div class="metric-bar-row">
                 <div class="metric-bar-labels">
@@ -3683,7 +3983,7 @@ $reserve_url = home_url('/reserve/');
                 <td><strong>₦${Number(r.total_amount).toLocaleString()}</strong></td>
                 <td><span style="color: var(--kc-success); font-weight: 700;">₦${Number(r.amount_paid).toLocaleString()}</span></td>
                 <td>${Number(r.balance_due) > 0 ? `<span style="color: var(--kc-danger); font-weight: 700;">₦${Number(r.balance_due).toLocaleString()}</span>` : 'Settled'}</td>
-                <td><span class="ref-code">${r.payment_method}</span></td>
+                <td>${this.formatPaymentMethodBadge(r.payment_method)}</td>
                 <td><span class="status-pill status-pill-available" style="font-size: 10px;">${r.booking_status}</span></td>
               </tr>
             `).join('');
@@ -3747,22 +4047,25 @@ $reserve_url = home_url('/reserve/');
         if (!tbody) return;
 
         const bookings = this.data.bookings || [];
-        let posTotal = 0, transferTotal = 0, cashTotal = 0, paystackTotal = 0;
+        let posTotal = 0, transferTotal = 0, cashTotal = 0, ngoAgodaTotal = 0, compCount = 0;
 
-        const paidBookings = bookings.filter(b => Number(b.amount_paid) > 0);
+        const paidBookings = bookings.filter(b => Number(b.amount_paid) > 0 || b.payment_method === 'complementary' || b.payment_method === 'ngo_cccrn' || b.payment_method === 'agoda');
 
         paidBookings.forEach(b => {
-          const amt = Number(b.amount_paid);
-          if (b.payment_method === 'pos') posTotal += amt;
-          else if (b.payment_method === 'transfer') transferTotal += amt;
-          else if (b.payment_method === 'cash') cashTotal += amt;
-          else if (b.payment_method === 'paystack') paystackTotal += amt;
+          const amt = Number(b.amount_paid) || 0;
+          const pm = (b.payment_method || '').toLowerCase();
+          if (pm === 'pos') posTotal += amt;
+          else if (pm === 'transfer' || pm === 'zcash_easywallet' || pm === 'zcash' || pm === 'easywallet') transferTotal += amt;
+          else if (pm === 'cash') cashTotal += amt;
+          else if (pm === 'ngo_cccrn' || pm === 'ngo' || pm === 'agoda' || pm.includes('cccrn')) ngoAgodaTotal += amt;
+          else if (pm === 'complementary' || pm === 'paid_to_boss') compCount++;
         });
 
-        document.getElementById('ledgerPosTotal').innerText = '₦' + posTotal.toLocaleString();
-        document.getElementById('ledgerTransferTotal').innerText = '₦' + transferTotal.toLocaleString();
-        document.getElementById('ledgerCashTotal').innerText = '₦' + cashTotal.toLocaleString();
-        document.getElementById('ledgerPaystackTotal').innerText = '₦' + paystackTotal.toLocaleString();
+        if (document.getElementById('ledgerPosTotal')) document.getElementById('ledgerPosTotal').innerText = '₦' + posTotal.toLocaleString();
+        if (document.getElementById('ledgerTransferTotal')) document.getElementById('ledgerTransferTotal').innerText = '₦' + transferTotal.toLocaleString();
+        if (document.getElementById('ledgerCashTotal')) document.getElementById('ledgerCashTotal').innerText = '₦' + cashTotal.toLocaleString();
+        if (document.getElementById('ledgerNgoTotal')) document.getElementById('ledgerNgoTotal').innerText = '₦' + ngoAgodaTotal.toLocaleString();
+        if (document.getElementById('ledgerCompTotal')) document.getElementById('ledgerCompTotal').innerText = compCount + ' Bookings';
 
         if (paidBookings.length === 0) {
           tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 30px; color: var(--kc-slate-400);">No transactions found in ledger.</td></tr>`;
@@ -3775,7 +4078,7 @@ $reserve_url = home_url('/reserve/');
             <td><span class="ref-code">${b.booking_ref}</span></td>
             <td><strong>${b.guest_name}</strong></td>
             <td>${b.room_number} (${b.branch})</td>
-            <td><span class="ref-code" style="text-transform: uppercase;">${(b.payment_method || '').replace(/_/g, ' ')}</span></td>
+            <td>${this.formatPaymentMethodBadge(b.payment_method)}</td>
             <td>${b.payment_reference || 'N/A'}</td>
             <td><strong style="color: var(--kc-navy-950);">₦${Number(b.amount_paid).toLocaleString()}</strong></td>
             <td><span class="status-pill status-pill-available" style="font-size: 10px;">${(b.payment_status || '').replace(/_/g, ' ')}</span></td>
