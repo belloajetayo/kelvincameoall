@@ -30,6 +30,9 @@ $reserve_url = home_url('/reserve/');
     (function() {
       var savedTheme = localStorage.getItem('kc_reception_theme') || 'dark';
       document.documentElement.setAttribute('data-theme', savedTheme);
+      document.addEventListener('DOMContentLoaded', function() {
+        if (document.body) document.body.setAttribute('data-theme', savedTheme);
+      });
     })();
   </script>
   <title>Reception Desk & Hotel PMS | Kelvin Cameo Resort Hotel (RC 1613032)</title>
@@ -1330,180 +1333,410 @@ $reserve_url = home_url('/reserve/');
        RECEPTION DASHBOARD — LUXURY DUAL THEME ENGINE (DARK & LIGHT)
        ============================================================== */
 
-    /* DARK THEME (DEFAULT / OBSIDIAN LUXURY) */
-    body[data-theme="dark"], body:not([data-theme="light"]) {
+    /* THEME SWITCHER CONTROLS */
+    .kc-theme-pill-container {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 30px;
+      padding: 3px 4px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      user-select: none;
+      flex-shrink: 0;
+    }
+    html[data-theme="dark"] .kc-theme-pill-container,
+    body:not([data-theme="light"]) .kc-theme-pill-container {
+      background: rgba(11, 26, 54, 0.85);
+      border: 1.5px solid rgba(212, 175, 55, 0.6);
+      box-shadow: 0 0 14px rgba(212, 175, 55, 0.25);
+    }
+    html[data-theme="light"] .kc-theme-pill-container {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+    .kc-theme-pill-container:hover {
+      transform: translateY(-1px);
+    }
+    .theme-switch-slider {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .theme-switch-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 11.5px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      transition: all 0.25s ease;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: #94a3b8;
+    }
+    html[data-theme="dark"] .theme-switch-btn.active,
+    body:not([data-theme="light"]) .theme-switch-btn.active {
+      background: linear-gradient(135deg, #d4af37 0%, #b89327 100%);
+      color: #040914 !important;
+      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.5);
+    }
+    html[data-theme="light"] .theme-switch-btn.active {
+      background: #0f172a;
+      color: #ffffff !important;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.3);
+    }
+    html[data-theme="light"] .theme-switch-btn:not(.active) {
+      color: #64748b;
+    }
+
+    /* FLOATING QUICK THEME TOGGLE (BOTTOM-RIGHT) */
+    .floating-theme-switch-pill {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 30px;
+      font-size: 12.5px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+      user-select: none;
+    }
+    html[data-theme="dark"] .floating-theme-switch-pill,
+    body:not([data-theme="light"]) .floating-theme-switch-pill {
+      background: linear-gradient(135deg, #0b1a36, #060e1e);
+      color: #fce079;
+      border: 1.5px solid #d4af37;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(212, 175, 55, 0.3);
+    }
+    html[data-theme="light"] .floating-theme-switch-pill {
+      background: #ffffff;
+      color: #0f172a;
+      border: 2px solid #0f172a;
+      box-shadow: 0 8px 25px rgba(15, 23, 42, 0.18), 0 0 10px rgba(15, 23, 42, 0.08);
+    }
+    .floating-theme-switch-pill:hover {
+      transform: translateY(-3px) scale(1.04);
+    }
+
+    /* ==============================================================
+       DARK THEME (DEFAULT / OBSIDIAN LUXURY)
+       ============================================================== */
+    html[data-theme="dark"] body,
+    body[data-theme="dark"],
+    html:not([data-theme="light"]) body {
       background: #040914 !important;
       color: #e2e8f0 !important;
     }
-    body[data-theme="dark"] .top-bar, body:not([data-theme="light"]) .top-bar {
+    html[data-theme="dark"] .top-bar,
+    body:not([data-theme="light"]) .top-bar {
       background: linear-gradient(135deg, #020610 0%, #060e1e 50%, #0a1936 100%) !important;
       border-bottom: 1px solid rgba(212,175,55,0.4) !important;
       box-shadow: 0 4px 25px rgba(0,0,0,0.6) !important;
     }
-    body[data-theme="dark"] .room-matrix-strip, body:not([data-theme="light"]) .room-matrix-strip,
-    body[data-theme="dark"] .tab-container, body:not([data-theme="light"]) .tab-container,
-    body[data-theme="dark"] .nav-tabs-wrapper, body:not([data-theme="light"]) .nav-tabs-wrapper {
+    html[data-theme="dark"] .room-matrix-strip,
+    html[data-theme="dark"] .tab-container,
+    html[data-theme="dark"] .nav-tabs-wrapper,
+    html[data-theme="dark"] .table-filter-bar,
+    body:not([data-theme="light"]) .room-matrix-strip,
+    body:not([data-theme="light"]) .tab-container,
+    body:not([data-theme="light"]) .nav-tabs-wrapper,
+    body:not([data-theme="light"]) .table-filter-bar {
       background: #0b1426 !important;
       border-color: #1e293b !important;
+      color: #e2e8f0 !important;
     }
-    body[data-theme="dark"] .tab-btn, body:not([data-theme="light"]) .tab-btn {
+    html[data-theme="dark"] .matrix-stat-pill,
+    body:not([data-theme="light"]) .matrix-stat-pill {
+      background: #111e38 !important;
+      border: 1px solid #1e293b !important;
+      color: #cbd5e1 !important;
+    }
+    html[data-theme="dark"] .matrix-filter-btn,
+    body:not([data-theme="light"]) .matrix-filter-btn {
+      background: #111e38 !important;
+      border: 1px solid #1e293b !important;
+      color: #94a3b8 !important;
+    }
+    html[data-theme="dark"] .matrix-filter-btn.active,
+    body:not([data-theme="light"]) .matrix-filter-btn.active {
+      background: linear-gradient(135deg, #d4af37, #b89327) !important;
+      color: #040914 !important;
+      font-weight: 800 !important;
+      border-color: transparent !important;
+    }
+    html[data-theme="dark"] .tab-btn,
+    body:not([data-theme="light"]) .tab-btn {
       background: #111e38 !important;
       color: #94a3b8 !important;
       border: 1px solid #1e293b !important;
     }
-    body[data-theme="dark"] .tab-btn:hover, body:not([data-theme="light"]) .tab-btn:hover {
+    html[data-theme="dark"] .tab-btn:hover,
+    body:not([data-theme="light"]) .tab-btn:hover {
       background: #182a4d !important;
       color: #ffffff !important;
     }
-    body[data-theme="dark"] .tab-btn.active, body:not([data-theme="light"]) .tab-btn.active {
+    html[data-theme="dark"] .tab-btn.active,
+    body:not([data-theme="light"]) .tab-btn.active {
       background: linear-gradient(135deg, #d4af37, #b89327) !important;
       color: #040914 !important;
       font-weight: 800 !important;
       border-color: transparent !important;
       box-shadow: 0 2px 10px rgba(212,175,55,0.4) !important;
     }
-    body[data-theme="dark"] .table-card, body:not([data-theme="light"]) .table-card,
-    body[data-theme="dark"] .kpi-card, body:not([data-theme="light"]) .kpi-card,
-    body[data-theme="dark"] .stat-card, body:not([data-theme="light"]) .stat-card,
-    body[data-theme="dark"] .modal-box, body:not([data-theme="light"]) .modal-box {
+    html[data-theme="dark"] .table-card,
+    html[data-theme="dark"] .kpi-card,
+    html[data-theme="dark"] .stat-card,
+    html[data-theme="dark"] .modal-box,
+    body:not([data-theme="light"]) .table-card,
+    body:not([data-theme="light"]) .kpi-card,
+    body:not([data-theme="light"]) .stat-card,
+    body:not([data-theme="light"]) .modal-box {
       background: #0b1426 !important;
       border: 1px solid #1e293b !important;
       color: #f1f5f9 !important;
       box-shadow: 0 8px 30px rgba(0,0,0,0.4) !important;
     }
-    body[data-theme="dark"] .table-card-head, body:not([data-theme="light"]) .table-card-head,
-    body[data-theme="dark"] .modal-header, body:not([data-theme="light"]) .modal-header,
-    body[data-theme="dark"] .modal-footer, body:not([data-theme="light"]) .modal-footer {
+    html[data-theme="dark"] .table-card-head,
+    html[data-theme="dark"] .modal-header,
+    html[data-theme="dark"] .modal-footer,
+    body:not([data-theme="light"]) .table-card-head,
+    body:not([data-theme="light"]) .modal-header,
+    body:not([data-theme="light"]) .modal-footer {
       background: #060c18 !important;
       border-color: #1e293b !important;
     }
-    body[data-theme="dark"] .table th, body:not([data-theme="light"]) .table th {
+    html[data-theme="dark"] .table th,
+    body:not([data-theme="light"]) .table th {
       background: #060c18 !important;
       color: #cbd5e1 !important;
       border-bottom: 2px solid #1e293b !important;
     }
-    body[data-theme="dark"] .table td, body:not([data-theme="light"]) .table td {
+    html[data-theme="dark"] .table td,
+    body:not([data-theme="light"]) .table td {
       border-bottom: 1px solid #142036 !important;
       color: #cbd5e1 !important;
     }
-    body[data-theme="dark"] .table tbody tr:hover, body:not([data-theme="light"]) .table tbody tr:hover {
+    html[data-theme="dark"] .table tbody tr:hover,
+    body:not([data-theme="light"]) .table tbody tr:hover {
       background: rgba(255,255,255,0.03) !important;
     }
-    body[data-theme="dark"] .room-card, body:not([data-theme="light"]) .room-card {
+    html[data-theme="dark"] .room-card,
+    body:not([data-theme="light"]) .room-card {
       background: #0b1426 !important;
       border: 1px solid #1e293b !important;
       color: #e2e8f0 !important;
     }
-    body[data-theme="dark"] .form-control, body:not([data-theme="light"]) .form-control {
+    html[data-theme="dark"] .room-type-title,
+    body:not([data-theme="light"]) .room-type-title {
+      color: #ffffff !important;
+    }
+    html[data-theme="dark"] .room-features,
+    body:not([data-theme="light"]) .room-features {
+      color: #94a3b8 !important;
+    }
+    html[data-theme="dark"] .room-guest-meta,
+    body:not([data-theme="light"]) .room-guest-meta {
+      background: #070f1e !important;
+      border-color: rgba(255,255,255,0.12) !important;
+    }
+    html[data-theme="dark"] .guest-name-row,
+    body:not([data-theme="light"]) .guest-name-row {
+      color: #ffffff !important;
+    }
+    html[data-theme="dark"] .form-control,
+    body:not([data-theme="light"]) .form-control {
       background: #111e38 !important;
       border: 1.5px solid #334155 !important;
       color: #ffffff !important;
     }
-    body[data-theme="dark"] .form-control:focus, body:not([data-theme="light"]) .form-control:focus {
+    html[data-theme="dark"] .form-control:focus,
+    body:not([data-theme="light"]) .form-control:focus {
       border-color: #d4af37 !important;
       box-shadow: 0 0 0 3px rgba(212,175,55,0.25) !important;
     }
-    body[data-theme="dark"] .kpi-info h3, body:not([data-theme="light"]) .kpi-info h3 {
+    html[data-theme="dark"] .kpi-info h3,
+    body:not([data-theme="light"]) .kpi-info h3 {
       color: #94a3b8 !important;
     }
-    body[data-theme="dark"] .kpi-val, body:not([data-theme="light"]) .kpi-val {
+    html[data-theme="dark"] .kpi-val,
+    body:not([data-theme="light"]) .kpi-val {
       color: #ffffff !important;
     }
-    body[data-theme="dark"] .bank-card-highlight, body:not([data-theme="light"]) .bank-card-highlight {
+    html[data-theme="dark"] .bank-card-highlight,
+    body:not([data-theme="light"]) .bank-card-highlight {
       background: #081124 !important;
       border-color: rgba(212,175,55,0.4) !important;
     }
 
-    /* LIGHT THEME (EXECUTIVE RESORT STYLE) */
+    /* ==============================================================
+       LIGHT THEME (EXECUTIVE RESORT STYLE — CRISP & HIGH CONTRAST)
+       ============================================================== */
+    html[data-theme="light"] body,
     body[data-theme="light"] {
       background: #f1f5f9 !important;
       color: #0f172a !important;
     }
-    body[data-theme="light"] .top-bar {
+    html[data-theme="light"] .top-bar {
       background: linear-gradient(135deg, #09172e 0%, #11284d 100%) !important;
-      border-bottom: 1px solid rgba(212,175,55,0.35) !important;
+      border-bottom: 2px solid #d4af37 !important;
       box-shadow: 0 4px 20px rgba(11,26,54,0.15) !important;
     }
-    body[data-theme="light"] .room-matrix-strip,
-    body[data-theme="light"] .tab-container,
-    body[data-theme="light"] .nav-tabs-wrapper {
+    html[data-theme="light"] .room-matrix-strip,
+    html[data-theme="light"] .tab-container,
+    html[data-theme="light"] .nav-tabs-wrapper,
+    html[data-theme="light"] .table-filter-bar {
       background: #ffffff !important;
-      border-color: #e2e8f0 !important;
-    }
-    body[data-theme="light"] .tab-btn {
-      background: #f8fafc !important;
-      color: #475569 !important;
-      border: 1px solid #e2e8f0 !important;
-    }
-    body[data-theme="light"] .tab-btn:hover {
-      background: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
       color: #0f172a !important;
     }
-    body[data-theme="light"] .tab-btn.active {
-      background: #0a2540 !important;
+    html[data-theme="light"] .matrix-stat-pill {
+      background: #f8fafc !important;
+      border: 1px solid #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    html[data-theme="light"] .matrix-filter-btn {
+      background: #f8fafc !important;
+      border: 1px solid #cbd5e1 !important;
+      color: #334155 !important;
+    }
+    html[data-theme="light"] .matrix-filter-btn.active {
+      background: #0f172a !important;
+      color: #ffffff !important;
+      border-color: #0f172a !important;
+      font-weight: 800 !important;
+    }
+    html[data-theme="light"] .tab-btn {
+      background: #f8fafc !important;
+      color: #334155 !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+    html[data-theme="light"] .tab-btn:hover {
+      background: #e2e8f0 !important;
+      color: #0f172a !important;
+    }
+    html[data-theme="light"] .tab-btn.active {
+      background: #0f172a !important;
       color: #ffffff !important;
       font-weight: 800 !important;
-      border-color: #0a2540 !important;
-      box-shadow: 0 2px 10px rgba(10,37,64,0.3) !important;
+      border-color: #0f172a !important;
+      box-shadow: 0 3px 12px rgba(15, 23, 42, 0.25) !important;
     }
-    body[data-theme="light"] .table-card,
-    body[data-theme="light"] .kpi-card,
-    body[data-theme="light"] .stat-card,
-    body[data-theme="light"] .modal-box {
+    html[data-theme="light"] .table-card,
+    html[data-theme="light"] .kpi-card,
+    html[data-theme="light"] .stat-card,
+    html[data-theme="light"] .modal-box {
       background: #ffffff !important;
-      border: 1px solid #e2e8f0 !important;
+      border: 1px solid #cbd5e1 !important;
       color: #0f172a !important;
-      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06) !important;
+      box-shadow: 0 4px 18px rgba(15, 23, 42, 0.06) !important;
     }
-    body[data-theme="light"] .table-card-head,
-    body[data-theme="light"] .modal-header,
-    body[data-theme="light"] .modal-footer {
+    html[data-theme="light"] .table-card-head,
+    html[data-theme="light"] .modal-header,
+    html[data-theme="light"] .modal-footer {
       background: #f8fafc !important;
       border-color: #e2e8f0 !important;
+      color: #0f172a !important;
     }
-    body[data-theme="light"] .table th {
+    html[data-theme="light"] .table th {
       background: #f8fafc !important;
-      color: #334155 !important;
-      border-bottom: 2px solid #e2e8f0 !important;
+      color: #1e293b !important;
+      font-weight: 800 !important;
+      border-bottom: 2px solid #cbd5e1 !important;
     }
-    body[data-theme="light"] .table td {
-      border-bottom: 1px solid #f1f5f9 !important;
+    html[data-theme="light"] .table td {
+      border-bottom: 1px solid #e2e8f0 !important;
       color: #1e293b !important;
     }
-    body[data-theme="light"] .table tbody tr:hover {
+    html[data-theme="light"] .table tbody tr:hover {
       background: #f8fafc !important;
     }
-    body[data-theme="light"] .room-card {
-      background: #ffffff !important;
-      border: 1px solid #e2e8f0 !important;
-      color: #0f172a !important;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
-    }
-    body[data-theme="light"] .form-control {
+    html[data-theme="light"] .room-card {
       background: #ffffff !important;
       border: 1.5px solid #cbd5e1 !important;
       color: #0f172a !important;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05) !important;
     }
-    body[data-theme="light"] .form-control:focus {
-      border-color: #1a428a !important;
-      box-shadow: 0 0 0 3px rgba(26,66,138,0.15) !important;
+    html[data-theme="light"] .room-card:hover {
+      border-color: #d4af37 !important;
+      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.2) !important;
     }
-    body[data-theme="light"] .kpi-info h3 {
+    html[data-theme="light"] .room-type-title {
+      color: #0f172a !important;
+    }
+    html[data-theme="light"] .room-features {
+      color: #475569 !important;
+    }
+    html[data-theme="light"] .room-guest-meta {
+      background: #f8fafc !important;
+      border: 1px dashed #cbd5e1 !important;
+    }
+    html[data-theme="light"] .guest-name-row {
+      color: #0f172a !important;
+    }
+    html[data-theme="light"] .guest-dates-row {
       color: #64748b !important;
     }
-    body[data-theme="light"] .kpi-val {
+    html[data-theme="light"] .form-control,
+    html[data-theme="light"] input:not([type="checkbox"]):not([type="radio"]),
+    html[data-theme="light"] select,
+    html[data-theme="light"] textarea {
+      background: #ffffff !important;
+      border: 1.5px solid #cbd5e1 !important;
       color: #0f172a !important;
     }
-    body[data-theme="light"] .bank-card-highlight {
+    html[data-theme="light"] .form-control:focus,
+    html[data-theme="light"] input:focus,
+    html[data-theme="light"] select:focus,
+    html[data-theme="light"] textarea:focus {
+      border-color: #d4af37 !important;
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25) !important;
+    }
+    html[data-theme="light"] .kpi-info h3 {
+      color: #475569 !important;
+    }
+    html[data-theme="light"] .kpi-val {
+      color: #0f172a !important;
+    }
+    html[data-theme="light"] .kpi-subtext {
+      color: #64748b !important;
+    }
+    html[data-theme="light"] .bank-card-highlight {
       background: #f8fafc !important;
       border: 1.5px solid #cbd5e1 !important;
       color: #0f172a !important;
     }
-    body[data-theme="light"] .bank-card-highlight span {
+    html[data-theme="light"] .bank-card-highlight span {
       color: #334155 !important;
     }
-    body[data-theme="light"] .bank-card-highlight span.account-num-display {
+    html[data-theme="light"] .bank-card-highlight span.account-num-display {
       color: #0284c7 !important;
+    }
+    html[data-theme="light"] .modal-header h2,
+    html[data-theme="light"] .modal-header h3 {
+      color: #0f172a !important;
+    }
+    html[data-theme="light"] .modal-close-btn {
+      color: #64748b !important;
+    }
+    html[data-theme="light"] .modal-close-btn:hover {
+      color: #0f172a !important;
+    }
+    html[data-theme="light"] .modal-body {
+      background: #ffffff !important;
+      color: #0f172a !important;
+    }
+    html[data-theme="light"] .modal-body label {
+      color: #1e293b !important;
     }
 
   </style>
@@ -1561,6 +1794,18 @@ $reserve_url = home_url('/reserve/');
         <div class="live-clock-date" id="liveDateDisplay">Loading Date...</div>
       </div>
 
+      <!-- PROMINENT HIGH-VISIBILITY THEME SWITCHER -->
+      <div class="kc-theme-pill-container" id="themeToggleBtn" onclick="KCHotelApp.toggleTheme()" title="Click to Switch Light or Dark Dashboard Mode">
+        <div class="theme-switch-slider">
+          <button type="button" class="theme-switch-btn active" id="themeOptDark">
+            <span>🌙</span> <span>Dark</span>
+          </button>
+          <button type="button" class="theme-switch-btn" id="themeOptLight">
+            <span>☀️</span> <span>Light</span>
+          </button>
+        </div>
+      </div>
+
       <!-- INCOMING TRANSFERS BELL ALERT -->
       <button class="btn btn-outline-light btn-sm bell-alert-btn" onclick="KCHotelApp.openPendingTransfersModal()" title="Pending Transfer Claims">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
@@ -1570,13 +1815,6 @@ $reserve_url = home_url('/reserve/');
       <a href="<?php echo esc_url($reserve_url); ?>" target="_blank" class="btn btn-outline-light btn-sm" title="Guest Booking & Transfer Page">
         Guest Booking Form ↗
       </a>
-
-      <!-- Staff on duty -->
-      <!-- THEME TOGGLE BUTTON -->
-      <button type="button" class="btn btn-outline-light btn-sm" id="themeToggleBtn" onclick="KCHotelApp.toggleTheme()" style="padding: 6px 12px; font-size: 12px; border-radius: 8px;" title="Switch Light or Dark Mode">
-        <span id="themeToggleIcon">☀️</span>
-        <span id="themeToggleText">Light Mode</span>
-      </button>
 
       <a href="<?php echo home_url('/kitchen/'); ?>" class="btn btn-outline-light btn-sm" title="Kitchen & Restaurant POS">
         🍳 Kitchen POS
@@ -1636,7 +1874,7 @@ $reserve_url = home_url('/reserve/');
         <div class="kpi-info">
           <h3>Occupancy Rate</h3>
           <div class="kpi-val" id="kpiOccupancyRate">0%</div>
-          <div class="kpi-subtext" id="kpiOccupiedRatio">0 of 31 Rooms Occupied</div>
+          <div class="kpi-subtext" id="kpiOccupiedRatio">0 of 50 Rooms Occupied</div>
         </div>
         <div class="kpi-icon">🛏️</div>
       </div>
@@ -3060,6 +3298,12 @@ $reserve_url = home_url('/reserve/');
 
   <div class="toast-container" id="toastContainer"></div>
 
+  <!-- FLOATING QUICK THEME SWITCHER PILL (ALWAYS VISIBLE ON SCROLL) -->
+  <div id="floatingThemeToggle" class="floating-theme-switch-pill" onclick="KCHotelApp.toggleTheme()" title="Switch Light or Dark Dashboard Mode">
+    <span id="floatingThemeIcon" class="floating-icon">☀️</span>
+    <span id="floatingThemeText" class="floating-text">Switch to Light Mode</span>
+  </div>
+
   <!-- APPLICATION JAVASCRIPT -->
   <script>
     const KCHotelApp = {
@@ -3448,25 +3692,38 @@ $reserve_url = home_url('/reserve/');
       },
 
       toggleTheme: function() {
-        const cur = document.documentElement.getAttribute('data-theme') || 'dark';
+        const cur = document.documentElement.getAttribute('data-theme') || (document.body ? document.body.getAttribute('data-theme') : 'dark') || 'dark';
         const next = cur === 'dark' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', next);
+        if (document.body) {
+          document.body.setAttribute('data-theme', next);
+        }
         localStorage.setItem('kc_reception_theme', next);
         this.updateThemeUI(next);
       },
 
       updateThemeUI: function(theme) {
-        const t = theme || document.documentElement.getAttribute('data-theme') || 'dark';
-        const icon = document.getElementById('themeToggleIcon');
-        const text = document.getElementById('themeToggleText');
-        if (icon && text) {
-          if (t === 'light') {
-            icon.textContent = '🌙';
-            text.textContent = 'Dark Mode';
-          } else {
-            icon.textContent = '☀️';
-            text.textContent = 'Light Mode';
-          }
+        const t = theme || localStorage.getItem('kc_reception_theme') || document.documentElement.getAttribute('data-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        if (document.body) {
+          document.body.setAttribute('data-theme', t);
+        }
+
+        const optDark = document.getElementById('themeOptDark');
+        const optLight = document.getElementById('themeOptLight');
+        const floatIcon = document.getElementById('floatingThemeIcon');
+        const floatText = document.getElementById('floatingThemeText');
+
+        if (t === 'light') {
+          if (optLight) optLight.classList.add('active');
+          if (optDark) optDark.classList.remove('active');
+          if (floatIcon) floatIcon.textContent = '🌙';
+          if (floatText) floatText.textContent = 'Switch to Dark Mode';
+        } else {
+          if (optDark) optDark.classList.add('active');
+          if (optLight) optLight.classList.remove('active');
+          if (floatIcon) floatIcon.textContent = '☀️';
+          if (floatText) floatText.textContent = 'Switch to Light Mode';
         }
       },
 
