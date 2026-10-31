@@ -1310,12 +1310,34 @@ $reserve_url = home_url('/reserve/');
         background: #fff !important;
       }
 
-      /* Mode 2: Standard A4 Guest Folio / Receipt */
-      body:not(.printing-shift) #printableFolioArea,
-      body:not(.printing-shift) #printableFolioArea * {
+      /* Mode 2: Official Financial & Revenue Statement (A4) */
+      body.printing-statement #printableStatementArea,
+      body.printing-statement #printableStatementArea * {
         visibility: visible;
       }
-      body:not(.printing-shift) #printableFolioArea {
+      body.printing-statement #printableStatementArea {
+        display: block !important;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 12mm 15mm !important;
+        box-shadow: none !important;
+        border: none !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+
+      /* Mode 3: Standard A4 Guest Folio / Receipt */
+      body.printing-folio #printableFolioArea,
+      body.printing-folio #printableFolioArea *,
+      body:not(.printing-shift):not(.printing-statement) #printableFolioArea,
+      body:not(.printing-shift):not(.printing-statement) #printableFolioArea * {
+        visibility: visible;
+      }
+      body.printing-folio #printableFolioArea,
+      body:not(.printing-shift):not(.printing-statement) #printableFolioArea {
         position: absolute;
         left: 0;
         top: 0;
@@ -1852,6 +1874,11 @@ $reserve_url = home_url('/reserve/');
         ⚙️ Bank Settings
       </button>
 
+      <!-- Generate Statement Button -->
+      <button class="btn btn-outline-light btn-sm" onclick="KCHotelApp.openStatementModal()" title="Generate Official Financial & Revenue Statement">
+        📑 Statement
+      </button>
+
       <button class="btn btn-gold" onclick="KCHotelApp.openNewBookingModal()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
         + New Reservation
@@ -2063,9 +2090,9 @@ $reserve_url = home_url('/reserve/');
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
             📥 Export Sales CSV
           </button>
-          <button class="btn btn-secondary btn-sm" onclick="window.print()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-            🖨️ Print Statement
+          <button class="btn btn-gold btn-sm" onclick="KCHotelApp.openStatementModal(KCHotelApp.activeSalesPeriod || 'all')" style="font-weight: 800;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+            🖨️ Generate &amp; Print Statement
           </button>
         </div>
       </div>
@@ -2960,9 +2987,189 @@ $reserve_url = home_url('/reserve/');
 
       <div class="modal-footer no-print">
         <button type="button" class="btn btn-secondary" onclick="KCHotelApp.closeModals()">Close</button>
-        <button type="button" class="btn btn-primary" onclick="window.print()">
+        <button type="button" class="btn btn-primary" onclick="KCHotelApp.printFolio()">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
           Print Receipt / Folio
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: OFFICIAL HOTEL FINANCIAL & REVENUE STATEMENT -->
+  <div id="statementModal" class="modal-backdrop">
+    <div class="modal-box modal-lg" style="max-width: 960px; max-height: 90vh;">
+      <div class="modal-header no-print">
+        <h2>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          Official Financial &amp; Revenue Statement
+        </h2>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button class="modal-close-btn" onclick="KCHotelApp.closeModals()">&times;</button>
+        </div>
+      </div>
+
+      <!-- Statement Period Selector (no-print) -->
+      <div class="no-print" style="padding: 12px 20px; background: rgba(0,0,0,0.03); border-bottom: 1px solid var(--kc-slate-200); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 12px; font-weight: 700; color: var(--kc-slate-700);">Audit Scope:</span>
+          <div class="pill-group">
+            <button type="button" class="filter-pill" id="stmtBtnToday" onclick="KCHotelApp.generateStatement('today')">Today</button>
+            <button type="button" class="filter-pill" id="stmtBtnWeek" onclick="KCHotelApp.generateStatement('week')">Last 7 Days</button>
+            <button type="button" class="filter-pill" id="stmtBtnMonth" onclick="KCHotelApp.generateStatement('month')">This Month</button>
+            <button type="button" class="filter-pill active" id="stmtBtnAll" onclick="KCHotelApp.generateStatement('all')">All Time</button>
+          </div>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="KCHotelApp.exportSalesCSV()">
+            📥 Export CSV
+          </button>
+          <button type="button" class="btn btn-gold btn-sm" onclick="KCHotelApp.printStatement()" style="font-weight: 800;">
+            🖨️ Print Statement (A4)
+          </button>
+        </div>
+      </div>
+
+      <!-- Scrollable Preview Body -->
+      <div class="modal-body" style="padding: 24px; background: #f8fafc;">
+        
+        <!-- =======================================================
+             THE ACTUAL PRINTABLE STATEMENT SHEET (A4)
+             ======================================================= -->
+        <div id="printableStatementArea" class="statement-sheet" style="background: #ffffff; color: #0f172a; border-radius: 8px; padding: 32px 36px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; font-family: 'Plus Jakarta Sans', Arial, sans-serif;">
+          
+          <!-- STATEMENT HEADER -->
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #0f172a; padding-bottom: 16px; margin-bottom: 20px;">
+            <div>
+              <div style="font-size: 20px; font-weight: 900; color: #040914; letter-spacing: -0.5px; text-transform: uppercase;">
+                Kelvin Cameo Resort Hotel
+              </div>
+              <div style="font-size: 12px; font-weight: 700; color: #b89327; margin-top: 2px;">
+                RECEPTION PROPERTY DESK &bull; OFFICIAL FINANCIAL AUDIT STATEMENT
+              </div>
+              <div style="font-size: 11px; color: #475569; margin-top: 4px; line-height: 1.4;">
+                CAC Corporate Incorporation RC: <strong>1613032</strong> &bull; Suleja–Abuja Expressway Corridor, Niger State<br>
+                Official Desk Email: desk@kelvincameo.com &bull; Phone: +234 805 555 8197 &bull; Web: kelvincameo.com
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <div style="display: inline-block; background: #040914; color: #d4af37; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 4px; letter-spacing: 0.5px;">
+                FINANCIAL STATEMENT
+              </div>
+              <div style="font-size: 11px; font-weight: 700; color: #0f172a; margin-top: 6px;">
+                Ref: <span id="stmtRefCode">KC-STMT-20261031</span>
+              </div>
+              <div style="font-size: 11px; color: #64748b; margin-top: 2px;">
+                Date: <span id="stmtPrintDate">--</span>
+              </div>
+              <div style="font-size: 11px; color: #64748b;">
+                Desk Staff: <strong id="stmtStaffName" style="color: #0f172a;">Front Desk Staff</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- PERIOD & AUDIT SCOPE BANNER -->
+          <div style="background: #f1f5f9; border-left: 4px solid #d4af37; padding: 10px 14px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; font-size: 12px;">
+            <div>
+              <strong>Audit Scope:</strong> <span id="stmtPeriodLabel" style="font-weight: 800; color: #0f172a;">All Time</span>
+            </div>
+            <div>
+              <strong>Total Records:</strong> <span id="stmtTotalBookingsCount" style="font-weight: 800; color: #0f172a;">0 Bookings</span>
+            </div>
+            <div>
+              <strong>Audit Status:</strong> <span style="color: #059669; font-weight: 800;">VERIFIED ACCREDITED</span>
+            </div>
+          </div>
+
+          <!-- FINANCIAL REVENUE KPI SUMMARY -->
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px;">
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 14px;">
+              <div style="font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase;">Total Billed (Gross)</div>
+              <div style="font-size: 18px; font-weight: 900; color: #040914; margin-top: 4px;" id="stmtGrossBilled">₦0.00</div>
+              <div style="font-size: 10px; color: #94a3b8; margin-top: 2px;">Contracted Revenue</div>
+            </div>
+
+            <div style="background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 6px; padding: 12px 14px;">
+              <div style="font-size: 10px; font-weight: 700; color: #166534; text-transform: uppercase;">Total Inflow Collected</div>
+              <div style="font-size: 18px; font-weight: 900; color: #15803d; margin-top: 4px;" id="stmtTotalCollected">₦0.00</div>
+              <div style="font-size: 10px; color: #166534; margin-top: 2px;">Settled Bank/POS/Cash</div>
+            </div>
+
+            <div style="background: #fef2f2; border: 1.5px solid #fca5a5; border-radius: 6px; padding: 12px 14px;">
+              <div style="font-size: 10px; font-weight: 700; color: #991b1b; text-transform: uppercase;">Outstanding Due</div>
+              <div style="font-size: 18px; font-weight: 900; color: #b91c1c; margin-top: 4px;" id="stmtBalanceDue">₦0.00</div>
+              <div style="font-size: 10px; color: #991b1b; margin-top: 2px;">Pending Receivables</div>
+            </div>
+
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 14px;">
+              <div style="font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase;">Performance Indices</div>
+              <div style="font-size: 15px; font-weight: 900; color: #040914; margin-top: 4px;" id="stmtOccupancyRate">50 Rooms Matrix</div>
+              <div style="font-size: 10px; color: #64748b; margin-top: 2px;" id="stmtAvgRate">ADR: ₦0.00</div>
+            </div>
+          </div>
+
+          <!-- PAYMENT CHANNEL BREAKDOWN -->
+          <div style="margin-bottom: 24px;">
+            <div style="font-size: 12px; font-weight: 800; text-transform: uppercase; color: #040914; margin-bottom: 8px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px;">
+              Revenue Inflow Breakdown by Payment Channel
+            </div>
+            <div id="stmtPaymentChannelsGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 11.5px;">
+              <!-- Dynamic channel cards populated by JS -->
+            </div>
+          </div>
+
+          <!-- ITEMIZED TRANSACTION LEDGER TABLE -->
+          <div style="margin-bottom: 24px;">
+            <div style="font-size: 12px; font-weight: 800; text-transform: uppercase; color: #040914; margin-bottom: 8px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px;">
+              Itemized Guest Booking &amp; Transaction Ledger
+            </div>
+            <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+              <thead>
+                <tr style="background: #f1f5f9; border-bottom: 1.5px solid #cbd5e1; text-align: left;">
+                  <th style="padding: 6px 8px;">Ref</th>
+                  <th style="padding: 6px 8px;">Guest Name</th>
+                  <th style="padding: 6px 8px;">Room</th>
+                  <th style="padding: 6px 8px;">Dates</th>
+                  <th style="padding: 6px 8px;">Method</th>
+                  <th style="padding: 6px 8px; text-align: right;">Billed (₦)</th>
+                  <th style="padding: 6px 8px; text-align: right;">Paid (₦)</th>
+                  <th style="padding: 6px 8px; text-align: right;">Balance (₦)</th>
+                  <th style="padding: 6px 8px; text-align: center;">Status</th>
+                </tr>
+              </thead>
+              <tbody id="stmtTransactionsTableBody">
+                <!-- Dynamically populated rows -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- OFFICIAL SIGNATURES & AUDIT CERTIFICATION -->
+          <div style="border-top: 1.5px solid #cbd5e1; padding-top: 18px; margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; font-size: 11px;">
+            <div>
+              <div style="color: #64748b; margin-bottom: 30px;">Prepared by Duty Receptionist:</div>
+              <div style="border-bottom: 1px solid #000; padding-bottom: 2px; font-weight: 700;" id="stmtSignStaffName">Staff On Duty</div>
+              <div style="color: #64748b; font-size: 10px; margin-top: 2px;">Front Desk Operations</div>
+            </div>
+            <div>
+              <div style="color: #64748b; margin-bottom: 30px;">Verified by Internal Auditor:</div>
+              <div style="border-bottom: 1px solid #000; padding-bottom: 2px; font-weight: 700;">Accountant / Duty Manager</div>
+              <div style="color: #64748b; font-size: 10px; margin-top: 2px;">Finance &amp; Reconciliation</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="display: inline-block; border: 2px solid #b89327; border-radius: 50%; width: 70px; height: 70px; padding-top: 12px; color: #b89327; font-weight: 800; font-size: 9px; line-height: 1.2;">
+                KELVIN CAMEO<br>RESORT<br>RC 1613032
+              </div>
+              <div style="color: #64748b; font-size: 10px; margin-top: 4px;">Official Property Seal</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="modal-footer no-print">
+        <button type="button" class="btn btn-secondary" onclick="KCHotelApp.closeModals()">Close</button>
+        <button type="button" class="btn btn-primary" onclick="KCHotelApp.printStatement()" style="font-weight: 800;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+          Print Statement (A4)
         </button>
       </div>
     </div>
@@ -4279,6 +4486,142 @@ $reserve_url = home_url('/reserve/');
         document.body.removeChild(a);
         URL.revokeObjectURL(url);
         this.showToast('Sales CSV exported successfully!');
+      },
+
+      openStatementModal: function(period = 'all') {
+        const modal = document.getElementById('statementModal');
+        if (modal) {
+          modal.classList.add('active');
+          this.generateStatement(period || this.activeSalesPeriod || 'all');
+        }
+      },
+
+      generateStatement: function(period = 'all') {
+        this.activeSalesPeriod = period;
+        
+        // Update filter pills inside statement modal
+        const pills = {
+          'today': 'stmtBtnToday',
+          'week': 'stmtBtnWeek',
+          'month': 'stmtBtnMonth',
+          'all': 'stmtBtnAll'
+        };
+        Object.keys(pills).forEach(p => {
+          const btn = document.getElementById(pills[p]);
+          if (btn) {
+            if (p === period) btn.classList.add('active');
+            else btn.classList.remove('active');
+          }
+        });
+
+        // Ensure sales analytics are loaded for this period
+        const fd = new FormData();
+        fd.append('action', 'kc_hotel_get_sales_analytics');
+        fd.append('period', period);
+
+        fetch(this.ajaxUrl, { method: 'POST', body: fd })
+          .then(r => r.json())
+          .then(res => {
+            if (res.success && res.data) {
+              this.data.sales = res.data;
+              this.renderStatementData(period);
+              this.renderSalesAnalytics(); // Keep tab 4 synchronized
+            }
+          })
+          .catch(() => {
+            this.showToast('Error loading statement data', 'error');
+          });
+      },
+
+      renderStatementData: function(period) {
+        const s = this.data.sales;
+        if (!s) return;
+
+        const sum = s.summary || {};
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) + ' ' + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        const refCode = 'KC-STMT-' + now.toISOString().slice(0,10).replace(/-/g,'') + '-' + Math.floor(1000 + Math.random() * 9000);
+
+        if (document.getElementById('stmtRefCode')) document.getElementById('stmtRefCode').innerText = refCode;
+        if (document.getElementById('stmtPrintDate')) document.getElementById('stmtPrintDate').innerText = dateStr;
+        if (document.getElementById('stmtStaffName')) document.getElementById('stmtStaffName').innerText = this.currentStaff || 'Front Desk Staff';
+        if (document.getElementById('stmtSignStaffName')) document.getElementById('stmtSignStaffName').innerText = this.currentStaff || 'Front Desk Staff';
+
+        const labels = {
+          'today': 'Today (' + now.toLocaleDateString('en-GB') + ')',
+          'week': 'Last 7 Days',
+          'month': 'This Month (' + now.toLocaleString('en-US', { month: 'long', year: 'numeric' }) + ')',
+          'all': 'All-Time Cumulative Audit'
+        };
+        if (document.getElementById('stmtPeriodLabel')) document.getElementById('stmtPeriodLabel').innerText = labels[period] || 'All Time';
+        if (document.getElementById('stmtTotalBookingsCount')) document.getElementById('stmtTotalBookingsCount').innerText = `${sum.total_bookings || 0} Bookings (${sum.occupied_nights || 0} Nights)`;
+
+        if (document.getElementById('stmtGrossBilled')) document.getElementById('stmtGrossBilled').innerText = '₦' + Number(sum.gross_sales || 0).toLocaleString();
+        if (document.getElementById('stmtTotalCollected')) document.getElementById('stmtTotalCollected').innerText = '₦' + Number(sum.collected_revenue || 0).toLocaleString();
+        if (document.getElementById('stmtBalanceDue')) document.getElementById('stmtBalanceDue').innerText = '₦' + Number(sum.pending_receivables || 0).toLocaleString();
+        if (document.getElementById('stmtOccupancyRate')) document.getElementById('stmtOccupancyRate').innerText = `${sum.total_bookings || 0} Bookings Logged`;
+        if (document.getElementById('stmtAvgRate')) document.getElementById('stmtAvgRate').innerText = `ADR: ₦${Number(sum.adr || 0).toLocaleString()} • RevPAR: ₦${Number(sum.revpar || 0).toLocaleString()}`;
+
+        // Render payment channels grid
+        const channelBox = document.getElementById('stmtPaymentChannelsGrid');
+        if (channelBox && s.by_method) {
+          const collected = sum.collected_revenue || 1;
+          channelBox.innerHTML = Object.keys(s.by_method).map(m => {
+            const item = s.by_method[m];
+            const pct = Math.round((item.amount / collected) * 100);
+            return `
+              <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px 10px;">
+                <div style="display: flex; justify-content: space-between; font-weight: 700; color: #040914;">
+                  <span>${item.label}</span>
+                  <span style="color: #059669;">₦${Number(item.amount).toLocaleString()}</span>
+                </div>
+                <div style="font-size: 10px; color: #64748b; margin-top: 2px;">
+                  ${item.count} payment(s) &bull; ${pct}% of total inflow
+                </div>
+              </div>
+            `;
+          }).join('');
+        }
+
+        // Render ledger rows
+        const tbody = document.getElementById('stmtTransactionsTableBody');
+        if (tbody && s.csv_rows) {
+          if (s.csv_rows.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 18px; color: #64748b;">No transaction records logged in this period.</td></tr>`;
+          } else {
+            tbody.innerHTML = s.csv_rows.map((r, idx) => `
+              <tr style="border-bottom: 1px solid #e2e8f0; ${idx % 2 === 1 ? 'background: #f8fafc;' : ''}">
+                <td style="padding: 5px 8px; font-weight: 700; font-family: monospace;">${r.booking_ref}</td>
+                <td style="padding: 5px 8px; font-weight: 700;">${r.guest_name}</td>
+                <td style="padding: 5px 8px;">${r.room_number}</td>
+                <td style="padding: 5px 8px; font-size: 10px; color: #475569;">${r.check_in} &rarr; ${r.check_out}</td>
+                <td style="padding: 5px 8px; font-size: 10.5px; font-weight: 600;">${r.payment_method ? r.payment_method.toUpperCase() : 'N/A'}</td>
+                <td style="padding: 5px 8px; text-align: right; font-weight: 600;">₦${Number(r.total_amount).toLocaleString()}</td>
+                <td style="padding: 5px 8px; text-align: right; font-weight: 700; color: #15803d;">₦${Number(r.amount_paid).toLocaleString()}</td>
+                <td style="padding: 5px 8px; text-align: right; font-weight: 700; color: ${Number(r.balance_due) > 0 ? '#b91c1c' : '#64748b'};">
+                  ₦${Number(r.balance_due).toLocaleString()}
+                </td>
+                <td style="padding: 5px 8px; text-align: center; font-size: 10px; font-weight: 700; text-transform: uppercase;">${r.booking_status}</td>
+              </tr>
+            `).join('');
+          }
+        }
+      },
+
+      printStatement: function() {
+        document.body.classList.add('printing-statement');
+        window.print();
+        setTimeout(() => {
+          document.body.classList.remove('printing-statement');
+        }, 1000);
+      },
+
+      printFolio: function() {
+        document.body.classList.add('printing-folio');
+        window.print();
+        setTimeout(() => {
+          document.body.classList.remove('printing-folio');
+        }, 1000);
       },
 
       renderLedger: function() {
