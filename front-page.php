@@ -125,7 +125,7 @@ get_header();
           </label>
           <div class="hp-input-inner-wrap" style="position: relative;">
             <select id="hpRoomSelect" name="room" required style="width: 100%; height: 50px; background: rgba(255,255,255,0.06); border: 1.5px solid rgba(212,175,55,0.3); border-radius: 10px; color: #ffffff; padding: 0 14px; font-size: 13.5px; font-weight: 600; outline: none; transition: all 0.25s ease;">
-              <option value="deluxe-uk" selected style="background: #09172e; color: #ffffff;">Deluxe (UK Room) (₦25,000 / Night) &bull; Rooms 401–414</option>
+              <option value="deluxe-uk" selected style="background: #09172e; color: #ffffff;">Deluxe (UK Room) (₦25,000 - ₦45,000)</option>
               <option value="love-night" style="background: #09172e; color: #ffffff;">Love Night Room (₦45,000 / Night) &bull; Rooms 401–415</option>
               <option value="golden-nest" style="background: #09172e; color: #ffffff;">Golden Nest Room (₦55,000 / Night) &bull; Rooms 416–430</option>
               <option value="suite" style="background: #09172e; color: #ffffff;">Executive VIP Suite (₦60,000 / Night) &bull; Rooms 422 &amp; 428</option>
@@ -214,7 +214,7 @@ get_header();
             <span class="hp-stat-number hp-counter" data-target="50" style="font-size: 1.85rem; font-weight: 900;">50</span>
             <span class="hp-stat-suffix" style="font-size: 1.25rem; font-weight: 900; color: #d4af37; margin-left: 2px;">+</span>
           </div>
-          <div class="hp-stat-label">Luxury Rooms &amp; Suites (From ₦25k)</div>
+          <div class="hp-stat-label">Luxury Rooms &amp; Suites (From ₦20k)</div>
         </div>
 
         <!-- Stat 3: Banquet Hall -->
@@ -428,9 +428,16 @@ get_header();
                 observer.disconnect();
               }
             });
-          }, { threshold: 0.25 });
+          }, { threshold: 0.15 });
 
           observer.observe(statsEl);
+
+          // If already in view on load
+          const rect = statsEl.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom >= 0) {
+            animateCounters();
+            observer.disconnect();
+          }
         } else {
           // Fallback
           animateCounters();
