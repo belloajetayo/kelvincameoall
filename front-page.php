@@ -99,136 +99,346 @@ get_header();
   </section>
 
   <!-- ====================================================================
-       INSTANT HOTEL BOOKING & AVAILABILITY BAR (Direct Hotel Engine)
+       INSTANT ROOM AVAILABILITY BAR — REDESIGNED & ANIMATED LUXURY ENGINE
        ==================================================================== -->
-  <div class="container container-wide hp-booking-bar-wrap">
-    <div class="hp-booking-bar">
-      <form action="<?php echo kc_url('reserve'); ?>" method="get" class="hp-booking-grid">
-        <div class="hp-booking-field">
-          <label for="hpRoomSelect">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+  <div class="container container-wide hp-booking-bar-wrap" style="position: relative; z-index: 25; margin-top: -3.5rem; margin-bottom: 2rem;">
+    <div class="hp-booking-bar-luxury" style="background: linear-gradient(135deg, rgba(8, 20, 44, 0.96) 0%, rgba(4, 10, 24, 0.98) 100%); border: 1.5px solid rgba(212, 175, 55, 0.4); border-radius: 20px; box-shadow: 0 16px 45px rgba(0,0,0,0.5), 0 0 25px rgba(212,175,55,0.15); backdrop-filter: blur(16px); padding: 22px 26px; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+      
+      <!-- Top Micro-Badge -->
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+        <div style="display: inline-flex; align-items: center; gap: 8px; font-size: 11.5px; font-weight: 800; letter-spacing: 0.8px; color: #d4af37; text-transform: uppercase;">
+          <span style="width: 8px; height: 8px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 10px #22c55e; display: inline-block;"></span>
+          DIRECT ROOM RESERVATION ENGINE &bull; 50 SUITES &amp; ROOMS
+        </div>
+        <div style="font-size: 11.5px; color: #94a3b8; font-weight: 600;">
+          🔒 Best Rate Guarantee &bull; Instant Confirmation
+        </div>
+      </div>
+
+      <form action="<?php echo kc_url('reserve'); ?>" method="get" class="hp-booking-grid-luxury" style="display: grid; grid-template-columns: 2fr 1.25fr 1.25fr 1.25fr 1.4fr; gap: 14px; align-items: end;">
+        
+        <!-- Field 1: Room Category -->
+        <div class="hp-booking-field-luxury">
+          <label for="hpRoomSelect" style="display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #cbd5e1; margin-bottom: 6px; letter-spacing: 0.2px;">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#d4af37" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
             Select Room Category
           </label>
-          <select id="hpRoomSelect" name="room" required>
-            <option value="love-night">Love Night Room (₦20,000 / Night)</option>
-            <option value="golden-nest">Golden Nest Room (₦20,000 / Night)</option>
-            <option value="deluxe-uk" selected>Deluxe (UK Room) (₦25,000 - ₦45,000)</option>
-            <option value="royal-treat">Royal Treat Suite (₦50,000 / Night)</option>
-            <option value="executive">Executive VIP Suite (₦60,000 / Night)</option>
-            <option value="apartment-3bed">3-Bedroom Luxury Apartment (₦160,000)</option>
-          </select>
+          <div class="hp-input-inner-wrap" style="position: relative;">
+            <select id="hpRoomSelect" name="room" required style="width: 100%; height: 50px; background: rgba(255,255,255,0.06); border: 1.5px solid rgba(212,175,55,0.3); border-radius: 10px; color: #ffffff; padding: 0 14px; font-size: 13.5px; font-weight: 600; outline: none; transition: all 0.25s ease;">
+              <option value="deluxe-uk" selected style="background: #09172e; color: #ffffff;">Deluxe (UK Room) (₦25,000 / Night) &bull; Rooms 401–414</option>
+              <option value="love-night" style="background: #09172e; color: #ffffff;">Love Night Room (₦45,000 / Night) &bull; Rooms 401–415</option>
+              <option value="golden-nest" style="background: #09172e; color: #ffffff;">Golden Nest Room (₦55,000 / Night) &bull; Rooms 416–430</option>
+              <option value="suite" style="background: #09172e; color: #ffffff;">Executive VIP Suite (₦60,000 / Night) &bull; Rooms 422 &amp; 428</option>
+              <option value="apartment" style="background: #09172e; color: #ffffff;">Luxury Serviced Apartment (₦160,000 / Night) &bull; 6 Apartments</option>
+            </select>
+          </div>
         </div>
 
-        <div class="hp-booking-field">
-          <label for="hpCheckIn">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg>
+        <!-- Field 2: Check-In Date -->
+        <div class="hp-booking-field-luxury">
+          <label for="hpCheckIn" style="display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #cbd5e1; margin-bottom: 6px; letter-spacing: 0.2px;">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#d4af37" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg>
             Check-In Date
           </label>
-          <input type="date" id="hpCheckIn" name="checkin" value="<?php echo date('Y-m-d'); ?>" required>
+          <div class="hp-input-inner-wrap" style="position: relative;">
+            <input type="date" id="hpCheckIn" name="checkin" value="<?php echo date('Y-m-d'); ?>" min="<?php echo date('Y-m-d'); ?>" required style="width: 100%; height: 50px; background: rgba(255,255,255,0.06); border: 1.5px solid rgba(212,175,55,0.3); border-radius: 10px; color: #ffffff; padding: 0 14px; font-size: 13.5px; font-weight: 600; outline: none; transition: all 0.25s ease;">
+          </div>
         </div>
 
-        <div class="hp-booking-field">
-          <label for="hpCheckOut">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg>
+        <!-- Field 3: Check-Out Date -->
+        <div class="hp-booking-field-luxury">
+          <label for="hpCheckOut" style="display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #cbd5e1; margin-bottom: 6px; letter-spacing: 0.2px;">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#d4af37" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg>
             Check-Out Date
           </label>
-          <input type="date" id="hpCheckOut" name="checkout" value="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" required>
+          <div class="hp-input-inner-wrap" style="position: relative;">
+            <input type="date" id="hpCheckOut" name="checkout" value="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" required style="width: 100%; height: 50px; background: rgba(255,255,255,0.06); border: 1.5px solid rgba(212,175,55,0.3); border-radius: 10px; color: #ffffff; padding: 0 14px; font-size: 13.5px; font-weight: 600; outline: none; transition: all 0.25s ease;">
+          </div>
         </div>
 
-        <div class="hp-booking-field">
-          <label for="hpGuests">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        <!-- Field 4: Number of Guests -->
+        <div class="hp-booking-field-luxury">
+          <label for="hpGuests" style="display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: #cbd5e1; margin-bottom: 6px; letter-spacing: 0.2px;">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#d4af37" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
             Number of Guests
           </label>
-          <select id="hpGuests" name="guests">
-            <option value="1">1 Adult (Single)</option>
-            <option value="2" selected>2 Adults (Couple)</option>
-            <option value="3">3 Adults (Family)</option>
-            <option value="4+">4+ Adults / Delegation</option>
-          </select>
+          <div class="hp-input-inner-wrap" style="position: relative;">
+            <select id="hpGuests" name="guests" style="width: 100%; height: 50px; background: rgba(255,255,255,0.06); border: 1.5px solid rgba(212,175,55,0.3); border-radius: 10px; color: #ffffff; padding: 0 14px; font-size: 13.5px; font-weight: 600; outline: none; transition: all 0.25s ease;">
+              <option value="1" style="background: #09172e; color: #ffffff;">1 Adult (Single)</option>
+              <option value="2" selected style="background: #09172e; color: #ffffff;">2 Adults (Couple)</option>
+              <option value="3" style="background: #09172e; color: #ffffff;">3 Adults (Family)</option>
+              <option value="4+" style="background: #09172e; color: #ffffff;">4+ Adults / Delegation</option>
+            </select>
+          </div>
         </div>
 
+        <!-- Submit Button with Shimmer Animation -->
         <div>
-          <button type="submit" class="btn-gold" style="width:100%; height:48px; border-radius:10px; font-size:0.95rem; justify-content:center;">
-            Check &amp; Reserve &rarr;
+          <button type="submit" class="btn-booking-reserve-animated" style="width: 100%; height: 50px; background: linear-gradient(135deg, #d4af37 0%, #f59e0b 50%, #b89327 100%); color: #040914; border: none; border-radius: 10px; font-size: 14.5px; font-weight: 800; letter-spacing: 0.3px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px; position: relative; overflow: hidden; box-shadow: 0 4px 18px rgba(212,175,55,0.4); transition: all 0.25s ease;">
+            <span style="position: relative; z-index: 2;">Check &amp; Reserve</span>
+            <span class="btn-arrow" style="position: relative; z-index: 2; font-size: 17px; transition: transform 0.25s ease;">&rarr;</span>
+            <span class="shimmer-sweep" aria-hidden="true"></span>
           </button>
         </div>
+
       </form>
     </div>
   </div>
 
   <!-- ====================================================================
-       STATS STRIP — Verifiable Conglomerate Scale & Credibility Metrics
+       STATS STRIP — VERIFIABLE SCALE & ANIMATED METRIC COUNTERS
        ==================================================================== -->
-  <section class="hp-stats-bar">
+  <section class="hp-stats-bar" id="hpStatsBar" style="background: linear-gradient(180deg, #020713 0%, #061126 50%, #030814 100%); border-top: 1px solid rgba(212, 175, 55, 0.22); border-bottom: 1px solid rgba(212, 175, 55, 0.22); padding: 3rem 0; position: relative; overflow: hidden;">
+    
     <div class="container container-wide">
-      <div class="hp-stats-row">
-        <!-- Stat 1 -->
-        <div class="hp-stat">
-          <div class="hp-stat-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div class="hp-stats-row-luxury" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;">
+        
+        <!-- Stat 1: CAC Incorporation -->
+        <div class="hp-stat-card-luxury">
+          <div class="hp-stat-icon-wrap" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
           <div class="hp-stat-val-wrap">
-            <span class="hp-stat-number" style="font-size:1.8rem; letter-spacing:0.02em;">1613032</span>
-            <span class="hp-stat-suffix" style="font-size:0.9rem; color:#f59e0b;">RC</span>
+            <span class="hp-stat-number hp-counter" data-target="1613032" style="font-size: 1.85rem; font-weight: 900; letter-spacing: -0.5px;">1613032</span>
+            <span class="hp-stat-suffix" style="font-size: 0.95rem; font-weight: 800; color: #f59e0b; margin-left: 4px;">RC</span>
           </div>
           <div class="hp-stat-label">CAC Corporate Incorporation</div>
         </div>
 
-        <!-- Stat 2 -->
-        <div class="hp-stat">
-          <div class="hp-stat-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+        <!-- Stat 2: Rooms & Suites -->
+        <div class="hp-stat-card-luxury">
+          <div class="hp-stat-icon-wrap" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
           </div>
           <div class="hp-stat-val-wrap">
-            <span class="hp-stat-number">31</span>
-            <span class="hp-stat-suffix">+</span>
+            <span class="hp-stat-number hp-counter" data-target="50" style="font-size: 1.85rem; font-weight: 900;">50</span>
+            <span class="hp-stat-suffix" style="font-size: 1.25rem; font-weight: 900; color: #d4af37; margin-left: 2px;">+</span>
           </div>
-          <div class="hp-stat-label">Luxury Rooms &amp; Suites (From ₦20k)</div>
+          <div class="hp-stat-label">Luxury Rooms &amp; Suites (From ₦25k)</div>
         </div>
 
-        <!-- Stat 3 -->
-        <div class="hp-stat">
-          <div class="hp-stat-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+        <!-- Stat 3: Banquet Hall -->
+        <div class="hp-stat-card-luxury">
+          <div class="hp-stat-icon-wrap" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
           </div>
           <div class="hp-stat-val-wrap">
-            <span class="hp-stat-number">1,000</span>
-            <span class="hp-stat-suffix">Guests</span>
+            <span class="hp-stat-number hp-counter" data-target="1000" data-format="comma" style="font-size: 1.85rem; font-weight: 900;">1,000</span>
+            <span class="hp-stat-suffix" style="font-size: 0.9rem; font-weight: 800; color: #f59e0b; margin-left: 4px;">Guests</span>
           </div>
           <div class="hp-stat-label">Grand Banquet &amp; Summit Hall</div>
         </div>
 
-        <!-- Stat 4 -->
-        <div class="hp-stat">
-          <div class="hp-stat-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v20M21 2v20M12 2v20"></path></svg>
+        <!-- Stat 4: Fuel Calibration -->
+        <div class="hp-stat-card-luxury">
+          <div class="hp-stat-icon-wrap" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 2v20M21 2v20M12 2v20"></path></svg>
           </div>
           <div class="hp-stat-val-wrap">
-            <span class="hp-stat-number">100</span>
-            <span class="hp-stat-suffix">%</span>
+            <span class="hp-stat-number hp-counter" data-target="100" style="font-size: 1.85rem; font-weight: 900;">100</span>
+            <span class="hp-stat-suffix" style="font-size: 1.15rem; font-weight: 900; color: #d4af37; margin-left: 2px;">%</span>
           </div>
           <div class="hp-stat-label">Calibrated Zero-Dispute Fuel Pumps</div>
         </div>
 
-        <!-- Stat 5 -->
-        <div class="hp-stat">
-          <div class="hp-stat-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+        <!-- Stat 5: Operating Sectors -->
+        <div class="hp-stat-card-luxury">
+          <div class="hp-stat-icon-wrap" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
           </div>
           <div class="hp-stat-val-wrap">
-            <span class="hp-stat-number">5</span>
-            <span class="hp-stat-suffix">Sectors</span>
+            <span class="hp-stat-number hp-counter" data-target="5" style="font-size: 1.85rem; font-weight: 900;">5</span>
+            <span class="hp-stat-suffix" style="font-size: 0.9rem; font-weight: 800; color: #f59e0b; margin-left: 4px;">Sectors</span>
           </div>
           <div class="hp-stat-label">United Group Divisions</div>
         </div>
+
       </div>
     </div>
+
+    <!-- STYLES FOR BOOKING BAR & STATS ANIMATIONS -->
+    <style>
+      .hp-booking-bar-luxury select:focus,
+      .hp-booking-bar-luxury input:focus {
+        border-color: #d4af37 !important;
+        box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25) !important;
+      }
+
+      .btn-booking-reserve-animated:hover .btn-arrow {
+        transform: translateX(5px);
+      }
+      .btn-booking-reserve-animated:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(212, 175, 55, 0.55) !important;
+      }
+
+      /* Shimmer sweep animation across the reserve button */
+      .shimmer-sweep {
+        position: absolute;
+        top: -50%;
+        left: -60%;
+        width: 40%;
+        height: 200%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        transform: rotate(25deg);
+        animation: bookingShimmer 3.5s infinite;
+      }
+
+      @keyframes bookingShimmer {
+        0% { left: -60%; }
+        25% { left: 140%; }
+        100% { left: 140%; }
+      }
+
+      /* Stat Card Luxury Styling */
+      .hp-stat-card-luxury {
+        background: rgba(255, 255, 255, 0.035);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 16px;
+        padding: 24px 18px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      }
+      .hp-stat-card-luxury:hover {
+        transform: translateY(-6px);
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(212, 175, 55, 0.45);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.4), 0 0 15px rgba(212,175,55,0.15);
+      }
+
+      .hp-stat-icon-wrap {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: rgba(212, 175, 55, 0.12);
+        color: #d4af37;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 12px;
+        border: 1px solid rgba(212, 175, 55, 0.25);
+      }
+      .hp-stat-icon-wrap svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      .hp-stat-val-wrap {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        margin-bottom: 6px;
+      }
+      .hp-stat-number {
+        color: #ffffff;
+        font-family: var(--font-display, 'Playfair Display', serif);
+      }
+      .hp-stat-label {
+        font-size: 12.5px;
+        color: #94a3b8;
+        font-weight: 600;
+        line-height: 1.4;
+      }
+
+      @media (max-width: 1024px) {
+        .hp-booking-grid-luxury {
+          grid-template-columns: 1fr 1fr !important;
+        }
+        .hp-stats-row-luxury {
+          grid-template-columns: repeat(3, 1fr) !important;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .hp-booking-grid-luxury {
+          grid-template-columns: 1fr !important;
+        }
+        .hp-stats-row-luxury {
+          grid-template-columns: 1fr 1fr !important;
+        }
+      }
+    </style>
+
+    <script>
+      (function() {
+        // Date auto-sync on check-in change
+        const inDate = document.getElementById('hpCheckIn');
+        const outDate = document.getElementById('hpCheckOut');
+        if (inDate && outDate) {
+          inDate.addEventListener('change', function() {
+            if (this.value) {
+              const d = new Date(this.value);
+              d.setDate(d.getDate() + 1);
+              const nextDay = d.toISOString().split('T')[0];
+              outDate.min = nextDay;
+              if (outDate.value <= this.value) {
+                outDate.value = nextDay;
+              }
+            }
+          });
+        }
+
+        // Animated Metric Counters via IntersectionObserver
+        const statsEl = document.getElementById('hpStatsBar');
+        let animated = false;
+
+        function animateCounters() {
+          if (animated) return;
+          animated = true;
+
+          const counters = document.querySelectorAll('#hpStatsBar .hp-counter');
+          counters.forEach(counter => {
+            const target = Number(counter.dataset.target || 0);
+            const isComma = counter.dataset.format === 'comma';
+            const duration = 1800; // 1.8 seconds
+            const startTime = performance.now();
+
+            function updateCounter(currentTime) {
+              const elapsed = currentTime - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              // Ease-out cubic formula
+              const easeOut = 1 - Math.pow(1 - progress, 3);
+              const currentVal = Math.floor(easeOut * target);
+
+              if (isComma) {
+                counter.textContent = currentVal.toLocaleString();
+              } else {
+                counter.textContent = String(currentVal);
+              }
+
+              if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+              } else {
+                counter.textContent = isComma ? target.toLocaleString() : String(target);
+              }
+            }
+
+            requestAnimationFrame(updateCounter);
+          });
+        }
+
+        if ('IntersectionObserver' in window && statsEl) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                animateCounters();
+                observer.disconnect();
+              }
+            });
+          }, { threshold: 0.25 });
+
+          observer.observe(statsEl);
+        } else {
+          // Fallback
+          animateCounters();
+        }
+      })();
+    </script>
   </section>
 
-  <!-- ====================================================================
-       OPERATING DIVISIONS SHOWCASE — The Conglomerate Matrix
-       ==================================================================== -->
   <!-- ====================================================================
        OUR OPERATING DIVISIONS & PORTALS — ANIMATED LUXURY HORIZONTAL SHOWCASE
        ==================================================================== -->

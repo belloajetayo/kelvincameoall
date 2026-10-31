@@ -60,17 +60,8 @@
         <a href="<?php echo kc_url('reserve'); ?>" class="top-portal-pill active-pill" title="Instant Room Reservation">
           🏨 Book Room
         </a>
-        <a href="<?php echo kc_url('bar'); ?>" class="top-portal-pill" title="Bar, Shisha, Snooker & Drinks">
-          🍸 Bar &amp; Games
-        </a>
         <a href="<?php echo kc_url('banquet-hall'); ?>" class="top-portal-pill hide-mobile" title="1,000-Seat Grand Banquet Hall">
           🏛️ Banquet Hall
-        </a>
-        <a href="<?php echo kc_url('reception'); ?>" class="top-portal-pill hide-mobile" title="Staff & Receptionist Portal">
-          🔑 Reception Desk
-        </a>
-        <a href="<?php echo kc_url('kitchen'); ?>" class="top-portal-pill hide-mobile" title="Kitchen & Restaurant Food POS">
-          🍳 Kitchen POS
         </a>
       </div>
     </div>
@@ -136,15 +127,7 @@
                     <p>Acoustic summit &amp; royal wedding hall with 250kVA generator &amp; bridal suite.</p>
                   </div>
                 </a>
-                <a href="<?php echo kc_url('bar'); ?>" class="mega-link-card">
-                  <div class="mega-icon-box">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M8 12h8"></path></svg>
-                  </div>
-                  <div class="mega-card-content">
-                    <h4>Sports Bar, Games &amp; Pool</h4>
-                    <p>Live sports screening, snooker tables, table tennis, shisha lounge &amp; swimming pool.</p>
-                  </div>
-                </a>
+                
               </div>
             </div>
           </li>

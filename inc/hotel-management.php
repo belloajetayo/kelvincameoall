@@ -304,8 +304,9 @@ function kc_hotel_cleanup_removed_test_bookings() {
         $wpdb->query("DELETE FROM $table_bookings WHERE created_at < '2026-09-27 00:00:00'");
         $wpdb->query(
             "DELETE FROM $table_bookings 
-             WHERE booking_ref IN ('KC-26-MYRGQ', 'KC-2026-101') 
+             WHERE booking_ref IN ('KC-26-MYRGQ', 'KC-2026-101', 'KC-26-ARCUJ') 
                 OR guest_name LIKE '%Dapo Alabi%' 
+                OR guest_name LIKE '%LiveTestGuest%'
                 OR (guest_name LIKE '%Sanusi Danladi%' AND room_number LIKE '%201%')"
         );
     }
@@ -722,6 +723,56 @@ function kc_hotel_ajax_admin_update_booking() {
 // Get Dashboard Data (Protected)
 add_action('wp_ajax_kc_hotel_get_dashboard', 'kc_hotel_ajax_get_dashboard');
 add_action('wp_ajax_nopriv_kc_hotel_get_dashboard', 'kc_hotel_ajax_get_dashboard');
+/**
+ * AJAX: Admin Delete Booking (Protected with PIN 1122 or Admin Token)
+ */
+add_action('wp_ajax_kc_hotel_admin_delete_booking', 'kc_hotel_ajax_admin_delete_booking');
+add_action('wp_ajax_nopriv_kc_hotel_admin_delete_booking', 'kc_hotel_ajax_admin_delete_booking');
+function kc_hotel_ajax_admin_delete_booking() {
+    if (!kc_hotel_verify_admin_session()) {
+        wp_send_json_error(['message' => 'Unauthorized: Admin password (1122) required to delete booking records.'], 403);
+    }
+
+    global $wpdb;
+    $table_bookings = $wpdb->prefix . 'kc_hotel_bookings';
+    $table_rooms    = $wpdb->prefix . 'kc_hotel_rooms';
+
+    $id = intval($_POST['id'] ?? 0);
+    if (!$id) {
+        wp_send_json_error(['message' => 'Invalid booking ID provided.']);
+    }
+
+    $b = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_bookings WHERE id = %d", $id), ARRAY_A);
+    if (!$b) {
+        wp_send_json_error(['message' => 'Booking not found or already deleted.']);
+    }
+
+    $ref = $b['booking_ref'];
+    $guest_name = $b['guest_name'];
+    $room_num = $b['room_number'];
+    $status = $b['booking_status'];
+
+    // Delete the booking record
+    $deleted = $wpdb->delete($table_bookings, ['id' => $id]);
+
+    // If room was reserved or occupied by this booking, check if another active booking exists
+    if ($room_num && in_array($status, ['checked_in', 'reserved'])) {
+        $other_active = $wpdb->get_var($wpdb->prepare(
+            "SELECT COUNT(*) FROM $table_bookings WHERE room_number = %s AND id != %d AND booking_status IN ('checked_in', 'reserved')",
+            $room_num, $id
+        ));
+        if (!$other_active) {
+            $wpdb->update($table_rooms, ['status' => 'available'], ['room_number' => $room_num]);
+        }
+    }
+
+    wp_send_json_success([
+        'message' => "Booking {$ref} for {$guest_name} has been permanently deleted by Administrator.",
+        'deleted_id' => $id,
+        'booking_ref' => $ref
+    ]);
+}
+
 function kc_hotel_ajax_get_dashboard() {
     if (!kc_hotel_verify_staff_session()) {
         wp_send_json_error(['message' => 'Unauthorized: Valid staff session token required.'], 403);

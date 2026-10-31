@@ -2397,8 +2397,11 @@ $reserve_url = home_url('/reserve/');
 
         <!-- STICKY BOTTOM MODAL FOOTER -->
         <div class="modal-footer" style="display: flex; align-items: center; justify-content: space-between; background: #f8fafc; border-top: 1px solid var(--kc-slate-200); padding: 12px 20px;">
-          <div style="font-size: 12px; color: var(--kc-slate-600);">
-            🔒 Master Override Mode • Admin PIN 1122
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <button type="button" class="btn btn-danger btn-sm" id="btnAdminDeleteBooking" onclick="KCHotelApp.handleAdminDeleteBooking()" style="background:#dc2626; color:#ffffff; border:none; padding:8px 16px; border-radius:6px; font-weight:700; display:inline-flex; align-items:center; gap:6px; cursor:pointer;" title="Permanently Delete Booking (Admin 1122)">
+              🗑️ Delete Booking
+            </button>
+            <span style="font-size: 12px; color: var(--kc-slate-600);">🔒 Admin PIN 1122</span>
           </div>
           <div style="display: flex; gap: 10px; align-items: center;">
             <button type="button" class="btn btn-secondary" onclick="KCHotelApp.closeModals()">Cancel</button>
@@ -3853,6 +3856,7 @@ $reserve_url = home_url('/reserve/');
               <td>
                 <div class="table-action-btns">
                   <button class="btn btn-sm" style="background: rgba(212,175,55,0.18); color: #b45309; border: 1px solid rgba(212,175,55,0.6); font-weight: 700; padding: 4px 8px; border-radius: 4px;" onclick="KCHotelApp.requestAdminEditBooking(${b.id})" title="Edit Every Part of Booking (Admin 1122)">✏️ Edit</button>
+                  <button class="btn btn-sm" style="background: rgba(220,38,38,0.15); color: #dc2626; border: 1px solid rgba(220,38,38,0.4); font-weight: 700; padding: 4px 8px; border-radius: 4px;" onclick="KCHotelApp.requestAdminDeleteBooking(${b.id})" title="Delete Booking (Admin 1122)">🗑️ Delete</button>
                   <button class="btn btn-secondary btn-sm" onclick="KCHotelApp.openFolio(${b.id})" title="Print Folio">Folio</button>
                   ${bal > 0 && b.booking_status !== 'cancelled' ? `<button class="btn btn-gold btn-sm" onclick="KCHotelApp.openPaymentModal(${b.id})">+ Pay</button>` : ''}
                   ${b.booking_status === 'reserved' ? `<button class="btn btn-primary btn-sm" onclick="KCHotelApp.updateBookingStatus(${b.id}, 'checked_in')">Check-In</button>` : ''}
@@ -4469,7 +4473,11 @@ $reserve_url = home_url('/reserve/');
           sessionStorage.setItem('kc_hotel_role', 'admin');
           document.getElementById('adminBookingPinModal').classList.remove('active');
           this.showToast('👑 Admin Authorized (1122)');
-          if (this.pendingEditBookingId) {
+          if (this.pendingDeleteBookingId) {
+            const delId = this.pendingDeleteBookingId;
+            this.pendingDeleteBookingId = null;
+            this.confirmAndDeleteBooking(delId);
+          } else if (this.pendingEditBookingId) {
             this.openAdminEditBookingModal(this.pendingEditBookingId);
           }
         } else {
@@ -4479,6 +4487,59 @@ $reserve_url = home_url('/reserve/');
             pinInput.focus();
           }
         }
+      },
+
+      requestAdminDeleteBooking: function(bookingId) {
+        this.pendingDeleteBookingId = bookingId;
+        const role = sessionStorage.getItem('kc_hotel_role');
+        if (this.isAdmin || role === 'admin' || this.currentPinToken === 'admin-1122') {
+          this.confirmAndDeleteBooking(bookingId);
+        } else {
+          const pinInput = document.getElementById('adminBookingPinInput');
+          if (pinInput) pinInput.value = '';
+          const errEl = document.getElementById('adminBookingPinError');
+          if (errEl) errEl.style.display = 'none';
+          document.getElementById('adminBookingPinModal').classList.add('active');
+          setTimeout(() => { if (pinInput) pinInput.focus(); }, 150);
+        }
+      },
+
+      handleAdminDeleteBooking: function() {
+        const bookingId = Number(document.getElementById('adminEditBookingId').value);
+        if (bookingId > 0) {
+          this.confirmAndDeleteBooking(bookingId);
+        }
+      },
+
+      confirmAndDeleteBooking: function(bookingId) {
+        const b = (this.data.bookings || []).find(item => item.id == bookingId);
+        const ref = b ? b.booking_ref : ('#' + bookingId);
+        const guestName = b ? b.guest_name : 'Guest';
+
+        if (!confirm('⚠️ Are you sure you want to permanently DELETE booking ' + ref + ' for "' + guestName + '"?\n\nThis action will erase the transaction from the system and release the room back to available inventory. This CANNOT be undone.')) {
+          return;
+        }
+
+        const fd = new FormData();
+        fd.append('action', 'kc_hotel_admin_delete_booking');
+        fd.append('id', bookingId);
+        fd.append('admin_pin', '1122');
+        if (this.currentPinToken) fd.append('token', this.currentPinToken);
+
+        fetch(this.ajaxUrl, { method: 'POST', body: fd })
+          .then(r => r.json())
+          .then(res => {
+            if (res.success) {
+              this.showToast(res.data && res.data.message ? res.data.message : '🗑️ Booking successfully deleted by Administrator!');
+              this.closeModals();
+              this.refreshDashboard();
+            } else {
+              this.showToast(res.data && res.data.message ? res.data.message : 'Failed to delete booking', 'error');
+            }
+          })
+          .catch(err => {
+            this.showToast('Network error while deleting booking', 'error');
+          });
       },
 
       openAdminEditBookingModal: function(bookingId) {
