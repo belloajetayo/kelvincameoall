@@ -1517,17 +1517,17 @@ get_header();
             <div class="resort-map-frame">
               <iframe 
                 title="Kelvin Cameo Resort Hotel Map Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126093.8447849184!2d7.1084803!3d9.1822858!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104e0e5a6ef67253%3A0xe9f7ff8b09da7482!2sSuleja%2C%20Niger!5e0!3m2!1sen!2sng!4v1710000000000!5m2!1sen!2sng" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15753.16205334513!2d7.1682521999999995!3d9.218291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x104dd77b6e0f2d93%3A0xf4965307270a80e4!2sKevin%20Camo%20Resort%20Hotel!5e0!3m2!1sen!2sng!4v1793437696435!5m2!1sen!2sng" 
                 width="100%" 
                 height="100%" 
                 style="border:0;" 
                 allowfullscreen="" 
                 loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade">
+                referrerpolicy="strict-origin-when-cross-origin">
               </iframe>
             </div>
             <div style="display:flex; gap:0.75rem; margin-top:1rem; flex-wrap:wrap;">
-              <a href="https://maps.google.com/?q=Suleja+Niger+State+Nigeria" target="_blank" rel="noopener" class="btn btn-navy btn-sm">
+              <a href="https://maps.google.com/?q=Kevin+Camo+Resort+Hotel+Suleja" target="_blank" rel="noopener" class="btn btn-navy btn-sm">
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
                 Open in Google Maps ↗
               </a>
