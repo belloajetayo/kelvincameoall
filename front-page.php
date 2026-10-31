@@ -1351,28 +1351,176 @@ get_header();
   </section>
 
   <!-- ====================================================================
-       KNOWLEDGE, TRANSPARENCY & TRAVEL GUIDES (Preserving Plugin Loop)
+       SIGNATURE RESORT AMENITIES & EXECUTIVE PRIVILEGES SHOWCASE
+       (Replaces blog posts with premier corporate hospitality features)
        ==================================================================== -->
-  <?php if ( function_exists( 'kc_render_post_plugin_showcase' ) ) : ?>
-  <section class="hp-insights section-padding" id="insights" style="background: var(--sand-50); border-top: 1px solid var(--sand-200); border-bottom: 1px solid var(--sand-200); padding: 5rem 0;">
-    <div class="container container-wide">
-      <div class="hp-section-head" style="margin-bottom: 2rem;">
-        <span class="rc-badge" style="margin-bottom:0.75rem; display:inline-flex;">Corporate Insights</span>
-        <h2 class="hp-section-title">Knowledge, Transparency &amp; Travel Guides</h2>
-        <p class="hp-section-sub">Authoritative reports from our executive desks &mdash; designed for travelers, event organizers, and corporate partners.</p>
+  <section class="hp-amenities-privileges" id="amenities" style="background: linear-gradient(180deg, #030814 0%, #07152e 50%, #040916 100%); color: #ffffff; padding: 6rem 0; border-top: 1px solid rgba(212,175,55,0.3); border-bottom: 1px solid rgba(212,175,55,0.3); position: relative; overflow: hidden;">
+    
+    <!-- Ambient Luxury Background Accents -->
+    <div style="position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(212,175,55,0.1) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
+    <div style="position: absolute; bottom: -100px; left: -100px; width: 450px; height: 450px; background: radial-gradient(circle, rgba(2,132,199,0.1) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
+
+    <div class="container container-wide" style="position: relative; z-index: 2;">
+      
+      <!-- Section Header -->
+      <div style="text-align: center; max-width: 820px; margin: 0 auto 3.5rem;">
+        <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(212,175,55,0.12); border: 1px solid rgba(212,175,55,0.35); padding: 5px 16px; border-radius: 30px; font-size: 12px; font-weight: 800; letter-spacing: 1px; color: #f59e0b; text-transform: uppercase; margin-bottom: 1rem;">
+          <span style="width: 7px; height: 7px; border-radius: 50%; background: #d4af37;"></span>
+          WORLD-CLASS RESORT COMFORTS &bull; UNCOMPROMISED EXCELLENCE
+        </div>
+        <h2 style="font-family: var(--font-display, 'Playfair Display', serif); font-size: 2.65rem; font-weight: 900; color: #ffffff; line-height: 1.2; margin-bottom: 1rem; letter-spacing: -0.5px;">
+          Signature Guest Privileges &amp; Resort Amenities
+        </h2>
+        <p style="color: #94a3b8; font-size: 1.1rem; line-height: 1.65; margin: 0;">
+          Engineered for international travelers, diplomatic delegations, wedding parties, and corporate leadership seeking tranquility along the Federal Capital Territory &mdash; Suleja economic gateway.
+        </p>
       </div>
 
-      <?php
-      echo kc_render_post_plugin_showcase( array(
-          'layout'         => 'carousel',
-          'posts_per_page' => 12,
-          'show_filters'   => 'yes',
-          'show_switcher'  => 'yes',
-      ) );
-      ?>
+      <!-- Amenities Grid (8 Premier Cards) -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 3.5rem;">
+        
+        <!-- Feature 1: 24/7 Power -->
+        <div class="hp-amenity-card" style="background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px 24px; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); position: relative; overflow: hidden;">
+          <div style="width: 52px; height: 52px; border-radius: 12px; background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(212,175,55,0.05)); border: 1px solid rgba(212,175,55,0.4); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 18px; color: #f59e0b;">
+            ⚡
+          </div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">
+            24/7 Uninterrupted Heavy Power
+          </h3>
+          <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.6; margin: 0;">
+            Dual heavy-duty soundproof industrial generators backed by smart solar-inverter systems guarantee zero power blackouts day and night.
+          </p>
+        </div>
+
+        <!-- Feature 2: Armed Security & CCTV -->
+        <div class="hp-amenity-card" style="background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px 24px; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); position: relative; overflow: hidden;">
+          <div style="width: 52px; height: 52px; border-radius: 12px; background: linear-gradient(135deg, rgba(16,185,129,0.2), rgba(16,185,129,0.05)); border: 1px solid rgba(16,185,129,0.4); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 18px; color: #34d399;">
+            🛡️
+          </div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">
+            Guarded Sanctuary &amp; 24/7 CCTV
+          </h3>
+          <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.6; margin: 0;">
+            Fully perimeter-walled compound with round-the-clock armed security personnel, digital access controls, and comprehensive high-definition CCTV coverage.
+          </p>
+        </div>
+
+        <!-- Feature 3: Olympic Pool & Cabanas -->
+        <div class="hp-amenity-card" style="background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px 24px; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); position: relative; overflow: hidden;">
+          <div style="width: 52px; height: 52px; border-radius: 12px; background: linear-gradient(135deg, rgba(2,132,199,0.2), rgba(2,132,199,0.05)); border: 1px solid rgba(2,132,199,0.4); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 18px; color: #38bdf8;">
+            🏊
+          </div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">
+            Olympic Leisure Pool &amp; Cabanas
+          </h3>
+          <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.6; margin: 0;">
+            Crystal-clear outdoor swimming pool with private lounging cabanas, sun loungers, poolside beverage service, and twilight ambient lighting.
+          </p>
+        </div>
+
+        <!-- Feature 4: Gourmet Kitchen & Room Service -->
+        <div class="hp-amenity-card" style="background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px 24px; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); position: relative; overflow: hidden;">
+          <div style="width: 52px; height: 52px; border-radius: 12px; background: linear-gradient(135deg, rgba(234,88,12,0.2), rgba(234,88,12,0.05)); border: 1px solid rgba(234,88,12,0.4); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 18px; color: #fb923c;">
+            🍳
+          </div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">
+            Gourmet Kitchen &amp; In-Suite Dining
+          </h3>
+          <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.6; margin: 0;">
+            Signature Nigerian delicacies, continental cuisine, evening barbecue suya, and prompt in-suite dining delivered directly from our central kitchen.
+          </p>
+        </div>
+
+        <!-- Feature 5: 1,000-Seat Grand Banquet Auditorium -->
+        <div class="hp-amenity-card" style="background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px 24px; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); position: relative; overflow: hidden;">
+          <div style="width: 52px; height: 52px; border-radius: 12px; background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(212,175,55,0.05)); border: 1px solid rgba(212,175,55,0.4); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 18px; color: #f59e0b;">
+            🏛️
+          </div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">
+            1,000-Seat Banquet &amp; Summit Hall
+          </h3>
+          <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.6; margin: 0;">
+            Acoustically tuned, fully air-conditioned grand ballroom with integrated VIP bridal suites, podium, stage lighting, and banquet staging.
+          </p>
+        </div>
+
+        <!-- Feature 6: High-Speed Fiber Internet -->
+        <div class="hp-amenity-card" style="background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px 24px; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); position: relative; overflow: hidden;">
+          <div style="width: 52px; height: 52px; border-radius: 12px; background: linear-gradient(135deg, rgba(56,189,248,0.2), rgba(56,189,248,0.05)); border: 1px solid rgba(56,189,248,0.4); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 18px; color: #38bdf8;">
+            📶
+          </div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">
+            High-Speed Enterprise Wi-Fi
+          </h3>
+          <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.6; margin: 0;">
+            Dedicated high-bandwidth fiber-optic wireless access spanning all rooms, suites, meeting rooms, lounges, and outdoor leisure spaces.
+          </p>
+        </div>
+
+        <!-- Feature 7: Airport VIP Chauffeur & Shuttle -->
+        <div class="hp-amenity-card" style="background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px 24px; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); position: relative; overflow: hidden;">
+          <div style="width: 52px; height: 52px; border-radius: 12px; background: linear-gradient(135deg, rgba(168,85,247,0.2), rgba(168,85,247,0.05)); border: 1px solid rgba(168,85,247,0.4); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 18px; color: #c084fc;">
+            🚗
+          </div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">
+            Airport VIP Chauffeur &amp; Escort
+          </h3>
+          <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.6; margin: 0;">
+            Seamless executive pickup and transfer services between Nnamdi Azikiwe International Airport Abuja (ABV) and our resort gates.
+          </p>
+        </div>
+
+        <!-- Feature 8: Corporate Compliance & Billing -->
+        <div class="hp-amenity-card" style="background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px 24px; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); position: relative; overflow: hidden;">
+          <div style="width: 52px; height: 52px; border-radius: 12px; background: linear-gradient(135deg, rgba(212,175,55,0.2), rgba(212,175,55,0.05)); border: 1px solid rgba(212,175,55,0.4); display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 18px; color: #f59e0b;">
+            📑
+          </div>
+          <h3 style="font-size: 1.2rem; font-weight: 800; color: #ffffff; margin-bottom: 8px;">
+            CAC &amp; NGO Institutional Billing
+          </h3>
+          <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.6; margin: 0;">
+            Full corporate incorporation (RC: 1613032) supporting formal procurement, NGO/CCCRN vendor accounts, and automated itemized receipts.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Bottom Interactive Concierge Action Strip -->
+      <div style="background: linear-gradient(135deg, rgba(212,175,55,0.12) 0%, rgba(11,26,54,0.6) 100%); border: 1.5px solid rgba(212,175,55,0.4); border-radius: 20px; padding: 28px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
+        <div style="max-width: 600px;">
+          <div style="font-size: 11px; font-weight: 800; color: #f59e0b; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px;">
+            RESERVATION CONCIERGE DESK &bull; 24/7 LIVE ASSISTANCE
+          </div>
+          <h4 style="font-size: 1.35rem; font-weight: 800; color: #ffffff; margin: 0 0 6px;">
+            Planning an Executive Stay, Wedding, or Corporate Delegation?
+          </h4>
+          <p style="color: #cbd5e1; font-size: 0.92rem; margin: 0; line-height: 1.5;">
+            Speak directly with our front desk managers or book directly online for priority suite assignment and guaranteed best rates.
+          </p>
+        </div>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="<?php echo kc_url('reserve'); ?>" class="btn" style="background: linear-gradient(135deg, #d4af37 0%, #b89327 100%); color: #040914; font-weight: 800; padding: 12px 24px; border-radius: 10px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(212,175,55,0.4);">
+            <span>Book A Room Now</span>
+            <span>&rarr;</span>
+          </a>
+          <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Concierge,%20I%20would%20like%20to%20inquire%20about%20booking%20suites%20and%20event%20halls" target="_blank" rel="noopener" class="btn" style="background: rgba(37,211,102,0.15); border: 1.5px solid #25D366; color: #25D366; font-weight: 800; padding: 12px 22px; border-radius: 10px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+            <span>WhatsApp Concierge ↗</span>
+          </a>
+        </div>
+      </div>
+
     </div>
+
+    <!-- Hover styles for amenity cards -->
+    <style>
+      .hp-amenity-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.07) !important;
+        border-color: rgba(212, 175, 55, 0.45) !important;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+      }
+    </style>
   </section>
-  <?php endif; ?>
 
   <!-- ====================================================================
        INTERACTIVE FAQ SECTION
