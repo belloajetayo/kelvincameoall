@@ -1826,7 +1826,7 @@ function kc_hotel_ajax_record_payment() {
     ]);
 }
 
-// Sales Analytics Endpoint
+// Sales Analytics & Statement Endpoint
 add_action('wp_ajax_kc_hotel_get_sales_analytics', 'kc_hotel_ajax_get_sales_analytics');
 add_action('wp_ajax_nopriv_kc_hotel_get_sales_analytics', 'kc_hotel_ajax_get_sales_analytics');
 function kc_hotel_ajax_get_sales_analytics() {
@@ -1835,31 +1835,92 @@ function kc_hotel_ajax_get_sales_analytics() {
     }
     global $wpdb;
     $table_bookings = $wpdb->prefix . 'kc_hotel_bookings';
-    $table_rooms = $wpdb->prefix . 'kc_hotel_rooms';
+    $table_rooms    = $wpdb->prefix . 'kc_hotel_rooms';
+    $table_shifts   = $wpdb->prefix . 'kc_hotel_shifts';
 
     kc_hotel_cleanup_removed_test_bookings();
 
-    $period = sanitize_text_field($_POST['period'] ?? 'all');
-    $today = date('Y-m-d');
+    $period       = sanitize_text_field($_POST['period'] ?? 'all');
+    $start_date   = sanitize_text_field($_POST['start_date'] ?? '');
+    $end_date     = sanitize_text_field($_POST['end_date'] ?? '');
+    $month_ym     = sanitize_text_field($_POST['month_ym'] ?? '');
+    $staff_filter = sanitize_text_field($_POST['staff_filter'] ?? '');
 
+    $today = current_time('Y-m-d');
     $where_date = "1=1";
     $days_in_period = 30;
+    $effective_start_date = '2026-09-27';
+    $effective_end_date   = $today;
+    $timeline_label       = 'All-Time Cumulative Statement';
 
     if ($period === 'today') {
-        $where_date = "DATE(created_at) = '$today'";
+        $effective_start_date = $today;
+        $effective_end_date   = $today;
+        $where_date = $wpdb->prepare("(DATE(created_at) = %s OR DATE(check_in) = %s)", $today, $today);
         $days_in_period = 1;
+        $timeline_label = 'Today (' . date('d M Y', strtotime($today)) . ')';
+    } elseif ($period === 'yesterday') {
+        $yest = date('Y-m-d', strtotime('-1 day', strtotime($today)));
+        $effective_start_date = $yest;
+        $effective_end_date   = $yest;
+        $where_date = $wpdb->prepare("(DATE(created_at) = %s OR DATE(check_in) = %s)", $yest, $yest);
+        $days_in_period = 1;
+        $timeline_label = 'Yesterday (' . date('d M Y', strtotime($yest)) . ')';
     } elseif ($period === 'week') {
-        $week_start = date('Y-m-d', strtotime('-7 days'));
-        $where_date = "DATE(created_at) >= '$week_start'";
+        $week_start = date('Y-m-d', strtotime('-7 days', strtotime($today)));
+        $effective_start_date = $week_start;
+        $effective_end_date   = $today;
+        $where_date = $wpdb->prepare("DATE(created_at) >= %s", $week_start);
         $days_in_period = 7;
+        $timeline_label = 'Last 7 Days (' . date('d M Y', strtotime($week_start)) . ' – ' . date('d M Y', strtotime($today)) . ')';
     } elseif ($period === 'month') {
-        $month_start = date('Y-m-d', strtotime('-30 days'));
-        $where_date = "DATE(created_at) >= '$month_start'";
+        $month_start = date('Y-m-d', strtotime('-30 days', strtotime($today)));
+        $effective_start_date = $month_start;
+        $effective_end_date   = $today;
+        $where_date = $wpdb->prepare("DATE(created_at) >= %s", $month_start);
         $days_in_period = 30;
+        $timeline_label = 'Monthly Rolling 30 Days (' . date('d M Y', strtotime($month_start)) . ' – ' . date('d M Y', strtotime($today)) . ')';
+    } elseif ($period === 'this_month') {
+        $effective_start_date = date('Y-m-01', strtotime($today));
+        $effective_end_date   = date('Y-m-t', strtotime($today));
+        $where_date = $wpdb->prepare("(DATE(created_at) BETWEEN %s AND %s OR DATE(check_in) BETWEEN %s AND %s)", $effective_start_date, $effective_end_date, $effective_start_date, $effective_end_date);
+        $days_in_period = max(1, (int)date('j', strtotime($today)));
+        $timeline_label = 'Monthly Statement — ' . date('F Y', strtotime($effective_start_date));
+    } elseif ($period === 'last_month') {
+        $effective_start_date = date('Y-m-01', strtotime('first day of last month', strtotime($today)));
+        $effective_end_date   = date('Y-m-t', strtotime('last day of last month', strtotime($today)));
+        $where_date = $wpdb->prepare("(DATE(created_at) BETWEEN %s AND %s OR DATE(check_in) BETWEEN %s AND %s)", $effective_start_date, $effective_end_date, $effective_start_date, $effective_end_date);
+        $days_in_period = (int)date('t', strtotime($effective_start_date));
+        $timeline_label = 'Monthly Statement — ' . date('F Y', strtotime($effective_start_date));
+    } elseif ($period === 'custom_month' && preg_match('/^\d{4}-\d{2}$/', $month_ym)) {
+        $effective_start_date = $month_ym . '-01';
+        $effective_end_date   = date('Y-m-t', strtotime($effective_start_date));
+        $where_date = $wpdb->prepare("(DATE(created_at) BETWEEN %s AND %s OR DATE(check_in) BETWEEN %s AND %s)", $effective_start_date, $effective_end_date, $effective_start_date, $effective_end_date);
+        $days_in_period = (int)date('t', strtotime($effective_start_date));
+        $timeline_label = 'Monthly Statement — ' . date('F Y', strtotime($effective_start_date)) . ' (' . date('d M Y', strtotime($effective_start_date)) . ' – ' . date('d M Y', strtotime($effective_end_date)) . ')';
+    } elseif ($period === 'custom_range' && (!empty($start_date) || !empty($end_date))) {
+        $effective_start_date = preg_match('/^\d{4}-\d{2}-\d{2}$/', $start_date) ? $start_date : '2026-09-27';
+        $effective_end_date   = preg_match('/^\d{4}-\d{2}-\d{2}$/', $end_date) ? $end_date : $today;
+        if ($effective_start_date > $effective_end_date) {
+            $tmp = $effective_start_date;
+            $effective_start_date = $effective_end_date;
+            $effective_end_date = $tmp;
+        }
+        $where_date = $wpdb->prepare("(DATE(created_at) BETWEEN %s AND %s OR DATE(check_in) BETWEEN %s AND %s)", $effective_start_date, $effective_end_date, $effective_start_date, $effective_end_date);
+        $days_in_period = max(1, (int)ceil((strtotime($effective_end_date) - strtotime($effective_start_date)) / 86400) + 1);
+        $timeline_label = 'Custom Timeline: ' . date('d M Y', strtotime($effective_start_date)) . ' to ' . date('d M Y', strtotime($effective_end_date));
     } else {
         $first_booking = $wpdb->get_var("SELECT MIN(created_at) FROM $table_bookings WHERE booking_status != 'cancelled' AND created_at >= '2026-09-27 00:00:00' AND booking_ref NOT IN ('KC-26-MYRGQ', 'KC-2026-101')");
+        $effective_start_date = $first_booking ? date('Y-m-d', strtotime($first_booking)) : '2026-09-27';
+        $effective_end_date   = $today;
         $days = $first_booking ? ceil((time() - strtotime($first_booking)) / 86400) : 1;
         $days_in_period = max(1, $days);
+        $timeline_label = 'All-Time Cumulative Audit (' . date('d M Y', strtotime($effective_start_date)) . ' – ' . date('d M Y', strtotime($today)) . ')';
+    }
+
+    $where_staff = "";
+    if (!empty($staff_filter) && strtolower($staff_filter) !== 'all') {
+        $where_staff = $wpdb->prepare(" AND receptionist_name = %s", $staff_filter);
     }
 
     $bookings = $wpdb->get_results(
@@ -1867,7 +1928,8 @@ function kc_hotel_ajax_get_sales_analytics() {
          WHERE booking_status != 'cancelled' 
            AND created_at >= '2026-09-27 00:00:00'
            AND booking_ref NOT IN ('KC-26-MYRGQ', 'KC-2026-101') 
-           AND $where_date 
+           AND $where_date
+           $where_staff
          ORDER BY 
             CASE 
                 WHEN booking_status = 'checked_in' THEN 1
@@ -1878,6 +1940,49 @@ function kc_hotel_ajax_get_sales_analytics() {
             id DESC", 
         ARRAY_A
     );
+
+    // Gather all known staff names from bookings and shifts for the filter dropdown
+    $booking_staff_names = $wpdb->get_col("SELECT DISTINCT receptionist_name FROM $table_bookings WHERE receptionist_name IS NOT NULL AND receptionist_name != '' AND created_at >= '2026-09-27 00:00:00'") ?: [];
+    $shift_staff_names = [];
+    if ($wpdb->get_var("SHOW TABLES LIKE '$table_shifts'") === $table_shifts) {
+        $shift_staff_names = $wpdb->get_col("SELECT DISTINCT receptionist_name FROM $table_shifts WHERE receptionist_name IS NOT NULL AND receptionist_name != ''") ?: [];
+    }
+    $all_staff_names = array_values(array_unique(array_filter(array_merge(['Front Desk Staff'], $booking_staff_names, $shift_staff_names))));
+
+    // Fetch active shift and historical shifts for the selected timeline
+    $active_shift = kc_hotel_get_or_create_active_shift();
+    $shifts_log = [];
+    if ($wpdb->get_var("SHOW TABLES LIKE '$table_shifts'") === $table_shifts) {
+        if ($period === 'all') {
+            $shifts_raw = $wpdb->get_results("SELECT * FROM $table_shifts ORDER BY id DESC LIMIT 25", ARRAY_A) ?: [];
+        } else {
+            $shifts_raw = $wpdb->get_results(
+                $wpdb->prepare(
+                    "SELECT * FROM $table_shifts WHERE DATE(start_time) BETWEEN %s AND %s OR status = 'active' ORDER BY id DESC LIMIT 25",
+                    $effective_start_date,
+                    $effective_end_date
+                ),
+                ARRAY_A
+            ) ?: [];
+        }
+        foreach ($shifts_raw as $sh) {
+            $shifts_log[] = [
+                'id'                    => $sh['id'],
+                'shift_code'            => $sh['shift_code'],
+                'receptionist_name'     => $sh['receptionist_name'] ?: 'Front Desk Staff',
+                'incoming_receptionist' => $sh['incoming_receptionist'] ?: '—',
+                'start_time'            => !empty($sh['start_time']) ? date('d M Y, h:i A', strtotime($sh['start_time'])) : '—',
+                'end_time'              => !empty($sh['end_time']) ? date('d M Y, h:i A', strtotime($sh['end_time'])) : ($sh['status'] === 'active' ? 'On Duty Now' : '—'),
+                'status'                => $sh['status'],
+                'total_bookings'        => intval($sh['total_bookings']),
+                'total_collected'       => floatval($sh['total_collected']),
+                'pos_collected'         => floatval($sh['pos_collected']),
+                'cash_collected'        => floatval($sh['cash_collected']),
+                'transfer_collected'    => floatval($sh['transfer_collected']),
+                'handover_notes'        => $sh['handover_notes'] ?: ''
+            ];
+        }
+    }
 
     $total_rooms = intval($wpdb->get_var("SELECT COUNT(*) FROM $table_rooms") ?: 31);
 
@@ -1903,6 +2008,7 @@ function kc_hotel_ajax_get_sales_analytics() {
         'paid_to_boss'     => ['label' => 'Paid to Boss', 'amount' => 0.0, 'count' => 0]
     ];
 
+    $by_staff = [];
     $csv_rows = [];
 
     foreach ($bookings as $b) {
@@ -1915,6 +2021,11 @@ function kc_hotel_ajax_get_sales_analytics() {
         $meth = strtolower($b['payment_method']) ?: 'cash';
         if ($meth === 'zcash' || $meth === 'easywallet') $meth = 'zcash_easywallet';
         if ($meth === 'ngo' || strpos($meth, 'cccrn') !== false) $meth = 'ngo_cccrn';
+
+        $staff = trim($b['receptionist_name'] ?? '');
+        if (empty($staff)) {
+            $staff = 'Front Desk Staff';
+        }
 
         $gross_sales += $tot;
         $collected += $paid;
@@ -1940,27 +2051,106 @@ function kc_hotel_ajax_get_sales_analytics() {
             $by_method[$meth]['count']++;
         }
 
+        // Aggregate per Staff on Shift
+        if (!isset($by_staff[$staff])) {
+            $by_staff[$staff] = [
+                'staff_name'      => $staff,
+                'shift_role'      => ($active_shift && strcasecmp($active_shift['receptionist_name'], $staff) === 0) ? 'Active Duty Staff' : 'Shift Receptionist',
+                'shift_code'      => ($active_shift && strcasecmp($active_shift['receptionist_name'], $staff) === 0) ? $active_shift['shift_code'] : 'SHIFT-ROSTER',
+                'bookings_count'  => 0,
+                'nights_count'    => 0,
+                'gross_billed'    => 0.0,
+                'total_collected' => 0.0,
+                'balance_due'     => 0.0,
+                'cash_amount'     => 0.0,
+                'pos_amount'      => 0.0,
+                'transfer_amount' => 0.0,
+                'other_amount'    => 0.0,
+                'first_seen'      => $b['created_at'],
+                'last_seen'       => $b['created_at'],
+                'rooms'           => []
+            ];
+        }
+        $by_staff[$staff]['bookings_count']++;
+        $by_staff[$staff]['nights_count'] += $nights;
+        $by_staff[$staff]['gross_billed'] += $tot;
+        $by_staff[$staff]['total_collected'] += $paid;
+        $by_staff[$staff]['balance_due'] += $bal;
+
+        if ($meth === 'cash') {
+            $by_staff[$staff]['cash_amount'] += $paid;
+        } elseif ($meth === 'pos') {
+            $by_staff[$staff]['pos_amount'] += $paid;
+        } elseif ($meth === 'transfer' || $meth === 'zcash_easywallet') {
+            $by_staff[$staff]['transfer_amount'] += $paid;
+        } else {
+            $by_staff[$staff]['other_amount'] += $paid;
+        }
+
+        if ($b['created_at'] < $by_staff[$staff]['first_seen']) {
+            $by_staff[$staff]['first_seen'] = $b['created_at'];
+        }
+        if ($b['created_at'] > $by_staff[$staff]['last_seen']) {
+            $by_staff[$staff]['last_seen'] = $b['created_at'];
+        }
+        if (!in_array($b['room_number'], $by_staff[$staff]['rooms'])) {
+            $by_staff[$staff]['rooms'][] = $b['room_number'];
+        }
+
         $csv_rows[] = [
-            'booking_ref' => $b['booking_ref'],
-            'guest_name' => $b['guest_name'],
-            'guest_phone' => $b['guest_phone'],
-            'room_number' => $b['room_number'],
-            'room_type' => $b['room_type'],
-            'branch' => $b['branch'],
-            'check_in' => $b['check_in'],
-            'check_out' => $b['check_out'],
-            'nights' => $b['nights'],
-            'rate_per_night' => $b['rate_per_night'],
-            'total_amount' => $b['total_amount'],
-            'amount_paid' => $b['amount_paid'],
-            'balance_due' => $b['balance_due'],
-            'payment_status' => $b['payment_status'],
-            'payment_method' => strtoupper($b['payment_method']),
+            'booking_ref'       => $b['booking_ref'],
+            'guest_name'        => $b['guest_name'],
+            'guest_phone'       => $b['guest_phone'],
+            'room_number'       => $b['room_number'],
+            'room_type'         => $b['room_type'],
+            'branch'            => $b['branch'],
+            'check_in'          => $b['check_in'],
+            'check_out'         => $b['check_out'],
+            'nights'            => $b['nights'],
+            'rate_per_night'    => $b['rate_per_night'],
+            'total_amount'      => $b['total_amount'],
+            'amount_paid'       => $b['amount_paid'],
+            'balance_due'       => $b['balance_due'],
+            'payment_status'    => $b['payment_status'],
+            'payment_method'    => strtoupper($b['payment_method']),
             'payment_reference' => $b['payment_reference'],
-            'booking_status' => $b['booking_status'],
-            'date' => $b['created_at']
+            'booking_status'    => $b['booking_status'],
+            'receptionist_name' => $staff,
+            'date'              => $b['created_at']
         ];
     }
+
+    // If no bookings in period yet, still include current active shift staff in by_staff
+    if (empty($by_staff) && $active_shift) {
+        $active_name = $active_shift['receptionist_name'] ?: 'Front Desk Staff';
+        $by_staff[$active_name] = [
+            'staff_name'      => $active_name,
+            'shift_role'      => 'Active Duty Staff',
+            'shift_code'      => $active_shift['shift_code'],
+            'bookings_count'  => 0,
+            'nights_count'    => 0,
+            'gross_billed'    => 0.0,
+            'total_collected' => 0.0,
+            'balance_due'     => 0.0,
+            'cash_amount'     => 0.0,
+            'pos_amount'      => 0.0,
+            'transfer_amount' => 0.0,
+            'other_amount'    => 0.0,
+            'first_seen'      => $active_shift['start_time'],
+            'last_seen'       => current_time('mysql'),
+            'rooms'           => []
+        ];
+    }
+
+    foreach ($by_staff as $k => $st) {
+        $by_staff[$k]['first_seen_fmt'] = !empty($st['first_seen']) ? date('d M Y, H:i', strtotime($st['first_seen'])) : '—';
+        $by_staff[$k]['last_seen_fmt']  = !empty($st['last_seen']) ? date('d M Y, H:i', strtotime($st['last_seen'])) : '—';
+        $by_staff[$k]['rooms_list']     = !empty($st['rooms']) ? implode(', ', $st['rooms']) : '—';
+    }
+
+    uasort($by_staff, function($a, $b) {
+        return $b['total_collected'] <=> $a['total_collected'];
+    });
 
     $adr = $occupied_nights > 0 ? round($gross_sales / $occupied_nights, 2) : 0.0;
     $avail_room_nights = max(1, $total_rooms * $days_in_period);
@@ -1972,20 +2162,31 @@ function kc_hotel_ajax_get_sales_analytics() {
 
     wp_send_json_success([
         'period' => $period,
-        'summary' => [
-            'gross_sales' => $gross_sales,
-            'collected_revenue' => $collected,
-            'pending_receivables' => $receivables,
-            'total_bookings' => $bookings_count,
-            'occupied_nights' => $occupied_nights,
-            'adr' => $adr,
-            'revpar' => $revpar,
-            'total_rooms' => $total_rooms,
-            'days_in_period' => $days_in_period
+        'timeline' => [
+            'period'       => $period,
+            'start_date'   => $effective_start_date,
+            'end_date'     => $effective_end_date,
+            'label'        => $timeline_label,
+            'staff_filter' => $staff_filter ?: 'all'
         ],
-        'by_wing' => $by_wing,
-        'by_room_type' => $by_room_type,
-        'by_method' => $by_method,
-        'csv_rows' => $csv_rows
+        'summary' => [
+            'gross_sales'         => $gross_sales,
+            'collected_revenue'   => $collected,
+            'pending_receivables' => $receivables,
+            'total_bookings'      => $bookings_count,
+            'occupied_nights'     => $occupied_nights,
+            'adr'                 => $adr,
+            'revpar'              => $revpar,
+            'total_rooms'         => $total_rooms,
+            'days_in_period'      => $days_in_period
+        ],
+        'by_wing'         => $by_wing,
+        'by_room_type'    => $by_room_type,
+        'by_method'       => $by_method,
+        'by_staff'        => array_values($by_staff),
+        'shifts_log'      => $shifts_log,
+        'active_shift'    => $active_shift,
+        'all_staff_names' => $all_staff_names,
+        'csv_rows'        => $csv_rows
     ]);
 }

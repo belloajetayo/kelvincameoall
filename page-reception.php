@@ -2077,23 +2077,49 @@ $reserve_url = home_url('/reserve/');
 
     <!-- TAB 4: SALES TRACKING & ANALYTICS -->
     <section id="tabSales" style="display: none;">
-      <div class="filter-bar">
-        <div class="pill-group">
-          <button class="filter-pill" data-sales-period="today" onclick="KCHotelApp.loadSalesAnalytics('today')">Today</button>
-          <button class="filter-pill" data-sales-period="week" onclick="KCHotelApp.loadSalesAnalytics('week')">Last 7 Days</button>
-          <button class="filter-pill" data-sales-period="month" onclick="KCHotelApp.loadSalesAnalytics('month')">This Month</button>
-          <button class="filter-pill active" data-sales-period="all" onclick="KCHotelApp.loadSalesAnalytics('all')">All Time</button>
+      <div class="filter-bar" style="flex-direction: column; align-items: stretch; gap: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div class="pill-group" style="flex-wrap: wrap;">
+            <button class="filter-pill" data-sales-period="today" onclick="KCHotelApp.loadSalesAnalytics('today')">Today</button>
+            <button class="filter-pill" data-sales-period="yesterday" onclick="KCHotelApp.loadSalesAnalytics('yesterday')">Yesterday</button>
+            <button class="filter-pill" data-sales-period="week" onclick="KCHotelApp.loadSalesAnalytics('week')">Last 7 Days</button>
+            <button class="filter-pill" data-sales-period="month" onclick="KCHotelApp.loadSalesAnalytics('month')">Rolling 30 Days</button>
+            <button class="filter-pill" data-sales-period="this_month" onclick="KCHotelApp.loadSalesAnalytics('this_month')">This Month</button>
+            <button class="filter-pill" data-sales-period="last_month" onclick="KCHotelApp.loadSalesAnalytics('last_month')">Last Month</button>
+            <button class="filter-pill active" data-sales-period="all" onclick="KCHotelApp.loadSalesAnalytics('all')">All Time</button>
+          </div>
+
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="btn btn-secondary btn-sm" onclick="KCHotelApp.exportSalesCSV()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              📥 Export Sales CSV
+            </button>
+            <button class="btn btn-gold btn-sm" onclick="KCHotelApp.openStatementModal(KCHotelApp.activeSalesPeriod || 'all')" style="font-weight: 800;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+              🖨️ Generate &amp; Print Statement
+            </button>
+          </div>
         </div>
 
-        <div style="display: flex; gap: 8px;">
-          <button class="btn btn-secondary btn-sm" onclick="KCHotelApp.exportSalesCSV()">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-            📥 Export Sales CSV
-          </button>
-          <button class="btn btn-gold btn-sm" onclick="KCHotelApp.openStatementModal(KCHotelApp.activeSalesPeriod || 'all')" style="font-weight: 800;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-            🖨️ Generate &amp; Print Statement
-          </button>
+        <!-- Custom Timeline & Staff Filter Bar -->
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding-top: 10px; border-top: 1px solid var(--kc-slate-200); font-size: 12px;">
+          <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 8px;">
+            <span style="font-weight: 700; color: var(--kc-slate-600);">📅 Specific Month:</span>
+            <input type="month" id="tabSalesMonthPicker" class="form-control" style="width: auto; padding: 5px 10px; font-size: 12px; height: 32px;" onchange="KCHotelApp.onTabSalesMonthChange(this.value)">
+            
+            <span style="font-weight: 700; color: var(--kc-slate-600); margin-left: 6px;">Custom Timeline:</span>
+            <input type="date" id="tabSalesStartDate" class="form-control" style="width: auto; padding: 5px 8px; font-size: 12px; height: 32px;" title="Start Date">
+            <span style="color: var(--kc-slate-400);">to</span>
+            <input type="date" id="tabSalesEndDate" class="form-control" style="width: auto; padding: 5px 8px; font-size: 12px; height: 32px;" title="End Date">
+            <button type="button" class="btn btn-primary btn-sm" style="height: 32px; padding: 0 12px;" onclick="KCHotelApp.applyTabSalesCustomRange()">Apply Dates</button>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-weight: 700; color: var(--kc-slate-600);">👤 Staff on Shift:</span>
+            <select id="tabSalesStaffFilter" class="form-control" style="width: auto; min-width: 160px; padding: 4px 10px; font-size: 12px; height: 32px;" onchange="KCHotelApp.onTabSalesStaffFilterChange(this.value)">
+              <option value="all">All Staff on Shift</option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -2155,11 +2181,38 @@ $reserve_url = home_url('/reserve/');
         </div>
       </div>
 
+      <!-- STAFF ON SHIFT PERFORMANCE SUMMARY IN TAB 4 -->
+      <div class="table-card" style="margin-bottom: 20px;">
+        <div style="padding: 14px 20px; border-bottom: 1px solid var(--kc-slate-200); display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="font-size: 14px; font-weight: 700; color: var(--kc-navy-950);">👥 Staff on Shift Performance &amp; Collections Breakdown</h3>
+          <span style="font-size: 11px; color: var(--kc-slate-500);" id="tabSalesTimelineBadge">All Time</span>
+        </div>
+        <div class="table-responsive">
+          <table class="custom-table">
+            <thead>
+              <tr>
+                <th>Staff / Receptionist on Shift</th>
+                <th>Shift Status / Code</th>
+                <th>Duty Window</th>
+                <th>Bookings Logged</th>
+                <th>Rooms Handled</th>
+                <th>Gross Billed</th>
+                <th>Cash</th>
+                <th>POS</th>
+                <th>Transfer / ZCash</th>
+                <th>Total Collected</th>
+              </tr>
+            </thead>
+            <tbody id="salesStaffBreakdownBody"></tbody>
+          </table>
+        </div>
+      </div>
+
       <!-- RECENT SALES TABLE -->
       <div class="table-card">
         <div style="padding: 16px 20px; border-bottom: 1px solid var(--kc-slate-200); display: flex; justify-content: space-between; align-items: center;">
-          <h3 style="font-size: 14px; font-weight: 700; color: var(--kc-navy-950);">Sales & Folios Ledger</h3>
-          <span style="font-size: 11px; color: var(--kc-slate-500);">All verified revenue entries</span>
+          <h3 style="font-size: 14px; font-weight: 700; color: var(--kc-navy-950);">Sales &amp; Folios Ledger</h3>
+          <span style="font-size: 11px; color: var(--kc-slate-500);">All verified revenue entries with Staff on Shift</span>
         </div>
         <div class="table-responsive">
           <table class="custom-table">
@@ -2169,6 +2222,7 @@ $reserve_url = home_url('/reserve/');
                 <th>Guest</th>
                 <th>Room / Wing</th>
                 <th>Stay Dates</th>
+                <th>Staff on Shift</th>
                 <th>Tariff</th>
                 <th>Total Billed</th>
                 <th>Paid Amount</th>
@@ -2997,35 +3051,88 @@ $reserve_url = home_url('/reserve/');
 
   <!-- MODAL: OFFICIAL HOTEL FINANCIAL & REVENUE STATEMENT -->
   <div id="statementModal" class="modal-backdrop">
-    <div class="modal-box modal-lg" style="max-width: 960px; max-height: 90vh;">
+    <div class="modal-box modal-lg" style="max-width: 1020px; max-height: 92vh;">
       <div class="modal-header no-print">
         <h2>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
-          Official Financial &amp; Revenue Statement
+          Official Financial, Monthly &amp; Shift Revenue Statement
         </h2>
         <div style="display:flex; align-items:center; gap:8px;">
           <button class="modal-close-btn" onclick="KCHotelApp.closeModals()">&times;</button>
         </div>
       </div>
 
-      <!-- Statement Period Selector (no-print) -->
-      <div class="no-print" style="padding: 12px 20px; background: rgba(0,0,0,0.03); border-bottom: 1px solid var(--kc-slate-200); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <span style="font-size: 12px; font-weight: 700; color: var(--kc-slate-700);">Audit Scope:</span>
-          <div class="pill-group">
-            <button type="button" class="filter-pill" id="stmtBtnToday" onclick="KCHotelApp.generateStatement('today')">Today</button>
-            <button type="button" class="filter-pill" id="stmtBtnWeek" onclick="KCHotelApp.generateStatement('week')">Last 7 Days</button>
-            <button type="button" class="filter-pill" id="stmtBtnMonth" onclick="KCHotelApp.generateStatement('month')">This Month</button>
-            <button type="button" class="filter-pill active" id="stmtBtnAll" onclick="KCHotelApp.generateStatement('all')">All Time</button>
+      <!-- Statement Timeline & Staff on Shift Controls (no-print) -->
+      <div class="no-print" style="padding: 14px 20px; background: rgba(0,0,0,0.03); border-bottom: 1px solid var(--kc-slate-200); display: flex; flex-direction: column; gap: 10px;">
+        <!-- Row 1: Quick Timeline Presets + Action Buttons -->
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+          <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 6px;">
+            <span style="font-size: 12px; font-weight: 800; color: var(--kc-slate-700);">📅 Timeline:</span>
+            <div class="pill-group" style="flex-wrap: wrap;">
+              <button type="button" class="filter-pill" id="stmtBtnToday" onclick="KCHotelApp.generateStatement('today')">Today</button>
+              <button type="button" class="filter-pill" id="stmtBtnYesterday" onclick="KCHotelApp.generateStatement('yesterday')">Yesterday</button>
+              <button type="button" class="filter-pill" id="stmtBtnWeek" onclick="KCHotelApp.generateStatement('week')">Last 7 Days</button>
+              <button type="button" class="filter-pill" id="stmtBtnMonth" onclick="KCHotelApp.generateStatement('month')">Rolling 30 Days</button>
+              <button type="button" class="filter-pill" id="stmtBtnThisMonth" onclick="KCHotelApp.generateStatement('this_month')">This Month</button>
+              <button type="button" class="filter-pill" id="stmtBtnLastMonth" onclick="KCHotelApp.generateStatement('last_month')">Last Month</button>
+              <button type="button" class="filter-pill active" id="stmtBtnAll" onclick="KCHotelApp.generateStatement('all')">All Time</button>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <button type="button" class="btn btn-secondary btn-sm" onclick="KCHotelApp.exportSalesCSV()">
+              📥 Export CSV
+            </button>
+            <button type="button" class="btn btn-gold btn-sm" onclick="KCHotelApp.printStatement()" style="font-weight: 800;">
+              🖨️ Print Statement (A4)
+            </button>
           </div>
         </div>
-        <div style="display: flex; gap: 8px;">
-          <button type="button" class="btn btn-secondary btn-sm" onclick="KCHotelApp.exportSalesCSV()">
-            📥 Export CSV
-          </button>
-          <button type="button" class="btn btn-gold btn-sm" onclick="KCHotelApp.printStatement()" style="font-weight: 800;">
-            🖨️ Print Statement (A4)
-          </button>
+
+        <!-- Row 2: Custom Month Picker & Custom Date Range Selector -->
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding-top: 8px; border-top: 1px dashed var(--kc-slate-300); font-size: 12px;">
+          <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 8px;">
+            <span style="font-weight: 700; color: var(--kc-slate-700);">📆 Pick Month:</span>
+            <input type="month" id="stmtMonthPicker" class="form-control" style="width: auto; padding: 4px 8px; font-size: 12px; height: 30px;" onchange="KCHotelApp.onStatementMonthChange(this.value)">
+
+            <span style="font-weight: 700; color: var(--kc-slate-700); margin-left: 6px;">Custom Date Range:</span>
+            <input type="date" id="stmtStartDate" class="form-control" style="width: auto; padding: 4px 8px; font-size: 12px; height: 30px;" title="From Date">
+            <span style="color: var(--kc-slate-500); font-weight: 600;">to</span>
+            <input type="date" id="stmtEndDate" class="form-control" style="width: auto; padding: 4px 8px; font-size: 12px; height: 30px;" title="To Date">
+            <button type="button" class="btn btn-primary btn-sm" style="height: 30px; padding: 0 12px; font-weight: 700;" onclick="KCHotelApp.applyCustomStatementRange()">
+              Apply Timeline
+            </button>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <span style="font-weight: 700; color: var(--kc-slate-700);">Filter Staff:</span>
+            <select id="stmtStaffFilterSelect" class="form-control" style="width: auto; min-width: 155px; padding: 4px 8px; font-size: 12px; height: 30px;" onchange="KCHotelApp.onStatementStaffFilterChange(this.value)">
+              <option value="all">All Staff on Shift</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Row 3: Staff on Shift Details & Shift Roster Customization -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; padding-top: 8px; border-top: 1px dashed var(--kc-slate-300); font-size: 11.5px;">
+          <div>
+            <label style="display: block; font-weight: 700; color: var(--kc-slate-600); margin-bottom: 3px;">👤 Staff on Shift Name(s) on Statement:</label>
+            <input type="text" id="stmtCustomStaffInput" class="form-control" style="padding: 5px 8px; font-size: 12px; height: 30px;" placeholder="Auto-filled from shift & bookings" oninput="KCHotelApp.updateStatementStaffHeader()">
+          </div>
+          <div>
+            <label style="display: block; font-weight: 700; color: var(--kc-slate-600); margin-bottom: 3px;">🕒 Shift Schedule / Duty Roster:</label>
+            <select id="stmtShiftTypeSelect" class="form-control" style="padding: 4px 8px; font-size: 12px; height: 30px;" onchange="KCHotelApp.updateStatementStaffHeader()">
+              <option value="Full 24-Hour Shift Roster">Full 24-Hour Shift Roster</option>
+              <option value="Morning Shift (7:00 AM – 3:00 PM)">Morning Shift (7:00 AM – 3:00 PM)</option>
+              <option value="Afternoon Shift (3:00 PM – 11:00 PM)">Afternoon Shift (3:00 PM – 11:00 PM)</option>
+              <option value="Night Audit Shift (11:00 PM – 7:00 AM)">Night Audit Shift (11:00 PM – 7:00 AM)</option>
+              <option value="Day Duty Shift (8:00 AM – 8:00 PM)">Day Duty Shift (8:00 AM – 8:00 PM)</option>
+              <option value="Night Duty Shift (8:00 PM – 8:00 AM)">Night Duty Shift (8:00 PM – 8:00 AM)</option>
+              <option value="Monthly Cumulative Roster">Monthly Cumulative Roster</option>
+            </select>
+          </div>
+          <div>
+            <label style="display: block; font-weight: 700; color: var(--kc-slate-600); margin-bottom: 3px;">✍️ Relieving Staff / Duty Supervisor:</label>
+            <input type="text" id="stmtSupervisorInput" class="form-control" style="padding: 5px 8px; font-size: 12px; height: 30px;" placeholder="Accountant / Duty Manager" value="Accountant / Duty Manager" oninput="KCHotelApp.updateStatementStaffHeader()">
+          </div>
         </div>
       </div>
 
@@ -3038,13 +3145,13 @@ $reserve_url = home_url('/reserve/');
         <div id="printableStatementArea" class="statement-sheet" style="background: #ffffff; color: #0f172a; border-radius: 8px; padding: 32px 36px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; font-family: 'Plus Jakarta Sans', Arial, sans-serif;">
           
           <!-- STATEMENT HEADER -->
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #0f172a; padding-bottom: 16px; margin-bottom: 20px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #0f172a; padding-bottom: 16px; margin-bottom: 18px;">
             <div>
               <div style="font-size: 20px; font-weight: 900; color: #040914; letter-spacing: -0.5px; text-transform: uppercase;">
                 Kelvin Cameo Resort Hotel
               </div>
               <div style="font-size: 12px; font-weight: 700; color: #b89327; margin-top: 2px;">
-                RECEPTION PROPERTY DESK &bull; OFFICIAL FINANCIAL AUDIT STATEMENT
+                RECEPTION PROPERTY DESK &bull; OFFICIAL FINANCIAL &amp; SHIFT AUDIT STATEMENT
               </div>
               <div style="font-size: 11px; color: #475569; margin-top: 4px; line-height: 1.4;">
                 CAC Corporate Incorporation RC: <strong>1613032</strong> &bull; Suleja–Abuja Expressway Corridor, Niger State<br>
@@ -3053,35 +3160,45 @@ $reserve_url = home_url('/reserve/');
             </div>
             <div style="text-align: right;">
               <div style="display: inline-block; background: #040914; color: #d4af37; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 4px; letter-spacing: 0.5px;">
-                FINANCIAL STATEMENT
+                OFFICIAL AUDIT STATEMENT
               </div>
               <div style="font-size: 11px; font-weight: 700; color: #0f172a; margin-top: 6px;">
-                Ref: <span id="stmtRefCode">KC-STMT-20261031</span>
+                Ref: <span id="stmtRefCode">KC-STMT-20261102</span>
               </div>
               <div style="font-size: 11px; color: #64748b; margin-top: 2px;">
-                Date: <span id="stmtPrintDate">--</span>
+                Printed: <span id="stmtPrintDate">--</span>
               </div>
-              <div style="font-size: 11px; color: #64748b;">
-                Desk Staff: <strong id="stmtStaffName" style="color: #0f172a;">Front Desk Staff</strong>
+              <div style="font-size: 11px; color: #64748b; margin-top: 2px;">
+                Staff on Shift: <strong id="stmtStaffName" style="color: #0f172a;">Front Desk Staff</strong>
+              </div>
+              <div style="font-size: 10.5px; color: #0b4ea2; font-weight: 700; margin-top: 1px;" id="stmtShiftRosterDisplay">
+                Full 24-Hour Shift Roster
               </div>
             </div>
           </div>
 
-          <!-- PERIOD & AUDIT SCOPE BANNER -->
-          <div style="background: #f1f5f9; border-left: 4px solid #d4af37; padding: 10px 14px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; font-size: 12px;">
+          <!-- PERIOD, TIMELINE & SHIFT METADATA BANNER -->
+          <div style="background: #f1f5f9; border-left: 4px solid #d4af37; padding: 10px 14px; margin-bottom: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; font-size: 11.5px;">
             <div>
-              <strong>Audit Scope:</strong> <span id="stmtPeriodLabel" style="font-weight: 800; color: #0f172a;">All Time</span>
+              <span style="color: #64748b; display: block; font-size: 10px; text-transform: uppercase; font-weight: 700;">Statement Timeline</span>
+              <strong id="stmtPeriodLabel" style="font-weight: 800; color: #0f172a;">All Time</strong>
             </div>
             <div>
-              <strong>Total Records:</strong> <span id="stmtTotalBookingsCount" style="font-weight: 800; color: #0f172a;">0 Bookings</span>
+              <span style="color: #64748b; display: block; font-size: 10px; text-transform: uppercase; font-weight: 700;">Date Window Covered</span>
+              <strong id="stmtDateWindowText" style="font-weight: 800; color: #0f172a;">27 Sep 2026 – Present</strong>
             </div>
             <div>
-              <strong>Audit Status:</strong> <span style="color: #059669; font-weight: 800;">VERIFIED ACCREDITED</span>
+              <span style="color: #64748b; display: block; font-size: 10px; text-transform: uppercase; font-weight: 700;">Staff on Shift Roster</span>
+              <strong id="stmtBannerStaffRoster" style="font-weight: 800; color: #0b4ea2;">Front Desk Staff</strong>
+            </div>
+            <div>
+              <span style="color: #64748b; display: block; font-size: 10px; text-transform: uppercase; font-weight: 700;">Total Activity &amp; Status</span>
+              <strong id="stmtTotalBookingsCount" style="font-weight: 800; color: #059669;">0 Bookings &bull; VERIFIED</strong>
             </div>
           </div>
 
           <!-- FINANCIAL REVENUE KPI SUMMARY -->
-          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 24px;">
+          <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 22px;">
             <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 14px;">
               <div style="font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase;">Total Billed (Gross)</div>
               <div style="font-size: 18px; font-weight: 900; color: #040914; margin-top: 4px;" id="stmtGrossBilled">₦0.00</div>
@@ -3102,13 +3219,63 @@ $reserve_url = home_url('/reserve/');
 
             <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 14px;">
               <div style="font-size: 10px; font-weight: 700; color: #64748b; text-transform: uppercase;">Performance Indices</div>
-              <div style="font-size: 15px; font-weight: 900; color: #040914; margin-top: 4px;" id="stmtOccupancyRate">50 Rooms Matrix</div>
+              <div style="font-size: 15px; font-weight: 900; color: #040914; margin-top: 4px;" id="stmtOccupancyRate">0 Bookings Logged</div>
               <div style="font-size: 10px; color: #64748b; margin-top: 2px;" id="stmtAvgRate">ADR: ₦0.00</div>
             </div>
           </div>
 
+          <!-- STAFF ON SHIFT & DUTY COLLECTIONS BREAKDOWN -->
+          <div style="margin-bottom: 22px;" id="stmtStaffBreakdownSection">
+            <div style="font-size: 12px; font-weight: 800; text-transform: uppercase; color: #040914; margin-bottom: 8px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px; display: flex; justify-content: space-between; align-items: center;">
+              <span>Staff on Shift &amp; Receptionist Duty Breakdown</span>
+              <span style="font-size: 10.5px; color: #475569; font-weight: 600;" id="stmtActiveShiftCodeLabel">Active Shift</span>
+            </div>
+            <table style="width: 100%; border-collapse: collapse; font-size: 10.5px;">
+              <thead>
+                <tr style="background: #f1f5f9; border-bottom: 1.5px solid #cbd5e1; text-align: left;">
+                  <th style="padding: 6px 8px;">Staff on Shift</th>
+                  <th style="padding: 6px 8px;">Duty Role / Shift Ref</th>
+                  <th style="padding: 6px 8px;">Activity Window</th>
+                  <th style="padding: 6px 8px; text-align: center;">Bookings</th>
+                  <th style="padding: 6px 8px;">Rooms Handled</th>
+                  <th style="padding: 6px 8px; text-align: right;">Billed (₦)</th>
+                  <th style="padding: 6px 8px; text-align: right;">Cash (₦)</th>
+                  <th style="padding: 6px 8px; text-align: right;">POS (₦)</th>
+                  <th style="padding: 6px 8px; text-align: right;">Transfer/ZCash (₦)</th>
+                  <th style="padding: 6px 8px; text-align: right;">Total Collected (₦)</th>
+                </tr>
+              </thead>
+              <tbody id="stmtStaffTableBody">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- SHIFT HANDOVER LOGS (IF RECORDED IN TIMELINE) -->
+          <div style="margin-bottom: 22px; display: none;" id="stmtShiftHistorySection">
+            <div style="font-size: 12px; font-weight: 800; text-transform: uppercase; color: #040914; margin-bottom: 8px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px;">
+              Front Desk Shift Log &amp; Handover Records
+            </div>
+            <table style="width: 100%; border-collapse: collapse; font-size: 10.5px;">
+              <thead>
+                <tr style="background: #f8fafc; border-bottom: 1.5px solid #cbd5e1; text-align: left;">
+                  <th style="padding: 5px 8px;">Shift Code</th>
+                  <th style="padding: 5px 8px;">Staff on Shift</th>
+                  <th style="padding: 5px 8px;">Handed Over To</th>
+                  <th style="padding: 5px 8px;">Shift Start</th>
+                  <th style="padding: 5px 8px;">Shift End / Status</th>
+                  <th style="padding: 5px 8px; text-align: right;">Shift Collected (₦)</th>
+                  <th style="padding: 5px 8px;">Handover Notes</th>
+                </tr>
+              </thead>
+              <tbody id="stmtShiftHistoryTableBody">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+
           <!-- PAYMENT CHANNEL BREAKDOWN -->
-          <div style="margin-bottom: 24px;">
+          <div style="margin-bottom: 22px;">
             <div style="font-size: 12px; font-weight: 800; text-transform: uppercase; color: #040914; margin-bottom: 8px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px;">
               Revenue Inflow Breakdown by Payment Channel
             </div>
@@ -3122,18 +3289,19 @@ $reserve_url = home_url('/reserve/');
             <div style="font-size: 12px; font-weight: 800; text-transform: uppercase; color: #040914; margin-bottom: 8px; border-bottom: 1px solid #e2e8f0; padding-bottom: 4px;">
               Itemized Guest Booking &amp; Transaction Ledger
             </div>
-            <table style="width: 100%; border-collapse: collapse; font-size: 11px;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 10.5px;">
               <thead>
                 <tr style="background: #f1f5f9; border-bottom: 1.5px solid #cbd5e1; text-align: left;">
-                  <th style="padding: 6px 8px;">Ref</th>
-                  <th style="padding: 6px 8px;">Guest Name</th>
-                  <th style="padding: 6px 8px;">Room</th>
-                  <th style="padding: 6px 8px;">Dates</th>
-                  <th style="padding: 6px 8px;">Method</th>
-                  <th style="padding: 6px 8px; text-align: right;">Billed (₦)</th>
-                  <th style="padding: 6px 8px; text-align: right;">Paid (₦)</th>
-                  <th style="padding: 6px 8px; text-align: right;">Balance (₦)</th>
-                  <th style="padding: 6px 8px; text-align: center;">Status</th>
+                  <th style="padding: 6px 6px;">Ref</th>
+                  <th style="padding: 6px 6px;">Guest Name</th>
+                  <th style="padding: 6px 6px;">Room</th>
+                  <th style="padding: 6px 6px;">Stay Dates</th>
+                  <th style="padding: 6px 6px;">Staff on Shift</th>
+                  <th style="padding: 6px 6px;">Method</th>
+                  <th style="padding: 6px 6px; text-align: right;">Billed (₦)</th>
+                  <th style="padding: 6px 6px; text-align: right;">Paid (₦)</th>
+                  <th style="padding: 6px 6px; text-align: right;">Balance (₦)</th>
+                  <th style="padding: 6px 6px; text-align: center;">Status</th>
                 </tr>
               </thead>
               <tbody id="stmtTransactionsTableBody">
@@ -3145,14 +3313,14 @@ $reserve_url = home_url('/reserve/');
           <!-- OFFICIAL SIGNATURES & AUDIT CERTIFICATION -->
           <div style="border-top: 1.5px solid #cbd5e1; padding-top: 18px; margin-top: 24px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; font-size: 11px;">
             <div>
-              <div style="color: #64748b; margin-bottom: 30px;">Prepared by Duty Receptionist:</div>
-              <div style="border-bottom: 1px solid #000; padding-bottom: 2px; font-weight: 700;" id="stmtSignStaffName">Staff On Duty</div>
-              <div style="color: #64748b; font-size: 10px; margin-top: 2px;">Front Desk Operations</div>
+              <div style="color: #64748b; margin-bottom: 28px;">Prepared by Staff on Shift:</div>
+              <div style="border-bottom: 1px solid #000; padding-bottom: 2px; font-weight: 800;" id="stmtSignStaffName">Staff On Duty</div>
+              <div style="color: #64748b; font-size: 10px; margin-top: 2px;" id="stmtSignShiftRole">Front Desk Operations</div>
             </div>
             <div>
-              <div style="color: #64748b; margin-bottom: 30px;">Verified by Internal Auditor:</div>
-              <div style="border-bottom: 1px solid #000; padding-bottom: 2px; font-weight: 700;">Accountant / Duty Manager</div>
-              <div style="color: #64748b; font-size: 10px; margin-top: 2px;">Finance &amp; Reconciliation</div>
+              <div style="color: #64748b; margin-bottom: 28px;">Verified by Relieving Staff / Auditor:</div>
+              <div style="border-bottom: 1px solid #000; padding-bottom: 2px; font-weight: 800;" id="stmtSignSupervisorName">Accountant / Duty Manager</div>
+              <div style="color: #64748b; font-size: 10px; margin-top: 2px;">Finance &amp; Shift Reconciliation</div>
             </div>
             <div style="text-align: center;">
               <div style="display: inline-block; border: 2px solid #b89327; border-radius: 50%; width: 70px; height: 70px; padding-top: 12px; color: #b89327; font-weight: 800; font-size: 9px; line-height: 1.2;">
@@ -4333,16 +4501,28 @@ $reserve_url = home_url('/reserve/');
         }).join('');
       },
 
-      loadSalesAnalytics: function(period = 'all') {
+      loadSalesAnalytics: function(period = 'all', opts = {}) {
         this.activeSalesPeriod = period;
+        this.activeSalesOpts = opts || {};
+
         document.querySelectorAll('[data-sales-period]').forEach(p => {
           if (p.dataset.salesPeriod === period) p.classList.add('active');
           else p.classList.remove('active');
         });
 
+        const staffSelect = document.getElementById('tabSalesStaffFilter');
+        const staffFilter = opts.staff_filter !== undefined
+          ? opts.staff_filter
+          : (staffSelect ? staffSelect.value : 'all');
+
         const fd = new FormData();
         fd.append('action', 'kc_hotel_get_sales_analytics');
         fd.append('period', period);
+        if (opts.start_date) fd.append('start_date', opts.start_date);
+        if (opts.end_date) fd.append('end_date', opts.end_date);
+        if (opts.month_ym) fd.append('month_ym', opts.month_ym);
+        if (staffFilter) fd.append('staff_filter', staffFilter);
+        if (this.currentPinToken) fd.append('token', this.currentPinToken);
 
         fetch(this.ajaxUrl, { method: 'POST', body: fd })
           .then(r => r.json())
@@ -4350,8 +4530,32 @@ $reserve_url = home_url('/reserve/');
             if (res.success && res.data) {
               this.data.sales = res.data;
               this.renderSalesAnalytics();
+              const stmtModal = document.getElementById('statementModal');
+              if (stmtModal && stmtModal.classList.contains('active')) {
+                this.renderStatementData(period);
+              }
             }
           });
+      },
+
+      onTabSalesMonthChange: function(val) {
+        if (!val) return;
+        this.loadSalesAnalytics('custom_month', { month_ym: val });
+      },
+
+      applyTabSalesCustomRange: function() {
+        const s = document.getElementById('tabSalesStartDate')?.value || '';
+        const e = document.getElementById('tabSalesEndDate')?.value || '';
+        if (!s && !e) {
+          this.showToast('Please select a From or To date first', 'error');
+          return;
+        }
+        this.loadSalesAnalytics('custom_range', { start_date: s || e, end_date: e || s });
+      },
+
+      onTabSalesStaffFilterChange: function(val) {
+        const nextOpts = Object.assign({}, this.activeSalesOpts || {}, { staff_filter: val });
+        this.loadSalesAnalytics(this.activeSalesPeriod || 'all', nextOpts);
       },
 
       renderSalesAnalytics: function() {
@@ -4359,12 +4563,64 @@ $reserve_url = home_url('/reserve/');
         if (!s) return;
 
         const sum = s.summary || {};
-        document.getElementById('salesGrossTotal').innerText = '₦' + Number(sum.gross_sales || 0).toLocaleString();
-        document.getElementById('salesBookingsCount').innerText = `${sum.total_bookings || 0} Bookings (${sum.occupied_nights || 0} Nights)`;
-        document.getElementById('salesCollectedTotal').innerText = '₦' + Number(sum.collected_revenue || 0).toLocaleString();
-        document.getElementById('salesReceivablesTotal').innerText = '₦' + Number(sum.pending_receivables || 0).toLocaleString();
-        document.getElementById('salesADR').innerText = '₦' + Number(sum.adr || 0).toLocaleString();
-        document.getElementById('salesRevPAR').innerText = 'RevPAR: ₦' + Number(sum.revpar || 0).toLocaleString();
+        const tl = s.timeline || {};
+
+        if (document.getElementById('salesGrossTotal')) document.getElementById('salesGrossTotal').innerText = '₦' + Number(sum.gross_sales || 0).toLocaleString();
+        if (document.getElementById('salesBookingsCount')) document.getElementById('salesBookingsCount').innerText = `${sum.total_bookings || 0} Bookings (${sum.occupied_nights || 0} Nights)`;
+        if (document.getElementById('salesCollectedTotal')) document.getElementById('salesCollectedTotal').innerText = '₦' + Number(sum.collected_revenue || 0).toLocaleString();
+        if (document.getElementById('salesReceivablesTotal')) document.getElementById('salesReceivablesTotal').innerText = '₦' + Number(sum.pending_receivables || 0).toLocaleString();
+        if (document.getElementById('salesADR')) document.getElementById('salesADR').innerText = '₦' + Number(sum.adr || 0).toLocaleString();
+        if (document.getElementById('salesRevPAR')) document.getElementById('salesRevPAR').innerText = 'RevPAR: ₦' + Number(sum.revpar || 0).toLocaleString();
+
+        const tlBadge = document.getElementById('tabSalesTimelineBadge');
+        if (tlBadge && tl.label) {
+          tlBadge.innerText = `${tl.label} (${tl.start_date || ''} → ${tl.end_date || ''})`;
+        }
+
+        const sInput = document.getElementById('tabSalesStartDate');
+        const eInput = document.getElementById('tabSalesEndDate');
+        if (sInput && tl.start_date && document.activeElement !== sInput) sInput.value = tl.start_date;
+        if (eInput && tl.end_date && document.activeElement !== eInput) eInput.value = tl.end_date;
+
+        // Populate Staff Filter dropdown
+        const staffSelect = document.getElementById('tabSalesStaffFilter');
+        if (staffSelect && Array.isArray(s.all_staff_names)) {
+          const currentVal = tl.staff_filter || 'all';
+          staffSelect.innerHTML = `<option value="all">All Staff on Shift</option>` +
+            s.all_staff_names.map(name => `<option value="${name.replace(/"/g, '&quot;')}" ${name === currentVal ? 'selected' : ''}>👤 ${name}</option>`).join('');
+        }
+
+        // Render Staff on Shift Breakdown table in Tab 4
+        const staffTbody = document.getElementById('salesStaffBreakdownBody');
+        if (staffTbody) {
+          const staffList = Array.isArray(s.by_staff) ? s.by_staff : [];
+          if (staffList.length === 0) {
+            staffTbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 18px; color: var(--kc-slate-400);">No staff shift transactions recorded for this timeline.</td></tr>`;
+          } else {
+            staffTbody.innerHTML = staffList.map(st => {
+              const roomsStr = Array.isArray(st.rooms_list) && st.rooms_list.length > 0 ? st.rooms_list.join(', ') : '—';
+              return `
+                <tr>
+                  <td><strong style="color: var(--kc-slate-900);">👤 ${st.staff_name}</strong></td>
+                  <td>
+                    <span class="status-pill status-pill-available" style="font-size: 10px;">${st.shift_role || 'Front Desk Receptionist'}</span>
+                    ${st.shift_code && st.shift_code !== 'N/A' ? `<div style="font-size: 10px; color: var(--kc-slate-500); font-family: monospace; margin-top: 2px;">${st.shift_code}</div>` : ''}
+                  </td>
+                  <td style="font-size: 11px; color: var(--kc-slate-600);">${st.first_seen_fmt || '—'} &rarr; ${st.last_seen_fmt || '—'}</td>
+                  <td><strong>${st.bookings_count}</strong> <span style="font-size: 11px; color: var(--kc-slate-500);">(${st.nights_count} nights)</span></td>
+                  <td style="font-size: 11.5px; font-weight: 600;">${roomsStr}</td>
+                  <td><strong>₦${Number(st.gross_billed || 0).toLocaleString()}</strong></td>
+                  <td style="font-size: 11px;">
+                    <span style="color: #d97706; font-weight: 700;">Cash: ₦${Number(st.cash_amount || 0).toLocaleString()}</span> &bull;
+                    <span style="color: #2563eb; font-weight: 700;">POS: ₦${Number(st.pos_amount || 0).toLocaleString()}</span> &bull;
+                    <span style="color: #059669; font-weight: 700;">Trf: ₦${Number(st.transfer_amount || 0).toLocaleString()}</span>
+                  </td>
+                  <td><strong style="color: var(--kc-success); font-size: 13px;">₦${Number(st.total_collected || 0).toLocaleString()}</strong></td>
+                </tr>
+              `;
+            }).join('');
+          }
+        }
 
         const wingBox = document.getElementById('salesWingDistribution');
         if (wingBox && s.by_wing) {
@@ -4417,7 +4673,7 @@ $reserve_url = home_url('/reserve/');
         const tbody = document.getElementById('salesTransactionsTableBody');
         if (tbody && s.csv_rows) {
           if (s.csv_rows.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 24px; color: var(--kc-slate-400);">No sales recorded in this period.</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="11" style="text-align: center; padding: 24px; color: var(--kc-slate-400);">No sales recorded in this period.</td></tr>`;
           } else {
             tbody.innerHTML = s.csv_rows.map(r => `
               <tr>
@@ -4425,6 +4681,7 @@ $reserve_url = home_url('/reserve/');
                 <td><strong>${r.guest_name}</strong></td>
                 <td>${r.room_number} (${r.branch})</td>
                 <td>${r.check_in} to ${r.check_out}</td>
+                <td><span style="font-weight: 700; color: var(--kc-primary); font-size: 11.5px;">👤 ${r.receptionist_name || 'Front Desk Staff'}</span></td>
                 <td>₦${Number(r.rate_per_night).toLocaleString()}</td>
                 <td><strong>₦${Number(r.total_amount).toLocaleString()}</strong></td>
                 <td><span style="color: var(--kc-success); font-weight: 700;">₦${Number(r.amount_paid).toLocaleString()}</span></td>
@@ -4446,7 +4703,7 @@ $reserve_url = home_url('/reserve/');
 
         const headers = [
           'Booking Ref', 'Guest Name', 'Phone', 'Room', 'Room Type', 'Wing',
-          'Check In', 'Check Out', 'Nights', 'Rate / Night (NGN)',
+          'Check In', 'Check Out', 'Nights', 'Staff on Shift', 'Rate / Night (NGN)',
           'Total Bill (NGN)', 'Amount Paid (NGN)', 'Balance Due (NGN)',
           'Payment Status', 'Payment Method', 'Reference', 'Booking Status', 'Date Created'
         ];
@@ -4455,14 +4712,15 @@ $reserve_url = home_url('/reserve/');
         s.csv_rows.forEach(r => {
           const row = [
             `"${r.booking_ref}"`,
-            `"${r.guest_name.replace(/"/g, '""')}"`,
-            `"${r.guest_phone}"`,
+            `"${(r.guest_name || '').replace(/"/g, '""')}"`,
+            `"${r.guest_phone || ''}"`,
             `"${r.room_number}"`,
-            `"${r.room_type.replace(/"/g, '""')}"`,
+            `"${(r.room_type || '').replace(/"/g, '""')}"`,
             `"${r.branch}"`,
             `"${r.check_in}"`,
             `"${r.check_out}"`,
             r.nights,
+            `"${(r.receptionist_name || 'Front Desk Staff').replace(/"/g, '""')}"`,
             r.rate_per_night,
             r.total_amount,
             r.amount_paid,
@@ -4488,22 +4746,62 @@ $reserve_url = home_url('/reserve/');
         this.showToast('Sales CSV exported successfully!');
       },
 
-      openStatementModal: function(period = 'all') {
+      openStatementModal: function(period) {
         const modal = document.getElementById('statementModal');
         if (modal) {
           modal.classList.add('active');
-          this.generateStatement(period || this.activeSalesPeriod || 'all');
+          const targetPeriod = period || this.activeSalesPeriod || 'all';
+          this.generateStatement(targetPeriod, this.activeSalesOpts || {});
         }
       },
 
-      generateStatement: function(period = 'all') {
+      onStatementMonthChange: function(val) {
+        if (!val) return;
+        this.generateStatement('custom_month', { month_ym: val });
+      },
+
+      applyCustomStatementRange: function() {
+        const s = document.getElementById('stmtStartDate')?.value || '';
+        const e = document.getElementById('stmtEndDate')?.value || '';
+        if (!s && !e) {
+          this.showToast('Please select a From Date or To Date for the statement timeline', 'error');
+          return;
+        }
+        this.generateStatement('custom_range', { start_date: s || e, end_date: e || s });
+      },
+
+      onStatementStaffFilterChange: function(val) {
+        const nextOpts = Object.assign({}, this.activeSalesOpts || {}, { staff_filter: val });
+        this.generateStatement(this.activeSalesPeriod || 'all', nextOpts);
+      },
+
+      updateStatementStaffHeader: function() {
+        const customStaff = document.getElementById('stmtCustomStaffInput')?.value?.trim();
+        const shiftType = document.getElementById('stmtShiftTypeSelect')?.value || 'Full 24-Hour Shift Roster';
+        const supervisor = document.getElementById('stmtSupervisorInput')?.value?.trim() || 'Management / Internal Audit';
+
+        const displayStaff = customStaff || this.currentStaff || 'Front Desk Staff';
+
+        if (document.getElementById('stmtStaffName')) document.getElementById('stmtStaffName').innerText = displayStaff;
+        if (document.getElementById('stmtBannerStaffRoster')) document.getElementById('stmtBannerStaffRoster').innerText = displayStaff;
+        if (document.getElementById('stmtSignStaffName')) document.getElementById('stmtSignStaffName').innerText = displayStaff;
+        if (document.getElementById('stmtShiftDutyLabel')) document.getElementById('stmtShiftDutyLabel').innerText = 'Shift Roster: ' + shiftType;
+        if (document.getElementById('stmtBannerShiftType')) document.getElementById('stmtBannerShiftType').innerText = shiftType + ' | Supervisor: ' + supervisor;
+        if (document.getElementById('stmtSignSupervisorName')) document.getElementById('stmtSignSupervisorName').innerText = supervisor;
+      },
+
+      generateStatement: function(period = 'all', opts = {}) {
         this.activeSalesPeriod = period;
-        
+        this.activeSalesOpts = opts || {};
+
         // Update filter pills inside statement modal
         const pills = {
           'today': 'stmtBtnToday',
+          'yesterday': 'stmtBtnYesterday',
           'week': 'stmtBtnWeek',
           'month': 'stmtBtnMonth',
+          'this_month': 'stmtBtnThisMonth',
+          'last_month': 'stmtBtnLastMonth',
           'all': 'stmtBtnAll'
         };
         Object.keys(pills).forEach(p => {
@@ -4514,10 +4812,19 @@ $reserve_url = home_url('/reserve/');
           }
         });
 
-        // Ensure sales analytics are loaded for this period
+        const staffSelect = document.getElementById('stmtStaffFilterSelect');
+        const staffFilter = opts.staff_filter !== undefined
+          ? opts.staff_filter
+          : (staffSelect ? staffSelect.value : 'all');
+
         const fd = new FormData();
         fd.append('action', 'kc_hotel_get_sales_analytics');
         fd.append('period', period);
+        if (opts.start_date) fd.append('start_date', opts.start_date);
+        if (opts.end_date) fd.append('end_date', opts.end_date);
+        if (opts.month_ym) fd.append('month_ym', opts.month_ym);
+        if (staffFilter) fd.append('staff_filter', staffFilter);
+        if (this.currentPinToken) fd.append('token', this.currentPinToken);
 
         fetch(this.ajaxUrl, { method: 'POST', body: fd })
           .then(r => r.json())
@@ -4538,29 +4845,157 @@ $reserve_url = home_url('/reserve/');
         if (!s) return;
 
         const sum = s.summary || {};
+        const tl = s.timeline || {};
         const now = new Date();
         const dateStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) + ' ' + now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
         const refCode = 'KC-STMT-' + now.toISOString().slice(0,10).replace(/-/g,'') + '-' + Math.floor(1000 + Math.random() * 9000);
 
         if (document.getElementById('stmtRefCode')) document.getElementById('stmtRefCode').innerText = refCode;
         if (document.getElementById('stmtPrintDate')) document.getElementById('stmtPrintDate').innerText = dateStr;
-        if (document.getElementById('stmtStaffName')) document.getElementById('stmtStaffName').innerText = this.currentStaff || 'Front Desk Staff';
-        if (document.getElementById('stmtSignStaffName')) document.getElementById('stmtSignStaffName').innerText = this.currentStaff || 'Front Desk Staff';
 
-        const labels = {
-          'today': 'Today (' + now.toLocaleDateString('en-GB') + ')',
-          'week': 'Last 7 Days',
-          'month': 'This Month (' + now.toLocaleString('en-US', { month: 'long', year: 'numeric' }) + ')',
-          'all': 'All-Time Cumulative Audit'
-        };
-        if (document.getElementById('stmtPeriodLabel')) document.getElementById('stmtPeriodLabel').innerText = labels[period] || 'All Time';
-        if (document.getElementById('stmtTotalBookingsCount')) document.getElementById('stmtTotalBookingsCount').innerText = `${sum.total_bookings || 0} Bookings (${sum.occupied_nights || 0} Nights)`;
+        // Sync date range inputs inside statement modal
+        const sInput = document.getElementById('stmtStartDate');
+        const eInput = document.getElementById('stmtEndDate');
+        if (sInput && tl.start_date && document.activeElement !== sInput) sInput.value = tl.start_date;
+        if (eInput && tl.end_date && document.activeElement !== eInput) eInput.value = tl.end_date;
+
+        // Populate Staff Filter dropdown inside statement modal
+        const staffSelect = document.getElementById('stmtStaffFilterSelect');
+        if (staffSelect && Array.isArray(s.all_staff_names)) {
+          const currentVal = tl.staff_filter || 'all';
+          staffSelect.innerHTML = `<option value="all">All Staff on Shift</option>` +
+            s.all_staff_names.map(name => `<option value="${name.replace(/"/g, '&quot;')}" ${name === currentVal ? 'selected' : ''}>👤 ${name}</option>`).join('');
+        }
+
+        // Compute Staff on Shift Roster string from timeline data
+        const staffList = Array.isArray(s.by_staff) ? s.by_staff : [];
+        let rosterNames = staffList.map(st => st.staff_name).filter(Boolean);
+        if (this.currentStaff && !rosterNames.includes(this.currentStaff) && (!tl.staff_filter || tl.staff_filter === 'all')) {
+          rosterNames.unshift(this.currentStaff);
+        }
+        if (rosterNames.length === 0) {
+          rosterNames = [this.currentStaff || 'Front Desk Staff'];
+        }
+        const computedRosterStr = rosterNames.join(', ');
+
+        const customStaffInput = document.getElementById('stmtCustomStaffInput');
+        if (customStaffInput && document.activeElement !== customStaffInput) {
+          customStaffInput.value = computedRosterStr;
+        }
+
+        // Populate incoming supervisor if active shift or recent shift log has one
+        const supInput = document.getElementById('stmtSupervisorInput');
+        if (supInput && !supInput.value && Array.isArray(s.shifts_log) && s.shifts_log.length > 0) {
+          const latestIncoming = s.shifts_log.find(sh => sh.incoming_receptionist)?.incoming_receptionist;
+          if (latestIncoming) supInput.value = latestIncoming;
+        }
+
+        this.updateStatementStaffHeader();
+
+        if (document.getElementById('stmtPeriodLabel')) {
+          document.getElementById('stmtPeriodLabel').innerText = tl.label || 'All-Time Cumulative Audit';
+        }
+        if (document.getElementById('stmtDateWindowText')) {
+          document.getElementById('stmtDateWindowText').innerText = `Window: ${tl.start_date || '—'} to ${tl.end_date || '—'}`;
+        }
+        if (document.getElementById('stmtTotalBookingsCount')) {
+          document.getElementById('stmtTotalBookingsCount').innerText = `${sum.total_bookings || 0} Bookings (${sum.occupied_nights || 0} Nights)`;
+        }
 
         if (document.getElementById('stmtGrossBilled')) document.getElementById('stmtGrossBilled').innerText = '₦' + Number(sum.gross_sales || 0).toLocaleString();
         if (document.getElementById('stmtTotalCollected')) document.getElementById('stmtTotalCollected').innerText = '₦' + Number(sum.collected_revenue || 0).toLocaleString();
         if (document.getElementById('stmtBalanceDue')) document.getElementById('stmtBalanceDue').innerText = '₦' + Number(sum.pending_receivables || 0).toLocaleString();
         if (document.getElementById('stmtOccupancyRate')) document.getElementById('stmtOccupancyRate').innerText = `${sum.total_bookings || 0} Bookings Logged`;
         if (document.getElementById('stmtAvgRate')) document.getElementById('stmtAvgRate').innerText = `ADR: ₦${Number(sum.adr || 0).toLocaleString()} • RevPAR: ₦${Number(sum.revpar || 0).toLocaleString()}`;
+
+        // Render Staff on Shift & Receptionist Duty Breakdown Table
+        const staffTbody = document.getElementById('stmtStaffTableBody');
+        if (staffTbody) {
+          if (staffList.length === 0) {
+            staffTbody.innerHTML = `
+              <tr style="border-bottom: 1px solid #e2e8f0;">
+                <td style="padding: 6px 8px; font-weight: 700;">👤 ${this.currentStaff || 'Front Desk Staff'}</td>
+                <td style="padding: 6px 8px;">On-Duty Receptionist</td>
+                <td style="padding: 6px 8px; font-size: 10px; color: #64748b;">${tl.start_date || '—'} &rarr; ${tl.end_date || '—'}</td>
+                <td style="padding: 6px 8px; text-align: center; font-weight: 700;">0 (0 nights)</td>
+                <td style="padding: 6px 8px; font-size: 10px;">—</td>
+                <td style="padding: 6px 8px; text-align: right; font-weight: 600;">₦0</td>
+                <td style="padding: 6px 8px; text-align: right;">₦0</td>
+                <td style="padding: 6px 8px; text-align: right;">₦0</td>
+                <td style="padding: 6px 8px; text-align: right;">₦0</td>
+                <td style="padding: 6px 8px; text-align: right; font-weight: 800; color: #15803d;">₦0</td>
+              </tr>
+            `;
+          } else {
+            let totBookings = 0, totNights = 0, totGross = 0, totCash = 0, totPos = 0, totTrf = 0, totCol = 0;
+            const rowsHtml = staffList.map((st, idx) => {
+              totBookings += Number(st.bookings_count || 0);
+              totNights += Number(st.nights_count || 0);
+              totGross += Number(st.gross_billed || 0);
+              totCash += Number(st.cash_amount || 0);
+              totPos += Number(st.pos_amount || 0);
+              totTrf += Number(st.transfer_amount || 0) + Number(st.other_amount || 0);
+              totCol += Number(st.total_collected || 0);
+              const roomsStr = Array.isArray(st.rooms_list) && st.rooms_list.length > 0 ? st.rooms_list.join(', ') : '—';
+              const trfPlusOther = Number(st.transfer_amount || 0) + Number(st.other_amount || 0);
+              return `
+                <tr style="border-bottom: 1px solid #e2e8f0; ${idx % 2 === 1 ? 'background: #f8fafc;' : ''}">
+                  <td style="padding: 6px 8px; font-weight: 800; color: #040914;">👤 ${st.staff_name}</td>
+                  <td style="padding: 6px 8px; font-size: 10px; font-weight: 600; color: #334155;">
+                    ${st.shift_role || 'Front Desk Receptionist'}
+                    ${st.shift_code && st.shift_code !== 'N/A' ? `<span style="display: block; font-family: monospace; color: #64748b; font-size: 9.5px;">${st.shift_code}</span>` : ''}
+                  </td>
+                  <td style="padding: 6px 8px; font-size: 10px; color: #475569;">${st.first_seen_fmt || '—'} &rarr; ${st.last_seen_fmt || '—'}</td>
+                  <td style="padding: 6px 8px; text-align: center; font-weight: 700;">${st.bookings_count} <span style="font-weight: 500; font-size: 9.5px; color: #64748b;">(${st.nights_count}n)</span></td>
+                  <td style="padding: 6px 8px; font-size: 10px; font-weight: 600; color: #1e293b;">${roomsStr}</td>
+                  <td style="padding: 6px 8px; text-align: right; font-weight: 700;">₦${Number(st.gross_billed || 0).toLocaleString()}</td>
+                  <td style="padding: 6px 8px; text-align: right; color: #b45309; font-weight: 600;">₦${Number(st.cash_amount || 0).toLocaleString()}</td>
+                  <td style="padding: 6px 8px; text-align: right; color: #1d4ed8; font-weight: 600;">₦${Number(st.pos_amount || 0).toLocaleString()}</td>
+                  <td style="padding: 6px 8px; text-align: right; color: #047857; font-weight: 600;">₦${trfPlusOther.toLocaleString()}</td>
+                  <td style="padding: 6px 8px; text-align: right; font-weight: 800; color: #15803d;">₦${Number(st.total_collected || 0).toLocaleString()}</td>
+                </tr>
+              `;
+            }).join('');
+
+            const footerHtml = `
+              <tr style="background: #f1f5f9; border-top: 2px solid #040914; font-weight: 800;">
+                <td colspan="3" style="padding: 6px 8px; text-transform: uppercase; font-size: 10px; color: #040914;">Total Combined Shift Roster (${staffList.length} Staff)</td>
+                <td style="padding: 6px 8px; text-align: center;">${totBookings} (${totNights}n)</td>
+                <td style="padding: 6px 8px; font-size: 10px;">All Active Wings</td>
+                <td style="padding: 6px 8px; text-align: right;">₦${totGross.toLocaleString()}</td>
+                <td style="padding: 6px 8px; text-align: right; color: #b45309;">₦${totCash.toLocaleString()}</td>
+                <td style="padding: 6px 8px; text-align: right; color: #1d4ed8;">₦${totPos.toLocaleString()}</td>
+                <td style="padding: 6px 8px; text-align: right; color: #047857;">₦${totTrf.toLocaleString()}</td>
+                <td style="padding: 6px 8px; text-align: right; color: #15803d;">₦${totCol.toLocaleString()}</td>
+              </tr>
+            `;
+            staffTbody.innerHTML = rowsHtml + footerHtml;
+          }
+        }
+
+        // Render Front Desk Shift Log & Handover History if records exist
+        const shiftSec = document.getElementById('stmtShiftHistorySection');
+        const shiftTbody = document.getElementById('stmtShiftHistoryTableBody');
+        if (shiftSec && shiftTbody) {
+          const shiftsLog = Array.isArray(s.shifts_log) ? s.shifts_log : [];
+          if (shiftsLog.length === 0) {
+            shiftSec.style.display = 'none';
+            shiftTbody.innerHTML = '';
+          } else {
+            shiftSec.style.display = 'block';
+            shiftTbody.innerHTML = shiftsLog.map((sh, idx) => `
+              <tr style="border-bottom: 1px solid #e2e8f0; ${idx % 2 === 1 ? 'background: #f8fafc;' : ''}">
+                <td style="padding: 5px 8px; font-family: monospace; font-weight: 700;">${sh.shift_code || '—'}</td>
+                <td style="padding: 5px 8px; font-weight: 700;">👤 ${sh.receptionist_name || '—'}</td>
+                <td style="padding: 5px 8px;">${sh.incoming_receptionist || '—'}</td>
+                <td style="padding: 5px 8px; font-size: 10px;">${sh.start_time || '—'} &rarr; ${sh.end_time || 'Active Shift'}</td>
+                <td style="padding: 5px 8px; text-align: center; font-weight: 700;">${sh.total_bookings || 0}</td>
+                <td style="padding: 5px 8px; text-align: right; font-weight: 700; color: #15803d;">₦${Number(sh.total_collected || 0).toLocaleString()}</td>
+                <td style="padding: 5px 8px; text-align: center; font-size: 9.5px; font-weight: 700; text-transform: uppercase;">${sh.status || 'active'}</td>
+              </tr>
+            `).join('');
+          }
+        }
 
         // Render payment channels grid
         const channelBox = document.getElementById('stmtPaymentChannelsGrid');
@@ -4583,11 +5018,11 @@ $reserve_url = home_url('/reserve/');
           }).join('');
         }
 
-        // Render ledger rows
+        // Render ledger rows with Staff on Shift column
         const tbody = document.getElementById('stmtTransactionsTableBody');
         if (tbody && s.csv_rows) {
           if (s.csv_rows.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; padding: 18px; color: #64748b;">No transaction records logged in this period.</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 18px; color: #64748b;">No transaction records logged in this timeline.</td></tr>`;
           } else {
             tbody.innerHTML = s.csv_rows.map((r, idx) => `
               <tr style="border-bottom: 1px solid #e2e8f0; ${idx % 2 === 1 ? 'background: #f8fafc;' : ''}">
@@ -4595,6 +5030,7 @@ $reserve_url = home_url('/reserve/');
                 <td style="padding: 5px 8px; font-weight: 700;">${r.guest_name}</td>
                 <td style="padding: 5px 8px;">${r.room_number}</td>
                 <td style="padding: 5px 8px; font-size: 10px; color: #475569;">${r.check_in} &rarr; ${r.check_out}</td>
+                <td style="padding: 5px 8px; font-size: 10.5px; font-weight: 700; color: #1e3a8a;">👤 ${r.receptionist_name || 'Front Desk Staff'}</td>
                 <td style="padding: 5px 8px; font-size: 10.5px; font-weight: 600;">${r.payment_method ? r.payment_method.toUpperCase() : 'N/A'}</td>
                 <td style="padding: 5px 8px; text-align: right; font-weight: 600;">₦${Number(r.total_amount).toLocaleString()}</td>
                 <td style="padding: 5px 8px; text-align: right; font-weight: 700; color: #15803d;">₦${Number(r.amount_paid).toLocaleString()}</td>
