@@ -1074,101 +1074,870 @@ get_header();
   <!-- ====================================================================
        HOTEL LUXURY SUITES SPOTLIGHT — Flagship Rooms Showcase
        ==================================================================== -->
-  <section class="hp-rooms-spotlight">
-    <div class="container container-wide">
-      <div class="hp-section-head">
-        <span class="rc-badge" style="margin-bottom:0.75rem; display:inline-flex;">Luxury Stays &bull; Suleja</span>
-        <h2 class="hp-section-title">Featured Suites &amp; Rooms</h2>
-        <p class="hp-section-sub">Experience serene comfort, executive ergonomic workspaces, rainfall showers, and guaranteed 24/7 power on the Abuja Capital Corridor.</p>
+  <style>
+    .hp-rooms-spotlight {
+      padding: 6rem 0 5.5rem;
+      background: radial-gradient(1200px circle at 15% 10%, rgba(245, 158, 11, 0.09), transparent 45%),
+                  radial-gradient(1000px circle at 85% 90%, rgba(11, 78, 162, 0.09), transparent 50%),
+                  linear-gradient(180deg, #f8fafc 0%, #eff6ff 50%, #f8fafc 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hp-rooms-glow-1 {
+      position: absolute;
+      top: -100px;
+      left: 5%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.14) 0%, transparent 70%);
+      pointer-events: none;
+      filter: blur(45px);
+    }
+    .hp-rooms-glow-2 {
+      position: absolute;
+      bottom: -80px;
+      right: 5%;
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, rgba(11, 78, 162, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+      filter: blur(50px);
+    }
+    .hp-luxury-eyebrow {
+      margin-bottom: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.45rem 1.15rem;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.08));
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #92400e;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      border-radius: 999px;
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.12);
+    }
+    .hp-rooms-main-title {
+      font-family: var(--font-display, 'Outfit', sans-serif);
+      font-size: clamp(2.1rem, 4vw, 2.85rem);
+      font-weight: 900;
+      color: #04142b;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.75rem;
+    }
+    .hp-title-gold-divider {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, #f59e0b, #d97706, transparent);
+      border-radius: 4px;
+      margin: 0 auto 1.15rem;
+    }
+    .hp-rooms-subtitle {
+      font-size: 1.05rem;
+      color: #475569;
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+    .hp-rooms-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3.25rem;
+    }
+    @media (max-width: 1024px) {
+      .hp-rooms-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    }
+    @media (max-width: 720px) {
+      .hp-rooms-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+    }
+    .hp-room-card-premium {
+      background: #ffffff;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(203, 213, 225, 0.85);
+      box-shadow: 0 14px 34px -10px rgba(4, 20, 43, 0.08), 0 4px 12px -2px rgba(11, 78, 162, 0.05);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .hp-room-card-premium::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #0b4ea2, #f59e0b, #d97706);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      z-index: 5;
+    }
+    .hp-room-card-premium:hover {
+      transform: translateY(-10px);
+      border-color: rgba(245, 158, 11, 0.5);
+      box-shadow: 0 28px 60px -12px rgba(4, 20, 43, 0.18), 0 0 0 1px rgba(245, 158, 11, 0.25);
+    }
+    .hp-room-card-premium:hover::before {
+      opacity: 1;
+    }
+    .hp-room-thumb-wrap {
+      position: relative;
+      height: 255px;
+      overflow: hidden;
+      background: #04142b;
+    }
+    .hp-room-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hp-room-card-premium:hover .hp-room-thumb {
+      transform: scale(1.08);
+    }
+    .hp-room-scrim {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(4, 20, 43, 0.38) 0%, rgba(4, 20, 43, 0.04) 45%, rgba(4, 20, 43, 0.88) 100%);
+      pointer-events: none;
+    }
+    .hp-room-top-tags {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      right: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 2;
+    }
+    .hp-room-pill-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    }
+    .hp-tag-popular {
+      background: linear-gradient(135deg, #e11d48 0%, #f59e0b 100%);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+    }
+    .hp-tag-serene {
+      background: linear-gradient(135deg, #0b4ea2 0%, #0284c7 100%);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+    }
+    .hp-tag-executive {
+      background: linear-gradient(135deg, #d97706 0%, #92400e 100%);
+      border: 1px solid rgba(254, 240, 138, 0.45);
+    }
+    .hp-room-meta-chip {
+      background: rgba(3, 12, 26, 0.72);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.28rem 0.65rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .hp-room-price-badge {
+      position: absolute;
+      bottom: 0.95rem;
+      left: 1rem;
+      background: rgba(3, 12, 26, 0.86);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #fef08a;
+      padding: 0.45rem 1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(245, 158, 11, 0.55);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+      display: flex;
+      align-items: baseline;
+      gap: 0.35rem;
+      z-index: 2;
+    }
+    .hp-price-amount {
+      font-weight: 900;
+      font-size: 1.05rem;
+      color: #fbbf24;
+      letter-spacing: -0.01em;
+    }
+    .hp-price-unit {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #cbd5e1;
+    }
+    .hp-room-body {
+      padding: 1.65rem 1.65rem 1.55rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .hp-room-header { margin-bottom: 0.55rem; }
+    .hp-room-category-label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #0b4ea2;
+      margin-bottom: 0.25rem;
+    }
+    .hp-room-title {
+      font-family: var(--font-display, 'Outfit', sans-serif);
+      font-size: 1.38rem;
+      font-weight: 800;
+      color: #04142b;
+      margin: 0;
+      line-height: 1.25;
+    }
+    .hp-room-desc {
+      font-size: 0.89rem;
+      color: #475569;
+      line-height: 1.6;
+      margin: 0 0 1.25rem 0;
+      flex: 1;
+    }
+    .hp-room-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1.35rem;
+      padding-bottom: 1.15rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .hp-room-feature-tag {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      color: #1e293b;
+      padding: 0.35rem 0.68rem;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.25s ease;
+    }
+    .hp-room-feature-tag svg {
+      color: #0b4ea2;
+      flex-shrink: 0;
+    }
+    .hp-room-card-premium:hover .hp-room-feature-tag {
+      border-color: rgba(11, 78, 162, 0.3);
+      background: #eff6ff;
+      color: #04142b;
+    }
+    .hp-room-actions {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    .hp-btn-reserve-gold {
+      flex: 1.25;
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: #ffffff !important;
+      padding: 0.78rem 1rem;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.875rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      box-shadow: 0 6px 16px rgba(217, 119, 6, 0.32);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hp-btn-reserve-gold:hover {
+      background: linear-gradient(135deg, #fbbf24 0%, #b45309 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(217, 119, 6, 0.45);
+      color: #ffffff !important;
+    }
+    .hp-btn-reserve-gold svg { transition: transform 0.25s ease; }
+    .hp-btn-reserve-gold:hover svg { transform: translateX(3px); }
+    .hp-btn-details-ghost {
+      flex: 0.85;
+      background: #f8fafc;
+      color: #0b4ea2 !important;
+      border: 1.5px solid rgba(11, 78, 162, 0.35);
+      padding: 0.74rem 0.85rem;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      transition: all 0.25s ease;
+    }
+    .hp-btn-details-ghost:hover {
+      background: #0b4ea2;
+      border-color: #0b4ea2;
+      color: #ffffff !important;
+      transform: translateY(-2px);
+    }
+    .hp-vip-banner-box {
+      margin-top: 2.85rem;
+      background: radial-gradient(circle at 90% 20%, rgba(245, 158, 11, 0.22), transparent 50%),
+                  radial-gradient(circle at 10% 80%, rgba(14, 165, 233, 0.15), transparent 50%),
+                  linear-gradient(135deg, #030d1d 0%, #061933 50%, #0a254a 100%);
+      border-radius: 24px;
+      padding: 2.35rem 2.65rem;
+      border: 1px solid rgba(245, 158, 11, 0.45);
+      box-shadow: 0 24px 55px -12px rgba(3, 13, 29, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.75rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hp-vip-banner-content { flex: 1 1 500px; }
+    .hp-vip-badge-row { margin-bottom: 0.65rem; }
+    .hp-vip-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(245, 158, 11, 0.18);
+      border: 1px solid rgba(245, 158, 11, 0.5);
+      color: #fef08a;
+      padding: 0.3rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.725rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .hp-vip-title {
+      font-family: var(--font-display, 'Outfit', sans-serif);
+      font-size: clamp(1.25rem, 2.3vw, 1.55rem);
+      font-weight: 800;
+      color: #ffffff;
+      margin: 0 0 0.5rem 0;
+      line-height: 1.3;
+    }
+    .hp-vip-subtitle {
+      font-size: 0.94rem;
+      color: #cbd5e1;
+      margin: 0 0 1.15rem 0;
+      line-height: 1.55;
+      max-width: 640px;
+    }
+    .hp-vip-tier-pills { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+    .hp-vip-pill {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      color: #f1f5f9;
+      padding: 0.38rem 0.8rem;
+      border-radius: 8px;
+      font-size: 0.79rem;
+      font-weight: 500;
+    }
+    .hp-vip-pill strong { color: #ffffff; }
+    .hp-vip-pill-highlight {
+      background: rgba(245, 158, 11, 0.2);
+      border-color: rgba(245, 158, 11, 0.55);
+      color: #fef08a;
+    }
+    .hp-vip-pill-highlight strong { color: #fbbf24; }
+    .hp-vip-actions { display: flex; flex-wrap: wrap; gap: 0.85rem; align-items: center; }
+    .hp-vip-btn-outline {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      color: #ffffff !important;
+      padding: 0.8rem 1.3rem;
+      border-radius: 12px;
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      backdrop-filter: blur(8px);
+      transition: all 0.25s ease;
+    }
+    .hp-vip-btn-outline:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: #ffffff;
+      transform: translateY(-2px);
+    }
+    .hp-vip-btn-gold {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: #ffffff !important;
+      padding: 0.8rem 1.4rem;
+      border-radius: 12px;
+      font-size: 0.875rem;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 6px 20px rgba(217, 119, 6, 0.42);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hp-vip-btn-gold:hover {
+      background: linear-gradient(135deg, #fbbf24 0%, #b45309 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(217, 119, 6, 0.55);
+    }
+    .hp-lifestyle-strip {
+      padding: 6rem 0 5.5rem;
+      background: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.16), transparent 65%),
+                  radial-gradient(circle at 85% 100%, rgba(245, 158, 11, 0.12), transparent 50%),
+                  #020712;
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+    }
+    .hp-lifestyle-bg-glow {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 500px;
+      background: radial-gradient(ellipse, rgba(11, 78, 162, 0.16) 0%, transparent 70%);
+      pointer-events: none;
+      filter: blur(60px);
+    }
+    .hp-lifestyle-badge {
+      background: rgba(245, 158, 11, 0.16);
+      color: #fef08a;
+      border: 1px solid rgba(245, 158, 11, 0.42);
+      margin-bottom: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      padding: 0.42rem 1.1rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .hp-lifestyle-main-title {
+      font-family: var(--font-display, 'Outfit', sans-serif);
+      font-size: clamp(2.1rem, 4vw, 2.85rem);
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.75rem;
+    }
+    .hp-lifestyle-gold-divider {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, #f59e0b, #d97706, transparent);
+      border-radius: 4px;
+      margin: 0 auto 1.15rem;
+    }
+    .hp-lifestyle-subtitle {
+      font-size: 1.05rem;
+      color: #cbd5e1;
+      max-width: 680px;
+      margin: 0 auto;
+      line-height: 1.65;
+    }
+    .hp-lifestyle-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3.25rem;
+    }
+    @media (max-width: 1024px) {
+      .hp-lifestyle-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+    }
+    .hp-lifestyle-card-premium {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 22px;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      display: flex;
+      flex-direction: column;
+    }
+    .hp-lifestyle-card-premium:hover {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.09) 0%, rgba(255, 255, 255, 0.04) 100%);
+      border-color: rgba(245, 158, 11, 0.55);
+      transform: translateY(-9px);
+      box-shadow: 0 28px 55px -10px rgba(0, 0, 0, 0.65), 0 0 28px rgba(245, 158, 11, 0.16);
+    }
+    .hp-lifestyle-thumb-wrap {
+      height: 235px;
+      overflow: hidden;
+      position: relative;
+      background: #020712;
+    }
+    .hp-lifestyle-thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hp-lifestyle-card-premium:hover .hp-lifestyle-thumb {
+      transform: scale(1.08);
+    }
+    .hp-lifestyle-scrim {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(2, 7, 18, 0.35) 0%, rgba(2, 7, 18, 0.08) 40%, rgba(2, 7, 18, 0.88) 100%);
+      pointer-events: none;
+    }
+    .hp-lifestyle-top-tags {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      right: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 2;
+    }
+    .hp-lifestyle-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.32rem 0.78rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #ffffff;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+    .hp-chip-amber {
+      background: linear-gradient(135deg, rgba(217, 119, 6, 0.92), rgba(180, 83, 9, 0.92));
+      border: 1px solid rgba(251, 191, 36, 0.55);
+    }
+    .hp-chip-purple {
+      background: linear-gradient(135deg, rgba(147, 51, 234, 0.92), rgba(109, 40, 217, 0.92));
+      border: 1px solid rgba(192, 132, 252, 0.55);
+    }
+    .hp-chip-cyan {
+      background: linear-gradient(135deg, rgba(2, 132, 199, 0.92), rgba(3, 105, 161, 0.92));
+      border: 1px solid rgba(56, 189, 248, 0.55);
+    }
+    .hp-lifestyle-pill-meta {
+      background: rgba(2, 7, 18, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.26rem 0.65rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .hp-lifestyle-body {
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .hp-lifestyle-title {
+      font-family: var(--font-display, 'Outfit', sans-serif);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin: 0 0 0.6rem 0;
+      line-height: 1.3;
+    }
+    .hp-lifestyle-desc {
+      font-size: 0.89rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+      flex: 1;
+    }
+    .hp-lifestyle-highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .hp-lifestyle-hl-item {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #e2e8f0;
+      padding: 0.32rem 0.68rem;
+      border-radius: 7px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .hp-lifestyle-btn {
+      background: rgba(255, 255, 255, 0.09);
+      border: 1.5px solid rgba(255, 255, 255, 0.22);
+      color: #ffffff !important;
+      padding: 0.78rem 1rem;
+      border-radius: 12px;
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hp-lifestyle-btn:hover {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      border-color: #f59e0b;
+      color: #ffffff !important;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(245, 158, 11, 0.38);
+    }
+    .hp-lifestyle-btn svg { transition: transform 0.25s ease; }
+    .hp-lifestyle-btn:hover svg { transform: translateX(3px); }
+  </style>
+  <section class="hp-rooms-spotlight" id="featuredRooms">
+    <div class="hp-rooms-glow-1" aria-hidden="true"></div>
+    <div class="hp-rooms-glow-2" aria-hidden="true"></div>
+
+    <div class="container container-wide" style="position:relative; z-index:2;">
+      <div class="hp-section-head text-center">
+        <span class="rc-badge hp-luxury-eyebrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="color:var(--gold-500); margin-right:4px;"><path d="M12 2l2.4 7.2h7.6l-6.2 4.5 2.4 7.3-6.2-4.5-6.2 4.5 2.4-7.3-6.2-4.5h7.6z"/></svg>
+          Handcrafted Hospitality &bull; Suleja Abuja Corridor
+        </span>
+        <h2 class="hp-section-title hp-rooms-main-title">Featured Suites &amp; Rooms</h2>
+        <div class="hp-title-gold-divider"></div>
+        <p class="hp-section-sub hp-rooms-subtitle">
+          Experience serene comfort, executive ergonomic workspaces, rainfall showers, and guaranteed 24/7 power on the Abuja Capital Corridor.
+        </p>
       </div>
 
       <div class="hp-rooms-grid">
         
         <!-- Room 1: Love Night -->
-        <div class="hp-room-card">
+        <article class="hp-room-card hp-room-card-premium" data-room-id="love-night">
           <div class="hp-room-thumb-wrap">
             <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/love-night-room.jpg' ); ?>" alt="Love Night Room at Kelvin Cameo Resort" class="hp-room-thumb" loading="lazy">
-            <span class="hp-room-tag">Popular Choice</span>
-            <div class="hp-room-price-badge">₦20,000 &ndash; ₦25,000 <span style="font-size:0.75rem; font-weight:600; color:#cbd5e1;">/ night</span></div>
+            <div class="hp-room-scrim"></div>
+            <div class="hp-room-top-tags">
+              <span class="hp-room-pill-tag hp-tag-popular">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 23c-4.97 0-9-4.03-9-9 0-4.06 2.7-7.49 6.43-8.61l.57 1.54C6.8 7.78 4.8 10.66 4.8 14c0 3.97 3.23 7.2 7.2 7.2s7.2-3.23 7.2-7.2c0-3.34-2-6.22-5.2-7.07l.57-1.54C18.3 6.51 21 9.94 21 14c0 4.97-4.03 9-9 9zm.5-19.5c.32 1.34 1.13 2.5 2.33 3.32 1.25.85 1.97 2.25 1.97 3.75 0 2.48-2.02 4.5-4.5 4.5s-4.5-2.02-4.5-4.5c0-1.85 1.13-3.47 2.8-4.14l.8 1.83c-1 .4-1.6 1.32-1.6 2.31 0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5c0-.82-.4-1.58-1.07-2.04-.97-.67-1.61-1.69-1.83-2.82l1.6-.21z"/></svg>
+                Popular Choice
+              </span>
+              <span class="hp-room-meta-chip">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#fbbf24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                4.96 Rating
+              </span>
+            </div>
+            <div class="hp-room-price-badge">
+              <span class="hp-price-amount">₦20,000 &ndash; ₦25,000</span>
+              <span class="hp-price-unit">/ night</span>
+            </div>
           </div>
           <div class="hp-room-body">
-            <h3>Love Night Room</h3>
-            <p>Romantic intimate ambiance with mood backlighting, plush queen mattress, smart streaming TV, and private ensuite bathroom.</p>
+            <div class="hp-room-header">
+              <span class="hp-room-category-label">Romantic &bull; Couples Delight</span>
+              <h3 class="hp-room-title">Love Night Room</h3>
+            </div>
+            <p class="hp-room-desc">Romantic intimate ambiance with mood backlighting, plush queen mattress, smart streaming TV, and private ensuite bathroom.</p>
             <div class="hp-room-features">
-              <span class="hp-room-feature-tag">Smart TV</span>
-              <span class="hp-room-feature-tag">24/7 Power</span>
-              <span class="hp-room-feature-tag">Air Conditioned</span>
-              <span class="hp-room-feature-tag">Free Wi-Fi</span>
+              <span class="hp-room-feature-tag">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect><polyline points="17 2 12 7 7 2"></polyline></svg>
+                Smart TV
+              </span>
+              <span class="hp-room-feature-tag">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                24/7 Power
+              </span>
+              <span class="hp-room-feature-tag">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path></svg>
+                Air Conditioned
+              </span>
+              <span class="hp-room-feature-tag">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+                Free Wi-Fi
+              </span>
             </div>
             <div class="hp-room-actions">
-              <a href="<?php echo kc_url('reserve'); ?>?room=love-night" class="btn-gold">Book Now</a>
-              <a href="<?php echo kc_url('hospitality'); ?>#rooms" class="btn btn-outline-primary">Details</a>
+              <a href="<?php echo kc_url('reserve'); ?>?room=love-night" class="hp-btn-reserve-gold">
+                <span>Book Now</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="<?php echo kc_url('hospitality'); ?>#rooms" class="hp-btn-details-ghost">
+                <span>Details</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
             </div>
           </div>
-        </div>
+        </article>
 
         <!-- Room 2: Golden Nest -->
-        <div class="hp-room-card">
+        <article class="hp-room-card hp-room-card-premium" data-room-id="golden-nest">
           <div class="hp-room-thumb-wrap">
             <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/golden-nest-room.jpg' ); ?>" alt="Golden Nest Room at Kelvin Cameo Resort" class="hp-room-thumb" loading="lazy">
-            <span class="hp-room-tag" style="background:#0b4ea2;">Serene Comfort</span>
-            <div class="hp-room-price-badge">₦20,000 &ndash; ₦25,000 <span style="font-size:0.75rem; font-weight:600; color:#cbd5e1;">/ night</span></div>
+            <div class="hp-room-scrim"></div>
+            <div class="hp-room-top-tags">
+              <span class="hp-room-pill-tag hp-tag-serene">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/></svg>
+                Serene Comfort
+              </span>
+              <span class="hp-room-meta-chip">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#38bdf8"><path d="M12 3a9 9 0 0 0 9 9 9 9 0 1 1-9-9z"></path></svg>
+                Quiet Wing
+              </span>
+            </div>
+            <div class="hp-room-price-badge">
+              <span class="hp-price-amount">₦20,000 &ndash; ₦25,000</span>
+              <span class="hp-price-unit">/ night</span>
+            </div>
           </div>
           <div class="hp-room-body">
-            <h3>Golden Nest Room</h3>
-            <p>Peaceful executive retreat designed for deep relaxation, featuring warm wood accents, dedicated desk, and silent split-unit AC.</p>
+            <div class="hp-room-header">
+              <span class="hp-room-category-label">Business &bull; Deep Relaxation</span>
+              <h3 class="hp-room-title">Golden Nest Room</h3>
+            </div>
+            <p class="hp-room-desc">Peaceful executive retreat designed for deep relaxation, featuring warm wood accents, dedicated desk, and silent split-unit AC.</p>
             <div class="hp-room-features">
-              <span class="hp-room-feature-tag">Silent AC</span>
-              <span class="hp-room-feature-tag">Work Desk</span>
-              <span class="hp-room-feature-tag">Rainfall Shower</span>
-              <span class="hp-room-feature-tag">Daily Housekeeping</span>
+              <span class="hp-room-feature-tag">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path></svg>
+                Silent AC
+              </span>
+              <span class="hp-room-feature-tag">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                Work Desk
+              </span>
+              <span class="hp-room-feature-tag">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h7a4 4 0 0 1 4 4v2"></path><path d="M14 10l3 3m-6-3l3 3"></path><circle cx="15" cy="18" r="1"></circle><circle cx="18" cy="21" r="1"></circle><circle cx="12" cy="21" r="1"></circle></svg>
+                Rainfall Shower
+              </span>
+              <span class="hp-room-feature-tag">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 5 5.6.8-4 4 1 5.6-5-2.6-5 2.6 1-5.6-4-4 5.6-.8z"></path></svg>
+                Daily Housekeeping
+              </span>
             </div>
             <div class="hp-room-actions">
-              <a href="<?php echo kc_url('reserve'); ?>?room=golden-nest" class="btn-gold">Book Now</a>
-              <a href="<?php echo kc_url('hospitality'); ?>#rooms" class="btn btn-outline-primary">Details</a>
+              <a href="<?php echo kc_url('reserve'); ?>?room=golden-nest" class="hp-btn-reserve-gold">
+                <span>Book Now</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="<?php echo kc_url('hospitality'); ?>#rooms" class="hp-btn-details-ghost">
+                <span>Details</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
             </div>
           </div>
-        </div>
+        </article>
 
         <!-- Room 3: Deluxe Room (UK Room) -->
-        <div class="hp-room-card">
+        <article class="hp-room-card hp-room-card-premium" data-room-id="deluxe-uk">
           <div class="hp-room-thumb-wrap">
             <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/deluxe-room.jpg' ); ?>" alt="Deluxe Room (UK Room) at Kelvin Cameo Resort" class="hp-room-thumb" loading="lazy">
-            <span class="hp-room-tag" style="background:#ea580c;">Executive Top Pick</span>
-            <div class="hp-room-price-badge">₦25,000 &ndash; ₦45,000 <span style="font-size:0.75rem; font-weight:600; color:#cbd5e1;">/ night</span></div>
+            <div class="hp-room-scrim"></div>
+            <div class="hp-room-top-tags">
+              <span class="hp-room-pill-tag hp-tag-executive">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>
+                Executive Top Pick
+              </span>
+              <span class="hp-room-meta-chip">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#f59e0b"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+                VIP Favorite
+              </span>
+            </div>
+            <div class="hp-room-price-badge">
+              <span class="hp-price-amount">₦25,000 &ndash; ₦45,000</span>
+              <span class="hp-price-unit">/ night</span>
+            </div>
           </div>
           <div class="hp-room-body">
-            <h3>Deluxe Room (UK Room)</h3>
-            <p>Spacious executive suite with luxury queen/king bedding, compact refrigerator, premium toiletries, and priority room service.</p>
+            <div class="hp-room-header">
+              <span class="hp-room-category-label">Flagship &bull; Executive Comfort</span>
+              <h3 class="hp-room-title">Deluxe Room (UK Room)</h3>
+            </div>
+            <p class="hp-room-desc">Spacious executive suite with luxury queen/king bedding, compact refrigerator, premium toiletries, and priority room service.</p>
             <div class="hp-room-features">
-              <span class="hp-room-feature-tag">King Bed</span>
-              <span class="hp-room-feature-tag">Minibar Fridge</span>
-              <span class="hp-room-feature-tag">High-Speed Wi-Fi</span>
-              <span class="hp-room-feature-tag">Room Service</span>
+              <span class="hp-room-feature-tag">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v5"></path></svg>
+                King Bed
+              </span>
+              <span class="hp-room-feature-tag">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="4" y1="10" x2="20" y2="10"></line><line x1="8" y1="6" x2="8" y2="8"></line><line x1="8" y1="14" x2="8" y2="16"></line></svg>
+                Minibar Fridge
+              </span>
+              <span class="hp-room-feature-tag">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
+                High-Speed Wi-Fi
+              </span>
+              <span class="hp-room-feature-tag">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                Room Service
+              </span>
             </div>
             <div class="hp-room-actions">
-              <a href="<?php echo kc_url('reserve'); ?>?room=deluxe-uk" class="btn-gold">Book Now</a>
-              <a href="<?php echo kc_url('hospitality'); ?>#rooms" class="btn btn-outline-primary">Details</a>
+              <a href="<?php echo kc_url('reserve'); ?>?room=deluxe-uk" class="hp-btn-reserve-gold">
+                <span>Book Now</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="<?php echo kc_url('hospitality'); ?>#rooms" class="hp-btn-details-ghost">
+                <span>Details</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
             </div>
           </div>
-        </div>
+        </article>
 
       </div>
 
-      <!-- Additional Rooms Strip -->
-      <div style="margin-top: 2rem; background: #ffffff; border-radius: 16px; padding: 1.5rem 2rem; border: 1px solid #e2e8f0; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
-        <div>
-          <h4 style="font-family:var(--font-display); font-size:1.15rem; font-weight:800; color:var(--cobalt-950); margin:0 0 0.25rem 0;">Looking for VIP Suites or 3-Bedroom Serviced Apartments?</h4>
-          <p style="font-size:0.875rem; color:#64748b; margin:0;">
+      <!-- Additional Rooms VIP Grand Showcase Strip -->
+      <div class="hp-vip-banner-box">
+        <div class="hp-vip-banner-content">
+          <div class="hp-vip-badge-row">
+            <span class="hp-vip-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>
+              Presidential &bull; Extended Stay Portfolio
+            </span>
+          </div>
+          <h3 class="hp-vip-title">Looking for VIP Suites or 3-Bedroom Serviced Apartments?</h3>
+          <p class="hp-vip-subtitle">
             We offer Royal Treat (₦50k), Executive VIP Suites (₦60k), and fully-furnished 3-Bedroom Luxury Apartments (₦160,000 / night).
           </p>
+          <div class="hp-vip-tier-pills">
+            <span class="hp-vip-pill"><strong>Royal Treat</strong> &bull; ₦50,000 / nt</span>
+            <span class="hp-vip-pill"><strong>Executive VIP Suites</strong> &bull; ₦60,000 / nt</span>
+            <span class="hp-vip-pill hp-vip-pill-highlight"><strong>3-Bed Luxury Apartments</strong> &bull; ₦160,000 / nt</span>
+          </div>
         </div>
-        <div style="display:flex; gap:0.75rem;">
-          <a href="<?php echo kc_url('hospitality'); ?>#rooms" class="btn btn-outline-primary btn-sm">
-            View All 10 Room Tiers &rarr;
+        <div class="hp-vip-actions">
+          <a href="<?php echo kc_url('hospitality'); ?>#rooms" class="hp-vip-btn-outline">
+            <span>View All 10 Room Tiers</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
-          <a href="<?php echo kc_url('reserve'); ?>" class="btn-gold btn-sm" style="border-radius:8px;">
-            Reserve Apartment / Suite
+          <a href="<?php echo kc_url('reserve'); ?>" class="hp-vip-btn-gold">
+            <span>Reserve Apartment / Suite</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
           </a>
         </div>
       </div>
@@ -1179,57 +1948,142 @@ get_header();
   <!-- ====================================================================
        RESORT LIFESTYLE — Sports Bar, Games, Shisha & Swimming Pool
        ==================================================================== -->
-  <section class="hp-lifestyle-strip">
-    <div class="container container-wide">
-      <div class="hp-section-head">
-        <span class="rc-badge" style="background:rgba(245,158,11,0.15); color:#fef08a; border-color:rgba(245,158,11,0.35); margin-bottom:0.75rem; display:inline-flex;">Leisure &bull; Recreation &bull; Nightlife</span>
-        <h2 class="hp-section-title" style="color:#ffffff;">The Resort Lifestyle Experience</h2>
-        <p class="hp-section-sub" style="color:#cbd5e1;">Unwind with friends, watch premier football clashes, shoot snooker, enjoy smooth shisha, and swim in our crystal blue pool.</p>
+  <section class="hp-lifestyle-strip" id="resortLifestyle">
+    <div class="hp-lifestyle-bg-glow" aria-hidden="true"></div>
+    <div class="container container-wide" style="position:relative; z-index:2;">
+      <div class="hp-section-head text-center">
+        <span class="rc-badge hp-lifestyle-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          Leisure &bull; Recreation &bull; Nightlife
+        </span>
+        <h2 class="hp-section-title hp-lifestyle-main-title">The Resort Lifestyle Experience</h2>
+        <div class="hp-lifestyle-gold-divider"></div>
+        <p class="hp-section-sub hp-lifestyle-subtitle">
+          Unwind with friends, watch premier football clashes, shoot snooker, enjoy smooth shisha, and swim in our crystal blue pool.
+        </p>
       </div>
 
       <div class="hp-lifestyle-grid">
         
         <!-- Lifestyle 1: Sports Bar & Games -->
-        <div class="hp-lifestyle-card">
+        <article class="hp-lifestyle-card hp-lifestyle-card-premium">
           <div class="hp-lifestyle-thumb-wrap">
             <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/lounge-pool-table.jpg' ); ?>" alt="VIP Sports Bar & Snooker Table" class="hp-lifestyle-thumb" loading="lazy">
+            <div class="hp-lifestyle-scrim"></div>
+            <div class="hp-lifestyle-top-tags">
+              <span class="hp-lifestyle-chip hp-chip-amber">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="4" fill="#030c1a"></circle></svg>
+                Sports Bar &amp; Games
+              </span>
+              <span class="hp-lifestyle-pill-meta">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                Open Daily
+              </span>
+            </div>
           </div>
           <div class="hp-lifestyle-body">
-            <h4>VIP Sports Bar, Snooker &amp; Games</h4>
-            <p>Equipped with tournament-grade snooker tables, competitive table tennis, ultra-HD match screening, and a dedicated restocked beverage lounge.</p>
-            <a href="<?php echo kc_url('bar'); ?>" class="btn btn-outline-white btn-sm" style="width:100%; justify-content:center;">
-              Explore Bar &amp; Games &rarr;
+            <h4 class="hp-lifestyle-title">VIP Sports Bar, Snooker &amp; Games</h4>
+            <p class="hp-lifestyle-desc">Equipped with tournament-grade snooker tables, competitive table tennis, ultra-HD match screening, and a dedicated restocked beverage lounge.</p>
+            <div class="hp-lifestyle-highlights">
+              <span class="hp-lifestyle-hl-item">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="color:var(--gold-400);"><path d="M12 2l2.4 5 5.6.8-4 4 1 5.6-5-2.6-5 2.6 1-5.6-4-4 5.6-.8z"/></svg>
+                Tournament Snooker
+              </span>
+              <span class="hp-lifestyle-hl-item">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="color:var(--gold-400);"><path d="M12 2l2.4 5 5.6.8-4 4 1 5.6-5-2.6-5 2.6 1-5.6-4-4 5.6-.8z"/></svg>
+                Ultra-HD Match Screening
+              </span>
+              <span class="hp-lifestyle-hl-item">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="color:var(--gold-400);"><path d="M12 2l2.4 5 5.6.8-4 4 1 5.6-5-2.6-5 2.6 1-5.6-4-4 5.6-.8z"/></svg>
+                Chilled Drinks &amp; Draught
+              </span>
+            </div>
+            <a href="<?php echo kc_url('bar'); ?>" class="hp-lifestyle-btn">
+              <span>Explore Bar &amp; Games</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </a>
           </div>
-        </div>
+        </article>
 
         <!-- Lifestyle 2: Shisha & Cocktails Lounge -->
-        <div class="hp-lifestyle-card">
+        <article class="hp-lifestyle-card hp-lifestyle-card-premium">
           <div class="hp-lifestyle-thumb-wrap">
             <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/bar-counter.jpg' ); ?>" alt="Kelvin Cameo Bar Counter" class="hp-lifestyle-thumb" loading="lazy">
+            <div class="hp-lifestyle-scrim"></div>
+            <div class="hp-lifestyle-top-tags">
+              <span class="hp-lifestyle-chip hp-chip-purple">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3"></path></svg>
+                VIP Lounge &amp; Shisha
+              </span>
+              <span class="hp-lifestyle-pill-meta">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path></svg>
+                Chilled AC
+              </span>
+            </div>
           </div>
           <div class="hp-lifestyle-body">
-            <h4>Premium Shisha &amp; Cocktail Bar</h4>
-            <p>Smooth exotic shisha flavors, chilled craft beers, premium spirits, fine wines, and custom cocktails served in an air-conditioned VIP lounge.</p>
-            <a href="<?php echo kc_url('bar'); ?>" class="btn btn-outline-white btn-sm" style="width:100%; justify-content:center;">
-              View Drink &amp; Shisha Menu &rarr;
+            <h4 class="hp-lifestyle-title">Premium Shisha &amp; Cocktail Bar</h4>
+            <p class="hp-lifestyle-desc">Smooth exotic shisha flavors, chilled craft beers, premium spirits, fine wines, and custom cocktails served in an air-conditioned VIP lounge.</p>
+            <div class="hp-lifestyle-highlights">
+              <span class="hp-lifestyle-hl-item">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="color:var(--gold-400);"><path d="M12 2l2.4 5 5.6.8-4 4 1 5.6-5-2.6-5 2.6 1-5.6-4-4 5.6-.8z"/></svg>
+                Exotic Shisha Flavors
+              </span>
+              <span class="hp-lifestyle-hl-item">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="color:var(--gold-400);"><path d="M12 2l2.4 5 5.6.8-4 4 1 5.6-5-2.6-5 2.6 1-5.6-4-4 5.6-.8z"/></svg>
+                Signature Mixology
+              </span>
+              <span class="hp-lifestyle-hl-item">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="color:var(--gold-400);"><path d="M12 2l2.4 5 5.6.8-4 4 1 5.6-5-2.6-5 2.6 1-5.6-4-4 5.6-.8z"/></svg>
+                VIP AC Seating Booths
+              </span>
+            </div>
+            <a href="<?php echo kc_url('bar'); ?>" class="hp-lifestyle-btn">
+              <span>View Drink &amp; Shisha Menu</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </a>
           </div>
-        </div>
+        </article>
 
         <!-- Lifestyle 3: Swimming Pool & Bush Bar -->
-        <div class="hp-lifestyle-card">
+        <article class="hp-lifestyle-card hp-lifestyle-card-premium">
           <div class="hp-lifestyle-thumb-wrap">
             <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/swimming-pool-sunny.jpg' ); ?>" alt="Olympic Swimming Pool at Kelvin Cameo Resort" class="hp-lifestyle-thumb" loading="lazy">
+            <div class="hp-lifestyle-scrim"></div>
+            <div class="hp-lifestyle-top-tags">
+              <span class="hp-lifestyle-chip hp-chip-cyan">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M2 17h20M2 7h20"></path></svg>
+                Poolside &amp; Bush Bar
+              </span>
+              <span class="hp-lifestyle-pill-meta">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#f59e0b"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                ₦3,000 Day Pass
+              </span>
+            </div>
           </div>
           <div class="hp-lifestyle-body">
-            <h4>Olympic Swimming Pool &amp; Bush Bar</h4>
-            <p>Crystal-clean waters with ₦3,000 day passes, private sun cabanas, outdoor poolside grills, suya skewers, and fresh pepper soup.</p>
-            <a href="<?php echo kc_url('hospitality'); ?>#amenities" class="btn btn-outline-white btn-sm" style="width:100%; justify-content:center;">
-              Pool &amp; Dining Details &rarr;
+            <h4 class="hp-lifestyle-title">Olympic Swimming Pool &amp; Bush Bar</h4>
+            <p class="hp-lifestyle-desc">Crystal-clean waters with ₦3,000 day passes, private sun cabanas, outdoor poolside grills, suya skewers, and fresh pepper soup.</p>
+            <div class="hp-lifestyle-highlights">
+              <span class="hp-lifestyle-hl-item">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="color:var(--gold-400);"><path d="M12 2l2.4 5 5.6.8-4 4 1 5.6-5-2.6-5 2.6 1-5.6-4-4 5.6-.8z"/></svg>
+                Crystal Treated Waters
+              </span>
+              <span class="hp-lifestyle-hl-item">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="color:var(--gold-400);"><path d="M12 2l2.4 5 5.6.8-4 4 1 5.6-5-2.6-5 2.6 1-5.6-4-4 5.6-.8z"/></svg>
+                Outdoor Suya &amp; Pepper Soup
+              </span>
+              <span class="hp-lifestyle-hl-item">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="color:var(--gold-400);"><path d="M12 2l2.4 5 5.6.8-4 4 1 5.6-5-2.6-5 2.6 1-5.6-4-4 5.6-.8z"/></svg>
+                Private Sun Cabanas
+              </span>
+            </div>
+            <a href="<?php echo kc_url('hospitality'); ?>#amenities" class="hp-lifestyle-btn">
+              <span>Pool &amp; Dining Details</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </a>
           </div>
-        </div>
+        </article>
 
       </div>
     </div>
