@@ -1920,7 +1920,7 @@ function kc_hotel_ajax_get_sales_analytics() {
 
     $where_staff = "";
     if (!empty($staff_filter) && strtolower($staff_filter) !== 'all') {
-        $where_staff = $wpdb->prepare(" AND receptionist_name = %s", $staff_filter);
+        $where_staff = $wpdb->prepare(" AND LOWER(receptionist_name) = LOWER(%s)", $staff_filter);
     }
 
     $bookings = $wpdb->get_results(
@@ -1941,13 +1941,23 @@ function kc_hotel_ajax_get_sales_analytics() {
         ARRAY_A
     );
 
-    // Gather all known staff names from bookings and shifts for the filter dropdown
+    // Gather all known staff names from bookings and shifts for the filter dropdown (deduplicated case-insensitively)
     $booking_staff_names = $wpdb->get_col("SELECT DISTINCT receptionist_name FROM $table_bookings WHERE receptionist_name IS NOT NULL AND receptionist_name != '' AND created_at >= '2026-09-27 00:00:00'") ?: [];
     $shift_staff_names = [];
     if ($wpdb->get_var("SHOW TABLES LIKE '$table_shifts'") === $table_shifts) {
         $shift_staff_names = $wpdb->get_col("SELECT DISTINCT receptionist_name FROM $table_shifts WHERE receptionist_name IS NOT NULL AND receptionist_name != ''") ?: [];
     }
-    $all_staff_names = array_values(array_unique(array_filter(array_merge(['Front Desk Staff'], $booking_staff_names, $shift_staff_names))));
+    $raw_staff_pool = array_filter(array_merge(['Front Desk Staff'], $booking_staff_names, $shift_staff_names));
+    $staff_map_ci = [];
+    foreach ($raw_staff_pool as $nm) {
+        $clean_nm = trim($nm);
+        if ($clean_nm === '') continue;
+        $k = strtolower($clean_nm);
+        if (!isset($staff_map_ci[$k])) {
+            $staff_map_ci[$k] = ucwords(strtolower($clean_nm));
+        }
+    }
+    $all_staff_names = array_values($staff_map_ci);
 
     // Fetch active shift and historical shifts for the selected timeline
     $active_shift = kc_hotel_get_or_create_active_shift();
@@ -2022,10 +2032,12 @@ function kc_hotel_ajax_get_sales_analytics() {
         if ($meth === 'zcash' || $meth === 'easywallet') $meth = 'zcash_easywallet';
         if ($meth === 'ngo' || strpos($meth, 'cccrn') !== false) $meth = 'ngo_cccrn';
 
-        $staff = trim($b['receptionist_name'] ?? '');
-        if (empty($staff)) {
-            $staff = 'Front Desk Staff';
+        $staff_raw = trim($b['receptionist_name'] ?? '');
+        if (empty($staff_raw)) {
+            $staff_raw = 'Front Desk Staff';
         }
+        $staff = ucwords(strtolower($staff_raw));
+        $staff_key = strtolower($staff_raw);
 
         $gross_sales += $tot;
         $collected += $paid;
@@ -2051,12 +2063,12 @@ function kc_hotel_ajax_get_sales_analytics() {
             $by_method[$meth]['count']++;
         }
 
-        // Aggregate per Staff on Shift
-        if (!isset($by_staff[$staff])) {
-            $by_staff[$staff] = [
+        // Aggregate per Staff on Shift (case-insensitive key)
+        if (!isset($by_staff[$staff_key])) {
+            $by_staff[$staff_key] = [
                 'staff_name'      => $staff,
-                'shift_role'      => ($active_shift && strcasecmp($active_shift['receptionist_name'], $staff) === 0) ? 'Active Duty Staff' : 'Shift Receptionist',
-                'shift_code'      => ($active_shift && strcasecmp($active_shift['receptionist_name'], $staff) === 0) ? $active_shift['shift_code'] : 'SHIFT-ROSTER',
+                'shift_role'      => ($active_shift && strcasecmp($active_shift['receptionist_name'], $staff_raw) === 0) ? 'Active Duty Staff' : 'Shift Receptionist',
+                'shift_code'      => ($active_shift && strcasecmp($active_shift['receptionist_name'], $staff_raw) === 0) ? $active_shift['shift_code'] : 'SHIFT-ROSTER',
                 'bookings_count'  => 0,
                 'nights_count'    => 0,
                 'gross_billed'    => 0.0,
@@ -2071,30 +2083,30 @@ function kc_hotel_ajax_get_sales_analytics() {
                 'rooms'           => []
             ];
         }
-        $by_staff[$staff]['bookings_count']++;
-        $by_staff[$staff]['nights_count'] += $nights;
-        $by_staff[$staff]['gross_billed'] += $tot;
-        $by_staff[$staff]['total_collected'] += $paid;
-        $by_staff[$staff]['balance_due'] += $bal;
+        $by_staff[$staff_key]['bookings_count']++;
+        $by_staff[$staff_key]['nights_count'] += $nights;
+        $by_staff[$staff_key]['gross_billed'] += $tot;
+        $by_staff[$staff_key]['total_collected'] += $paid;
+        $by_staff[$staff_key]['balance_due'] += $bal;
 
         if ($meth === 'cash') {
-            $by_staff[$staff]['cash_amount'] += $paid;
+            $by_staff[$staff_key]['cash_amount'] += $paid;
         } elseif ($meth === 'pos') {
-            $by_staff[$staff]['pos_amount'] += $paid;
+            $by_staff[$staff_key]['pos_amount'] += $paid;
         } elseif ($meth === 'transfer' || $meth === 'zcash_easywallet') {
-            $by_staff[$staff]['transfer_amount'] += $paid;
+            $by_staff[$staff_key]['transfer_amount'] += $paid;
         } else {
-            $by_staff[$staff]['other_amount'] += $paid;
+            $by_staff[$staff_key]['other_amount'] += $paid;
         }
 
-        if ($b['created_at'] < $by_staff[$staff]['first_seen']) {
-            $by_staff[$staff]['first_seen'] = $b['created_at'];
+        if ($b['created_at'] < $by_staff[$staff_key]['first_seen']) {
+            $by_staff[$staff_key]['first_seen'] = $b['created_at'];
         }
-        if ($b['created_at'] > $by_staff[$staff]['last_seen']) {
-            $by_staff[$staff]['last_seen'] = $b['created_at'];
+        if ($b['created_at'] > $by_staff[$staff_key]['last_seen']) {
+            $by_staff[$staff_key]['last_seen'] = $b['created_at'];
         }
-        if (!in_array($b['room_number'], $by_staff[$staff]['rooms'])) {
-            $by_staff[$staff]['rooms'][] = $b['room_number'];
+        if (!in_array($b['room_number'], $by_staff[$staff_key]['rooms'])) {
+            $by_staff[$staff_key]['rooms'][] = $b['room_number'];
         }
 
         $csv_rows[] = [

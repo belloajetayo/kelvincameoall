@@ -4598,7 +4598,9 @@ $reserve_url = home_url('/reserve/');
             staffTbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 18px; color: var(--kc-slate-400);">No staff shift transactions recorded for this timeline.</td></tr>`;
           } else {
             staffTbody.innerHTML = staffList.map(st => {
-              const roomsStr = Array.isArray(st.rooms_list) && st.rooms_list.length > 0 ? st.rooms_list.join(', ') : '—';
+              const roomsStr = (typeof st.rooms_list === 'string' && st.rooms_list.trim() !== '')
+                ? st.rooms_list
+                : (Array.isArray(st.rooms) && st.rooms.length > 0 ? st.rooms.join(', ') : '—');
               return `
                 <tr>
                   <td><strong style="color: var(--kc-slate-900);">👤 ${st.staff_name}</strong></td>
@@ -4936,7 +4938,9 @@ $reserve_url = home_url('/reserve/');
               totPos += Number(st.pos_amount || 0);
               totTrf += Number(st.transfer_amount || 0) + Number(st.other_amount || 0);
               totCol += Number(st.total_collected || 0);
-              const roomsStr = Array.isArray(st.rooms_list) && st.rooms_list.length > 0 ? st.rooms_list.join(', ') : '—';
+              const roomsStr = (typeof st.rooms_list === 'string' && st.rooms_list.trim() !== '')
+                ? st.rooms_list
+                : (Array.isArray(st.rooms) && st.rooms.length > 0 ? st.rooms.join(', ') : '—');
               const trfPlusOther = Number(st.transfer_amount || 0) + Number(st.other_amount || 0);
               return `
                 <tr style="border-bottom: 1px solid #e2e8f0; ${idx % 2 === 1 ? 'background: #f8fafc;' : ''}">
