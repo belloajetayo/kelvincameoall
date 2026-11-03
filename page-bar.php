@@ -2098,71 +2098,211 @@ $site_home = home_url('/');
   </div>
 
   <!-- ==============================================================
-       PRINT AREA 2: OFFICIAL A4 MONTHLY AUDIT REPORT
+       PRINT AREA 2: OFFICIAL A4 MONTHLY AUDIT REPORT & STATEMENT
        ============================================================== -->
-  <div id="printableMonthlyArea">
-    <div style="text-align:center; border-bottom:2px solid #000; padding-bottom:10px; margin-bottom:15px;">
-      <h2 style="font-size:20px; font-weight:800; text-transform:uppercase; margin-bottom:4px;">KELVIN CAMEO RESORT &amp; LOUNGE</h2>
-      <div style="font-size:12px; font-weight:bold;">RC: 1613032 | Suleja, Niger State (Abuja Corridor)</div>
-      <h3 style="font-size:15px; font-weight:800; margin-top:8px; text-decoration:underline;" id="printAuditHeaderTitle">
-        MONTHLY BEVERAGE INVENTORY &amp; REVENUE AUDIT REPORT - OCTOBER 2026
-      </h3>
-      <div style="font-size:11px; margin-top:4px;" id="printAuditGeneratedDate">Generated: 15 October 2026</div>
-    </div>
-
-    <!-- Summary Box -->
-    <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:10px; border:1px solid #000; padding:10px; margin-bottom:15px; font-size:12px;">
-      <div><strong>TOTAL REVENUE:</strong><br><span id="printAuditTotalRev" style="font-size:14px; font-weight:bold;">₦0</span></div>
-      <div><strong>POS CARD:</strong><br><span id="printAuditPosRev">₦0</span></div>
-      <div><strong>CASH:</strong><br><span id="printAuditCashRev">₦0</span></div>
-      <div><strong>BANK TRANSFER:</strong><br><span id="printAuditTransferRev">₦0</span></div>
-    </div>
-
-    <!-- Table -->
-    <table style="width:100%; border-collapse:collapse; font-size:11px; margin-bottom:20px;" border="1">
-      <thead>
-        <tr style="background:#eee;">
-          <th style="padding:4px;">#</th>
-          <th style="text-align:left; padding:4px;">Product Name</th>
-          <th style="padding:4px;">Category</th>
-          <th style="padding:4px;">Price (₦)</th>
-          <th style="padding:4px;">Opening</th>
-          <th style="padding:4px;">New Stock</th>
-          <th style="padding:4px;">Sold Qty</th>
-          <th style="padding:4px;">Breakage</th>
-          <th style="padding:4px;">Closing Stock</th>
-          <th style="padding:4px; text-align:right;">Month Revenue (₦)</th>
-        </tr>
-      </thead>
-      <tbody id="printAuditTableBody"></tbody>
-      <tfoot>
-        <tr style="font-weight:bold; background:#eee;">
-          <td colspan="6" style="text-align:right; padding:4px;">TOTAL:</td>
-          <td id="printAuditTotalSold" style="text-align:center; padding:4px;">0</td>
-          <td colspan="2">-</td>
-          <td id="printAuditGrandTotal" style="text-align:right; padding:4px;">₦0</td>
-        </tr>
-      </tfoot>
-    </table>
-
-    <!-- Signature Audit Box -->
-    <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; margin-top:40px; font-size:11px;">
-      <div style="border-top:1px solid #000; padding-top:6px; text-align:center;">
-        <strong>PREPARED BY:</strong><br>
-        <span style="font-size:10px;">Bar Supervisor / Attendant on Duty</span><br><br>
-        Signature &amp; Date: ___________________
+  <div id="printableMonthlyArea" class="statement-sheet" style="background:#ffffff; color:#0f172a; border-radius:8px; padding:32px 36px; box-shadow:0 4px 20px rgba(0,0,0,0.08); border:1px solid #e2e8f0; font-family:'Plus Jakarta Sans', Arial, sans-serif;">
+    
+    <!-- STATEMENT HEADER -->
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid #0f172a; padding-bottom:16px; margin-bottom:18px;">
+      <div>
+        <div style="font-size:20px; font-weight:900; color:#040914; letter-spacing:-0.5px; text-transform:uppercase;">
+          Kelvin Cameo Resort &amp; Lounge
+        </div>
+        <div style="font-size:12px; font-weight:700; color:#b89327; margin-top:2px;">
+          VIP SPORTS BAR &amp; BEVERAGE DESK &bull; OFFICIAL FINANCIAL &amp; SHIFT AUDIT STATEMENT
+        </div>
+        <div style="font-size:11px; color:#475569; margin-top:4px; line-height:1.4;">
+          CAC Corporate Incorporation RC: <strong>1613032</strong> &bull; Suleja–Abuja Expressway Corridor, Niger State<br>
+          Official Bar Desk &bull; Web: kelvincameo.com/bar/ &bull; Hotline: +234 805 555 8197
+        </div>
       </div>
-      <div style="border-top:1px solid #000; padding-top:6px; text-align:center;">
-        <strong>VERIFIED BY:</strong><br>
-        <span style="font-size:10px;">Internal Auditor / Accountant</span><br><br>
-        Signature &amp; Date: ___________________
-      </div>
-      <div style="border-top:1px solid #000; padding-top:6px; text-align:center;">
-        <strong>APPROVED BY:</strong><br>
-        <span style="font-size:10px;">Managing Director / Board</span><br><br>
-        Signature &amp; Date: ___________________
+      <div style="text-align:right;">
+        <div style="display:inline-block; background:#040914; color:#d4af37; font-size:11px; font-weight:800; padding:4px 10px; border-radius:4px; letter-spacing:0.5px;">
+          OFFICIAL AUDIT STATEMENT
+        </div>
+        <div style="font-size:11px; font-weight:700; color:#0f172a; margin-top:6px;">
+          Ref: <span id="printAuditRefCode">KC-BAR-STMT-20261103</span>
+        </div>
+        <div style="font-size:11px; color:#64748b; margin-top:2px;">
+          Printed: <span id="printAuditGeneratedDate">--</span>
+        </div>
+        <div style="font-size:11px; color:#64748b; margin-top:2px;">
+          Staff on Shift: <strong id="printAuditStaffName" style="color:#0f172a;">Bar Attendant</strong>
+        </div>
+        <div style="font-size:10.5px; color:#0b4ea2; font-weight:700; margin-top:1px;" id="printAuditShiftRosterDisplay">
+          Monthly Cumulative Roster
+        </div>
       </div>
     </div>
+
+    <!-- PERIOD, TIMELINE & SHIFT METADATA BANNER -->
+    <div style="background:#f1f5f9; border-left:4px solid #d4af37; padding:10px 14px; margin-bottom:20px; display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:10px; font-size:11.5px;">
+      <div>
+        <span style="color:#64748b; display:block; font-size:10px; text-transform:uppercase; font-weight:700;">Statement Timeline</span>
+        <strong id="printAuditPeriodLabel" style="font-weight:800; color:#0f172a;">October 2026</strong>
+      </div>
+      <div>
+        <span style="color:#64748b; display:block; font-size:10px; text-transform:uppercase; font-weight:700;">Date Window Covered</span>
+        <strong id="printAuditDateWindowText" style="font-weight:800; color:#0f172a;">01 Oct 2026 – 31 Oct 2026</strong>
+      </div>
+      <div>
+        <span style="color:#64748b; display:block; font-size:10px; text-transform:uppercase; font-weight:700;">Staff on Shift Roster</span>
+        <strong id="printAuditBannerStaffRoster" style="font-weight:800; color:#0b4ea2;">Bar Team</strong>
+      </div>
+      <div>
+        <span style="color:#64748b; display:block; font-size:10px; text-transform:uppercase; font-weight:700;">Total Orders &amp; Bottles Sold</span>
+        <strong id="printAuditTotalOrdersText" style="font-weight:800; color:#059669;">0 Orders &bull; 0 Bottles &bull; VERIFIED</strong>
+      </div>
+    </div>
+
+    <!-- FINANCIAL REVENUE KPI SUMMARY -->
+    <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:12px; margin-bottom:22px;">
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:12px 14px;">
+        <div style="font-size:10px; font-weight:700; color:#64748b; text-transform:uppercase;">Total Billed (Gross)</div>
+        <div style="font-size:18px; font-weight:900; color:#040914; margin-top:4px;" id="printAuditTotalRev">₦0.00</div>
+        <div style="font-size:10px; color:#94a3b8; margin-top:2px;">Gross Beverage Turnover</div>
+      </div>
+
+      <div style="background:#f0fdf4; border:1.5px solid #86efac; border-radius:6px; padding:12px 14px;">
+        <div style="font-size:10px; font-weight:700; color:#166534; text-transform:uppercase;">Total Inflow Collected</div>
+        <div style="font-size:18px; font-weight:900; color:#15803d; margin-top:4px;" id="printAuditCollectedRev">₦0.00</div>
+        <div style="font-size:10px; color:#166534; margin-top:2px;">Settled POS / Cash / Transfer</div>
+      </div>
+
+      <div style="background:#eff6ff; border:1.5px solid #93c5fd; border-radius:6px; padding:12px 14px;">
+        <div style="font-size:10px; font-weight:700; color:#1e40af; text-transform:uppercase;">Room Charges / Credit</div>
+        <div style="font-size:18px; font-weight:900; color:#1d4ed8; margin-top:4px;" id="printAuditRoomChargeRev">₦0.00</div>
+        <div style="font-size:10px; color:#1e40af; margin-top:2px;">Guest Room Folio Transfer</div>
+      </div>
+
+      <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:6px; padding:12px 14px;">
+        <div style="font-size:10px; font-weight:700; color:#64748b; text-transform:uppercase;">Beverage Sales Index</div>
+        <div style="font-size:16px; font-weight:900; color:#040914; margin-top:4px;" id="printAuditBottlesIndex">0 Bottles / Cans</div>
+        <div style="font-size:10px; color:#64748b; margin-top:2px;" id="printAuditAvgOrder">Avg: ₦0.00 / order</div>
+      </div>
+    </div>
+
+    <!-- STAFF ON SHIFT & BAR ATTENDANT BREAKDOWN -->
+    <div style="margin-bottom:22px;" id="printAuditStaffSection">
+      <div style="font-size:12px; font-weight:800; text-transform:uppercase; color:#040914; margin-bottom:8px; border-bottom:1px solid #e2e8f0; padding-bottom:4px; display:flex; justify-content:space-between; align-items:center;">
+        <span>Staff on Shift &amp; Bar Attendant Duty Breakdown</span>
+        <span style="font-size:10.5px; color:#475569; font-weight:600;" id="printAuditShiftCountLabel">Bar Roster Shifts</span>
+      </div>
+      <table style="width:100%; border-collapse:collapse; font-size:10.5px;">
+        <thead>
+          <tr style="background:#f1f5f9; border-bottom:1.5px solid #cbd5e1; text-align:left;">
+            <th style="padding:6px 8px;">Staff on Shift</th>
+            <th style="padding:6px 8px; text-align:center;">Shifts</th>
+            <th style="padding:6px 8px; text-align:center;">Orders</th>
+            <th style="padding:6px 8px; text-align:center;">Bottles Sold</th>
+            <th style="padding:6px 8px; text-align:right;">Cash (₦)</th>
+            <th style="padding:6px 8px; text-align:right;">POS (₦)</th>
+            <th style="padding:6px 8px; text-align:right;">Transfer (₦)</th>
+            <th style="padding:6px 8px; text-align:right;">Total Collected (₦)</th>
+          </tr>
+        </thead>
+        <tbody id="printAuditStaffTableBody">
+          <!-- Populated dynamically -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- PAYMENT CHANNEL INFLOW BREAKDOWN -->
+    <div style="margin-bottom:22px;">
+      <div style="font-size:12px; font-weight:800; text-transform:uppercase; color:#040914; margin-bottom:8px; border-bottom:1px solid #e2e8f0; padding-bottom:4px;">
+        Revenue Inflow Breakdown by Payment Channel
+      </div>
+      <div id="printAuditPaymentChannelsGrid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:10px; font-size:11.5px;">
+        <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:6px; padding:10px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong>💳 POS Terminal (Card)</strong>
+            <span style="background:#38bdf8; color:#040914; font-size:9px; font-weight:800; padding:2px 6px; border-radius:3px;">CARD</span>
+          </div>
+          <div style="font-size:15px; font-weight:800; color:#0284c7; margin-top:4px;" id="printAuditPosRev">₦0.00</div>
+          <div style="font-size:10px; color:#64748b; margin-top:2px;">Direct Terminal Settlement</div>
+        </div>
+
+        <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:6px; padding:10px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong>💵 Cash at Counter</strong>
+            <span style="background:#f59e0b; color:#040914; font-size:9px; font-weight:800; padding:2px 6px; border-radius:3px;">CASH</span>
+          </div>
+          <div style="font-size:15px; font-weight:800; color:#b45309; margin-top:4px;" id="printAuditCashRev">₦0.00</div>
+          <div style="font-size:10px; color:#64748b; margin-top:2px;">Physical Vault Cash Drawer</div>
+        </div>
+
+        <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:6px; padding:10px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong>🏦 Direct Bank Transfer</strong>
+            <span style="background:#a855f7; color:#fff; font-size:9px; font-weight:800; padding:2px 6px; border-radius:3px;">TRANSFER</span>
+          </div>
+          <div style="font-size:15px; font-weight:800; color:#7e22ce; margin-top:4px;" id="printAuditTransferRev">₦0.00</div>
+          <div style="font-size:10px; color:#64748b; margin-top:2px;">Zenith Bank (1311320179)</div>
+        </div>
+
+        <div style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:6px; padding:10px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong>🛎️ Room Charge / Post to Room</strong>
+            <span style="background:#64748b; color:#fff; font-size:9px; font-weight:800; padding:2px 6px; border-radius:3px;">ROOM</span>
+          </div>
+          <div style="font-size:15px; font-weight:800; color:#475569; margin-top:4px;" id="printAuditRoomRev">₦0.00</div>
+          <div style="font-size:10px; color:#64748b; margin-top:2px;">Settled at Reception Checkout</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITEMIZED STOCK MOVEMENT & VALUE REALIZED TABLE -->
+    <div style="margin-bottom:24px;">
+      <div style="font-size:12px; font-weight:800; text-transform:uppercase; color:#040914; margin-bottom:8px; border-bottom:1px solid #e2e8f0; padding-bottom:4px;">
+        Itemized Beverage Stock Movement &amp; Revenue Realized
+      </div>
+      <table style="width:100%; border-collapse:collapse; font-size:10.5px;">
+        <thead>
+          <tr style="background:#f1f5f9; border-bottom:1.5px solid #cbd5e1; text-align:left;">
+            <th style="padding:5px 6px; text-align:center;">#</th>
+            <th style="padding:5px 6px;">Product Name</th>
+            <th style="padding:5px 6px; text-align:center;">Category</th>
+            <th style="padding:5px 6px; text-align:right;">Unit Price (₦)</th>
+            <th style="padding:5px 6px; text-align:center;">Opening</th>
+            <th style="padding:5px 6px; text-align:center;">New Stock</th>
+            <th style="padding:5px 6px; text-align:center; font-weight:bold;">Sold Qty</th>
+            <th style="padding:5px 6px; text-align:center;">Breakage</th>
+            <th style="padding:5px 6px; text-align:center; font-weight:bold;">Closing Stock</th>
+            <th style="padding:5px 6px; text-align:right; font-weight:bold;">Month Revenue (₦)</th>
+          </tr>
+        </thead>
+        <tbody id="printAuditTableBody"></tbody>
+        <tfoot>
+          <tr style="font-weight:bold; background:#f1f5f9; border-top:1.5px solid #cbd5e1;">
+            <td colspan="6" style="text-align:right; padding:6px;">TOTAL BEVERAGE MOVEMENT &amp; TURNOVER:</td>
+            <td id="printAuditTotalSold" style="text-align:center; padding:6px; color:#10b981; font-weight:800;">0</td>
+            <td colspan="2">-</td>
+            <td id="printAuditGrandTotal" style="text-align:right; padding:6px; color:#040914; font-weight:900; font-family:'JetBrains Mono';">₦0</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- OFFICIAL SIGNATURES & AUDIT CERTIFICATION (MATCHING RECEPTION) -->
+    <div style="border-top:1.5px solid #cbd5e1; padding-top:18px; margin-top:24px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; font-size:11px;">
+      <div>
+        <div style="color:#64748b; margin-bottom:28px;">Prepared by Staff on Shift:</div>
+        <div style="border-bottom:1px solid #000; padding-bottom:2px; font-weight:800;" id="printAuditSignStaffName">Staff On Duty</div>
+        <div style="color:#64748b; font-size:10px; margin-top:2px;" id="printAuditSignShiftRole">Bar Operations &amp; Inventory</div>
+      </div>
+      <div>
+        <div style="color:#64748b; margin-bottom:28px;">Verified by Internal Auditor / Accountant:</div>
+        <div style="border-bottom:1px solid #000; padding-bottom:2px; font-weight:800;" id="printAuditSignSupervisorName">Internal Auditor / Accountant</div>
+        <div style="color:#64748b; font-size:10px; margin-top:2px;">Finance &amp; Stock Reconciliation</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="display:inline-block; border:2px solid #b89327; border-radius:50%; width:70px; height:70px; padding-top:12px; color:#b89327; font-weight:800; font-size:9px; line-height:1.2;">
+          KELVIN CAMEO<br>RESORT<br>RC 1613032
+        </div>
+        <div style="color:#64748b; font-size:10px; margin-top:4px;">Official Property Seal</div>
+      </div>
+    </div>
+
   </div>
 
   <!-- ==============================================================
@@ -2904,42 +3044,153 @@ $site_home = home_url('/');
       if (!monthlyReportData) return;
 
       const data = monthlyReportData;
-      document.getElementById('printAuditHeaderTitle').textContent = `MONTHLY BEVERAGE INVENTORY & REVENUE AUDIT REPORT - ${data.month_name.toUpperCase()}`;
-      document.getElementById('printAuditGeneratedDate').textContent = `Generated on ${data.generated_at} by ${data.prepared_by}`;
+      const refCode = `KC-BAR-STMT-${data.year || 2026}${String(data.month || 10).padStart(2, '0')}-${Math.floor(1000 + Math.random() * 9000)}`;
+      
+      const elRefCode = document.getElementById('printAuditRefCode');
+      if (elRefCode) elRefCode.textContent = refCode;
 
-      document.getElementById('printAuditTotalRev').textContent = `₦${formatNaira(data.summary?.total_revenue || 0)}`;
-      document.getElementById('printAuditPosRev').textContent = `₦${formatNaira(data.summary?.pos_revenue || 0)}`;
-      document.getElementById('printAuditCashRev').textContent = `₦${formatNaira(data.summary?.cash_revenue || 0)}`;
-      document.getElementById('printAuditTransferRev').textContent = `₦${formatNaira(data.summary?.transfer_revenue || 0)}`;
+      const elGenDate = document.getElementById('printAuditGeneratedDate');
+      if (elGenDate) elGenDate.textContent = data.generated_at || new Date().toLocaleString('en-GB');
 
+      const elPeriodLabel = document.getElementById('printAuditPeriodLabel');
+      if (elPeriodLabel) elPeriodLabel.textContent = data.month_name || 'Current Month';
+
+      const elDateWindow = document.getElementById('printAuditDateWindowText');
+      if (elDateWindow) elDateWindow.textContent = `${data.start_date || '01'} – ${data.end_date || 'End of Month'}`;
+
+      // Staff names on duty
+      let staffNamesList = [];
+      if (data.staff_summary && data.staff_summary.length > 0) {
+        staffNamesList = data.staff_summary.map(s => s.staff_name).filter(Boolean);
+      }
+      if (currentStaffName && !staffNamesList.includes(currentStaffName)) {
+        staffNamesList.unshift(currentStaffName);
+      }
+      const staffRosterString = staffNamesList.length > 0 ? staffNamesList.join(', ') : (currentStaffName || 'Bar Team On Duty');
+
+      const elStaffName = document.getElementById('printAuditStaffName');
+      if (elStaffName) elStaffName.textContent = currentStaffName || staffNamesList[0] || 'Bar Attendant';
+
+      const elBannerStaff = document.getElementById('printAuditBannerStaffRoster');
+      if (elBannerStaff) elBannerStaff.textContent = staffRosterString;
+
+      const elSignStaff = document.getElementById('printAuditSignStaffName');
+      if (elSignStaff) elSignStaff.textContent = currentStaffName || staffNamesList[0] || 'Bar Attendant';
+
+      const totalOrders = data.summary?.total_orders || 0;
+      const totalBottles = data.summary?.total_bottles_sold || 0;
+      const totalRev = Number(data.summary?.total_revenue || 0);
+      const posRev = Number(data.summary?.pos_revenue || 0);
+      const cashRev = Number(data.summary?.cash_revenue || 0);
+      const transferRev = Number(data.summary?.transfer_revenue || 0);
+      const roomRev = Number(data.summary?.room_revenue || 0);
+      const collectedRev = posRev + cashRev + transferRev;
+
+      const elOrdersText = document.getElementById('printAuditTotalOrdersText');
+      if (elOrdersText) elOrdersText.textContent = `${totalOrders} Orders • ${formatNaira(totalBottles)} Bottles Sold • VERIFIED`;
+
+      // Financial KPI Summary Cards
+      const elTotalRev = document.getElementById('printAuditTotalRev');
+      if (elTotalRev) elTotalRev.textContent = `₦${formatNaira(totalRev)}`;
+
+      const elCollectedRev = document.getElementById('printAuditCollectedRev');
+      if (elCollectedRev) elCollectedRev.textContent = `₦${formatNaira(collectedRev)}`;
+
+      const elRoomRev = document.getElementById('printAuditRoomChargeRev');
+      if (elRoomRev) elRoomRev.textContent = `₦${formatNaira(roomRev)}`;
+
+      const elBottlesIndex = document.getElementById('printAuditBottlesIndex');
+      if (elBottlesIndex) elBottlesIndex.textContent = `${formatNaira(totalBottles)} Bottles / Cans`;
+
+      const elAvgOrder = document.getElementById('printAuditAvgOrder');
+      if (elAvgOrder) {
+        const avg = totalOrders > 0 ? Math.round(totalRev / totalOrders) : 0;
+        elAvgOrder.textContent = `Avg: ₦${formatNaira(avg)} / order`;
+      }
+
+      // Payment Channel Cards
+      const elPos = document.getElementById('printAuditPosRev');
+      if (elPos) elPos.textContent = `₦${formatNaira(posRev)}`;
+
+      const elCash = document.getElementById('printAuditCashRev');
+      if (elCash) elCash.textContent = `₦${formatNaira(cashRev)}`;
+
+      const elTrans = document.getElementById('printAuditTransferRev');
+      if (elTrans) elTrans.textContent = `₦${formatNaira(transferRev)}`;
+
+      const elRoomCh = document.getElementById('printAuditRoomRev');
+      if (elRoomCh) elRoomCh.textContent = `₦${formatNaira(roomRev)}`;
+
+      // Render Staff on Shift Table
+      const staffTbody = document.getElementById('printAuditStaffTableBody');
+      if (staffTbody) {
+        staffTbody.innerHTML = '';
+        if (data.staff_summary && data.staff_summary.length > 0) {
+          data.staff_summary.forEach((st, idx) => {
+            const tr = document.createElement('tr');
+            tr.style.borderBottom = '1px solid #e2e8f0';
+            tr.innerHTML = `
+              <td style="padding:6px 8px; font-weight:700;">👤 ${escapeHtml(st.staff_name)}</td>
+              <td style="padding:6px 8px; text-align:center;">${st.shifts_count || 1}</td>
+              <td style="padding:6px 8px; text-align:center;">${st.total_orders || 0}</td>
+              <td style="padding:6px 8px; text-align:center; font-weight:700; color:#059669;">${formatNaira(st.total_bottles || 0)}</td>
+              <td style="padding:6px 8px; text-align:right;">₦${formatNaira(st.cash_revenue || 0)}</td>
+              <td style="padding:6px 8px; text-align:right;">₦${formatNaira(st.pos_revenue || 0)}</td>
+              <td style="padding:6px 8px; text-align:right;">₦${formatNaira(st.transfer_revenue || 0)}</td>
+              <td style="padding:6px 8px; text-align:right; font-weight:800; color:#15803d;">₦${formatNaira(st.total_revenue || 0)}</td>
+            `;
+            staffTbody.appendChild(tr);
+          });
+        } else {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td style="padding:6px 8px; font-weight:700;">👤 ${escapeHtml(currentStaffName || 'Bar Attendant')}</td>
+            <td style="padding:6px 8px; text-align:center;">1</td>
+            <td style="padding:6px 8px; text-align:center;">${totalOrders}</td>
+            <td style="padding:6px 8px; text-align:center; font-weight:700; color:#059669;">${formatNaira(totalBottles)}</td>
+            <td style="padding:6px 8px; text-align:right;">₦${formatNaira(cashRev)}</td>
+            <td style="padding:6px 8px; text-align:right;">₦${formatNaira(posRev)}</td>
+            <td style="padding:6px 8px; text-align:right;">₦${formatNaira(transferRev)}</td>
+            <td style="padding:6px 8px; text-align:right; font-weight:800; color:#15803d;">₦${formatNaira(totalRev)}</td>
+          `;
+          staffTbody.appendChild(tr);
+        }
+      }
+
+      // Render Itemized Stock Table
       const printTbody = document.getElementById('printAuditTableBody');
-      printTbody.innerHTML = '';
+      if (printTbody) {
+        printTbody.innerHTML = '';
+        let calcSold = 0;
+        let calcRev = 0;
 
-      let totalSold = 0;
-      let totalRev = 0;
+        (data.items || []).forEach((it, idx) => {
+          calcSold += it.sold_qty;
+          calcRev  += it.revenue;
 
-      data.items.forEach((it, idx) => {
-        totalSold += it.sold_qty;
-        totalRev  += it.revenue;
+          const tr = document.createElement('tr');
+          tr.style.borderBottom = '1px solid #e2e8f0';
+          tr.innerHTML = `
+            <td style="text-align:center; padding:5px 6px;">${idx + 1}</td>
+            <td style="padding:5px 6px; font-weight:600;">${escapeHtml(it.name)}</td>
+            <td style="text-align:center; padding:5px 6px; text-transform:capitalize; color:#64748b;">${it.category}</td>
+            <td style="text-align:right; padding:5px 6px; font-family:'JetBrains Mono';">₦${formatNaira(it.price)}</td>
+            <td style="text-align:center; padding:5px 6px;">${it.opening_stock}</td>
+            <td style="text-align:center; padding:5px 6px;">${it.new_stock}</td>
+            <td style="text-align:center; padding:5px 6px; font-weight:bold; color:#10b981;">${it.sold_qty}</td>
+            <td style="text-align:center; padding:5px 6px; color:#ef4444;">${it.breakage}</td>
+            <td style="text-align:center; padding:5px 6px; font-weight:bold; color:#b45309;">${it.closing_stock}</td>
+            <td style="text-align:right; padding:5px 6px; font-weight:bold; font-family:'JetBrains Mono';">${it.revenue > 0 ? '₦' + formatNaira(it.revenue) : '-'}</td>
+          `;
+          printTbody.appendChild(tr);
+        });
 
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td style="text-align:center; padding:3px;">${idx + 1}</td>
-          <td style="padding:3px;">${escapeHtml(it.name)}</td>
-          <td style="text-align:center; padding:3px; text-transform:capitalize;">${it.category}</td>
-          <td style="text-align:right; padding:3px;">₦${formatNaira(it.price)}</td>
-          <td style="text-align:center; padding:3px;">${it.opening_stock}</td>
-          <td style="text-align:center; padding:3px;">${it.new_stock}</td>
-          <td style="text-align:center; padding:3px; font-weight:bold;">${it.sold_qty}</td>
-          <td style="text-align:center; padding:3px;">${it.breakage}</td>
-          <td style="text-align:center; padding:3px; font-weight:bold;">${it.closing_stock}</td>
-          <td style="text-align:right; padding:3px; font-weight:bold;">${it.revenue > 0 ? '₦' + formatNaira(it.revenue) : '-'}</td>
-        `;
-        printTbody.appendChild(tr);
-      });
+        const elTotalSold = document.getElementById('printAuditTotalSold');
+        if (elTotalSold) elTotalSold.textContent = formatNaira(calcSold);
 
-      document.getElementById('printAuditTotalSold').textContent = totalSold;
-      document.getElementById('printAuditGrandTotal').textContent = `₦${formatNaira(totalRev)}`;
+        const elGrandTotal = document.getElementById('printAuditGrandTotal');
+        if (elGrandTotal) elGrandTotal.textContent = `₦${formatNaira(calcRev)}`;
+      }
 
       document.body.className = 'printing-monthly';
       window.print();

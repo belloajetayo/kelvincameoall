@@ -1307,15 +1307,79 @@ function kc_bar_ajax_get_monthly_report() {
     });
     $top_5 = array_slice($top_items, 0, 5);
 
+    // 4. Fetch staff on shift summary for this period
+    $table_shifts = $wpdb->prefix . 'kc_bar_shifts';
+    $staff_summary = $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT 
+                staff_name,
+                COUNT(id) as shifts_count,
+                COALESCE(SUM(total_orders), 0) as total_orders,
+                COALESCE(SUM(total_sales), 0) as total_revenue,
+                COALESCE(SUM(pos_sales), 0) as pos_revenue,
+                COALESCE(SUM(cash_sales), 0) as cash_revenue,
+                COALESCE(SUM(transfer_sales), 0) as transfer_revenue,
+                COALESCE(SUM(total_bottles_sold), 0) as total_bottles
+             FROM $table_shifts
+             WHERE start_time BETWEEN %s AND %s
+             GROUP BY staff_name
+             ORDER BY total_revenue DESC",
+            $start_date,
+            $end_date
+        ),
+        ARRAY_A
+    );
+
+    // If no shift records yet in shifts table, fallback group by orders
+    if (empty($staff_summary)) {
+        $staff_summary = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT 
+                    staff_name,
+                    1 as shifts_count,
+                    COUNT(id) as total_orders,
+                    COALESCE(SUM(total_amount), 0) as total_revenue,
+                    COALESCE(SUM(CASE WHEN payment_method = 'pos' THEN total_amount ELSE 0 END), 0) as pos_revenue,
+                    COALESCE(SUM(CASE WHEN payment_method = 'cash' THEN total_amount ELSE 0 END), 0) as cash_revenue,
+                    COALESCE(SUM(CASE WHEN payment_method = 'transfer' THEN total_amount ELSE 0 END), 0) as transfer_revenue,
+                    COALESCE(SUM(total_items), 0) as total_bottles
+                 FROM $table_orders
+                 WHERE created_at BETWEEN %s AND %s AND status = 'completed'
+                 GROUP BY staff_name
+                 ORDER BY total_revenue DESC",
+                $start_date,
+                $end_date
+            ),
+            ARRAY_A
+        );
+    }
+
+    // Recent shift logs for audit
+    $shift_logs = $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT shift_code, staff_name, incoming_staff, start_time, end_time, total_orders, total_sales, pos_sales, cash_sales, transfer_sales, status
+             FROM $table_shifts
+             WHERE start_time BETWEEN %s AND %s
+             ORDER BY id DESC LIMIT 20",
+            $start_date,
+            $end_date
+        ),
+        ARRAY_A
+    );
+
     wp_send_json_success(array(
         'month_name'     => $month_name,
         'year'           => $year,
         'month'          => $month,
+        'start_date'     => date('d M Y', strtotime($start_date)),
+        'end_date'       => date('d M Y', strtotime($end_date)),
         'summary'        => $summary,
         'category_qty'   => $cat_totals,
         'category_rev'   => $cat_rev,
         'top_5'          => $top_5,
         'items'          => $report_items,
+        'staff_summary'  => $staff_summary,
+        'shift_logs'     => $shift_logs,
         'generated_at'   => current_time('d F Y, h:i A'),
         'prepared_by'    => 'Kelvin Cameo Automated Bar Accounting Engine',
     ));
