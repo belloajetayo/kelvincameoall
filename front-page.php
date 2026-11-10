@@ -126,8 +126,8 @@ get_header();
           <div class="hp-input-inner-wrap" style="position: relative;">
             <select id="hpRoomSelect" name="room" required style="width: 100%; height: 50px; background: rgba(255,255,255,0.06); border: 1.5px solid rgba(212,175,55,0.3); border-radius: 10px; color: #ffffff; padding: 0 14px; font-size: 13.5px; font-weight: 600; outline: none; transition: all 0.25s ease;">
               <option value="deluxe-uk" selected style="background: #09172e; color: #ffffff;">Deluxe (UK Room) (₦25,000 - ₦45,000)</option>
-              <option value="love-night" style="background: #09172e; color: #ffffff;">Love Night Room (₦45,000 / Night) &bull; Rooms 401–415</option>
-              <option value="golden-nest" style="background: #09172e; color: #ffffff;">Golden Nest Room (₦55,000 / Night) &bull; Rooms 416–430</option>
+              <option value="love-night" style="background: #09172e; color: #ffffff;">Love Night Room (₦45,000 &ndash; ₦50,000 / Night) &bull; Rooms 401–415</option>
+              <option value="golden-nest" style="background: #09172e; color: #ffffff;">Golden Nest Room (₦55,000 &ndash; ₦60,000 / Night) &bull; Rooms 416–430</option>
               <option value="suite" style="background: #09172e; color: #ffffff;">Executive VIP Suite (₦60,000 / Night) &bull; Rooms 422 &amp; 428</option>
               <option value="apartment" style="background: #09172e; color: #ffffff;">Luxury Serviced Apartment (₦160,000 / Night) &bull; 6 Apartments</option>
             </select>
@@ -1754,7 +1754,7 @@ get_header();
               </span>
             </div>
             <div class="hp-room-price-badge">
-              <span class="hp-price-amount">₦20,000 &ndash; ₦25,000</span>
+              <span class="hp-price-amount">₦45,000 &ndash; ₦50,000</span>
               <span class="hp-price-unit">/ night</span>
             </div>
           </div>
@@ -1811,7 +1811,7 @@ get_header();
               </span>
             </div>
             <div class="hp-room-price-badge">
-              <span class="hp-price-amount">₦20,000 &ndash; ₦25,000</span>
+              <span class="hp-price-amount">₦55,000 &ndash; ₦60,000</span>
               <span class="hp-price-unit">/ night</span>
             </div>
           </div>
