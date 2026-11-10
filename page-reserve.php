@@ -11,6 +11,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+$kc_reserve_qs = !empty($_SERVER['QUERY_STRING']) ? '?' . $_SERVER['QUERY_STRING'] : '';
+wp_safe_redirect(home_url('/hospitality/' . $kc_reserve_qs), 301);
+exit;
+
 $bank_details = function_exists('kc_hotel_get_bank_details') ? kc_hotel_get_bank_details() : [
     'bank_name' => 'ZENITH BANK',
     'account_name' => 'KELVIN CAMEO RESORT',

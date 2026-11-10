@@ -505,6 +505,45 @@ function initRoomBookingModal() {
     });
   });
 
+  // Auto-open room reservation modal on /hospitality/ if ?room= query param is present
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const roomParam = (urlParams.get('room') || '').toLowerCase().trim();
+    if (roomParam && bookBtns.length) {
+      const slugMap = {
+        'love-night': 'love night',
+        'golden-nest': 'golden nest',
+        'deluxe-uk': 'deluxe',
+        'suite': 'suite',
+        'apartment': 'apartment'
+      };
+      const targetKeyword = slugMap[roomParam] || roomParam.replace(/-/g, ' ');
+      let matchedBtn = null;
+      bookBtns.forEach(btn => {
+        const rName = (btn.getAttribute('data-room-name') || '').toLowerCase();
+        if (!matchedBtn && rName.includes(targetKeyword)) {
+          matchedBtn = btn;
+        }
+      });
+      if (!matchedBtn) matchedBtn = bookBtns[0];
+      const roomsSec = document.getElementById('rooms');
+      if (roomsSec) {
+        roomsSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      openModal(matchedBtn);
+      const qCheckin = urlParams.get('checkin');
+      const qCheckout = urlParams.get('checkout');
+      const qGuests = urlParams.get('guests');
+      if (qCheckin && checkinInput) checkinInput.value = qCheckin;
+      if (qCheckout && checkoutInput) checkoutInput.value = qCheckout;
+      if (qGuests && guestCountSelect) {
+        const gNum = parseInt(qGuests, 10);
+        if (!isNaN(gNum)) guestCountSelect.value = gNum >= 4 ? '4' : String(gNum);
+      }
+      updateCostCalculation();
+    }
+  } catch (err) {}
+
   if (closeBtn) {
     closeBtn.addEventListener('click', closeModal);
   }

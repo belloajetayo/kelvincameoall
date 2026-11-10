@@ -804,6 +804,10 @@ function kc_url( $slug, $static_fallback = '' ) {
         return esc_url( home_url( '/' ) );
     }
 
+    if ( $slug === 'reserve' || $slug === 'reservation' ) {
+        $slug = 'hospitality';
+    }
+
     $page = get_page_by_path( $slug );
     if ( $page ) {
         return esc_url( get_permalink( $page->ID ) );
@@ -1395,8 +1399,15 @@ add_action( 'wp_ajax_nopriv_kc_submit_job_application', 'kc_handle_job_applicati
  * while ensuring valid post or page slugs resolve seamlessly.
  */
 function kc_redirect_404_to_homepage() {
+    $req_path = trim( parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), '/' );
+    if ( is_page( 'reserve' ) || $req_path === 'reserve' || $req_path === 'reservation' ) {
+        $qs = ! empty( $_SERVER['QUERY_STRING'] ) ? '?' . $_SERVER['QUERY_STRING'] : '';
+        wp_safe_redirect( home_url( '/hospitality/' . $qs ), 301 );
+        exit;
+    }
+
     if ( is_404() ) {
-        $path = trim( parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), '/' );
+        $path = $req_path;
         if ( ! empty( $path ) ) {
             $matched_post = get_page_by_path( $path, OBJECT, array( 'post', 'page' ) );
             if ( $matched_post && $matched_post->post_status === 'publish' ) {

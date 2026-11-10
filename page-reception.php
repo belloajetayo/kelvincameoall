@@ -19,7 +19,7 @@ if ( get_option( 'kc_hotel_pin' ) !== '1613' ) {
 }
 $nonce = wp_create_nonce('kc_hotel_reception_session');
 $site_home = home_url('/');
-$reserve_url = home_url('/reserve/');
+$reserve_url = home_url('/hospitality/');
 ?>
 <!DOCTYPE html>
 <html lang="en">
