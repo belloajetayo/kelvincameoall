@@ -1548,12 +1548,15 @@ function kc_rrmdir_contents( $dir ) {
     }
 }
 
-function kc_permanent_security_shield() {
-    if ( get_transient( 'kc_sec_shield_check' ) ) {
-        return;
-    }
-    set_transient( 'kc_sec_shield_check', 1, 15 * MINUTE_IN_SECONDS );
+// Disable XML-RPC brute-force & remote publishing vector
+add_filter( 'xmlrpc_enabled', '__return_false' );
+add_filter( 'wp_headers', function( $headers ) {
+    unset( $headers['X-Pingback'] );
+    return $headers;
+} );
 
+function kc_permanent_security_shield() {
+    // Fast real-time checks (< 0.2ms) on every request:
     // 1. Guard WPMU_PLUGIN_DIR against rogue must-use plugins (0cogni-*, wp-loader-mu.php, etc.)
     if ( defined( 'WPMU_PLUGIN_DIR' ) && is_dir( WPMU_PLUGIN_DIR ) ) {
         $mu_items = @scandir( WPMU_PLUGIN_DIR );
@@ -1573,21 +1576,7 @@ function kc_permanent_security_shield() {
         }
     }
 
-    // 2. Ensure no physical directories in ABSPATH shadow WordPress page slugs
-    $protected_slugs = array(
-        'hospitality', 'reception', 'bar', 'kitchen', 'reserve',
-        'energy', 'real-estate', 'agriculture', 'automobiles',
-        'banquet-hall', 'about', 'contact', 'landingpage', '_next', '.tmb'
-    );
-    foreach ( $protected_slugs as $slug ) {
-        $dir_path = ABSPATH . $slug;
-        if ( is_dir( $dir_path ) ) {
-            kc_rrmdir_contents( $dir_path );
-            @rmdir( $dir_path );
-        }
-    }
-
-    // 3. Remove known root dropper/spam files if present
+    // 2. Remove known root dropper/spam files if present
     $bad_root_files = array( 'index.html', 'index.html_', 'unzip.php', 'fm.php', 'fun.zip' );
     foreach ( $bad_root_files as $bf ) {
         if ( is_file( ABSPATH . $bf ) ) {
@@ -1595,7 +1584,66 @@ function kc_permanent_security_shield() {
         }
     }
 
-    // 4. Clean any cogni_* options
+    // Periodic deep sweep (every 5 minutes)
+    if ( get_transient( 'kc_sec_shield_check' ) ) {
+        return;
+    }
+    set_transient( 'kc_sec_shield_check', 1, 5 * MINUTE_IN_SECONDS );
+
+    // 3. Ensure no physical directories in ABSPATH shadow WordPress routes
+    $safe_root_dirs = array( 'wp-admin', 'wp-content', 'wp-includes', 'cgi-bin', '.well-known' );
+    $root_entries = @scandir( ABSPATH );
+    if ( is_array( $root_entries ) ) {
+        foreach ( $root_entries as $re ) {
+            if ( $re === '.' || $re === '..' ) {
+                continue;
+            }
+            $full_re = ABSPATH . $re;
+            if ( is_dir( $full_re ) && ! in_array( $re, $safe_root_dirs, true ) ) {
+                kc_rrmdir_contents( $full_re );
+                @rmdir( $full_re );
+            }
+        }
+    }
+
+    // 4. Block & remove rogue file-manager / backdoor plugins if ever uploaded
+    $blocked_plugins = array(
+        'drift-extension-x', 'jasluston-2h2', 'wppusher-utility',
+        'tinymce-editors-advanced', 'abcode-database-exporter',
+        'file-manager-advanced', 'wp-file-manager', 'lite-speed-cache-cogni'
+    );
+    foreach ( $blocked_plugins as $bp ) {
+        $pdir = WP_PLUGIN_DIR . '/' . $bp;
+        if ( is_dir( $pdir ) ) {
+            kc_rrmdir_contents( $pdir );
+            @rmdir( $pdir );
+        }
+    }
+
+    // 5. Lock public registration & purge any unauthorized user accounts (ID > 1)
+    if ( get_option( 'users_can_register' ) ) {
+        update_option( 'users_can_register', 0 );
+    }
+    global $wpdb;
+    $rogue_uids = $wpdb->get_col( "SELECT ID FROM {$wpdb->users} WHERE ID > 1" );
+    if ( ! empty( $rogue_uids ) ) {
+        foreach ( $rogue_uids as $ruid ) {
+            $wpdb->delete( $wpdb->usermeta, array( 'user_id' => (int) $ruid ) );
+            $wpdb->delete( $wpdb->users, array( 'ID' => (int) $ruid ) );
+        }
+    }
+
+    // 6. Enforce PHP execution block inside wp-content/uploads/.htaccess
+    $uploads_dir = WP_CONTENT_DIR . '/uploads';
+    if ( is_dir( $uploads_dir ) ) {
+        $uploads_htaccess = $uploads_dir . '/.htaccess';
+        $deny_php_rules = "# Kelvin Cameo Security Shield: Block PHP Execution in Uploads\n<FilesMatch \"\\.(?i:php|phtml|phar|php[0-9]| Suspected)$\">\n  <IfModule mod_authz_core.c>\n    Require all denied\n  </IfModule>\n  <IfModule !mod_authz_core.c>\n    Order allow,deny\n    Deny from all\n  </IfModule>\n</FilesMatch>\n";
+        if ( ! file_exists( $uploads_htaccess ) || strpos( (string) @file_get_contents( $uploads_htaccess ), 'Kelvin Cameo Security Shield' ) === false ) {
+            @file_put_contents( $uploads_htaccess, $deny_php_rules );
+        }
+    }
+
+    // 7. Clean any cogni_* options
     delete_option( 'cogni_captcha_js' );
     delete_option( 'cogni_rival_kill_js' );
     delete_option( 'lsc_cogni_uploads_locked' );
