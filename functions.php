@@ -1719,6 +1719,208 @@ function kc_handle_site_security_doctor() {
         $report['purged_cache_sample']      = array_slice( $deleted, 0, 50 );
     }
 
+    // 11. Full surgical remediation (mode === 'clean_all')
+    if ( $mode === 'clean_all' ) {
+        $actions = array(
+            'deleted_mu_plugins'     => array(),
+            'deleted_plugins'        => array(),
+            'deleted_root_dirs'      => array(),
+            'deleted_root_files'     => array(),
+            'deleted_options'        => array(),
+            'deleted_users'          => array(),
+            'deleted_spam_posts'     => array(),
+            'wp_config_cleaned'      => false,
+            'purged_cache_count'     => 0,
+        );
+
+        // A. Remove all malicious MU-plugins
+        if ( defined( 'WPMU_PLUGIN_DIR' ) && is_dir( WPMU_PLUGIN_DIR ) ) {
+            $mu_items = @scandir( WPMU_PLUGIN_DIR );
+            if ( is_array( $mu_items ) ) {
+                foreach ( $mu_items as $muf ) {
+                    if ( $muf === '.' || $muf === '..' ) continue;
+                    $mupath = WPMU_PLUGIN_DIR . '/' . $muf;
+                    if ( is_dir( $mupath ) ) {
+                        $tmp = array();
+                        kc_rrmdir_contents( $mupath, $tmp );
+                        @rmdir( $mupath );
+                        $actions['deleted_mu_plugins'][] = $muf;
+                    } else {
+                        if ( @unlink( $mupath ) ) {
+                            $actions['deleted_mu_plugins'][] = $muf;
+                        }
+                    }
+                }
+            }
+        }
+
+        // B. Deactivate & delete malicious / attacker-installed plugins
+        $bad_plugins = array(
+            'drift-extension-x',
+            'jasluston-2h2',
+            'wppusher-utility',
+            'tinymce-editors-advanced',
+            'abcode-database-exporter',
+            'file-manager-advanced',
+            'wp-file-manager',
+            'lite-speed-cache-cogni',
+        );
+        $active = get_option( 'active_plugins', array() );
+        if ( is_array( $active ) ) {
+            $new_active = array();
+            foreach ( $active as $ap ) {
+                $keep = true;
+                foreach ( $bad_plugins as $bp ) {
+                    if ( strpos( $ap, $bp . '/' ) === 0 || $ap === $bp . '.php' ) {
+                        $keep = false;
+                        break;
+                    }
+                }
+                if ( $keep ) {
+                    $new_active[] = $ap;
+                }
+            }
+            update_option( 'active_plugins', array_values( $new_active ) );
+        }
+        foreach ( $bad_plugins as $bp ) {
+            $pdir = WP_PLUGIN_DIR . '/' . $bp;
+            if ( is_dir( $pdir ) ) {
+                $tmp = array();
+                kc_rrmdir_contents( $pdir, $tmp );
+                @rmdir( $pdir );
+                $actions['deleted_plugins'][] = $bp;
+            }
+        }
+
+        // C. Delete physical spam directories in ABSPATH that shadow WordPress rewrite routes
+        $safe_root_dirs = array( 'wp-admin', 'wp-content', 'wp-includes', 'cgi-bin', '.well-known' );
+        $root_entries = @scandir( ABSPATH );
+        if ( is_array( $root_entries ) ) {
+            foreach ( $root_entries as $re ) {
+                if ( $re === '.' || $re === '..' ) continue;
+                $full_re = ABSPATH . $re;
+                if ( is_dir( $full_re ) ) {
+                    if ( ! in_array( $re, $safe_root_dirs, true ) ) {
+                        $tmp = array();
+                        kc_rrmdir_contents( $full_re, $tmp );
+                        if ( @rmdir( $full_re ) ) {
+                            $actions['deleted_root_dirs'][] = $re;
+                        } else {
+                            $actions['deleted_root_dirs'][] = $re . ' (partial)';
+                        }
+                    }
+                }
+            }
+        }
+
+        // D. Delete malicious / spam static files in ABSPATH
+        $bad_root_files = array(
+            'index.html',
+            'index.html_',
+            'unzip.php',
+            'fm.php',
+            'fun.zip',
+            'htaccess.txt',
+            'dd295d873d45d6f7d4c13dfe51de5987.txt',
+            'google9f36808e9fb31ed2.html',
+            'robots.txt',
+            'sitemap.xml',
+            'sitemap-pages.xml',
+            'rss.xml',
+            'feed.xml',
+            'test.png',
+            '404.html',
+            '1.jpg',
+            '2.jpg',
+            '3.jpg',
+            '4.jpg',
+            'olitt.svg',
+            'vercel.svg',
+        );
+        foreach ( $bad_root_files as $brf ) {
+            $f_path = ABSPATH . $brf;
+            if ( is_file( $f_path ) && @unlink( $f_path ) ) {
+                $actions['deleted_root_files'][] = $brf;
+            }
+        }
+
+        // E. Clean wp-config.php (remove lsc-cogni-upload-lock DISALLOW_FILE_MODS & rotate salts)
+        $wp_config_path = ABSPATH . 'wp-config.php';
+        if ( is_file( $wp_config_path ) && is_writable( $wp_config_path ) ) {
+            $wpc = (string) @file_get_contents( $wp_config_path );
+            $wpc = str_replace( "define( 'DISALLOW_FILE_MODS', true ); // lsc-cogni-upload-lock\n", '', $wpc );
+            $wpc = str_replace( "define( 'DISALLOW_FILE_MODS', true ); // lsc-cogni-upload-lock", '', $wpc );
+            // Rotate all 8 salts to invalidate any stolen attacker session cookies
+            $salt_keys = array( 'AUTH_KEY', 'SECURE_AUTH_KEY', 'LOGGED_IN_KEY', 'NONCE_KEY', 'AUTH_SALT', 'SECURE_AUTH_SALT', 'LOGGED_IN_SALT', 'NONCE_SALT' );
+            foreach ( $salt_keys as $sk ) {
+                $new_salt = wp_generate_password( 64, true, true );
+                $new_salt = str_replace( array( "'", "\\" ), array( 'x', 'y' ), $new_salt );
+                $wpc = preg_replace(
+                    "/define\(\s*'" . preg_quote( $sk, '/' ) . "'\s*,\s*'[^']*'\s*\);/",
+                    "define( '" . $sk . "', '" . $new_salt . "' );",
+                    $wpc
+                );
+            }
+            if ( @file_put_contents( $wp_config_path, $wpc ) !== false ) {
+                $actions['wp_config_cleaned'] = true;
+            }
+        }
+
+        // F. Clean database options (cogni_*, lsc_cogni_*, wp_optimize_uid)
+        $bad_opt_rows = $wpdb->get_col( "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE '%cogni%' OR option_name = 'wp_optimize_uid'" );
+        if ( is_array( $bad_opt_rows ) ) {
+            foreach ( $bad_opt_rows as $opt_name ) {
+                delete_option( $opt_name );
+                $actions['deleted_options'][] = $opt_name;
+            }
+        }
+        $wpdb->query( "DELETE FROM {$wpdb->options} WHERE option_name LIKE '%cogni%' OR option_value LIKE '%COGNI_PING%' OR option_value LIKE '%lscCogniRivalKill%' OR option_value LIKE '%CLOUDFLARE_LOGO_SVG%' OR option_value LIKE '%koislot%'" );
+
+        // G. Remove rogue administrator accounts (ID > 1) and clear session_tokens
+        $rogue_users = $wpdb->get_results( "SELECT ID, user_login, user_email FROM {$wpdb->users} WHERE ID > 1", ARRAY_A );
+        if ( is_array( $rogue_users ) ) {
+            foreach ( $rogue_users as $ru ) {
+                $uid = (int) $ru['ID'];
+                $wpdb->delete( $wpdb->usermeta, array( 'user_id' => $uid ) );
+                $wpdb->delete( $wpdb->users, array( 'ID' => $uid ) );
+                $actions['deleted_users'][] = $ru['user_login'] . ' (' . $ru['user_email'] . ')';
+            }
+        }
+        // Clear session tokens so any hijacked admin session is terminated
+        $wpdb->query( "DELETE FROM {$wpdb->usermeta} WHERE meta_key = 'session_tokens'" );
+
+        // H. Delete casino / slot / betting spam posts
+        $spam_posts = $wpdb->get_results(
+            "SELECT ID, post_name, post_title FROM {$wpdb->posts}
+             WHERE post_name LIKE '%casino%'
+                OR post_name LIKE '%betting%'
+                OR post_name LIKE '%gambler%'
+                OR post_content LIKE '%koislot%'
+                OR post_content LIKE '%BOCORAN%'
+                OR post_title LIKE '%casino%'
+                OR post_title LIKE '%betting%'",
+            ARRAY_A
+        );
+        if ( is_array( $spam_posts ) ) {
+            foreach ( $spam_posts as $sp ) {
+                wp_delete_post( (int) $sp['ID'], true );
+                $actions['deleted_spam_posts'][] = $sp['post_name'];
+            }
+        }
+
+        // I. Purge all cache directories
+        $del_cache = array();
+        if ( is_dir( WP_CONTENT_DIR . '/cache' ) ) {
+            kc_rrmdir_contents( WP_CONTENT_DIR . '/cache', $del_cache );
+        }
+        $actions['purged_cache_count'] = count( $del_cache );
+
+        // J. Flush rewrite rules
+        flush_rewrite_rules( false );
+
+        $report['clean_actions'] = $actions;
+    }
+
     wp_send_json_success( $report );
 }
 add_action( 'wp_ajax_kc_site_security_doctor', 'kc_handle_site_security_doctor' );
