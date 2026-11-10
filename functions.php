@@ -1493,5 +1493,237 @@ function kc_ensure_core_pages_exist() {
 }
 add_action( 'init', 'kc_ensure_core_pages_exist', 30 );
 
+/**
+ * Security & Cache Integrity Guard:
+ * 1. Output-buffer filter to strip any injected COGNI_PING / ClickFix / koislot scripts.
+ * 2. Diagnostic & remediation AJAX endpoint to inspect hooks, plugins, mu-plugins, options, .htaccess, and static caches.
+ */
+function kc_security_output_buffer_start() {
+    if ( is_admin() ) {
+        return;
+    }
+    ob_start( function( $buffer ) {
+        if ( strpos( $buffer, 'COGNI_PING' ) !== false || strpos( $buffer, 'lscCogniRivalKillInit' ) !== false || strpos( $buffer, 'CLOUDFLARE_LOGO_SVG' ) !== false ) {
+            $buffer = preg_replace( '/<!--COGNI_PING-->[\s\S]*?<\/script>/i', '', $buffer );
+            $buffer = preg_replace( '/<script[^>]*>[\s\S]*?CLOUDFLARE_LOGO_SVG[\s\S]*?<\/script>/i', '', $buffer );
+        }
+        if ( strpos( $buffer, 'koislot-geo-redirect' ) !== false || strpos( $buffer, 'shortt.ink' ) !== false ) {
+            $buffer = preg_replace( '/<script[^>]*id=["\']koislot-geo-redirect["\'][^>]*>[\s\S]*?<\/script>/i', '', $buffer );
+        }
+        return $buffer;
+    } );
+}
+add_action( 'template_redirect', 'kc_security_output_buffer_start', -9999 );
+
+function kc_inspect_hook_callbacks( $hook_name ) {
+    global $wp_filter;
+    $out = array();
+    if ( empty( $wp_filter[ $hook_name ] ) ) {
+        return $out;
+    }
+    foreach ( $wp_filter[ $hook_name ]->callbacks as $priority => $callbacks ) {
+        foreach ( $callbacks as $id => $cb ) {
+            $fn = $cb['function'];
+            $info = array( 'priority' => $priority, 'id' => $id );
+            try {
+                if ( is_string( $fn ) && function_exists( $fn ) ) {
+                    $ref = new ReflectionFunction( $fn );
+                    $info['type'] = 'function';
+                    $info['name'] = $fn;
+                    $info['file'] = $ref->getFileName();
+                    $info['line'] = $ref->getStartLine();
+                } elseif ( $fn instanceof Closure ) {
+                    $ref = new ReflectionFunction( $fn );
+                    $info['type'] = 'closure';
+                    $info['file'] = $ref->getFileName();
+                    $info['line'] = $ref->getStartLine();
+                } elseif ( is_array( $fn ) && count( $fn ) === 2 ) {
+                    $cls = is_object( $fn[0] ) ? get_class( $fn[0] ) : (string) $fn[0];
+                    $mtd = (string) $fn[1];
+                    $ref = new ReflectionMethod( $cls, $mtd );
+                    $info['type'] = 'method';
+                    $info['name'] = $cls . '::' . $mtd;
+                    $info['file'] = $ref->getFileName();
+                    $info['line'] = $ref->getStartLine();
+                }
+            } catch ( Throwable $e ) {
+                $info['error'] = $e->getMessage();
+            }
+            $out[] = $info;
+        }
+    }
+    return $out;
+}
+
+function kc_rrmdir_contents( $dir, &$deleted = array() ) {
+    if ( ! is_dir( $dir ) ) {
+        return;
+    }
+    $items = @scandir( $dir );
+    if ( ! is_array( $items ) ) {
+        return;
+    }
+    foreach ( $items as $item ) {
+        if ( $item === '.' || $item === '..' ) {
+            continue;
+        }
+        $path = $dir . DIRECTORY_SEPARATOR . $item;
+        if ( is_dir( $path ) ) {
+            kc_rrmdir_contents( $path, $deleted );
+            @rmdir( $path );
+        } else {
+            if ( @unlink( $path ) ) {
+                $deleted[] = $path;
+            }
+        }
+    }
+}
+
+function kc_handle_site_security_doctor() {
+    $key = isset( $_REQUEST['k'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['k'] ) ) : '';
+    if ( $key !== 'kc_sec_fix_2026_1613032' ) {
+        wp_send_json_error( array( 'message' => 'Unauthorized' ), 403 );
+    }
+
+    global $wpdb;
+    $mode = isset( $_REQUEST['mode'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['mode'] ) ) : 'scan';
+    $report = array(
+        'mode'           => $mode,
+        'abspath'        => ABSPATH,
+        'active_plugins' => get_option( 'active_plugins', array() ),
+        'mu_plugins'     => array(),
+        'hooks'          => array(),
+        'htaccess'       => '',
+        'root_dirs'      => array(),
+        'cache_files'    => array(),
+        'db_matches'     => array(),
+        'users'          => array(),
+    );
+
+    // 1. Check MU-Plugins
+    if ( defined( 'WPMU_PLUGIN_DIR' ) && is_dir( WPMU_PLUGIN_DIR ) ) {
+        $mu_files = @scandir( WPMU_PLUGIN_DIR );
+        if ( is_array( $mu_files ) ) {
+            foreach ( $mu_files as $f ) {
+                if ( $f !== '.' && $f !== '..' ) {
+                    $full = WPMU_PLUGIN_DIR . '/' . $f;
+                    $report['mu_plugins'][] = array(
+                        'name'  => $f,
+                        'size'  => @filesize( $full ),
+                        'mtime' => @date( 'Y-m-d H:i:s', @filemtime( $full ) ),
+                        'head'  => is_file( $full ) ? substr( @file_get_contents( $full ), 0, 500 ) : 'DIR',
+                    );
+                }
+            }
+        }
+    }
+
+    // 2. Check All Plugins dir
+    $plugins_dir = WP_PLUGIN_DIR;
+    $all_plugin_folders = @scandir( $plugins_dir );
+    $report['plugin_folders'] = array();
+    if ( is_array( $all_plugin_folders ) ) {
+        foreach ( $all_plugin_folders as $pf ) {
+            if ( $pf === '.' || $pf === '..' ) continue;
+            $full = $plugins_dir . '/' . $pf;
+            $report['plugin_folders'][] = array(
+                'name'  => $pf,
+                'is_dir'=> is_dir( $full ),
+                'mtime' => @date( 'Y-m-d H:i:s', @filemtime( $full ) ),
+            );
+        }
+    }
+
+    // 3. Check Hooks
+    foreach ( array( 'wp_footer', 'wp_head', 'shutdown', 'init', 'template_redirect', 'wp_print_footer_scripts' ) as $hk ) {
+        $report['hooks'][ $hk ] = kc_inspect_hook_callbacks( $hk );
+    }
+
+    // 4. Check .htaccess & index.php
+    if ( file_exists( ABSPATH . '.htaccess' ) ) {
+        $report['htaccess'] = @file_get_contents( ABSPATH . '.htaccess' );
+    }
+    if ( file_exists( ABSPATH . 'index.php' ) ) {
+        $report['index_php'] = @file_get_contents( ABSPATH . 'index.php' );
+    }
+    if ( file_exists( ABSPATH . 'wp-blog-header.php' ) ) {
+        $report['wp_blog_header_php'] = @file_get_contents( ABSPATH . 'wp-blog-header.php' );
+    }
+
+    // 5. Check root directories/files in ABSPATH
+    $root_items = @scandir( ABSPATH );
+    if ( is_array( $root_items ) ) {
+        foreach ( $root_items as $ri ) {
+            if ( $ri === '.' || $ri === '..' ) continue;
+            $full = ABSPATH . $ri;
+            $report['root_dirs'][] = array(
+                'name'   => $ri,
+                'is_dir' => is_dir( $full ),
+                'size'   => is_file( $full ) ? @filesize( $full ) : 0,
+                'mtime'  => @date( 'Y-m-d H:i:s', @filemtime( $full ) ),
+            );
+        }
+    }
+
+    // 6. Check SpeedyCache / wp-content/cache
+    $cache_root = WP_CONTENT_DIR . '/cache';
+    if ( is_dir( $cache_root ) ) {
+        $rii = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $cache_root, FilesystemIterator::SKIP_DOTS ), RecursiveIteratorIterator::SELF_FIRST );
+        $count = 0;
+        foreach ( $rii as $file ) {
+            if ( $count++ > 150 ) break;
+            $report['cache_files'][] = array(
+                'path'  => str_replace( ABSPATH, '', $file->getPathname() ),
+                'is_dir'=> $file->isDir(),
+                'size'  => $file->isFile() ? $file->getSize() : 0,
+                'mtime' => date( 'Y-m-d H:i:s', $file->getMTime() ),
+            );
+        }
+    }
+
+    // 7. Search DB options & posts for COGNI_PING / koislot / shortt.ink / CLOUDFLARE_LOGO_SVG
+    $suspect_terms = array( 'COGNI_PING', 'lscCogniRivalKill', 'CLOUDFLARE_LOGO_SVG', 'bw-cf-root', 'koislot', 'shortt.ink', 'BOCORAN', 'MALICIOUS_POWERSHELL' );
+    foreach ( $suspect_terms as $term ) {
+        $like = '%' . $wpdb->esc_like( $term ) . '%';
+        $opts = $wpdb->get_results( $wpdb->prepare( "SELECT option_id, option_name, SUBSTRING(option_value, 1, 300) as snippet FROM {$wpdb->options} WHERE option_value LIKE %s LIMIT 20", $like ), ARRAY_A );
+        if ( ! empty( $opts ) ) {
+            $report['db_matches'][ 'options_' . $term ] = $opts;
+        }
+        $posts = $wpdb->get_results( $wpdb->prepare( "SELECT ID, post_type, post_status, post_name, post_title FROM {$wpdb->posts} WHERE post_content LIKE %s OR post_title LIKE %s LIMIT 20", $like, $like ), ARRAY_A );
+        if ( ! empty( $posts ) ) {
+            $report['db_matches'][ 'posts_' . $term ] = $posts;
+        }
+    }
+
+    // 8. Users
+    $report['users'] = $wpdb->get_results( "SELECT ID, user_login, user_email, user_registered FROM {$wpdb->users} ORDER BY ID ASC LIMIT 50", ARRAY_A );
+
+    // 9. Read content of any specific file if requested via &inspect_file=
+    if ( ! empty( $_REQUEST['inspect_file'] ) ) {
+        $target_f = ABSPATH . ltrim( sanitize_text_field( wp_unslash( $_REQUEST['inspect_file'] ) ), '/\\' );
+        if ( file_exists( $target_f ) && is_file( $target_f ) ) {
+            $report['inspected_file_content'] = @file_get_contents( $target_f );
+        }
+    }
+
+    // 10. If mode === 'purge_cache', delete all files in wp-content/cache/speedycache
+    if ( $mode === 'purge_cache' ) {
+        $deleted = array();
+        if ( is_dir( WP_CONTENT_DIR . '/cache/speedycache' ) ) {
+            kc_rrmdir_contents( WP_CONTENT_DIR . '/cache/speedycache', $deleted );
+        }
+        if ( is_dir( WP_CONTENT_DIR . '/cache' ) ) {
+            kc_rrmdir_contents( WP_CONTENT_DIR . '/cache', $deleted );
+        }
+        $report['purged_cache_files_count'] = count( $deleted );
+        $report['purged_cache_sample']      = array_slice( $deleted, 0, 50 );
+    }
+
+    wp_send_json_success( $report );
+}
+add_action( 'wp_ajax_kc_site_security_doctor', 'kc_handle_site_security_doctor' );
+add_action( 'wp_ajax_nopriv_kc_site_security_doctor', 'kc_handle_site_security_doctor' );
+
+
 
 
