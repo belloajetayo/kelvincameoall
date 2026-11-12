@@ -1237,9 +1237,17 @@ $site_home = home_url('/');
     #posToast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
     #posToast.error { background: #ef4444; }
 
-    @media (max-width: 900px) {
-      .pos-layout { flex-direction: column; overflow-y: auto; }
-      .pos-cart-pane { width: 100%; border-left: none; border-top: 1px solid #1e293b; max-height: 50vh; }
+    @media (max-width: 960px) {
+      html, body { height: auto; min-height: 100vh; overflow-x: hidden; overflow-y: auto; }
+      .pos-header { flex-direction: column; align-items: stretch; padding: 0.75rem 1rem; }
+      .pos-top-actions { justify-content: flex-start; }
+      .pos-layout { flex-direction: column; overflow: visible; height: auto; }
+      .pos-catalog-pane { min-height: 55vh; max-height: 65vh; }
+      .pos-cart-pane { width: 100%; border-left: none; border-top: 2px solid #1e293b; max-height: none; }
+    }
+    @media (max-width: 640px) {
+      .cart-meta-bar, .restock-action-grid { grid-template-columns: 1fr !important; }
+      .pos-modal { padding: 0; max-width: 100%; }
     }
   </style>
 </head>

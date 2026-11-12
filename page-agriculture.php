@@ -211,7 +211,7 @@ get_header();
       </div>
 
       <!-- 3-Pillar Process Showcase -->
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:2rem; margin-bottom:3.5rem;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap:2rem; margin-bottom:3.5rem;">
         
         <!-- Pillar 1: Planting -->
         <div style="background:#ffffff; border-radius:16px; border:1px solid #e2e8f0; overflow:hidden; box-shadow:0 10px 25px -5px rgba(0,0,0,0.06); transition:transform 0.3s ease, box-shadow 0.3s ease;">
@@ -282,7 +282,7 @@ get_header();
       </div>
 
       <!-- Maize Specifications & Off-Take Callout Strip -->
-      <div style="background:#ffffff; border-radius:18px; border:2px solid #bbf7d0; padding:2.5rem; box-shadow:0 15px 30px -10px rgba(16,185,129,0.12);">
+      <div style="background:#ffffff; border-radius:18px; border:2px solid #bbf7d0; padding:clamp(1.25rem, 4vw, 2.5rem); box-shadow:0 15px 30px -10px rgba(16,185,129,0.12);">
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:2rem; align-items:center;">
           <div>
             <h4 style="font-size:1.25rem; font-weight:800; color:var(--navy-900); margin-bottom:0.4rem;">Grain Purity Standard</h4>
@@ -350,7 +350,7 @@ get_header();
   <!-- Produce Off-Take RFP Form Section -->
   <section id="supply-rfp" class="section-padding" style="background:var(--white);">
     <div class="container">
-      <div style="max-width:860px; margin:0 auto; background:var(--sand-50); border:1px solid var(--sand-200); border-radius:var(--radius-xl); padding:3.5rem; box-shadow:var(--shadow-lg);">
+      <div style="max-width:860px; margin:0 auto; background:var(--sand-50); border:1px solid var(--sand-200); border-radius:var(--radius-xl); padding:clamp(1.25rem, 5vw, 3.5rem); box-shadow:var(--shadow-lg);">
         <div style="text-align:center; margin-bottom:2.5rem;">
           <span class="section-badge" style="background:rgba(16,185,129,0.15); color:var(--agro-emerald);">Institutional Procurement</span>
           <h2 class="section-title" style="margin-top:0.5rem;">Request Produce Quotation & Off-Take Terms</h2>

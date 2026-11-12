@@ -672,6 +672,20 @@ $site_home = home_url('/');
         background: #fff;
       }
     }
+
+    @media (max-width: 960px) {
+      html, body { height: auto; min-height: 100vh; overflow-x: hidden; overflow-y: auto; }
+      .pos-header { flex-direction: column; align-items: stretch; padding: 0.75rem 1rem; }
+      .pos-brand { flex-wrap: wrap; }
+      .pos-top-actions { justify-content: flex-start; }
+      .pos-main { flex-direction: column; overflow: visible; height: auto; }
+      .catalog-pane { min-height: 55vh; max-height: 65vh; border-right: none; border-bottom: 1px solid #1e293b; }
+      .cart-pane { width: 100%; max-height: none; }
+    }
+    @media (max-width: 640px) {
+      .restock-action-grid, .payment-grid { grid-template-columns: repeat(2, 1fr) !important; }
+      .cart-field { flex-direction: column; }
+    }
   </style>
 </head>
 <body>

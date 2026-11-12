@@ -87,7 +87,7 @@ get_header();
       </div>
 
       <!-- Vehicle Grid -->
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:2rem;" id="autoInventoryGrid">
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap:2rem;" id="autoInventoryGrid">
 
         <!-- Vehicle 1: Toyota Corolla (CNG Bi-Fuel) -->
         <article class="auto-car-card" data-category="cng sedan" style="background:#fff; border-radius:18px; border:1px solid #e2e8f0; overflow:hidden; box-shadow:0 10px 25px -5px rgba(0,0,0,0.06); transition:transform 0.3s ease, box-shadow 0.3s ease; display:flex; flex-direction:column;">

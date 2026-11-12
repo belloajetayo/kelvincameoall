@@ -1237,12 +1237,18 @@ $reserve_url = home_url('/hospitality/');
     }
 
     /* RESPONSIVE BREAKPOINTS */
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
     @media (max-width: 900px) {
       .top-bar { padding: 12px 16px; flex-direction: column; gap: 12px; align-items: stretch; }
-      .top-actions { justify-content: space-between; flex-wrap: wrap; }
-      .dashboard-container { padding: 16px 16px 40px; }
+      .top-actions { justify-content: flex-start; flex-wrap: wrap; }
+      .dashboard-container { padding: 16px 12px 40px; max-width: 100%; overflow-x: hidden; }
       .form-row { grid-template-columns: 1fr; gap: 0; }
       .sales-analytics-grid { grid-template-columns: 1fr; }
+      .folio-signatures { grid-template-columns: 1fr; gap: 20px; }
+      .folio-total-box { width: 100%; }
     }
 
     /* STAFF ON DUTY BADGE */

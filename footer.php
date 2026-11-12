@@ -9,7 +9,7 @@
   <!-- Universal Site Footer -->
   <footer class="site-footer" style="background: linear-gradient(180deg, #071e3d 0%, #030c1a 100%); border-top: 3px solid #ea580c; color: #e2e8f0; padding: 4.5rem 0 2rem; position: relative; z-index: 20;">
     <div class="container container-wide">
-      <div class="footer-top-grid" style="display: grid; grid-template-columns: 1.8fr 1.2fr 1.2fr 1.2fr 1.5fr; gap: 2.5rem; margin-bottom: 3.5rem;">
+      <div class="footer-top-grid" style="margin-bottom: 3.5rem;">
         
         <!-- Brand & Registration Column -->
         <div class="footer-brand-col">
@@ -236,6 +236,159 @@
       </a>
     </div>
   </aside>
+
+  <!-- Universal Responsive & Anti-Overflow Shield -->
+  <style id="kc-universal-responsive-shield">
+    html, body {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+    }
+    section, footer, main, .page-hero, .site-footer {
+      max-width: 100%;
+      overflow-x: clip;
+    }
+    .container, .container-wide {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .footer-top-grid {
+      display: grid;
+      grid-template-columns: 1.8fr 1.2fr 1.2fr 1.2fr 1.5fr;
+      gap: 2.25rem;
+    }
+    /* Keep floating slider buttons inside viewport on 1366px-1480px laptops */
+    @media (max-width: 1480px) {
+      .track-floating-btn.prev { left: 8px !important; }
+      .track-floating-btn.next { right: 8px !important; }
+    }
+    @media (max-width: 1100px) {
+      .footer-top-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 2rem !important;
+      }
+      .founder-layout,
+      .split-media-grid,
+      .contact-grid,
+      .concierge-grid,
+      .exp-showcase-panel {
+        grid-template-columns: 1fr !important;
+        gap: 2.25rem !important;
+      }
+      .hp-testimonials-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.5rem !important;
+      }
+      .grid-4-responsive,
+      .real-talk-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+    }
+    @media (max-width: 768px) {
+      .container, .container-wide {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+      }
+      .grid-2-responsive,
+      .grid-2-stats,
+      .hp-testimonials-grid,
+      .suites-grid,
+      .agro-production-grid,
+      .board-grid,
+      .partners-cards-grid,
+      .capabilities-grid,
+      .estate-layouts-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+      }
+      .hp-vip-banner-box {
+        padding: 1.5rem 1.25rem !important;
+      }
+      .hp-vip-banner-content {
+        flex: 1 1 100% !important;
+        min-width: 0 !important;
+      }
+      .hp-vip-actions {
+        width: 100%;
+      }
+      .hp-vip-btn-outline,
+      .hp-vip-btn-gold {
+        flex: 1 1 auto;
+        justify-content: center;
+        text-align: center;
+      }
+      .hp-divisions-carousel-wrap {
+        margin: 0 !important;
+      }
+      .about-floating-philosophy-badge {
+        position: relative !important;
+        bottom: auto !important;
+        right: auto !important;
+        max-width: 100% !important;
+        margin-top: 1rem !important;
+      }
+    }
+    @media (max-width: 640px) {
+      .footer-top-grid,
+      .grid-4-responsive,
+      .real-talk-grid,
+      .fuel-specs-bar,
+      .agro-stats-banner,
+      .form-group-row {
+        grid-template-columns: 1fr !important;
+        gap: 1.25rem !important;
+      }
+      .footer-bottom-bar {
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+      }
+      .brand-subtitle {
+        font-size: 0.56rem !important;
+        letter-spacing: 0.03em !important;
+      }
+      .brand-title {
+        font-size: 1.05rem !important;
+      }
+      .nav-actions {
+        gap: 0.4rem !important;
+      }
+      .nav-actions .btn {
+        padding: 0.4rem 0.65rem !important;
+        font-size: 0.75rem !important;
+      }
+      .toast-container {
+        left: 12px !important;
+        right: 12px !important;
+        bottom: 16px !important;
+      }
+      .toast {
+        min-width: 0 !important;
+        width: 100% !important;
+      }
+      .floating-whatsapp-btn {
+        width: 50px !important;
+        height: 50px !important;
+        right: 16px !important;
+        bottom: 16px !important;
+      }
+    }
+    @media (max-width: 400px) {
+      .brand-subtitle {
+        display: none !important;
+      }
+      .hp-room-actions {
+        flex-direction: column !important;
+      }
+      .hp-btn-reserve-gold,
+      .hp-btn-details-ghost {
+        width: 100% !important;
+      }
+    }
+  </style>
 
 <?php wp_footer(); ?>
 </body>

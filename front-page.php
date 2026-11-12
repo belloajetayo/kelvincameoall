@@ -522,7 +522,7 @@ get_header();
       <!-- ================================================================
            ANIMATED HORIZONTAL CAROUSEL TRACK
            ================================================================ -->
-      <div class="hp-divisions-carousel-wrap" style="position: relative; margin: 0 -12px;">
+      <div class="hp-divisions-carousel-wrap" style="position: relative; margin: 0;">
         
         <div id="hpDivisionsTrack" class="hp-divisions-track" style="display: flex; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 10px 12px 28px; scrollbar-width: none;">
 
@@ -1411,7 +1411,7 @@ get_header();
       position: relative;
       overflow: hidden;
     }
-    .hp-vip-banner-content { flex: 1 1 500px; }
+    .hp-vip-banner-content { flex: 1 1 min(100%, 480px); min-width: 0; }
     .hp-vip-badge-row { margin-bottom: 0.65rem; }
     .hp-vip-badge {
       display: inline-flex;
@@ -2137,7 +2137,7 @@ get_header();
             We are deeply committed to socioeconomic empowerment across Suleja, Niger State, and the wider Federal Capital Territory corridor — creating sustainable employment, fostering local agro-allied industries, and setting international benchmarks for Nigerian enterprise.
           </p>
 
-          <div style="display:flex; gap:1rem; align-items:center;">
+          <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;">
             <a href="<?php echo kc_url('about'); ?>" class="btn btn-primary btn-md">
               Read Our Corporate Heritage &rarr;
             </a>
@@ -2162,7 +2162,7 @@ get_header();
         <p class="hp-section-sub">Real words from those who stay at our suites, pump at our stations, and develop on our land.</p>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 2.5rem;">
+      <div class="hp-testimonials-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 2rem; margin-top: 2.5rem;">
         
         <!-- Review 1 -->
         <div style="background:#ffffff; border-radius:16px; padding:2rem; box-shadow:0 8px 24px -6px rgba(4,20,43,0.06); border:1px solid #e2e8f0;">
@@ -2231,7 +2231,7 @@ get_header();
       </div>
 
       <!-- Amenities Grid (8 Premier Cards) -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 3.5rem;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 24px; margin-bottom: 3.5rem;">
         
         <!-- Feature 1: 24/7 Power -->
         <div class="hp-amenity-card" style="background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px 24px; transition: all 0.3s cubic-bezier(0.4,0,0.2,1); position: relative; overflow: hidden;">
