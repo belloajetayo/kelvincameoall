@@ -637,19 +637,7 @@ get_header();
         <article class="suite-card" data-room-cat="annex">
           <div class="suite-card-media">
             <span class="suite-branch-badge branch-annex">Oyus Branch • Suleja</span>
-            <div class="card-media-slider">
-              <div class="card-media-slides">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-prestige.jpg' ); ?>" alt="Prestige Room at Kelvin Cameo Resort Oyus Branch" class="active" loading="lazy">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/suite-lounge.jpg' ); ?>" alt="Prestige Room Amenities" loading="lazy">
-              </div>
-              <button type="button" class="card-media-nav prev" aria-label="Previous photo">‹</button>
-              <button type="button" class="card-media-nav next" aria-label="Next photo">›</button>
-              <div class="card-media-dots">
-                <span class="dot active"></span>
-                <span class="dot"></span>
-              </div>
-              <span class="card-media-badge">📷 2 Photos</span>
-            </div>
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-prestige.jpg' ); ?>" alt="Prestige Room at Kelvin Cameo Resort Oyus Branch" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
           </div>
           <div class="suite-card-body">
             <div>
