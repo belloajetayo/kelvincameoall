@@ -142,10 +142,10 @@ function kc_hotel_reconcile_room_rates() {
     // - UK Room: 401 to 414 (The Annex, Rate: ₦25,000)
     // - Love Night Room: 401 to 415 (Main Hotel, Rate: ₦45,000)
     // - Golden Nest Room: 416 to 430, except 422 & 428 (Main Hotel, Rate: ₦55,000)
-    // - Suites: 422 and 428 (Main Hotel, Rate: ₦60,000)
+    // - Suites: 422 and 428 (Main Hotel, Rate: ₦65,000)
     // - 6 Apartments: Apartment 1 to Apartment 6 (Main Hotel, Rate: ₦160,000)
     $rooms_sync_ver = get_option('kc_hotel_rooms_sync_ver', '0');
-    if ($rooms_sync_ver !== '2026.10.revamp_rooms_v5') {
+    if ($rooms_sync_ver !== '2026.11.blissful_breeze_65k') {
         if ($wpdb->get_var("SHOW TABLES LIKE '$table_bookings'") === $table_bookings) {
             // Remap active in-house and reserved bookings to new official room numbers
             $wpdb->query("UPDATE $table_bookings SET room_number = '401', room_type = 'Love Night Room', branch = 'Main Hotel' WHERE room_number IN ('M-101', 'M-102') AND booking_status IN ('checked_in', 'reserved')");
@@ -198,7 +198,7 @@ function kc_hotel_reconcile_room_rates() {
                     'room_number' => (string)$i,
                     'room_type'   => 'Blissful Breeze Suite',
                     'branch'      => 'Main Hotel',
-                    'rate'        => 60000.00,
+                    'rate'        => 65000.00,
                     'features'    => 'Luxury Living Parlour, King Bed, Minibar, Smart TV, Ensuite Bath, VIP Amenities',
                     'image_url'   => $img_suite,
                     'status'      => ($i === 422) ? 'occupied' : 'available'

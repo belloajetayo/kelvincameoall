@@ -128,7 +128,7 @@ get_header();
               <option value="deluxe-uk" selected style="background: #09172e; color: #ffffff;">Deluxe (UK Room) (₦25,000 - ₦45,000)</option>
               <option value="love-night" style="background: #09172e; color: #ffffff;">Love Night Room (₦45,000 &ndash; ₦50,000 / Night) &bull; Rooms 401–415</option>
               <option value="golden-nest" style="background: #09172e; color: #ffffff;">Golden Nest Room (₦55,000 &ndash; ₦60,000 / Night) &bull; Rooms 416–430</option>
-              <option value="suite" style="background: #09172e; color: #ffffff;">Executive VIP Suite (₦60,000 / Night) &bull; Rooms 422 &amp; 428</option>
+              <option value="suite" style="background: #09172e; color: #ffffff;">Executive VIP Suite (Blissful Breeze) (₦65,000 / Night) &bull; Rooms 422 &amp; 428</option>
               <option value="apartment" style="background: #09172e; color: #ffffff;">Luxury Serviced Apartment (₦160,000 / Night) &bull; 6 Apartments</option>
             </select>
           </div>
@@ -1922,11 +1922,11 @@ get_header();
           </div>
           <h3 class="hp-vip-title">Looking for VIP Suites or 3-Bedroom Serviced Apartments?</h3>
           <p class="hp-vip-subtitle">
-            We offer Royal Treat (₦50k), Executive VIP Suites (₦60k), and fully-furnished 3-Bedroom Luxury Apartments (₦160,000 / night).
+            We offer Royal Treat (₦50k), Executive VIP Suites (Blissful Breeze - ₦65k), and fully-furnished 3-Bedroom Luxury Apartments (₦160,000 / night).
           </p>
           <div class="hp-vip-tier-pills">
             <span class="hp-vip-pill"><strong>Royal Treat</strong> &bull; ₦50,000 / nt</span>
-            <span class="hp-vip-pill"><strong>Executive VIP Suites</strong> &bull; ₦60,000 / nt</span>
+            <span class="hp-vip-pill"><strong>Executive VIP Suites</strong> &bull; ₦65,000 / nt</span>
             <span class="hp-vip-pill hp-vip-pill-highlight"><strong>3-Bed Luxury Apartments</strong> &bull; ₦160,000 / nt</span>
           </div>
         </div>

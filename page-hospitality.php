@@ -309,19 +309,19 @@ get_header();
             <div class="suite-footer">
               <div class="suite-price-block">
                 <span class="suite-price-currency">Tariff Per Night</span>
-                <div class="suite-price-amount">₦60,000<span>/night</span></div>
+                <div class="suite-price-amount">₦65,000<span>/night</span></div>
               </div>
               <div class="suite-action-btns">
                 <button type="button" class="btn btn-primary btn-sm btn-book-room" 
                   data-room-name="Blissful Breeze Suite"
-                  data-room-price="60000"
+                  data-room-price="65000"
                   data-room-branch="Branch 01 • Main Hotel"
                   data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/blissful-breeze-suite.jpg' ); ?>"
                   data-paystack-url="https://paystack.com/buy/blissful-breeze-suite-jrcwry">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
                 </button>
-                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Blissful%20Breeze%20Suite%20(60k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
+                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Blissful%20Breeze%20Suite%20(65k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
               </div>
             </div>
           </div>

@@ -426,7 +426,7 @@ function kelvin_cameo_seo_schema() {
                     'name'           => 'What are the room rates at Kelvin Cameo Resort Hotel?',
                     'acceptedAnswer' => array(
                         '@type' => 'Answer',
-                        'text'  => 'Kelvin Cameo Resort Hotel room rates start from ₦25,000 for Standard Luxury and Annex Deluxe Rooms, ₦30,000 for Superior, ₦35,000 for Executive, ₦40,000 for Studio, ₦45,000 for Prestige, ₦55,000 for Golden Nest Suite, ₦60,000 for Royal Treat Suite and Blissful Breeze Suite, up to ₦200,000 for the 2-Bedroom Royal Retreat Presidential Apartment. All bookings include 24/7 power, air conditioning, flat-screen satellite TV, ensuite bathrooms, and pool access.',
+                        'text'  => 'Kelvin Cameo Resort Hotel room rates start from ₦25,000 for Standard Luxury and Annex Deluxe Rooms, ₦30,000 for Superior, ₦35,000 for Executive, ₦40,000 for Studio, ₦45,000 for Prestige and Love Night Room, ₦55,000 for Golden Nest Suite, ₦60,000 for Royal Treat Suite, ₦65,000 for Blissful Breeze Suite, up to ₦200,000 for the 2-Bedroom Royal Retreat Presidential Apartment. All bookings include 24/7 power, air conditioning, flat-screen satellite TV, ensuite bathrooms, and pool access.',
                     ),
                 ),
                 array(

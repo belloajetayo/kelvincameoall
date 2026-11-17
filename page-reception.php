@@ -2432,7 +2432,7 @@ $reserve_url = home_url('/hospitality/');
                 <option value="all">-- All Room Categories (50 Rooms) --</option>
                 <option value="Love Night Room" data-rate="45000">💖 Love Night Room (₦45,000) • Rooms 401–415</option>
                 <option value="Golden Nest Room" data-rate="55000">🪺 Golden Nest Room (₦55,000) • Rooms 416–430</option>
-                <option value="Blissful Breeze Suite" data-rate="60000">🌬️ Suite (₦60,000) • Rooms 422 & 428</option>
+                <option value="Blissful Breeze Suite" data-rate="65000">🌬️ Suite (₦65,000) • Rooms 422 & 428</option>
                 <option value="UK Room" data-rate="25000">🇬🇧 UK Room (₦25,000) • Rooms 401–414</option>
                 <option value="Luxury Serviced Apartment" data-rate="160000">🏰 Serviced Apartment (₦160,000) • 6 Apartments</option>
               </select>
@@ -2790,8 +2790,8 @@ $reserve_url = home_url('/hospitality/');
               <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Golden Nest Room', 55000, 'Main Hotel', 'Work Desk, Premium Bedding, City View, Smart TV, Ensuite Bath')">
                 🪺 Golden Nest (416–430) (₦55k)
               </button>
-              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Blissful Breeze Suite', 60000, 'Main Hotel', 'Luxury Living Parlour, King Bed, Minibar, Smart TV, VIP Amenities')">
-                🌬️ Suite (422 & 428) (₦60k)
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Blissful Breeze Suite', 65000, 'Main Hotel', 'Luxury Living Parlour, King Bed, Minibar, Smart TV, VIP Amenities')">
+                🌬️ Suite (422 & 428) (₦65k)
               </button>
               <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('UK Room', 25000, 'The Annex', 'Comfort Double Bed, Ensuite Bath, Air Conditioning, Satellite TV, Free Wi-Fi')">
                 🇬🇧 UK Room (401–414) (₦25k)
