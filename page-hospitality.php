@@ -143,29 +143,45 @@ get_header();
       </div>
 
       <!-- ====================================================================
-           BRANCH 01: MAIN HOTEL (Strictly Listed First)
+           REFUNDABLE CAUTION FEE BANNER (Official Policy)
+           ==================================================================== -->
+      <div class="caution-fee-banner" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(6, 78, 59, 0.12) 100%); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: var(--radius-lg); padding: 1.1rem 1.5rem; margin-bottom: 2.25rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: #10b981; color: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <div>
+            <strong style="color: #065f46; font-size: 0.98rem; display: block; margin-bottom: 2px;">CAUTION FEES: 100% REFUNDABLE</strong>
+            <span style="color: #047857; font-size: 0.88rem; line-height: 1.4;">Caution fees will be fully refunded upon check-out, subject to no damages or loss of hotel property.</span>
+          </div>
+        </div>
+        <span class="rc-badge" style="background: #dcfce7; color: #15803d; border-color: #86efac; font-weight: 800; font-size: 0.75rem; padding: 0.35rem 0.85rem;">Guaranteed Refund at Check-out</span>
+      </div>
+
+      <!-- ====================================================================
+           BRANCH 01: KWAMBA BRANCH (Opposite Technical, Suleja)
            ==================================================================== -->
       <div class="branch-section-bar main-bar" data-branch-group="main">
         <div class="branch-bar-title-group">
-          <span class="branch-pill main">Branch 01</span>
+          <span class="branch-pill main">Branch 01 • Kwamba Branch</span>
           <div>
-            <h3 class="branch-bar-heading">Main Hotel — Luxury Rooms, Boutique Suites & Serviced Residences</h3>
-            <p class="branch-bar-sub">Direct access to the swimming pool, gourmet restaurant, cocktail bar, and the 1,000-seat grand banquet auditorium.</p>
+            <h3 class="branch-bar-heading">Kwamba Branch (Opposite Technical, Suleja) — Rooms, Suites & Serviced Residences</h3>
+            <p class="branch-bar-sub">Opposite Technical, Suleja, Niger State. Direct access to Olympic pool, banquet hall, restaurant, cocktail bar, and table tennis.</p>
           </div>
         </div>
-        <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20I%20want%20to%20inquire%20about%20staying%20at%20Branch%2001%20Main%20Hotel" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Inquire Main Hotel</a>
+        <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20I%20want%20to%20inquire%20about%20staying%20at%20Kwamba%20Branch%20(Opposite%20Technical)" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Inquire Kwamba Branch</a>
       </div>
 
       <!-- Main Hotel Suites Grid (Cards 1–5) -->
       <div class="suites-grid" data-branch-grid="main">
 
-        <!-- 1. Love Night Room (Main Hotel - Authentic Photo) -->
+        <!-- 1. Love Night Room (Kwamba Branch - Authentic Photo) -->
         <article class="suite-card" data-room-cat="main">
           <div class="suite-card-media">
-            <span class="suite-branch-badge branch-main">Branch 01 • Main Hotel</span>
+            <span class="suite-branch-badge branch-main">Kwamba Branch • Suleja</span>
             <div class="card-media-slider">
               <div class="card-media-slides">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/love-night-room.jpg' ); ?>" alt="Love Night Room at Kelvin Cameo Resort Hotel" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/love-night-room.jpg' ); ?>" alt="Love Night Room at Kelvin Cameo Resort Hotel Kwamba Branch" class="active" loading="lazy">
                 <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/single-room.jpg' ); ?>" alt="Love Night Room Suite Interior" loading="lazy">
               </div>
               <button type="button" class="card-media-nav prev" aria-label="Previous photo">‹</button>
@@ -193,32 +209,32 @@ get_header();
             </div>
             <div class="suite-footer">
               <div class="suite-price-block">
-                <span class="suite-price-currency">Tariff Per Night</span>
-                <div class="suite-price-amount">₦45,000<span>/night</span></div>
+                <span class="suite-price-currency">Weekday: <strong>₦50,000</strong> &bull; Weekend: <strong>₦45,000</strong></span>
+                <div class="suite-price-amount">₦45,000 &ndash; ₦50,000<span>/night</span></div>
               </div>
               <div class="suite-action-btns">
                 <button type="button" class="btn btn-primary btn-sm btn-book-room" 
                   data-room-name="Love Night Room"
                   data-room-price="45000"
-                  data-room-branch="Branch 01 • Main Hotel"
+                  data-room-branch="Kwamba Branch • Opposite Technical"
                   data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/love-night-room.jpg' ); ?>"
                   data-paystack-url="https://paystack.com/buy/love-night-hdtfxs">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
                 </button>
-                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Love%20Night%20Room%20(45k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
+                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Love%20Night%20Room%20(Weekday%20₦50,000%20/%20Weekend%20₦45,000)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
               </div>
             </div>
           </div>
         </article>
 
-        <!-- 2. Golden Nest Room (Main Hotel - Authentic Photo) -->
+        <!-- 2. Golden Nest Room (Kwamba Branch - Authentic Photo) -->
         <article class="suite-card" data-room-cat="main">
           <div class="suite-card-media">
-            <span class="suite-branch-badge branch-main">Branch 01 • Main Hotel</span>
+            <span class="suite-branch-badge branch-main">Kwamba Branch • Suleja</span>
             <div class="card-media-slider">
               <div class="card-media-slides">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/golden-nest-room.jpg' ); ?>" alt="Golden Nest Room at Kelvin Cameo Resort Hotel" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/golden-nest-room.jpg' ); ?>" alt="Golden Nest Room at Kelvin Cameo Resort Hotel Kwamba Branch" class="active" loading="lazy">
                 <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-purple.jpg' ); ?>" alt="Golden Nest Room Ambience" loading="lazy">
               </div>
               <button type="button" class="card-media-nav prev" aria-label="Previous photo">‹</button>
@@ -235,7 +251,7 @@ get_header();
               <span class="suite-category-label">Warm Executive Sanctuary</span>
               <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.35rem;">
                 <h3 class="suite-name" style="margin:0;">Golden Nest Room</h3>
-                <span class="rc-badge" style="background:#dcfce7; color:#15803d; border-color:#86efac; font-size:0.7rem; font-weight:800; padding:0.2rem 0.6rem;">₦5k Discount</span>
+                <span class="rc-badge" style="background:#dcfce7; color:#15803d; border-color:#86efac; font-size:0.7rem; font-weight:800; padding:0.2rem 0.6rem;">Weekend ₦55k</span>
               </div>
               <p class="suite-desc">
                 Enriched with warm golden undertones, custom acoustic drapery, premium orthopedic king mattress, high-definition satellite TV, and executive workspace.
@@ -249,36 +265,33 @@ get_header();
             </div>
             <div class="suite-footer">
               <div class="suite-price-block">
-                <span class="suite-price-currency">Tariff Per Night • <span style="color:#16a34a; font-weight:700;">Promo Rate</span></span>
-                <div class="suite-price-amount">
-                  <span style="text-decoration:line-through; color:var(--slate-400); font-size:1.05rem; margin-right:0.35rem; font-weight:600;">₦60,000</span>
-                  ₦55,000<span>/night</span>
-                </div>
+                <span class="suite-price-currency">Weekday: <strong>₦60,000</strong> &bull; Weekend: <strong>₦55,000</strong></span>
+                <div class="suite-price-amount">₦55,000 &ndash; ₦60,000<span>/night</span></div>
               </div>
               <div class="suite-action-btns">
                 <button type="button" class="btn btn-primary btn-sm btn-book-room" 
                   data-room-name="Golden Nest Room"
                   data-room-price="55000"
-                  data-room-branch="Branch 01 • Main Hotel"
+                  data-room-branch="Kwamba Branch • Opposite Technical"
                   data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/golden-nest-room.jpg' ); ?>"
                   data-paystack-url="https://paystack.com/buy/golden-nest-ugswqe">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
                 </button>
-                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Golden%20Nest%20Room%20(Discount%20₦55,000/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
+                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Golden%20Nest%20Room%20(Weekday%20₦60,000%20/%20Weekend%20₦55,000)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
               </div>
             </div>
           </div>
         </article>
 
-        <!-- 3. Blissful Breeze Suite (Main Hotel - Authentic Photos) -->
+        <!-- 3. Blissful Breeze Suite (Kwamba Branch - Authentic Bed & Living Photos) -->
         <article class="suite-card" data-room-cat="main">
           <div class="suite-card-media">
-            <span class="suite-branch-badge branch-main">Branch 01 • Main Hotel</span>
+            <span class="suite-branch-badge branch-main">Kwamba Branch • Suleja</span>
             <div class="card-media-slider">
               <div class="card-media-slides">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/blissful-breeze-suite.jpg' ); ?>" alt="Blissful Breeze Suite Living Parlor at Kelvin Cameo Resort Hotel" class="active" loading="lazy">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/blissful-breeze-bedroom.jpg' ); ?>" alt="Blissful Breeze Suite Bedroom" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/blissful-breeze-bedroom.jpg' ); ?>" alt="Blissful Breeze Suite Master Bedroom with King Bed at Kelvin Cameo Resort" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/blissful-breeze-suite.jpg' ); ?>" alt="Blissful Breeze Suite Living Parlor at Kelvin Cameo Resort Hotel" loading="lazy">
                 <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/blissful-breeze-desk.jpg' ); ?>" alt="Blissful Breeze Suite Work Desk and Minibar" loading="lazy">
               </div>
               <button type="button" class="card-media-nav prev" aria-label="Previous photo">‹</button>
@@ -296,41 +309,41 @@ get_header();
               <span class="suite-category-label">Executive Living Suite</span>
               <h3 class="suite-name">Blissful Breeze Suite</h3>
               <p class="suite-desc">
-                Spacious multi-room luxury suite featuring a private living room parlor with plush L-shaped sectional sofa, modern wall art, fluted acoustic panel with smart TV, and ensuite master bedroom with dedicated workstation and minibar fridge.
+                Spacious multi-room luxury suite featuring an ensuite master bedroom with king bed and brown ribbed headboard, private living parlor with plush sectional sofa, smart TV, dedicated workstation, and minibar fridge.
               </p>
               <div class="suite-amenities-row">
+                <span class="suite-amenity-tag">King Bed</span>
                 <span class="suite-amenity-tag">Private Parlor</span>
                 <span class="suite-amenity-tag">Sectional Sofa</span>
                 <span class="suite-amenity-tag">Work Desk</span>
                 <span class="suite-amenity-tag">Minibar Fridge</span>
-                <span class="suite-amenity-tag">Split AC</span>
               </div>
             </div>
             <div class="suite-footer">
               <div class="suite-price-block">
-                <span class="suite-price-currency">Tariff Per Night</span>
-                <div class="suite-price-amount">₦65,000<span>/night</span></div>
+                <span class="suite-price-currency">Weekday: <strong>₦75,000</strong> &bull; Weekend: <strong>₦65,000</strong></span>
+                <div class="suite-price-amount">₦65,000 &ndash; ₦75,000<span>/night</span></div>
               </div>
               <div class="suite-action-btns">
                 <button type="button" class="btn btn-primary btn-sm btn-book-room" 
                   data-room-name="Blissful Breeze Suite"
                   data-room-price="65000"
-                  data-room-branch="Branch 01 • Main Hotel"
-                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/blissful-breeze-suite.jpg' ); ?>"
+                  data-room-branch="Kwamba Branch • Opposite Technical"
+                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/blissful-breeze-bedroom.jpg' ); ?>"
                   data-paystack-url="https://paystack.com/buy/blissful-breeze-suite-jrcwry">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
                 </button>
-                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Blissful%20Breeze%20Suite%20(65k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
+                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Blissful%20Breeze%20Suite%20(Weekday%20₦75,000%20/%20Weekend%20₦65,000)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
               </div>
             </div>
           </div>
         </article>
 
-        <!-- 4. Luxury Retreat Apartment (Main Hotel) -->
+        <!-- 4. Luxury Retreat Apartment (Kwamba Branch) -->
         <article class="suite-card" data-room-cat="main">
           <div class="suite-card-media">
-            <span class="suite-branch-badge branch-main">Branch 01 • Main Hotel</span>
+            <span class="suite-branch-badge branch-main">Kwamba Branch • Suleja</span>
             <div class="card-media-slider">
               <div class="card-media-slides">
                 <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-lounge.jpg' ); ?>" alt="Luxury Retreat Apartment Lounge" class="active" loading="lazy">
@@ -361,29 +374,29 @@ get_header();
             </div>
             <div class="suite-footer">
               <div class="suite-price-block">
-                <span class="suite-price-currency">Tariff Per Night</span>
-                <div class="suite-price-amount">₦160,000<span>/night</span></div>
+                <span class="suite-price-currency">Weekday: <strong>₦160,000</strong> &bull; Weekend: <strong>₦150,000</strong></span>
+                <div class="suite-price-amount">₦150,000 &ndash; ₦160,000<span>/night</span></div>
               </div>
               <div class="suite-action-btns">
                 <button type="button" class="btn btn-primary btn-sm btn-book-room" 
                   data-room-name="Luxury Retreat Apartment"
-                  data-room-price="160000"
-                  data-room-branch="Branch 01 • Main Hotel"
+                  data-room-price="150000"
+                  data-room-branch="Kwamba Branch • Opposite Technical"
                   data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-lounge.jpg' ); ?>"
                   data-paystack-url="https://paystack.com/buy/luxury-retreat-apartment-nvadhl">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
                 </button>
-                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Luxury%20Retreat%20Apartment%20(160k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
+                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Luxury%20Retreat%20Apartment%20(Weekday%20₦160,000%20/%20Weekend%20₦150,000)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
               </div>
             </div>
           </div>
         </article>
 
-        <!-- 5. Royal Retreat Apartment (Main Hotel) -->
+        <!-- 5. Royal Retreat Apartment (Kwamba Branch) -->
         <article class="suite-card" data-room-cat="main">
           <div class="suite-card-media">
-            <span class="suite-branch-badge branch-main">Branch 01 • Main Hotel</span>
+            <span class="suite-branch-badge branch-main">Kwamba Branch • Suleja</span>
             <div class="card-media-slider">
               <div class="card-media-slides">
                 <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-hall.jpg' ); ?>" alt="Royal Retreat Apartment Presidential Suite" class="active" loading="lazy">
@@ -414,20 +427,20 @@ get_header();
             </div>
             <div class="suite-footer">
               <div class="suite-price-block">
-                <span class="suite-price-currency">Tariff Per Night</span>
-                <div class="suite-price-amount">₦200,000<span>/night</span></div>
+                <span class="suite-price-currency">Weekday: <strong>₦180,000</strong> &bull; Weekend: <strong>₦170,000</strong></span>
+                <div class="suite-price-amount">₦170,000 &ndash; ₦180,000<span>/night</span></div>
               </div>
               <div class="suite-action-btns">
                 <button type="button" class="btn btn-primary btn-sm btn-book-room" 
                   data-room-name="Royal Retreat Apartment"
-                  data-room-price="200000"
-                  data-room-branch="Branch 01 • Main Hotel"
+                  data-room-price="170000"
+                  data-room-branch="Kwamba Branch • Opposite Technical"
                   data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-hall.jpg' ); ?>"
                   data-paystack-url="https://paystack.com/buy/royal-retreat-apartment-twvshd">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
                 </button>
-                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Royal%20Retreat%20Apartment%20(200k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
+                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Royal%20Retreat%20Apartment%20(Weekday%20₦180,000%20/%20Weekend%20₦170,000)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
               </div>
             </div>
           </div>
@@ -437,29 +450,29 @@ get_header();
 
 
       <!-- ====================================================================
-           BRANCH 02: THE ANNEX (Strictly Listed Second)
+           BRANCH 02: OYUS BRANCH (Oyus, Suleja)
            ==================================================================== -->
       <div class="branch-section-bar annex-bar" data-branch-group="annex">
         <div class="branch-bar-title-group">
-          <span class="branch-pill annex">Branch 02</span>
+          <span class="branch-pill annex">Branch 02 • Oyus Branch</span>
           <div>
-            <h3 class="branch-bar-heading">The Annex Branch — Executive Rooms & Royal Treat Suite</h3>
-            <p class="branch-bar-sub">Affordable business comfort, quiet residential privacy, and modern executive suites from ₦25,000/night.</p>
+            <h3 class="branch-bar-heading">Oyus Branch (Oyus, Suleja) — Executive Rooms & Royal Treat Suite</h3>
+            <p class="branch-bar-sub">Oyus, Suleja, Niger State. Affordable business comfort, quiet residential privacy, and modern executive suites from ₦23,000/night.</p>
           </div>
         </div>
-        <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20I%20want%20to%20inquire%20about%20staying%20at%20The%20Annex%20Branch" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Inquire The Annex</a>
+        <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20I%20want%20to%20inquire%20about%20staying%20at%20Oyus%20Branch%20(Oyus,%20Suleja)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">Inquire Oyus Branch</a>
       </div>
 
       <!-- The Annex Suites Grid (Cards 6–10) -->
       <div class="suites-grid" data-branch-grid="annex">
 
-        <!-- 6. Deluxe Room (Annex - Authentic Photos) -->
+        <!-- 6. Deluxe Room (Oyus Branch - Authentic Photos) -->
         <article class="suite-card" data-room-cat="annex">
           <div class="suite-card-media">
-            <span class="suite-branch-badge branch-annex">Branch 02 • The Annex</span>
+            <span class="suite-branch-badge branch-annex">Oyus Branch • Suleja</span>
             <div class="card-media-slider">
               <div class="card-media-slides">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/deluxe-room.jpg' ); ?>" alt="Deluxe Room Queen Bed with Burgundy Headboard at Kelvin Cameo Resort Annex" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/deluxe-room.jpg' ); ?>" alt="Deluxe Room Queen Bed with Burgundy Headboard at Kelvin Cameo Resort Oyus Branch" class="active" loading="lazy">
                 <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/deluxe-room-tv.jpg' ); ?>" alt="Deluxe Room Wall TV and Marble Workstation" loading="lazy">
                 <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/deluxe-room-bath.jpg' ); ?>" alt="Deluxe Room Ensuite Bathroom with Water Heater and Shower" loading="lazy">
                 <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/deluxe-room-overview.jpg' ); ?>" alt="Deluxe Room Interior Layout" loading="lazy">
@@ -480,7 +493,7 @@ get_header();
               <span class="suite-category-label">Standard Luxury</span>
               <h3 class="suite-name">Deluxe Room <span style="font-size:0.85rem; font-weight:700; color:#d4af37;">(UK Room)</span></h3>
               <p class="suite-desc">
-                Cozy, modern retreat at The Annex featuring a dedicated marble-top workstation with wardrobe, wall-mounted satellite TV, and contemporary ensuite bathroom with electric water heater and glass shower enclosure.
+                Cozy, modern retreat at Oyus Branch featuring a dedicated marble-top workstation with wardrobe, wall-mounted satellite TV, and contemporary ensuite bathroom with electric water heater and glass shower enclosure.
               </p>
               <div class="suite-amenities-row">
                 <span class="suite-amenity-tag">Queen Bed</span>
@@ -492,32 +505,32 @@ get_header();
             </div>
             <div class="suite-footer">
               <div class="suite-price-block">
-                <span class="suite-price-currency">Tariff Per Night</span>
-                <div class="suite-price-amount">₦25,000<span>/night</span></div>
+                <span class="suite-price-currency">Weekday: <strong>₦25,000</strong> &bull; Weekend: <strong>₦23,000</strong></span>
+                <div class="suite-price-amount">₦23,000 &ndash; ₦25,000<span>/night</span></div>
               </div>
               <div class="suite-action-btns">
                 <button type="button" class="btn btn-primary btn-sm btn-book-room" 
                   data-room-name="Deluxe Room"
-                  data-room-price="25000"
-                  data-room-branch="Branch 02 • The Annex"
+                  data-room-price="23000"
+                  data-room-branch="Oyus Branch • Oyus, Suleja"
                   data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/deluxe-room.jpg' ); ?>"
                   data-paystack-url="https://paystack.com/buy/deluxe-room-fgzwtc">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
                 </button>
-                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Deluxe%20Room%20(25k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
+                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Deluxe%20Room%20(Weekday%20₦25,000%20/%20Weekend%20₦23,000)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
               </div>
             </div>
           </div>
         </article>
 
-        <!-- 7. Executive Room (The Annex - Authentic Photos) -->
+        <!-- 7. Executive Room (Oyus Branch - Authentic Photos) -->
         <article class="suite-card" data-room-cat="annex">
           <div class="suite-card-media">
-            <span class="suite-branch-badge branch-annex">Branch 02 • The Annex</span>
+            <span class="suite-branch-badge branch-annex">Oyus Branch • Suleja</span>
             <div class="card-media-slider">
               <div class="card-media-slides">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/executive-room.jpg' ); ?>" alt="Executive Room at Kelvin Cameo Resort The Annex" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/executive-room.jpg' ); ?>" alt="Executive Room at Kelvin Cameo Resort Oyus Branch" class="active" loading="lazy">
                 <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/executive-room-desk.jpg' ); ?>" alt="Executive Room Work Desk, Wardrobe, and TV" loading="lazy">
                 <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/executive-room-bath.jpg' ); ?>" alt="Executive Room Ensuite Bathroom with Water Heater and Shower" loading="lazy">
               </div>
@@ -548,32 +561,32 @@ get_header();
             </div>
             <div class="suite-footer">
               <div class="suite-price-block">
-                <span class="suite-price-currency">Tariff Per Night</span>
-                <div class="suite-price-amount">₦30,000<span>/night</span></div>
+                <span class="suite-price-currency">Weekday: <strong>₦35,000</strong> &bull; Weekend: <strong>₦30,000</strong></span>
+                <div class="suite-price-amount">₦30,000 &ndash; ₦35,000<span>/night</span></div>
               </div>
               <div class="suite-action-btns">
                 <button type="button" class="btn btn-primary btn-sm btn-book-room" 
                   data-room-name="Executive Room"
                   data-room-price="30000"
-                  data-room-branch="Branch 02 • The Annex"
+                  data-room-branch="Oyus Branch • Oyus, Suleja"
                   data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/executive-room.jpg' ); ?>"
                   data-paystack-url="https://paystack.com/buy/executive-room-qyjqms">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
                 </button>
-                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Executive%20Room%20(30k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
+                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Executive%20Room%20(Weekday%20₦35,000%20/%20Weekend%20₦30,000)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
               </div>
             </div>
           </div>
         </article>
 
-        <!-- 8. Sunset Room (Annex) -->
+        <!-- 8. Sunset Room (Oyus Branch) -->
         <article class="suite-card" data-room-cat="annex">
           <div class="suite-card-media">
-            <span class="suite-branch-badge branch-annex">Branch 02 • The Annex</span>
+            <span class="suite-branch-badge branch-annex">Oyus Branch • Suleja</span>
             <div class="card-media-slider">
               <div class="card-media-slides">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-sunset.jpg' ); ?>" alt="Sunset Room at Kelvin Cameo Resort Annex" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-sunset.jpg' ); ?>" alt="Sunset Room at Kelvin Cameo Resort Oyus Branch" class="active" loading="lazy">
                 <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/single-room.jpg' ); ?>" alt="Sunset Room View" loading="lazy">
               </div>
               <button type="button" class="card-media-nav prev" aria-label="Previous photo">‹</button>
@@ -601,32 +614,32 @@ get_header();
             </div>
             <div class="suite-footer">
               <div class="suite-price-block">
-                <span class="suite-price-currency">Tariff Per Night</span>
-                <div class="suite-price-amount">₦35,000<span>/night</span></div>
+                <span class="suite-price-currency">Weekday: <strong>₦40,000</strong> &bull; Weekend: <strong>₦35,000</strong></span>
+                <div class="suite-price-amount">₦35,000 &ndash; ₦40,000<span>/night</span></div>
               </div>
               <div class="suite-action-btns">
                 <button type="button" class="btn btn-primary btn-sm btn-book-room" 
                   data-room-name="Sunset Room"
                   data-room-price="35000"
-                  data-room-branch="Branch 02 • The Annex"
+                  data-room-branch="Oyus Branch • Oyus, Suleja"
                   data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-sunset.jpg' ); ?>"
                   data-paystack-url="https://paystack.com/buy/sunset-room-nxwzrk">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
                 </button>
-                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Sunset%20Room%20(35k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
+                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Sunset%20Room%20(Weekday%20₦40,000%20/%20Weekend%20₦35,000)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
               </div>
             </div>
           </div>
         </article>
 
-        <!-- 9. Prestige Room (Annex) -->
+        <!-- 9. Prestige Room (Oyus Branch) -->
         <article class="suite-card" data-room-cat="annex">
           <div class="suite-card-media">
-            <span class="suite-branch-badge branch-annex">Branch 02 • The Annex</span>
+            <span class="suite-branch-badge branch-annex">Oyus Branch • Suleja</span>
             <div class="card-media-slider">
               <div class="card-media-slides">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-prestige.jpg' ); ?>" alt="Prestige Room at Kelvin Cameo Resort Annex" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-prestige.jpg' ); ?>" alt="Prestige Room at Kelvin Cameo Resort Oyus Branch" class="active" loading="lazy">
                 <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/suite-lounge.jpg' ); ?>" alt="Prestige Room Amenities" loading="lazy">
               </div>
               <button type="button" class="card-media-nav prev" aria-label="Previous photo">‹</button>
@@ -654,37 +667,37 @@ get_header();
             </div>
             <div class="suite-footer">
               <div class="suite-price-block">
-                <span class="suite-price-currency">Tariff Per Night</span>
-                <div class="suite-price-amount">₦45,000<span>/night</span></div>
+                <span class="suite-price-currency">Weekday: <strong>₦45,000</strong> &bull; Weekend: <strong>₦40,000</strong></span>
+                <div class="suite-price-amount">₦40,000 &ndash; ₦45,000<span>/night</span></div>
               </div>
               <div class="suite-action-btns">
                 <button type="button" class="btn btn-primary btn-sm btn-book-room" 
                   data-room-name="Prestige Room"
-                  data-room-price="45000"
-                  data-room-branch="Branch 02 • The Annex"
+                  data-room-price="40000"
+                  data-room-branch="Oyus Branch • Oyus, Suleja"
                   data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/room-prestige.jpg' ); ?>"
                   data-paystack-url="https://paystack.com/buy/prestige-lknrmy">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
                 </button>
-                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Prestige%20Room%20(45k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
+                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Prestige%20Room%20(Weekday%20₦45,000%20/%20Weekend%20₦40,000)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
               </div>
             </div>
           </div>
         </article>
 
-        <!-- 10. Royal Treat Suite (Annex Regal Suite) -->
+        <!-- 10. Royal Treat Suite (Oyus Branch Regal Suite) -->
         <article class="suite-card" data-room-cat="annex">
           <div class="suite-card-media">
-            <span class="suite-branch-badge branch-annex">Branch 02 • The Annex</span>
-            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/suite-lounge.jpg' ); ?>" alt="Royal Treat Suite at Kelvin Cameo Resort Annex" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
+            <span class="suite-branch-badge branch-annex">Oyus Branch • Suleja</span>
+            <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/suite-lounge.jpg' ); ?>" alt="Royal Treat Suite at Kelvin Cameo Resort Oyus Branch" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
           </div>
           <div class="suite-card-body">
             <div>
-              <span class="suite-category-label">Regal Annex Suite</span>
+              <span class="suite-category-label">Regal Suite</span>
               <h3 class="suite-name">Royal Treat Suite</h3>
               <p class="suite-desc">
-                The crown jewel suite of The Annex branch. Indulge in regal comfort featuring an expansive master bedroom, gold-accented fixtures, separate guest powder room, and personalized 24-hour butler service.
+                The crown jewel suite of Oyus Branch. Indulge in regal comfort featuring an expansive master bedroom, gold-accented fixtures, separate guest powder room, and personalized 24-hour butler service.
               </p>
               <div class="suite-amenities-row">
                 <span class="suite-amenity-tag">Regal Finish</span>
@@ -695,26 +708,26 @@ get_header();
             </div>
             <div class="suite-footer">
               <div class="suite-price-block">
-                <span class="suite-price-currency">Tariff Per Night</span>
-                <div class="suite-price-amount">₦60,000<span>/night</span></div>
+                <span class="suite-price-currency">Weekday: <strong>₦60,000</strong> &bull; Weekend: <strong>₦55,000</strong></span>
+                <div class="suite-price-amount">₦55,000 &ndash; ₦60,000<span>/night</span></div>
               </div>
               <div class="suite-action-btns">
                 <button type="button" class="btn btn-primary btn-sm btn-book-room" 
                   data-room-name="Royal Treat Suite"
-                  data-room-price="60000"
-                  data-room-branch="Branch 02 • The Annex"
+                  data-room-price="55000"
+                  data-room-branch="Oyus Branch • Oyus, Suleja"
                   data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/suite-lounge.jpg' ); ?>"
                   data-paystack-url="">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
                 </button>
-                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Royal%20Treat%20Suite%20Annex%20(60k/night)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
+                <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo%20Resort,%20I%20am%20interested%20in%20the%20Royal%20Treat%20Suite%20Oyus%20Branch%20(Weekday%20₦60,000%20/%20Weekend%20₦55,000)" target="_blank" rel="noopener" class="btn btn-secondary btn-sm">WhatsApp</a>
               </div>
             </div>
           </div>
         </article>
 
-      </div> <!-- /.suites-grid (The Annex) -->
+      </div> <!-- /.suites-grid (Oyus Branch) -->
 
     </div>
   </section>
@@ -804,12 +817,15 @@ get_header();
             </div>
           </div>
 
-          <!-- Option 2: À La Carte / Space Only (₦850,000) -->
+          <!-- Option 2: No Package / Space Only (Weekday ₦850k / Weekend ₦800k) -->
           <div class="banquet-tier-card">
             <div>
-              <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--slate-400); font-weight:700;">Standard Space Rental</span>
-              <h4 class="banquet-tier-title">À La Carte / Space Only</h4>
-              <div class="banquet-tier-price" style="color:var(--white);">₦850,000</div>
+              <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--slate-400); font-weight:700;">Standard Space Rental • Without Chairs / Tables</span>
+              <h4 class="banquet-tier-title">Hall No Package</h4>
+              <div class="banquet-tier-price" style="color:var(--white);">₦800k &ndash; ₦850k</div>
+              <div style="font-size:0.82rem; color:var(--slate-300); margin-top:-0.5rem; margin-bottom:1rem; font-weight:600;">
+                Weekday (Mon&ndash;Thu): <strong style="color:#fff;">₦850,000</strong> &bull; Weekend (Fri&ndash;Sun): <strong style="color:var(--orange-400);">₦800,000</strong>
+              </div>
               <div class="banquet-perks-list">
                 <div class="banquet-perk-item">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -834,18 +850,21 @@ get_header();
               </div>
             </div>
             <div>
-              <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20I%20want%20to%20inquire%20about%20the%20A%20La%20Carte%20Space%20Only%20Banquet%20Package%20(850,000)" target="_blank" rel="noopener" class="btn btn-secondary btn-lg" style="width:100%; margin-bottom:0.75rem;">Inquire via WhatsApp</a>
+              <a href="https://wa.me/2348055558197?text=Hello%20Kelvin%20Cameo,%20I%20want%20to%20inquire%20about%20the%20Hall%20No%20Package%20(Weekday%20850k%20/%20Weekend%20800k)" target="_blank" rel="noopener" class="btn btn-secondary btn-lg" style="width:100%; margin-bottom:0.75rem;">Inquire via WhatsApp</a>
               <a href="#banquet-checker" class="btn btn-outline-white btn-sm" style="width:100%; display:block; text-align:center;">Check Date Availability</a>
             </div>
           </div>
 
-          <!-- Option 3: Celebrations Full Package (₦1,050,000) -->
+          <!-- Option 3: Full Package with Chairs / Tables (Weekday ₦1.05M / Weekend ₦1.0M) -->
           <div class="banquet-tier-card featured">
             <span class="banquet-tier-ribbon">Most Popular</span>
             <div>
-              <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--orange-400); font-weight:700;">All-Inclusive Production</span>
-              <h4 class="banquet-tier-title">Celebrations Full Package</h4>
-              <div class="banquet-tier-price">₦1,050,000</div>
+              <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--orange-400); font-weight:700;">Complete Setup • With Chairs &amp; Tables</span>
+              <h4 class="banquet-tier-title">Hall Full Package</h4>
+              <div class="banquet-tier-price">₦1.0M &ndash; ₦1.05M</div>
+              <div style="font-size:0.82rem; color:var(--slate-300); margin-top:-0.5rem; margin-bottom:1rem; font-weight:600;">
+                Weekday (Mon&ndash;Thu): <strong style="color:#fff;">₦1,050,000</strong> &bull; Weekend (Fri&ndash;Sun): <strong style="color:var(--orange-400);">₦1,000,000</strong>
+              </div>
               <div class="banquet-perks-list">
                 <div class="banquet-perk-item">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -1179,17 +1198,22 @@ get_header();
       </div>
 
       <div class="capabilities-grid">
-        <!-- Amenity 1: Swimming Pool -->
+        <!-- Amenity 1: Swimming Pool (Official Tariff) -->
         <div class="capability-card" style="padding:0; overflow:hidden; display:flex; flex-direction:column; border-radius:var(--radius-xl); border:1px solid var(--slate-200); background:var(--white); box-shadow:var(--shadow-sm);">
           <div style="position:relative; height:200px; overflow:hidden;">
             <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/swimming-pool-pergola.jpg' ); ?>" alt="Kelvin Cameo Resort Swimming Pool & Pergola" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
-            <span style="position:absolute; top:12px; right:12px; background:rgba(2,132,199,0.92); backdrop-filter:blur(4px); color:#fff; font-size:0.75rem; font-weight:800; padding:4px 10px; border-radius:999px;">₦3,000 / Day Pass</span>
+            <span style="position:absolute; top:12px; right:12px; background:rgba(2,132,199,0.92); backdrop-filter:blur(4px); color:#fff; font-size:0.75rem; font-weight:800; padding:4px 10px; border-radius:999px;">From ₦3,000 / Person</span>
           </div>
           <div style="padding:1.75rem; flex:1; display:flex; flex-direction:column;">
             <h4 style="font-family:var(--font-display); font-size:1.25rem; font-weight:800; color:var(--navy-900); margin-bottom:0.6rem;">Pristine Swimming Pool & Pergola Lounge</h4>
-            <p style="flex:1; color:var(--slate-600); font-size:0.9rem; line-height:1.6; margin-bottom:1.25rem;">
-              Crystal-clear outdoor pool equipped with water fountain jets, stainless steel safety rails, and a sheltered ivy-covered pergola terrace with artificial turf and seating. Free for in-house residents; accessible to daytime visitors for <strong>₦3,000 per entry</strong>.
+            <p style="flex:1; color:var(--slate-600); font-size:0.9rem; line-height:1.6; margin-bottom:1rem;">
+              Crystal-clear outdoor pool equipped with water fountain jets, stainless steel safety rails, and ivy pergola terrace. Entry rates per person:
             </p>
+            <div style="background:#f8fafc; border:1px solid var(--slate-200); border-radius:var(--radius-md); padding:0.75rem 1rem; margin-bottom:1.25rem; font-size:0.85rem; line-height:1.6;">
+              <div>• <strong>Weekday (Mon&ndash;Thu):</strong> <span style="color:var(--navy-900); font-weight:700;">₦4,000</span></div>
+              <div>• <strong>Weekend (Fri&ndash;Sun):</strong> <span style="color:var(--orange-600); font-weight:700;">₦3,500</span></div>
+              <div>• <strong>More than 2 Persons:</strong> <span style="color:#16a34a; font-weight:700;">₦3,000 / person</span></div>
+            </div>
             <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
               <span class="rc-badge" style="font-size:0.7rem; background:#e0f2fe; color:#0369a1; border-color:#bae6fd;">Water Fountain Jets</span>
               <span class="rc-badge" style="font-size:0.7rem; background:#e0f2fe; color:#0369a1; border-color:#bae6fd;">Ivy Pergola Terrace</span>
@@ -1198,17 +1222,28 @@ get_header();
           </div>
         </div>
 
-        <!-- Amenity 2: Snooker & Games Lounge -->
+        <!-- Amenity 2: Snooker & Table Tennis Lounge -->
         <div class="capability-card" style="padding:0; overflow:hidden; display:flex; flex-direction:column; border-radius:var(--radius-xl); border:1px solid var(--slate-200); background:var(--white); box-shadow:var(--shadow-sm);">
           <div style="position:relative; height:200px; overflow:hidden;">
             <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/lounge-pool-table.jpg' ); ?>" alt="Billiards & Snooker Lounge" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
-            <span style="position:absolute; top:12px; right:12px; background:rgba(15,76,129,0.92); backdrop-filter:blur(4px); color:#fff; font-size:0.75rem; font-weight:800; padding:4px 10px; border-radius:999px;">Clubhouse Hub</span>
+            <span style="position:absolute; top:12px; right:12px; background:rgba(15,76,129,0.92); backdrop-filter:blur(4px); color:#fff; font-size:0.75rem; font-weight:800; padding:4px 10px; border-radius:999px;">Snooker ₦1,000 &bull; Table Tennis FREE</span>
           </div>
           <div style="padding:1.75rem; flex:1; display:flex; flex-direction:column;">
-            <h4 style="font-family:var(--font-display); font-size:1.25rem; font-weight:800; color:var(--navy-900); margin-bottom:0.6rem;">Billiards & Games Lounge</h4>
-            <p style="flex:1; color:var(--slate-600); font-size:0.9rem; line-height:1.6; margin-bottom:1.25rem;">
-              Championship-grade snooker and pool tables, board games, high-definition sports screens, and craft cocktails. The perfect evening hub to network or kick back with friends.
+            <h4 style="font-family:var(--font-display); font-size:1.25rem; font-weight:800; color:var(--navy-900); margin-bottom:0.6rem;">Billiards, Snooker & Table Tennis</h4>
+            <p style="flex:1; color:var(--slate-600); font-size:0.9rem; line-height:1.6; margin-bottom:1rem;">
+              Championship-grade recreation lounge equipped for leisure, friendly tournaments, and social networking:
             </p>
+            <div style="background:#f8fafc; border:1px solid var(--slate-200); border-radius:var(--radius-md); padding:0.75rem 1rem; margin-bottom:1.25rem; font-size:0.85rem; line-height:1.6;">
+              <div>• <strong>Snooker Board:</strong> <span style="color:var(--navy-900); font-weight:700;">₦1,000</span> (Both Branches)</div>
+              <div>• <strong>Table Tennis:</strong> <span style="color:#16a34a; font-weight:800;">FREE</span> (Kwamba Branch)</div>
+            </div>
+            <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+              <span class="rc-badge" style="font-size:0.7rem; background:#f1f5f9; color:#334155; border-color:#cbd5e1;">Tournament Tables</span>
+              <span class="rc-badge" style="font-size:0.7rem; background:#f1f5f9; color:#334155; border-color:#cbd5e1;">Sports Broadcasts</span>
+              <span class="rc-badge" style="font-size:0.7rem; background:#f1f5f9; color:#334155; border-color:#cbd5e1;">Cocktail Bar</span>
+            </div>
+          </div>
+        </div>
             <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
               <span class="rc-badge" style="font-size:0.7rem; background:#f1f5f9; color:#334155; border-color:#cbd5e1;">Tournament Tables</span>
               <span class="rc-badge" style="font-size:0.7rem; background:#f1f5f9; color:#334155; border-color:#cbd5e1;">Sports Broadcasts</span>
@@ -1538,17 +1573,17 @@ get_header();
             <div style="background:var(--white); border:1px solid var(--slate-200); border-radius:var(--radius-md); padding:1rem 1.25rem; margin-bottom:1.25rem;">
               <div style="display:flex; flex-direction:column; gap:0.65rem; font-size:0.85rem; color:var(--slate-700);">
                 <div>
-                  <strong style="color:var(--orange-600);">• Branch 01 (Main Hotel & Grand Auditorium):</strong> 
-                  Abuja–Kaduna Expressway Corridor, Suleja, Niger State (Pool, Banquet Hall, Dining).
+                  <strong style="color:var(--orange-600);">• Kwamba Branch:</strong> 
+                  Opposite Technical, Suleja, Niger State (Olympic Pool, 1,000-Seat Hall, Table Tennis &amp; Dining).
                 </div>
                 <div>
-                  <strong style="color:#0284c7;">• Branch 02 (The Annex):</strong> 
-                  Executive Residential Quarter, Suleja, Niger State (Deluxe Rooms & Royal Treat Suite).
+                  <strong style="color:#0284c7;">• Oyus Branch:</strong> 
+                  Oyus, Suleja, Niger State (Deluxe Rooms, Executive Rooms &amp; Royal Treat Suite).
                 </div>
                 <div>
-                  <strong style="color:var(--navy-900);">• Direct Concierge Desk:</strong> 
-                  <a href="tel:+2348055558197" style="color:var(--navy-900); font-weight:700;">+234 805 555 8197</a> | 
-                  <a href="mailto:concierge@kelvincameo.com" style="color:var(--navy-900); font-weight:700;">concierge@kelvincameo.com</a>
+                  <strong style="color:var(--navy-900);">• Reservations &amp; Enquiries:</strong> 
+                  <a href="tel:+2348055558197" style="color:var(--navy-900); font-weight:700;">08055558197</a> | 
+                  <a href="tel:+2348036195957" style="color:var(--navy-900); font-weight:700;">08036195957</a>
                 </div>
               </div>
             </div>

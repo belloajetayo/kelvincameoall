@@ -2430,11 +2430,16 @@ $reserve_url = home_url('/hospitality/');
               <label>Room Category / Type</label>
               <select id="bookingCategorySelect" class="form-control" onchange="KCHotelApp.onBookingCategoryChange(this.value)">
                 <option value="all">-- All Room Categories (50 Rooms) --</option>
-                <option value="Love Night Room" data-rate="45000">💖 Love Night Room (₦45,000) • Rooms 401–415</option>
-                <option value="Golden Nest Room" data-rate="55000">🪺 Golden Nest Room (₦55,000) • Rooms 416–430</option>
-                <option value="Blissful Breeze Suite" data-rate="65000">🌬️ Suite (₦65,000) • Rooms 422 & 428</option>
-                <option value="UK Room" data-rate="25000">🇬🇧 UK Room (₦25,000) • Rooms 401–414</option>
-                <option value="Luxury Serviced Apartment" data-rate="160000">🏰 Serviced Apartment (₦160,000) • 6 Apartments</option>
+                <option value="Love Night Room" data-rate="45000">💖 Love Night Room (₦45k–₦50k) • Kwamba Branch</option>
+                <option value="Golden Nest Room" data-rate="55000">🪺 Golden Nest Room (₦55k–₦60k) • Kwamba Branch</option>
+                <option value="Blissful Breeze Suite" data-rate="65000">🌬️ Blissful Breeze Suite (₦65k–₦75k) • Kwamba Branch</option>
+                <option value="Luxury Serviced Apartment" data-rate="150000">🏰 Luxury Retreat Apartment (₦150k–₦160k) • Kwamba Branch</option>
+                <option value="Royal Retreat Apartment" data-rate="170000">👑 Royal Retreat Penthouse (₦170k–₦180k) • Kwamba Branch</option>
+                <option value="UK Room" data-rate="23000">🇬🇧 Deluxe / UK Room (₦23k–₦25k) • Oyus Branch</option>
+                <option value="Executive Room" data-rate="30000">💼 Executive Room (₦30k–₦35k) • Oyus Branch</option>
+                <option value="Sunset Room" data-rate="35000">🌅 Sunset Room (₦35k–₦40k) • Oyus Branch</option>
+                <option value="Prestige Room" data-rate="40000">✨ Prestige Room (₦40k–₦45k) • Oyus Branch</option>
+                <option value="Royal Treat Suite" data-rate="55000">💎 Royal Treat Suite (₦55k–₦60k) • Oyus Branch</option>
               </select>
             </div>
             <div class="form-group">
@@ -2784,20 +2789,35 @@ $reserve_url = home_url('/hospitality/');
               ⚡ Quick Preset Categories (Click to Auto-Fill):
             </div>
             <div style="display: flex; flex-wrap: wrap; gap: 6px;">
-              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Love Night Room', 45000, 'Main Hotel', 'King Bed, Ambient Mood Lighting, Ensuite Bath, Satellite TV, Free Wi-Fi')">
-                💖 Love Night (401–415) (₦45k)
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Love Night Room', 45000, 'Kwamba Branch', 'King Bed, Ambient Mood Lighting, Ensuite Bath, Satellite TV, Free Wi-Fi')">
+                💖 Love Night (₦45k–₦50k)
               </button>
-              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Golden Nest Room', 55000, 'Main Hotel', 'Work Desk, Premium Bedding, City View, Smart TV, Ensuite Bath')">
-                🪺 Golden Nest (416–430) (₦55k)
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Golden Nest Room', 55000, 'Kwamba Branch', 'Work Desk, Premium Bedding, City View, Smart TV, Ensuite Bath')">
+                🪺 Golden Nest (₦55k–₦60k)
               </button>
-              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Blissful Breeze Suite', 65000, 'Main Hotel', 'Luxury Living Parlour, King Bed, Minibar, Smart TV, VIP Amenities')">
-                🌬️ Suite (422 & 428) (₦65k)
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Blissful Breeze Suite', 65000, 'Kwamba Branch', 'Luxury Living Parlour, Master King Bed, Minibar, Smart TV, VIP Amenities')">
+                🌬️ Blissful Breeze (₦65k–₦75k)
               </button>
-              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('UK Room', 25000, 'The Annex', 'Comfort Double Bed, Ensuite Bath, Air Conditioning, Satellite TV, Free Wi-Fi')">
-                🇬🇧 UK Room (401–414) (₦25k)
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Luxury Retreat Apartment', 150000, 'Kwamba Branch', 'Serviced Apartment, Full Kitchenette, Executive Living Room, 24/7 Security')">
+                🏰 Luxury Retreat (₦150k–₦160k)
               </button>
-              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Luxury Serviced Apartment', 160000, 'Main Hotel', '2/3 Bedroom Serviced Apartment, Full Kitchen, Executive Living Room, 24/7 Security')">
-                🏰 Serviced Apartment (1–6) (₦160k)
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Royal Retreat Apartment', 170000, 'Kwamba Branch', 'Presidential Penthouse, 2 Bedrooms, Dual Baths, Butler Service, 65-inch 4K TV')">
+                👑 Royal Retreat (₦170k–₦180k)
+              </button>
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Deluxe Room', 23000, 'Oyus Branch', 'Comfort Queen Bed, Ensuite Bath, Air Conditioning, Satellite TV, Free Wi-Fi')">
+                🇬🇧 Deluxe / UK Room (₦23k–₦25k)
+              </button>
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Executive Room', 30000, 'Oyus Branch', 'Emerald Ribbed Bed, Marble Workstation, Water Heater, Intercom Phone')">
+                💼 Executive Room (₦30k–₦35k)
+              </button>
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Sunset Room', 35000, 'Oyus Branch', 'Scenic Sunset Views, Reading Sofa, Mini Fridge, Tea Station, King Rest')">
+                🌅 Sunset Room (₦35k–₦40k)
+              </button>
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Prestige Room', 40000, 'Oyus Branch', 'Acoustic Soundproofing, Luxury Linens, Smart TV, Daily Housekeeping')">
+                ✨ Prestige Room (₦40k–₦45k)
+              </button>
+              <button type="button" class="btn btn-outline-light btn-sm" onclick="KCHotelApp.applyRoomPreset('Royal Treat Suite', 55000, 'Oyus Branch', 'Regal Suite, Powder Room, 24h Butler Service, VIP Turn-down')">
+                💎 Royal Treat Suite (₦55k–₦60k)
               </button>
             </div>
           </div>

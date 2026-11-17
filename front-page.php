@@ -125,11 +125,11 @@ get_header();
           </label>
           <div class="hp-input-inner-wrap" style="position: relative;">
             <select id="hpRoomSelect" name="room" required style="width: 100%; height: 50px; background: rgba(255,255,255,0.06); border: 1.5px solid rgba(212,175,55,0.3); border-radius: 10px; color: #ffffff; padding: 0 14px; font-size: 13.5px; font-weight: 600; outline: none; transition: all 0.25s ease;">
-              <option value="deluxe-uk" selected style="background: #09172e; color: #ffffff;">Deluxe (UK Room) (₦25,000 - ₦45,000)</option>
+              <option value="deluxe-uk" selected style="background: #09172e; color: #ffffff;">Deluxe (UK Room) (₦23,000 &ndash; ₦25,000 / Night)</option>
               <option value="love-night" style="background: #09172e; color: #ffffff;">Love Night Room (₦45,000 &ndash; ₦50,000 / Night) &bull; Rooms 401–415</option>
               <option value="golden-nest" style="background: #09172e; color: #ffffff;">Golden Nest Room (₦55,000 &ndash; ₦60,000 / Night) &bull; Rooms 416–430</option>
-              <option value="suite" style="background: #09172e; color: #ffffff;">Executive VIP Suite (Blissful Breeze) (₦65,000 / Night) &bull; Rooms 422 &amp; 428</option>
-              <option value="apartment" style="background: #09172e; color: #ffffff;">Luxury Serviced Apartment (₦160,000 / Night) &bull; 6 Apartments</option>
+              <option value="suite" style="background: #09172e; color: #ffffff;">Executive VIP Suite (Blissful Breeze) (₦65,000 &ndash; ₦75,000 / Night) &bull; Rooms 422 &amp; 428</option>
+              <option value="apartment" style="background: #09172e; color: #ffffff;">Luxury &amp; Royal Apartments (₦150,000 &ndash; ₦180,000 / Night)</option>
             </select>
           </div>
         </div>
@@ -1920,14 +1920,15 @@ get_header();
               Presidential &bull; Extended Stay Portfolio
             </span>
           </div>
-          <h3 class="hp-vip-title">Looking for VIP Suites or 3-Bedroom Serviced Apartments?</h3>
+          <h3 class="hp-vip-title">Looking for VIP Suites or Serviced Apartments?</h3>
           <p class="hp-vip-subtitle">
-            We offer Royal Treat (₦50k), Executive VIP Suites (Blissful Breeze - ₦65k), and fully-furnished 3-Bedroom Luxury Apartments (₦160,000 / night).
+            We offer Royal Treat Suite (₦55k–₦60k), Blissful Breeze Suite (₦65k–₦75k), Luxury Retreat Apartment (₦150k–₦160k), and Royal Retreat Penthouse (₦170k–₦180k).
           </p>
           <div class="hp-vip-tier-pills">
-            <span class="hp-vip-pill"><strong>Royal Treat</strong> &bull; ₦50,000 / nt</span>
-            <span class="hp-vip-pill"><strong>Executive VIP Suites</strong> &bull; ₦65,000 / nt</span>
-            <span class="hp-vip-pill hp-vip-pill-highlight"><strong>3-Bed Luxury Apartments</strong> &bull; ₦160,000 / nt</span>
+            <span class="hp-vip-pill"><strong>Royal Treat Suite</strong> &bull; ₦55k &ndash; ₦60k / nt</span>
+            <span class="hp-vip-pill"><strong>Blissful Breeze Suite</strong> &bull; ₦65k &ndash; ₦75k / nt</span>
+            <span class="hp-vip-pill"><strong>Luxury Retreat Apartment</strong> &bull; ₦150k &ndash; ₦160k / nt</span>
+            <span class="hp-vip-pill hp-vip-pill-highlight"><strong>Royal Retreat Penthouse</strong> &bull; ₦170k &ndash; ₦180k / nt</span>
           </div>
         </div>
         <div class="hp-vip-actions">
