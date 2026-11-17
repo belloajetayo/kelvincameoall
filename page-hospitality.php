@@ -346,16 +346,18 @@ get_header();
             <span class="suite-branch-badge branch-main">Kwamba Branch • Suleja</span>
             <div class="card-media-slider">
               <div class="card-media-slides">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-lounge.jpg' ); ?>" alt="Luxury Retreat Apartment Lounge" class="active" loading="lazy">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-hall.jpg' ); ?>" alt="Luxury Retreat Apartment Bedroom" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/apartment-bedroom.jpg' ); ?>" alt="Luxury Retreat Apartment Master Bedroom at Kelvin Cameo Resort" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-lounge.jpg' ); ?>" alt="Luxury Retreat Apartment Lounge" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-hall.jpg' ); ?>" alt="Luxury Retreat Apartment Living Hall" loading="lazy">
               </div>
               <button type="button" class="card-media-nav prev" aria-label="Previous photo">‹</button>
               <button type="button" class="card-media-nav next" aria-label="Next photo">›</button>
               <div class="card-media-dots">
                 <span class="dot active"></span>
                 <span class="dot"></span>
+                <span class="dot"></span>
               </div>
-              <span class="card-media-badge">📷 2 Photos</span>
+              <span class="card-media-badge">📷 3 Photos</span>
             </div>
           </div>
           <div class="suite-card-body">
@@ -382,7 +384,7 @@ get_header();
                   data-room-name="Luxury Retreat Apartment"
                   data-room-price="150000"
                   data-room-branch="Kwamba Branch • Opposite Technical"
-                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-lounge.jpg' ); ?>"
+                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/apartment-bedroom.jpg' ); ?>"
                   data-paystack-url="https://paystack.com/buy/luxury-retreat-apartment-nvadhl">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
@@ -399,7 +401,8 @@ get_header();
             <span class="suite-branch-badge branch-main">Kwamba Branch • Suleja</span>
             <div class="card-media-slider">
               <div class="card-media-slides">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-hall.jpg' ); ?>" alt="Royal Retreat Apartment Presidential Suite" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/apartment-bedroom.jpg' ); ?>" alt="Royal Retreat Apartment Master Bedroom at Kelvin Cameo Resort" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-hall.jpg' ); ?>" alt="Royal Retreat Apartment Presidential Suite" loading="lazy">
                 <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-lounge.jpg' ); ?>" alt="Royal Retreat Apartment Living Area" loading="lazy">
               </div>
               <button type="button" class="card-media-nav prev" aria-label="Previous photo">‹</button>
@@ -407,8 +410,9 @@ get_header();
               <div class="card-media-dots">
                 <span class="dot active"></span>
                 <span class="dot"></span>
+                <span class="dot"></span>
               </div>
-              <span class="card-media-badge">📷 2 Photos</span>
+              <span class="card-media-badge">📷 3 Photos</span>
             </div>
           </div>
           <div class="suite-card-body">
@@ -435,7 +439,7 @@ get_header();
                   data-room-name="Royal Retreat Apartment"
                   data-room-price="170000"
                   data-room-branch="Kwamba Branch • Opposite Technical"
-                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-hall.jpg' ); ?>"
+                  data-room-img="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/apartment-bedroom.jpg' ); ?>"
                   data-paystack-url="https://paystack.com/buy/royal-retreat-apartment-twvshd">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                   Book Now
