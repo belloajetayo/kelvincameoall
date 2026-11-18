@@ -406,7 +406,8 @@ get_header();
             <span class="suite-branch-badge branch-main">Branch 01 • Main Hotel</span>
             <div class="card-media-slider">
               <div class="card-media-slides">
-                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/apartment-bedroom.jpg' ); ?>" alt="Royal Retreat Apartment Master Bedroom at Kelvin Cameo Resort" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/royal-retreat-parlor.jpg' ); ?>" alt="Royal Retreat Apartment Living Parlor at Kelvin Cameo Resort" class="active" loading="lazy">
+                <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/apartment-bedroom.jpg' ); ?>" alt="Royal Retreat Apartment Master Bedroom at Kelvin Cameo Resort" loading="lazy">
                 <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-hall.jpg' ); ?>" alt="Royal Retreat Apartment Presidential Suite" loading="lazy">
                 <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/photos/resort/apartment-lounge.jpg' ); ?>" alt="Royal Retreat Apartment Living Area" loading="lazy">
               </div>
@@ -416,8 +417,9 @@ get_header();
                 <span class="dot active"></span>
                 <span class="dot"></span>
                 <span class="dot"></span>
+                <span class="dot"></span>
               </div>
-              <span class="card-media-badge">📷 3 Photos</span>
+              <span class="card-media-badge">📷 4 Photos</span>
             </div>
           </div>
           <div class="suite-card-body">
