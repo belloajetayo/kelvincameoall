@@ -1,6 +1,6 @@
 <?php
 /**
- * Kelvin Cameo Organization (RC: 1613032)
+ * Kelvin Cameo Organization (RC: 1513032)
  * Executive Front Page Template — World-Class Luxury Revamp
  *
  * @package Kelvin_Cameo
@@ -28,7 +28,7 @@ get_header();
         <!-- Live Verified Badge with Animated Pulse Indicator -->
         <div class="hp-hero-badge" style="background: rgba(3, 12, 26, 0.75); border: 1px solid rgba(245, 158, 11, 0.4); box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
           <span class="hp-pulse-dot" style="background:#22c55e;" aria-hidden="true"></span>
-          <span style="color:#fef08a; font-weight:800; letter-spacing:0.04em;">RC: 1613032 &bull; CAC VERIFIED CONGLOMERATE &bull; NIGERIA</span>
+          <span style="color:#fef08a; font-weight:800; letter-spacing:0.04em;">RC: 1513032 &bull; CAC VERIFIED CONGLOMERATE &bull; NIGERIA</span>
         </div>
 
         <h1 class="hp-hero-title">
@@ -37,7 +37,7 @@ get_header();
         </h1>
 
         <p class="hp-hero-desc">
-          Kelvin Cameo Organization (RC: 1613032) is a diversified multi-sector powerhouse delivering calibrated petroleum dispensing, verified master-planned real estate, industrial agro-processing, automotive mobility, and Suleja’s premier luxury resort hotel.
+          Kelvin Cameo Organization (RC: 1513032) is a diversified multi-sector powerhouse delivering calibrated petroleum dispensing, verified master-planned real estate, industrial agro-processing, automotive mobility, and Suleja’s premier luxury resort hotel.
         </p>
 
         <!-- Interactive 5-Sector Selector Pills -->
@@ -199,7 +199,7 @@ get_header();
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
           <div class="hp-stat-val-wrap">
-            <span class="hp-stat-number hp-counter" data-target="1613032" style="font-size: 1.85rem; font-weight: 900; letter-spacing: -0.5px;">1613032</span>
+            <span class="hp-stat-number hp-counter" data-target="1513032" style="font-size: 1.85rem; font-weight: 900; letter-spacing: -0.5px;">1513032</span>
             <span class="hp-stat-suffix" style="font-size: 0.95rem; font-weight: 800; color: #f59e0b; margin-left: 4px;">RC</span>
           </div>
           <div class="hp-stat-label">CAC Corporate Incorporation</div>
@@ -2132,7 +2132,7 @@ get_header();
             "We build on what can be independently verified every single day."
           </h2>
           <p style="font-size:1rem; color:#475569; line-height:1.7; margin-bottom:1.25rem;">
-            At Kelvin Cameo Organization (RC: 1613032), our operating philosophy is uncompromising: when a customer buys fuel, our pump meters must read 100% exact. When an investor acquires land, the survey and title must be legally bulletproof. When a guest sleeps in our resort, power and security must be flawless 24 hours a day.
+            At Kelvin Cameo Organization (RC: 1513032), our operating philosophy is uncompromising: when a customer buys fuel, our pump meters must read 100% exact. When an investor acquires land, the survey and title must be legally bulletproof. When a guest sleeps in our resort, power and security must be flawless 24 hours a day.
           </p>
           <p style="font-size:1rem; color:#475569; line-height:1.7; margin-bottom:2rem;">
             We are deeply committed to socioeconomic empowerment across Suleja, Niger State, and the wider Federal Capital Territory corridor — creating sustainable employment, fostering local agro-allied industries, and setting international benchmarks for Nigerian enterprise.
@@ -2334,7 +2334,7 @@ get_header();
             CAC &amp; NGO Institutional Billing
           </h3>
           <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.6; margin: 0;">
-            Full corporate incorporation (RC: 1613032) supporting formal procurement, NGO/CCCRN vendor accounts, and automated itemized receipts.
+            Full corporate incorporation (RC: 1513032) supporting formal procurement, NGO/CCCRN vendor accounts, and automated itemized receipts.
           </p>
         </div>
 
@@ -2440,7 +2440,7 @@ get_header();
   <section class="hp-cta" style="background: linear-gradient(135deg, #071e3d 0%, #030c1a 100%); color: #ffffff; padding: 5rem 0; border-top: 3px solid #f59e0b; text-align: center;">
     <div class="container container-wide" style="max-width: 850px;">
       <span class="rc-badge" style="background: rgba(245, 158, 11, 0.2); color: #fef08a; border-color: rgba(245, 158, 11, 0.4); margin-bottom: 1.25rem; display: inline-flex;">
-        RC: 1613032 &bull; Direct Corporate Access
+        RC: 1513032 &bull; Direct Corporate Access
       </span>
       <h2 style="font-family: var(--font-display); font-size: 2.5rem; font-weight: 900; color: #ffffff; line-height: 1.2; margin-bottom: 1rem;">
         Experience Verifiable Excellence Across Nigeria

@@ -4,7 +4,7 @@
  * Template Post Type: page
  *
  * Kelvin Cameo Resort Hotel - Online Room Reservation & Direct Bank Transfer
- * Registration: RC 1613032
+ * Registration: RC 1513032
  */
 
 if (!defined('ABSPATH')) {
@@ -31,7 +31,7 @@ $site_home = home_url('/');
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reserve a Room & Suite | Kelvin Cameo Resort Hotel (RC 1613032)</title>
+  <title>Reserve a Room & Suite | Kelvin Cameo Resort Hotel (RC 1513032)</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -509,7 +509,7 @@ $site_home = home_url('/');
       <div class="brand-crest">KC</div>
       <div>
         <div class="brand-title">Kelvin Cameo Resort Hotel</div>
-        <div class="brand-sub">Luxury Accommodations • RC 1613032</div>
+        <div class="brand-sub">Luxury Accommodations • RC 1513032</div>
       </div>
     </a>
     <div style="display: flex; gap: 10px;">
@@ -725,7 +725,7 @@ $site_home = home_url('/');
 
   <!-- FOOTER -->
   <footer class="reserve-footer">
-    Kelvin Cameo Resort Hotel • Opposite Suleiman Barau Technical College, Kwamba, Suleja, Niger State (Abuja Capital Corridor) • RC: 1613032
+    Kelvin Cameo Resort Hotel • Opposite Suleiman Barau Technical College, Kwamba, Suleja, Niger State (Abuja Capital Corridor) • RC: 1513032
   </footer>
 
   <!-- SCRIPT -->

@@ -1,7 +1,7 @@
 <?php
 /**
  * The template for displaying 404 pages (Not Found)
- * Kelvin Cameo Organization (RC: 1613032)
+ * Kelvin Cameo Organization (RC: 1513032)
  *
  * Automatically 301-redirects all 404 errors directly to the homepage.
  *

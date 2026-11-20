@@ -1,6 +1,6 @@
 <?php
 /**
- * Kelvin Cameo Organization (RC: 1613032)
+ * Kelvin Cameo Organization (RC: 1513032)
  * Executive Header Template — Revamped Modern Luxury Experience
  *
  * @package Kelvin_Cameo
@@ -38,7 +38,7 @@
           <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           </svg>
-          RC: 1613032 &bull; CAC Certified
+          RC: 1513032 &bull; CAC Certified
         </span>
         <span class="utility-link hide-mobile" style="opacity:0.85; font-size:0.75rem;">
           <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
@@ -71,13 +71,13 @@
   <header class="site-header">
     <div class="container container-wide">
       <nav class="navbar" aria-label="Main Navigation">
-        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="brand-logo-wrap" title="Kelvin Cameo Organization (RC: 1613032)">
+        <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="brand-logo-wrap" title="Kelvin Cameo Organization (RC: 1513032)">
           <div class="brand-emblem-badge" aria-label="Kelvin Cameo Brand Emblem" style="border: 1.5px solid rgba(245, 158, 11, 0.4); box-shadow: 0 4px 14px rgba(4, 20, 43, 0.2);">
             <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/logo-emblem.png' ); ?>" alt="Kelvin Cameo Crest" class="brand-emblem-img" width="38" height="38" />
           </div>
           <div class="brand-text-block">
             <span class="brand-title">KELVIN <span style="color:var(--orange-500); background:linear-gradient(135deg, #f59e0b, #ea580c); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">CAMEO</span></span>
-            <span class="brand-subtitle">RC: 1613032 &bull; NIGERIAN CONGLOMERATE</span>
+            <span class="brand-subtitle">RC: 1513032 &bull; NIGERIAN CONGLOMERATE</span>
           </div>
         </a>
 

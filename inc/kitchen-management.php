@@ -3,7 +3,7 @@
  * Kelvin Cameo Resort Hotel - Kitchen & Restaurant Management Engine
  * Point of Sale (POS), Food Inventory, Portion Tracking, Role-Based Access & Monthly Audit Reports
  *
- * Official RC: 1613032
+ * Official RC: 1513032
  * Categories: Grills & Proteins, Rice & Mains, Soups & Swallows, Breakfast & Quick Bites, Sides & Extras
  * Admin PIN: 1122 | Kitchen Staff PIN: 1613
  *

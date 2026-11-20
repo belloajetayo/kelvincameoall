@@ -1,4 +1,4 @@
-# Kelvin Cameo (RC: 1613032)
+# Kelvin Cameo (RC: 1513032)
 
 > **Official Multi-Sector Conglomerate Web Portal**  
 > Inspiring Excellence across Downstream Energy, Master-Planned Real Estate, Commercial Agriculture, and Luxury Hospitality.
@@ -7,7 +7,7 @@
 
 ## 🏛️ About Kelvin Cameo
 
-**Kelvin Cameo (RC: 1613032)** is a diversified indigenous Nigerian enterprise headquartered along the Abuja–Kaduna Capital Corridor in Suleja, Niger State. 
+**Kelvin Cameo (RC: 1513032)** is a diversified indigenous Nigerian enterprise headquartered along the Abuja–Kaduna Capital Corridor in Suleja, Niger State. 
 
 The group operates scalable market leaders across four pillar economic sectors:
 1. **Kelvin Cameo Energy** — Modern retail fuel dispensing (PMS, AGO, DPK), 50-tonne LPG cooking gas skids, lubricants, and solar microgrid installations.
@@ -26,7 +26,7 @@ The group operates scalable market leaders across four pillar economic sectors:
 | `real-estate.html` | **Real Estate Division** | Residential estates, highway commercial plots, land banking, site inspection booking. |
 | `agriculture.html` | **Agriculture Division** | Mechanized farming, poultry battery cages, storage silos, outgrower scheme, off-take RFP. |
 | `hospitality.html` | **Resort Hotel & Suites** | 10 rooms across Main Hotel & The Annex with active Paystack links, 1,000-seat banquet hall, conference partners. |
-| `about.html` | **Corporate Profile** | CAC registration (RC: 1613032), vision, mission, executive leadership, Kelvin Cameo Foundation (CSR). |
+| `about.html` | **Corporate Profile** | CAC registration (RC: 1513032), vision, mission, executive leadership, Kelvin Cameo Foundation (CSR). |
 | `contact.html` | **Universal Help Desk** | Direct phone/WhatsApp channels, division inquiry form, regional location brief. |
 
 ---
@@ -71,4 +71,4 @@ Start-Process index.html
 - **WhatsApp Concierge:** [+234 805 555 8197](https://wa.me/2348055558197)
 - **Official Email:** [kelvincameo73@gmail.com](mailto:kelvincameo73@gmail.com)
 - **Physical Address:** Kelvin Cameo Resort Hotel Complex, Suleja, Niger State (Abuja Corridor), Nigeria.
-- **Registration:** RC: 1613032 (Corporate Affairs Commission, Federal Republic of Nigeria).
+- **Registration:** RC: 1513032 (Corporate Affairs Commission, Federal Republic of Nigeria).

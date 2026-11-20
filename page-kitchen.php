@@ -4,7 +4,7 @@
  * Template Post Type: page
  *
  * Kelvin Cameo Resort Hotel - Kitchen & Restaurant Management System
- * Official RC: 1613032
+ * Official RC: 1513032
  * Access Levels: Admin PIN (1122) | Kitchen Staff PIN (1613)
  *
  * @package Kelvin_Cameo
@@ -22,7 +22,7 @@ $site_home = home_url('/');
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Kitchen POS &amp; Inventory | Kelvin Cameo Resort (RC 1613032)</title>
+  <title>Kitchen POS &amp; Inventory | Kelvin Cameo Resort (RC 1513032)</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -698,7 +698,7 @@ $site_home = home_url('/');
       <div class="brand-icon">👨‍🍳</div>
       <div class="brand-text">
         <h1>KELVIN CAMEO KITCHEN &bull; FOOD POS</h1>
-        <p>RC: 1613032 &bull; RESTAURANT &bull; PORTION INVENTORY ENGINE</p>
+        <p>RC: 1513032 &bull; RESTAURANT &bull; PORTION INVENTORY ENGINE</p>
       </div>
       <span class="pos-badge" id="activeShiftBadge">KSHIFT-ACTIVE</span>
     </div>
@@ -1163,7 +1163,7 @@ $site_home = home_url('/');
   <div id="kitchenReceiptDocket" style="display:none; padding:1.5rem; font-family:'Courier New', Courier, monospace;">
     <div style="text-align:center; margin-bottom:1rem;">
       <h2 style="margin:0; font-size:1.3rem;">KELVIN CAMEO RESORT HOTEL</h2>
-      <p style="margin:0; font-size:0.85rem;">KITCHEN ORDER DOCKET &bull; RC: 1613032</p>
+      <p style="margin:0; font-size:0.85rem;">KITCHEN ORDER DOCKET &bull; RC: 1513032</p>
       <p style="margin:0; font-size:0.8rem;">Suleja, Niger State &bull; +234 805 555 8197</p>
       <hr style="border:none; border-top:1px dashed #000; margin:0.5rem 0;">
     </div>

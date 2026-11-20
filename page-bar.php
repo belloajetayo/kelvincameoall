@@ -4,7 +4,7 @@
  * Template Post Type: page
  *
  * Kelvin Cameo Resort Hotel & Lounge - Bar Management & POS System
- * Official RC: 1613032
+ * Official RC: 1513032
  * Access Levels: Admin PIN (1122) | Staff PIN (1613)
  *
  * @package Kelvin_Cameo
@@ -22,7 +22,7 @@ $site_home = home_url('/');
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Bar POS &amp; Inventory | Kelvin Cameo Resort (RC 1613032)</title>
+  <title>Bar POS &amp; Inventory | Kelvin Cameo Resort (RC 1513032)</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1301,7 +1301,7 @@ $site_home = home_url('/');
       <div class="brand-text">
         <h1>
           Kelvin Cameo Bar &amp; Lounge
-          <span class="rc-tag">RC: 1613032</span>
+          <span class="rc-tag">RC: 1513032</span>
         </h1>
         <p>Beverage Inventory &amp; Thermal POS Terminal</p>
       </div>
@@ -2050,7 +2050,7 @@ $site_home = home_url('/');
       <div style="font-size:12px; font-weight:bold;">BAR, LOUNGE &amp; SUITES</div>
       <div style="font-size:10px;">Opp. Suleiman Barau Tech College</div>
       <div style="font-size:10px;">Maje-Minna Rd, Kwamba, Suleja</div>
-      <div style="font-size:10px;">RC: 1613032 | Tel: +234 805 555 8197</div>
+      <div style="font-size:10px;">RC: 1513032 | Tel: +234 805 555 8197</div>
     </div>
 
     <div class="receipt-divider"></div>
@@ -2120,7 +2120,7 @@ $site_home = home_url('/');
           VIP SPORTS BAR &amp; BEVERAGE DESK &bull; OFFICIAL FINANCIAL &amp; SHIFT AUDIT STATEMENT
         </div>
         <div style="font-size:11px; color:#475569; margin-top:4px; line-height:1.4;">
-          CAC Corporate Incorporation RC: <strong>1613032</strong> &bull; Suleja–Abuja Expressway Corridor, Niger State<br>
+          CAC Corporate Incorporation RC: <strong>1513032</strong> &bull; Suleja–Abuja Expressway Corridor, Niger State<br>
           Official Bar Desk &bull; Web: kelvincameo.com/bar/ &bull; Hotline: +234 805 555 8197
         </div>
       </div>
@@ -2305,7 +2305,7 @@ $site_home = home_url('/');
       </div>
       <div style="text-align:center;">
         <div style="display:inline-block; border:2px solid #b89327; border-radius:50%; width:70px; height:70px; padding-top:12px; color:#b89327; font-weight:800; font-size:9px; line-height:1.2;">
-          KELVIN CAMEO<br>RESORT<br>RC 1613032
+          KELVIN CAMEO<br>RESORT<br>RC 1513032
         </div>
         <div style="color:#64748b; font-size:10px; margin-top:4px;">Official Property Seal</div>
       </div>
@@ -2320,7 +2320,7 @@ $site_home = home_url('/');
     <div class="receipt-center">
       <div style="font-size:14px; font-weight:bold; letter-spacing:1px;">KELVIN CAMEO RESORT</div>
       <div style="font-size:12px; font-weight:bold;">BAR, LOUNGE &amp; SUITES</div>
-      <div style="font-size:10px;">RC: 1613032 | Suleja, Abuja Corridor</div>
+      <div style="font-size:10px;">RC: 1513032 | Suleja, Abuja Corridor</div>
       <div style="font-size:11px; font-weight:bold; margin-top:5px; border-top:1px dashed #000; border-bottom:1px dashed #000; padding:2px 0;">
         *** SHIFT HANDOVER REPORT ***
       </div>

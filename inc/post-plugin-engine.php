@@ -1,6 +1,6 @@
 <?php
 /**
- * Kelvin Cameo Organization (RC: 1613032)
+ * Kelvin Cameo Organization (RC: 1513032)
  * Advanced WordPress Post Plugin & Editorial Showcase Engine
  *
  * Provides a modern, responsive, high-performance Post Plugin experience:

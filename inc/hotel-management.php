@@ -1,7 +1,7 @@
 <?php
 /**
  * Kelvin Cameo Resort Hotel - Front Desk & Hotel Management Backend
- * Registration: RC 1613032
+ * Registration: RC 1513032
  */
 
 if (!defined('ABSPATH')) {
@@ -1407,7 +1407,7 @@ function kc_hotel_ajax_guest_submit_transfer() {
     <div style='font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;'>
       <div style='background: #060e1e; color: #fff; padding: 20px 24px; border-bottom: 2px solid #d4af37;'>
         <h2 style='margin: 0; color: #d4af37; font-size: 18px; text-transform: uppercase;'>Kelvin Cameo Resort Hotel</h2>
-        <p style='margin: 4px 0 0; font-size: 12px; color: #94a3b8;'>Front Desk & Reservation Alert • RC 1613032</p>
+        <p style='margin: 4px 0 0; font-size: 12px; color: #94a3b8;'>Front Desk & Reservation Alert • RC 1513032</p>
       </div>
 
       <div style='padding: 24px; color: #1e293b;'>
@@ -1463,7 +1463,7 @@ function kc_hotel_ajax_guest_submit_transfer() {
       </div>
 
       <div style='background: #f8fafc; padding: 12px 24px; text-align: center; font-size: 11px; color: #94a3b8; border-top: 1px solid #e2e8f0;'>
-        Kelvin Cameo Resort Hotel • Opposite Suleiman Barau Technical College, Kwamba, Suleja, Niger State (Abuja Capital Corridor) • RC: 1613032
+        Kelvin Cameo Resort Hotel • Opposite Suleiman Barau Technical College, Kwamba, Suleja, Niger State (Abuja Capital Corridor) • RC: 1513032
       </div>
     </div>";
 
@@ -1487,7 +1487,7 @@ function kc_hotel_ajax_guest_submit_transfer() {
             <p>Thank you for choosing Kelvin Cameo Resort Hotel. We have received your payment notification of <strong>₦" . number_format($amount_claimed, 2) . "</strong> for your stay in <strong>$room_number ({$matched_room['type']})</strong>.</p>
             <p>Our front desk has received the alert and is confirming the Zenith Bank credit. Your booking reference is <strong style='color: #1a428a;'>$booking_ref</strong>.</p>
             <p>Upon check-in, please present your booking reference or phone number at our executive front desk.</p>
-            <p style='margin-top: 20px;'>Warm regards,<br><strong>Executive Front Desk</strong><br>Kelvin Cameo Resort Hotel & Suite<br>RC: 1613032</p>
+            <p style='margin-top: 20px;'>Warm regards,<br><strong>Executive Front Desk</strong><br>Kelvin Cameo Resort Hotel & Suite<br>RC: 1513032</p>
           </div>
         </div>";
         try {

@@ -1,8 +1,8 @@
-# Kelvin Cameo (RC: 1613032) — Project Knowledge & Agent Guidelines
+# Kelvin Cameo (RC: 1513032) — Project Knowledge & Agent Guidelines
 
 ## 1. Corporate Identity & Registration
 - **Entity Name:** Kelvin Cameo
-- **CAC Registration:** RC: 1613032 (Corporate Affairs Commission, Federal Republic of Nigeria)
+- **CAC Registration:** RC: 1513032 (Corporate Affairs Commission, Federal Republic of Nigeria)
 - **Headquarters:** Kelvin Cameo Resort Hotel Complex, Suleja, Niger State (Abuja Capital Corridor), Nigeria
 - **Corporate Line & WhatsApp:** +234 805 555 8197 ([Chat on WhatsApp](https://wa.me/2348055558197))
 - **Official Contact Email:** `kelvincameo73@gmail.com`

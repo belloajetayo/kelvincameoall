@@ -1,6 +1,6 @@
 <?php
 /**
- * Kelvin Cameo Organization (RC: 1613032)
+ * Kelvin Cameo Organization (RC: 1513032)
  * Executive Footer Template — Revamped Modern Luxury Experience
  *
  * @package Kelvin_Cameo
@@ -19,16 +19,16 @@
             </div>
             <div>
               <h4 style="font-family:var(--font-display); font-size:1.2rem; font-weight:900; color:#ffffff; margin:0; letter-spacing:0.02em;">KELVIN <span style="color:#f97316;">CAMEO</span></h4>
-              <span style="font-size:0.68rem; color:#fde047; font-weight:800; letter-spacing:0.06em;">RC: 1613032 &bull; NIGERIAN CONGLOMERATE</span>
+              <span style="font-size:0.68rem; color:#fde047; font-weight:800; letter-spacing:0.06em;">RC: 1513032 &bull; NIGERIAN CONGLOMERATE</span>
             </div>
           </div>
           <p class="footer-bio" style="font-size:0.875rem; color:#94a3b8; line-height:1.65; margin-bottom:1.25rem;">
-            Kelvin Cameo Organization (RC: 1613032) is a diversified Nigerian multi-sector group leading downstream petroleum retail stations, master-planned real estate schemes, commercial agriculture, and premier resort hospitality.
+            Kelvin Cameo Organization (RC: 1513032) is a diversified Nigerian multi-sector group leading downstream petroleum retail stations, master-planned real estate schemes, commercial agriculture, and premier resort hospitality.
           </p>
           <div style="display:flex; flex-direction:column; gap:0.5rem;">
             <span class="rc-badge" style="display:inline-flex; width:fit-content; background:rgba(245,158,11,0.15); color:#fef08a; border:1px solid rgba(245,158,11,0.35); font-size:0.75rem;">
               <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              RC: 1613032 &bull; CAC Registered &amp; Verified
+              RC: 1513032 &bull; CAC Registered &amp; Verified
             </span>
             <span style="font-size:0.75rem; color:#cbd5e1; display:flex; align-items:center; gap:0.4rem;">
               <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#22c55e;"></span>
@@ -104,7 +104,7 @@
       <!-- Bottom Legal / Copyright Strip -->
       <div class="footer-bottom-bar" style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 1.75rem; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem; font-size: 0.8125rem; color: #94a3b8;">
         <div>
-          &copy; <?php echo date('Y'); ?> <strong>Kelvin Cameo Organization</strong>. All Rights Reserved. Incorporated in the Federal Republic of Nigeria (RC: 1613032).
+          &copy; <?php echo date('Y'); ?> <strong>Kelvin Cameo Organization</strong>. All Rights Reserved. Incorporated in the Federal Republic of Nigeria (RC: 1513032).
         </div>
         <div style="display: flex; gap: 1.25rem;">
           <a href="<?php echo kc_url('about'); ?>" style="color:#94a3b8; text-decoration:none;">Privacy Policy</a>
@@ -129,7 +129,7 @@
     <div class="modal-box">
       <div class="modal-header">
         <div>
-          <span class="rc-badge" style="margin-bottom:0.25rem; display:inline-flex;">RC: 1613032 &bull; Formal Inquiry</span>
+          <span class="rc-badge" style="margin-bottom:0.25rem; display:inline-flex;">RC: 1513032 &bull; Formal Inquiry</span>
           <h3>Partner With Kelvin Cameo</h3>
         </div>
         <button class="modal-close-btn" data-close-modal="inquiryModal">&times;</button>
@@ -199,7 +199,7 @@
           </div>
           <div>
             <strong style="font-family:var(--font-display); font-size:1.05rem; color:#ffffff;">KELVIN <span style="color:#f97316;">CAMEO</span></strong>
-            <div style="font-size:0.65rem; color:#fde047; font-weight:700;">RC: 1613032 &bull; CONGLOMERATE</div>
+            <div style="font-size:0.65rem; color:#fde047; font-weight:700;">RC: 1513032 &bull; CONGLOMERATE</div>
           </div>
         </div>
         <button id="closeDrawerBtn" class="modal-close-btn" style="position:static; color:#ffffff;" aria-label="Close Navigation">&times;</button>

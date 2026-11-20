@@ -153,7 +153,7 @@ if ( ! $featured_img_url ) {
   <div class="container article-hero-container">
     <div class="article-meta-badge">
       <span class="article-cat-pill"><?php echo esc_html( $category_name ); ?></span>
-      <span class="article-rc-pill"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> RC: 1613032 Verified</span>
+      <span class="article-rc-pill"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> RC: 1513032 Verified</span>
     </div>
 
     <h1 class="article-title"><?php echo esc_html( $post_title ); ?></h1>
@@ -239,9 +239,9 @@ if ( ! $featured_img_url ) {
             <h4>Alhaji Kamorudeen Oladejo</h4>
             <span class="author-title-pill">Founder &amp; Group Managing Director</span>
           </div>
-          <p>Industrialist and indigenous investor steering Kelvin Cameo Organization (RC: 1613032). Providing verified corporate leadership across Downstream Energy, Master-Planned Real Estate, Commercial Agriculture, and Premier Hospitality in Suleja and the Federal Capital Territory corridor.</p>
+          <p>Industrialist and indigenous investor steering Kelvin Cameo Organization (RC: 1513032). Providing verified corporate leadership across Downstream Energy, Master-Planned Real Estate, Commercial Agriculture, and Premier Hospitality in Suleja and the Federal Capital Territory corridor.</p>
           <div class="author-trust-meta">
-            <span>Corporate Registration: <strong>RC: 1613032</strong></span>
+            <span>Corporate Registration: <strong>RC: 1513032</strong></span>
             <span>&bull;</span>
             <span>Headquarters: <strong>Kwamba, Suleja, Niger State</strong></span>
           </div>

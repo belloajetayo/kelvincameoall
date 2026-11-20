@@ -1,6 +1,6 @@
 <?php
 /**
- * Kelvin Cameo Organization (RC: 1613032)
+ * Kelvin Cameo Organization (RC: 1513032)
  * Theme Functions & Definitions
  *
  * @package Kelvin_Cameo
@@ -127,7 +127,7 @@ function kelvin_cameo_seo_schema() {
         '@type'       => 'Organization',
         '@id'         => $site_url . '#organization',
         'name'        => 'Kelvin Cameo Organization',
-        'legalName'   => 'Kelvin Cameo Organization (RC: 1613032)',
+        'legalName'   => 'Kelvin Cameo Organization (RC: 1513032)',
         'url'         => $site_url,
         'logo'        => esc_url( get_template_directory_uri() . '/assets/logo-emblem.png' ),
         'email'       => $email_addr,
@@ -194,7 +194,7 @@ function kelvin_cameo_seo_schema() {
                     '@id'         => esc_url( home_url( '/about/' ) ),
                     'name'        => 'About Kelvin Cameo',
                     'url'         => esc_url( home_url( '/about/' ) ),
-                    'description' => 'CAC statutory registration (RC: 1613032), corporate governance, and community impact foundation.',
+                    'description' => 'CAC statutory registration (RC: 1513032), corporate governance, and community impact foundation.',
                 ),
                 array(
                     '@type'       => 'WebPage',
@@ -262,7 +262,7 @@ function kelvin_cameo_seo_schema() {
                 array(
                     '@type'       => 'SiteNavigationElement',
                     'position'    => 6,
-                    'name'        => 'About Kelvin Cameo (RC: 1613032)',
+                    'name'        => 'About Kelvin Cameo (RC: 1513032)',
                     'description' => 'Corporate history, executive governance, and community CSR foundation.',
                     'url'         => esc_url( home_url( '/about/' ) ),
                 ),
@@ -680,7 +680,7 @@ function kc_handle_room_booking() {
     $message .= '<div style="max-width:600px; margin:0 auto; background:#ffffff; border-radius:12px; overflow:hidden; border:1px solid #e2e8f0; box-shadow:0 4px 15px rgba(0,0,0,0.06);">';
     $message .= '<div style="background: linear-gradient(135deg, #0b4ea2 0%, #ea580c 100%); padding:24px; text-align:center; color:#ffffff;">';
     $message .= '<h2 style="margin:0; font-size:22px; font-weight:800; letter-spacing:-0.5px;">KELVIN CAMEO RESORT HOTEL</h2>';
-    $message .= '<p style="margin:4px 0 0; font-size:13px; opacity:0.9;">Zenith Bank Transfer Notification • RC: 1613032</p>';
+    $message .= '<p style="margin:4px 0 0; font-size:13px; opacity:0.9;">Zenith Bank Transfer Notification • RC: 1513032</p>';
     $message .= '</div>';
     $message .= '<div style="padding:28px;">';
     $message .= '<h3 style="margin:0 0 16px; color:#0b4ea2; font-size:18px;">Reservation & Payment Summary</h3>';
@@ -704,7 +704,7 @@ function kc_handle_room_booking() {
     $message .= '</div>';
     $message .= '</div>';
     $message .= '<div style="background:#f1f5f9; padding:14px; text-align:center; font-size:12px; color:#64748b;">';
-    $message .= 'Kelvin Cameo Organization • RC: 1613032 • Automated Booking Gateway';
+    $message .= 'Kelvin Cameo Organization • RC: 1513032 • Automated Booking Gateway';
     $message .= '</div>';
     $message .= '</div></body></html>';
 
@@ -1072,7 +1072,7 @@ function kc_handle_job_application_submission() {
     $msg .= '</div>';
     $msg .= '</div>';
     $msg .= '<div style="background:#f8fafc;padding:12px 24px;text-align:center;font-size:11px;color:#94a3b8;border-top:1px solid #e2e8f0;">';
-    $msg .= 'Kelvin Cameo Organization • Suleja, Niger State • RC: 1613032';
+    $msg .= 'Kelvin Cameo Organization • Suleja, Niger State • RC: 1513032';
     $msg .= '</div>';
     $msg .= '</div></body></html>';
 
@@ -1094,7 +1094,7 @@ function kc_handle_job_application_submission() {
         $cand_msg .= '<p>Dear <strong>' . esc_html($full_name) . '</strong>,</p>';
         $cand_msg .= '<p>Thank you for applying for the position of <strong>' . esc_html($position) . '</strong> at Kelvin Cameo Resort Hotel. Your application reference is <strong style="color:#0b4ea2;">' . esc_html($app_ref) . '</strong>.</p>';
         $cand_msg .= '<p>Our human resources and front office management team will review your qualifications. If shortlisted, you will be invited for an interview at our executive complex in Kwamba, Suleja.</p>';
-        $cand_msg .= '<p style="margin-top:20px;font-size:13px;color:#64748b;">Best regards,<br><strong>HR & Talent Desk</strong><br>Kelvin Cameo Organization (RC: 1613032)</p>';
+        $cand_msg .= '<p style="margin-top:20px;font-size:13px;color:#64748b;">Best regards,<br><strong>HR & Talent Desk</strong><br>Kelvin Cameo Organization (RC: 1513032)</p>';
         $cand_msg .= '</div></div>';
         try {
             @wp_mail( $email, $cand_subject, $cand_msg, $headers );

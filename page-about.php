@@ -1,7 +1,7 @@
 <?php
 /**
  * Template Name: Corporate Heritage & About
- * Description: Company History, RC: 1613032, Vision, Board of Directors, and Foundation CSR.
+ * Description: Company History, RC: 1513032, Vision, Board of Directors, and Foundation CSR.
  *
  * @package Kelvin_Cameo
  */
@@ -24,7 +24,7 @@ get_header();
         </h1>
 
         <p class="page-hero-desc">
-          <strong>Kelvin Cameo (RC: 1613032)</strong> is a forward-thinking, diversified multi-sector enterprise. Through visionary leadership, institutional integrity, and strategic capital allocation, we build scalable platforms in Petroleum Retailing, Real Estate Development, Commercial Agriculture, and Luxury Hospitality.
+          <strong>Kelvin Cameo (RC: 1513032)</strong> is a forward-thinking, diversified multi-sector enterprise. Through visionary leadership, institutional integrity, and strategic capital allocation, we build scalable platforms in Petroleum Retailing, Real Estate Development, Commercial Agriculture, and Luxury Hospitality.
         </p>
 
         <div style="display:flex; gap:1.25rem; flex-wrap:wrap;">
@@ -44,11 +44,11 @@ get_header();
             <div class="brand-emblem-badge" style="width:42px; height:42px;" aria-label="Kelvin Cameo Logo">
               <img src="<?php echo esc_url( get_template_directory_uri() . '/assets/logo-emblem.png' ); ?>" alt="Kelvin Cameo Monogram" class="brand-emblem-img" width="42" height="42" />
             </div>
-            <span class="section-badge" style="background:rgba(234,88,12,0.12); color:var(--orange-600); margin:0;">Our Corporate Identity • RC: 1613032</span>
+            <span class="section-badge" style="background:rgba(234,88,12,0.12); color:var(--orange-600); margin:0;">Our Corporate Identity • RC: 1513032</span>
           </div>
           <h2 class="section-title" style="margin-top:0.5rem;">An Indigenous Conglomerate Built on Resilient Foundations</h2>
           <p style="color:var(--slate-600); line-height:1.75; margin-bottom:1.25rem;">
-            Registered under the laws of the Federal Republic of Nigeria (<strong>RC: 1613032</strong>), Kelvin Cameo began with a resolute determination: to build indigenous businesses that deliver world-class products, generate sustainable youth employment, and drive grassroots infrastructural advancement.
+            Registered under the laws of the Federal Republic of Nigeria (<strong>RC: 1513032</strong>), Kelvin Cameo began with a resolute determination: to build indigenous businesses that deliver world-class products, generate sustainable youth employment, and drive grassroots infrastructural advancement.
           </p>
           <p style="color:var(--slate-600); line-height:1.75; margin-bottom:1.5rem;">
             Over the years, our operations have systematically expanded into four pillar sectors critical to the everyday prosperity of Nigerians: powering transportation and commerce through our energy retail network, unlocking generational wealth through verified land and residential properties, securing local food chains through mechanized farming, and setting new benchmarks for leisure and grand events at Kelvin Cameo Resort Hotel.
@@ -56,7 +56,7 @@ get_header();
 
           <div class="grid-2-stats" style="margin-top:2rem;">
             <div style="background:var(--sand-50); padding:1.5rem; border-radius:var(--radius-md); border-left:4px solid var(--orange-500);">
-              <h4 style="font-family:var(--font-display); font-size:1.75rem; font-weight:800; color:var(--navy-900);">RC: 1613032</h4>
+              <h4 style="font-family:var(--font-display); font-size:1.75rem; font-weight:800; color:var(--navy-900);">RC: 1513032</h4>
               <p style="font-size:0.85rem; color:var(--slate-600);">Corporate Affairs Commission verified legal standing.</p>
             </div>
             <div style="background:var(--sand-50); padding:1.5rem; border-radius:var(--radius-md); border-left:4px solid var(--agro-emerald);">
@@ -206,7 +206,7 @@ get_header();
           <h3 class="board-name">Company Secretary & Legal Advisor</h3>
           <span class="board-title">Legal & Corporate Affairs</span>
           <p class="board-bio">
-            Guarantees statutory adherence to CAC regulations (RC: 1613032), tax compliance, investor contract protections, and title perfections across all asset classes.
+            Guarantees statutory adherence to CAC regulations (RC: 1513032), tax compliance, investor contract protections, and title perfections across all asset classes.
           </p>
         </article>
       </div>

@@ -92,7 +92,7 @@ get_header();
             <div>
               <h4 style="font-size:1.05rem; font-weight:800; color:var(--white); margin-bottom:0.2rem;">Registration Authority</h4>
               <p style="font-size:0.85rem; color:var(--slate-300);">Corporate Affairs Commission (CAC) Nigeria</p>
-              <span style="font-size:1.1rem; font-weight:900; color:var(--orange-400); font-family:var(--font-display);">RC: 1613032</span>
+              <span style="font-size:1.1rem; font-weight:900; color:var(--orange-400); font-family:var(--font-display);">RC: 1513032</span>
             </div>
           </div>
         </div>

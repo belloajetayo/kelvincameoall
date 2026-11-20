@@ -1,5 +1,5 @@
 /**
- * Kelvin Cameo (RC: 1613032)
+ * Kelvin Cameo (RC: 1513032)
  * Master Client-Side JavaScript
  * Integrated with authentic Kelvin Cameo Resort Hotel tariffs & booking links
  */
@@ -71,7 +71,7 @@ function initMobileDrawer() {
             </div>
             <div>
               <strong style="font-family:var(--font-display); font-size:1.05rem; color:var(--cobalt-900);">KELVIN <span style="color:var(--orange-500);">CAMEO</span></strong>
-              <div style="font-size:0.65rem; color:var(--cobalt-700); font-weight:700;">RC: 1613032</div>
+              <div style="font-size:0.65rem; color:var(--cobalt-700); font-weight:700;">RC: 1513032</div>
             </div>
           </div>
           <button id="closeDrawerBtn" class="modal-close-btn" style="position:static;" aria-label="Close Navigation">✕</button>

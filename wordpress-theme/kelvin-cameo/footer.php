@@ -1,6 +1,6 @@
 <?php
 /**
- * Kelvin Cameo Organization (RC: 1613032)
+ * Kelvin Cameo Organization (RC: 1513032)
  * Footer Template
  *
  * @package Kelvin_Cameo
@@ -17,15 +17,15 @@
             </div>
             <div>
               <h4 style="font-family:var(--font-display); font-size:1.15rem; font-weight:800; color:var(--white); margin:0;">KELVIN <span style="color:var(--orange-400);">CAMEO</span></h4>
-              <span style="font-size:0.7rem; color:#bad7fc; font-weight:700; letter-spacing:0.04em;">RC: 1613032 • CONGLOMERATE</span>
+              <span style="font-size:0.7rem; color:#bad7fc; font-weight:700; letter-spacing:0.04em;">RC: 1513032 • CONGLOMERATE</span>
             </div>
           </div>
           <p class="footer-bio">
-            Kelvin Cameo (RC: 1613032) is a diversified Nigerian multi-sector group leading downstream petroleum retail stations, master-planned real estate, commercial agriculture, and premier resort hospitality.
+            Kelvin Cameo (RC: 1513032) is a diversified Nigerian multi-sector group leading downstream petroleum retail stations, master-planned real estate, commercial agriculture, and premier resort hospitality.
           </p>
           <span class="rc-badge" style="display: inline-flex; background:rgba(255,255,255,0.15); color:#ffffff; border-color:rgba(255,255,255,0.3);">
             <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            RC: 1613032 • Incorporated in Nigeria
+            RC: 1513032 • Incorporated in Nigeria
           </span>
         </div>
 
@@ -103,13 +103,13 @@
         <span class="crawl-sep">&bull;</span>
         <a href="<?php echo kc_url('reception'); ?>" itemprop="url"><span itemprop="name">Reception Portal</span></a>
         <span class="crawl-sep">&bull;</span>
-        <a href="<?php echo kc_url('about'); ?>" itemprop="url"><span itemprop="name">Corporate Profile (RC: 1613032)</span></a>
+        <a href="<?php echo kc_url('about'); ?>" itemprop="url"><span itemprop="name">Corporate Profile (RC: 1513032)</span></a>
         <span class="crawl-sep">&bull;</span>
         <a href="<?php echo kc_url('contact'); ?>" itemprop="url"><span itemprop="name">Headquarters &amp; Help Desk</span></a>
       </div>
 
       <div class="footer-bottom-bar">
-        <span>&copy; <?php echo date('Y'); ?> Kelvin Cameo (RC: 1613032). All rights reserved.</span>
+        <span>&copy; <?php echo date('Y'); ?> Kelvin Cameo (RC: 1513032). All rights reserved.</span>
         <div style="display:flex; gap:1.5rem;">
           <a href="<?php echo kc_url('about'); ?>" class="footer-link">Corporate Governance</a>
           <a href="<?php echo kc_url('contact'); ?>" class="footer-link">Inquiries Desk</a>
@@ -132,7 +132,7 @@
       <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">&times;</button>
       
       <div class="modal-header" style="margin-bottom: 1.5rem;">
-        <span class="rc-badge" style="margin-bottom:0.5rem; display:inline-flex;">RC: 1613032</span>
+        <span class="rc-badge" style="margin-bottom:0.5rem; display:inline-flex;">RC: 1513032</span>
         <h3 style="font-family:var(--font-display); font-size: 1.5rem; font-weight: 800; color: var(--navy-900);">Partner With Us / Request a Quote</h3>
         <p style="font-size: 0.875rem; color: var(--slate-600);">Tell us what your business or project needs. Our management team will follow up with an official quotation promptly.</p>
       </div>
@@ -195,7 +195,7 @@
           </div>
           <div>
             <strong style="font-family:var(--font-display); font-size:1.05rem; color:var(--cobalt-900);">KELVIN <span style="color:var(--orange-500);">CAMEO</span></strong>
-            <div style="font-size:0.65rem; color:var(--cobalt-700); font-weight:700;">RC: 1613032</div>
+            <div style="font-size:0.65rem; color:var(--cobalt-700); font-weight:700;">RC: 1513032</div>
           </div>
         </div>
         <button id="closeDrawerBtn" class="modal-close-btn" style="position:static;" aria-label="Close Navigation">✕</button>

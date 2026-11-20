@@ -1,6 +1,6 @@
 <?php
 /**
- * Kelvin Cameo Organization (RC: 1613032)
+ * Kelvin Cameo Organization (RC: 1513032)
  * Automated High-Ranking SEO Posts Seeder
  *
  * Generates authoritative, in-depth editorial articles optimized for:
@@ -132,7 +132,7 @@ function kc_get_seo_articles_content() {
   </figcaption>
 </figure>
 
-<p><strong>Kelvin Cameo Resort Hotel &amp; Suites (RC: 1613032)</strong> has emerged as the consensus top-rated hospitality destination in Suleja and the greater Abuja border region. Combining metropolitan sophistication with tranquil suburban comfort, here are the top 7 reasons why business leaders, couples, wedding organizers, and international visitors rank Kelvin Cameo Resort as their #1 choice.</p>
+<p><strong>Kelvin Cameo Resort Hotel &amp; Suites (RC: 1513032)</strong> has emerged as the consensus top-rated hospitality destination in Suleja and the greater Abuja border region. Combining metropolitan sophistication with tranquil suburban comfort, here are the top 7 reasons why business leaders, couples, wedding organizers, and international visitors rank Kelvin Cameo Resort as their #1 choice.</p>
 
 <h2>1. Strategic, Serene Location in Kwamba (Avoid the City Noise)</h2>
 <p>Unlike crowded inner-city hotels surrounded by noisy markets and vehicular congestion, Kelvin Cameo Resort is strategically nestled along Maje, Minna Road in Kwamba, Suleja. Situated directly <strong>opposite Suleiman Barau Technical College</strong>, the resort enjoys an exceptional natural security buffer and easy access directly off the Abuja-Kaduna Highway corridor.</p>
@@ -516,7 +516,7 @@ function kc_get_seo_articles_content() {
   </figcaption>
 </figure>
 
-<p>At <strong>Kelvin Cameo Resort Hotel &amp; Suites (RC: 1613032)</strong>, we took a firm corporate decision from day one: <em>power cuts are unacceptable</em>. We engineered an industrial-grade energy infrastructure that guarantees 24-hour uninterrupted electricity across 365 days of the year.</p>
+<p>At <strong>Kelvin Cameo Resort Hotel &amp; Suites (RC: 1513032)</strong>, we took a firm corporate decision from day one: <em>power cuts are unacceptable</em>. We engineered an industrial-grade energy infrastructure that guarantees 24-hour uninterrupted electricity across 365 days of the year.</p>
 
 <h2>The Kelvin Cameo Dual Caterpillar Redundancy Engine</h2>
 <p>Most commercial hotels operate with a single primary generator. When that generator requires oil servicing, mechanical repairs, or encounters fuel injector issues, the entire hotel is plunged into darkness.</p>
@@ -587,7 +587,7 @@ function kc_get_seo_articles_content() {
   </figcaption>
 </figure>
 
-<p><strong>Kelvin Cameo Energy</strong>, the downstream petroleum division of Kelvin Cameo Organization (RC: 1613032), was established on a radical, uncompromising counter-culture: <strong>absolute measurement integrity</strong>. At our modern service stations, <em>10 liters paid is exactly 10 liters dispensed</em> — down to the last milliliter.</p>
+<p><strong>Kelvin Cameo Energy</strong>, the downstream petroleum division of Kelvin Cameo Organization (RC: 1513032), was established on a radical, uncompromising counter-culture: <strong>absolute measurement integrity</strong>. At our modern service stations, <em>10 liters paid is exactly 10 liters dispensed</em> — down to the last milliliter.</p>
 
 <h2>The Daily Seraphin 10-Liter Test Protocol</h2>
 <p>Every morning before our service stations open their forecourt gates to the general public, our Quality Control supervisors conduct the mandatory <strong>Seraphin Can Calibration Test</strong> on every single dispensing nozzle.</p>
@@ -972,7 +972,7 @@ function kc_get_seo_articles_content() {
   
   <div class="faq-item">
     <h4 class="faq-question"><span class="faq-q-badge">Q:</span> Do you issue official corporate invoices and receipts?</h4>
-    <p class="faq-answer">Yes. We issue official corporate invoices and payment vouchers with CAC registration (RC: 1613032) and Zenith Bank verification.</p>
+    <p class="faq-answer">Yes. We issue official corporate invoices and payment vouchers with CAC registration (RC: 1513032) and Zenith Bank verification.</p>
   </div>
 
   <div class="faq-item">
@@ -1754,7 +1754,7 @@ function kc_get_seo_articles_content() {
   </ul>
 </div>
 
-<p>Modern commercial agriculture is not just about farming land — it is an exacting industrial engineering process. At <strong>Kelvin Cameo Agriculture (RC: 1613032)</strong>, our end-to-end grain workflow eliminates the 30% to 40% post-harvest loss typical in West Africa\'s traditional agricultural sector. Here is how our mechanized farm-to-factory system operates step by step.</p>
+<p>Modern commercial agriculture is not just about farming land — it is an exacting industrial engineering process. At <strong>Kelvin Cameo Agriculture (RC: 1513032)</strong>, our end-to-end grain workflow eliminates the 30% to 40% post-harvest loss typical in West Africa\'s traditional agricultural sector. Here is how our mechanized farm-to-factory system operates step by step.</p>
 
 <figure class="article-inline-figure">
   <img src="$template_uri/assets/photos/agriculture/maize-planting-field.jpg" alt="Modern Tractorization and Seed Drilling - Kelvin Cameo Farm" class="article-inline-img" loading="lazy">

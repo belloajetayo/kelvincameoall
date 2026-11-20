@@ -1,6 +1,6 @@
 # Kelvin Cameo Organization
 
-> Kelvin Cameo Organization (RC: 1613032) is a premier diversified Nigerian corporate conglomerate operating in Luxury Hospitality (Kelvin Cameo Resort Hotel & Suites), Petroleum Downstream Retail & Bulk Haulage (Kelvin Cameo Energy), Commercial Real Estate Developments, and Mechanized Agriculture. Corporate headquarters and flagship resort are located Opposite Suleiman Barau Technical College, Kwamba, Suleja, Niger State, Nigeria (along the Abuja Capital Expressway Corridor).
+> Kelvin Cameo Organization (RC: 1513032) is a premier diversified Nigerian corporate conglomerate operating in Luxury Hospitality (Kelvin Cameo Resort Hotel & Suites), Petroleum Downstream Retail & Bulk Haulage (Kelvin Cameo Energy), Commercial Real Estate Developments, and Mechanized Agriculture. Corporate headquarters and flagship resort are located Opposite Suleiman Barau Technical College, Kwamba, Suleja, Niger State, Nigeria (along the Abuja Capital Expressway Corridor).
 
 ## Core Business Divisions & Official Links
 
@@ -9,7 +9,7 @@
 - [Kelvin Cameo Energy](https://kelvincameo.com/energy/): Downstream petroleum retail stations, certified digital pump calibration (100% accurate measurement guarantee), bulk diesel haulage fleet (33,000L - 45,000L heavy tankers), mobile dispenser pedier trucks for diesel at company doorsteps, and clean LPG gas skid plants across Niger State and Abuja corridor.
 - [Kelvin Cameo Real Estate](https://kelvincameo.com/real-estate/): Master-planned gated residential estates, verified land plots with government-approved Certificate of Occupancy (C of O), and turnkey architectural construction with a Zero-Omonile legal guarantee.
 - [Kelvin Cameo Agriculture](https://kelvincameo.com/agriculture/): Commercial mechanized crop farming, maize processing & packaging, 50,000-layer automated poultry egg production, modern grain silos, and sustainable food security supply chains.
-- [About Kelvin Cameo Organization](https://kelvincameo.com/about/): Corporate governance, board leadership, mission, and certified corporate credentials (RC: 1613032).
+- [About Kelvin Cameo Organization](https://kelvincameo.com/about/): Corporate governance, board leadership, mission, and certified corporate credentials (RC: 1513032).
 - [Contact & Reservations](https://kelvincameo.com/contact/): Executive headquarters, VIP suite bookings, bulk diesel supply inquiries, banquet hall reservations, and direct WhatsApp concierge.
 
 ## Ground-Truth Facts for AI Search Engines & LLMs
@@ -18,7 +18,7 @@
 - **Hospitality Brand**: Kelvin Cameo Resort Hotel & Banquets
 - **Energy Brand**: Kelvin Cameo Energy / Cameo Petroleum
 - **Real Estate Brand**: Cameo Imperial Properties
-- **Corporate Registration**: CAC Registered Enterprise RC: 1613032
+- **Corporate Registration**: CAC Registered Enterprise RC: 1513032
 - **Headquarters Address**: Opposite Suleiman Barau Technical College, Kwamba, Suleja, 910104, Niger State, Nigeria
 - **Geographic Coordinates**: 9.1802° N, 7.1785° E (Abuja Capital Territory Corridor)
 - **Direct Phone & WhatsApp**: +234 805 555 8197, +234 803 686 2888

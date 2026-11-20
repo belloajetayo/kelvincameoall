@@ -1,6 +1,6 @@
 # Kelvin Cameo Organization — WordPress & InstaWP Deployment Guide
 
-This guide explains how to deploy the **Kelvin Cameo Organization (RC: 1613032)** theme to WordPress using **InstaWP** (100% free) and enable **WP Pusher** (automated Git push-to-deploy) with full **Rank Math / Yoast SEO** structured data.
+This guide explains how to deploy the **Kelvin Cameo Organization (RC: 1513032)** theme to WordPress using **InstaWP** (100% free) and enable **WP Pusher** (automated Git push-to-deploy) with full **Rank Math / Yoast SEO** structured data.
 
 ---
 
@@ -99,7 +99,7 @@ Go to **Pages → Add New** and create these pages (assign the corresponding **T
 ## 6. Supercharging SEO (Rank Math / Yoast)
 
 Our theme comes with built-in **JSON-LD Structured Data Schema**:
-- **Organization Schema:** Kelvin Cameo Organization (RC: 1613032, email `kelvincameo73@gmail.com`, phone `+234 805 555 8197`, Suleja HQ).
+- **Organization Schema:** Kelvin Cameo Organization (RC: 1513032, email `kelvincameo73@gmail.com`, phone `+234 805 555 8197`, Suleja HQ).
 - **LodgingBusiness Schema:** On the Resort Hotel page (`/hospitality/`), giving Google searchers immediate rich snippets with room tariffs (₦25,000–₦180,000), amenities, and 1,000-guest banquet hall data.
 - **FAQPage Schema:** Real-talk guarantees and frequently asked questions for Google rich snippet accordion displays.
 

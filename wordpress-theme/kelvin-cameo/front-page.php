@@ -1,6 +1,6 @@
 <?php
 /**
- * Kelvin Cameo Organization (RC: 1613032)
+ * Kelvin Cameo Organization (RC: 1513032)
  * Front Page Template — Clean Revamp
  *
  * @package Kelvin_Cameo
@@ -15,7 +15,7 @@ get_header();
   <section class="hp-hero">
     <div class="container">
       <div class="hp-hero-inner">
-        <span class="hp-hero-badge">RC: 1613032 &mdash; Verified &amp; Active in Nigeria</span>
+        <span class="hp-hero-badge">RC: 1513032 &mdash; Verified &amp; Active in Nigeria</span>
 
         <h1 class="hp-hero-title">
           Honest Fuel. Safe Land.<br>
@@ -143,7 +143,7 @@ get_header();
           <div class="founder-portrait-frame">
             <div class="founder-seal-float">
               <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              <span>RC: 1613032</span>
+              <span>RC: 1513032</span>
             </div>
 
             <div class="founder-emblem-halo">
@@ -231,7 +231,7 @@ get_header();
             <div class="hp-trust-item">
               <span class="hp-trust-check"></span>
               <div>
-                <strong>Certified Legal Standing (RC: 1613032)</strong>
+                <strong>Certified Legal Standing (RC: 1513032)</strong>
                 <p>Fully registered under the Corporate Affairs Commission with rigorous statutory audits.</p>
               </div>
             </div>
@@ -266,7 +266,7 @@ get_header();
   <section class="hp-site-directory" id="site-directory" aria-label="Kelvin Cameo Conglomerate Sitelinks Directory">
     <div class="container">
       <div class="hp-section-head">
-        <span class="hp-hero-badge" style="background:#e0f2fe; color:#0369a1; border-color:#bae6fd;">Direct Crawl Index &bull; RC: 1613032</span>
+        <span class="hp-hero-badge" style="background:#e0f2fe; color:#0369a1; border-color:#bae6fd;">Direct Crawl Index &bull; RC: 1513032</span>
         <h2 class="hp-section-title">Explore All Divisions &amp; Official Portals</h2>
         <p class="hp-section-sub">Quickly navigate the full scope of Kelvin Cameo Organization across downstream energy, master-planned property, commercial agriculture, and luxury resort hospitality.</p>
       </div>
@@ -355,10 +355,10 @@ get_header();
             <span class="directory-badge" style="background:#f1f5f9; color:#334155;">Corporate &bull; CAC Reg</span>
           </div>
           <h3 itemprop="name" class="directory-title">
-            <a itemprop="url" href="<?php echo kc_url('about'); ?>">Corporate Heritage &amp; Leadership (RC: 1613032)</a>
+            <a itemprop="url" href="<?php echo kc_url('about'); ?>">Corporate Heritage &amp; Leadership (RC: 1513032)</a>
           </h3>
           <p class="directory-desc">
-            Incorporated under the Corporate Affairs Commission (RC: 1613032). Read our founding history, executive board profile, and community philanthropic foundation.
+            Incorporated under the Corporate Affairs Commission (RC: 1513032). Read our founding history, executive board profile, and community philanthropic foundation.
           </p>
           <ul class="directory-sublinks">
             <li><a href="<?php echo kc_url('about'); ?>#governance">&rarr; Executive Board &amp; Leadership</a></li>

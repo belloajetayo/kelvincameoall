@@ -4,7 +4,7 @@
  * Template Post Type: page
  *
  * Kelvin Cameo Resort Hotel - Front Desk & Room Management System
- * Official RC: 1613032
+ * Official RC: 1513032
  */
 
 if (!defined('ABSPATH')) {
@@ -35,7 +35,7 @@ $reserve_url = home_url('/hospitality/');
       });
     })();
   </script>
-  <title>Reception Desk & Hotel PMS | Kelvin Cameo Resort Hotel (RC 1613032)</title>
+  <title>Reception Desk & Hotel PMS | Kelvin Cameo Resort Hotel (RC 1513032)</title>
   
   <!-- Google Fonts: Plus Jakarta Sans & Playfair Display -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1802,7 +1802,7 @@ $reserve_url = home_url('/hospitality/');
         </button>
       </form>
       <div style="font-size: 11px; color: var(--kc-slate-400); margin-top: 16px;">
-        Kelvin Cameo Resort Hotel & Suite • RC 1613032
+        Kelvin Cameo Resort Hotel & Suite • RC 1513032
       </div>
     </div>
   </div>
@@ -1813,7 +1813,7 @@ $reserve_url = home_url('/hospitality/');
       <div class="brand-logo-crest">KC</div>
       <div class="brand-text">
         <h1>Kelvin Cameo Resort Hotel <span class="gold-tag">Property Desk</span></h1>
-        <p>Front Desk & Room Management System • RC 1613032</p>
+        <p>Front Desk & Room Management System • RC 1513032</p>
       </div>
     </div>
     <div class="top-actions">
@@ -2993,7 +2993,7 @@ $reserve_url = home_url('/hospitality/');
             <div>
               <div class="folio-brand-title">Kelvin Cameo Resort Hotel</div>
               <div class="folio-brand-sub">Luxury Suites, Accommodations & Hospitality</div>
-              <div class="folio-brand-sub">Opposite Suleiman Barau Technical College, Kwamba, Suleja, Niger State (Abuja Capital Corridor) • RC: 1613032</div>
+              <div class="folio-brand-sub">Opposite Suleiman Barau Technical College, Kwamba, Suleja, Niger State (Abuja Capital Corridor) • RC: 1513032</div>
               <div class="folio-brand-sub">Zenith Bank: 1311320179 • desk@kelvincameo.com</div>
             </div>
             <div class="folio-badge-official">
@@ -3180,7 +3180,7 @@ $reserve_url = home_url('/hospitality/');
                 RECEPTION PROPERTY DESK &bull; OFFICIAL FINANCIAL &amp; SHIFT AUDIT STATEMENT
               </div>
               <div style="font-size: 11px; color: #475569; margin-top: 4px; line-height: 1.4;">
-                CAC Corporate Incorporation RC: <strong>1613032</strong> &bull; Suleja–Abuja Expressway Corridor, Niger State<br>
+                CAC Corporate Incorporation RC: <strong>1513032</strong> &bull; Suleja–Abuja Expressway Corridor, Niger State<br>
                 Official Desk Email: desk@kelvincameo.com &bull; Phone: +234 805 555 8197 &bull; Web: kelvincameo.com
               </div>
             </div>
@@ -3350,7 +3350,7 @@ $reserve_url = home_url('/hospitality/');
             </div>
             <div style="text-align: center;">
               <div style="display: inline-block; border: 2px solid #b89327; border-radius: 50%; width: 70px; height: 70px; padding-top: 12px; color: #b89327; font-weight: 800; font-size: 9px; line-height: 1.2;">
-                KELVIN CAMEO<br>RESORT<br>RC 1613032
+                KELVIN CAMEO<br>RESORT<br>RC 1513032
               </div>
               <div style="color: #64748b; font-size: 10px; margin-top: 4px;">Official Property Seal</div>
             </div>
@@ -3587,7 +3587,7 @@ $reserve_url = home_url('/hospitality/');
     <div class="receipt-center">
       <div style="font-size:14px; font-weight:bold; letter-spacing:1px;">KELVIN CAMEO RESORT</div>
       <div style="font-size:12px; font-weight:bold;">HOTEL, SUITES &amp; PROPERTY DESK</div>
-      <div style="font-size:10px;">RC: 1613032 | Suleja, Abuja Corridor</div>
+      <div style="font-size:10px;">RC: 1513032 | Suleja, Abuja Corridor</div>
       <div style="font-size:10px;">desk@kelvincameo.com • 08055558197</div>
       <div style="font-size:11px; font-weight:bold; margin-top:5px; border-top:1px dashed #000; border-bottom:1px dashed #000; padding:3px 0;">
         *** FRONT DESK SHIFT HANDOVER SLIP ***
